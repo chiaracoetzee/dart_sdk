@@ -8,7 +8,11 @@ part 'handoff_initiate_response.g.dart';
 
 @JsonSerializable()
 class HandoffInitiateResponse {
-  const HandoffInitiateResponse({required this.code, required this.expiresAt});
+  const HandoffInitiateResponse({
+    required this.code,
+    required this.expiresAt,
+    this.pollSecret,
+  });
 
   factory HandoffInitiateResponse.fromJson(Map<String, Object?> json) =>
       _$HandoffInitiateResponseFromJson(json);
@@ -19,6 +23,10 @@ class HandoffInitiateResponse {
   /// ISO 8601 timestamp when the handoff code expires
   @JsonKey(name: 'expires_at')
   final DateTime expiresAt;
+
+  /// Secret the initiating device must present to retrieve the token
+  @JsonKey(includeIfNull: false, name: 'poll_secret')
+  final String? pollSecret;
 
   Map<String, Object?> toJson() => _$HandoffInitiateResponseToJson(this);
 }

@@ -66,7 +66,7 @@ class GlobalSearchMessagesRequest {
   @JsonKey(includeIfNull: false, name: 'hits_per_page')
   final int? hitsPerPage;
 
-  /// Page number for pagination (ignored when cursor is provided)
+  /// Page number for pagination (ignored when cursor is provided). Use cursor to page beyond this.
   @JsonKey(includeIfNull: false)
   final int? page;
 

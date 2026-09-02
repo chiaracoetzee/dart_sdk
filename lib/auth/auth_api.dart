@@ -13,9 +13,11 @@ import '../models/auth_token_with_user_id_response.dart';
 import '../models/authorize_ip_request.dart';
 import '../models/email_revert_request.dart';
 import '../models/forgot_password_request.dart';
+import '../models/handoff_cancel_request.dart';
 import '../models/handoff_complete_request.dart';
 import '../models/handoff_info_response.dart';
 import '../models/handoff_initiate_response.dart';
+import '../models/handoff_status_request.dart';
 import '../models/handoff_status_response.dart';
 import '../models/ip_authorization_poll_response.dart';
 import '../models/login_request.dart';
@@ -88,8 +90,13 @@ abstract class AuthApi {
   /// Cancel an ongoing handoff session. The handoff code will no longer be valid for authentication.
   ///
   /// [code] - The code.
+  ///
+  /// [body] - Name not received - field will be skipped.
   @DELETE('/auth/handoff/{code}')
-  Future<void> cancelHandoff({@Path('code') required String code});
+  Future<void> cancelHandoff({
+    @Path('code') required String code,
+    @Body() required HandoffCancelRequest body,
+  });
 
   /// Get handoff info.
   ///
@@ -109,6 +116,19 @@ abstract class AuthApi {
   @GET('/auth/handoff/{code}/status')
   Future<HandoffStatusResponse> getHandoffStatus({
     @Path('code') required String code,
+  });
+
+  /// Get handoff status with secret.
+  ///
+  /// Check the status of a handoff session using the poll secret from initiation. Returns the authentication token once the handoff is complete and the presented secret matches.
+  ///
+  /// [code] - The code.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/auth/handoff/{code}/status')
+  Future<HandoffStatusResponse> getHandoffStatusWithSecret({
+    @Path('code') required String code,
+    @Body() required HandoffStatusRequest body,
   });
 
   /// Poll IP authorization.
