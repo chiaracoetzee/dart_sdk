@@ -42,6 +42,9 @@ import '../models/harvest_status_response_schema_nullable.dart';
 import '../models/inbound_sms_challenge_start_response.dart';
 import '../models/mark_mentions_read_request.dart';
 import '../models/message_list_response.dart';
+import '../models/mfa_backup_codes_challenge_resend_request.dart';
+import '../models/mfa_backup_codes_challenge_start_response.dart';
+import '../models/mfa_backup_codes_challenge_verify_request.dart';
 import '../models/mfa_backup_codes_request.dart';
 import '../models/mfa_backup_codes_response.dart';
 import '../models/mobile_devices_list_response.dart';
@@ -484,6 +487,36 @@ abstract class UsersApi {
   @POST('/users/@me/mfa/backup-codes')
   Future<MfaBackupCodesResponse> getBackupCodesMfa({
     @Body() required MfaBackupCodesRequest body,
+  });
+
+  /// Start backup codes challenge.
+  ///
+  /// Initiates the challenge required to view existing backup codes. Sends a verification code to the user's email address. Returns a ticket for use in the remaining challenge steps.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/users/@me/mfa/backup-codes/challenge')
+  Future<MfaBackupCodesChallengeStartResponse> startBackupCodesChallenge({
+    @Body() required EmptyBodyRequest body,
+  });
+
+  /// Resend backup codes challenge code.
+  ///
+  /// Resends the verification code for a backup codes challenge. Use if the original code was not received. Requires a valid backup codes challenge ticket.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/users/@me/mfa/backup-codes/challenge/resend')
+  Future<void> resendBackupCodesChallenge({
+    @Body() required MfaBackupCodesChallengeResendRequest body,
+  });
+
+  /// Verify backup codes challenge code.
+  ///
+  /// Verifies the email code sent during a backup codes challenge and returns the existing backup codes. The ticket is consumed on success.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/users/@me/mfa/backup-codes/challenge/verify')
+  Future<MfaBackupCodesResponse> verifyBackupCodesChallenge({
+    @Body() required MfaBackupCodesChallengeVerifyRequest body,
   });
 
   /// Disable TOTP multi-factor authentication.
