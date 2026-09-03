@@ -1151,6 +1151,36 @@ class _UsersApi implements UsersApi {
   }
 
   @override
+  Future<MfaBackupCodesResponse> regenerateBackupCodesChallenge({
+    required MfaBackupCodesChallengeRegenerateRequest body,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body.toJson());
+    final _options = _setStreamType<MfaBackupCodesResponse>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/users/@me/mfa/backup-codes/challenge/regenerate',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, Object?>>(_options);
+    late MfaBackupCodesResponse _value;
+    try {
+      _value = MfaBackupCodesResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, response: _result);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<void> resendBackupCodesChallenge({
     required MfaBackupCodesChallengeResendRequest body,
   }) async {
@@ -1173,7 +1203,7 @@ class _UsersApi implements UsersApi {
   }
 
   @override
-  Future<MfaBackupCodesResponse> verifyBackupCodesChallenge({
+  Future<MfaBackupCodesChallengeVerifyResponse> verifyBackupCodesChallenge({
     required MfaBackupCodesChallengeVerifyRequest body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -1181,7 +1211,7 @@ class _UsersApi implements UsersApi {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _options = _setStreamType<MfaBackupCodesResponse>(
+    final _options = _setStreamType<MfaBackupCodesChallengeVerifyResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -1192,9 +1222,9 @@ class _UsersApi implements UsersApi {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, Object?>>(_options);
-    late MfaBackupCodesResponse _value;
+    late MfaBackupCodesChallengeVerifyResponse _value;
     try {
-      _value = MfaBackupCodesResponse.fromJson(_result.data!);
+      _value = MfaBackupCodesChallengeVerifyResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;

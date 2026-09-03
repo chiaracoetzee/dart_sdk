@@ -42,9 +42,11 @@ import '../models/harvest_status_response_schema_nullable.dart';
 import '../models/inbound_sms_challenge_start_response.dart';
 import '../models/mark_mentions_read_request.dart';
 import '../models/message_list_response.dart';
+import '../models/mfa_backup_codes_challenge_regenerate_request.dart';
 import '../models/mfa_backup_codes_challenge_resend_request.dart';
 import '../models/mfa_backup_codes_challenge_start_response.dart';
 import '../models/mfa_backup_codes_challenge_verify_request.dart';
+import '../models/mfa_backup_codes_challenge_verify_response.dart';
 import '../models/mfa_backup_codes_request.dart';
 import '../models/mfa_backup_codes_response.dart';
 import '../models/mobile_devices_list_response.dart';
@@ -499,6 +501,16 @@ abstract class UsersApi {
     @Body() required EmptyBodyRequest body,
   });
 
+  /// Regenerate backup codes with a verified challenge.
+  ///
+  /// Replaces the account backup codes using the proof token from a verified backup codes challenge. Old codes are invalidated.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/users/@me/mfa/backup-codes/challenge/regenerate')
+  Future<MfaBackupCodesResponse> regenerateBackupCodesChallenge({
+    @Body() required MfaBackupCodesChallengeRegenerateRequest body,
+  });
+
   /// Resend backup codes challenge code.
   ///
   /// Resends the verification code for a backup codes challenge. Use if the original code was not received. Requires a valid backup codes challenge ticket.
@@ -511,11 +523,11 @@ abstract class UsersApi {
 
   /// Verify backup codes challenge code.
   ///
-  /// Verifies the email code sent during a backup codes challenge and returns the existing backup codes. The ticket is consumed on success.
+  /// Verifies the email code sent during a backup codes challenge and returns the existing backup codes along with a proof token. The code is consumed on success and the proof token authorizes regeneration on the same ticket.
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/users/@me/mfa/backup-codes/challenge/verify')
-  Future<MfaBackupCodesResponse> verifyBackupCodesChallenge({
+  Future<MfaBackupCodesChallengeVerifyResponse> verifyBackupCodesChallenge({
     @Body() required MfaBackupCodesChallengeVerifyRequest body,
   });
 
