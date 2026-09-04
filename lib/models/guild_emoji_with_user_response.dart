@@ -14,6 +14,7 @@ class GuildEmojiWithUserResponse {
     required this.id,
     required this.name,
     required this.animated,
+    required this.nsfw,
     required this.user,
   });
 
@@ -28,6 +29,9 @@ class GuildEmojiWithUserResponse {
 
   /// Whether this emoji is animated
   final bool animated;
+
+  /// Deprecated; always false. Retained for compatibility with older clients
+  final bool nsfw;
   final UserPartialResponse user;
 
   Map<String, Object?> toJson() => _$GuildEmojiWithUserResponseToJson(this);
