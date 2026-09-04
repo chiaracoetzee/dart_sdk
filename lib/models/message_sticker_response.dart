@@ -12,7 +12,6 @@ class MessageStickerResponse {
     required this.id,
     required this.name,
     required this.animated,
-    this.nsfw,
   });
 
   factory MessageStickerResponse.fromJson(Map<String, Object?> json) =>
@@ -26,10 +25,6 @@ class MessageStickerResponse {
 
   /// Whether the sticker is animated
   final bool animated;
-
-  /// Whether this sticker is classified as NSFW
-  @JsonKey(includeIfNull: false)
-  final bool? nsfw;
 
   Map<String, Object?> toJson() => _$MessageStickerResponseToJson(this);
 }

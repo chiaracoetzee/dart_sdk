@@ -93,10 +93,6 @@ _$MessageResponseSchemaReferencedMessageFromJson(
             )
             .toList(),
       ),
-      nsfwEmojis: $checkedConvert(
-        'nsfw_emojis',
-        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
-      ),
       reactions: $checkedConvert(
         'reactions',
         (v) => (v as List<dynamic>?)
@@ -142,7 +138,6 @@ _$MessageResponseSchemaReferencedMessageFromJson(
     'webhookId': 'webhook_id',
     'editedTimestamp': 'edited_timestamp',
     'mentionChannels': 'mention_channels',
-    'nsfwEmojis': 'nsfw_emojis',
     'messageReference': 'message_reference',
     'messageSnapshots': 'message_snapshots',
   },
@@ -170,7 +165,6 @@ Map<String, dynamic> _$MessageResponseSchemaReferencedMessageToJson(
   'embeds': ?instance.embeds,
   'attachments': ?instance.attachments,
   'stickers': ?instance.stickers,
-  'nsfw_emojis': ?instance.nsfwEmojis,
   'reactions': ?instance.reactions,
   'message_reference': ?instance.messageReference,
   'message_snapshots': ?instance.messageSnapshots,

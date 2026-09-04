@@ -12,7 +12,6 @@ class GuildEmojiResponse {
     required this.id,
     required this.name,
     required this.animated,
-    required this.nsfw,
   });
 
   factory GuildEmojiResponse.fromJson(Map<String, Object?> json) =>
@@ -26,9 +25,6 @@ class GuildEmojiResponse {
 
   /// Whether this emoji is animated
   final bool animated;
-
-  /// Whether this emoji is classified as NSFW
-  final bool nsfw;
 
   Map<String, Object?> toJson() => _$GuildEmojiResponseToJson(this);
 }

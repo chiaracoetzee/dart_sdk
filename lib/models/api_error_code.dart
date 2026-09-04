@@ -427,8 +427,6 @@ enum ApiErrorCode {
   notOwnerOfAdminApiKey('NOT_OWNER_OF_ADMIN_API_KEY'),
   @JsonValue('NSFW_CONTENT_AGE_RESTRICTED')
   nsfwContentAgeRestricted('NSFW_CONTENT_AGE_RESTRICTED'),
-  @JsonValue('NSFW_EMOJI_STICKER_BLOCKED')
-  nsfwEmojiStickerBlocked('NSFW_EMOJI_STICKER_BLOCKED'),
   @JsonValue('PASSKEY_AUTHENTICATION_FAILED')
   passkeyAuthenticationFailed('PASSKEY_AUTHENTICATION_FAILED'),
   @JsonValue('PASSKEYS_DISABLED')

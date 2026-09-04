@@ -18,7 +18,6 @@ GuildStickerResponse _$GuildStickerResponseFromJson(
       (v) => (v as List<dynamic>).map((e) => e as String).toList(),
     ),
     animated: $checkedConvert('animated', (v) => v as bool),
-    nsfw: $checkedConvert('nsfw', (v) => v as bool),
   );
   return val;
 });
@@ -31,5 +30,4 @@ Map<String, dynamic> _$GuildStickerResponseToJson(
   'description': instance.description,
   'tags': instance.tags,
   'animated': instance.animated,
-  'nsfw': instance.nsfw,
 };

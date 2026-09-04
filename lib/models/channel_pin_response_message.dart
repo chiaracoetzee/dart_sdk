@@ -40,7 +40,6 @@ class ChannelPinResponseMessage {
     this.embeds,
     this.attachments,
     this.stickers,
-    this.nsfwEmojis,
     this.messageReference,
     this.messageSnapshots,
     this.nonce,
@@ -112,10 +111,6 @@ class ChannelPinResponseMessage {
   /// The stickers sent with the message
   @JsonKey(includeIfNull: false)
   final List<MessageStickerResponse>? stickers;
-
-  /// IDs of custom emojis in this message that are classified as NSFW
-  @JsonKey(includeIfNull: false, name: 'nsfw_emojis')
-  final List<SnowflakeType>? nsfwEmojis;
 
   /// Reference data for replies or forwards
   @JsonKey(includeIfNull: false, name: 'message_reference')
