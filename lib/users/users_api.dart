@@ -56,6 +56,7 @@ import '../models/password_change_start_response.dart';
 import '../models/password_change_ticket_request.dart';
 import '../models/password_change_verify_request.dart';
 import '../models/password_change_verify_response.dart';
+import '../models/phone_gate_escape_preview_response.dart';
 import '../models/phone_send_verification_request.dart';
 import '../models/phone_send_verification_response.dart';
 import '../models/phone_verify_request.dart';
@@ -857,6 +858,22 @@ abstract class UsersApi {
   Future<RelationshipResponse> updateRelationshipNickname({
     @Path('user_id') required SnowflakeType userId,
     @Body() required RelationshipNicknameUpdateRequest body,
+  });
+
+  /// Preview setting the deferred phone check aside.
+  ///
+  /// Reports whether this account can set a deferred phone verification requirement aside, and which communities would be left if it did. Returns available false with empty lists for any account outside that state.
+  @GET('/users/@me/required-actions/phone-gate-escape')
+  Future<PhoneGateEscapePreviewResponse> getPhoneGateEscape();
+
+  /// Set the deferred phone check aside.
+  ///
+  /// Leaves the communities that trigger the deferred phone verification check and restores the deferral, so the account works normally again. Communities the user owns are kept, and a run that hits the per-call community limit leaves what it can and can be repeated. Returns the updated private user object.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/users/@me/required-actions/phone-gate-escape')
+  Future<UserPrivateResponse> executePhoneGateEscape({
+    @Body() required EmptyBodyRequest body,
   });
 
   /// List saved messages.

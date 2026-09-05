@@ -435,6 +435,8 @@ enum ApiErrorCode {
   phoneAddNotEligible('PHONE_ADD_NOT_ELIGIBLE'),
   @JsonValue('PHONE_ALREADY_USED')
   phoneAlreadyUsed('PHONE_ALREADY_USED'),
+  @JsonValue('PHONE_GATE_ESCAPE_UNAVAILABLE')
+  phoneGateEscapeUnavailable('PHONE_GATE_ESCAPE_UNAVAILABLE'),
   @JsonValue('PHONE_RATE_LIMIT_EXCEEDED')
   phoneRateLimitExceeded('PHONE_RATE_LIMIT_EXCEEDED'),
   @JsonValue('PHONE_VERIFICATION_REQUIRED')
