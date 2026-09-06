@@ -176,6 +176,32 @@ abstract class GuildsApi {
     @Body() required ChannelPositionUpdateRequest body,
   });
 
+  /// Toggle emoji cloning disabled.
+  ///
+  /// Requires manage_guild permission. When disabled, members of other guilds cannot use the in-app one-click clone shortcut for this guild's emojis. Note that this does not prevent users from saving and re-uploading the image manually.
+  ///
+  /// [guildId] - The ID of the guild.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @PATCH('/guilds/{guild_id}/clone-emoji-disabled')
+  Future<GuildResponse> toggleCloneEmojiDisabled({
+    @Path('guild_id') required SnowflakeType guildId,
+    @Body() required dynamic body,
+  });
+
+  /// Toggle sticker cloning disabled.
+  ///
+  /// Requires manage_guild permission. When disabled, members of other guilds cannot use the in-app one-click clone shortcut for this guild's stickers. Note that this does not prevent users from saving and re-uploading the image manually.
+  ///
+  /// [guildId] - The ID of the guild.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @PATCH('/guilds/{guild_id}/clone-sticker-disabled')
+  Future<GuildResponse> toggleCloneStickerDisabled({
+    @Path('guild_id') required SnowflakeType guildId,
+    @Body() required dynamic body,
+  });
+
   /// Delete guild.
   ///
   /// Only guild owner can delete. Requires sudo mode verification (MFA). Permanently deletes the guild and all associated data.
@@ -187,6 +213,19 @@ abstract class GuildsApi {
   Future<void> deleteGuild({
     @Path('guild_id') required SnowflakeType guildId,
     @Body() required GuildDeleteRequest body,
+  });
+
+  /// Toggle detached banner.
+  ///
+  /// Requires manage_guild permission. Enables or disables independent banner display configuration.
+  ///
+  /// [guildId] - The ID of the guild.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @PATCH('/guilds/{guild_id}/detached-banner')
+  Future<GuildResponse> toggleDetachedBanner({
+    @Path('guild_id') required SnowflakeType guildId,
+    @Body() required dynamic body,
   });
 
   /// Create guild emoji.
@@ -266,6 +305,32 @@ abstract class GuildsApi {
     @Path('guild_id') required SnowflakeType guildId,
     @Path('emoji_id') required SnowflakeType emojiId,
     @Query('purge') String? purge,
+  });
+
+  /// Toggle hide community owner crown.
+  ///
+  /// Requires manage_guild permission. When enabled, the community owner crown icon is hidden across the UI for this guild.
+  ///
+  /// [guildId] - The ID of the guild.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @PATCH('/guilds/{guild_id}/hide-owner-crown')
+  Future<GuildResponse> toggleHideOwnerCrown({
+    @Path('guild_id') required SnowflakeType guildId,
+    @Body() required dynamic body,
+  });
+
+  /// Toggle invites disabled.
+  ///
+  /// Requires manage_guild permission. Pauses or resumes invite-link joins for this guild.
+  ///
+  /// [guildId] - The ID of the guild.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @PATCH('/guilds/{guild_id}/invites-disabled')
+  Future<GuildResponse> toggleInvitesDisabled({
+    @Path('guild_id') required SnowflakeType guildId,
+    @Body() required dynamic body,
   });
 
   /// List guild members.
@@ -555,6 +620,19 @@ abstract class GuildsApi {
     @Path('guild_id') required SnowflakeType guildId,
     @Path('sticker_id') required SnowflakeType stickerId,
     @Query('purge') String? purge,
+  });
+
+  /// Toggle text channel flexible names.
+  ///
+  /// Requires manage_guild permission. Allows or disables flexible naming for text channels.
+  ///
+  /// [guildId] - The ID of the guild.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @PATCH('/guilds/{guild_id}/text-channel-flexible-names')
+  Future<GuildResponse> toggleTextChannelFlexibleNames({
+    @Path('guild_id') required SnowflakeType guildId,
+    @Body() required dynamic body,
   });
 
   /// Transfer guild ownership.

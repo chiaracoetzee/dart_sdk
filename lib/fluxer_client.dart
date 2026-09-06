@@ -12,13 +12,16 @@ import 'invites/invites_api.dart';
 import 'saved_media/saved_media_api.dart';
 import 'webhooks/webhooks_api.dart';
 import 'discovery/discovery_api.dart';
+import 'downloads/downloads_api.dart';
 import 'donations/donations_api.dart';
 import 'emojis/emojis_api.dart';
 import 'gateway/gateway_api.dart';
+import 'gi_fs/gi_fs_api.dart';
 import 'gifts/gifts_api.dart';
 import 'guilds/guilds_api.dart';
 import 'users/users_api.dart';
 import 'geolocation/geolocation_api.dart';
+import 'gi_fs_deprecated/gi_fs_deprecated_api.dart';
 import 'premium/premium_api.dart';
 import 'billing/billing_api.dart';
 import 'read_states/read_states_api.dart';
@@ -49,13 +52,16 @@ class FluxerClient {
   SavedMediaApi? _savedMedia;
   WebhooksApi? _webhooks;
   DiscoveryApi? _discovery;
+  DownloadsApi? _downloads;
   DonationsApi? _donations;
   EmojisApi? _emojis;
   GatewayApi? _gateway;
+  GiFsApi? _giFs;
   GiftsApi? _gifts;
   GuildsApi? _guilds;
   UsersApi? _users;
   GeolocationApi? _geolocation;
+  GiFsDeprecatedApi? _giFsDeprecated;
   PremiumApi? _premium;
   BillingApi? _billing;
   ReadStatesApi? _readStates;
@@ -88,12 +94,17 @@ class FluxerClient {
   DiscoveryApi get discovery =>
       _discovery ??= DiscoveryApi(_dio, baseUrl: _baseUrl);
 
+  DownloadsApi get downloads =>
+      _downloads ??= DownloadsApi(_dio, baseUrl: _baseUrl);
+
   DonationsApi get donations =>
       _donations ??= DonationsApi(_dio, baseUrl: _baseUrl);
 
   EmojisApi get emojis => _emojis ??= EmojisApi(_dio, baseUrl: _baseUrl);
 
   GatewayApi get gateway => _gateway ??= GatewayApi(_dio, baseUrl: _baseUrl);
+
+  GiFsApi get giFs => _giFs ??= GiFsApi(_dio, baseUrl: _baseUrl);
 
   GiftsApi get gifts => _gifts ??= GiftsApi(_dio, baseUrl: _baseUrl);
 
@@ -103,6 +114,9 @@ class FluxerClient {
 
   GeolocationApi get geolocation =>
       _geolocation ??= GeolocationApi(_dio, baseUrl: _baseUrl);
+
+  GiFsDeprecatedApi get giFsDeprecated =>
+      _giFsDeprecated ??= GiFsDeprecatedApi(_dio, baseUrl: _baseUrl);
 
   PremiumApi get premium => _premium ??= PremiumApi(_dio, baseUrl: _baseUrl);
 
