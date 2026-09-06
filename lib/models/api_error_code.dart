@@ -435,10 +435,22 @@ enum ApiErrorCode {
   phoneAddNotEligible('PHONE_ADD_NOT_ELIGIBLE'),
   @JsonValue('PHONE_ALREADY_USED')
   phoneAlreadyUsed('PHONE_ALREADY_USED'),
+  @JsonValue('PHONE_COUNTRY_NOT_SUPPORTED')
+  phoneCountryNotSupported('PHONE_COUNTRY_NOT_SUPPORTED'),
   @JsonValue('PHONE_GATE_ESCAPE_UNAVAILABLE')
   phoneGateEscapeUnavailable('PHONE_GATE_ESCAPE_UNAVAILABLE'),
+  @JsonValue('PHONE_INBOUND_VERIFICATION_REQUIRED')
+  phoneInboundVerificationRequired('PHONE_INBOUND_VERIFICATION_REQUIRED'),
+  @JsonValue('PHONE_LOOKUP_UNAVAILABLE')
+  phoneLookupUnavailable('PHONE_LOOKUP_UNAVAILABLE'),
+  @JsonValue('PHONE_NUMBER_NOT_IN_SERVICE')
+  phoneNumberNotInService('PHONE_NUMBER_NOT_IN_SERVICE'),
+  @JsonValue('PHONE_NUMBER_NOT_MOBILE')
+  phoneNumberNotMobile('PHONE_NUMBER_NOT_MOBILE'),
   @JsonValue('PHONE_RATE_LIMIT_EXCEEDED')
   phoneRateLimitExceeded('PHONE_RATE_LIMIT_EXCEEDED'),
+  @JsonValue('PHONE_VERIFICATION_NEEDS_REVIEW')
+  phoneVerificationNeedsReview('PHONE_VERIFICATION_NEEDS_REVIEW'),
   @JsonValue('PHONE_VERIFICATION_REQUIRED')
   phoneVerificationRequired('PHONE_VERIFICATION_REQUIRED'),
   @JsonValue('PREMIUM_PURCHASE_BLOCKED')
