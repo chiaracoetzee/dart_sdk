@@ -38,7 +38,7 @@ class GuildMemberUpdateRequest {
   @JsonKey(includeIfNull: false)
   final String? nick;
 
-  /// Array of role IDs to assign to the member (max 100)
+  /// Array of role IDs to assign to the member (max 250)
   @JsonKey(includeIfNull: false)
   final List<SnowflakeType>? roles;
 

@@ -8,34 +8,19 @@ part of 'application_public_response_bot.dart';
 
 ApplicationPublicResponseBot _$ApplicationPublicResponseBotFromJson(
   Map<String, dynamic> json,
-) => $checkedCreate(
-  'ApplicationPublicResponseBot',
-  json,
-  ($checkedConvert) {
-    final val = ApplicationPublicResponseBot(
-      id: $checkedConvert('id', (v) => v as String),
-      username: $checkedConvert('username', (v) => v as String),
-      discriminator: $checkedConvert('discriminator', (v) => v as String),
-      bio: $checkedConvert('bio', (v) => v as String?),
-      flags: $checkedConvert('flags', (v) => (v as num).toInt()),
-      avatar: $checkedConvert('avatar', (v) => v as String?),
-      banner: $checkedConvert('banner', (v) => v as String?),
-      token: $checkedConvert('token', (v) => v as String?),
-      mfaEnabled: $checkedConvert('mfa_enabled', (v) => v as bool?),
-      authenticatorTypes: $checkedConvert(
-        'authenticator_types',
-        (v) => (v as List<dynamic>?)
-            ?.map((e) => AuthenticatorType.fromJson((e as num).toInt()))
-            .toList(),
-      ),
-    );
-    return val;
-  },
-  fieldKeyMap: const {
-    'mfaEnabled': 'mfa_enabled',
-    'authenticatorTypes': 'authenticator_types',
-  },
-);
+) => $checkedCreate('ApplicationPublicResponseBot', json, ($checkedConvert) {
+  final val = ApplicationPublicResponseBot(
+    id: $checkedConvert('id', (v) => v as String),
+    username: $checkedConvert('username', (v) => v as String),
+    discriminator: $checkedConvert('discriminator', (v) => v as String),
+    bio: $checkedConvert('bio', (v) => v as String?),
+    flags: $checkedConvert('flags', (v) => (v as num).toInt()),
+    avatar: $checkedConvert('avatar', (v) => v as String?),
+    banner: $checkedConvert('banner', (v) => v as String?),
+    token: $checkedConvert('token', (v) => v as String?),
+  );
+  return val;
+});
 
 Map<String, dynamic> _$ApplicationPublicResponseBotToJson(
   ApplicationPublicResponseBot instance,
@@ -47,7 +32,5 @@ Map<String, dynamic> _$ApplicationPublicResponseBotToJson(
   'banner': ?instance.banner,
   'bio': instance.bio,
   'token': ?instance.token,
-  'mfa_enabled': ?instance.mfaEnabled,
-  'authenticator_types': ?instance.authenticatorTypes,
   'flags': instance.flags,
 };

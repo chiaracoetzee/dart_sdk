@@ -4,7 +4,6 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'authenticator_type.dart';
 import 'bot_flags.dart';
 
 part 'application_public_response_bot.g.dart';
@@ -20,8 +19,6 @@ class ApplicationPublicResponseBot {
     this.avatar,
     this.banner,
     this.token,
-    this.mfaEnabled,
-    this.authenticatorTypes,
   });
 
   factory ApplicationPublicResponseBot.fromJson(Map<String, Object?> json) =>
@@ -51,14 +48,6 @@ class ApplicationPublicResponseBot {
   /// The bot token for authentication
   @JsonKey(includeIfNull: false)
   final String? token;
-
-  /// Whether the bot has MFA enabled
-  @JsonKey(includeIfNull: false, name: 'mfa_enabled')
-  final bool? mfaEnabled;
-
-  /// The types of authenticators enabled
-  @JsonKey(includeIfNull: false, name: 'authenticator_types')
-  final List<AuthenticatorType>? authenticatorTypes;
   final BotFlags flags;
 
   Map<String, Object?> toJson() => _$ApplicationPublicResponseBotToJson(this);
