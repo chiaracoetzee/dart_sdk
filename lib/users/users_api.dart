@@ -882,6 +882,7 @@ abstract class UsersApi {
   @GET('/users/@me/saved-messages')
   Future<SavedMessageEntryListResponse> listSavedMessages({
     @Query('limit') String? limit,
+    @Query('before') SnowflakeType? before,
   });
 
   /// Save message.

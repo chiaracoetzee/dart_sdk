@@ -2239,9 +2239,13 @@ class _UsersApi implements UsersApi {
   @override
   Future<List<SavedMessageEntryResponse>> listSavedMessages({
     String? limit,
+    String? before,
   }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'limit': limit};
+    final queryParameters = <String, dynamic>{
+      r'limit': limit,
+      r'before': before,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
