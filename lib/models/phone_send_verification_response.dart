@@ -31,12 +31,19 @@ extension PhoneSendVerificationResponseUnionDeserializer
     };
     final value = json[key];
     final effective = mapping ?? mappingFallback;
+    final valueAsString = value?.toString();
     return switch (value) {
-      _ when value == effective[PhoneSendVerificationResponseSms] =>
+      _
+          when value == effective[PhoneSendVerificationResponseSms] ||
+              valueAsString ==
+                  effective[PhoneSendVerificationResponseSms]?.toString() =>
         PhoneSendVerificationResponseSms.fromJson(json),
       _
           when value ==
-              effective[PhoneSendVerificationResponseInboundChallenge] =>
+                  effective[PhoneSendVerificationResponseInboundChallenge] ||
+              valueAsString ==
+                  effective[PhoneSendVerificationResponseInboundChallenge]
+                      ?.toString() =>
         PhoneSendVerificationResponseInboundChallenge.fromJson(json),
       _ => throw FormatException(
         'Unknown discriminator value "${json[key]}" for PhoneSendVerificationResponse',

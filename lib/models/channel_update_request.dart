@@ -45,16 +45,27 @@ extension ChannelUpdateRequestUnionDeserializer on ChannelUpdateRequest {
     };
     final value = json[key];
     final effective = mapping ?? mappingFallback;
+    final valueAsString = value?.toString();
     return switch (value) {
-      _ when value == effective[ChannelUpdateRequest0] =>
+      _
+          when value == effective[ChannelUpdateRequest0] ||
+              valueAsString == effective[ChannelUpdateRequest0]?.toString() =>
         ChannelUpdateRequest0.fromJson(json),
-      _ when value == effective[ChannelUpdateRequest2] =>
+      _
+          when value == effective[ChannelUpdateRequest2] ||
+              valueAsString == effective[ChannelUpdateRequest2]?.toString() =>
         ChannelUpdateRequest2.fromJson(json),
-      _ when value == effective[ChannelUpdateRequest4] =>
+      _
+          when value == effective[ChannelUpdateRequest4] ||
+              valueAsString == effective[ChannelUpdateRequest4]?.toString() =>
         ChannelUpdateRequest4.fromJson(json),
-      _ when value == effective[ChannelUpdateRequest998] =>
+      _
+          when value == effective[ChannelUpdateRequest998] ||
+              valueAsString == effective[ChannelUpdateRequest998]?.toString() =>
         ChannelUpdateRequest998.fromJson(json),
-      _ when value == effective[ChannelUpdateRequest3] =>
+      _
+          when value == effective[ChannelUpdateRequest3] ||
+              valueAsString == effective[ChannelUpdateRequest3]?.toString() =>
         ChannelUpdateRequest3.fromJson(json),
       _ => throw FormatException(
         'Unknown discriminator value "${json[key]}" for ChannelUpdateRequest',

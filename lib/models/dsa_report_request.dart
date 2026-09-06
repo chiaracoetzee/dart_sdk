@@ -40,12 +40,19 @@ extension DsaReportRequestUnionDeserializer on DsaReportRequest {
     };
     final value = json[key];
     final effective = mapping ?? mappingFallback;
+    final valueAsString = value?.toString();
     return switch (value) {
-      _ when value == effective[DsaReportRequestMessage] =>
+      _
+          when value == effective[DsaReportRequestMessage] ||
+              valueAsString == effective[DsaReportRequestMessage]?.toString() =>
         DsaReportRequestMessage.fromJson(json),
-      _ when value == effective[DsaReportRequestUser] =>
+      _
+          when value == effective[DsaReportRequestUser] ||
+              valueAsString == effective[DsaReportRequestUser]?.toString() =>
         DsaReportRequestUser.fromJson(json),
-      _ when value == effective[DsaReportRequestGuild] =>
+      _
+          when value == effective[DsaReportRequestGuild] ||
+              valueAsString == effective[DsaReportRequestGuild]?.toString() =>
         DsaReportRequestGuild.fromJson(json),
       _ => throw FormatException(
         'Unknown discriminator value "${json[key]}" for DsaReportRequest',

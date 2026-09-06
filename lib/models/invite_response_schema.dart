@@ -34,10 +34,15 @@ extension InviteResponseSchemaUnionDeserializer on InviteResponseSchema {
     };
     final value = json[key];
     final effective = mapping ?? mappingFallback;
+    final valueAsString = value?.toString();
     return switch (value) {
-      _ when value == effective[InviteResponseSchema0] =>
+      _
+          when value == effective[InviteResponseSchema0] ||
+              valueAsString == effective[InviteResponseSchema0]?.toString() =>
         InviteResponseSchema0.fromJson(json),
-      _ when value == effective[InviteResponseSchema1] =>
+      _
+          when value == effective[InviteResponseSchema1] ||
+              valueAsString == effective[InviteResponseSchema1]?.toString() =>
         InviteResponseSchema1.fromJson(json),
       _ => throw FormatException(
         'Unknown discriminator value "${json[key]}" for InviteResponseSchema',

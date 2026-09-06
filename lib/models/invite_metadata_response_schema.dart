@@ -35,10 +35,17 @@ extension InviteMetadataResponseSchemaUnionDeserializer
     };
     final value = json[key];
     final effective = mapping ?? mappingFallback;
+    final valueAsString = value?.toString();
     return switch (value) {
-      _ when value == effective[InviteMetadataResponseSchema0] =>
+      _
+          when value == effective[InviteMetadataResponseSchema0] ||
+              valueAsString ==
+                  effective[InviteMetadataResponseSchema0]?.toString() =>
         InviteMetadataResponseSchema0.fromJson(json),
-      _ when value == effective[InviteMetadataResponseSchema1] =>
+      _
+          when value == effective[InviteMetadataResponseSchema1] ||
+              valueAsString ==
+                  effective[InviteMetadataResponseSchema1]?.toString() =>
         InviteMetadataResponseSchema1.fromJson(json),
       _ => throw FormatException(
         'Unknown discriminator value "${json[key]}" for InviteMetadataResponseSchema',

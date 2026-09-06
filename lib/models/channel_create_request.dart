@@ -41,14 +41,23 @@ extension ChannelCreateRequestUnionDeserializer on ChannelCreateRequest {
     };
     final value = json[key];
     final effective = mapping ?? mappingFallback;
+    final valueAsString = value?.toString();
     return switch (value) {
-      _ when value == effective[ChannelCreateRequest0] =>
+      _
+          when value == effective[ChannelCreateRequest0] ||
+              valueAsString == effective[ChannelCreateRequest0]?.toString() =>
         ChannelCreateRequest0.fromJson(json),
-      _ when value == effective[ChannelCreateRequest2] =>
+      _
+          when value == effective[ChannelCreateRequest2] ||
+              valueAsString == effective[ChannelCreateRequest2]?.toString() =>
         ChannelCreateRequest2.fromJson(json),
-      _ when value == effective[ChannelCreateRequest4] =>
+      _
+          when value == effective[ChannelCreateRequest4] ||
+              valueAsString == effective[ChannelCreateRequest4]?.toString() =>
         ChannelCreateRequest4.fromJson(json),
-      _ when value == effective[ChannelCreateRequest998] =>
+      _
+          when value == effective[ChannelCreateRequest998] ||
+              valueAsString == effective[ChannelCreateRequest998]?.toString() =>
         ChannelCreateRequest998.fromJson(json),
       _ => throw FormatException(
         'Unknown discriminator value "${json[key]}" for ChannelCreateRequest',

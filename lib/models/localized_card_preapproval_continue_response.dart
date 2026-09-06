@@ -40,22 +40,35 @@ extension LocalizedCardPreapprovalContinueResponseUnionDeserializer
     };
     final value = json[key];
     final effective = mapping ?? mappingFallback;
+    final valueAsString = value?.toString();
     return switch (value) {
       _
           when value ==
-              effective[LocalizedCardPreapprovalContinueResponsePending] =>
+                  effective[LocalizedCardPreapprovalContinueResponsePending] ||
+              valueAsString ==
+                  effective[LocalizedCardPreapprovalContinueResponsePending]
+                      ?.toString() =>
         LocalizedCardPreapprovalContinueResponsePending.fromJson(json),
       _
           when value ==
-              effective[LocalizedCardPreapprovalContinueResponseReady] =>
+                  effective[LocalizedCardPreapprovalContinueResponseReady] ||
+              valueAsString ==
+                  effective[LocalizedCardPreapprovalContinueResponseReady]
+                      ?.toString() =>
         LocalizedCardPreapprovalContinueResponseReady.fromJson(json),
       _
           when value ==
-              effective[LocalizedCardPreapprovalContinueResponseRejected] =>
+                  effective[LocalizedCardPreapprovalContinueResponseRejected] ||
+              valueAsString ==
+                  effective[LocalizedCardPreapprovalContinueResponseRejected]
+                      ?.toString() =>
         LocalizedCardPreapprovalContinueResponseRejected.fromJson(json),
       _
           when value ==
-              effective[LocalizedCardPreapprovalContinueResponseExpired] =>
+                  effective[LocalizedCardPreapprovalContinueResponseExpired] ||
+              valueAsString ==
+                  effective[LocalizedCardPreapprovalContinueResponseExpired]
+                      ?.toString() =>
         LocalizedCardPreapprovalContinueResponseExpired.fromJson(json),
       _ => throw FormatException(
         'Unknown discriminator value "${json[key]}" for LocalizedCardPreapprovalContinueResponse',

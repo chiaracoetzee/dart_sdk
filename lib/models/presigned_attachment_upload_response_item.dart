@@ -38,14 +38,21 @@ extension PresignedAttachmentUploadResponseItemUnionDeserializer
     };
     final value = json[key];
     final effective = mapping ?? mappingFallback;
+    final valueAsString = value?.toString();
     return switch (value) {
       _
           when value ==
-              effective[PresignedAttachmentUploadResponseItemSinglepart] =>
+                  effective[PresignedAttachmentUploadResponseItemSinglepart] ||
+              valueAsString ==
+                  effective[PresignedAttachmentUploadResponseItemSinglepart]
+                      ?.toString() =>
         PresignedAttachmentUploadResponseItemSinglepart.fromJson(json),
       _
           when value ==
-              effective[PresignedAttachmentUploadResponseItemMultipart] =>
+                  effective[PresignedAttachmentUploadResponseItemMultipart] ||
+              valueAsString ==
+                  effective[PresignedAttachmentUploadResponseItemMultipart]
+                      ?.toString() =>
         PresignedAttachmentUploadResponseItemMultipart.fromJson(json),
       _ => throw FormatException(
         'Unknown discriminator value "${json[key]}" for PresignedAttachmentUploadResponseItem',
