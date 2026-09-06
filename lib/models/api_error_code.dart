@@ -9,8 +9,6 @@ import 'package:json_annotation/json_annotation.dart';
 enum ApiErrorCode {
   @JsonValue('ACCESS_DENIED')
   accessDenied('ACCESS_DENIED'),
-  @JsonValue('ACCOUNT_DISABLED')
-  accountDisabled('ACCOUNT_DISABLED'),
   @JsonValue('BAD_GATEWAY')
   badGateway('BAD_GATEWAY'),
   @JsonValue('BAD_REQUEST')
@@ -21,12 +19,8 @@ enum ApiErrorCode {
   blueskyOauthCallbackFailed('BLUESKY_OAUTH_CALLBACK_FAILED'),
   @JsonValue('BLUESKY_OAUTH_NOT_ENABLED')
   blueskyOauthNotEnabled('BLUESKY_OAUTH_NOT_ENABLED'),
-  @JsonValue('BLUESKY_OAUTH_SESSION_EXPIRED')
-  blueskyOauthSessionExpired('BLUESKY_OAUTH_SESSION_EXPIRED'),
   @JsonValue('BLUESKY_OAUTH_STATE_INVALID')
   blueskyOauthStateInvalid('BLUESKY_OAUTH_STATE_INVALID'),
-  @JsonValue('ACCOUNT_SCHEDULED_FOR_DELETION')
-  accountScheduledForDeletion('ACCOUNT_SCHEDULED_FOR_DELETION'),
   @JsonValue('ACCOUNT_SUSPENDED_PERMANENTLY')
   accountSuspendedPermanently('ACCOUNT_SUSPENDED_PERMANENTLY'),
   @JsonValue('ACCOUNT_SUSPENDED_TEMPORARILY')
@@ -39,22 +33,16 @@ enum ApiErrorCode {
   aclsMustBeNonEmpty('ACLS_MUST_BE_NON_EMPTY'),
   @JsonValue('ADMIN_API_KEY_NOT_FOUND')
   adminApiKeyNotFound('ADMIN_API_KEY_NOT_FOUND'),
-  @JsonValue('APPLICATION_NOT_FOUND')
-  applicationNotFound('APPLICATION_NOT_FOUND'),
   @JsonValue('APPLICATION_NOT_OWNED')
   applicationNotOwned('APPLICATION_NOT_OWNED'),
   @JsonValue('ALREADY_FRIENDS')
   alreadyFriends('ALREADY_FRIENDS'),
-  @JsonValue('AUDIT_LOG_INDEXING')
-  auditLogIndexing('AUDIT_LOG_INDEXING'),
   @JsonValue('BOTS_CANNOT_CREATE_GUILDS')
   botsCannotCreateGuilds('BOTS_CANNOT_CREATE_GUILDS'),
   @JsonValue('BOTS_CANNOT_SEND_FRIEND_REQUESTS')
   botsCannotSendFriendRequests('BOTS_CANNOT_SEND_FRIEND_REQUESTS'),
   @JsonValue('BOT_ALREADY_IN_GUILD')
   botAlreadyInGuild('BOT_ALREADY_IN_GUILD'),
-  @JsonValue('BOT_APPLICATION_NOT_FOUND')
-  botApplicationNotFound('BOT_APPLICATION_NOT_FOUND'),
   @JsonValue('BOT_IS_PRIVATE')
   botIsPrivate('BOT_IS_PRIVATE'),
   @JsonValue('BOT_USER_AUTH_ENDPOINT_ACCESS_DENIED')
@@ -75,8 +63,6 @@ enum ApiErrorCode {
   cannotBlockSystemUser('CANNOT_BLOCK_SYSTEM_USER'),
   @JsonValue('CANNOT_MODIFY_SYSTEM_WEBHOOK')
   cannotModifySystemWebhook('CANNOT_MODIFY_SYSTEM_WEBHOOK'),
-  @JsonValue('CANNOT_MODIFY_VOICE_STATE')
-  cannotModifyVoiceState('CANNOT_MODIFY_VOICE_STATE'),
   @JsonValue('CANNOT_REDEEM_PLUTONIUM_WITH_VISIONARY')
   cannotRedeemPlutoniumWithVisionary('CANNOT_REDEEM_PLUTONIUM_WITH_VISIONARY'),
   @JsonValue('CANNOT_REPORT_GUILD')
@@ -107,16 +93,12 @@ enum ApiErrorCode {
   cannotShrinkReservedSlots('CANNOT_SHRINK_RESERVED_SLOTS'),
   @JsonValue('CAPTCHA_REQUIRED')
   captchaRequired('CAPTCHA_REQUIRED'),
-  @JsonValue('CHANNEL_INDEXING')
-  channelIndexing('CHANNEL_INDEXING'),
   @JsonValue('COMMUNICATION_DISABLED')
   communicationDisabled('COMMUNICATION_DISABLED'),
   @JsonValue('CONNECTION_ALREADY_EXISTS')
   connectionAlreadyExists('CONNECTION_ALREADY_EXISTS'),
   @JsonValue('CONNECTION_INITIATION_TOKEN_INVALID')
   connectionInitiationTokenInvalid('CONNECTION_INITIATION_TOKEN_INVALID'),
-  @JsonValue('CONNECTION_INVALID_IDENTIFIER')
-  connectionInvalidIdentifier('CONNECTION_INVALID_IDENTIFIER'),
   @JsonValue('CONNECTION_INVALID_TYPE')
   connectionInvalidType('CONNECTION_INVALID_TYPE'),
   @JsonValue('CONNECTION_LIMIT_REACHED')
@@ -129,10 +111,6 @@ enum ApiErrorCode {
   conflict('CONFLICT'),
   @JsonValue('CONTENT_BLOCKED')
   contentBlocked('CONTENT_BLOCKED'),
-  @JsonValue('CREATION_FAILED')
-  creationFailed('CREATION_FAILED'),
-  @JsonValue('DECRYPTION_FAILED')
-  decryptionFailed('DECRYPTION_FAILED'),
   @JsonValue('DELETION_FAILED')
   deletionFailed('DELETION_FAILED'),
   @JsonValue('DISCOVERY_ALREADY_APPLIED')
@@ -141,14 +119,10 @@ enum ApiErrorCode {
   discoveryApplicationAlreadyReviewed('DISCOVERY_APPLICATION_ALREADY_REVIEWED'),
   @JsonValue('DISCOVERY_APPLICATION_NOT_FOUND')
   discoveryApplicationNotFound('DISCOVERY_APPLICATION_NOT_FOUND'),
-  @JsonValue('DISCOVERY_DESCRIPTION_REQUIRED')
-  discoveryDescriptionRequired('DISCOVERY_DESCRIPTION_REQUIRED'),
   @JsonValue('DISCOVERY_DISABLED')
   discoveryDisabled('DISCOVERY_DISABLED'),
   @JsonValue('DISCOVERY_INSUFFICIENT_MEMBERS')
   discoveryInsufficientMembers('DISCOVERY_INSUFFICIENT_MEMBERS'),
-  @JsonValue('DISCOVERY_INVALID_CATEGORY')
-  discoveryInvalidCategory('DISCOVERY_INVALID_CATEGORY'),
   @JsonValue('DISCOVERY_NOT_DISCOVERABLE')
   discoveryNotDiscoverable('DISCOVERY_NOT_DISCOVERABLE'),
   @JsonValue('DISCRIMINATOR_REQUIRED')
@@ -189,12 +163,6 @@ enum ApiErrorCode {
   registrationRejected('REGISTRATION_REJECTED'),
   @JsonValue('REGISTRATION_URL_INVALID')
   registrationUrlInvalid('REGISTRATION_URL_INVALID'),
-  @JsonValue('EMPTY_ENCRYPTED_BODY')
-  emptyEncryptedBody('EMPTY_ENCRYPTED_BODY'),
-  @JsonValue('ENCRYPTION_FAILED')
-  encryptionFailed('ENCRYPTION_FAILED'),
-  @JsonValue('EU_WITHDRAWAL_WAIVER_REQUIRED')
-  euWithdrawalWaiverRequired('EU_WITHDRAWAL_WAIVER_REQUIRED'),
   @JsonValue('EXPLICIT_CONTENT_CANNOT_BE_SENT')
   explicitContentCannotBeSent('EXPLICIT_CONTENT_CANNOT_BE_SENT'),
   @JsonValue('FEATURE_NOT_AVAILABLE_SELF_HOSTED')
@@ -217,8 +185,6 @@ enum ApiErrorCode {
   giftCodeAlreadyRedeemed('GIFT_CODE_ALREADY_REDEEMED'),
   @JsonValue('GUILD_PHONE_VERIFICATION_REQUIRED')
   guildPhoneVerificationRequired('GUILD_PHONE_VERIFICATION_REQUIRED'),
-  @JsonValue('GUILD_TEMPLATE_FETCH_FAILED')
-  guildTemplateFetchFailed('GUILD_TEMPLATE_FETCH_FAILED'),
   @JsonValue('GUILD_TEMPLATE_INVALID')
   guildTemplateInvalid('GUILD_TEMPLATE_INVALID'),
   @JsonValue('GUILD_VERIFICATION_REQUIRED')
@@ -231,10 +197,6 @@ enum ApiErrorCode {
   harvestFailed('HARVEST_FAILED'),
   @JsonValue('HARVEST_NOT_READY')
   harvestNotReady('HARVEST_NOT_READY'),
-  @JsonValue('HTTP_GET_AUTHORIZE_NOT_SUPPORTED')
-  httpGetAuthorizeNotSupported('HTTP_GET_AUTHORIZE_NOT_SUPPORTED'),
-  @JsonValue('INSTANCE_VERSION_MISMATCH')
-  instanceVersionMismatch('INSTANCE_VERSION_MISMATCH'),
   @JsonValue('INTERNAL_SERVER_ERROR')
   internalServerError('INTERNAL_SERVER_ERROR'),
   @JsonValue('INVALID_ACLS_FORMAT')
@@ -251,28 +213,16 @@ enum ApiErrorCode {
   invalidChannelTypeForCall('INVALID_CHANNEL_TYPE_FOR_CALL'),
   @JsonValue('INVALID_CHANNEL_TYPE')
   invalidChannelType('INVALID_CHANNEL_TYPE'),
-  @JsonValue('INVALID_CLIENT')
-  invalidClient('INVALID_CLIENT'),
-  @JsonValue('INVALID_CLIENT_SECRET')
-  invalidClientSecret('INVALID_CLIENT_SECRET'),
   @JsonValue('INVALID_DSA_REPORT_TARGET')
   invalidDsaReportTarget('INVALID_DSA_REPORT_TARGET'),
   @JsonValue('INVALID_DSA_TICKET')
   invalidDsaTicket('INVALID_DSA_TICKET'),
   @JsonValue('INVALID_DSA_VERIFICATION_CODE')
   invalidDsaVerificationCode('INVALID_DSA_VERIFICATION_CODE'),
-  @JsonValue('INVALID_DECRYPTED_JSON')
-  invalidDecryptedJson('INVALID_DECRYPTED_JSON'),
-  @JsonValue('INVALID_EPHEMERAL_KEY')
-  invalidEphemeralKey('INVALID_EPHEMERAL_KEY'),
   @JsonValue('INVALID_FLAGS_FORMAT')
   invalidFlagsFormat('INVALID_FLAGS_FORMAT'),
-  @JsonValue('INVALID_IV')
-  invalidIv('INVALID_IV'),
   @JsonValue('INVALID_FORM_BODY')
   invalidFormBody('INVALID_FORM_BODY'),
-  @JsonValue('INVALID_GRANT')
-  invalidGrant('INVALID_GRANT'),
   @JsonValue('INVALID_HANDOFF_CODE')
   invalidHandoffCode('INVALID_HANDOFF_CODE'),
   @JsonValue('INVALID_PERMISSIONS_INTEGER')
@@ -283,20 +233,12 @@ enum ApiErrorCode {
   invalidPhoneNumber('INVALID_PHONE_NUMBER'),
   @JsonValue('INVALID_PHONE_VERIFICATION_CODE')
   invalidPhoneVerificationCode('INVALID_PHONE_VERIFICATION_CODE'),
-  @JsonValue('INVALID_REDIRECT_URI')
-  invalidRedirectUri('INVALID_REDIRECT_URI'),
   @JsonValue('INVALID_REQUEST')
   invalidRequest('INVALID_REQUEST'),
-  @JsonValue('INVALID_RESPONSE_TYPE_FOR_NON_BOT')
-  invalidResponseTypeForNonBot('INVALID_RESPONSE_TYPE_FOR_NON_BOT'),
-  @JsonValue('INVALID_SCOPE')
-  invalidScope('INVALID_SCOPE'),
   @JsonValue('INVALID_STREAM_KEY_FORMAT')
   invalidStreamKeyFormat('INVALID_STREAM_KEY_FORMAT'),
   @JsonValue('INVALID_STREAM_THUMBNAIL_PAYLOAD')
   invalidStreamThumbnailPayload('INVALID_STREAM_THUMBNAIL_PAYLOAD'),
-  @JsonValue('INVALID_SUDO_TOKEN')
-  invalidSudoToken('INVALID_SUDO_TOKEN'),
   @JsonValue('INVALID_SUSPICIOUS_FLAGS_FORMAT')
   invalidSuspiciousFlagsFormat('INVALID_SUSPICIOUS_FLAGS_FORMAT'),
   @JsonValue('INVALID_SYSTEM_FLAG')
@@ -327,10 +269,8 @@ enum ApiErrorCode {
   globalIpBanned('GLOBAL_IP_BANNED'),
   @JsonValue('GLOBAL_IP_TEMPORARILY_BANNED')
   globalIpTemporarilyBanned('GLOBAL_IP_TEMPORARILY_BANNED'),
-  @JsonValue('IP_BANNED')
-  ipBanned('IP_BANNED'),
-  @JsonValue('MAX_ANIMATED_EMOJIS')
-  maxAnimatedEmojis('MAX_ANIMATED_EMOJIS'),
+  @JsonValue('IP_BAN_DECLINED')
+  ipBanDeclined('IP_BAN_DECLINED'),
   @JsonValue('MAX_APPLICATIONS')
   maxApplications('MAX_APPLICATIONS'),
   @JsonValue('MAX_BOOKMARKS')
@@ -357,14 +297,8 @@ enum ApiErrorCode {
   maxGuildRoles('MAX_GUILD_ROLES'),
   @JsonValue('MAX_GUILDS')
   maxGuilds('MAX_GUILDS'),
-  @JsonValue('NEW_ACCOUNT_GUILD_JOIN_RATE_LIMITED')
-  newAccountGuildJoinRateLimited('NEW_ACCOUNT_GUILD_JOIN_RATE_LIMITED'),
   @JsonValue('MAX_INVITES')
   maxInvites('MAX_INVITES'),
-  @JsonValue('MAX_PINS_PER_CHANNEL')
-  maxPinsPerChannel('MAX_PINS_PER_CHANNEL'),
-  @JsonValue('MESSAGE_TOTAL_ATTACHMENT_SIZE_TOO_LARGE')
-  messageTotalAttachmentSizeTooLarge('MESSAGE_TOTAL_ATTACHMENT_SIZE_TOO_LARGE'),
   @JsonValue('MAX_REACTIONS')
   maxReactions('MAX_REACTIONS'),
   @JsonValue('MAX_STICKERS')
@@ -373,8 +307,6 @@ enum ApiErrorCode {
   maxWebhooksPerChannel('MAX_WEBHOOKS_PER_CHANNEL'),
   @JsonValue('MAX_WEBHOOKS_PER_GUILD')
   maxWebhooksPerGuild('MAX_WEBHOOKS_PER_GUILD'),
-  @JsonValue('MAX_WEBHOOKS')
-  maxWebhooks('MAX_WEBHOOKS'),
   @JsonValue('NCMEC_ALREADY_SUBMITTED')
   ncmecAlreadySubmitted('NCMEC_ALREADY_SUBMITTED'),
   @JsonValue('NCMEC_SUBMISSION_FAILED')
@@ -389,20 +321,10 @@ enum ApiErrorCode {
   missingAcl('MISSING_ACL'),
   @JsonValue('MISSING_AUTHORIZATION')
   missingAuthorization('MISSING_AUTHORIZATION'),
-  @JsonValue('MISSING_CLIENT_SECRET')
-  missingClientSecret('MISSING_CLIENT_SECRET'),
-  @JsonValue('MISSING_EPHEMERAL_KEY')
-  missingEphemeralKey('MISSING_EPHEMERAL_KEY'),
-  @JsonValue('MISSING_IV')
-  missingIv('MISSING_IV'),
-  @JsonValue('MISSING_OAUTH_FIELDS')
-  missingOauthFields('MISSING_OAUTH_FIELDS'),
   @JsonValue('MISSING_OAUTH_SCOPE')
   missingOauthScope('MISSING_OAUTH_SCOPE'),
   @JsonValue('MISSING_PERMISSIONS')
   missingPermissions('MISSING_PERMISSIONS'),
-  @JsonValue('MISSING_REDIRECT_URI')
-  missingRedirectUri('MISSING_REDIRECT_URI'),
   @JsonValue('NO_ACTIVE_CALL')
   noActiveCall('NO_ACTIVE_CALL'),
   @JsonValue('NO_ACTIVE_SUBSCRIPTION')
@@ -417,20 +339,14 @@ enum ApiErrorCode {
   noPendingDeletion('NO_PENDING_DELETION'),
   @JsonValue('NO_USERS_WITH_FLUXERTAG_EXIST')
   noUsersWithFluxertagExist('NO_USERS_WITH_FLUXERTAG_EXIST'),
-  @JsonValue('NO_VISIONARY_SLOTS_AVAILABLE')
-  noVisionarySlotsAvailable('NO_VISIONARY_SLOTS_AVAILABLE'),
   @JsonValue('NOT_A_BOT_APPLICATION')
   notABotApplication('NOT_A_BOT_APPLICATION'),
   @JsonValue('NOT_FRIENDS_WITH_USER')
   notFriendsWithUser('NOT_FRIENDS_WITH_USER'),
-  @JsonValue('NOT_OWNER_OF_ADMIN_API_KEY')
-  notOwnerOfAdminApiKey('NOT_OWNER_OF_ADMIN_API_KEY'),
   @JsonValue('NSFW_CONTENT_AGE_RESTRICTED')
   nsfwContentAgeRestricted('NSFW_CONTENT_AGE_RESTRICTED'),
   @JsonValue('PASSKEY_AUTHENTICATION_FAILED')
   passkeyAuthenticationFailed('PASSKEY_AUTHENTICATION_FAILED'),
-  @JsonValue('PASSKEYS_DISABLED')
-  passkeysDisabled('PASSKEYS_DISABLED'),
   @JsonValue('PHONE_ADD_NOT_ELIGIBLE')
   phoneAddNotEligible('PHONE_ADD_NOT_ELIGIBLE'),
   @JsonValue('PHONE_ALREADY_USED')
@@ -461,8 +377,6 @@ enum ApiErrorCode {
   processingFailed('PROCESSING_FAILED'),
   @JsonValue('RATE_LIMITED')
   rateLimited('RATE_LIMITED'),
-  @JsonValue('REDIRECT_URI_REQUIRED_FOR_NON_BOT')
-  redirectUriRequiredForNonBot('REDIRECT_URI_REQUIRED_FOR_NON_BOT'),
   @JsonValue('REPORT_ALREADY_RESOLVED')
   reportAlreadyResolved('REPORT_ALREADY_RESOLVED'),
   @JsonValue('REPORT_BANNED')
@@ -493,8 +407,6 @@ enum ApiErrorCode {
   streamKeyChannelMismatch('STREAM_KEY_CHANNEL_MISMATCH'),
   @JsonValue('STREAM_KEY_SCOPE_MISMATCH')
   streamKeyScopeMismatch('STREAM_KEY_SCOPE_MISMATCH'),
-  @JsonValue('STREAM_THUMBNAIL_PAYLOAD_EMPTY')
-  streamThumbnailPayloadEmpty('STREAM_THUMBNAIL_PAYLOAD_EMPTY'),
   @JsonValue('STRIPE_ERROR')
   stripeError('STRIPE_ERROR'),
   @JsonValue('STRIPE_GIFT_REDEMPTION_IN_PROGRESS')
@@ -519,8 +431,6 @@ enum ApiErrorCode {
   stripeSubscriptionAlreadyCanceling('STRIPE_SUBSCRIPTION_ALREADY_CANCELING'),
   @JsonValue('STRIPE_SUBSCRIPTION_NOT_CANCELING')
   stripeSubscriptionNotCanceling('STRIPE_SUBSCRIPTION_NOT_CANCELING'),
-  @JsonValue('STRIPE_SUBSCRIPTION_PERIOD_END_MISSING')
-  stripeSubscriptionPeriodEndMissing('STRIPE_SUBSCRIPTION_PERIOD_END_MISSING'),
   @JsonValue('STRIPE_WEBHOOK_NOT_AVAILABLE')
   stripeWebhookNotAvailable('STRIPE_WEBHOOK_NOT_AVAILABLE'),
   @JsonValue('STRIPE_WEBHOOK_SIGNATURE_INVALID')
@@ -537,8 +447,6 @@ enum ApiErrorCode {
   donationMagicLinkInvalid('DONATION_MAGIC_LINK_INVALID'),
   @JsonValue('DONATION_MAGIC_LINK_USED')
   donationMagicLinkUsed('DONATION_MAGIC_LINK_USED'),
-  @JsonValue('DONOR_NOT_FOUND')
-  donorNotFound('DONOR_NOT_FOUND'),
   @JsonValue('SUDO_MODE_REQUIRED')
   sudoModeRequired('SUDO_MODE_REQUIRED'),
   @JsonValue('TAG_ALREADY_TAKEN')
@@ -635,10 +543,6 @@ enum ApiErrorCode {
   unknownApplication('UNKNOWN_APPLICATION'),
   @JsonValue('UNKNOWN_WEBHOOK')
   unknownWebhook('UNKNOWN_WEBHOOK'),
-  @JsonValue('UNFURL_STREAM_TOO_LARGE')
-  unfurlStreamTooLarge('UNFURL_STREAM_TOO_LARGE'),
-  @JsonValue('UNSUPPORTED_RESPONSE_TYPE')
-  unsupportedResponseType('UNSUPPORTED_RESPONSE_TYPE'),
   @JsonValue('USERNAME_NOT_AVAILABLE')
   usernameNotAvailable('USERNAME_NOT_AVAILABLE'),
   @JsonValue('UPDATE_FAILED')
@@ -659,8 +563,6 @@ enum ApiErrorCode {
   webauthnCredentialLimitReached('WEBAUTHN_CREDENTIAL_LIMIT_REACHED'),
   @JsonValue('AGE_VERIFICATION_ALREADY_VERIFIED')
   ageVerificationAlreadyVerified('AGE_VERIFICATION_ALREADY_VERIFIED'),
-  @JsonValue('AGE_VERIFICATION_INVALID_CARD_TYPE')
-  ageVerificationInvalidCardType('AGE_VERIFICATION_INVALID_CARD_TYPE'),
 
   /// Default value for all unparsed values, allows backward compatibility when adding new values on the backend.
   $unknown(null);
