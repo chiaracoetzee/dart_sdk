@@ -74,7 +74,7 @@ class GatewayConnection {
            ),
        _presence = presence;
 
-  final String _token;
+  String _token;
   final Dio _dio;
   final String? _gatewayUrlOverride;
   final String? _initialGuildId;
@@ -323,6 +323,68 @@ class GatewayConnection {
       d['nonce'] = nonce;
     }
     _send(<String, Object?>{'op': GatewayOpcodes.requestGuildMembers, 'd': d});
+  }
+
+  /// Updates the auth token used for later identify/resume without reconnecting.
+  void setToken(String token) {
+    if (token.isEmpty) {
+      return;
+    }
+    _token = token;
+  }
+
+  /// Sends opcode 15 to request live member/online counts for [guildIds].
+  ///
+  /// The server responds with `GUILD_COUNTS_UPDATE`.
+  void requestGuildCounts(List<String> guildIds) {
+    if (_state != GatewayState.connected || _channel == null) {
+      return;
+    }
+    final List<String> uniqueIds = guildIds
+        .where((String id) => id.isNotEmpty)
+        .toSet()
+        .toList();
+    if (uniqueIds.isEmpty) {
+      return;
+    }
+    _send(<String, Object?>{
+      'op': GatewayOpcodes.requestGuildCounts,
+      'd': <String, Object?>{'guild_ids': uniqueIds},
+    });
+  }
+
+  /// Sends opcode 16 to request live member/online counts for channels.
+  ///
+  /// The server responds with `CHANNEL_MEMBER_COUNTS_UPDATE`.
+  void requestChannelMemberCounts({
+    required String guildId,
+    required List<String> channelIds,
+    String? nonce,
+  }) {
+    if (_state != GatewayState.connected || _channel == null) {
+      return;
+    }
+    if (guildId.isEmpty) {
+      return;
+    }
+    final List<String> uniqueIds = channelIds
+        .where((String id) => id.isNotEmpty)
+        .toSet()
+        .toList();
+    if (uniqueIds.isEmpty) {
+      return;
+    }
+    final Map<String, Object?> d = <String, Object?>{
+      'guild_id': guildId,
+      'channel_ids': uniqueIds,
+    };
+    if (nonce != null) {
+      d['nonce'] = nonce;
+    }
+    _send(<String, Object?>{
+      'op': GatewayOpcodes.requestChannelMemberCounts,
+      'd': d,
+    });
   }
 
   /// Join, move, or leave a voice channel. Requires an established gateway

@@ -588,6 +588,92 @@ class VoiceServerUpdateEvent extends GatewayEvent {
   final String? e2eeKey;
 }
 
+class VoiceStateAckEvent extends GatewayEvent {
+  const VoiceStateAckEvent({
+    this.mutationId,
+    this.runtimeEpoch,
+    this.connectionId,
+    this.guildId,
+    this.channelId,
+    this.status,
+    this.serverVersion,
+    this.canonicalState,
+    this.errorCode,
+    this.errorMessage,
+  });
+
+  final String? mutationId;
+  final String? runtimeEpoch;
+  final String? connectionId;
+  final String? guildId;
+  final String? channelId;
+  final String? status;
+  final int? serverVersion;
+  final VoiceState? canonicalState;
+  final String? errorCode;
+  final String? errorMessage;
+}
+
+class EntranceSoundPlayEvent extends GatewayEvent {
+  const EntranceSoundPlayEvent({
+    required this.userId,
+    required this.channelId,
+    required this.soundId,
+    required this.hash,
+    required this.url,
+    required this.durationMs,
+    required this.contentType,
+    this.guildId,
+  });
+
+  final String userId;
+  final String channelId;
+  final String soundId;
+  final String hash;
+  final String url;
+  final int durationMs;
+  final String contentType;
+  final String? guildId;
+}
+
+class GuildCountEntry {
+  const GuildCountEntry({
+    required this.guildId,
+    required this.memberCount,
+    required this.onlineCount,
+  });
+
+  final String guildId;
+  final int memberCount;
+  final int onlineCount;
+}
+
+class GuildCountsUpdateEvent extends GatewayEvent {
+  const GuildCountsUpdateEvent({required this.counts});
+
+  final List<GuildCountEntry> counts;
+}
+
+class ChannelMemberCountEntry {
+  const ChannelMemberCountEntry({
+    required this.guildId,
+    required this.channelId,
+    required this.memberCount,
+    required this.onlineCount,
+  });
+
+  final String guildId;
+  final String channelId;
+  final int memberCount;
+  final int onlineCount;
+}
+
+class ChannelMemberCountsUpdateEvent extends GatewayEvent {
+  const ChannelMemberCountsUpdateEvent({required this.counts});
+
+  final List<ChannelMemberCountEntry> counts;
+}
+
 // ---------------------------------------------------------------------------
 // Calls
 // ---------------------------------------------------------------------------

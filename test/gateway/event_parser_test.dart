@@ -1357,6 +1357,88 @@ void main() {
       expect(e.guildId, isNull);
       expect(e.channelId, isNull);
     });
+
+    test('VOICE_STATE_ACK → VoiceStateAckEvent', () {
+      final data = <String, Object?>{
+        'mutation_id': 'm1',
+        'status': 'ok',
+        'guild_id': 'g1',
+        'channel_id': 'ch1',
+        'connection_id': 'c1',
+        'canonical_state': <String, Object?>{
+          'user_id': 'u1',
+          'channel_id': 'ch1',
+          'guild_id': 'g1',
+          'connection_id': 'c1',
+          'self_mute': true,
+        },
+      };
+      final event = parser.parse('VOICE_STATE_ACK', data);
+
+      expect(event, isA<VoiceStateAckEvent>());
+      final e = event as VoiceStateAckEvent;
+      expect(e.mutationId, 'm1');
+      expect(e.status, 'ok');
+      expect(e.canonicalState?.userId, 'u1');
+      expect(e.canonicalState?.selfMute, true);
+    });
+
+    test('ENTRANCE_SOUND_PLAY → EntranceSoundPlayEvent', () {
+      final data = <String, Object?>{
+        'user_id': 'u1',
+        'channel_id': 'ch1',
+        'guild_id': 'g1',
+        'sound_id': 's1',
+        'hash': 'abc',
+        'url': 'https://cdn.example/sound.ogg',
+        'duration_ms': 1500,
+        'content_type': 'audio/ogg',
+      };
+      final event = parser.parse('ENTRANCE_SOUND_PLAY', data);
+
+      expect(event, isA<EntranceSoundPlayEvent>());
+      final e = event as EntranceSoundPlayEvent;
+      expect(e.userId, 'u1');
+      expect(e.channelId, 'ch1');
+      expect(e.url, 'https://cdn.example/sound.ogg');
+      expect(e.durationMs, 1500);
+    });
+
+    test('GUILD_COUNTS_UPDATE → GuildCountsUpdateEvent', () {
+      final data = <String, Object?>{
+        'counts': [
+          {'guild_id': 'g1', 'member_count': 10, 'online_count': 3},
+        ],
+      };
+      final event = parser.parse('GUILD_COUNTS_UPDATE', data);
+
+      expect(event, isA<GuildCountsUpdateEvent>());
+      final e = event as GuildCountsUpdateEvent;
+      expect(e.counts, hasLength(1));
+      expect(e.counts.first.guildId, 'g1');
+      expect(e.counts.first.memberCount, 10);
+      expect(e.counts.first.onlineCount, 3);
+    });
+
+    test('CHANNEL_MEMBER_COUNTS_UPDATE → ChannelMemberCountsUpdateEvent', () {
+      final data = <String, Object?>{
+        'counts': [
+          {
+            'guild_id': 'g1',
+            'channel_id': 'ch1',
+            'member_count': 8,
+            'online_count': 2,
+          },
+        ],
+      };
+      final event = parser.parse('CHANNEL_MEMBER_COUNTS_UPDATE', data);
+
+      expect(event, isA<ChannelMemberCountsUpdateEvent>());
+      final e = event as ChannelMemberCountsUpdateEvent;
+      expect(e.counts, hasLength(1));
+      expect(e.counts.first.channelId, 'ch1');
+      expect(e.counts.first.memberCount, 8);
+    });
   });
 
   // ---------------------------------------------------------------------------

@@ -280,6 +280,22 @@ class EventParser {
         'VOICE_STATE_UPDATE' => VoiceStateUpdateEvent(
           state: VoiceState.fromJson(data),
         ),
+        'VOICE_STATE_ACK' => VoiceStateAckEvent(
+          mutationId: data['mutation_id'] as String?,
+          runtimeEpoch: data['runtime_epoch'] as String?,
+          connectionId: data['connection_id'] as String?,
+          guildId: data['guild_id'] as String?,
+          channelId: data['channel_id'] as String?,
+          status: data['status'] as String?,
+          serverVersion: (data['server_version'] as num?)?.toInt(),
+          canonicalState: data['canonical_state'] == null
+              ? null
+              : VoiceState.fromJson(
+                  data['canonical_state'] as Map<String, dynamic>,
+                ),
+          errorCode: data['error_code'] as String?,
+          errorMessage: data['error_message'] as String?,
+        ),
         'VOICE_SERVER_UPDATE' => VoiceServerUpdateEvent(
           token: data['token'] as String,
           endpoint: data['endpoint'] as String,
@@ -294,6 +310,22 @@ class EventParser {
         'CALL_UPDATE' => _parseCallUpdate(data),
         'CALL_DELETE' => CallDeleteEvent(
           channelId: data['channel_id'] as String,
+        ),
+        'ENTRANCE_SOUND_PLAY' => EntranceSoundPlayEvent(
+          userId: data['user_id'] as String,
+          channelId: data['channel_id'] as String,
+          soundId: data['sound_id'] as String,
+          hash: data['hash'] as String,
+          url: data['url'] as String,
+          durationMs: (data['duration_ms'] as num).toInt(),
+          contentType: data['content_type'] as String,
+          guildId: data['guild_id'] as String?,
+        ),
+        'GUILD_COUNTS_UPDATE' => GuildCountsUpdateEvent(
+          counts: _parseGuildCountEntries(data['counts']),
+        ),
+        'CHANNEL_MEMBER_COUNTS_UPDATE' => ChannelMemberCountsUpdateEvent(
+          counts: _parseChannelMemberCountEntries(data['counts']),
         ),
 
         // Invites
@@ -453,6 +485,67 @@ class EventParser {
       }
     }
     return result;
+  }
+
+  static List<GuildCountEntry> _parseGuildCountEntries(dynamic raw) {
+    if (raw is! List) {
+      return const <GuildCountEntry>[];
+    }
+    final List<GuildCountEntry> counts = <GuildCountEntry>[];
+    for (final dynamic item in raw) {
+      if (item is! Map) {
+        continue;
+      }
+      final Map<String, dynamic> map = Map<String, dynamic>.from(item);
+      final String? guildId = map['guild_id'] as String?;
+      final int? memberCount = (map['member_count'] as num?)?.toInt();
+      final int? onlineCount = (map['online_count'] as num?)?.toInt();
+      if (guildId == null || memberCount == null || onlineCount == null) {
+        continue;
+      }
+      counts.add(
+        GuildCountEntry(
+          guildId: guildId,
+          memberCount: memberCount,
+          onlineCount: onlineCount,
+        ),
+      );
+    }
+    return counts;
+  }
+
+  static List<ChannelMemberCountEntry> _parseChannelMemberCountEntries(
+    dynamic raw,
+  ) {
+    if (raw is! List) {
+      return const <ChannelMemberCountEntry>[];
+    }
+    final List<ChannelMemberCountEntry> counts = <ChannelMemberCountEntry>[];
+    for (final dynamic item in raw) {
+      if (item is! Map) {
+        continue;
+      }
+      final Map<String, dynamic> map = Map<String, dynamic>.from(item);
+      final String? guildId = map['guild_id'] as String?;
+      final String? channelId = map['channel_id'] as String?;
+      final int? memberCount = (map['member_count'] as num?)?.toInt();
+      final int? onlineCount = (map['online_count'] as num?)?.toInt();
+      if (guildId == null ||
+          channelId == null ||
+          memberCount == null ||
+          onlineCount == null) {
+        continue;
+      }
+      counts.add(
+        ChannelMemberCountEntry(
+          guildId: guildId,
+          channelId: channelId,
+          memberCount: memberCount,
+          onlineCount: onlineCount,
+        ),
+      );
+    }
+    return counts;
   }
 
   PresenceUpdateEvent _parsePresenceUpdate(Map<String, dynamic> data) {

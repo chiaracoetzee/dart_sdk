@@ -43,4 +43,10 @@ class GatewayOpcodes {
 
   /// Client sends a lazy request for guild member list.
   static const int lazyRequest = 14;
+
+  /// Client requests live member and online counts for guilds.
+  static const int requestGuildCounts = 15;
+
+  /// Client requests live member and online counts for channels.
+  static const int requestChannelMemberCounts = 16;
 }
