@@ -354,7 +354,7 @@ class EventParser {
         'FAVORITE_MEME_CREATE' => FavoriteMemeCreateEvent(data: data),
         'FAVORITE_MEME_UPDATE' => FavoriteMemeUpdateEvent(data: data),
         'FAVORITE_MEME_DELETE' => FavoriteMemeDeleteEvent(
-          id: (data['id'] ?? data['meme_id']) as String,
+          id: _snowflakeId(data['id'] ?? data['meme_id']) ?? '',
         ),
         'SESSIONS_REPLACE' => const SessionsReplaceEvent(),
 
@@ -619,4 +619,18 @@ class EventParser {
           ?.cast<String>(),
     );
   }
+}
+
+String? _snowflakeId(Object? value) {
+  if (value is String) {
+    final trimmed = value.trim();
+    return trimmed.isEmpty ? null : trimmed;
+  }
+  if (value is int) {
+    return value.toString();
+  }
+  if (value is BigInt) {
+    return value.toString();
+  }
+  return null;
 }
