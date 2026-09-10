@@ -15,6 +15,13 @@ _$PendingSubscriptionChangeResponseVariant1FromJson(
   ($checkedConvert) {
     final val = PendingSubscriptionChangeResponseVariant1(
       scheduleId: $checkedConvert('schedule_id', (v) => v as String),
+      changeKind: $checkedConvert(
+        'change_kind',
+        (v) =>
+            PendingSubscriptionChangeResponseVariant1ChangeKindChangeKind.fromJson(
+              v as String,
+            ),
+      ),
       currentBillingCycle: $checkedConvert(
         'current_billing_cycle',
         (v) => v == null
@@ -33,6 +40,10 @@ _$PendingSubscriptionChangeResponseVariant1FromJson(
       effectiveAt: $checkedConvert('effective_at', (v) => v as String),
       currentPriceId: $checkedConvert('current_price_id', (v) => v as String?),
       targetPriceId: $checkedConvert('target_price_id', (v) => v as String?),
+      targetAmountMinor: $checkedConvert(
+        'target_amount_minor',
+        (v) => (v as num?)?.toInt(),
+      ),
       currency: $checkedConvert(
         'currency',
         (v) => v == null
@@ -58,11 +69,13 @@ _$PendingSubscriptionChangeResponseVariant1FromJson(
   },
   fieldKeyMap: const {
     'scheduleId': 'schedule_id',
+    'changeKind': 'change_kind',
     'currentBillingCycle': 'current_billing_cycle',
     'targetBillingCycle': 'target_billing_cycle',
     'effectiveAt': 'effective_at',
     'currentPriceId': 'current_price_id',
     'targetPriceId': 'target_price_id',
+    'targetAmountMinor': 'target_amount_minor',
     'initialAmountMinor': 'initial_amount_minor',
     'recurringAmountMinor': 'recurring_amount_minor',
     'creditAmountMinor': 'credit_amount_minor',
@@ -73,11 +86,13 @@ Map<String, dynamic> _$PendingSubscriptionChangeResponseVariant1ToJson(
   PendingSubscriptionChangeResponseVariant1 instance,
 ) => <String, dynamic>{
   'schedule_id': instance.scheduleId,
+  'change_kind': instance.changeKind,
   'current_billing_cycle': instance.currentBillingCycle,
   'target_billing_cycle': instance.targetBillingCycle,
   'effective_at': instance.effectiveAt,
   'current_price_id': instance.currentPriceId,
   'target_price_id': instance.targetPriceId,
+  'target_amount_minor': instance.targetAmountMinor,
   'currency': instance.currency,
   'initial_amount_minor': instance.initialAmountMinor,
   'recurring_amount_minor': instance.recurringAmountMinor,

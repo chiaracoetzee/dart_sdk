@@ -6,6 +6,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'current_subscription_price_response.dart';
 import 'pending_subscription_change_response.dart';
+import 'list_price_switch_state.dart';
 import 'premium_billing_subscription_response.dart';
 import 'premium_billing_invoice_response.dart';
 import 'premium_billing_payment_method_response.dart';
@@ -19,6 +20,7 @@ class PremiumStateResponseBilling {
     required this.stripeCustomerId,
     required this.currentSubscriptionPrice,
     required this.pendingSubscriptionChange,
+    required this.listPriceSwitch,
     required this.subscription,
     required this.invoices,
     required this.invoicesHasMore,
@@ -35,6 +37,8 @@ class PremiumStateResponseBilling {
   final CurrentSubscriptionPriceResponse? currentSubscriptionPrice;
   @JsonKey(includeIfNull: true, name: 'pending_subscription_change')
   final PendingSubscriptionChangeResponse? pendingSubscriptionChange;
+  @JsonKey(name: 'list_price_switch')
+  final ListPriceSwitchState listPriceSwitch;
   @JsonKey(includeIfNull: true)
   final PremiumBillingSubscriptionResponse? subscription;
   final List<PremiumBillingInvoiceResponse> invoices;

@@ -33,6 +33,10 @@ PremiumStateResponseBilling _$PremiumStateResponseBillingFromJson(
                 v as Map<String, dynamic>,
               ),
       ),
+      listPriceSwitch: $checkedConvert(
+        'list_price_switch',
+        (v) => ListPriceSwitchState.fromJson(v as Map<String, dynamic>),
+      ),
       subscription: $checkedConvert(
         'subscription',
         (v) => v == null
@@ -75,6 +79,7 @@ PremiumStateResponseBilling _$PremiumStateResponseBillingFromJson(
     'stripeCustomerId': 'stripe_customer_id',
     'currentSubscriptionPrice': 'current_subscription_price',
     'pendingSubscriptionChange': 'pending_subscription_change',
+    'listPriceSwitch': 'list_price_switch',
     'invoicesHasMore': 'invoices_has_more',
     'paymentMethods': 'payment_methods',
     'refundEligibility': 'refund_eligibility',
@@ -87,6 +92,7 @@ Map<String, dynamic> _$PremiumStateResponseBillingToJson(
   'stripe_customer_id': instance.stripeCustomerId,
   'current_subscription_price': instance.currentSubscriptionPrice,
   'pending_subscription_change': instance.pendingSubscriptionChange,
+  'list_price_switch': instance.listPriceSwitch,
   'subscription': instance.subscription,
   'invoices': instance.invoices,
   'invoices_has_more': instance.invoicesHasMore,

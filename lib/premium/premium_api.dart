@@ -12,6 +12,7 @@ import '../models/premium_state_response.dart';
 import '../models/price_ids_response.dart';
 import '../models/pricing_mode_enum.dart';
 import '../models/success_response.dart';
+import '../models/switch_to_list_price_response.dart';
 import '../models/update_premium_perks_disabled_request.dart';
 import '../models/url_response.dart';
 
@@ -93,6 +94,12 @@ abstract class PremiumApi {
   Future<PremiumStateResponse> getPremiumState({
     @Query('country_code') String? countryCode,
   });
+
+  /// Switch subscription to the current list price.
+  ///
+  /// Moves the authenticated user's grandfathered premium subscription down to the current list price for the same currency and billing cycle, effective at the end of the current billing period. The target price is resolved on the server and the switch is refused unless it lowers the amount charged.
+  @POST('/premium/switch-to-list-price')
+  Future<SwitchToListPriceResponse> switchSubscriptionToListPrice();
 
   /// Rejoin visionary guild.
   ///
