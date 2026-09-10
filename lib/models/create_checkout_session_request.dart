@@ -5,7 +5,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'checkout_payment_method_enum.dart';
-import 'pricing_mode_enum.dart';
 
 part 'create_checkout_session_request.g.dart';
 
@@ -16,7 +15,6 @@ class CreateCheckoutSessionRequest {
     this.countryCode,
     this.clientGeoipCountryCode,
     this.euWithdrawalWaiverAccepted,
-    this.pricingMode,
     this.paymentMethod,
     this.isBusiness,
   });
@@ -28,7 +26,7 @@ class CreateCheckoutSessionRequest {
   @JsonKey(name: 'price_id')
   final String priceId;
 
-  /// Two-letter country code used for regional pricing
+  /// Two-letter country code used for regional pricing. Only used when the server cannot geolocate the request; otherwise the request GeoIP country wins.
   @JsonKey(includeIfNull: false, name: 'country_code')
   final String? countryCode;
 
@@ -39,8 +37,6 @@ class CreateCheckoutSessionRequest {
   /// Whether the EU/EEA digital content withdrawal waiver was expressly accepted before checkout
   @JsonKey(includeIfNull: false, name: 'eu_withdrawal_waiver_accepted')
   final bool? euWithdrawalWaiverAccepted;
-  @JsonKey(includeIfNull: false, name: 'pricing_mode')
-  final PricingModeEnum? pricingMode;
   @JsonKey(includeIfNull: false, name: 'payment_method')
   final CheckoutPaymentMethodEnum? paymentMethod;
 

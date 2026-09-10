@@ -10,7 +10,6 @@ import '../models/change_subscription_request.dart';
 import '../models/current_subscription_price_response.dart';
 import '../models/premium_state_response.dart';
 import '../models/price_ids_response.dart';
-import '../models/pricing_mode_enum.dart';
 import '../models/success_response.dart';
 import '../models/switch_to_list_price_response.dart';
 import '../models/update_premium_perks_disabled_request.dart';
@@ -78,7 +77,6 @@ abstract class PremiumApi {
   @GET('/premium/price-ids')
   Future<PriceIdsResponse> getPriceIds({
     @Query('country_code') String? countryCode,
-    @Query('pricing_mode') PricingModeEnum? pricingMode,
   });
 
   /// Reactivate subscription.

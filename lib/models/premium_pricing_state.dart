@@ -13,7 +13,6 @@ class PremiumPricingState {
   const PremiumPricingState({
     required this.countryCode,
     required this.localized,
-    required this.baseField,
   });
 
   factory PremiumPricingState.fromJson(Map<String, Object?> json) =>
@@ -26,8 +25,6 @@ class PremiumPricingState {
   /// Localized checkout prices resolved from mirrored billing data
   @JsonKey(includeIfNull: true)
   final PriceIdsResponse? localized;
-  @JsonKey(includeIfNull: true, name: 'base')
-  final PriceIdsResponse? baseField;
 
   Map<String, Object?> toJson() => _$PremiumPricingStateToJson(this);
 }

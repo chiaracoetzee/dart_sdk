@@ -16,20 +16,13 @@ PremiumPricingState _$PremiumPricingStateFromJson(Map<String, dynamic> json) =>
               ? null
               : PriceIdsResponse.fromJson(v as Map<String, dynamic>),
         ),
-        baseField: $checkedConvert(
-          'base',
-          (v) => v == null
-              ? null
-              : PriceIdsResponse.fromJson(v as Map<String, dynamic>),
-        ),
       );
       return val;
-    }, fieldKeyMap: const {'countryCode': 'country_code', 'baseField': 'base'});
+    }, fieldKeyMap: const {'countryCode': 'country_code'});
 
 Map<String, dynamic> _$PremiumPricingStateToJson(
   PremiumPricingState instance,
 ) => <String, dynamic>{
   'country_code': instance.countryCode,
   'localized': instance.localized,
-  'base': instance.baseField,
 };
