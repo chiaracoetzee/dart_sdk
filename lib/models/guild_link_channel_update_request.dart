@@ -52,7 +52,7 @@ class GuildLinkChannelUpdateRequest {
   @JsonKey(includeIfNull: false, name: 'parent_id')
   final SnowflakeType? parentId;
 
-  /// Voice channel bitrate in bits per second (8000-320000)
+  /// Voice channel bitrate in bits per second (8000-384000), clamped to 96000 unless the guild holds an AUDIO_BITRATE feature
   @JsonKey(includeIfNull: false)
   final int? bitrate;
 
