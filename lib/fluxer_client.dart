@@ -15,6 +15,7 @@ import 'discovery/discovery_api.dart';
 import 'downloads/downloads_api.dart';
 import 'donations/donations_api.dart';
 import 'emojis/emojis_api.dart';
+import 'experiments/experiments_api.dart';
 import 'gateway/gateway_api.dart';
 import 'gi_fs/gi_fs_api.dart';
 import 'gifts/gifts_api.dart';
@@ -55,6 +56,7 @@ class FluxerClient {
   DownloadsApi? _downloads;
   DonationsApi? _donations;
   EmojisApi? _emojis;
+  ExperimentsApi? _experiments;
   GatewayApi? _gateway;
   GiFsApi? _giFs;
   GiftsApi? _gifts;
@@ -101,6 +103,9 @@ class FluxerClient {
       _donations ??= DonationsApi(_dio, baseUrl: _baseUrl);
 
   EmojisApi get emojis => _emojis ??= EmojisApi(_dio, baseUrl: _baseUrl);
+
+  ExperimentsApi get experiments =>
+      _experiments ??= ExperimentsApi(_dio, baseUrl: _baseUrl);
 
   GatewayApi get gateway => _gateway ??= GatewayApi(_dio, baseUrl: _baseUrl);
 
