@@ -12,10 +12,16 @@ enum PendingSubscriptionChangeResponseVariant1CurrencyCurrency {
   eur('EUR'),
   @JsonValue('BRL')
   brl('BRL'),
+  @JsonValue('DKK')
+  dkk('DKK'),
   @JsonValue('INR')
   inr('INR'),
+  @JsonValue('NOK')
+  nok('NOK'),
   @JsonValue('PLN')
   pln('PLN'),
+  @JsonValue('SEK')
+  sek('SEK'),
 
   /// The name has been replaced because it contains a keyword. Original name: `TRY`.
   @JsonValue('TRY')
