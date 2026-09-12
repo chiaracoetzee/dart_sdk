@@ -58,6 +58,9 @@ class GatewayConnection {
         ZstdStreamDecoder.defaultMaxDecompressedMessageSize,
     String? initialGuildId,
     int flags = 0,
+    Future<void> Function(String name, Future<void> Function() body)?
+    traceAsync,
+    void Function(String name, void Function() body)? traceSync,
   }) : _token = token,
        _dio = dio,
        _gatewayUrlOverride = gatewayUrl,
@@ -65,6 +68,8 @@ class GatewayConnection {
        _maxDecompressedMessageSize = maxDecompressedMessageSize,
        _initialGuildId = initialGuildId,
        _flags = flags,
+       _traceAsync = traceAsync,
+       _traceSync = traceSync,
        _properties =
            properties ??
            const GatewayIdentifyProperties(
@@ -79,6 +84,9 @@ class GatewayConnection {
   final String? _gatewayUrlOverride;
   final String? _initialGuildId;
   final int _flags;
+  final Future<void> Function(String name, Future<void> Function() body)?
+  _traceAsync;
+  final void Function(String name, void Function() body)? _traceSync;
   final String _compress;
   final int _maxDecompressedMessageSize;
   final GatewayIdentifyProperties _properties;
@@ -186,11 +194,13 @@ class GatewayConnection {
       onTimeout: _onHeartbeatTimeout,
     );
     try {
-      _gatewayUrl = _gatewayUrlOverride ?? await _fetchGatewayUrl();
-      if (generation != _connectGeneration) {
-        return;
-      }
-      await _openWebSocket(_gatewayUrl!, generation: generation);
+      await _traceAsyncPhase('gateway.ws.open', () async {
+        _gatewayUrl = _gatewayUrlOverride ?? await _fetchGatewayUrl();
+        if (generation != _connectGeneration) {
+          return;
+        }
+        await _openWebSocket(_gatewayUrl!, generation: generation);
+      });
     } catch (e) {
       if (generation != _connectGeneration) {
         return;
@@ -677,21 +687,43 @@ class GatewayConnection {
   // ---------------------------------------------------------------------------
 
   void _sendIdentify() {
-    final payload = <String, Object?>{
-      'token': _token,
-      'properties': _properties.toJson(),
-      'compress': _activeCompress,
-    };
-    if (_presence != null) {
-      payload['presence'] = _presence!.toJson();
+    _traceSyncPhase('gateway.identify', () {
+      final payload = <String, Object?>{
+        'token': _token,
+        'properties': _properties.toJson(),
+        'compress': _activeCompress,
+      };
+      if (_presence != null) {
+        payload['presence'] = _presence!.toJson();
+      }
+      if (_flags != 0) {
+        payload['flags'] = _flags;
+      }
+      final String? initialGuildId = _initialGuildId;
+      if (initialGuildId != null && initialGuildId.isNotEmpty) {
+        payload['initial_guild_id'] = initialGuildId;
+      }
+      _send({'op': GatewayOpcodes.identify, 'd': payload});
+    });
+  }
+
+  Future<void> _traceAsyncPhase(String name, Future<void> Function() body) {
+    final Future<void> Function(String name, Future<void> Function() body)?
+    traceAsync = _traceAsync;
+    if (traceAsync == null) {
+      return body();
     }
-    if (_flags != 0) {
-      payload['flags'] = _flags;
+    return traceAsync(name, body);
+  }
+
+  void _traceSyncPhase(String name, void Function() body) {
+    final void Function(String name, void Function() body)? traceSync =
+        _traceSync;
+    if (traceSync == null) {
+      body();
+      return;
     }
-    if (_initialGuildId != null) {
-      payload['initial_guild_id'] = _initialGuildId;
-    }
-    _send({'op': GatewayOpcodes.identify, 'd': payload});
+    traceSync(name, body);
   }
 
   void _sendResume() {
