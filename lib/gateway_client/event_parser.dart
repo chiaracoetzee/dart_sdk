@@ -130,6 +130,7 @@ class EventParser {
         ),
         'USER_SETTINGS_UPDATE' => UserSettingsUpdateEvent(
           settings: UserSettingsResponse.fromJson(data),
+          data: data,
         ),
         'USER_GUILD_SETTINGS_UPDATE' => UserGuildSettingsUpdateEvent(
           guildId: data['guild_id'] as String,

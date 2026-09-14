@@ -80,9 +80,10 @@ class UserUpdateEvent extends GatewayEvent {
 }
 
 class UserSettingsUpdateEvent extends GatewayEvent {
-  const UserSettingsUpdateEvent({required this.settings});
+  const UserSettingsUpdateEvent({required this.settings, required this.data});
 
   final UserSettingsResponse settings;
+  final Map<String, dynamic> data;
 }
 
 class UserGuildSettingsUpdateEvent extends GatewayEvent {
