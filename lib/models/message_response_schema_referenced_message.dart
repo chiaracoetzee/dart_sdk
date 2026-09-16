@@ -16,6 +16,7 @@ import 'message_reaction_response.dart';
 import 'message_response_schema_referenced_message_message_reference.dart';
 import 'message_snapshot_response.dart';
 import 'message_response_schema_referenced_message_call.dart';
+import 'message_subprofile_response.dart';
 
 part 'message_response_schema_referenced_message.g.dart';
 
@@ -46,6 +47,11 @@ class MessageResponseSchemaReferencedMessage {
     this.messageSnapshots,
     this.nonce,
     this.call,
+    this.subprofile,
+    this.personaId,
+    this.personaName,
+    this.personaAvatar,
+    this.personaTag,
   });
 
   factory MessageResponseSchemaReferencedMessage.fromJson(
