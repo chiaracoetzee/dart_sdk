@@ -17,6 +17,7 @@ import 'message_snapshot_response.dart';
 import 'message_sticker_response.dart';
 import 'snowflake_type.dart';
 import 'user_partial_response.dart';
+import 'message_subprofile_response.dart';
 
 part 'message_response_schema.g.dart';
 
@@ -48,6 +49,11 @@ class MessageResponseSchema {
     this.nonce,
     this.call,
     this.referencedMessage,
+    this.subprofile,
+    this.personaId,
+    this.personaName,
+    this.personaAvatar,
+    this.personaTag,
   });
 
   factory MessageResponseSchema.fromJson(Map<String, Object?> json) =>
@@ -139,6 +145,26 @@ class MessageResponseSchema {
   /// The reply target. Present and populated when the target resolved, present and null when the target is gone, absent when this message carries no default reference. Clients must tell null apart from absent by key presence.
   @JsonKey(includeIfNull: false, name: 'referenced_message')
   final MessageResponseSchemaReferencedMessage? referencedMessage;
+
+  /// Optional subprofile persona information
+  @JsonKey(includeIfNull: false)
+  final MessageSubprofileResponse? subprofile;
+
+  /// The ID of the persona that sent this message
+  @JsonKey(includeIfNull: false, name: 'persona_id')
+  final SnowflakeType? personaId;
+
+  /// The display name of the persona that sent this message
+  @JsonKey(includeIfNull: false, name: 'persona_name')
+  final String? personaName;
+
+  /// The avatar URL of the persona that sent this message
+  @JsonKey(includeIfNull: false, name: 'persona_avatar')
+  final String? personaAvatar;
+
+  /// The tag/pronouns/badge text of the persona that sent this message
+  @JsonKey(includeIfNull: false, name: 'persona_tag')
+  final String? personaTag;
 
   Map<String, Object?> toJson() => _$MessageResponseSchemaToJson(this);
 }

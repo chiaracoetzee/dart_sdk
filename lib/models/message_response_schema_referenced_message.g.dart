@@ -128,6 +128,16 @@ _$MessageResponseSchemaReferencedMessageFromJson(
                 v as Map<String, dynamic>,
               ),
       ),
+      subprofile: $checkedConvert(
+        'subprofile',
+        (v) => v == null
+            ? null
+            : MessageSubprofileResponse.fromJson(v as Map<String, dynamic>),
+      ),
+      personaId: $checkedConvert('persona_id', (v) => v as String?),
+      personaName: $checkedConvert('persona_name', (v) => v as String?),
+      personaAvatar: $checkedConvert('persona_avatar', (v) => v as String?),
+      personaTag: $checkedConvert('persona_tag', (v) => v as String?),
     );
     return val;
   },
@@ -140,6 +150,10 @@ _$MessageResponseSchemaReferencedMessageFromJson(
     'mentionChannels': 'mention_channels',
     'messageReference': 'message_reference',
     'messageSnapshots': 'message_snapshots',
+    'personaId': 'persona_id',
+    'personaName': 'persona_name',
+    'personaAvatar': 'persona_avatar',
+    'personaTag': 'persona_tag',
   },
 );
 
@@ -170,4 +184,9 @@ Map<String, dynamic> _$MessageResponseSchemaReferencedMessageToJson(
   'message_snapshots': ?instance.messageSnapshots,
   'nonce': ?instance.nonce,
   'call': ?instance.call,
+  'subprofile': ?instance.subprofile?.toJson(),
+  'persona_id': ?instance.personaId,
+  'persona_name': ?instance.personaName,
+  'persona_avatar': ?instance.personaAvatar,
+  'persona_tag': ?instance.personaTag,
 };
