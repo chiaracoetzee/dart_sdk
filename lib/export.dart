@@ -85,6 +85,7 @@ export 'models/verify_email_request.dart';
 export 'models/web_authn_authenticate_request.dart';
 export 'models/bulk_message_fetch_response.dart';
 export 'models/message_response_schema.dart';
+export 'models/message_subprofile_response.dart';
 export 'models/message_flags.dart';
 export 'models/message_channel_mention_response.dart';
 export 'models/message_embed_response.dart';
