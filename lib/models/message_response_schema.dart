@@ -17,6 +17,7 @@ import 'message_sticker_response.dart';
 import 'message_type.dart';
 import 'snowflake_string_type.dart';
 import 'user_partial_response.dart';
+import 'message_subprofile_response.dart';
 
 part 'message_response_schema.g.dart';
 
@@ -48,6 +49,11 @@ class MessageResponseSchema {
     this.nonce,
     this.call,
     this.referencedMessage,
+    this.subprofile,
+    this.personaId,
+    this.personaName,
+    this.personaAvatar,
+    this.personaTag,
   });
 
   factory MessageResponseSchema.fromJson(Map<String, Object?> json) =>
