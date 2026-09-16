@@ -17,6 +17,7 @@ import 'message_sticker_response.dart';
 import 'message_type.dart';
 import 'snowflake_string_type.dart';
 import 'user_partial_response.dart';
+import 'message_subprofile_response.dart';
 
 part 'message_response_schema.g.dart';
 
@@ -50,6 +51,11 @@ class MessageResponseSchema {
     Object? nonce = _omit,
     Object? call = _omit,
     Object? referencedMessage = _omit,
+    Object? subprofile = _omit,
+    Object? personaId = _omit,
+    Object? personaName = _omit,
+    Object? personaAvatar = _omit,
+    Object? personaTag = _omit,
   }) : webhookId = identical(webhookId, _omit)
            ? null
            : webhookId as SnowflakeStringType?,
@@ -99,7 +105,27 @@ class MessageResponseSchema {
        referencedMessage = identical(referencedMessage, _omit)
            ? null
            : referencedMessage as MessageResponseSchemaReferencedMessage?,
-       _referencedMessagePresent = !identical(referencedMessage, _omit);
+       _referencedMessagePresent = !identical(referencedMessage, _omit),
+       subprofile = identical(subprofile, _omit)
+           ? null
+           : subprofile as MessageSubprofileResponse?,
+       _subprofilePresent = !identical(subprofile, _omit),
+       personaId = identical(personaId, _omit)
+           ? null
+           : personaId as SnowflakeStringType?,
+       _personaIdPresent = !identical(personaId, _omit),
+       personaName = identical(personaName, _omit)
+           ? null
+           : personaName as String?,
+       _personaNamePresent = !identical(personaName, _omit),
+       personaAvatar = identical(personaAvatar, _omit)
+           ? null
+           : personaAvatar as String?,
+       _personaAvatarPresent = !identical(personaAvatar, _omit),
+       personaTag = identical(personaTag, _omit)
+           ? null
+           : personaTag as String?,
+       _personaTagPresent = !identical(personaTag, _omit);
 
   const MessageResponseSchema._({
     required this.id,
@@ -127,6 +153,11 @@ class MessageResponseSchema {
     this.nonce,
     this.call,
     this.referencedMessage,
+    this.subprofile,
+    this.personaId,
+    this.personaName,
+    this.personaAvatar,
+    this.personaTag,
   }) : _webhookIdPresent = false,
        _editedTimestampPresent = false,
        _mentionChannelsPresent = false,
@@ -139,7 +170,12 @@ class MessageResponseSchema {
        _messageSnapshotsPresent = false,
        _noncePresent = false,
        _callPresent = false,
-       _referencedMessagePresent = false;
+       _referencedMessagePresent = false,
+       _subprofilePresent = false,
+       _personaIdPresent = false,
+       _personaNamePresent = false,
+       _personaAvatarPresent = false,
+       _personaTagPresent = false;
   factory MessageResponseSchema.fromJson(Map<String, Object?> json) {
     final value = _$MessageResponseSchemaFromJson(json);
     return MessageResponseSchema(
@@ -178,6 +214,13 @@ class MessageResponseSchema {
       referencedMessage: json.containsKey('referenced_message')
           ? value.referencedMessage
           : _omit,
+      subprofile: json.containsKey('subprofile') ? value.subprofile : _omit,
+      personaId: json.containsKey('persona_id') ? value.personaId : _omit,
+      personaName: json.containsKey('persona_name') ? value.personaName : _omit,
+      personaAvatar: json.containsKey('persona_avatar')
+          ? value.personaAvatar
+          : _omit,
+      personaTag: json.containsKey('persona_tag') ? value.personaTag : _omit,
     );
   }
 
@@ -282,6 +325,31 @@ class MessageResponseSchema {
   final bool _noncePresent;
   final bool _callPresent;
   final bool _referencedMessagePresent;
+  final bool _subprofilePresent;
+  final bool _personaIdPresent;
+  final bool _personaNamePresent;
+  final bool _personaAvatarPresent;
+  final bool _personaTagPresent;
+
+  /// Optional subprofile persona information
+  @JsonKey(includeIfNull: false)
+  final MessageSubprofileResponse? subprofile;
+
+  /// The ID of the persona that sent this message
+  @JsonKey(includeIfNull: false, name: 'persona_id')
+  final SnowflakeStringType? personaId;
+
+  /// The display name of the persona that sent this message
+  @JsonKey(includeIfNull: false, name: 'persona_name')
+  final String? personaName;
+
+  /// The avatar URL of the persona that sent this message
+  @JsonKey(includeIfNull: false, name: 'persona_avatar')
+  final String? personaAvatar;
+
+  /// The tag/pronouns/badge text of the persona that sent this message
+  @JsonKey(includeIfNull: false, name: 'persona_tag')
+  final String? personaTag;
 
   Map<String, Object?> toJson() {
     final json = _$MessageResponseSchemaToJson(this);
@@ -323,6 +391,21 @@ class MessageResponseSchema {
     }
     if (_referencedMessagePresent) {
       json.putIfAbsent('referenced_message', () => referencedMessage);
+    }
+    if (_subprofilePresent) {
+      json.putIfAbsent('subprofile', () => subprofile);
+    }
+    if (_personaIdPresent) {
+      json.putIfAbsent('persona_id', () => personaId);
+    }
+    if (_personaNamePresent) {
+      json.putIfAbsent('persona_name', () => personaName);
+    }
+    if (_personaAvatarPresent) {
+      json.putIfAbsent('persona_avatar', () => personaAvatar);
+    }
+    if (_personaTagPresent) {
+      json.putIfAbsent('persona_tag', () => personaTag);
     }
     return json;
   }
