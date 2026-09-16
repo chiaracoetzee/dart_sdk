@@ -40,6 +40,7 @@ export 'models/throttled_error.dart';
 export 'models/slack_webhook_response.dart';
 export 'models/webhook_message_edit_request.dart';
 export 'models/message_response_schema.dart';
+export 'models/message_subprofile_response.dart';
 export 'models/instatus_webhook.dart';
 export 'models/git_hub_webhook.dart';
 export 'models/webhook_message_request.dart';
