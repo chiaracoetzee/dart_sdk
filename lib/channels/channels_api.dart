@@ -647,6 +647,7 @@ abstract class ChannelsApi {
   @POST('/channels/{channel_id}/typing')
   Future<void> indicateTyping({
     @Path('channel_id') required SnowflakeType channelId,
+    @Body() Map<String, dynamic>? body,
   });
 
   /// Get stream preview image.
