@@ -1153,11 +1153,14 @@ class _ChannelsApi implements ChannelsApi {
   }
 
   @override
-  Future<void> indicateTyping({required String channelId}) async {
+  Future<void> indicateTyping({
+    required String channelId,
+    Map<String, dynamic>? body,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final _data = body;
     final _options = _setStreamType<void>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
