@@ -23,6 +23,7 @@ MessageSubprofileResponse _$MessageSubprofileResponseFromJson(
       pronouns: $checkedConvert('pronouns', (v) => v as String?),
       color: $checkedConvert('color', (v) => (v as num?)?.toInt()),
       bio: $checkedConvert('bio', (v) => v as String?),
+      visibility: $checkedConvert('visibility', (v) => v as String?),
     );
     return val;
   },
@@ -47,4 +48,5 @@ Map<String, dynamic> _$MessageSubprofileResponseToJson(
   'pronouns': ?instance.pronouns,
   'color': ?instance.color,
   'bio': ?instance.bio,
+  'visibility': ?instance.visibility,
 };
