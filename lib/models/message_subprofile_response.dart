@@ -18,6 +18,7 @@ class MessageSubprofileResponse {
     this.pronouns,
     this.color,
     this.bio,
+    this.visibility,
   });
 
   factory MessageSubprofileResponse.fromJson(Map<String, Object?> json) =>
@@ -49,6 +50,9 @@ class MessageSubprofileResponse {
 
   @JsonKey(includeIfNull: false)
   final String? bio;
+
+  @JsonKey(includeIfNull: false)
+  final String? visibility;
 
   Map<String, Object?> toJson() => _$MessageSubprofileResponseToJson(this);
 }
