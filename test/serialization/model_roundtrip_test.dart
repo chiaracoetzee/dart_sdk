@@ -252,6 +252,70 @@ void main() {
     });
   });
 
+  group('MessageSubprofileResponse roundtrip', () {
+    test('deserializes and serializes with required and optional fields', () {
+      final json = <String, Object?>{
+        'id': 'persona-1',
+        'name': 'Alice',
+        'avatar': 'avatar_hash_1',
+        'avatar_color': 0xFF0000,
+        'display_tag_text': 'Wonderland',
+        'display_tag_icon': 'icon_hash_1',
+        'system_name': 'Wonderland Sys',
+        'pronouns': 'she/her',
+        'color': 0xFF0000,
+        'bio': 'Alice bio',
+        'visibility': 'public',
+      };
+
+      final model = MessageSubprofileResponse.fromJson(json);
+      expect(model.id, 'persona-1');
+      expect(model.name, 'Alice');
+      expect(model.avatar, 'avatar_hash_1');
+      expect(model.avatarColor, 0xFF0000);
+      expect(model.displayTagText, 'Wonderland');
+      expect(model.displayTagIcon, 'icon_hash_1');
+      expect(model.systemName, 'Wonderland Sys');
+      expect(model.pronouns, 'she/her');
+      expect(model.color, 0xFF0000);
+      expect(model.bio, 'Alice bio');
+      expect(model.visibility, 'public');
+
+      final serialized =
+          jsonDecode(jsonEncode(model.toJson())) as Map<String, Object?>;
+      final roundtripped = MessageSubprofileResponse.fromJson(serialized);
+
+      expect(roundtripped.id, model.id);
+      expect(roundtripped.name, model.name);
+      expect(roundtripped.visibility, 'public');
+      expect(roundtripped.systemName, 'Wonderland Sys');
+    });
+
+    test('handles null optional fields and different visibility levels', () {
+      final json = <String, Object?>{
+        'id': 'persona-2',
+        'name': 'Bob',
+        'visibility': 'unlisted',
+      };
+
+      final model = MessageSubprofileResponse.fromJson(json);
+      expect(model.id, 'persona-2');
+      expect(model.name, 'Bob');
+      expect(model.visibility, 'unlisted');
+      expect(model.avatar, isNull);
+      expect(model.avatarColor, isNull);
+      expect(model.displayTagText, isNull);
+      expect(model.pronouns, isNull);
+      expect(model.bio, isNull);
+
+      final serialized = model.toJson();
+      expect(serialized['id'], 'persona-2');
+      expect(serialized['name'], 'Bob');
+      expect(serialized['visibility'], 'unlisted');
+      expect(serialized.containsKey('avatar'), isFalse);
+    });
+  });
+
   group('RelationshipResponse roundtrip', () {
     test('deserializes with user and type', () {
       final json = <String, Object?>{
