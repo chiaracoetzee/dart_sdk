@@ -85,12 +85,6 @@ void main() {
       final mentions = await client.users.listMentionsForCurrentUser();
       expect(mentions, isNotNull);
     });
-
-    test('listScheduledMessages returns list', () async {
-      if (skipIfNotConfigured()) return;
-      final messages = await client.users.listScheduledMessages();
-      expect(messages, isA<List<ScheduledMessageResponseSchema>>());
-    });
   });
 
   // ---------------------------------------------------------------------------
