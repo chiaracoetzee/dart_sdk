@@ -250,6 +250,128 @@ void main() {
       expect(roundtripped.author.id, model.author.id);
       expect(roundtripped.pinned, model.pinned);
     });
+
+    test('roundtrips with persona and subprofile payload', () {
+      final json = <String, Object?>{
+        'id': '503',
+        'channel_id': '100',
+        'author': {
+          'id': '123',
+          'username': 'sender',
+          'discriminator': '0001',
+          'flags': 0,
+        },
+        'type': 0,
+        'flags': 0,
+        'content': 'proxied persona message',
+        'timestamp': '2026-03-20T12:00:00.000Z',
+        'pinned': false,
+        'mention_everyone': false,
+        'tts': false,
+        'mentions': <Object?>[],
+        'mention_roles': <String>[],
+        'persona_id': 'persona-abc',
+        'persona_name': 'Persona Alice',
+        'persona_avatar': 'avatar_hash_abc',
+        'persona_tag': 'Wonderland',
+        'subprofile': {
+          'id': 'persona-abc',
+          'name': 'Persona Alice',
+          'avatar': 'avatar_hash_abc',
+          'avatar_color': 0xFF0000,
+          'display_tag_text': 'Wonderland',
+          'system_name': 'Wonderland Sys',
+          'pronouns': 'she/her',
+          'visibility': 'public',
+        },
+      };
+
+      final model = MessageResponseSchema.fromJson(json);
+      expect(model.personaId, 'persona-abc');
+      expect(model.personaName, 'Persona Alice');
+      expect(model.personaAvatar, 'avatar_hash_abc');
+      expect(model.personaTag, 'Wonderland');
+      expect(model.subprofile, isNotNull);
+      expect(model.subprofile!.id, 'persona-abc');
+      expect(model.subprofile!.name, 'Persona Alice');
+      expect(model.subprofile!.displayTagText, 'Wonderland');
+      expect(model.subprofile!.systemName, 'Wonderland Sys');
+      expect(model.subprofile!.pronouns, 'she/her');
+
+      final serialized =
+          jsonDecode(jsonEncode(model.toJson())) as Map<String, Object?>;
+      final roundtripped = MessageResponseSchema.fromJson(serialized);
+
+      expect(roundtripped.personaId, 'persona-abc');
+      expect(roundtripped.personaName, 'Persona Alice');
+      expect(roundtripped.subprofile?.id, 'persona-abc');
+      expect(roundtripped.subprofile?.name, 'Persona Alice');
+      expect(roundtripped.subprofile?.systemName, 'Wonderland Sys');
+    });
+
+    test('deserializes referenced_message with subprofile', () {
+      final json = <String, Object?>{
+        'id': '601',
+        'channel_id': '100',
+        'author': {
+          'id': '123',
+          'username': 'sender',
+          'discriminator': '0001',
+          'flags': 0,
+        },
+        'type': 19,
+        'flags': 0,
+        'content': 'replying to persona message',
+        'timestamp': '2026-03-20T12:01:00.000Z',
+        'pinned': false,
+        'mention_everyone': false,
+        'tts': false,
+        'mentions': <Object?>[],
+        'mention_roles': <String>[],
+        'referenced_message': {
+          'id': '503',
+          'channel_id': '100',
+          'author': {
+            'id': '123',
+            'username': 'sender',
+            'discriminator': '0001',
+            'flags': 0,
+          },
+          'type': 0,
+          'flags': 0,
+          'content': 'original persona message',
+          'timestamp': '2026-03-20T12:00:00.000Z',
+          'pinned': false,
+          'mention_everyone': false,
+          'tts': false,
+          'mentions': <Object?>[],
+          'mention_roles': <String>[],
+          'persona_id': 'persona-abc',
+          'persona_name': 'Persona Alice',
+          'subprofile': {
+            'id': 'persona-abc',
+            'name': 'Persona Alice',
+            'avatar': 'avatar_hash_abc',
+            'display_tag_text': 'Wonderland',
+            'system_name': 'Wonderland Sys',
+          },
+        },
+      };
+
+      final model = MessageResponseSchema.fromJson(json);
+      expect(model.referencedMessage, isNotNull);
+      expect(model.referencedMessage!.id, '503');
+      expect(model.referencedMessage!.personaId, 'persona-abc');
+      expect(model.referencedMessage!.personaName, 'Persona Alice');
+      expect(model.referencedMessage!.subprofile, isNotNull);
+      expect(model.referencedMessage!.subprofile!.name, 'Persona Alice');
+      expect(model.referencedMessage!.subprofile!.displayTagText, 'Wonderland');
+
+      final serialized =
+          jsonDecode(jsonEncode(model.toJson())) as Map<String, Object?>;
+      final roundtripped = MessageResponseSchema.fromJson(serialized);
+      expect(roundtripped.referencedMessage?.subprofile?.name, 'Persona Alice');
+    });
   });
 
   group('MessageSubprofileResponse roundtrip', () {
