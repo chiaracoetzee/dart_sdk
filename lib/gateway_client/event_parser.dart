@@ -114,10 +114,10 @@ class EventParser {
                 ),
         ),
         'RELATIONSHIP_ADD' => RelationshipAddEvent(
-          relationship: RelationshipResponse.fromJson(data),
+          relationship: _parseRelationship(data),
         ),
         'RELATIONSHIP_UPDATE' => RelationshipUpdateEvent(
-          relationship: RelationshipResponse.fromJson(data),
+          relationship: _parseRelationship(data),
         ),
         'RELATIONSHIP_REMOVE' => RelationshipRemoveEvent(
           userId: data['id'] as String,
@@ -408,7 +408,7 @@ class EventParser {
 
     final relationships = _parseListSafe(
       data['relationships'],
-      (e) => RelationshipResponse.fromJson(e as Map<String, Object?>),
+      _parseRelationship,
     );
 
     final readStates = _parseListSafe(
@@ -469,6 +469,15 @@ class EventParser {
       authSessionIdHash: data['auth_session_id_hash'] as String?,
       rtcRegions: rtcRegions,
     );
+  }
+
+  static RelationshipResponse _parseRelationship(dynamic raw) {
+    final Map<String, Object?> json = Map<String, Object?>.from(
+      raw as Map<dynamic, dynamic>,
+    );
+    json['share_voice_activity'] ??= true;
+    json['friend_shares_voice_activity'] ??= true;
+    return RelationshipResponse.fromJson(json);
   }
 
   /// Safely parses a JSON list, skipping items that fail deserialization.

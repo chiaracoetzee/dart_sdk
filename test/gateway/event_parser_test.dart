@@ -656,6 +656,21 @@ void main() {
       expect(e.relationship.type, RelationshipTypes.friend);
     });
 
+    test('RELATIONSHIP_ADD defaults omitted voice-share fields', () {
+      final data = <String, Object?>{
+        'id': '100',
+        'type': 4,
+        'user': _userPartialJson(id: '100'),
+        'nickname': null,
+      };
+      final event =
+          parser.parse('RELATIONSHIP_ADD', data) as RelationshipAddEvent;
+
+      expect(event.relationship.type, RelationshipTypes.outgoingRequest);
+      expect(event.relationship.shareVoiceActivity, isTrue);
+      expect(event.relationship.friendSharesVoiceActivity, isTrue);
+    });
+
     test('RELATIONSHIP_REMOVE → RelationshipRemoveEvent with userId, type', () {
       final data = <String, Object?>{'id': '101', 'type': 2};
       final event = parser.parse('RELATIONSHIP_REMOVE', data);
@@ -1689,6 +1704,32 @@ void main() {
       expect(event.notes!['user1'], 'A friend');
       expect(event.notes!['user2'], 'A colleague');
     });
+
+    test(
+      'relationships keep pending outgoing when voice-share fields are omitted',
+      () {
+        final data = minimalReadyPayload({
+          'relationships': [
+            {
+              'id': '100',
+              'type': 4,
+              'user': _userPartialJson(id: '100'),
+              'nickname': null,
+            },
+          ],
+        });
+        final event = parser.parse('READY', data) as ReadyEvent;
+
+        expect(event.relationships, hasLength(1));
+        expect(event.relationships.single.id, '100');
+        expect(
+          event.relationships.single.type,
+          RelationshipTypes.outgoingRequest,
+        );
+        expect(event.relationships.single.shareVoiceActivity, isTrue);
+        expect(event.relationships.single.friendSharesVoiceActivity, isTrue);
+      },
+    );
 
     test('pinned_dms — List<String> parsed correctly', () {
       final data = minimalReadyPayload({
