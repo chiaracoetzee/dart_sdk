@@ -11,6 +11,7 @@ class MessageSubprofileResponse {
     required this.id,
     required this.name,
     this.avatar,
+    this.banner,
     this.avatarColor,
     this.displayTagText,
     this.displayTagIcon,
@@ -29,6 +30,9 @@ class MessageSubprofileResponse {
 
   @JsonKey(includeIfNull: false)
   final String? avatar;
+
+  @JsonKey(includeIfNull: false)
+  final String? banner;
 
   @JsonKey(includeIfNull: false, name: 'avatar_color')
   final int? avatarColor;
