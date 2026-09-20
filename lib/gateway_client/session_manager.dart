@@ -17,7 +17,7 @@ class SessionManager {
   /// Whether the session can be resumed.
   ///
   /// Requires session id and sequence. Uses [noteSuspendedForResume]'s grace
-  /// window when set; otherwise requires a heartbeat ACK within 180 seconds.
+  /// window when set; otherwise requires a heartbeat ACK within 300 seconds.
   bool get canResume {
     if (_sessionId == null || _lastSequence == null) {
       return false;
@@ -30,7 +30,7 @@ class SessionManager {
       return false;
     }
     final elapsed = DateTime.now().difference(_lastAckAt!);
-    return elapsed.inSeconds < 180;
+    return elapsed.inSeconds < 300;
   }
 
   /// Updates the last received sequence number.
