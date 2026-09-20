@@ -184,6 +184,12 @@ class GatewayConnection {
   /// Time of the last heartbeat ACK, or null if none yet.
   DateTime? get lastAckAt => _session.lastAckAt;
 
+  /// Whether the connection currently holds a resumable session.
+  bool get canResume => _session.canResume;
+
+  /// In-memory session manager, exposed for testing.
+  SessionManager get session => _session;
+
   /// Compression traffic observed on the current socket.
   GatewayCompressionStats get compressionStats => GatewayCompressionStats(
     frames: _compressedFrames,
@@ -331,11 +337,17 @@ class GatewayConnection {
   }
 
   /// Disconnects and suppresses automatic reconnect until [unsuspendAndReconnect].
+  ///
+  /// Unlike [disconnect], this preserves the session state ([SessionManager])
+  /// so that resuming (Op 6 RESUME) remains possible upon reconnecting.
   Future<void> suspend() async {
     if (_disposed) return;
     _reconnectSuspended = true;
     _cancelReconnectTimer();
-    await disconnect();
+    _reconnectAttempts = 0;
+    await _tearDownSocket();
+    _connectedAt = null;
+    _setState(GatewayState.disconnected);
   }
 
   /// Clears the suspend flag and reconnects immediately.
