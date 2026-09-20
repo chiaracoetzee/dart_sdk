@@ -16,13 +16,13 @@ class SessionManager {
   /// Whether the session can be resumed.
   ///
   /// A session is resumable if a session ID and sequence exist and the last
-  /// ACK was received within the past 180 seconds.
+  /// ACK was received within the past 300 seconds.
   bool get canResume {
     if (_sessionId == null || _lastSequence == null || _lastAckAt == null) {
       return false;
     }
     final elapsed = DateTime.now().difference(_lastAckAt!);
-    return elapsed.inSeconds < 180;
+    return elapsed.inSeconds < 300;
   }
 
   /// Updates the last received sequence number.
