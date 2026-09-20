@@ -30,6 +30,14 @@ void main() {
       },
     );
 
+    test('canResume respects 300s window', () {
+      session.setSession('sess-123');
+      session.updateSequence(42);
+      session.updateLastAck();
+
+      expect(session.canResume, isTrue);
+    });
+
     test('canResume is false when only sessionId is set', () {
       session.setSession('sess-123');
       expect(session.canResume, isFalse);
