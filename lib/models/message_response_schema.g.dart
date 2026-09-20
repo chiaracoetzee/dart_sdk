@@ -189,7 +189,7 @@ Map<String, dynamic> _$MessageResponseSchemaToJson(
   'nonce': ?instance.nonce,
   'call': ?instance.call,
   'referenced_message': ?instance.referencedMessage,
-  'subprofile': ?instance.subprofile?.toJson(),
+  'subprofile': ?instance.subprofile,
   'persona_id': ?instance.personaId,
   'persona_name': ?instance.personaName,
   'persona_avatar': ?instance.personaAvatar,
