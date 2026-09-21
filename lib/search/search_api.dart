@@ -22,6 +22,6 @@ abstract class SearchApi {
   /// [body] - Name not received - field will be skipped.
   @POST('/search/messages')
   Future<MessageSearchResponse> searchMessages({
-    @Body() required GlobalSearchMessagesRequest body,
+    @Body() GlobalSearchMessagesRequest? body,
   });
 }

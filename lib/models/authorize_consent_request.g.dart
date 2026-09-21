@@ -13,22 +13,21 @@ AuthorizeConsentRequest _$AuthorizeConsentRequestFromJson(
   json,
   ($checkedConvert) {
     final val = AuthorizeConsentRequest(
-      clientId: $checkedConvert('client_id', (v) => v as String),
+      clientId: $checkedConvert(
+        'client_id',
+        (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
+      ),
       scope: $checkedConvert('scope', (v) => v as String),
-      responseType: $checkedConvert('response_type', (v) => v as String?),
-      redirectUri: $checkedConvert('redirect_uri', (v) => v as String?),
-      state: $checkedConvert('state', (v) => v as String?),
-      permissions: $checkedConvert('permissions', (v) => v as String?),
-      guildId: $checkedConvert('guild_id', (v) => v as String?),
-      channelId: $checkedConvert('channel_id', (v) => v as String?),
-      codeChallenge: $checkedConvert('code_challenge', (v) => v as String?),
+      responseType: $checkedConvert('response_type', (v) => v ?? _omit),
+      redirectUri: $checkedConvert('redirect_uri', (v) => v ?? _omit),
+      state: $checkedConvert('state', (v) => v ?? _omit),
+      guildId: $checkedConvert('guild_id', (v) => v ?? _omit),
+      channelId: $checkedConvert('channel_id', (v) => v ?? _omit),
+      permissions: $checkedConvert('permissions', (v) => v ?? _omit),
+      codeChallenge: $checkedConvert('code_challenge', (v) => v ?? _omit),
       codeChallengeMethod: $checkedConvert(
         'code_challenge_method',
-        (v) => v == null
-            ? null
-            : AuthorizeConsentRequestCodeChallengeMethodCodeChallengeMethod.fromJson(
-                v as String,
-              ),
+        (v) => v ?? _omit,
       ),
     );
     return val;
@@ -52,9 +51,9 @@ Map<String, dynamic> _$AuthorizeConsentRequestToJson(
   'redirect_uri': ?instance.redirectUri,
   'scope': instance.scope,
   'state': ?instance.state,
-  'permissions': ?instance.permissions,
   'guild_id': ?instance.guildId,
   'channel_id': ?instance.channelId,
+  'permissions': ?instance.permissions,
   'code_challenge': ?instance.codeChallenge,
   'code_challenge_method': ?instance.codeChallengeMethod,
 };

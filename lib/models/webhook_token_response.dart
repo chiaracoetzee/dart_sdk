@@ -4,7 +4,11 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'snowflake_string_type.dart';
+
 part 'webhook_token_response.g.dart';
+
+const Object _omit = Object();
 
 @JsonSerializable()
 class WebhookTokenResponse {
@@ -14,22 +18,31 @@ class WebhookTokenResponse {
     required this.channelId,
     required this.name,
     required this.token,
-    this.avatar,
-  });
-
-  factory WebhookTokenResponse.fromJson(Map<String, Object?> json) =>
-      _$WebhookTokenResponseFromJson(json);
+    Object? avatar = _omit,
+  }) : avatar = identical(avatar, _omit) ? null : avatar as String?,
+       _avatarPresent = !identical(avatar, _omit);
+  factory WebhookTokenResponse.fromJson(Map<String, Object?> json) {
+    final value = _$WebhookTokenResponseFromJson(json);
+    return WebhookTokenResponse(
+      id: value.id,
+      guildId: value.guildId,
+      channelId: value.channelId,
+      name: value.name,
+      token: value.token,
+      avatar: json.containsKey('avatar') ? value.avatar : _omit,
+    );
+  }
 
   /// The unique identifier (snowflake) for the webhook
-  final String id;
+  final SnowflakeStringType id;
 
   /// The ID of the guild this webhook belongs to
   @JsonKey(name: 'guild_id')
-  final String guildId;
+  final SnowflakeStringType guildId;
 
   /// The ID of the channel this webhook posts to
   @JsonKey(name: 'channel_id')
-  final String channelId;
+  final SnowflakeStringType channelId;
 
   /// The display name of the webhook
   final String name;
@@ -40,6 +53,13 @@ class WebhookTokenResponse {
 
   /// The secure token used to execute the webhook
   final String token;
+  final bool _avatarPresent;
 
-  Map<String, Object?> toJson() => _$WebhookTokenResponseToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$WebhookTokenResponseToJson(this);
+    if (_avatarPresent) {
+      json.putIfAbsent('avatar', () => avatar);
+    }
+    return json;
+  }
 }

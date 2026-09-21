@@ -13,85 +13,57 @@ GuildUpdateRequest _$GuildUpdateRequestFromJson(
   json,
   ($checkedConvert) {
     final val = GuildUpdateRequest(
-      name: $checkedConvert('name', (v) => v as String?),
-      icon: $checkedConvert('icon', (v) => v as String?),
-      systemChannelId: $checkedConvert(
-        'system_channel_id',
-        (v) => v as String?,
-      ),
+      name: $checkedConvert('name', (v) => v ?? _omit),
+      icon: $checkedConvert('icon', (v) => v ?? _omit),
+      systemChannelId: $checkedConvert('system_channel_id', (v) => v ?? _omit),
       systemChannelFlags: $checkedConvert(
         'system_channel_flags',
-        (v) => (v as num?)?.toInt(),
+        (v) => v ?? _omit,
       ),
-      afkChannelId: $checkedConvert('afk_channel_id', (v) => v as String?),
-      afkTimeout: $checkedConvert('afk_timeout', (v) => (v as num?)?.toInt()),
+      afkChannelId: $checkedConvert('afk_channel_id', (v) => v ?? _omit),
+      afkTimeout: $checkedConvert('afk_timeout', (v) => v ?? _omit),
       defaultMessageNotifications: $checkedConvert(
         'default_message_notifications',
-        (v) => v == null
-            ? null
-            : DefaultMessageNotifications.fromJson((v as num).toInt()),
+        (v) => v ?? _omit,
       ),
       verificationLevel: $checkedConvert(
         'verification_level',
-        (v) => v == null
-            ? null
-            : GuildVerificationLevel.fromJson((v as num).toInt()),
+        (v) => v ?? _omit,
       ),
-      mfaLevel: $checkedConvert(
-        'mfa_level',
-        (v) => v == null ? null : GuildMfaLevel.fromJson((v as num).toInt()),
-      ),
-      nsfwLevel: $checkedConvert(
-        'nsfw_level',
-        (v) => v == null ? null : NsfwLevel.fromJson((v as num).toInt()),
-      ),
-      nsfw: $checkedConvert('nsfw', (v) => v as bool?),
+      mfaLevel: $checkedConvert('mfa_level', (v) => v ?? _omit),
+      nsfwLevel: $checkedConvert('nsfw_level', (v) => v ?? _omit),
+      nsfw: $checkedConvert('nsfw', (v) => v ?? _omit),
       contentWarningLevel: $checkedConvert(
         'content_warning_level',
-        (v) =>
-            v == null ? null : ContentWarningLevel.fromJson((v as num).toInt()),
+        (v) => v ?? _omit,
       ),
       contentWarningText: $checkedConvert(
         'content_warning_text',
-        (v) => v as String?,
+        (v) => v ?? _omit,
       ),
       explicitContentFilter: $checkedConvert(
         'explicit_content_filter',
-        (v) => v == null
-            ? null
-            : GuildExplicitContentFilter.fromJson((v as num).toInt()),
+        (v) => v ?? _omit,
       ),
-      banner: $checkedConvert('banner', (v) => v as String?),
-      splash: $checkedConvert('splash', (v) => v as String?),
-      embedSplash: $checkedConvert('embed_splash', (v) => v as String?),
+      banner: $checkedConvert('banner', (v) => v ?? _omit),
+      splash: $checkedConvert('splash', (v) => v ?? _omit),
+      embedSplash: $checkedConvert('embed_splash', (v) => v ?? _omit),
       splashCardAlignment: $checkedConvert(
         'splash_card_alignment',
-        (v) => v == null
-            ? null
-            : GuildUpdateRequestSplashCardAlignmentSplashCardAlignment.fromJson(
-                (v as num).toInt(),
-              ),
+        (v) => v ?? _omit,
       ),
-      features: $checkedConvert(
-        'features',
-        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
-      ),
+      features: $checkedConvert('features', (v) => v ?? _omit),
       messageHistoryCutoff: $checkedConvert(
         'message_history_cutoff',
-        (v) => v == null ? null : DateTime.parse(v as String),
+        (v) => v ?? _omit,
       ),
-      password: $checkedConvert('password', (v) => v as String?),
-      mfaMethod: $checkedConvert(
-        'mfa_method',
-        (v) => v == null
-            ? null
-            : GuildUpdateRequestMfaMethodMfaMethod.fromJson(v as String),
-      ),
-      mfaCode: $checkedConvert('mfa_code', (v) => v as String?),
-      webauthnResponse: $checkedConvert('webauthn_response', (v) => v),
+      password: $checkedConvert('password', (v) => v ?? _omit),
+      mfaMethod: $checkedConvert('mfa_method', (v) => v ?? _omit),
+      mfaCode: $checkedConvert('mfa_code', (v) => v ?? _omit),
+      webauthnResponse: $checkedConvert('webauthn_response', (v) => v ?? _omit),
       webauthnChallenge: $checkedConvert(
         'webauthn_challenge',
-        (v) => v as String?,
+        (v) => v ?? _omit,
       ),
     );
     return val;

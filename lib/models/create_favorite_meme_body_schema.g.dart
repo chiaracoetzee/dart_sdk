@@ -14,13 +14,14 @@ CreateFavoriteMemeBodySchema _$CreateFavoriteMemeBodySchemaFromJson(
   ($checkedConvert) {
     final val = CreateFavoriteMemeBodySchema(
       name: $checkedConvert('name', (v) => v as String),
-      altText: $checkedConvert('alt_text', (v) => v as String?),
       tags: $checkedConvert(
         'tags',
-        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+        (v) =>
+            (v as List<dynamic>?)?.map((e) => e as String).toList() ?? const [],
       ),
-      attachmentId: $checkedConvert('attachment_id', (v) => v as String?),
-      embedIndex: $checkedConvert('embed_index', (v) => (v as num?)?.toInt()),
+      altText: $checkedConvert('alt_text', (v) => v ?? _omit),
+      attachmentId: $checkedConvert('attachment_id', (v) => v ?? _omit),
+      embedIndex: $checkedConvert('embed_index', (v) => v ?? _omit),
     );
     return val;
   },
@@ -36,7 +37,7 @@ Map<String, dynamic> _$CreateFavoriteMemeBodySchemaToJson(
 ) => <String, dynamic>{
   'name': instance.name,
   'alt_text': ?instance.altText,
-  'tags': ?instance.tags,
+  'tags': instance.tags,
   'attachment_id': ?instance.attachmentId,
   'embed_index': ?instance.embedIndex,
 };

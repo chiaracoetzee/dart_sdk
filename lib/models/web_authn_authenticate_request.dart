@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'web_authn_authentication_response.dart';
+
 part 'web_authn_authenticate_request.g.dart';
 
 @JsonSerializable()
@@ -17,7 +19,7 @@ class WebAuthnAuthenticateRequest {
       _$WebAuthnAuthenticateRequestFromJson(json);
 
   /// WebAuthn authentication response
-  final dynamic response;
+  final WebAuthnAuthenticationResponse response;
 
   /// The challenge string from authentication options
   final String challenge;

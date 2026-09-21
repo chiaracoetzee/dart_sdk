@@ -8,11 +8,14 @@ import 'int32_type.dart';
 import 'mention_reply_preferences.dart';
 import 'profile_field_privacy_flags.dart';
 import 'public_user_flags.dart';
+import 'snowflake_string_type.dart';
 import 'user_authenticator_types.dart';
 import 'user_premium_types.dart';
 import 'user_private_response_pending_bulk_message_deletion.dart';
 
 part 'user_private_response.g.dart';
+
+const Object _omit = Object();
 
 @JsonSerializable()
 class UserPrivateResponse {
@@ -62,23 +65,128 @@ class UserPrivateResponse {
     required this.lastVoiceActivitySharingChangeAt,
     required this.passwordLastChangedAt,
     required this.requiredActions,
-    this.mentionFlags,
-    this.authenticatorTypes,
-    this.timezonePrivacyFlags,
-    this.timezone,
-    this.phone,
-    this.emailBounced,
-    this.system,
-    this.ageVerifiedAdult,
-    this.bot,
-    this.forceInboundPhoneVerification,
-  });
-
-  factory UserPrivateResponse.fromJson(Map<String, Object?> json) =>
-      _$UserPrivateResponseFromJson(json);
+    Object? mentionFlags = _omit,
+    Object? authenticatorTypes = _omit,
+    Object? timezonePrivacyFlags = _omit,
+    Object? timezone = _omit,
+    Object? phone = _omit,
+    Object? emailBounced = _omit,
+    Object? system = _omit,
+    Object? ageVerifiedAdult = _omit,
+    Object? bot = _omit,
+    Object? forceInboundPhoneVerification = _omit,
+  }) : bot = identical(bot, _omit) ? null : bot as bool?,
+       _botPresent = !identical(bot, _omit),
+       system = identical(system, _omit) ? null : system as bool?,
+       _systemPresent = !identical(system, _omit),
+       mentionFlags = identical(mentionFlags, _omit)
+           ? null
+           : mentionFlags as MentionReplyPreferences?,
+       _mentionFlagsPresent = !identical(mentionFlags, _omit),
+       emailBounced = identical(emailBounced, _omit)
+           ? null
+           : emailBounced as bool?,
+       _emailBouncedPresent = !identical(emailBounced, _omit),
+       phone = identical(phone, _omit) ? null : phone as String?,
+       _phonePresent = !identical(phone, _omit),
+       timezone = identical(timezone, _omit) ? null : timezone as String?,
+       _timezonePresent = !identical(timezone, _omit),
+       timezonePrivacyFlags = identical(timezonePrivacyFlags, _omit)
+           ? null
+           : timezonePrivacyFlags as ProfileFieldPrivacyFlags?,
+       _timezonePrivacyFlagsPresent = !identical(timezonePrivacyFlags, _omit),
+       authenticatorTypes = identical(authenticatorTypes, _omit)
+           ? null
+           : authenticatorTypes as List<UserAuthenticatorTypes>?,
+       _authenticatorTypesPresent = !identical(authenticatorTypes, _omit),
+       forceInboundPhoneVerification =
+           identical(forceInboundPhoneVerification, _omit)
+           ? null
+           : forceInboundPhoneVerification as bool?,
+       _forceInboundPhoneVerificationPresent = !identical(
+         forceInboundPhoneVerification,
+         _omit,
+       ),
+       ageVerifiedAdult = identical(ageVerifiedAdult, _omit)
+           ? null
+           : ageVerifiedAdult as bool?,
+       _ageVerifiedAdultPresent = !identical(ageVerifiedAdult, _omit);
+  factory UserPrivateResponse.fromJson(Map<String, Object?> json) {
+    final value = _$UserPrivateResponseFromJson(json);
+    return UserPrivateResponse(
+      premiumType: value.premiumType,
+      username: value.username,
+      discriminator: value.discriminator,
+      globalName: value.globalName,
+      avatar: value.avatar,
+      avatarColor: value.avatarColor,
+      termsAgreedAt: value.termsAgreedAt,
+      pendingBulkMessageDeletion: value.pendingBulkMessageDeletion,
+      flags: value.flags,
+      pronouns: value.pronouns,
+      isStaff: value.isStaff,
+      acls: value.acls,
+      traits: value.traits,
+      email: value.email,
+      unreadGiftInventoryCount: value.unreadGiftInventoryCount,
+      hasUnreadGiftInventory: value.hasUnreadGiftInventory,
+      hasVerifiedPhone: value.hasVerifiedPhone,
+      bio: value.bio,
+      id: value.id,
+      accentColor: value.accentColor,
+      hasEverPurchased: value.hasEverPurchased,
+      hasDismissedPremiumOnboarding: value.hasDismissedPremiumOnboarding,
+      banner: value.banner,
+      bannerColor: value.bannerColor,
+      mfaEnabled: value.mfaEnabled,
+      nsfwAllowed: value.nsfwAllowed,
+      verified: value.verified,
+      premiumBadgeMasked: value.premiumBadgeMasked,
+      premiumSince: value.premiumSince,
+      premiumUntil: value.premiumUntil,
+      premiumWillCancel: value.premiumWillCancel,
+      premiumBillingCycle: value.premiumBillingCycle,
+      premiumLifetimeSequence: value.premiumLifetimeSequence,
+      premiumGraceEndsAt: value.premiumGraceEndsAt,
+      premiumDiscriminator: value.premiumDiscriminator,
+      premiumBadgeHidden: value.premiumBadgeHidden,
+      privacyAgreedAt: value.privacyAgreedAt,
+      premiumBadgeTimestampHidden: value.premiumBadgeTimestampHidden,
+      premiumBadgeSequenceHidden: value.premiumBadgeSequenceHidden,
+      premiumPurchaseDisabled: value.premiumPurchaseDisabled,
+      premiumEnabledOverride: value.premiumEnabledOverride,
+      premiumPerksDisabled: value.premiumPerksDisabled,
+      lastVoiceActivitySharingChangeAt: value.lastVoiceActivitySharingChangeAt,
+      passwordLastChangedAt: value.passwordLastChangedAt,
+      requiredActions: value.requiredActions,
+      mentionFlags: json.containsKey('mention_flags')
+          ? value.mentionFlags
+          : _omit,
+      authenticatorTypes: json.containsKey('authenticator_types')
+          ? value.authenticatorTypes
+          : _omit,
+      timezonePrivacyFlags: json.containsKey('timezone_privacy_flags')
+          ? value.timezonePrivacyFlags
+          : _omit,
+      timezone: json.containsKey('timezone') ? value.timezone : _omit,
+      phone: json.containsKey('phone') ? value.phone : _omit,
+      emailBounced: json.containsKey('email_bounced')
+          ? value.emailBounced
+          : _omit,
+      system: json.containsKey('system') ? value.system : _omit,
+      ageVerifiedAdult: json.containsKey('age_verified_adult')
+          ? value.ageVerifiedAdult
+          : _omit,
+      bot: json.containsKey('bot') ? value.bot : _omit,
+      forceInboundPhoneVerification:
+          json.containsKey('force_inbound_phone_verification')
+          ? value.forceInboundPhoneVerification
+          : _omit,
+    );
+  }
 
   /// The unique identifier (snowflake) for this user
-  final String id;
+  final SnowflakeStringType id;
 
   /// The username of the user, not unique across the platform
   final String username;
@@ -107,7 +215,7 @@ class UserPrivateResponse {
   final bool? system;
   final PublicUserFlags flags;
 
-  /// The user's account-wide reply mention preference
+  /// The user's account-wide reply mention preference. Omitted when the user has no preference set (treated as NO_PREFERENCE).
   @JsonKey(includeIfNull: false, name: 'mention_flags')
   final MentionReplyPreferences? mentionFlags;
 
@@ -152,6 +260,8 @@ class UserPrivateResponse {
   /// The IANA timezone identifier saved by the user. Omitted unless the user has staff access.
   @JsonKey(includeIfNull: false)
   final String? timezone;
+
+  /// Bitfield controlling who can see the profile timezone. Omitted unless the user has staff access.
   @JsonKey(includeIfNull: false, name: 'timezone_privacy_flags')
   final ProfileFieldPrivacyFlags? timezonePrivacyFlags;
 
@@ -268,7 +378,7 @@ class UserPrivateResponse {
 
   /// The number of unread gift inventory items
   @JsonKey(name: 'unread_gift_inventory_count')
-  final int unreadGiftInventoryCount;
+  final Int32Type unreadGiftInventoryCount;
 
   /// Information about a pending bulk message deletion request. Only populated when the legacy delayed-deletion flow is in progress; the new immediate-deletion flow does not surface a pending state here.
   @JsonKey(includeIfNull: true, name: 'pending_bulk_message_deletion')
@@ -286,6 +396,52 @@ class UserPrivateResponse {
   /// ISO8601 timestamp of when the user last agreed to the privacy policy
   @JsonKey(includeIfNull: true, name: 'privacy_agreed_at')
   final String? privacyAgreedAt;
+  final bool _botPresent;
+  final bool _systemPresent;
+  final bool _mentionFlagsPresent;
+  final bool _emailBouncedPresent;
+  final bool _phonePresent;
+  final bool _timezonePresent;
+  final bool _timezonePrivacyFlagsPresent;
+  final bool _authenticatorTypesPresent;
+  final bool _forceInboundPhoneVerificationPresent;
+  final bool _ageVerifiedAdultPresent;
 
-  Map<String, Object?> toJson() => _$UserPrivateResponseToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$UserPrivateResponseToJson(this);
+    if (_botPresent) {
+      json.putIfAbsent('bot', () => bot);
+    }
+    if (_systemPresent) {
+      json.putIfAbsent('system', () => system);
+    }
+    if (_mentionFlagsPresent) {
+      json.putIfAbsent('mention_flags', () => mentionFlags);
+    }
+    if (_emailBouncedPresent) {
+      json.putIfAbsent('email_bounced', () => emailBounced);
+    }
+    if (_phonePresent) {
+      json.putIfAbsent('phone', () => phone);
+    }
+    if (_timezonePresent) {
+      json.putIfAbsent('timezone', () => timezone);
+    }
+    if (_timezonePrivacyFlagsPresent) {
+      json.putIfAbsent('timezone_privacy_flags', () => timezonePrivacyFlags);
+    }
+    if (_authenticatorTypesPresent) {
+      json.putIfAbsent('authenticator_types', () => authenticatorTypes);
+    }
+    if (_forceInboundPhoneVerificationPresent) {
+      json.putIfAbsent(
+        'force_inbound_phone_verification',
+        () => forceInboundPhoneVerification,
+      );
+    }
+    if (_ageVerifiedAdultPresent) {
+      json.putIfAbsent('age_verified_adult', () => ageVerifiedAdult);
+    }
+    return json;
+  }
 }

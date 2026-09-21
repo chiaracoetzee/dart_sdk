@@ -11,7 +11,7 @@ WebhookCreateRequest _$WebhookCreateRequestFromJson(
 ) => $checkedCreate('WebhookCreateRequest', json, ($checkedConvert) {
   final val = WebhookCreateRequest(
     name: $checkedConvert('name', (v) => v as String),
-    avatar: $checkedConvert('avatar', (v) => v as String?),
+    avatar: $checkedConvert('avatar', (v) => v ?? _omit),
   );
   return val;
 });

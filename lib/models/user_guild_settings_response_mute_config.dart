@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'int32_type.dart';
+
 part 'user_guild_settings_response_mute_config.g.dart';
 
 @JsonSerializable()
@@ -23,7 +25,7 @@ class UserGuildSettingsResponseMuteConfig {
 
   /// The selected mute duration in seconds
   @JsonKey(name: 'selected_time_window')
-  final int selectedTimeWindow;
+  final Int32Type selectedTimeWindow;
 
   Map<String, Object?> toJson() =>
       _$UserGuildSettingsResponseMuteConfigToJson(this);

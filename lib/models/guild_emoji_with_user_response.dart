@@ -4,6 +4,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'snowflake_string_type.dart';
 import 'user_partial_response.dart';
 
 part 'guild_emoji_with_user_response.g.dart';
@@ -22,7 +23,7 @@ class GuildEmojiWithUserResponse {
       _$GuildEmojiWithUserResponseFromJson(json);
 
   /// The unique identifier for this emoji
-  final String id;
+  final SnowflakeStringType id;
 
   /// The name of the emoji
   final String name;
@@ -32,6 +33,8 @@ class GuildEmojiWithUserResponse {
 
   /// Deprecated; always false. Retained for compatibility with older clients
   final bool nsfw;
+
+  /// The user who uploaded this emoji
   final UserPartialResponse user;
 
   Map<String, Object?> toJson() => _$GuildEmojiWithUserResponseToJson(this);

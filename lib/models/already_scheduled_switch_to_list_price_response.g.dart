@@ -14,12 +14,6 @@ _$AlreadyScheduledSwitchToListPriceResponseFromJson(
   json,
   ($checkedConvert) {
     final val = AlreadyScheduledSwitchToListPriceResponse(
-      status: $checkedConvert(
-        'status',
-        (v) => AlreadyScheduledSwitchToListPriceResponseStatusStatus.fromJson(
-          v as String,
-        ),
-      ),
       effectiveAt: $checkedConvert('effective_at', (v) => v as String),
       targetPriceId: $checkedConvert('target_price_id', (v) => v as String),
       targetAmountMinor: $checkedConvert(
@@ -32,11 +26,9 @@ _$AlreadyScheduledSwitchToListPriceResponseFromJson(
       ),
       currency: $checkedConvert(
         'currency',
-        (v) =>
-            AlreadyScheduledSwitchToListPriceResponseCurrencyCurrency.fromJson(
-              v as String,
-            ),
+        (v) => PremiumCurrency.fromJson(v as String),
       ),
+      status: $checkedConvert('status', (v) => v as String),
     );
     return val;
   },
@@ -51,10 +43,10 @@ _$AlreadyScheduledSwitchToListPriceResponseFromJson(
 Map<String, dynamic> _$AlreadyScheduledSwitchToListPriceResponseToJson(
   AlreadyScheduledSwitchToListPriceResponse instance,
 ) => <String, dynamic>{
-  'status': instance.status,
   'effective_at': instance.effectiveAt,
   'target_price_id': instance.targetPriceId,
   'target_amount_minor': instance.targetAmountMinor,
   'current_amount_minor': instance.currentAmountMinor,
   'currency': instance.currency,
+  'status': instance.status,
 };

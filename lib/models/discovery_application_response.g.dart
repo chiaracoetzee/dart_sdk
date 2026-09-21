@@ -22,15 +22,12 @@ DiscoveryApplicationResponse _$DiscoveryApplicationResponseFromJson(
         (v) => (v as List<dynamic>).map((e) => e as String).toList(),
       ),
       appliedAt: $checkedConvert('applied_at', (v) => v as String),
-      guildNsfwLevel: $checkedConvert(
-        'guild_nsfw_level',
-        (v) => v == null ? null : NsfwLevel.fromJson((v as num).toInt()),
-      ),
-      primaryLanguage: $checkedConvert('primary_language', (v) => v as String?),
-      reviewedAt: $checkedConvert('reviewed_at', (v) => v as String?),
-      reviewReason: $checkedConvert('review_reason', (v) => v as String?),
-      removedAt: $checkedConvert('removed_at', (v) => v as String?),
-      removalReason: $checkedConvert('removal_reason', (v) => v as String?),
+      guildNsfwLevel: $checkedConvert('guild_nsfw_level', (v) => v ?? _omit),
+      primaryLanguage: $checkedConvert('primary_language', (v) => v ?? _omit),
+      reviewedAt: $checkedConvert('reviewed_at', (v) => v ?? _omit),
+      reviewReason: $checkedConvert('review_reason', (v) => v ?? _omit),
+      removedAt: $checkedConvert('removed_at', (v) => v ?? _omit),
+      removalReason: $checkedConvert('removal_reason', (v) => v ?? _omit),
     );
     return val;
   },

@@ -11,7 +11,7 @@ LoginRequest _$LoginRequestFromJson(Map<String, dynamic> json) =>
       final val = LoginRequest(
         email: $checkedConvert('email', (v) => v as String),
         password: $checkedConvert('password', (v) => v as String),
-        inviteCode: $checkedConvert('invite_code', (v) => v as String?),
+        inviteCode: $checkedConvert('invite_code', (v) => v ?? _omit),
       );
       return val;
     }, fieldKeyMap: const {'inviteCode': 'invite_code'});

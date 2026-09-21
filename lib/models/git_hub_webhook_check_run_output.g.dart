@@ -10,8 +10,8 @@ GitHubWebhookCheckRunOutput _$GitHubWebhookCheckRunOutputFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('GitHubWebhookCheckRunOutput', json, ($checkedConvert) {
   final val = GitHubWebhookCheckRunOutput(
-    title: $checkedConvert('title', (v) => v as String?),
-    summary: $checkedConvert('summary', (v) => v as String?),
+    title: $checkedConvert('title', (v) => v ?? _omit),
+    summary: $checkedConvert('summary', (v) => v ?? _omit),
   );
   return val;
 });

@@ -19,14 +19,10 @@ UnregisterMobileDeviceRequest _$UnregisterMobileDeviceRequestFromJson(
             UnregisterMobileDeviceRequestPlatformPlatform.fromJson(v as String),
       ),
       token: $checkedConvert('token', (v) => v as String),
-      appId: $checkedConvert('app_id', (v) => v as String?),
+      appId: $checkedConvert('app_id', (v) => v ?? _omit),
       providerEnvironment: $checkedConvert(
         'provider_environment',
-        (v) => v == null
-            ? null
-            : UnregisterMobileDeviceRequestProviderEnvironmentProviderEnvironment.fromJson(
-                v as String,
-              ),
+        (v) => v ?? _omit,
       ),
     );
     return val;

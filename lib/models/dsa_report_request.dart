@@ -5,64 +5,35 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'message_dsa_report_request_reporter_country_of_residence_reporter_country_of_residence.dart';
-import 'message_dsa_report_request_report_type_report_type.dart';
-import 'message_dsa_report_request_category_category.dart';
+import 'message_report_category.dart';
 import 'user_dsa_report_request_reporter_country_of_residence_reporter_country_of_residence.dart';
-import 'user_dsa_report_request_report_type_report_type.dart';
-import 'user_dsa_report_request_category_category.dart';
+import 'user_report_category.dart';
 import 'snowflake_type.dart';
 import 'guild_dsa_report_request_reporter_country_of_residence_reporter_country_of_residence.dart';
-import 'guild_dsa_report_request_report_type_report_type.dart';
-import 'guild_dsa_report_request_category_category.dart';
+import 'guild_report_category.dart';
 
 part 'dsa_report_request.g.dart';
 
-@JsonSerializable(createFactory: false)
-sealed class DsaReportRequest {
-  const DsaReportRequest();
+class DsaReportRequest {
+  final Map<String, dynamic> _json;
+
+  const DsaReportRequest(this._json);
 
   factory DsaReportRequest.fromJson(Map<String, dynamic> json) =>
-      DsaReportRequestUnionDeserializer.tryDeserialize(json);
+      DsaReportRequest(json);
 
-  Map<String, dynamic> toJson();
-}
+  Map<String, dynamic> toJson() => _json;
 
-extension DsaReportRequestUnionDeserializer on DsaReportRequest {
-  static DsaReportRequest tryDeserialize(
-    Map<String, dynamic> json, {
-    String key = 'report_type',
-    Map<Type, Object?>? mapping,
-  }) {
-    final mappingFallback = const <Type, Object?>{
-      DsaReportRequestMessage: 'message',
-      DsaReportRequestUser: 'user',
-      DsaReportRequestGuild: 'guild',
-    };
-    final value = json[key];
-    final effective = mapping ?? mappingFallback;
-    final valueAsString = value?.toString();
-    return switch (value) {
-      _
-          when value == effective[DsaReportRequestMessage] ||
-              valueAsString == effective[DsaReportRequestMessage]?.toString() =>
-        DsaReportRequestMessage.fromJson(json),
-      _
-          when value == effective[DsaReportRequestUser] ||
-              valueAsString == effective[DsaReportRequestUser]?.toString() =>
-        DsaReportRequestUser.fromJson(json),
-      _
-          when value == effective[DsaReportRequestGuild] ||
-              valueAsString == effective[DsaReportRequestGuild]?.toString() =>
-        DsaReportRequestGuild.fromJson(json),
-      _ => throw FormatException(
-        'Unknown discriminator value "${json[key]}" for DsaReportRequest',
-      ),
-    };
-  }
+  DsaReportRequestMessageDsaReportRequest toMessageDsaReportRequest() =>
+      DsaReportRequestMessageDsaReportRequest.fromJson(_json);
+  DsaReportRequestUserDsaReportRequest toUserDsaReportRequest() =>
+      DsaReportRequestUserDsaReportRequest.fromJson(_json);
+  DsaReportRequestGuildDsaReportRequest toGuildDsaReportRequest() =>
+      DsaReportRequestGuildDsaReportRequest.fromJson(_json);
 }
 
 @JsonSerializable()
-class DsaReportRequestMessage extends DsaReportRequest {
+class DsaReportRequestMessageDsaReportRequest {
   final String ticket;
   @JsonKey(includeIfNull: false, name: 'additional_info')
   final String? additionalInfo;
@@ -74,14 +45,14 @@ class DsaReportRequestMessage extends DsaReportRequest {
   @JsonKey(includeIfNull: false, name: 'reporter_fluxer_tag')
   final String? reporterFluxerTag;
   @JsonKey(name: 'report_type')
-  final MessageDsaReportRequestReportTypeReportType reportType;
-  final MessageDsaReportRequestCategoryCategory category;
+  final String reportType;
+  final MessageReportCategory category;
   @JsonKey(name: 'message_link')
   final String messageLink;
   @JsonKey(includeIfNull: false, name: 'reported_user_tag')
   final String? reportedUserTag;
 
-  const DsaReportRequestMessage({
+  const DsaReportRequestMessageDsaReportRequest({
     required this.ticket,
     required this.additionalInfo,
     required this.reporterFullLegalName,
@@ -93,15 +64,16 @@ class DsaReportRequestMessage extends DsaReportRequest {
     required this.reportedUserTag,
   });
 
-  factory DsaReportRequestMessage.fromJson(Map<String, dynamic> json) =>
-      _$DsaReportRequestMessageFromJson(json);
+  factory DsaReportRequestMessageDsaReportRequest.fromJson(
+    Map<String, dynamic> json,
+  ) => _$DsaReportRequestMessageDsaReportRequestFromJson(json);
 
-  @override
-  Map<String, dynamic> toJson() => _$DsaReportRequestMessageToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$DsaReportRequestMessageDsaReportRequestToJson(this);
 }
 
 @JsonSerializable()
-class DsaReportRequestUser extends DsaReportRequest {
+class DsaReportRequestUserDsaReportRequest {
   final String ticket;
   @JsonKey(includeIfNull: false, name: 'additional_info')
   final String? additionalInfo;
@@ -113,14 +85,14 @@ class DsaReportRequestUser extends DsaReportRequest {
   @JsonKey(includeIfNull: false, name: 'reporter_fluxer_tag')
   final String? reporterFluxerTag;
   @JsonKey(name: 'report_type')
-  final UserDsaReportRequestReportTypeReportType reportType;
-  final UserDsaReportRequestCategoryCategory category;
+  final String reportType;
+  final UserReportCategory category;
   @JsonKey(includeIfNull: false, name: 'user_id')
   final SnowflakeType? userId;
   @JsonKey(includeIfNull: false, name: 'user_tag')
   final String? userTag;
 
-  const DsaReportRequestUser({
+  const DsaReportRequestUserDsaReportRequest({
     required this.ticket,
     required this.additionalInfo,
     required this.reporterFullLegalName,
@@ -132,15 +104,16 @@ class DsaReportRequestUser extends DsaReportRequest {
     required this.userTag,
   });
 
-  factory DsaReportRequestUser.fromJson(Map<String, dynamic> json) =>
-      _$DsaReportRequestUserFromJson(json);
+  factory DsaReportRequestUserDsaReportRequest.fromJson(
+    Map<String, dynamic> json,
+  ) => _$DsaReportRequestUserDsaReportRequestFromJson(json);
 
-  @override
-  Map<String, dynamic> toJson() => _$DsaReportRequestUserToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$DsaReportRequestUserDsaReportRequestToJson(this);
 }
 
 @JsonSerializable()
-class DsaReportRequestGuild extends DsaReportRequest {
+class DsaReportRequestGuildDsaReportRequest {
   final String ticket;
   @JsonKey(includeIfNull: false, name: 'additional_info')
   final String? additionalInfo;
@@ -152,14 +125,14 @@ class DsaReportRequestGuild extends DsaReportRequest {
   @JsonKey(includeIfNull: false, name: 'reporter_fluxer_tag')
   final String? reporterFluxerTag;
   @JsonKey(name: 'report_type')
-  final GuildDsaReportRequestReportTypeReportType reportType;
-  final GuildDsaReportRequestCategoryCategory category;
+  final String reportType;
+  final GuildReportCategory category;
   @JsonKey(name: 'guild_id')
   final SnowflakeType guildId;
   @JsonKey(includeIfNull: false, name: 'invite_code')
   final String? inviteCode;
 
-  const DsaReportRequestGuild({
+  const DsaReportRequestGuildDsaReportRequest({
     required this.ticket,
     required this.additionalInfo,
     required this.reporterFullLegalName,
@@ -171,9 +144,10 @@ class DsaReportRequestGuild extends DsaReportRequest {
     required this.inviteCode,
   });
 
-  factory DsaReportRequestGuild.fromJson(Map<String, dynamic> json) =>
-      _$DsaReportRequestGuildFromJson(json);
+  factory DsaReportRequestGuildDsaReportRequest.fromJson(
+    Map<String, dynamic> json,
+  ) => _$DsaReportRequestGuildDsaReportRequestFromJson(json);
 
-  @override
-  Map<String, dynamic> toJson() => _$DsaReportRequestGuildToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$DsaReportRequestGuildDsaReportRequestToJson(this);
 }

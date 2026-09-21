@@ -14,23 +14,17 @@ _$CreateFavoriteMemeFromUrlBodySchemaFromJson(Map<String, dynamic> json) =>
       ($checkedConvert) {
         final val = CreateFavoriteMemeFromUrlBodySchema(
           url: $checkedConvert('url', (v) => v as String),
-          altText: $checkedConvert('alt_text', (v) => v as String?),
           tags: $checkedConvert(
             'tags',
-            (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+            (v) =>
+                (v as List<dynamic>?)?.map((e) => e as String).toList() ??
+                const [],
           ),
-          gifSlug: $checkedConvert('gif_slug', (v) => v as String?),
-          gifProvider: $checkedConvert('gif_provider', (v) => v as String?),
-          media: $checkedConvert(
-            'media',
-            (v) => (v as Map<String, dynamic>?)?.map(
-              (k, e) => MapEntry(
-                k,
-                GifMediaFormat.fromJson(e as Map<String, dynamic>),
-              ),
-            ),
-          ),
-          name: $checkedConvert('name', (v) => v as String?),
+          altText: $checkedConvert('alt_text', (v) => v ?? _omit),
+          gifSlug: $checkedConvert('gif_slug', (v) => v ?? _omit),
+          gifProvider: $checkedConvert('gif_provider', (v) => v ?? _omit),
+          media: $checkedConvert('media', (v) => v ?? _omit),
+          name: $checkedConvert('name', (v) => v ?? _omit),
         );
         return val;
       },
@@ -45,7 +39,7 @@ Map<String, dynamic> _$CreateFavoriteMemeFromUrlBodySchemaToJson(
   CreateFavoriteMemeFromUrlBodySchema instance,
 ) => <String, dynamic>{
   'alt_text': ?instance.altText,
-  'tags': ?instance.tags,
+  'tags': instance.tags,
   'url': instance.url,
   'gif_slug': ?instance.gifSlug,
   'gif_provider': ?instance.gifProvider,

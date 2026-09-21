@@ -4,9 +4,6 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'localized_card_preapproval_continue_response.dart';
-import 'ready_localized_card_preapproval_continue_response_status_status.dart';
-
 part 'ready_localized_card_preapproval_continue_response.g.dart';
 
 @JsonSerializable()
@@ -21,7 +18,7 @@ class ReadyLocalizedCardPreapprovalContinueResponse {
   ) => _$ReadyLocalizedCardPreapprovalContinueResponseFromJson(json);
 
   /// The preapproval succeeded and the paid checkout URL is ready
-  final ReadyLocalizedCardPreapprovalContinueResponseStatusStatus status;
+  final String status;
 
   /// The URL to redirect to
   final String url;

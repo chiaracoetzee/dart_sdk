@@ -13,33 +13,18 @@ InstatusWebhookIncident _$InstatusWebhookIncidentFromJson(
   json,
   ($checkedConvert) {
     final val = InstatusWebhookIncident(
-      id: $checkedConvert('id', (v) => v as String?),
-      name: $checkedConvert('name', (v) => v as String?),
-      url: $checkedConvert('url', (v) => v as String?),
-      status: $checkedConvert('status', (v) => v as String?),
-      backfilled: $checkedConvert('backfilled', (v) => v as bool?),
-      createdAt: $checkedConvert('created_at', (v) => v as String?),
-      updatedAt: $checkedConvert('updated_at', (v) => v as String?),
-      resolvedAt: $checkedConvert('resolved_at', (v) => v as String?),
-      incidentUpdates: $checkedConvert(
-        'incident_updates',
-        (v) => (v as List<dynamic>?)
-            ?.map(
-              (e) => InstatusWebhookIncidentIncidentUpdates.fromJson(
-                e as Map<String, dynamic>,
-              ),
-            )
-            .toList(),
-      ),
+      id: $checkedConvert('id', (v) => v ?? _omit),
+      name: $checkedConvert('name', (v) => v ?? _omit),
+      url: $checkedConvert('url', (v) => v ?? _omit),
+      status: $checkedConvert('status', (v) => v ?? _omit),
+      backfilled: $checkedConvert('backfilled', (v) => v ?? _omit),
+      createdAt: $checkedConvert('created_at', (v) => v ?? _omit),
+      updatedAt: $checkedConvert('updated_at', (v) => v ?? _omit),
+      resolvedAt: $checkedConvert('resolved_at', (v) => v ?? _omit),
+      incidentUpdates: $checkedConvert('incident_updates', (v) => v ?? _omit),
       affectedComponents: $checkedConvert(
         'affected_components',
-        (v) => (v as List<dynamic>?)
-            ?.map(
-              (e) => InstatusWebhookIncidentAffectedComponents.fromJson(
-                e as Map<String, dynamic>,
-              ),
-            )
-            .toList(),
+        (v) => v ?? _omit,
       ),
     );
     return val;

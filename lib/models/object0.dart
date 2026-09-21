@@ -40,12 +40,12 @@ class Object0ClientUploadedAttachmentRequest {
   final String? waveform;
   final Int32Type id;
   final String filename;
+  @JsonKey(name: 'content_type')
+  final String contentType;
   @JsonKey(name: 'upload_filename')
   final String uploadFilename;
   @JsonKey(name: 'file_size')
   final NonNegativeSafeIntegerType fileSize;
-  @JsonKey(name: 'content_type')
-  final String contentType;
 
   const Object0ClientUploadedAttachmentRequest({
     required this.title,
@@ -55,9 +55,9 @@ class Object0ClientUploadedAttachmentRequest {
     required this.waveform,
     required this.id,
     required this.filename,
+    required this.contentType,
     required this.uploadFilename,
     required this.fileSize,
-    required this.contentType,
   });
 
   factory Object0ClientUploadedAttachmentRequest.fromJson(

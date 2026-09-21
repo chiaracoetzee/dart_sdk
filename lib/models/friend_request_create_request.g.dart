@@ -10,7 +10,7 @@ FriendRequestCreateRequest _$FriendRequestCreateRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('FriendRequestCreateRequest', json, ($checkedConvert) {
   final val = FriendRequestCreateRequest(
-    staffForceAccept: $checkedConvert('staff_force_accept', (v) => v as bool?),
+    staffForceAccept: $checkedConvert('staff_force_accept', (v) => v ?? _omit),
   );
   return val;
 }, fieldKeyMap: const {'staffForceAccept': 'staff_force_accept'});

@@ -22,8 +22,8 @@ class _SavedMediaApi implements SavedMediaApi {
 
   @override
   Future<FavoriteMemeResponse> createMemeFromMessage({
-    required String channelId,
-    required String messageId,
+    required SnowflakeType channelId,
+    required SnowflakeType messageId,
     required CreateFavoriteMemeBodySchema body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -145,7 +145,9 @@ class _SavedMediaApi implements SavedMediaApi {
   }
 
   @override
-  Future<FavoriteMemeResponse> getFavoriteMeme({required String memeId}) async {
+  Future<FavoriteMemeResponse> getFavoriteMeme({
+    required SnowflakeType memeId,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -173,14 +175,15 @@ class _SavedMediaApi implements SavedMediaApi {
 
   @override
   Future<FavoriteMemeResponse> updateFavoriteMeme({
-    required String memeId,
-    required UpdateFavoriteMemeBodySchema body,
+    required SnowflakeType memeId,
+    UpdateFavoriteMemeBodySchema? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<FavoriteMemeResponse>(
       Options(method: 'PATCH', headers: _headers, extra: _extra)
           .compose(
@@ -203,7 +206,7 @@ class _SavedMediaApi implements SavedMediaApi {
   }
 
   @override
-  Future<void> deleteFavoriteMeme({required String memeId}) async {
+  Future<void> deleteFavoriteMeme({required SnowflakeType memeId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

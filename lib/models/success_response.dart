@@ -4,8 +4,6 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'success_response_success_success.dart';
-
 part 'success_response.g.dart';
 
 @JsonSerializable()
@@ -16,7 +14,7 @@ class SuccessResponse {
       _$SuccessResponseFromJson(json);
 
   /// Whether the operation succeeded
-  final SuccessResponseSuccessSuccess success;
+  final bool success;
 
   Map<String, Object?> toJson() => _$SuccessResponseToJson(this);
 }

@@ -19,39 +19,32 @@ GuildLinkChannelCreateRequest _$GuildLinkChannelCreateRequestFromJson(
             GuildLinkChannelCreateRequestTypeType.fromJson((v as num).toInt()),
       ),
       name: $checkedConvert('name', (v) => v as String),
-      topic: $checkedConvert('topic', (v) => v as String?),
-      url: $checkedConvert('url', (v) => v as String?),
-      parentId: $checkedConvert('parent_id', (v) => v as String?),
-      bitrate: $checkedConvert('bitrate', (v) => (v as num?)?.toInt()),
-      userLimit: $checkedConvert('user_limit', (v) => (v as num?)?.toInt()),
+      nsfw: $checkedConvert('nsfw', (v) => v as bool? ?? false),
+      topic: $checkedConvert('topic', (v) => v ?? _omit),
+      url: $checkedConvert('url', (v) => v ?? _omit),
+      parentId: $checkedConvert('parent_id', (v) => v ?? _omit),
+      bitrate: $checkedConvert('bitrate', (v) => v ?? _omit),
+      userLimit: $checkedConvert('user_limit', (v) => v ?? _omit),
       voiceConnectionLimit: $checkedConvert(
         'voice_connection_limit',
-        (v) => (v as num?)?.toInt(),
+        (v) => v ?? _omit,
       ),
       permissionOverwrites: $checkedConvert(
         'permission_overwrites',
-        (v) => (v as List<dynamic>?)
-            ?.map(
-              (e) => GuildLinkChannelCreateRequestPermissionOverwrites.fromJson(
-                e as Map<String, dynamic>,
-              ),
-            )
-            .toList(),
+        (v) => v ?? _omit,
       ),
       rateLimitPerUser: $checkedConvert(
         'rate_limit_per_user',
-        (v) => (v as num?)?.toInt(),
+        (v) => v ?? _omit,
       ),
-      nsfw: $checkedConvert('nsfw', (v) => v as bool?),
-      nsfwOverride: $checkedConvert('nsfw_override', (v) => v as bool?),
+      nsfwOverride: $checkedConvert('nsfw_override', (v) => v ?? _omit),
       contentWarningLevel: $checkedConvert(
         'content_warning_level',
-        (v) =>
-            v == null ? null : ContentWarningLevel.fromJson((v as num).toInt()),
+        (v) => v ?? _omit,
       ),
       contentWarningText: $checkedConvert(
         'content_warning_text',
-        (v) => v as String?,
+        (v) => v ?? _omit,
       ),
     );
     return val;
@@ -79,7 +72,7 @@ Map<String, dynamic> _$GuildLinkChannelCreateRequestToJson(
   'voice_connection_limit': ?instance.voiceConnectionLimit,
   'permission_overwrites': ?instance.permissionOverwrites,
   'rate_limit_per_user': ?instance.rateLimitPerUser,
-  'nsfw': ?instance.nsfw,
+  'nsfw': instance.nsfw,
   'nsfw_override': ?instance.nsfwOverride,
   'content_warning_level': ?instance.contentWarningLevel,
   'content_warning_text': ?instance.contentWarningText,

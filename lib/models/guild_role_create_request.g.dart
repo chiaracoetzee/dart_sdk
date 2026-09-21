@@ -11,8 +11,8 @@ GuildRoleCreateRequest _$GuildRoleCreateRequestFromJson(
 ) => $checkedCreate('GuildRoleCreateRequest', json, ($checkedConvert) {
   final val = GuildRoleCreateRequest(
     name: $checkedConvert('name', (v) => v as String),
-    color: $checkedConvert('color', (v) => (v as num?)?.toInt()),
-    permissions: $checkedConvert('permissions', (v) => v as String?),
+    permissions: $checkedConvert('permissions', (v) => v ?? _omit),
+    color: $checkedConvert('color', (v) => (v as num?)?.toInt() ?? 0),
   );
   return val;
 });
@@ -21,6 +21,6 @@ Map<String, dynamic> _$GuildRoleCreateRequestToJson(
   GuildRoleCreateRequest instance,
 ) => <String, dynamic>{
   'name': instance.name,
-  'color': ?instance.color,
+  'color': instance.color,
   'permissions': ?instance.permissions,
 };

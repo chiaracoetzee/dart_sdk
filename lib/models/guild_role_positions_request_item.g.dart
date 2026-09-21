@@ -10,8 +10,11 @@ GuildRolePositionsRequestItem _$GuildRolePositionsRequestItemFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('GuildRolePositionsRequestItem', json, ($checkedConvert) {
   final val = GuildRolePositionsRequestItem(
-    id: $checkedConvert('id', (v) => v as String),
-    position: $checkedConvert('position', (v) => (v as num?)?.toInt()),
+    id: $checkedConvert(
+      'id',
+      (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
+    ),
+    position: $checkedConvert('position', (v) => v ?? _omit),
   );
   return val;
 });

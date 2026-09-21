@@ -8,17 +8,30 @@ import 'join_source_type.dart';
 
 part 'guild_member_search_result_supplemental.g.dart';
 
+const Object _omit = Object();
+
 @JsonSerializable()
 class GuildMemberSearchResultSupplemental {
   const GuildMemberSearchResultSupplemental({
     required this.sourceInviteCode,
     required this.inviterId,
-    this.joinSourceType,
-  });
-
+    Object? joinSourceType = _omit,
+  }) : joinSourceType = identical(joinSourceType, _omit)
+           ? null
+           : joinSourceType as JoinSourceType?,
+       _joinSourceTypePresent = !identical(joinSourceType, _omit);
   factory GuildMemberSearchResultSupplemental.fromJson(
     Map<String, Object?> json,
-  ) => _$GuildMemberSearchResultSupplementalFromJson(json);
+  ) {
+    final value = _$GuildMemberSearchResultSupplementalFromJson(json);
+    return GuildMemberSearchResultSupplemental(
+      sourceInviteCode: value.sourceInviteCode,
+      inviterId: value.inviterId,
+      joinSourceType: json.containsKey('join_source_type')
+          ? value.joinSourceType
+          : _omit,
+    );
+  }
 
   /// How the member joined
   @JsonKey(includeIfNull: false, name: 'join_source_type')
@@ -31,7 +44,13 @@ class GuildMemberSearchResultSupplemental {
   /// User ID of the member who sent the invite
   @JsonKey(includeIfNull: true, name: 'inviter_id')
   final String? inviterId;
+  final bool _joinSourceTypePresent;
 
-  Map<String, Object?> toJson() =>
-      _$GuildMemberSearchResultSupplementalToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$GuildMemberSearchResultSupplementalToJson(this);
+    if (_joinSourceTypePresent) {
+      json.putIfAbsent('join_source_type', () => joinSourceType);
+    }
+    return json;
+  }
 }

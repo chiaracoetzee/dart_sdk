@@ -11,7 +11,11 @@ EntranceSoundSelectionRequest _$EntranceSoundSelectionRequestFromJson(
 ) => $checkedCreate('EntranceSoundSelectionRequest', json, ($checkedConvert) {
   final val = EntranceSoundSelectionRequest(
     scopeId: $checkedConvert('scope_id', (v) => v as String),
-    soundId: $checkedConvert('sound_id', (v) => v as String?),
+    soundId: $checkedConvert(
+      'sound_id',
+      (v) =>
+          v == null ? null : SnowflakeType.fromJson(v as Map<String, dynamic>),
+    ),
   );
   return val;
 }, fieldKeyMap: const {'scopeId': 'scope_id', 'soundId': 'sound_id'});

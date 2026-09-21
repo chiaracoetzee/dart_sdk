@@ -19,18 +19,14 @@ RegisterMobileDeviceRequest _$RegisterMobileDeviceRequestFromJson(
             RegisterMobileDeviceRequestPlatformPlatform.fromJson(v as String),
       ),
       token: $checkedConvert('token', (v) => v as String),
-      userAgent: $checkedConvert('user_agent', (v) => v as String?),
-      appId: $checkedConvert('app_id', (v) => v as String?),
+      userAgent: $checkedConvert('user_agent', (v) => v ?? _omit),
+      appId: $checkedConvert('app_id', (v) => v ?? _omit),
       providerEnvironment: $checkedConvert(
         'provider_environment',
-        (v) => v == null
-            ? null
-            : RegisterMobileDeviceRequestProviderEnvironmentProviderEnvironment.fromJson(
-                v as String,
-              ),
+        (v) => v ?? _omit,
       ),
-      encryptionKey: $checkedConvert('encryption_key', (v) => v as String?),
-      authSecret: $checkedConvert('auth_secret', (v) => v as String?),
+      encryptionKey: $checkedConvert('encryption_key', (v) => v ?? _omit),
+      authSecret: $checkedConvert('auth_secret', (v) => v ?? _omit),
     );
     return val;
   },

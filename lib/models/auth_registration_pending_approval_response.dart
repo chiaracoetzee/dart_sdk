@@ -4,7 +4,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'auth_registration_pending_approval_response_registration_pending_approval_registration_pending_approval.dart';
+import 'snowflake_string_type.dart';
 
 part 'auth_registration_pending_approval_response.g.dart';
 
@@ -21,12 +21,11 @@ class AuthRegistrationPendingApprovalResponse {
 
   /// Registration succeeded and is waiting for admin approval
   @JsonKey(name: 'registration_pending_approval')
-  final AuthRegistrationPendingApprovalResponseRegistrationPendingApprovalRegistrationPendingApproval
-  registrationPendingApproval;
+  final bool registrationPendingApproval;
 
   /// ID of the registered account waiting for approval
   @JsonKey(name: 'user_id')
-  final String userId;
+  final SnowflakeStringType userId;
 
   Map<String, Object?> toJson() =>
       _$AuthRegistrationPendingApprovalResponseToJson(this);

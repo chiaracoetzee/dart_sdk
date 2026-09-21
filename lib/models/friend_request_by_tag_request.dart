@@ -19,7 +19,10 @@ class FriendRequestByTagRequest {
   factory FriendRequestByTagRequest.fromJson(Map<String, Object?> json) =>
       _$FriendRequestByTagRequestFromJson(json);
 
+  /// Username of the user to send friend request
   final UsernameType username;
+
+  /// Discriminator tag of the user
   final DiscriminatorType discriminator;
 
   Map<String, Object?> toJson() => _$FriendRequestByTagRequestToJson(this);

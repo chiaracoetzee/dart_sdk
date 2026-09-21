@@ -20,7 +20,7 @@ ReadStateResponse _$ReadStateResponseFromJson(
         'last_pin_timestamp',
         (v) => v as String?,
       ),
-      version: $checkedConvert('version', (v) => v as String?),
+      version: $checkedConvert('version', (v) => v ?? _omit),
     );
     return val;
   },

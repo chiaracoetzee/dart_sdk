@@ -19,6 +19,7 @@ class MultipartPresignedAttachmentUploadResponseItemParts {
     Map<String, Object?> json,
   ) => _$MultipartPresignedAttachmentUploadResponseItemPartsFromJson(json);
 
+  /// 1-indexed part number; order is required for completion
   @JsonKey(name: 'part_number')
   final Int32Type partNumber;
 

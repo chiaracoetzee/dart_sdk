@@ -15,7 +15,7 @@ GitHubWebhookReview _$GitHubWebhookReviewFromJson(Map<String, dynamic> json) =>
         ),
         htmlUrl: $checkedConvert('html_url', (v) => v as String),
         state: $checkedConvert('state', (v) => v as String),
-        body: $checkedConvert('body', (v) => v as String?),
+        body: $checkedConvert('body', (v) => v ?? _omit),
       );
       return val;
     }, fieldKeyMap: const {'htmlUrl': 'html_url'});

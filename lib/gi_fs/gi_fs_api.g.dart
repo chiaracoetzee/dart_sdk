@@ -21,7 +21,9 @@ class _GiFsApi implements GiFsApi {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<GifFeaturedResponse> getFeaturedGifs({Locale? locale}) async {
+  Future<GifFeaturedResponse> getFeaturedGifs({
+    Locale? locale = Locale.enUs,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'locale': locale?.toJson()};
     queryParameters.removeWhere((k, v) => v == null);
@@ -73,7 +75,7 @@ class _GiFsApi implements GiFsApi {
   @override
   Future<List<GifResponse>> searchGifs({
     required String q,
-    Locale? locale,
+    Locale? locale = Locale.enUs,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -109,7 +111,7 @@ class _GiFsApi implements GiFsApi {
   @override
   Future<List<String>> getGifsSearchSuggestions({
     required String q,
-    Locale? locale,
+    Locale? locale = Locale.enUs,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -141,7 +143,9 @@ class _GiFsApi implements GiFsApi {
   }
 
   @override
-  Future<List<GifResponse>> getTrendingGifs({Locale? locale}) async {
+  Future<List<GifResponse>> getTrendingGifs({
+    Locale? locale = Locale.enUs,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'locale': locale?.toJson()};
     queryParameters.removeWhere((k, v) => v == null);

@@ -5,11 +5,14 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'channel_overrides.dart';
-import 'snowflake_type.dart';
+import 'int32_type.dart';
+import 'snowflake_string_type.dart';
 import 'user_guild_settings_response_mute_config.dart';
 import 'user_notification_settings.dart';
 
 part 'user_guild_settings_response.g.dart';
+
+const Object _omit = Object();
 
 @JsonSerializable()
 class UserGuildSettingsResponse {
@@ -24,15 +27,33 @@ class UserGuildSettingsResponse {
     required this.hideMutedChannels,
     required this.channelOverrides,
     required this.version,
-    this.unreadBadges,
-  });
-
-  factory UserGuildSettingsResponse.fromJson(Map<String, Object?> json) =>
-      _$UserGuildSettingsResponseFromJson(json);
+    Object? unreadBadges = _omit,
+  }) : unreadBadges = identical(unreadBadges, _omit)
+           ? null
+           : unreadBadges as UserNotificationSettings?,
+       _unreadBadgesPresent = !identical(unreadBadges, _omit);
+  factory UserGuildSettingsResponse.fromJson(Map<String, Object?> json) {
+    final value = _$UserGuildSettingsResponseFromJson(json);
+    return UserGuildSettingsResponse(
+      guildId: value.guildId,
+      messageNotifications: value.messageNotifications,
+      muted: value.muted,
+      muteConfig: value.muteConfig,
+      mobilePush: value.mobilePush,
+      suppressEveryone: value.suppressEveryone,
+      suppressRoles: value.suppressRoles,
+      hideMutedChannels: value.hideMutedChannels,
+      channelOverrides: value.channelOverrides,
+      version: value.version,
+      unreadBadges: json.containsKey('unread_badges')
+          ? value.unreadBadges
+          : _omit,
+    );
+  }
 
   /// The ID of the guild these settings apply to
   @JsonKey(includeIfNull: true, name: 'guild_id')
-  final SnowflakeType? guildId;
+  final SnowflakeStringType? guildId;
 
   /// The default notification level for the guild
   @JsonKey(name: 'message_notifications')
@@ -70,7 +91,14 @@ class UserGuildSettingsResponse {
   final UserNotificationSettings? unreadBadges;
 
   /// The version number of these settings for sync
-  final int version;
+  final Int32Type version;
+  final bool _unreadBadgesPresent;
 
-  Map<String, Object?> toJson() => _$UserGuildSettingsResponseToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$UserGuildSettingsResponseToJson(this);
+    if (_unreadBadgesPresent) {
+      json.putIfAbsent('unread_badges', () => unreadBadges);
+    }
+    return json;
+  }
 }

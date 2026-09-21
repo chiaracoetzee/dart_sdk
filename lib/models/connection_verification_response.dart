@@ -4,7 +4,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'connection_verification_response_type_type.dart';
+import 'connection_type.dart';
 
 part 'connection_verification_response.g.dart';
 
@@ -25,7 +25,7 @@ class ConnectionVerificationResponse {
   final String token;
 
   /// The type of connection being verified
-  final ConnectionVerificationResponseTypeType type;
+  final ConnectionType type;
 
   /// The connection identifier (handle or domain)
   final String id;

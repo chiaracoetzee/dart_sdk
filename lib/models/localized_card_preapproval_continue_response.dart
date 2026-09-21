@@ -4,150 +4,130 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'pending_localized_card_preapproval_continue_response_status_status.dart';
-import 'ready_localized_card_preapproval_continue_response_status_status.dart';
-import 'rejected_localized_card_preapproval_continue_response_status_status.dart';
 import 'rejected_localized_card_preapproval_continue_response_reason_reason.dart';
-import 'expired_localized_card_preapproval_continue_response_status_status.dart';
 
 part 'localized_card_preapproval_continue_response.g.dart';
 
-@JsonSerializable(createFactory: false)
-sealed class LocalizedCardPreapprovalContinueResponse {
-  const LocalizedCardPreapprovalContinueResponse();
+class LocalizedCardPreapprovalContinueResponse {
+  final Map<String, dynamic> _json;
+
+  const LocalizedCardPreapprovalContinueResponse(this._json);
 
   factory LocalizedCardPreapprovalContinueResponse.fromJson(
     Map<String, dynamic> json,
-  ) => LocalizedCardPreapprovalContinueResponseUnionDeserializer.tryDeserialize(
-    json,
-  );
+  ) => LocalizedCardPreapprovalContinueResponse(json);
 
-  Map<String, dynamic> toJson();
-}
+  Map<String, dynamic> toJson() => _json;
 
-extension LocalizedCardPreapprovalContinueResponseUnionDeserializer
-    on LocalizedCardPreapprovalContinueResponse {
-  static LocalizedCardPreapprovalContinueResponse tryDeserialize(
-    Map<String, dynamic> json, {
-    String key = 'status',
-    Map<Type, Object?>? mapping,
-  }) {
-    final mappingFallback = const <Type, Object?>{
-      LocalizedCardPreapprovalContinueResponsePending: 'pending',
-      LocalizedCardPreapprovalContinueResponseReady: 'ready',
-      LocalizedCardPreapprovalContinueResponseRejected: 'rejected',
-      LocalizedCardPreapprovalContinueResponseExpired: 'expired',
-    };
-    final value = json[key];
-    final effective = mapping ?? mappingFallback;
-    final valueAsString = value?.toString();
-    return switch (value) {
-      _
-          when value ==
-                  effective[LocalizedCardPreapprovalContinueResponsePending] ||
-              valueAsString ==
-                  effective[LocalizedCardPreapprovalContinueResponsePending]
-                      ?.toString() =>
-        LocalizedCardPreapprovalContinueResponsePending.fromJson(json),
-      _
-          when value ==
-                  effective[LocalizedCardPreapprovalContinueResponseReady] ||
-              valueAsString ==
-                  effective[LocalizedCardPreapprovalContinueResponseReady]
-                      ?.toString() =>
-        LocalizedCardPreapprovalContinueResponseReady.fromJson(json),
-      _
-          when value ==
-                  effective[LocalizedCardPreapprovalContinueResponseRejected] ||
-              valueAsString ==
-                  effective[LocalizedCardPreapprovalContinueResponseRejected]
-                      ?.toString() =>
-        LocalizedCardPreapprovalContinueResponseRejected.fromJson(json),
-      _
-          when value ==
-                  effective[LocalizedCardPreapprovalContinueResponseExpired] ||
-              valueAsString ==
-                  effective[LocalizedCardPreapprovalContinueResponseExpired]
-                      ?.toString() =>
-        LocalizedCardPreapprovalContinueResponseExpired.fromJson(json),
-      _ => throw FormatException(
-        'Unknown discriminator value "${json[key]}" for LocalizedCardPreapprovalContinueResponse',
-      ),
-    };
-  }
+  LocalizedCardPreapprovalContinueResponsePendingLocalizedCardPreapprovalContinueResponse
+  toPendingLocalizedCardPreapprovalContinueResponse() =>
+      LocalizedCardPreapprovalContinueResponsePendingLocalizedCardPreapprovalContinueResponse.fromJson(
+        _json,
+      );
+  LocalizedCardPreapprovalContinueResponseReadyLocalizedCardPreapprovalContinueResponse
+  toReadyLocalizedCardPreapprovalContinueResponse() =>
+      LocalizedCardPreapprovalContinueResponseReadyLocalizedCardPreapprovalContinueResponse.fromJson(
+        _json,
+      );
+  LocalizedCardPreapprovalContinueResponseRejectedLocalizedCardPreapprovalContinueResponse
+  toRejectedLocalizedCardPreapprovalContinueResponse() =>
+      LocalizedCardPreapprovalContinueResponseRejectedLocalizedCardPreapprovalContinueResponse.fromJson(
+        _json,
+      );
+  LocalizedCardPreapprovalContinueResponseExpiredLocalizedCardPreapprovalContinueResponse
+  toExpiredLocalizedCardPreapprovalContinueResponse() =>
+      LocalizedCardPreapprovalContinueResponseExpiredLocalizedCardPreapprovalContinueResponse.fromJson(
+        _json,
+      );
 }
 
 @JsonSerializable()
-class LocalizedCardPreapprovalContinueResponsePending
-    extends LocalizedCardPreapprovalContinueResponse {
-  final PendingLocalizedCardPreapprovalContinueResponseStatusStatus status;
+class LocalizedCardPreapprovalContinueResponsePendingLocalizedCardPreapprovalContinueResponse {
+  final String status;
 
-  const LocalizedCardPreapprovalContinueResponsePending({required this.status});
+  const LocalizedCardPreapprovalContinueResponsePendingLocalizedCardPreapprovalContinueResponse({
+    required this.status,
+  });
 
-  factory LocalizedCardPreapprovalContinueResponsePending.fromJson(
+  factory LocalizedCardPreapprovalContinueResponsePendingLocalizedCardPreapprovalContinueResponse.fromJson(
     Map<String, dynamic> json,
-  ) => _$LocalizedCardPreapprovalContinueResponsePendingFromJson(json);
+  ) =>
+      _$LocalizedCardPreapprovalContinueResponsePendingLocalizedCardPreapprovalContinueResponseFromJson(
+        json,
+      );
 
-  @override
   Map<String, dynamic> toJson() =>
-      _$LocalizedCardPreapprovalContinueResponsePendingToJson(this);
+      _$LocalizedCardPreapprovalContinueResponsePendingLocalizedCardPreapprovalContinueResponseToJson(
+        this,
+      );
 }
 
 @JsonSerializable()
-class LocalizedCardPreapprovalContinueResponseReady
-    extends LocalizedCardPreapprovalContinueResponse {
-  final ReadyLocalizedCardPreapprovalContinueResponseStatusStatus status;
+class LocalizedCardPreapprovalContinueResponseReadyLocalizedCardPreapprovalContinueResponse {
+  final String status;
   final String url;
 
-  const LocalizedCardPreapprovalContinueResponseReady({
+  const LocalizedCardPreapprovalContinueResponseReadyLocalizedCardPreapprovalContinueResponse({
     required this.status,
     required this.url,
   });
 
-  factory LocalizedCardPreapprovalContinueResponseReady.fromJson(
+  factory LocalizedCardPreapprovalContinueResponseReadyLocalizedCardPreapprovalContinueResponse.fromJson(
     Map<String, dynamic> json,
-  ) => _$LocalizedCardPreapprovalContinueResponseReadyFromJson(json);
+  ) =>
+      _$LocalizedCardPreapprovalContinueResponseReadyLocalizedCardPreapprovalContinueResponseFromJson(
+        json,
+      );
 
-  @override
   Map<String, dynamic> toJson() =>
-      _$LocalizedCardPreapprovalContinueResponseReadyToJson(this);
+      _$LocalizedCardPreapprovalContinueResponseReadyLocalizedCardPreapprovalContinueResponseToJson(
+        this,
+      );
 }
 
 @JsonSerializable()
-class LocalizedCardPreapprovalContinueResponseRejected
-    extends LocalizedCardPreapprovalContinueResponse {
-  final RejectedLocalizedCardPreapprovalContinueResponseStatusStatus status;
+class LocalizedCardPreapprovalContinueResponseRejectedLocalizedCardPreapprovalContinueResponse {
+  final String status;
   final RejectedLocalizedCardPreapprovalContinueResponseReasonReason reason;
   @JsonKey(includeIfNull: false, name: 'actual_country')
   final String? actualCountry;
 
-  const LocalizedCardPreapprovalContinueResponseRejected({
+  const LocalizedCardPreapprovalContinueResponseRejectedLocalizedCardPreapprovalContinueResponse({
     required this.status,
     required this.reason,
     required this.actualCountry,
   });
 
-  factory LocalizedCardPreapprovalContinueResponseRejected.fromJson(
+  factory LocalizedCardPreapprovalContinueResponseRejectedLocalizedCardPreapprovalContinueResponse.fromJson(
     Map<String, dynamic> json,
-  ) => _$LocalizedCardPreapprovalContinueResponseRejectedFromJson(json);
+  ) =>
+      _$LocalizedCardPreapprovalContinueResponseRejectedLocalizedCardPreapprovalContinueResponseFromJson(
+        json,
+      );
 
-  @override
   Map<String, dynamic> toJson() =>
-      _$LocalizedCardPreapprovalContinueResponseRejectedToJson(this);
+      _$LocalizedCardPreapprovalContinueResponseRejectedLocalizedCardPreapprovalContinueResponseToJson(
+        this,
+      );
 }
 
 @JsonSerializable()
-class LocalizedCardPreapprovalContinueResponseExpired
-    extends LocalizedCardPreapprovalContinueResponse {
-  final ExpiredLocalizedCardPreapprovalContinueResponseStatusStatus status;
+class LocalizedCardPreapprovalContinueResponseExpiredLocalizedCardPreapprovalContinueResponse {
+  final String status;
 
-  const LocalizedCardPreapprovalContinueResponseExpired({required this.status});
+  const LocalizedCardPreapprovalContinueResponseExpiredLocalizedCardPreapprovalContinueResponse({
+    required this.status,
+  });
 
-  factory LocalizedCardPreapprovalContinueResponseExpired.fromJson(
+  factory LocalizedCardPreapprovalContinueResponseExpiredLocalizedCardPreapprovalContinueResponse.fromJson(
     Map<String, dynamic> json,
-  ) => _$LocalizedCardPreapprovalContinueResponseExpiredFromJson(json);
+  ) =>
+      _$LocalizedCardPreapprovalContinueResponseExpiredLocalizedCardPreapprovalContinueResponseFromJson(
+        json,
+      );
 
-  @override
   Map<String, dynamic> toJson() =>
-      _$LocalizedCardPreapprovalContinueResponseExpiredToJson(this);
+      _$LocalizedCardPreapprovalContinueResponseExpiredLocalizedCardPreapprovalContinueResponseToJson(
+        this,
+      );
 }

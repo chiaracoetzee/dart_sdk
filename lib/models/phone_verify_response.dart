@@ -4,8 +4,6 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'phone_verify_response_verified_verified.dart';
-
 part 'phone_verify_response.g.dart';
 
 @JsonSerializable()
@@ -16,7 +14,7 @@ class PhoneVerifyResponse {
       _$PhoneVerifyResponseFromJson(json);
 
   /// Indicates the phone number was verified successfully
-  final PhoneVerifyResponseVerifiedVerified verified;
+  final bool verified;
 
   Map<String, Object?> toJson() => _$PhoneVerifyResponseToJson(this);
 }

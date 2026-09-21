@@ -15,7 +15,7 @@ HandoffInitiateResponse _$HandoffInitiateResponseFromJson(
       'expires_at',
       (v) => DateTime.parse(v as String),
     ),
-    pollSecret: $checkedConvert('poll_secret', (v) => v as String?),
+    pollSecret: $checkedConvert('poll_secret', (v) => v ?? _omit),
   );
   return val;
 }, fieldKeyMap: const {'expiresAt': 'expires_at', 'pollSecret': 'poll_secret'});

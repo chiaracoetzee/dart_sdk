@@ -15,6 +15,7 @@ class PhoneVerifyRequest {
   factory PhoneVerifyRequest.fromJson(Map<String, Object?> json) =>
       _$PhoneVerifyRequestFromJson(json);
 
+  /// Phone number being verified
   final PhoneNumberType phone;
 
   /// The verification code

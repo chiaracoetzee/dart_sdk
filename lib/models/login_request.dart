@@ -9,23 +9,41 @@ import 'password_type.dart';
 
 part 'login_request.g.dart';
 
+const Object _omit = Object();
+
 @JsonSerializable()
 class LoginRequest {
   const LoginRequest({
     required this.email,
     required this.password,
-    this.inviteCode,
-  });
+    Object? inviteCode = _omit,
+  }) : inviteCode = identical(inviteCode, _omit) ? null : inviteCode as String?,
+       _inviteCodePresent = !identical(inviteCode, _omit);
+  factory LoginRequest.fromJson(Map<String, Object?> json) {
+    final value = _$LoginRequestFromJson(json);
+    return LoginRequest(
+      email: value.email,
+      password: value.password,
+      inviteCode: json.containsKey('invite_code') ? value.inviteCode : _omit,
+    );
+  }
 
-  factory LoginRequest.fromJson(Map<String, Object?> json) =>
-      _$LoginRequestFromJson(json);
-
+  /// Email address for authentication
   final EmailType email;
+
+  /// Account password
   final PasswordType password;
 
   /// Guild invite code to join after login
   @JsonKey(includeIfNull: false, name: 'invite_code')
   final String? inviteCode;
+  final bool _inviteCodePresent;
 
-  Map<String, Object?> toJson() => _$LoginRequestToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$LoginRequestToJson(this);
+    if (_inviteCodePresent) {
+      json.putIfAbsent('invite_code', () => inviteCode);
+    }
+    return json;
+  }
 }

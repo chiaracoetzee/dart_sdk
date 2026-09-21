@@ -4,7 +4,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'stream_preview_upload_url_response_schema_method_method.dart';
+import 'int32_type.dart';
 
 part 'stream_preview_upload_url_response_schema.g.dart';
 
@@ -28,7 +28,7 @@ class StreamPreviewUploadUrlResponseSchema {
   final String uploadUrl;
 
   /// HTTP method to use for the upload URL
-  final StreamPreviewUploadUrlResponseSchemaMethodMethod method;
+  final String method;
 
   /// MIME type that must be sent with the upload request
   @JsonKey(name: 'content_type')
@@ -40,11 +40,11 @@ class StreamPreviewUploadUrlResponseSchema {
 
   /// Number of seconds the upload URL remains valid
   @JsonKey(name: 'expires_in')
-  final int expiresIn;
+  final Int32Type expiresIn;
 
   /// Maximum supported preview image size in bytes
   @JsonKey(name: 'max_bytes')
-  final int maxBytes;
+  final Int32Type maxBytes;
 
   Map<String, Object?> toJson() =>
       _$StreamPreviewUploadUrlResponseSchemaToJson(this);

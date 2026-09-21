@@ -13,155 +13,99 @@ UserSettingsUpdateRequest _$UserSettingsUpdateRequestFromJson(
   json,
   ($checkedConvert) {
     final val = UserSettingsUpdateRequest(
-      gifAutoPlay: $checkedConvert('gif_auto_play', (v) => v as bool?),
-      status: $checkedConvert(
-        'status',
-        (v) => v == null
-            ? null
-            : UserSettingsUpdateRequestStatusStatus.fromJson(v as String),
-      ),
-      statusResetsAt: $checkedConvert('status_resets_at', (v) => v),
-      statusResetsTo: $checkedConvert(
-        'status_resets_to',
-        (v) => v == null
-            ? null
-            : UserSettingsUpdateRequestStatusResetsToStatusResetsTo.fromJson(
-                v as String,
-              ),
-      ),
-      theme: $checkedConvert(
-        'theme',
-        (v) => v == null
-            ? null
-            : UserSettingsUpdateRequestThemeTheme.fromJson(v as String),
-      ),
-      locale: $checkedConvert(
-        'locale',
-        (v) => v == null ? null : Locale.fromJson(v as String),
-      ),
-      restrictedGuilds: $checkedConvert(
-        'restricted_guilds',
-        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
-      ),
+      gifAutoPlay: $checkedConvert('gif_auto_play', (v) => v ?? _omit),
+      status: $checkedConvert('status', (v) => v ?? _omit),
+      statusResetsAt: $checkedConvert('status_resets_at', (v) => v ?? _omit),
+      statusResetsTo: $checkedConvert('status_resets_to', (v) => v ?? _omit),
+      theme: $checkedConvert('theme', (v) => v ?? _omit),
+      guildPositions: $checkedConvert('guild_positions', (v) => v ?? _omit),
+      locale: $checkedConvert('locale', (v) => v ?? _omit),
+      restrictedGuilds: $checkedConvert('restricted_guilds', (v) => v ?? _omit),
       botRestrictedGuilds: $checkedConvert(
         'bot_restricted_guilds',
-        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+        (v) => v ?? _omit,
       ),
       defaultGuildsRestricted: $checkedConvert(
         'default_guilds_restricted',
-        (v) => v as bool?,
+        (v) => v ?? _omit,
       ),
       botDefaultGuildsRestricted: $checkedConvert(
         'bot_default_guilds_restricted',
-        (v) => v as bool?,
+        (v) => v ?? _omit,
       ),
       inlineAttachmentMedia: $checkedConvert(
         'inline_attachment_media',
-        (v) => v as bool?,
+        (v) => v ?? _omit,
       ),
       inlineEmbedMedia: $checkedConvert(
         'inline_embed_media',
-        (v) => v as bool?,
+        (v) => v ?? _omit,
       ),
-      flags: $checkedConvert('flags', (v) => (v as num?)?.toInt()),
-      renderEmbeds: $checkedConvert('render_embeds', (v) => v as bool?),
-      renderReactions: $checkedConvert('render_reactions', (v) => v as bool?),
-      animateEmoji: $checkedConvert('animate_emoji', (v) => v as bool?),
-      animateStickers: $checkedConvert(
-        'animate_stickers',
-        (v) => v == null
-            ? null
-            : StickerAnimationOptions.fromJson((v as num).toInt()),
-      ),
-      renderSpoilers: $checkedConvert(
-        'render_spoilers',
-        (v) => v == null ? null : RenderSpoilers.fromJson((v as num).toInt()),
-      ),
+      flags: $checkedConvert('flags', (v) => v ?? _omit),
+      renderEmbeds: $checkedConvert('render_embeds', (v) => v ?? _omit),
+      renderReactions: $checkedConvert('render_reactions', (v) => v ?? _omit),
+      animateEmoji: $checkedConvert('animate_emoji', (v) => v ?? _omit),
+      animateStickers: $checkedConvert('animate_stickers', (v) => v ?? _omit),
+      renderSpoilers: $checkedConvert('render_spoilers', (v) => v ?? _omit),
       messageDisplayCompact: $checkedConvert(
         'message_display_compact',
-        (v) => v as bool?,
+        (v) => v ?? _omit,
       ),
       friendSourceFlags: $checkedConvert(
         'friend_source_flags',
-        (v) => (v as num?)?.toInt(),
+        (v) => v ?? _omit,
       ),
       incomingCallFlags: $checkedConvert(
         'incoming_call_flags',
-        (v) => (v as num?)?.toInt(),
+        (v) => v ?? _omit,
       ),
       groupDmAddPermissionFlags: $checkedConvert(
         'group_dm_add_permission_flags',
-        (v) => (v as num?)?.toInt(),
+        (v) => v ?? _omit,
       ),
-      guildFolders: $checkedConvert(
-        'guild_folders',
-        (v) => (v as List<dynamic>?)
-            ?.map(
-              (e) => UserSettingsUpdateRequestGuildFolders.fromJson(
-                e as Map<String, dynamic>,
-              ),
-            )
-            .toList(),
-      ),
-      customStatus: $checkedConvert(
-        'custom_status',
-        (v) => v == null
-            ? null
-            : CustomStatusPayload.fromJson(v as Map<String, dynamic>),
-      ),
+      guildFolders: $checkedConvert('guild_folders', (v) => v ?? _omit),
+      customStatus: $checkedConvert('custom_status', (v) => v ?? _omit),
       syncedPreferences: $checkedConvert(
         'synced_preferences',
-        (v) => v as String?,
+        (v) => v ?? _omit,
       ),
-      timeFormat: $checkedConvert(
-        'time_format',
-        (v) => v == null ? null : TimeFormatTypes.fromJson((v as num).toInt()),
-      ),
-      developerMode: $checkedConvert('developer_mode', (v) => v as bool?),
-      trustedDomains: $checkedConvert(
-        'trusted_domains',
-        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
-      ),
+      timeFormat: $checkedConvert('time_format', (v) => v ?? _omit),
+      developerMode: $checkedConvert('developer_mode', (v) => v ?? _omit),
+      trustedDomains: $checkedConvert('trusted_domains', (v) => v ?? _omit),
       defaultHideMutedChannels: $checkedConvert(
         'default_hide_muted_channels',
-        (v) => v as bool?,
+        (v) => v ?? _omit,
       ),
       sensitiveContentFriendDmFilter: $checkedConvert(
         'sensitive_content_friend_dm_filter',
-        (v) => v == null
-            ? null
-            : SensitiveMediaFilterLevel.fromJson((v as num).toInt()),
+        (v) => v ?? _omit,
       ),
       sensitiveContentNonFriendDmFilter: $checkedConvert(
         'sensitive_content_non_friend_dm_filter',
-        (v) => v == null
-            ? null
-            : SensitiveMediaFilterLevel.fromJson((v as num).toInt()),
+        (v) => v ?? _omit,
       ),
       sensitiveContentGuildFilter: $checkedConvert(
         'sensitive_content_guild_filter',
-        (v) => v == null
-            ? null
-            : SensitiveMediaGuildFilterLevel.fromJson((v as num).toInt()),
+        (v) => v ?? _omit,
       ),
       suppressUnprivilegedSelfMentions: $checkedConvert(
         'suppress_unprivileged_self_mentions',
-        (v) => v as bool?,
+        (v) => v ?? _omit,
       ),
       suppressUnprivilegedSelfMentionsBypassUserIds: $checkedConvert(
         'suppress_unprivileged_self_mentions_bypass_user_ids',
-        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+        (v) => v ?? _omit,
       ),
       staffDmAccessUserIds: $checkedConvert(
         'staff_dm_access_user_ids',
-        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+        (v) => v ?? _omit,
       ),
-      profilePrivacy: $checkedConvert(
-        'profile_privacy',
-        (v) =>
-            v == null ? null : ProfilePrivacyLevel.fromJson((v as num).toInt()),
+      profilePrivacy: $checkedConvert('profile_privacy', (v) => v ?? _omit),
+      defaultShareVoiceActivity: $checkedConvert(
+        'default_share_voice_activity',
+        (v) => v ?? _omit,
       ),
-      afkTimeout: $checkedConvert('afk_timeout', (v) => (v as num?)?.toInt()),
+      afkTimeout: $checkedConvert('afk_timeout', (v) => v ?? _omit),
     );
     return val;
   },
@@ -169,6 +113,7 @@ UserSettingsUpdateRequest _$UserSettingsUpdateRequestFromJson(
     'gifAutoPlay': 'gif_auto_play',
     'statusResetsAt': 'status_resets_at',
     'statusResetsTo': 'status_resets_to',
+    'guildPositions': 'guild_positions',
     'restrictedGuilds': 'restricted_guilds',
     'botRestrictedGuilds': 'bot_restricted_guilds',
     'defaultGuildsRestricted': 'default_guilds_restricted',
@@ -200,6 +145,7 @@ UserSettingsUpdateRequest _$UserSettingsUpdateRequestFromJson(
         'suppress_unprivileged_self_mentions_bypass_user_ids',
     'staffDmAccessUserIds': 'staff_dm_access_user_ids',
     'profilePrivacy': 'profile_privacy',
+    'defaultShareVoiceActivity': 'default_share_voice_activity',
     'afkTimeout': 'afk_timeout',
   },
 );
@@ -212,6 +158,7 @@ Map<String, dynamic> _$UserSettingsUpdateRequestToJson(
   'status_resets_at': ?instance.statusResetsAt,
   'status_resets_to': ?instance.statusResetsTo,
   'theme': ?instance.theme,
+  'guild_positions': ?instance.guildPositions,
   'locale': ?instance.locale,
   'restricted_guilds': ?instance.restrictedGuilds,
   'bot_restricted_guilds': ?instance.botRestrictedGuilds,
@@ -247,5 +194,6 @@ Map<String, dynamic> _$UserSettingsUpdateRequestToJson(
       ?instance.suppressUnprivilegedSelfMentionsBypassUserIds,
   'staff_dm_access_user_ids': ?instance.staffDmAccessUserIds,
   'profile_privacy': ?instance.profilePrivacy,
+  'default_share_voice_activity': ?instance.defaultShareVoiceActivity,
   'synced_preferences': ?instance.syncedPreferences,
 };

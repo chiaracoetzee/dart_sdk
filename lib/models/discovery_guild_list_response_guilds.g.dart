@@ -27,10 +27,10 @@ DiscoveryGuildListResponseGuilds _$DiscoveryGuildListResponseGuildsFromJson(
         (v) => (v as List<dynamic>).map((e) => e as String).toList(),
       ),
       verificationLevel: $checkedConvert('verification_level', (v) => v as num),
-      icon: $checkedConvert('icon', (v) => v as String?),
-      banner: $checkedConvert('banner', (v) => v as String?),
-      description: $checkedConvert('description', (v) => v as String?),
-      primaryLanguage: $checkedConvert('primary_language', (v) => v as String?),
+      icon: $checkedConvert('icon', (v) => v ?? _omit),
+      banner: $checkedConvert('banner', (v) => v ?? _omit),
+      description: $checkedConvert('description', (v) => v ?? _omit),
+      primaryLanguage: $checkedConvert('primary_language', (v) => v ?? _omit),
     );
     return val;
   },

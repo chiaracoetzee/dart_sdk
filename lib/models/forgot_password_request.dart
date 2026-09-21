@@ -15,6 +15,7 @@ class ForgotPasswordRequest {
   factory ForgotPasswordRequest.fromJson(Map<String, Object?> json) =>
       _$ForgotPasswordRequestFromJson(json);
 
+  /// Email address to send password reset link
   final EmailType email;
 
   Map<String, Object?> toJson() => _$ForgotPasswordRequestToJson(this);

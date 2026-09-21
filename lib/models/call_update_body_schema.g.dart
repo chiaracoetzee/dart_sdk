@@ -10,9 +10,9 @@ CallUpdateBodySchema _$CallUpdateBodySchemaFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('CallUpdateBodySchema', json, ($checkedConvert) {
   final val = CallUpdateBodySchema(
-    region: $checkedConvert('region', (v) => v as String?),
-    latitude: $checkedConvert('latitude', (v) => v as String?),
-    longitude: $checkedConvert('longitude', (v) => v as String?),
+    region: $checkedConvert('region', (v) => v ?? _omit),
+    latitude: $checkedConvert('latitude', (v) => v ?? _omit),
+    longitude: $checkedConvert('longitude', (v) => v ?? _omit),
   );
   return val;
 });

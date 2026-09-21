@@ -11,6 +11,8 @@ import 'user_partial_response.dart';
 
 part 'guild_member_response.g.dart';
 
+const Object _omit = Object();
+
 @JsonSerializable()
 class GuildMemberResponse {
   const GuildMemberResponse({
@@ -19,18 +21,64 @@ class GuildMemberResponse {
     required this.joinedAt,
     required this.mute,
     required this.deaf,
-    this.nick,
-    this.avatar,
-    this.banner,
-    this.accentColor,
-    this.communicationDisabledUntil,
-    this.profileFlags,
-    this.mentionFlags,
-  });
+    Object? nick = _omit,
+    Object? avatar = _omit,
+    Object? banner = _omit,
+    Object? accentColor = _omit,
+    Object? communicationDisabledUntil = _omit,
+    Object? profileFlags = _omit,
+    Object? mentionFlags = _omit,
+  }) : nick = identical(nick, _omit) ? null : nick as String?,
+       _nickPresent = !identical(nick, _omit),
+       avatar = identical(avatar, _omit) ? null : avatar as String?,
+       _avatarPresent = !identical(avatar, _omit),
+       banner = identical(banner, _omit) ? null : banner as String?,
+       _bannerPresent = !identical(banner, _omit),
+       accentColor = identical(accentColor, _omit)
+           ? null
+           : accentColor as Int32Type?,
+       _accentColorPresent = !identical(accentColor, _omit),
+       communicationDisabledUntil = identical(communicationDisabledUntil, _omit)
+           ? null
+           : communicationDisabledUntil as DateTime?,
+       _communicationDisabledUntilPresent = !identical(
+         communicationDisabledUntil,
+         _omit,
+       ),
+       profileFlags = identical(profileFlags, _omit)
+           ? null
+           : profileFlags as GuildMemberProfileFlags?,
+       _profileFlagsPresent = !identical(profileFlags, _omit),
+       mentionFlags = identical(mentionFlags, _omit)
+           ? null
+           : mentionFlags as MentionReplyPreferences?,
+       _mentionFlagsPresent = !identical(mentionFlags, _omit);
+  factory GuildMemberResponse.fromJson(Map<String, Object?> json) {
+    final value = _$GuildMemberResponseFromJson(json);
+    return GuildMemberResponse(
+      user: value.user,
+      roles: value.roles,
+      joinedAt: value.joinedAt,
+      mute: value.mute,
+      deaf: value.deaf,
+      nick: json.containsKey('nick') ? value.nick : _omit,
+      avatar: json.containsKey('avatar') ? value.avatar : _omit,
+      banner: json.containsKey('banner') ? value.banner : _omit,
+      accentColor: json.containsKey('accent_color') ? value.accentColor : _omit,
+      communicationDisabledUntil:
+          json.containsKey('communication_disabled_until')
+          ? value.communicationDisabledUntil
+          : _omit,
+      profileFlags: json.containsKey('profile_flags')
+          ? value.profileFlags
+          : _omit,
+      mentionFlags: json.containsKey('mention_flags')
+          ? value.mentionFlags
+          : _omit,
+    );
+  }
 
-  factory GuildMemberResponse.fromJson(Map<String, Object?> json) =>
-      _$GuildMemberResponseFromJson(json);
-
+  /// The user this guild member represents
   final UserPartialResponse user;
 
   /// The nickname of the member in this guild
@@ -71,6 +119,40 @@ class GuildMemberResponse {
   /// Per-guild reply mention preference override; NO_PREFERENCE means inherit the user-level mention_flags.
   @JsonKey(includeIfNull: false, name: 'mention_flags')
   final MentionReplyPreferences? mentionFlags;
+  final bool _nickPresent;
+  final bool _avatarPresent;
+  final bool _bannerPresent;
+  final bool _accentColorPresent;
+  final bool _communicationDisabledUntilPresent;
+  final bool _profileFlagsPresent;
+  final bool _mentionFlagsPresent;
 
-  Map<String, Object?> toJson() => _$GuildMemberResponseToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$GuildMemberResponseToJson(this);
+    if (_nickPresent) {
+      json.putIfAbsent('nick', () => nick);
+    }
+    if (_avatarPresent) {
+      json.putIfAbsent('avatar', () => avatar);
+    }
+    if (_bannerPresent) {
+      json.putIfAbsent('banner', () => banner);
+    }
+    if (_accentColorPresent) {
+      json.putIfAbsent('accent_color', () => accentColor);
+    }
+    if (_communicationDisabledUntilPresent) {
+      json.putIfAbsent(
+        'communication_disabled_until',
+        () => communicationDisabledUntil,
+      );
+    }
+    if (_profileFlagsPresent) {
+      json.putIfAbsent('profile_flags', () => profileFlags);
+    }
+    if (_mentionFlagsPresent) {
+      json.putIfAbsent('mention_flags', () => mentionFlags);
+    }
+    return json;
+  }
 }

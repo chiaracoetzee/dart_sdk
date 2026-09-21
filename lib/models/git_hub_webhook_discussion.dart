@@ -9,6 +9,8 @@ import 'git_hub_webhook_discussion_user.dart';
 
 part 'git_hub_webhook_discussion.g.dart';
 
+const Object _omit = Object();
+
 @JsonSerializable()
 class GitHubWebhookDiscussion {
   const GitHubWebhookDiscussion({
@@ -16,12 +18,27 @@ class GitHubWebhookDiscussion {
     required this.number,
     required this.htmlUrl,
     required this.user,
-    this.answerHtmlUrl,
-    this.body,
-  });
-
-  factory GitHubWebhookDiscussion.fromJson(Map<String, Object?> json) =>
-      _$GitHubWebhookDiscussionFromJson(json);
+    Object? answerHtmlUrl = _omit,
+    Object? body = _omit,
+  }) : answerHtmlUrl = identical(answerHtmlUrl, _omit)
+           ? null
+           : answerHtmlUrl as String?,
+       _answerHtmlUrlPresent = !identical(answerHtmlUrl, _omit),
+       body = identical(body, _omit) ? null : body as String?,
+       _bodyPresent = !identical(body, _omit);
+  factory GitHubWebhookDiscussion.fromJson(Map<String, Object?> json) {
+    final value = _$GitHubWebhookDiscussionFromJson(json);
+    return GitHubWebhookDiscussion(
+      title: value.title,
+      number: value.number,
+      htmlUrl: value.htmlUrl,
+      user: value.user,
+      answerHtmlUrl: json.containsKey('answer_html_url')
+          ? value.answerHtmlUrl
+          : _omit,
+      body: json.containsKey('body') ? value.body : _omit,
+    );
+  }
 
   final String title;
   final Int32Type number;
@@ -32,6 +49,17 @@ class GitHubWebhookDiscussion {
   @JsonKey(includeIfNull: false)
   final String? body;
   final GitHubWebhookDiscussionUser user;
+  final bool _answerHtmlUrlPresent;
+  final bool _bodyPresent;
 
-  Map<String, Object?> toJson() => _$GitHubWebhookDiscussionToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$GitHubWebhookDiscussionToJson(this);
+    if (_answerHtmlUrlPresent) {
+      json.putIfAbsent('answer_html_url', () => answerHtmlUrl);
+    }
+    if (_bodyPresent) {
+      json.putIfAbsent('body', () => body);
+    }
+    return json;
+  }
 }

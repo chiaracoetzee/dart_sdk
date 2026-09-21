@@ -20,19 +20,19 @@ _$Object1ClientUploadedAttachmentRequestFromJson(Map<String, dynamic> json) =>
           waveform: $checkedConvert('waveform', (v) => v as String?),
           id: $checkedConvert('id', (v) => (v as num).toInt()),
           filename: $checkedConvert('filename', (v) => v as String),
+          contentType: $checkedConvert('content_type', (v) => v as String),
           uploadFilename: $checkedConvert(
             'upload_filename',
             (v) => v as String,
           ),
           fileSize: $checkedConvert('file_size', (v) => (v as num).toInt()),
-          contentType: $checkedConvert('content_type', (v) => v as String),
         );
         return val;
       },
       fieldKeyMap: const {
+        'contentType': 'content_type',
         'uploadFilename': 'upload_filename',
         'fileSize': 'file_size',
-        'contentType': 'content_type',
       },
     );
 
@@ -46,9 +46,9 @@ Map<String, dynamic> _$Object1ClientUploadedAttachmentRequestToJson(
   'waveform': ?instance.waveform,
   'id': instance.id,
   'filename': instance.filename,
+  'content_type': instance.contentType,
   'upload_filename': instance.uploadFilename,
   'file_size': instance.fileSize,
-  'content_type': instance.contentType,
 };
 
 Object1ClientAttachmentReferenceRequest

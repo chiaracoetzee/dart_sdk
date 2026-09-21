@@ -20,8 +20,8 @@ GitHubWebhookDiscussion _$GitHubWebhookDiscussionFromJson(
         'user',
         (v) => GitHubWebhookDiscussionUser.fromJson(v as Map<String, dynamic>),
       ),
-      answerHtmlUrl: $checkedConvert('answer_html_url', (v) => v as String?),
-      body: $checkedConvert('body', (v) => v as String?),
+      answerHtmlUrl: $checkedConvert('answer_html_url', (v) => v ?? _omit),
+      body: $checkedConvert('body', (v) => v ?? _omit),
     );
     return val;
   },

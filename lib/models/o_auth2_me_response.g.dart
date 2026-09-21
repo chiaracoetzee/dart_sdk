@@ -19,12 +19,7 @@ OAuth2MeResponse _$OAuth2MeResponseFromJson(Map<String, dynamic> json) =>
           (v) => (v as List<dynamic>).map((e) => e as String).toList(),
         ),
         expires: $checkedConvert('expires', (v) => v as String),
-        user: $checkedConvert(
-          'user',
-          (v) => v == null
-              ? null
-              : OAuth2MeResponseUser.fromJson(v as Map<String, dynamic>),
-        ),
+        user: $checkedConvert('user', (v) => v ?? _omit),
       );
       return val;
     });

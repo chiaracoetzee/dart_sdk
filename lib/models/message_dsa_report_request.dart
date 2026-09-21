@@ -4,12 +4,12 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'dsa_report_request.dart';
-import 'message_dsa_report_request_category_category.dart';
-import 'message_dsa_report_request_report_type_report_type.dart';
 import 'message_dsa_report_request_reporter_country_of_residence_reporter_country_of_residence.dart';
+import 'message_report_category.dart';
 
 part 'message_dsa_report_request.g.dart';
+
+const Object _omit = Object();
 
 @JsonSerializable()
 class MessageDsaReportRequest {
@@ -20,13 +20,41 @@ class MessageDsaReportRequest {
     required this.reportType,
     required this.category,
     required this.messageLink,
-    this.additionalInfo,
-    this.reporterFluxerTag,
-    this.reportedUserTag,
-  });
-
-  factory MessageDsaReportRequest.fromJson(Map<String, Object?> json) =>
-      _$MessageDsaReportRequestFromJson(json);
+    Object? additionalInfo = _omit,
+    Object? reporterFluxerTag = _omit,
+    Object? reportedUserTag = _omit,
+  }) : additionalInfo = identical(additionalInfo, _omit)
+           ? null
+           : additionalInfo as String?,
+       _additionalInfoPresent = !identical(additionalInfo, _omit),
+       reporterFluxerTag = identical(reporterFluxerTag, _omit)
+           ? null
+           : reporterFluxerTag as String?,
+       _reporterFluxerTagPresent = !identical(reporterFluxerTag, _omit),
+       reportedUserTag = identical(reportedUserTag, _omit)
+           ? null
+           : reportedUserTag as String?,
+       _reportedUserTagPresent = !identical(reportedUserTag, _omit);
+  factory MessageDsaReportRequest.fromJson(Map<String, Object?> json) {
+    final value = _$MessageDsaReportRequestFromJson(json);
+    return MessageDsaReportRequest(
+      ticket: value.ticket,
+      reporterFullLegalName: value.reporterFullLegalName,
+      reporterCountryOfResidence: value.reporterCountryOfResidence,
+      reportType: value.reportType,
+      category: value.category,
+      messageLink: value.messageLink,
+      additionalInfo: json.containsKey('additional_info')
+          ? value.additionalInfo
+          : _omit,
+      reporterFluxerTag: json.containsKey('reporter_fluxer_tag')
+          ? value.reporterFluxerTag
+          : _omit,
+      reportedUserTag: json.containsKey('reported_user_tag')
+          ? value.reportedUserTag
+          : _omit,
+    );
+  }
 
   /// Verification ticket obtained from email verification
   final String ticket;
@@ -50,10 +78,8 @@ class MessageDsaReportRequest {
 
   /// Type of report
   @JsonKey(name: 'report_type')
-  final MessageDsaReportRequestReportTypeReportType reportType;
-
-  /// Category of the message report
-  final MessageDsaReportRequestCategoryCategory category;
+  final String reportType;
+  final MessageReportCategory category;
 
   /// Link to the message being reported
   @JsonKey(name: 'message_link')
@@ -62,6 +88,21 @@ class MessageDsaReportRequest {
   /// Fluxer tag of the user who sent the message
   @JsonKey(includeIfNull: false, name: 'reported_user_tag')
   final String? reportedUserTag;
+  final bool _additionalInfoPresent;
+  final bool _reporterFluxerTagPresent;
+  final bool _reportedUserTagPresent;
 
-  Map<String, Object?> toJson() => _$MessageDsaReportRequestToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$MessageDsaReportRequestToJson(this);
+    if (_additionalInfoPresent) {
+      json.putIfAbsent('additional_info', () => additionalInfo);
+    }
+    if (_reporterFluxerTagPresent) {
+      json.putIfAbsent('reporter_fluxer_tag', () => reporterFluxerTag);
+    }
+    if (_reportedUserTagPresent) {
+      json.putIfAbsent('reported_user_tag', () => reportedUserTag);
+    }
+    return json;
+  }
 }

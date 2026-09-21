@@ -13,13 +13,7 @@ _$PendingLocalizedCardPreapprovalContinueResponseFromJson(
   $checkedConvert,
 ) {
   final val = PendingLocalizedCardPreapprovalContinueResponse(
-    status: $checkedConvert(
-      'status',
-      (v) =>
-          PendingLocalizedCardPreapprovalContinueResponseStatusStatus.fromJson(
-            v as String,
-          ),
-    ),
+    status: $checkedConvert('status', (v) => v as String),
   );
   return val;
 });

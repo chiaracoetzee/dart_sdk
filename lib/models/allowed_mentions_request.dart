@@ -9,17 +9,36 @@ import 'snowflake_type.dart';
 
 part 'allowed_mentions_request.g.dart';
 
+const Object _omit = Object();
+
 @JsonSerializable()
 class AllowedMentionsRequest {
   const AllowedMentionsRequest({
-    this.parse,
-    this.users,
-    this.roles,
-    this.repliedUser,
-  });
-
-  factory AllowedMentionsRequest.fromJson(Map<String, Object?> json) =>
-      _$AllowedMentionsRequestFromJson(json);
+    Object? parse = _omit,
+    Object? users = _omit,
+    Object? roles = _omit,
+    Object? repliedUser = _omit,
+  }) : parse = identical(parse, _omit)
+           ? null
+           : parse as List<AllowedMentionsRequestParseParse>?,
+       _parsePresent = !identical(parse, _omit),
+       users = identical(users, _omit) ? null : users as List<SnowflakeType>?,
+       _usersPresent = !identical(users, _omit),
+       roles = identical(roles, _omit) ? null : roles as List<SnowflakeType>?,
+       _rolesPresent = !identical(roles, _omit),
+       repliedUser = identical(repliedUser, _omit)
+           ? null
+           : repliedUser as bool?,
+       _repliedUserPresent = !identical(repliedUser, _omit);
+  factory AllowedMentionsRequest.fromJson(Map<String, Object?> json) {
+    final value = _$AllowedMentionsRequestFromJson(json);
+    return AllowedMentionsRequest(
+      parse: json.containsKey('parse') ? value.parse : _omit,
+      users: json.containsKey('users') ? value.users : _omit,
+      roles: json.containsKey('roles') ? value.roles : _omit,
+      repliedUser: json.containsKey('replied_user') ? value.repliedUser : _omit,
+    );
+  }
 
   /// Types of mentions to parse from content
   @JsonKey(includeIfNull: false)
@@ -36,6 +55,25 @@ class AllowedMentionsRequest {
   /// Whether to mention the author of the replied message
   @JsonKey(includeIfNull: false, name: 'replied_user')
   final bool? repliedUser;
+  final bool _parsePresent;
+  final bool _usersPresent;
+  final bool _rolesPresent;
+  final bool _repliedUserPresent;
 
-  Map<String, Object?> toJson() => _$AllowedMentionsRequestToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$AllowedMentionsRequestToJson(this);
+    if (_parsePresent) {
+      json.putIfAbsent('parse', () => parse);
+    }
+    if (_usersPresent) {
+      json.putIfAbsent('users', () => users);
+    }
+    if (_rolesPresent) {
+      json.putIfAbsent('roles', () => roles);
+    }
+    if (_repliedUserPresent) {
+      json.putIfAbsent('replied_user', () => repliedUser);
+    }
+    return json;
+  }
 }

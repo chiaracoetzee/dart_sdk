@@ -10,21 +10,10 @@ AllowedMentionsRequest _$AllowedMentionsRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('AllowedMentionsRequest', json, ($checkedConvert) {
   final val = AllowedMentionsRequest(
-    parse: $checkedConvert(
-      'parse',
-      (v) => (v as List<dynamic>?)
-          ?.map((e) => AllowedMentionsRequestParseParse.fromJson(e as String))
-          .toList(),
-    ),
-    users: $checkedConvert(
-      'users',
-      (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
-    ),
-    roles: $checkedConvert(
-      'roles',
-      (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
-    ),
-    repliedUser: $checkedConvert('replied_user', (v) => v as bool?),
+    parse: $checkedConvert('parse', (v) => v ?? _omit),
+    users: $checkedConvert('users', (v) => v ?? _omit),
+    roles: $checkedConvert('roles', (v) => v ?? _omit),
+    repliedUser: $checkedConvert('replied_user', (v) => v ?? _omit),
   );
   return val;
 }, fieldKeyMap: const {'repliedUser': 'replied_user'});

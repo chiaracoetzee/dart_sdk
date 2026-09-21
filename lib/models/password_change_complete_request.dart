@@ -25,6 +25,8 @@ class PasswordChangeCompleteRequest {
   /// Proof token obtained from verifying the email code
   @JsonKey(name: 'verification_proof')
   final String verificationProof;
+
+  /// The new password to set
   @JsonKey(name: 'new_password')
   final PasswordType newPassword;
 

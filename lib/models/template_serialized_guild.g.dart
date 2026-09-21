@@ -26,24 +26,24 @@ TemplateSerializedGuild _$TemplateSerializedGuildFromJson(
             .map((e) => TemplateChannel.fromJson(e as Map<String, dynamic>))
             .toList(),
       ),
-      description: $checkedConvert('description', (v) => v as String?),
+      description: $checkedConvert('description', (v) => v ?? _omit),
       verificationLevel: $checkedConvert(
         'verification_level',
-        (v) => v as num?,
+        (v) => v ?? _omit,
       ),
       defaultMessageNotifications: $checkedConvert(
         'default_message_notifications',
-        (v) => v as num?,
+        (v) => v ?? _omit,
       ),
       explicitContentFilter: $checkedConvert(
         'explicit_content_filter',
-        (v) => v as num?,
+        (v) => v ?? _omit,
       ),
-      systemChannelId: $checkedConvert('system_channel_id', (v) => v),
-      afkTimeout: $checkedConvert('afk_timeout', (v) => v as num?),
+      systemChannelId: $checkedConvert('system_channel_id', (v) => v ?? _omit),
+      afkTimeout: $checkedConvert('afk_timeout', (v) => v ?? _omit),
       systemChannelFlags: $checkedConvert(
         'system_channel_flags',
-        (v) => v as num?,
+        (v) => v ?? _omit,
       ),
     );
     return val;

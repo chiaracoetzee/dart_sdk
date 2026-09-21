@@ -9,19 +9,10 @@ part of 'slack_webhook_request.dart';
 SlackWebhookRequest _$SlackWebhookRequestFromJson(Map<String, dynamic> json) =>
     $checkedCreate('SlackWebhookRequest', json, ($checkedConvert) {
       final val = SlackWebhookRequest(
-        text: $checkedConvert('text', (v) => v as String?),
-        username: $checkedConvert('username', (v) => v as String?),
-        iconUrl: $checkedConvert('icon_url', (v) => v as String?),
-        attachments: $checkedConvert(
-          'attachments',
-          (v) => (v as List<dynamic>?)
-              ?.map(
-                (e) => SlackWebhookRequestAttachments.fromJson(
-                  e as Map<String, dynamic>,
-                ),
-              )
-              .toList(),
-        ),
+        text: $checkedConvert('text', (v) => v ?? _omit),
+        username: $checkedConvert('username', (v) => v ?? _omit),
+        iconUrl: $checkedConvert('icon_url', (v) => v ?? _omit),
+        attachments: $checkedConvert('attachments', (v) => v ?? _omit),
       );
       return val;
     }, fieldKeyMap: const {'iconUrl': 'icon_url'});

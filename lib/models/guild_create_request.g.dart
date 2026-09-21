@@ -10,14 +10,9 @@ GuildCreateRequest _$GuildCreateRequestFromJson(Map<String, dynamic> json) =>
     $checkedCreate('GuildCreateRequest', json, ($checkedConvert) {
       final val = GuildCreateRequest(
         name: $checkedConvert('name', (v) => v as String),
-        icon: $checkedConvert('icon', (v) => v as String?),
-        emptyFeatures: $checkedConvert('empty_features', (v) => v as bool?),
-        template: $checkedConvert(
-          'template',
-          (v) => v == null
-              ? null
-              : TemplateSerializedGuild.fromJson(v as Map<String, dynamic>),
-        ),
+        icon: $checkedConvert('icon', (v) => v ?? _omit),
+        emptyFeatures: $checkedConvert('empty_features', (v) => v ?? _omit),
+        template: $checkedConvert('template', (v) => v ?? _omit),
       );
       return val;
     }, fieldKeyMap: const {'emptyFeatures': 'empty_features'});

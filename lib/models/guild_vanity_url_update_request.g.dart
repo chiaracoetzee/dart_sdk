@@ -10,7 +10,7 @@ GuildVanityUrlUpdateRequest _$GuildVanityUrlUpdateRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('GuildVanityUrlUpdateRequest', json, ($checkedConvert) {
   final val = GuildVanityUrlUpdateRequest(
-    code: $checkedConvert('code', (v) => v as String?),
+    code: $checkedConvert('code', (v) => v ?? _omit),
   );
   return val;
 });

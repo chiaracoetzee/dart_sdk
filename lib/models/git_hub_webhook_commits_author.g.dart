@@ -11,7 +11,7 @@ GitHubWebhookCommitsAuthor _$GitHubWebhookCommitsAuthorFromJson(
 ) => $checkedCreate('GitHubWebhookCommitsAuthor', json, ($checkedConvert) {
   final val = GitHubWebhookCommitsAuthor(
     name: $checkedConvert('name', (v) => v as String),
-    username: $checkedConvert('username', (v) => v as String?),
+    username: $checkedConvert('username', (v) => v ?? _omit),
   );
   return val;
 });

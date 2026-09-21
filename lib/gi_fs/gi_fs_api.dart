@@ -7,8 +7,9 @@ import 'package:retrofit/retrofit.dart';
 import 'package:retrofit/error_logger.dart';
 
 import '../models/gif_featured_response.dart';
+import '../models/gif_list_response.dart';
 import '../models/gif_register_share_request.dart';
-import '../models/gif_response.dart';
+import '../models/gif_search_suggestions_response.dart';
 import '../models/locale.dart';
 
 part 'gi_fs_api.g.dart';
@@ -20,9 +21,11 @@ abstract class GiFsApi {
   /// Get featured GIFs.
   ///
   /// Retrieves currently featured GIFs and category tags from the active provider.
+  ///
+  /// [locale] - The locale code for the user interface language.
   @GET('/gifs/featured')
   Future<GifFeaturedResponse> getFeaturedGifs({
-    @Query('locale') Locale? locale,
+    @Query('locale') Locale? locale = Locale.enUs,
   });
 
   /// Register a GIF share.
@@ -38,24 +41,36 @@ abstract class GiFsApi {
   /// Search GIFs.
   ///
   /// Searches the active GIF provider for GIFs matching the given query. The provider name is returned in the X-Fluxer-GIF-Provider response header so clients can adapt without refetching .well-known.
+  ///
+  /// [q] - The search query.
+  ///
+  /// [locale] - The locale code for the user interface language.
   @GET('/gifs/search')
-  Future<List<GifResponse>> searchGifs({
+  Future<GifListResponse> searchGifs({
     @Query('q') required String q,
-    @Query('locale') Locale? locale,
+    @Query('locale') Locale? locale = Locale.enUs,
   });
 
   /// Get GIF search suggestions.
   ///
   /// Returns search-term suggestions from the active GIF provider for the given partial query.
+  ///
+  /// [q] - The search query.
+  ///
+  /// [locale] - The locale code for the user interface language.
   @GET('/gifs/suggest')
-  Future<List<String>> getGifsSearchSuggestions({
+  Future<GifSearchSuggestionsResponse> getGifsSearchSuggestions({
     @Query('q') required String q,
-    @Query('locale') Locale? locale,
+    @Query('locale') Locale? locale = Locale.enUs,
   });
 
   /// Get trending GIFs.
   ///
   /// Retrieves trending GIFs from the active provider.
+  ///
+  /// [locale] - The locale code for the user interface language.
   @GET('/gifs/trending')
-  Future<List<GifResponse>> getTrendingGifs({@Query('locale') Locale? locale});
+  Future<GifListResponse> getTrendingGifs({
+    @Query('locale') Locale? locale = Locale.enUs,
+  });
 }

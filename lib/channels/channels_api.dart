@@ -18,13 +18,15 @@ import '../models/call_update_body_schema.dart';
 import '../models/channel_pins_response.dart';
 import '../models/channel_response.dart';
 import '../models/channel_slowmode_state_response.dart';
-import '../models/channel_update_request.dart';
+import '../models/channel_update_request_body.dart';
 import '../models/complete_multipart_attachment_upload_request.dart';
 import '../models/complete_multipart_attachment_upload_response.dart';
 import '../models/message_ack_request.dart';
 import '../models/message_content_request.dart';
 import '../models/message_flags.dart';
+import '../models/message_list_response.dart';
 import '../models/message_nonce_request.dart';
+import '../models/message_purge_response.dart';
 import '../models/message_reference_request.dart';
 import '../models/message_response_schema.dart';
 import '../models/object0.dart';
@@ -33,12 +35,12 @@ import '../models/object2.dart';
 import '../models/permission_overwrite_create_request.dart';
 import '../models/presigned_attachment_upload_request.dart';
 import '../models/presigned_attachment_upload_response.dart';
-import '../models/purge_personal_notes_messages_response.dart';
 import '../models/reaction_users_list_response.dart';
 import '../models/reaction_users_page_response.dart';
 import '../models/rich_embed_request.dart';
-import '../models/rtc_region_response.dart';
+import '../models/rtc_region_list_response.dart';
 import '../models/snowflake_type.dart';
+import '../models/stream_preview_response.dart';
 import '../models/stream_preview_upload_body_schema.dart';
 import '../models/stream_preview_upload_url_body_schema.dart';
 import '../models/stream_preview_upload_url_response_schema.dart';
@@ -81,7 +83,7 @@ abstract class ChannelsApi {
   @PATCH('/channels/{channel_id}')
   Future<ChannelResponse> updateChannel({
     @Path('channel_id') required SnowflakeType channelId,
-    @Body() required ChannelUpdateRequest body,
+    @Body() ChannelUpdateRequestBody? body,
   });
 
   /// Delete a channel.
@@ -90,13 +92,17 @@ abstract class ChannelsApi {
   ///
   /// [channelId] - The ID of the channel.
   ///
+  /// [silent] - Whether to suppress the system message when leaving a group DM.
+  ///
+  /// [deleteMessages] - When leaving a group DM, also delete all messages the caller has sent in the channel.
+  ///
   /// [body] - Name not received - field will be skipped.
   @DELETE('/channels/{channel_id}')
   Future<void> deleteChannel({
     @Path('channel_id') required SnowflakeType channelId,
-    @Body() required SudoVerificationSchema body,
-    @Query('silent') String? silent,
-    @Query('delete_messages') String? deleteMessages,
+    @Body() SudoVerificationSchema? body,
+    @Query('silent') String? silent = 'false',
+    @Query('delete_messages') String? deleteMessages = 'false',
   });
 
   /// Request presigned attachment upload URLs.
@@ -147,7 +153,7 @@ abstract class ChannelsApi {
   @PATCH('/channels/{channel_id}/call')
   Future<void> updateCallRegion({
     @Path('channel_id') required SnowflakeType channelId,
-    @Body() required CallUpdateBodySchema body,
+    @Body() CallUpdateBodySchema? body,
   });
 
   /// End call session.
@@ -168,7 +174,7 @@ abstract class ChannelsApi {
   @POST('/channels/{channel_id}/call/ring')
   Future<void> ringCallRecipients({
     @Path('channel_id') required SnowflakeType channelId,
-    @Body() required CallRingBodySchema body,
+    @Body() CallRingBodySchema? body,
   });
 
   /// Stop ringing call recipients.
@@ -181,7 +187,7 @@ abstract class ChannelsApi {
   @POST('/channels/{channel_id}/call/stop-ringing')
   Future<void> stopRingingCallRecipients({
     @Path('channel_id') required SnowflakeType channelId,
-    @Body() required CallRingBodySchema body,
+    @Body() CallRingBodySchema? body,
   });
 
   /// List messages in a channel.
@@ -189,13 +195,21 @@ abstract class ChannelsApi {
   /// Retrieves a paginated list of messages from a channel. User must have permission to view the channel. Supports pagination via limit, before, after, and around parameters. Returns messages in reverse chronological order (newest first).
   ///
   /// [channelId] - The ID of the channel.
+  ///
+  /// [limit] - Number of messages to return (1-100, default 50).
+  ///
+  /// [before] - Get messages before this message ID.
+  ///
+  /// [after] - Get messages after this message ID.
+  ///
+  /// [around] - Get messages around this message ID.
   @GET('/channels/{channel_id}/messages')
-  Future<List<MessageResponseSchema>> listMessages({
+  Future<MessageListResponse> listMessages({
     @Path('channel_id') required SnowflakeType channelId,
-    @Query('limit') String? limit,
     @Query('before') SnowflakeType? before,
     @Query('after') SnowflakeType? after,
     @Query('around') SnowflakeType? around,
+    @Query('limit') String? limit = '50',
   });
 
   /// Send a message.
@@ -219,7 +233,8 @@ abstract class ChannelsApi {
   /// [allowedMentions] - Name not received - field will be skipped.
   /// Name not received - field will be skipped.
   ///
-  /// [flags] - Name not received - field will be skipped.
+  /// [flags] - Message flags bitfield.
+  /// Name not received - field will be skipped.
   ///
   /// [nonce] - Name not received - field will be skipped.
   ///
@@ -235,12 +250,12 @@ abstract class ChannelsApi {
   @POST('/channels/{channel_id}/messages')
   Future<MessageResponseSchema> sendMessage({
     @Path('channel_id') required SnowflakeType channelId,
+    @Part(name: 'flags') MessageFlags? flags = 0,
     @Part(name: 'content') MessageContentRequest? content,
     @Part(name: 'embeds') List<RichEmbedRequest>? embeds,
     @Part(name: 'attachments') List<Object0>? attachments,
     @Part(name: 'message_reference') MessageReferenceRequest? messageReference,
     @Part(name: 'allowed_mentions') AllowedMentionsRequest? allowedMentions,
-    @Part(name: 'flags') MessageFlags? flags,
     @Part(name: 'nonce') MessageNonceRequest? nonce,
     @Part(name: 'favorite_meme_id') SnowflakeType? favoriteMemeId,
     @Part(name: 'sticker_ids') List<SnowflakeType>? stickerIds,
@@ -280,7 +295,7 @@ abstract class ChannelsApi {
   @POST('/channels/{channel_id}/messages/bulk-delete-mine')
   Future<void> bulkDeleteMyMessagesInChannel({
     @Path('channel_id') required SnowflakeType channelId,
-    @Body() required SudoVerificationSchema body,
+    @Body() SudoVerificationSchema? body,
   });
 
   /// List pinned messages.
@@ -288,11 +303,15 @@ abstract class ChannelsApi {
   /// Retrieves a paginated list of messages pinned in a channel. User must have permission to view the channel. Supports pagination via limit and before parameters. Returns pinned messages with their pin timestamps.
   ///
   /// [channelId] - The ID of the channel.
+  ///
+  /// [limit] - Maximum number of pinned messages to return (1-50).
+  ///
+  /// [before] - Get pinned messages before this timestamp.
   @GET('/channels/{channel_id}/messages/pins')
   Future<ChannelPinsResponse> listPinnedMessages({
     @Path('channel_id') required SnowflakeType channelId,
     @Query('limit') int? limit,
-    @Query('before') DateTime? before,
+    @Query('before') String? before,
   });
 
   /// Purge all messages in personal notes.
@@ -301,7 +320,7 @@ abstract class ChannelsApi {
   ///
   /// [channelId] - The ID of the channel.
   @POST('/channels/{channel_id}/messages/purge')
-  Future<PurgePersonalNotesMessagesResponse> purgePersonalNotesMessages({
+  Future<MessagePurgeResponse> purgePersonalNotesMessages({
     @Path('channel_id') required SnowflakeType channelId,
   });
 
@@ -335,7 +354,8 @@ abstract class ChannelsApi {
   /// [allowedMentions] - Name not received - field will be skipped.
   /// Name not received - field will be skipped.
   ///
-  /// [flags] - Name not received - field will be skipped.
+  /// [flags] - Message flags bitfield.
+  /// Name not received - field will be skipped.
   ///
   /// [attachments] - Array of attachment objects to keep or add.
   /// Name not received - field will be skipped.
@@ -381,7 +401,7 @@ abstract class ChannelsApi {
   Future<void> acknowledgeMessage({
     @Path('channel_id') required SnowflakeType channelId,
     @Path('message_id') required SnowflakeType messageId,
-    @Body() required MessageAckRequest body,
+    @Body() MessageAckRequest? body,
   });
 
   /// Delete a message attachment.
@@ -392,14 +412,14 @@ abstract class ChannelsApi {
   ///
   /// [messageId] - The ID of the message.
   ///
-  /// [attachmentId] - The attachment id.
+  /// [attachmentId] - The ID of the attachment.
   @DELETE(
     '/channels/{channel_id}/messages/{message_id}/attachments/{attachment_id}',
   )
   Future<void> deleteMessageAttachment({
     @Path('channel_id') required SnowflakeType channelId,
     @Path('message_id') required SnowflakeType messageId,
-    @Path('attachment_id') required String attachmentId,
+    @Path('attachment_id') required SnowflakeType attachmentId,
   });
 
   /// Remove all reactions from message.
@@ -423,7 +443,11 @@ abstract class ChannelsApi {
   ///
   /// [messageId] - The ID of the message.
   ///
-  /// [emoji] - The emoji.
+  /// [emoji] - The emoji identifier.
+  ///
+  /// [limit] - Maximum number of users to return (1-100).
+  ///
+  /// [after] - Get users after this user ID.
   @GET('/channels/{channel_id}/messages/{message_id}/reactions/{emoji}')
   Future<ReactionUsersListResponse> listReactionUsers({
     @Path('channel_id') required SnowflakeType channelId,
@@ -441,7 +465,7 @@ abstract class ChannelsApi {
   ///
   /// [messageId] - The ID of the message.
   ///
-  /// [emoji] - The emoji.
+  /// [emoji] - The emoji identifier.
   @DELETE('/channels/{channel_id}/messages/{message_id}/reactions/{emoji}')
   Future<void> removeAllReactionsForEmoji({
     @Path('channel_id') required SnowflakeType channelId,
@@ -457,7 +481,9 @@ abstract class ChannelsApi {
   ///
   /// [messageId] - The ID of the message.
   ///
-  /// [emoji] - The emoji.
+  /// [emoji] - The emoji identifier.
+  ///
+  /// [sessionId] - The session ID for synchronization.
   @PUT('/channels/{channel_id}/messages/{message_id}/reactions/{emoji}/@me')
   Future<void> addReaction({
     @Path('channel_id') required SnowflakeType channelId,
@@ -474,7 +500,9 @@ abstract class ChannelsApi {
   ///
   /// [messageId] - The ID of the message.
   ///
-  /// [emoji] - The emoji.
+  /// [emoji] - The emoji identifier.
+  ///
+  /// [sessionId] - The session ID for synchronization.
   @DELETE('/channels/{channel_id}/messages/{message_id}/reactions/{emoji}/@me')
   Future<void> removeOwnReaction({
     @Path('channel_id') required SnowflakeType channelId,
@@ -491,7 +519,11 @@ abstract class ChannelsApi {
   ///
   /// [messageId] - The ID of the message.
   ///
-  /// [emoji] - The emoji.
+  /// [emoji] - The emoji identifier.
+  ///
+  /// [limit] - Maximum number of users to return (1-100).
+  ///
+  /// [after] - Get users after this user ID.
   @GET('/channels/{channel_id}/messages/{message_id}/reactions/{emoji}/users')
   Future<ReactionUsersPageResponse> listReactionUsersV2({
     @Path('channel_id') required SnowflakeType channelId,
@@ -509,9 +541,11 @@ abstract class ChannelsApi {
   ///
   /// [messageId] - The ID of the message.
   ///
-  /// [emoji] - The emoji.
+  /// [emoji] - The emoji identifier.
   ///
-  /// [targetId] - The target id.
+  /// [targetId] - The ID of the target user.
+  ///
+  /// [sessionId] - The session ID for synchronization.
   @DELETE(
     '/channels/{channel_id}/messages/{message_id}/reactions/{emoji}/{target_id}',
   )
@@ -519,7 +553,7 @@ abstract class ChannelsApi {
     @Path('channel_id') required SnowflakeType channelId,
     @Path('message_id') required SnowflakeType messageId,
     @Path('emoji') required String emoji,
-    @Path('target_id') required String targetId,
+    @Path('target_id') required SnowflakeType targetId,
     @Query('session_id') String? sessionId,
   });
 
@@ -529,13 +563,13 @@ abstract class ChannelsApi {
   ///
   /// [channelId] - The ID of the channel.
   ///
-  /// [overwriteId] - The overwrite id.
+  /// [overwriteId] - The ID of the permission overwrite.
   ///
   /// [body] - Name not received - field will be skipped.
   @PUT('/channels/{channel_id}/permissions/{overwrite_id}')
   Future<void> setChannelPermissionOverwrite({
     @Path('channel_id') required SnowflakeType channelId,
-    @Path('overwrite_id') required String overwriteId,
+    @Path('overwrite_id') required SnowflakeType overwriteId,
     @Body() required PermissionOverwriteCreateRequest body,
   });
 
@@ -545,11 +579,11 @@ abstract class ChannelsApi {
   ///
   /// [channelId] - The ID of the channel.
   ///
-  /// [overwriteId] - The overwrite id.
+  /// [overwriteId] - The ID of the permission overwrite.
   @DELETE('/channels/{channel_id}/permissions/{overwrite_id}')
   Future<void> deleteChannelPermissionOverwrite({
     @Path('channel_id') required SnowflakeType channelId,
-    @Path('overwrite_id') required String overwriteId,
+    @Path('overwrite_id') required SnowflakeType overwriteId,
   });
 
   /// Acknowledge new pin notifications.
@@ -609,14 +643,18 @@ abstract class ChannelsApi {
   ///
   /// [userId] - The ID of the user.
   ///
+  /// [silent] - Whether to suppress the system message when leaving a group DM.
+  ///
+  /// [deleteMessages] - When leaving a group DM, also delete all messages the caller has sent in the channel.
+  ///
   /// [body] - Name not received - field will be skipped.
   @DELETE('/channels/{channel_id}/recipients/{user_id}')
   Future<void> removeGroupDmRecipient({
     @Path('channel_id') required SnowflakeType channelId,
     @Path('user_id') required SnowflakeType userId,
-    @Body() required SudoVerificationSchema body,
-    @Query('silent') String? silent,
-    @Query('delete_messages') String? deleteMessages,
+    @Body() SudoVerificationSchema? body,
+    @Query('silent') String? silent = 'false',
+    @Query('delete_messages') String? deleteMessages = 'false',
   });
 
   /// List RTC regions.
@@ -625,7 +663,7 @@ abstract class ChannelsApi {
   ///
   /// [channelId] - The ID of the channel.
   @GET('/channels/{channel_id}/rtc-regions')
-  Future<List<RtcRegionResponse>> listRtcRegions({
+  Future<RtcRegionListResponse> listRtcRegions({
     @Path('channel_id') required SnowflakeType channelId,
   });
 
@@ -655,7 +693,7 @@ abstract class ChannelsApi {
   ///
   /// [streamKey] - The stream key.
   @GET('/streams/{stream_key}/preview')
-  Future<void> getStreamPreview({
+  Future<StreamPreviewResponse> getStreamPreview({
     @Path('stream_key') required String streamKey,
   });
 
@@ -705,6 +743,6 @@ abstract class ChannelsApi {
   @PATCH('/streams/{stream_key}/stream')
   Future<void> updateStreamRegion({
     @Path('stream_key') required String streamKey,
-    @Body() required StreamUpdateBodySchema body,
+    @Body() StreamUpdateBodySchema? body,
   });
 }

@@ -4,26 +4,39 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'localized_card_preapproval_continue_response.dart';
 import 'rejected_localized_card_preapproval_continue_response_reason_reason.dart';
-import 'rejected_localized_card_preapproval_continue_response_status_status.dart';
 
 part 'rejected_localized_card_preapproval_continue_response.g.dart';
+
+const Object _omit = Object();
 
 @JsonSerializable()
 class RejectedLocalizedCardPreapprovalContinueResponse {
   const RejectedLocalizedCardPreapprovalContinueResponse({
     required this.status,
     required this.reason,
-    this.actualCountry,
-  });
-
+    Object? actualCountry = _omit,
+  }) : actualCountry = identical(actualCountry, _omit)
+           ? null
+           : actualCountry as String?,
+       _actualCountryPresent = !identical(actualCountry, _omit);
   factory RejectedLocalizedCardPreapprovalContinueResponse.fromJson(
     Map<String, Object?> json,
-  ) => _$RejectedLocalizedCardPreapprovalContinueResponseFromJson(json);
+  ) {
+    final value = _$RejectedLocalizedCardPreapprovalContinueResponseFromJson(
+      json,
+    );
+    return RejectedLocalizedCardPreapprovalContinueResponse(
+      status: value.status,
+      reason: value.reason,
+      actualCountry: json.containsKey('actual_country')
+          ? value.actualCountry
+          : _omit,
+    );
+  }
 
   /// The preapproval failed and the paid checkout should not continue
-  final RejectedLocalizedCardPreapprovalContinueResponseStatusStatus status;
+  final String status;
 
   /// The reason the preapproval was rejected
   final RejectedLocalizedCardPreapprovalContinueResponseReasonReason reason;
@@ -31,7 +44,13 @@ class RejectedLocalizedCardPreapprovalContinueResponse {
   /// The detected card issuing country when available
   @JsonKey(includeIfNull: false, name: 'actual_country')
   final String? actualCountry;
+  final bool _actualCountryPresent;
 
-  Map<String, Object?> toJson() =>
-      _$RejectedLocalizedCardPreapprovalContinueResponseToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$RejectedLocalizedCardPreapprovalContinueResponseToJson(this);
+    if (_actualCountryPresent) {
+      json.putIfAbsent('actual_country', () => actualCountry);
+    }
+    return json;
+  }
 }

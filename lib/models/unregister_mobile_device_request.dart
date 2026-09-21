@@ -9,17 +9,33 @@ import 'unregister_mobile_device_request_provider_environment_provider_environme
 
 part 'unregister_mobile_device_request.g.dart';
 
+const Object _omit = Object();
+
 @JsonSerializable()
 class UnregisterMobileDeviceRequest {
   const UnregisterMobileDeviceRequest({
     required this.platform,
     required this.token,
-    this.appId,
-    this.providerEnvironment,
-  });
-
-  factory UnregisterMobileDeviceRequest.fromJson(Map<String, Object?> json) =>
-      _$UnregisterMobileDeviceRequestFromJson(json);
+    Object? appId = _omit,
+    Object? providerEnvironment = _omit,
+  }) : appId = identical(appId, _omit) ? null : appId as String?,
+       _appIdPresent = !identical(appId, _omit),
+       providerEnvironment = identical(providerEnvironment, _omit)
+           ? null
+           : providerEnvironment
+                 as UnregisterMobileDeviceRequestProviderEnvironmentProviderEnvironment?,
+       _providerEnvironmentPresent = !identical(providerEnvironment, _omit);
+  factory UnregisterMobileDeviceRequest.fromJson(Map<String, Object?> json) {
+    final value = _$UnregisterMobileDeviceRequestFromJson(json);
+    return UnregisterMobileDeviceRequest(
+      platform: value.platform,
+      token: value.token,
+      appId: json.containsKey('app_id') ? value.appId : _omit,
+      providerEnvironment: json.containsKey('provider_environment')
+          ? value.providerEnvironment
+          : _omit,
+    );
+  }
 
   /// The mobile push notification platform
   final UnregisterMobileDeviceRequestPlatformPlatform platform;
@@ -35,6 +51,17 @@ class UnregisterMobileDeviceRequest {
   @JsonKey(includeIfNull: false, name: 'provider_environment')
   final UnregisterMobileDeviceRequestProviderEnvironmentProviderEnvironment?
   providerEnvironment;
+  final bool _appIdPresent;
+  final bool _providerEnvironmentPresent;
 
-  Map<String, Object?> toJson() => _$UnregisterMobileDeviceRequestToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$UnregisterMobileDeviceRequestToJson(this);
+    if (_appIdPresent) {
+      json.putIfAbsent('app_id', () => appId);
+    }
+    if (_providerEnvironmentPresent) {
+      json.putIfAbsent('provider_environment', () => providerEnvironment);
+    }
+    return json;
+  }
 }

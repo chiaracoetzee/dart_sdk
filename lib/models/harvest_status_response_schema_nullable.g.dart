@@ -6,18 +6,18 @@ part of 'harvest_status_response_schema_nullable.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-HarvestStatusResponseSchemaNullableHarvestStatusResponseSchema
-_$HarvestStatusResponseSchemaNullableHarvestStatusResponseSchemaFromJson(
+HarvestStatusResponseSchemaNullableVariant1
+_$HarvestStatusResponseSchemaNullableVariant1FromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate(
-  'HarvestStatusResponseSchemaNullableHarvestStatusResponseSchema',
+  'HarvestStatusResponseSchemaNullableVariant1',
   json,
   ($checkedConvert) {
-    final val = HarvestStatusResponseSchemaNullableHarvestStatusResponseSchema(
+    final val = HarvestStatusResponseSchemaNullableVariant1(
       harvestId: $checkedConvert('harvest_id', (v) => v as String),
       status: $checkedConvert(
         'status',
-        (v) => HarvestStatusResponseSchemaStatusStatus.fromJson(v as String),
+        (v) => HarvestStatus.fromJson(v as String),
       ),
       createdAt: $checkedConvert('created_at', (v) => v as String),
       startedAt: $checkedConvert('started_at', (v) => v as String?),
@@ -50,9 +50,8 @@ _$HarvestStatusResponseSchemaNullableHarvestStatusResponseSchemaFromJson(
   },
 );
 
-Map<String, dynamic>
-_$HarvestStatusResponseSchemaNullableHarvestStatusResponseSchemaToJson(
-  HarvestStatusResponseSchemaNullableHarvestStatusResponseSchema instance,
+Map<String, dynamic> _$HarvestStatusResponseSchemaNullableVariant1ToJson(
+  HarvestStatusResponseSchemaNullableVariant1 instance,
 ) => <String, dynamic>{
   'harvest_id': instance.harvestId,
   'status': instance.status,

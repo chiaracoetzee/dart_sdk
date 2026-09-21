@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'int32_type.dart';
+
 part 'gif_media_format.g.dart';
 
 @JsonSerializable()
@@ -26,10 +28,10 @@ class GifMediaFormat {
   final String proxySrc;
 
   /// Width of this format in pixels.
-  final int width;
+  final Int32Type width;
 
   /// Height of this format in pixels.
-  final int height;
+  final Int32Type height;
 
   Map<String, Object?> toJson() => _$GifMediaFormatToJson(this);
 }

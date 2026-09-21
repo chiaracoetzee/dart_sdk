@@ -13,13 +13,11 @@ GuildInviteResponse _$GuildInviteResponseFromJson(Map<String, dynamic> json) =>
       ($checkedConvert) {
         final val = GuildInviteResponse(
           code: $checkedConvert('code', (v) => v as String),
-          type: $checkedConvert(
-            'type',
-            (v) => GuildInviteResponseTypeType.fromJson((v as num).toInt()),
-          ),
+          temporary: $checkedConvert('temporary', (v) => v as bool),
+          type: $checkedConvert('type', (v) => v as num),
           guild: $checkedConvert(
             'guild',
-            (v) => GuildInviteResponseGuild.fromJson(v as Map<String, dynamic>),
+            (v) => GuildPartialResponse.fromJson(v as Map<String, dynamic>),
           ),
           channel: $checkedConvert(
             'channel',
@@ -33,17 +31,8 @@ GuildInviteResponse _$GuildInviteResponseFromJson(Map<String, dynamic> json) =>
             'presence_count',
             (v) => (v as num).toInt(),
           ),
-          temporary: $checkedConvert('temporary', (v) => v as bool),
-          inviter: $checkedConvert(
-            'inviter',
-            (v) => v == null
-                ? null
-                : UserPartialResponse.fromJson(v as Map<String, dynamic>),
-          ),
-          expiresAt: $checkedConvert(
-            'expires_at',
-            (v) => v == null ? null : DateTime.parse(v as String),
-          ),
+          inviter: $checkedConvert('inviter', (v) => v ?? _omit),
+          expiresAt: $checkedConvert('expires_at', (v) => v ?? _omit),
         );
         return val;
       },
@@ -58,12 +47,12 @@ Map<String, dynamic> _$GuildInviteResponseToJson(
   GuildInviteResponse instance,
 ) => <String, dynamic>{
   'code': instance.code,
+  'inviter': ?instance.inviter,
+  'expires_at': ?instance.expiresAt?.toIso8601String(),
+  'temporary': instance.temporary,
   'type': instance.type,
   'guild': instance.guild,
   'channel': instance.channel,
-  'inviter': ?instance.inviter,
   'member_count': instance.memberCount,
   'presence_count': instance.presenceCount,
-  'expires_at': ?instance.expiresAt?.toIso8601String(),
-  'temporary': instance.temporary,
 };

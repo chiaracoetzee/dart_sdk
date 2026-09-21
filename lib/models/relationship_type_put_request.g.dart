@@ -10,10 +10,7 @@ RelationshipTypePutRequest _$RelationshipTypePutRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('RelationshipTypePutRequest', json, ($checkedConvert) {
   final val = RelationshipTypePutRequest(
-    type: $checkedConvert(
-      'type',
-      (v) => v == null ? null : RelationshipTypes.fromJson((v as num).toInt()),
-    ),
+    type: $checkedConvert('type', (v) => v ?? _omit),
   );
   return val;
 });

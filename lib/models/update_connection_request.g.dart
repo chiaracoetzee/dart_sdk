@@ -13,11 +13,8 @@ UpdateConnectionRequest _$UpdateConnectionRequestFromJson(
   json,
   ($checkedConvert) {
     final val = UpdateConnectionRequest(
-      visibilityFlags: $checkedConvert(
-        'visibility_flags',
-        (v) => (v as num?)?.toInt(),
-      ),
-      sortOrder: $checkedConvert('sort_order', (v) => (v as num?)?.toInt()),
+      visibilityFlags: $checkedConvert('visibility_flags', (v) => v ?? _omit),
+      sortOrder: $checkedConvert('sort_order', (v) => v ?? _omit),
     );
     return val;
   },

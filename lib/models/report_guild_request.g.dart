@@ -9,12 +9,15 @@ part of 'report_guild_request.dart';
 ReportGuildRequest _$ReportGuildRequestFromJson(Map<String, dynamic> json) =>
     $checkedCreate('ReportGuildRequest', json, ($checkedConvert) {
       final val = ReportGuildRequest(
-        guildId: $checkedConvert('guild_id', (v) => v as String),
+        guildId: $checkedConvert(
+          'guild_id',
+          (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
+        ),
         category: $checkedConvert(
           'category',
-          (v) => ReportGuildRequestCategoryCategory.fromJson(v as String),
+          (v) => GuildReportCategory.fromJson(v as String),
         ),
-        inviteCode: $checkedConvert('invite_code', (v) => v as String?),
+        inviteCode: $checkedConvert('invite_code', (v) => v ?? _omit),
       );
       return val;
     }, fieldKeyMap: const {'guildId': 'guild_id', 'inviteCode': 'invite_code'});

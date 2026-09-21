@@ -15,6 +15,7 @@ class DsaReportEmailSendRequest {
   factory DsaReportEmailSendRequest.fromJson(Map<String, Object?> json) =>
       _$DsaReportEmailSendRequestFromJson(json);
 
+  /// Email address to send the DSA verification code to
   final EmailType email;
 
   Map<String, Object?> toJson() => _$DsaReportEmailSendRequestToJson(this);

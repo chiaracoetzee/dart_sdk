@@ -15,7 +15,7 @@ ConnectionResponse _$ConnectionResponseFromJson(Map<String, dynamic> json) =>
           id: $checkedConvert('id', (v) => v as String),
           type: $checkedConvert(
             'type',
-            (v) => ConnectionResponseTypeType.fromJson(v as String),
+            (v) => ConnectionType.fromJson(v as String),
           ),
           name: $checkedConvert('name', (v) => v as String),
           verified: $checkedConvert('verified', (v) => v as bool),

@@ -4,7 +4,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'snowflake_type.dart';
+import 'snowflake_string_type.dart';
 import 'user_partial_response.dart';
 
 part 'reaction_users_page_response.g.dart';
@@ -29,7 +29,7 @@ class ReactionUsersPageResponse {
 
   /// Cursor for the next page, or null when there are no more users
   @JsonKey(includeIfNull: true, name: 'next_after')
-  final SnowflakeType? nextAfter;
+  final SnowflakeStringType? nextAfter;
 
   Map<String, Object?> toJson() => _$ReactionUsersPageResponseToJson(this);
 }

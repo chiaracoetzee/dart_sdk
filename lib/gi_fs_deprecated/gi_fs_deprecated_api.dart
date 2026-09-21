@@ -7,8 +7,9 @@ import 'package:retrofit/retrofit.dart';
 import 'package:retrofit/error_logger.dart';
 
 import '../models/gif_featured_response.dart';
+import '../models/gif_list_response.dart';
 import '../models/gif_register_share_request.dart';
-import '../models/gif_response.dart';
+import '../models/gif_search_suggestions_response.dart';
 import '../models/locale.dart';
 
 part 'gi_fs_deprecated_api.g.dart';
@@ -20,9 +21,11 @@ abstract class GiFsDeprecatedApi {
   /// Get featured GIFs (deprecated alias).
   ///
   /// Use /gifs/* instead - these vendor-specific paths are deprecated and will be removed. Routes to the active provider; identical behaviour to /gifs/featured.
+  ///
+  /// [locale] - The locale code for the user interface language.
   @GET('/klipy/featured')
   Future<GifFeaturedResponse> getFeaturedKlipy({
-    @Query('locale') Locale? locale,
+    @Query('locale') Locale? locale = Locale.enUs,
   });
 
   /// Register a GIF share (deprecated alias).
@@ -38,33 +41,47 @@ abstract class GiFsDeprecatedApi {
   /// Search GIFs (deprecated alias).
   ///
   /// Use /gifs/* instead - these vendor-specific paths are deprecated and will be removed. Routes to the active provider; identical behaviour to /gifs/search.
+  ///
+  /// [q] - The search query.
+  ///
+  /// [locale] - The locale code for the user interface language.
   @GET('/klipy/search')
-  Future<List<GifResponse>> searchKlipy({
+  Future<GifListResponse> searchKlipy({
     @Query('q') required String q,
-    @Query('locale') Locale? locale,
+    @Query('locale') Locale? locale = Locale.enUs,
   });
 
   /// Get GIF search suggestions (deprecated alias).
   ///
   /// Use /gifs/* instead - these vendor-specific paths are deprecated and will be removed. Routes to the active provider; identical behaviour to /gifs/suggest.
+  ///
+  /// [q] - The search query.
+  ///
+  /// [locale] - The locale code for the user interface language.
   @GET('/klipy/suggest')
-  Future<List<String>> getKlipySearchSuggestions({
+  Future<GifSearchSuggestionsResponse> getKlipySearchSuggestions({
     @Query('q') required String q,
-    @Query('locale') Locale? locale,
+    @Query('locale') Locale? locale = Locale.enUs,
   });
 
   /// Get trending GIFs (deprecated alias).
   ///
   /// Use /gifs/* instead - these vendor-specific paths are deprecated and will be removed. Routes to the active provider; identical behaviour to /gifs/trending.
+  ///
+  /// [locale] - The locale code for the user interface language.
   @GET('/klipy/trending-gifs')
-  Future<List<GifResponse>> getTrendingKlipy({@Query('locale') Locale? locale});
+  Future<GifListResponse> getTrendingKlipy({
+    @Query('locale') Locale? locale = Locale.enUs,
+  });
 
   /// Get featured GIFs (deprecated alias).
   ///
   /// Use /gifs/* instead - these vendor-specific paths are deprecated and will be removed. Routes to the active provider; identical behaviour to /gifs/featured.
+  ///
+  /// [locale] - The locale code for the user interface language.
   @GET('/tenor/featured')
   Future<GifFeaturedResponse> getFeaturedTenor({
-    @Query('locale') Locale? locale,
+    @Query('locale') Locale? locale = Locale.enUs,
   });
 
   /// Register a GIF share (deprecated alias).
@@ -80,24 +97,36 @@ abstract class GiFsDeprecatedApi {
   /// Search GIFs (deprecated alias).
   ///
   /// Use /gifs/* instead - these vendor-specific paths are deprecated and will be removed. Routes to the active provider; identical behaviour to /gifs/search.
+  ///
+  /// [q] - The search query.
+  ///
+  /// [locale] - The locale code for the user interface language.
   @GET('/tenor/search')
-  Future<List<GifResponse>> searchTenor({
+  Future<GifListResponse> searchTenor({
     @Query('q') required String q,
-    @Query('locale') Locale? locale,
+    @Query('locale') Locale? locale = Locale.enUs,
   });
 
   /// Get GIF search suggestions (deprecated alias).
   ///
   /// Use /gifs/* instead - these vendor-specific paths are deprecated and will be removed. Routes to the active provider; identical behaviour to /gifs/suggest.
+  ///
+  /// [q] - The search query.
+  ///
+  /// [locale] - The locale code for the user interface language.
   @GET('/tenor/suggest')
-  Future<List<String>> getTenorSearchSuggestions({
+  Future<GifSearchSuggestionsResponse> getTenorSearchSuggestions({
     @Query('q') required String q,
-    @Query('locale') Locale? locale,
+    @Query('locale') Locale? locale = Locale.enUs,
   });
 
   /// Get trending GIFs (deprecated alias).
   ///
   /// Use /gifs/* instead - these vendor-specific paths are deprecated and will be removed. Routes to the active provider; identical behaviour to /gifs/trending.
+  ///
+  /// [locale] - The locale code for the user interface language.
   @GET('/tenor/trending-gifs')
-  Future<List<GifResponse>> getTrendingTenor({@Query('locale') Locale? locale});
+  Future<GifListResponse> getTrendingTenor({
+    @Query('locale') Locale? locale = Locale.enUs,
+  });
 }

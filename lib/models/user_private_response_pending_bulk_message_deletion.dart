@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'int32_type.dart';
+
 part 'user_private_response_pending_bulk_message_deletion.g.dart';
 
 @JsonSerializable()
@@ -24,11 +26,11 @@ class UserPrivateResponsePendingBulkMessageDeletion {
 
   /// The number of channels with messages to delete
   @JsonKey(name: 'channel_count')
-  final int channelCount;
+  final Int32Type channelCount;
 
   /// The total number of messages to delete
   @JsonKey(name: 'message_count')
-  final int messageCount;
+  final Int32Type messageCount;
 
   Map<String, Object?> toJson() =>
       _$UserPrivateResponsePendingBulkMessageDeletionToJson(this);

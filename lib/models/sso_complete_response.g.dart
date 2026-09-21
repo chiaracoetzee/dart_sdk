@@ -13,7 +13,7 @@ SsoCompleteResponse _$SsoCompleteResponseFromJson(Map<String, dynamic> json) =>
         userId: $checkedConvert('user_id', (v) => v as String),
         user: $checkedConvert(
           'user',
-          (v) => SsoCompleteResponseUser.fromJson(v as Map<String, dynamic>),
+          (v) => UserPartialResponse.fromJson(v as Map<String, dynamic>),
         ),
         redirectTo: $checkedConvert('redirect_to', (v) => v as String),
       );

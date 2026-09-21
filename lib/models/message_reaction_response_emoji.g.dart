@@ -11,8 +11,8 @@ MessageReactionResponseEmoji _$MessageReactionResponseEmojiFromJson(
 ) => $checkedCreate('MessageReactionResponseEmoji', json, ($checkedConvert) {
   final val = MessageReactionResponseEmoji(
     name: $checkedConvert('name', (v) => v as String),
-    id: $checkedConvert('id', (v) => v as String?),
-    animated: $checkedConvert('animated', (v) => v as bool?),
+    id: $checkedConvert('id', (v) => v ?? _omit),
+    animated: $checkedConvert('animated', (v) => v ?? _omit),
   );
   return val;
 });

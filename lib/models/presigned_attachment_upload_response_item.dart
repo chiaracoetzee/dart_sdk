@@ -6,134 +6,110 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'int32_type.dart';
 import 'non_negative_safe_integer_type.dart';
-import 'singlepart_presigned_attachment_upload_response_item_upload_mode_upload_mode.dart';
-import 'multipart_presigned_attachment_upload_response_item_upload_mode_upload_mode.dart';
 import 'multipart_presigned_attachment_upload_response_item_parts.dart';
 
 part 'presigned_attachment_upload_response_item.g.dart';
 
-@JsonSerializable(createFactory: false)
-sealed class PresignedAttachmentUploadResponseItem {
-  const PresignedAttachmentUploadResponseItem();
+class PresignedAttachmentUploadResponseItem {
+  final Map<String, dynamic> _json;
+
+  const PresignedAttachmentUploadResponseItem(this._json);
 
   factory PresignedAttachmentUploadResponseItem.fromJson(
     Map<String, dynamic> json,
-  ) => PresignedAttachmentUploadResponseItemUnionDeserializer.tryDeserialize(
-    json,
-  );
+  ) => PresignedAttachmentUploadResponseItem(json);
 
-  Map<String, dynamic> toJson();
-}
+  Map<String, dynamic> toJson() => _json;
 
-extension PresignedAttachmentUploadResponseItemUnionDeserializer
-    on PresignedAttachmentUploadResponseItem {
-  static PresignedAttachmentUploadResponseItem tryDeserialize(
-    Map<String, dynamic> json, {
-    String key = 'upload_mode',
-    Map<Type, Object?>? mapping,
-  }) {
-    final mappingFallback = const <Type, Object?>{
-      PresignedAttachmentUploadResponseItemSinglepart: 'singlepart',
-      PresignedAttachmentUploadResponseItemMultipart: 'multipart',
-    };
-    final value = json[key];
-    final effective = mapping ?? mappingFallback;
-    final valueAsString = value?.toString();
-    return switch (value) {
-      _
-          when value ==
-                  effective[PresignedAttachmentUploadResponseItemSinglepart] ||
-              valueAsString ==
-                  effective[PresignedAttachmentUploadResponseItemSinglepart]
-                      ?.toString() =>
-        PresignedAttachmentUploadResponseItemSinglepart.fromJson(json),
-      _
-          when value ==
-                  effective[PresignedAttachmentUploadResponseItemMultipart] ||
-              valueAsString ==
-                  effective[PresignedAttachmentUploadResponseItemMultipart]
-                      ?.toString() =>
-        PresignedAttachmentUploadResponseItemMultipart.fromJson(json),
-      _ => throw FormatException(
-        'Unknown discriminator value "${json[key]}" for PresignedAttachmentUploadResponseItem',
-      ),
-    };
-  }
+  PresignedAttachmentUploadResponseItemSinglepartPresignedAttachmentUploadResponseItem
+  toSinglepartPresignedAttachmentUploadResponseItem() =>
+      PresignedAttachmentUploadResponseItemSinglepartPresignedAttachmentUploadResponseItem.fromJson(
+        _json,
+      );
+  PresignedAttachmentUploadResponseItemMultipartPresignedAttachmentUploadResponseItem
+  toMultipartPresignedAttachmentUploadResponseItem() =>
+      PresignedAttachmentUploadResponseItemMultipartPresignedAttachmentUploadResponseItem.fromJson(
+        _json,
+      );
 }
 
 @JsonSerializable()
-class PresignedAttachmentUploadResponseItemSinglepart
-    extends PresignedAttachmentUploadResponseItem {
+class PresignedAttachmentUploadResponseItemSinglepartPresignedAttachmentUploadResponseItem {
   final Int32Type id;
   final String filename;
-  @JsonKey(name: 'upload_filename')
-  final String uploadFilename;
   @JsonKey(name: 'file_size')
   final NonNegativeSafeIntegerType fileSize;
   @JsonKey(name: 'content_type')
   final String contentType;
+  @JsonKey(name: 'upload_filename')
+  final String uploadFilename;
   @JsonKey(name: 'upload_mode')
-  final SinglepartPresignedAttachmentUploadResponseItemUploadModeUploadMode
-  uploadMode;
+  final String uploadMode;
   @JsonKey(name: 'upload_url')
   final String uploadUrl;
 
-  const PresignedAttachmentUploadResponseItemSinglepart({
+  const PresignedAttachmentUploadResponseItemSinglepartPresignedAttachmentUploadResponseItem({
     required this.id,
     required this.filename,
-    required this.uploadFilename,
     required this.fileSize,
     required this.contentType,
+    required this.uploadFilename,
     required this.uploadMode,
     required this.uploadUrl,
   });
 
-  factory PresignedAttachmentUploadResponseItemSinglepart.fromJson(
+  factory PresignedAttachmentUploadResponseItemSinglepartPresignedAttachmentUploadResponseItem.fromJson(
     Map<String, dynamic> json,
-  ) => _$PresignedAttachmentUploadResponseItemSinglepartFromJson(json);
+  ) =>
+      _$PresignedAttachmentUploadResponseItemSinglepartPresignedAttachmentUploadResponseItemFromJson(
+        json,
+      );
 
-  @override
   Map<String, dynamic> toJson() =>
-      _$PresignedAttachmentUploadResponseItemSinglepartToJson(this);
+      _$PresignedAttachmentUploadResponseItemSinglepartPresignedAttachmentUploadResponseItemToJson(
+        this,
+      );
 }
 
 @JsonSerializable()
-class PresignedAttachmentUploadResponseItemMultipart
-    extends PresignedAttachmentUploadResponseItem {
+class PresignedAttachmentUploadResponseItemMultipartPresignedAttachmentUploadResponseItem {
   final Int32Type id;
   final String filename;
-  @JsonKey(name: 'upload_filename')
-  final String uploadFilename;
   @JsonKey(name: 'file_size')
   final NonNegativeSafeIntegerType fileSize;
   @JsonKey(name: 'content_type')
   final String contentType;
+  @JsonKey(name: 'upload_filename')
+  final String uploadFilename;
   @JsonKey(name: 'upload_mode')
-  final MultipartPresignedAttachmentUploadResponseItemUploadModeUploadMode
-  uploadMode;
+  final String uploadMode;
   @JsonKey(name: 'upload_id')
   final String uploadId;
   @JsonKey(name: 'part_size')
   final NonNegativeSafeIntegerType partSize;
   final List<MultipartPresignedAttachmentUploadResponseItemParts> parts;
 
-  const PresignedAttachmentUploadResponseItemMultipart({
+  const PresignedAttachmentUploadResponseItemMultipartPresignedAttachmentUploadResponseItem({
     required this.id,
     required this.filename,
-    required this.uploadFilename,
     required this.fileSize,
     required this.contentType,
+    required this.uploadFilename,
     required this.uploadMode,
     required this.uploadId,
     required this.partSize,
     required this.parts,
   });
 
-  factory PresignedAttachmentUploadResponseItemMultipart.fromJson(
+  factory PresignedAttachmentUploadResponseItemMultipartPresignedAttachmentUploadResponseItem.fromJson(
     Map<String, dynamic> json,
-  ) => _$PresignedAttachmentUploadResponseItemMultipartFromJson(json);
+  ) =>
+      _$PresignedAttachmentUploadResponseItemMultipartPresignedAttachmentUploadResponseItemFromJson(
+        json,
+      );
 
-  @override
   Map<String, dynamic> toJson() =>
-      _$PresignedAttachmentUploadResponseItemMultipartToJson(this);
+      _$PresignedAttachmentUploadResponseItemMultipartPresignedAttachmentUploadResponseItemToJson(
+        this,
+      );
 }

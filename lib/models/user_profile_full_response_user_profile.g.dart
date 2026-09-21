@@ -17,7 +17,7 @@ UserProfileFullResponseUserProfile _$UserProfileFullResponseUserProfileFromJson(
       pronouns: $checkedConvert('pronouns', (v) => v as String?),
       banner: $checkedConvert('banner', (v) => v as String?),
       accentColor: $checkedConvert('accent_color', (v) => (v as num?)?.toInt()),
-      bannerColor: $checkedConvert('banner_color', (v) => (v as num?)?.toInt()),
+      bannerColor: $checkedConvert('banner_color', (v) => v ?? _omit),
     );
     return val;
   },

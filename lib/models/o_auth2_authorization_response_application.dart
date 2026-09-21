@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'snowflake_string_type.dart';
+
 part 'o_auth2_authorization_response_application.g.dart';
 
 @JsonSerializable()
@@ -21,7 +23,7 @@ class OAuth2AuthorizationResponseApplication {
   ) => _$OAuth2AuthorizationResponseApplicationFromJson(json);
 
   /// The unique identifier of the application
-  final String id;
+  final SnowflakeStringType id;
 
   /// The name of the application
   final String name;

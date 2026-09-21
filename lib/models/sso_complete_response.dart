@@ -4,7 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'sso_complete_response_user.dart';
+import 'snowflake_string_type.dart';
+import 'user_partial_response.dart';
 
 part 'sso_complete_response.g.dart';
 
@@ -25,10 +26,10 @@ class SsoCompleteResponse {
 
   /// ID of the authenticated user
   @JsonKey(name: 'user_id')
-  final String userId;
+  final SnowflakeStringType userId;
 
   /// Partial user data for the authenticated account
-  final SsoCompleteResponseUser user;
+  final UserPartialResponse user;
 
   /// URL to redirect the user to after completion
   @JsonKey(name: 'redirect_to')

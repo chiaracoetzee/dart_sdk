@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'hex_string32_type.dart';
+
 part 'register_mobile_device_response.g.dart';
 
 @JsonSerializable()
@@ -15,7 +17,7 @@ class RegisterMobileDeviceResponse {
 
   /// The unique identifier for the registered device
   @JsonKey(name: 'device_id')
-  final String deviceId;
+  final HexString32Type deviceId;
 
   Map<String, Object?> toJson() => _$RegisterMobileDeviceResponseToJson(this);
 }

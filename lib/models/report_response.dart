@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'snowflake_string_type.dart';
+
 part 'report_response.g.dart';
 
 @JsonSerializable()
@@ -19,7 +21,7 @@ class ReportResponse {
 
   /// The unique identifier for this report
   @JsonKey(name: 'report_id')
-  final String reportId;
+  final SnowflakeStringType reportId;
 
   /// Current status of the report (pending, reviewed, resolved)
   final String status;

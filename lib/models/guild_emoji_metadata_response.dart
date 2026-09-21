@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'snowflake_string_type.dart';
+
 part 'guild_emoji_metadata_response.g.dart';
 
 @JsonSerializable()
@@ -20,11 +22,11 @@ class GuildEmojiMetadataResponse {
       _$GuildEmojiMetadataResponseFromJson(json);
 
   /// The unique identifier for this emoji
-  final String id;
+  final SnowflakeStringType id;
 
   /// The guild this emoji belongs to
   @JsonKey(name: 'guild_id')
-  final String guildId;
+  final SnowflakeStringType guildId;
 
   /// The name of the emoji
   final String name;

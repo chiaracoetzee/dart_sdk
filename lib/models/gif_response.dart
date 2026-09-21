@@ -5,8 +5,11 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'gif_media_format.dart';
+import 'int32_type.dart';
 
 part 'gif_response.g.dart';
+
+const Object _omit = Object();
 
 @JsonSerializable()
 class GifResponse {
@@ -21,11 +24,27 @@ class GifResponse {
     required this.width,
     required this.height,
     required this.media,
-    this.placeholder,
-  });
-
-  factory GifResponse.fromJson(Map<String, Object?> json) =>
-      _$GifResponseFromJson(json);
+    Object? placeholder = _omit,
+  }) : placeholder = identical(placeholder, _omit)
+           ? null
+           : placeholder as String?,
+       _placeholderPresent = !identical(placeholder, _omit);
+  factory GifResponse.fromJson(Map<String, Object?> json) {
+    final value = _$GifResponseFromJson(json);
+    return GifResponse(
+      id: value.id,
+      slug: value.slug,
+      provider: value.provider,
+      title: value.title,
+      url: value.url,
+      src: value.src,
+      proxySrc: value.proxySrc,
+      width: value.width,
+      height: value.height,
+      media: value.media,
+      placeholder: json.containsKey('placeholder') ? value.placeholder : _omit,
+    );
+  }
 
   /// Provider-stable identifier for this GIF.
   final String id;
@@ -50,10 +69,10 @@ class GifResponse {
   final String proxySrc;
 
   /// Width of the GIF in pixels (best format).
-  final int width;
+  final Int32Type width;
 
   /// Height of the GIF in pixels (best format).
-  final int height;
+  final Int32Type height;
 
   /// Map of format-name → media descriptor. Keys are a size prefix (none for full size, "medium", "tiny", "nano") joined to a codec name ("webm", "mp4", "webp", "gif"), plus "loopedmp4". Video keys are "webm" / "mp4" / "loopedmp4" / "mediumwebm" / "mediummp4" / "tinywebm" / "tinymp4" / "nanowebm" / "nanomp4"; image keys are "webp" / "gif" / "mediumwebp" / "mediumgif" / "tinywebp" / "tinygif" / "nanowebp" / "nanogif". Every key is optional, so clients must walk a priority list rather than index a single key. Clients that cannot decode the video keys should prefer "tinywebp" / "tinygif" / "mediumwebp" / "mediumgif" / "webp" / "gif" / "nanowebp" / "nanogif" in that order.
   final Map<String, GifMediaFormat> media;
@@ -61,6 +80,13 @@ class GifResponse {
   /// Compact thumbhash placeholder produced by the media proxy. Clients render it as a low-res preview while the GIF loads, and persist it on favourites so the picker has a fallback if the source URL later disappears.
   @JsonKey(includeIfNull: false)
   final String? placeholder;
+  final bool _placeholderPresent;
 
-  Map<String, Object?> toJson() => _$GifResponseToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$GifResponseToJson(this);
+    if (_placeholderPresent) {
+      json.putIfAbsent('placeholder', () => placeholder);
+    }
+    return json;
+  }
 }

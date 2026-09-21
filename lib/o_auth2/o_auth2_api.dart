@@ -18,7 +18,6 @@ import '../models/authorize_consent_request.dart';
 import '../models/bot_profile_response.dart';
 import '../models/bot_profile_update_request.dart';
 import '../models/bot_token_reset_response.dart';
-import '../models/enum0.dart';
 import '../models/o_auth2_applications_me_response.dart';
 import '../models/o_auth2_authorizations_bulk_revoke_request.dart';
 import '../models/o_auth2_authorizations_list_response.dart';
@@ -29,6 +28,7 @@ import '../models/o_auth2_token_response.dart';
 import '../models/o_auth2_user_info_response.dart';
 import '../models/snowflake_type.dart';
 import '../models/sudo_verification_schema.dart';
+import '../models/token_type_hint.dart';
 
 part 'o_auth2_api.g.dart';
 
@@ -36,9 +36,9 @@ part 'o_auth2_api.g.dart';
 abstract class OAuth2Api {
   factory OAuth2Api(Dio dio, {String? baseUrl}) = _OAuth2Api;
 
-  /// List current user applications.
+  /// Get current bot application.
   ///
-  /// Lists all OAuth2 applications registered by the authenticated user. Includes application credentials and metadata. Requires valid OAuth2 access token.
+  /// Retrieves the application associated with the authenticated bot, including its owner and bot profile. Requires a valid bot token.
   @GET('/applications/@me')
   Future<ApplicationsMeResponse> getCurrentUserApplications();
 
@@ -68,10 +68,10 @@ abstract class OAuth2Api {
   ///
   /// Revokes user authorization for a third-party application. Immediately invalidates all tokens issued to that application. User regains control of delegated access.
   ///
-  /// [applicationId] - The applicationId.
+  /// [applicationId] - The ID of the application.
   @DELETE('/oauth2/@me/authorizations/{applicationId}')
   Future<void> deleteUserOauth2Authorization({
-    @Path('applicationId') required String applicationId,
+    @Path('applicationId') required SnowflakeType applicationId,
   });
 
   /// Create OAuth2 application.
@@ -94,85 +94,85 @@ abstract class OAuth2Api {
   ///
   /// Retrieves details of a specific OAuth2 application owned by the user. Returns full application configuration and credentials.
   ///
-  /// [id] - The id.
+  /// [id] - The ID of the application.
   @GET('/oauth2/applications/{id}')
   Future<ApplicationResponse> getOauthApplication({
-    @Path('id') required String id,
+    @Path('id') required SnowflakeType id,
   });
 
   /// Update application.
   ///
   /// Modifies OAuth2 application configuration such as name, description, and redirect URIs. Does not rotate credentials.
   ///
-  /// [id] - The id.
+  /// [id] - The ID of the application.
   ///
   /// [body] - Name not received - field will be skipped.
   @PATCH('/oauth2/applications/{id}')
   Future<ApplicationResponse> updateOauthApplication({
-    @Path('id') required String id,
-    @Body() required ApplicationUpdateRequest body,
+    @Path('id') required SnowflakeType id,
+    @Body() ApplicationUpdateRequest? body,
   });
 
   /// Delete application.
   ///
   /// Permanently deletes an OAuth2 application. Requires sudo mode authentication. Invalidates all issued tokens and revokes all user authorizations.
   ///
-  /// [id] - The id.
+  /// [id] - The ID of the application.
   ///
   /// [body] - Name not received - field will be skipped.
   @DELETE('/oauth2/applications/{id}')
   Future<void> deleteOauthApplication({
-    @Path('id') required String id,
-    @Body() required SudoVerificationSchema body,
+    @Path('id') required SnowflakeType id,
+    @Body() SudoVerificationSchema? body,
   });
 
   /// Update bot profile.
   ///
   /// Modifies bot profile information such as name, avatar, and status. Changes apply to the bot account associated with this OAuth2 application.
   ///
-  /// [id] - The id.
+  /// [id] - The ID of the application.
   ///
   /// [body] - Name not received - field will be skipped.
   @PATCH('/oauth2/applications/{id}/bot')
   Future<BotProfileResponse> updateBotProfile({
-    @Path('id') required String id,
-    @Body() required BotProfileUpdateRequest body,
+    @Path('id') required SnowflakeType id,
+    @Body() BotProfileUpdateRequest? body,
   });
 
   /// Reset bot token.
   ///
   /// Rotates the bot token for an OAuth2 application. Requires sudo mode authentication. Invalidates all previously issued bot tokens. Used for security rotation and compromise mitigation.
   ///
-  /// [id] - The id.
+  /// [id] - The ID of the application.
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/oauth2/applications/{id}/bot/reset-token')
   Future<BotTokenResetResponse> resetBotToken({
-    @Path('id') required String id,
-    @Body() required SudoVerificationSchema body,
+    @Path('id') required SnowflakeType id,
+    @Body() SudoVerificationSchema? body,
   });
 
   /// Reset client secret.
   ///
   /// Rotates the client secret for an OAuth2 application. Requires sudo mode authentication. Essential security operation for protecting client credentials. Existing access tokens remain valid.
   ///
-  /// [id] - The id.
+  /// [id] - The ID of the application.
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/oauth2/applications/{id}/client-secret/reset')
   Future<ApplicationResponse> resetClientSecret({
-    @Path('id') required String id,
-    @Body() required SudoVerificationSchema body,
+    @Path('id') required SnowflakeType id,
+    @Body() SudoVerificationSchema? body,
   });
 
   /// Get public application.
   ///
   /// Retrieves public information about an OAuth2 application without authentication. Allows clients to discover application metadata before initiating authorization.
   ///
-  /// [id] - The id.
+  /// [id] - The ID of the application.
   @GET('/oauth2/applications/{id}/public')
   Future<ApplicationPublicResponse> getPublicApplication({
-    @Path('id') required String id,
+    @Path('id') required SnowflakeType id,
   });
 
   /// Grant OAuth2 consent.
@@ -192,7 +192,8 @@ abstract class OAuth2Api {
   /// [token] - The token to introspect.
   /// Name not received - field will be skipped.
   ///
-  /// [clientId] - Name not received - field will be skipped.
+  /// [clientId] - The application client ID.
+  /// Name not received - field will be skipped.
   ///
   /// [clientSecret] - The application client secret.
   /// Name not received - field will be skipped.
@@ -216,7 +217,8 @@ abstract class OAuth2Api {
   /// [redirectUri] - The redirect URI used in the authorization request.
   /// Name not received - field will be skipped.
   ///
-  /// [clientId] - Name not received - field will be skipped.
+  /// [clientId] - The application client ID.
+  /// Name not received - field will be skipped.
   ///
   /// [clientSecret] - The application client secret.
   /// Name not received - field will be skipped.
@@ -245,20 +247,20 @@ abstract class OAuth2Api {
   /// [token] - The token to revoke.
   /// Name not received - field will be skipped.
   ///
-  /// [tokenTypeHint] - A hint about the type of token being revoked.
-  /// Name not received and was auto-generated.
-  ///
-  /// [clientId] - Name not received - field will be skipped.
+  /// [clientId] - The application client ID.
+  /// Name not received - field will be skipped.
   ///
   /// [clientSecret] - The application client secret.
   /// Name not received - field will be skipped.
+  ///
+  /// [tokenTypeHint] - Name not received - field will be skipped.
   @MultiPart()
   @POST('/oauth2/token/revoke')
   Future<void> revokeOauth2Token({
     @Part(name: 'token') required String token,
-    @Part(name: 'token_type_hint') Enum0? tokenTypeHint,
     @Part(name: 'client_id') SnowflakeType? clientId,
     @Part(name: 'client_secret') String? clientSecret,
+    @Part(name: 'token_type_hint') TokenTypeHint? tokenTypeHint,
   });
 
   /// Get OAuth2 user information.

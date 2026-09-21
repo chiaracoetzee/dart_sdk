@@ -13,14 +13,8 @@ _$WellKnownFluxerResponseLimitsRulesFiltersFromJson(
   $checkedConvert,
 ) {
   final val = WellKnownFluxerResponseLimitsRulesFilters(
-    traits: $checkedConvert(
-      'traits',
-      (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
-    ),
-    guildFeatures: $checkedConvert(
-      'guildFeatures',
-      (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
-    ),
+    traits: $checkedConvert('traits', (v) => v ?? _omit),
+    guildFeatures: $checkedConvert('guildFeatures', (v) => v ?? _omit),
   );
   return val;
 });

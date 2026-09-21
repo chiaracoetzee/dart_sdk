@@ -26,27 +26,16 @@ GuildMemberResponse _$GuildMemberResponseFromJson(Map<String, dynamic> json) =>
           ),
           mute: $checkedConvert('mute', (v) => v as bool),
           deaf: $checkedConvert('deaf', (v) => v as bool),
-          nick: $checkedConvert('nick', (v) => v as String?),
-          avatar: $checkedConvert('avatar', (v) => v as String?),
-          banner: $checkedConvert('banner', (v) => v as String?),
-          accentColor: $checkedConvert(
-            'accent_color',
-            (v) => (v as num?)?.toInt(),
-          ),
+          nick: $checkedConvert('nick', (v) => v ?? _omit),
+          avatar: $checkedConvert('avatar', (v) => v ?? _omit),
+          banner: $checkedConvert('banner', (v) => v ?? _omit),
+          accentColor: $checkedConvert('accent_color', (v) => v ?? _omit),
           communicationDisabledUntil: $checkedConvert(
             'communication_disabled_until',
-            (v) => v == null ? null : DateTime.parse(v as String),
+            (v) => v ?? _omit,
           ),
-          profileFlags: $checkedConvert(
-            'profile_flags',
-            (v) => (v as num?)?.toInt(),
-          ),
-          mentionFlags: $checkedConvert(
-            'mention_flags',
-            (v) => v == null
-                ? null
-                : MentionReplyPreferences.fromJson((v as num).toInt()),
-          ),
+          profileFlags: $checkedConvert('profile_flags', (v) => v ?? _omit),
+          mentionFlags: $checkedConvert('mention_flags', (v) => v ?? _omit),
         );
         return val;
       },

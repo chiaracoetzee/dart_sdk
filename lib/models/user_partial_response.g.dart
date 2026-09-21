@@ -22,14 +22,9 @@ UserPartialResponse _$UserPartialResponseFromJson(Map<String, dynamic> json) =>
             (v) => (v as num?)?.toInt(),
           ),
           flags: $checkedConvert('flags', (v) => (v as num).toInt()),
-          bot: $checkedConvert('bot', (v) => v as bool?),
-          system: $checkedConvert('system', (v) => v as bool?),
-          mentionFlags: $checkedConvert(
-            'mention_flags',
-            (v) => v == null
-                ? null
-                : MentionReplyPreferences.fromJson((v as num).toInt()),
-          ),
+          bot: $checkedConvert('bot', (v) => v ?? _omit),
+          system: $checkedConvert('system', (v) => v ?? _omit),
+          mentionFlags: $checkedConvert('mention_flags', (v) => v ?? _omit),
         );
         return val;
       },

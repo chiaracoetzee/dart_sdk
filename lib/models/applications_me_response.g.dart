@@ -25,18 +25,10 @@ ApplicationsMeResponse _$ApplicationsMeResponseFromJson(
       verifyKey: $checkedConvert('verify_key', (v) => v as String),
       owner: $checkedConvert(
         'owner',
-        (v) => ApplicationsMeResponseOwner.fromJson(v as Map<String, dynamic>),
+        (v) => UserPartialResponse.fromJson(v as Map<String, dynamic>),
       ),
-      bot: $checkedConvert(
-        'bot',
-        (v) => v == null
-            ? null
-            : ApplicationsMeResponseBot.fromJson(v as Map<String, dynamic>),
-      ),
-      redirectUris: $checkedConvert(
-        'redirect_uris',
-        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
-      ),
+      bot: $checkedConvert('bot', (v) => v ?? _omit),
+      redirectUris: $checkedConvert('redirect_uris', (v) => v ?? _omit),
     );
     return val;
   },

@@ -15,7 +15,7 @@ UserProfileFullResponse _$UserProfileFullResponseFromJson(
     final val = UserProfileFullResponse(
       user: $checkedConvert(
         'user',
-        (v) => UserProfileFullResponseUser.fromJson(v as Map<String, dynamic>),
+        (v) => UserPartialResponse.fromJson(v as Map<String, dynamic>),
       ),
       userProfile: $checkedConvert(
         'user_profile',
@@ -27,54 +27,24 @@ UserProfileFullResponse _$UserProfileFullResponseFromJson(
         'timezone_offset',
         (v) => (v as num?)?.toInt(),
       ),
-      guildMember: $checkedConvert(
-        'guild_member',
-        (v) => v == null
-            ? null
-            : GuildMemberResponse.fromJson(v as Map<String, dynamic>),
-      ),
+      guildMember: $checkedConvert('guild_member', (v) => v ?? _omit),
       guildMemberProfile: $checkedConvert(
         'guild_member_profile',
-        (v) => v == null
-            ? null
-            : UserProfileFullResponseGuildMemberProfile.fromJson(
-                v as Map<String, dynamic>,
-              ),
+        (v) => v ?? _omit,
       ),
-      premiumType: $checkedConvert(
-        'premium_type',
-        (v) => v == null ? null : UserPremiumTypes.fromJson((v as num).toInt()),
-      ),
-      premiumSince: $checkedConvert('premium_since', (v) => v as String?),
+      premiumType: $checkedConvert('premium_type', (v) => v ?? _omit),
+      premiumSince: $checkedConvert('premium_since', (v) => v ?? _omit),
       premiumLifetimeSequence: $checkedConvert(
         'premium_lifetime_sequence',
-        (v) => (v as num?)?.toInt(),
+        (v) => v ?? _omit,
       ),
-      mutualFriends: $checkedConvert(
-        'mutual_friends',
-        (v) => (v as List<dynamic>?)
-            ?.map(
-              (e) => UserPartialResponse.fromJson(e as Map<String, dynamic>),
-            )
-            .toList(),
-      ),
-      mutualGuilds: $checkedConvert(
-        'mutual_guilds',
-        (v) => (v as List<dynamic>?)
-            ?.map(
-              (e) => UserProfileFullResponseMutualGuilds.fromJson(
-                e as Map<String, dynamic>,
-              ),
-            )
-            .toList(),
-      ),
+      mutualFriends: $checkedConvert('mutual_friends', (v) => v ?? _omit),
+      mutualGuilds: $checkedConvert('mutual_guilds', (v) => v ?? _omit),
       connectedAccounts: $checkedConvert(
         'connected_accounts',
-        (v) => (v as List<dynamic>?)
-            ?.map((e) => ConnectionResponse.fromJson(e as Map<String, dynamic>))
-            .toList(),
+        (v) => v ?? _omit,
       ),
-      profileLimited: $checkedConvert('profile_limited', (v) => v as bool?),
+      profileLimited: $checkedConvert('profile_limited', (v) => v ?? _omit),
     );
     return val;
   },

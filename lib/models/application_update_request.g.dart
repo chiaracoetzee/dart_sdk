@@ -13,23 +13,20 @@ ApplicationUpdateRequest _$ApplicationUpdateRequestFromJson(
   json,
   ($checkedConvert) {
     final val = ApplicationUpdateRequest(
-      name: $checkedConvert('name', (v) => v as String?),
-      redirectUris: $checkedConvert(
-        'redirect_uris',
-        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
-      ),
-      botPublic: $checkedConvert('bot_public', (v) => v as bool?),
+      name: $checkedConvert('name', (v) => v ?? _omit),
+      botPublic: $checkedConvert('bot_public', (v) => v ?? _omit),
       botRequireCodeGrant: $checkedConvert(
         'bot_require_code_grant',
-        (v) => v as bool?,
+        (v) => v ?? _omit,
       ),
+      redirectUris: $checkedConvert('redirect_uris', (v) => v ?? _omit),
     );
     return val;
   },
   fieldKeyMap: const {
-    'redirectUris': 'redirect_uris',
     'botPublic': 'bot_public',
     'botRequireCodeGrant': 'bot_require_code_grant',
+    'redirectUris': 'redirect_uris',
   },
 );
 
@@ -37,7 +34,7 @@ Map<String, dynamic> _$ApplicationUpdateRequestToJson(
   ApplicationUpdateRequest instance,
 ) => <String, dynamic>{
   'name': ?instance.name,
-  'redirect_uris': ?instance.redirectUris,
   'bot_public': ?instance.botPublic,
   'bot_require_code_grant': ?instance.botRequireCodeGrant,
+  'redirect_uris': ?instance.redirectUris,
 };

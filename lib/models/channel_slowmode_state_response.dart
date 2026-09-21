@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'int32_type.dart';
+
 part 'channel_slowmode_state_response.g.dart';
 
 @JsonSerializable()
@@ -20,11 +22,11 @@ class ChannelSlowmodeStateResponse {
 
   /// The configured slowmode interval in seconds (0 if disabled)
   @JsonKey(name: 'rate_limit_per_user')
-  final int rateLimitPerUser;
+  final Int32Type rateLimitPerUser;
 
   /// Milliseconds the current user must wait before sending the next message (0 if allowed now)
   @JsonKey(name: 'retry_after_ms')
-  final int retryAfterMs;
+  final Int32Type retryAfterMs;
 
   /// Absolute timestamp at which the current user is next allowed to send a message, or null if allowed now
   @JsonKey(includeIfNull: true, name: 'next_send_allowed_at')

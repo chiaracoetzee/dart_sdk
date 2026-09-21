@@ -30,15 +30,29 @@ abstract class DiscoveryApi {
   /// Search discoverable guilds.
   ///
   /// Search for guilds listed in the discovery directory.
+  ///
+  /// [query] - Search query.
+  ///
+  /// [category] - Filter by category.
+  ///
+  /// [language] - Filter by primary community language.
+  ///
+  /// [tag] - Filter by a specific custom tag.
+  ///
+  /// [sortBy] - Sort order.
+  ///
+  /// [limit] - Number of results to return.
+  ///
+  /// [offset] - Pagination offset.
   @GET('/discovery/guilds')
   Future<DiscoveryGuildListResponse> searchDiscoveryGuilds({
+    @Query('limit') int? limit = 24,
+    @Query('offset') int? offset = 0,
     @Query('query') String? query,
     @Query('category') int? category,
     @Query('language') String? language,
     @Query('tag') String? tag,
     @Query('sort_by') SortBy? sortBy,
-    @Query('limit') int? limit,
-    @Query('offset') int? offset,
   });
 
   /// Join a discoverable guild.
@@ -74,7 +88,7 @@ abstract class DiscoveryApi {
   @PATCH('/guilds/{guild_id}/discovery')
   Future<DiscoveryApplicationResponse> editDiscoveryApplication({
     @Path('guild_id') required SnowflakeType guildId,
-    @Body() required DiscoveryApplicationPatchRequest body,
+    @Body() DiscoveryApplicationPatchRequest? body,
   });
 
   /// Withdraw discovery application.

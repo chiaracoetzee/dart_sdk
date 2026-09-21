@@ -4,114 +4,92 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'guild_invite_response_type_type.dart';
-import 'guild_invite_response_guild.dart';
-import 'channel_partial_response.dart';
 import 'user_partial_response.dart';
-import 'group_dm_invite_response_type_type.dart';
+import 'guild_partial_response.dart';
+import 'channel_partial_response.dart';
+import 'int32_type.dart';
 
 part 'invite_response_schema.g.dart';
 
-@JsonSerializable(createFactory: false)
-sealed class InviteResponseSchema {
-  const InviteResponseSchema();
+class InviteResponseSchema {
+  final Map<String, dynamic> _json;
+
+  const InviteResponseSchema(this._json);
 
   factory InviteResponseSchema.fromJson(Map<String, dynamic> json) =>
-      InviteResponseSchemaUnionDeserializer.tryDeserialize(json);
+      InviteResponseSchema(json);
 
-  Map<String, dynamic> toJson();
-}
+  Map<String, dynamic> toJson() => _json;
 
-extension InviteResponseSchemaUnionDeserializer on InviteResponseSchema {
-  static InviteResponseSchema tryDeserialize(
-    Map<String, dynamic> json, {
-    String key = 'type',
-    Map<Type, Object?>? mapping,
-  }) {
-    final mappingFallback = const <Type, Object?>{
-      InviteResponseSchema0: '0',
-      InviteResponseSchema1: '1',
-    };
-    final value = json[key];
-    final effective = mapping ?? mappingFallback;
-    final valueAsString = value?.toString();
-    return switch (value) {
-      _
-          when value == effective[InviteResponseSchema0] ||
-              valueAsString == effective[InviteResponseSchema0]?.toString() =>
-        InviteResponseSchema0.fromJson(json),
-      _
-          when value == effective[InviteResponseSchema1] ||
-              valueAsString == effective[InviteResponseSchema1]?.toString() =>
-        InviteResponseSchema1.fromJson(json),
-      _ => throw FormatException(
-        'Unknown discriminator value "${json[key]}" for InviteResponseSchema',
-      ),
-    };
-  }
+  InviteResponseSchemaGuildInviteResponse toGuildInviteResponse() =>
+      InviteResponseSchemaGuildInviteResponse.fromJson(_json);
+  InviteResponseSchemaGroupDmInviteResponse toGroupDmInviteResponse() =>
+      InviteResponseSchemaGroupDmInviteResponse.fromJson(_json);
 }
 
 @JsonSerializable()
-class InviteResponseSchema0 extends InviteResponseSchema {
+class InviteResponseSchemaGuildInviteResponse {
   final String code;
-  final GuildInviteResponseTypeType type;
-  final GuildInviteResponseGuild guild;
-  final ChannelPartialResponse channel;
   @JsonKey(includeIfNull: false)
   final UserPartialResponse? inviter;
-  @JsonKey(name: 'member_count')
-  final int memberCount;
-  @JsonKey(name: 'presence_count')
-  final int presenceCount;
   @JsonKey(includeIfNull: false, name: 'expires_at')
   final DateTime? expiresAt;
   final bool temporary;
+  final num type;
+  final GuildPartialResponse guild;
+  final ChannelPartialResponse channel;
+  @JsonKey(name: 'member_count')
+  final Int32Type memberCount;
+  @JsonKey(name: 'presence_count')
+  final Int32Type presenceCount;
 
-  const InviteResponseSchema0({
+  const InviteResponseSchemaGuildInviteResponse({
     required this.code,
+    required this.inviter,
+    required this.expiresAt,
+    required this.temporary,
     required this.type,
     required this.guild,
     required this.channel,
-    required this.inviter,
     required this.memberCount,
     required this.presenceCount,
-    required this.expiresAt,
-    required this.temporary,
   });
 
-  factory InviteResponseSchema0.fromJson(Map<String, dynamic> json) =>
-      _$InviteResponseSchema0FromJson(json);
+  factory InviteResponseSchemaGuildInviteResponse.fromJson(
+    Map<String, dynamic> json,
+  ) => _$InviteResponseSchemaGuildInviteResponseFromJson(json);
 
-  @override
-  Map<String, dynamic> toJson() => _$InviteResponseSchema0ToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$InviteResponseSchemaGuildInviteResponseToJson(this);
 }
 
 @JsonSerializable()
-class InviteResponseSchema1 extends InviteResponseSchema {
+class InviteResponseSchemaGroupDmInviteResponse {
   final String code;
-  final GroupDmInviteResponseTypeType type;
-  final ChannelPartialResponse channel;
   @JsonKey(includeIfNull: false)
   final UserPartialResponse? inviter;
-  @JsonKey(name: 'member_count')
-  final int memberCount;
   @JsonKey(includeIfNull: false, name: 'expires_at')
   final DateTime? expiresAt;
   final bool temporary;
+  final num type;
+  final ChannelPartialResponse channel;
+  @JsonKey(name: 'member_count')
+  final Int32Type memberCount;
 
-  const InviteResponseSchema1({
+  const InviteResponseSchemaGroupDmInviteResponse({
     required this.code,
-    required this.type,
-    required this.channel,
     required this.inviter,
-    required this.memberCount,
     required this.expiresAt,
     required this.temporary,
+    required this.type,
+    required this.channel,
+    required this.memberCount,
   });
 
-  factory InviteResponseSchema1.fromJson(Map<String, dynamic> json) =>
-      _$InviteResponseSchema1FromJson(json);
+  factory InviteResponseSchemaGroupDmInviteResponse.fromJson(
+    Map<String, dynamic> json,
+  ) => _$InviteResponseSchemaGroupDmInviteResponseFromJson(json);
 
-  @override
-  Map<String, dynamic> toJson() => _$InviteResponseSchema1ToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$InviteResponseSchemaGroupDmInviteResponseToJson(this);
 }

@@ -4,6 +4,9 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'int32_type.dart';
+import 'snowflake_string_type.dart';
+
 part 'message_channel_mention_response.g.dart';
 
 @JsonSerializable()
@@ -18,13 +21,13 @@ class MessageChannelMentionResponse {
       _$MessageChannelMentionResponseFromJson(json);
 
   /// The ID of the mentioned channel
-  final String id;
+  final SnowflakeStringType id;
 
   /// The name of the mentioned channel
   final String name;
 
   /// The type of the mentioned channel
-  final int type;
+  final Int32Type type;
 
   Map<String, Object?> toJson() => _$MessageChannelMentionResponseToJson(this);
 }

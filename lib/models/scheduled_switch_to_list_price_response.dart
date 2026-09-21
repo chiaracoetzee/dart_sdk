@@ -4,29 +4,24 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'scheduled_switch_to_list_price_response_currency_currency.dart';
-import 'scheduled_switch_to_list_price_response_status_status.dart';
-import 'switch_to_list_price_response.dart';
+import 'premium_currency.dart';
 
 part 'scheduled_switch_to_list_price_response.g.dart';
 
 @JsonSerializable()
 class ScheduledSwitchToListPriceResponse {
   const ScheduledSwitchToListPriceResponse({
-    required this.status,
     required this.effectiveAt,
     required this.targetPriceId,
     required this.targetAmountMinor,
     required this.currentAmountMinor,
     required this.currency,
+    required this.status,
   });
 
   factory ScheduledSwitchToListPriceResponse.fromJson(
     Map<String, Object?> json,
   ) => _$ScheduledSwitchToListPriceResponseFromJson(json);
-
-  /// The switch was scheduled for the end of the current billing period
-  final ScheduledSwitchToListPriceResponseStatusStatus status;
 
   /// ISO timestamp the switch takes effect
   @JsonKey(name: 'effective_at')
@@ -45,7 +40,10 @@ class ScheduledSwitchToListPriceResponse {
   final int currentAmountMinor;
 
   /// Currency of both amounts
-  final ScheduledSwitchToListPriceResponseCurrencyCurrency currency;
+  final PremiumCurrency currency;
+
+  /// The switch was scheduled for the end of the current billing period
+  final String status;
 
   Map<String, Object?> toJson() =>
       _$ScheduledSwitchToListPriceResponseToJson(this);

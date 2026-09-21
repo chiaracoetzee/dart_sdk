@@ -12,23 +12,18 @@ RegisterRequest _$RegisterRequestFromJson(Map<String, dynamic> json) =>
       json,
       ($checkedConvert) {
         final val = RegisterRequest(
-          email: $checkedConvert('email', (v) => v as String?),
-          username: $checkedConvert('username', (v) => v as String?),
-          globalName: $checkedConvert('global_name', (v) => v as String?),
-          password: $checkedConvert('password', (v) => v as String?),
-          dateOfBirth: $checkedConvert('date_of_birth', (v) => v as String?),
-          consent: $checkedConvert('consent', (v) => v as bool?),
-          inviteCode: $checkedConvert('invite_code', (v) => v as String?),
+          consent: $checkedConvert('consent', (v) => v as bool? ?? false),
+          email: $checkedConvert('email', (v) => v ?? _omit),
+          username: $checkedConvert('username', (v) => v ?? _omit),
+          globalName: $checkedConvert('global_name', (v) => v ?? _omit),
+          password: $checkedConvert('password', (v) => v ?? _omit),
+          dateOfBirth: $checkedConvert('date_of_birth', (v) => v ?? _omit),
+          inviteCode: $checkedConvert('invite_code', (v) => v ?? _omit),
           registrationUrlCode: $checkedConvert(
             'registration_url_code',
-            (v) => v as String?,
+            (v) => v ?? _omit,
           ),
-          theme: $checkedConvert(
-            'theme',
-            (v) => v == null
-                ? null
-                : RegisterRequestThemeTheme.fromJson(v as String),
-          ),
+          theme: $checkedConvert('theme', (v) => v ?? _omit),
         );
         return val;
       },
@@ -47,7 +42,7 @@ Map<String, dynamic> _$RegisterRequestToJson(RegisterRequest instance) =>
       'global_name': ?instance.globalName,
       'password': ?instance.password,
       'date_of_birth': ?instance.dateOfBirth,
-      'consent': ?instance.consent,
+      'consent': instance.consent,
       'invite_code': ?instance.inviteCode,
       'registration_url_code': ?instance.registrationUrlCode,
       'theme': ?instance.theme,

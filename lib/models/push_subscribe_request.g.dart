@@ -15,7 +15,7 @@ PushSubscribeRequest _$PushSubscribeRequestFromJson(
       'keys',
       (v) => PushSubscribeRequestKeys.fromJson(v as Map<String, dynamic>),
     ),
-    userAgent: $checkedConvert('user_agent', (v) => v as String?),
+    userAgent: $checkedConvert('user_agent', (v) => v ?? _omit),
   );
   return val;
 }, fieldKeyMap: const {'userAgent': 'user_agent'});

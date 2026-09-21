@@ -4,7 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'harvest_creation_response_schema_status_status.dart';
+import 'harvest_status.dart';
+import 'snowflake_string_type.dart';
 
 part 'harvest_creation_response_schema.g.dart';
 
@@ -21,10 +22,8 @@ class HarvestCreationResponseSchema {
 
   /// Unique identifier for the harvest request
   @JsonKey(name: 'harvest_id')
-  final String harvestId;
-
-  /// Current status of the harvest request
-  final HarvestCreationResponseSchemaStatusStatus status;
+  final SnowflakeStringType harvestId;
+  final HarvestStatus status;
 
   /// ISO 8601 timestamp when the harvest request was created
   @JsonKey(name: 'created_at')

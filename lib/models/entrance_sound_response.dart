@@ -5,7 +5,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'entrance_sound_response_extension_extension_enum.dart';
-import 'snowflake_type.dart';
+import 'snowflake_string_type.dart';
 
 part 'entrance_sound_response.g.dart';
 
@@ -26,7 +26,7 @@ class EntranceSoundResponse {
   factory EntranceSoundResponse.fromJson(Map<String, Object?> json) =>
       _$EntranceSoundResponseFromJson(json);
 
-  final SnowflakeType id;
+  final SnowflakeStringType id;
   final String name;
   final String hash;
   @JsonKey(name: 'extension')

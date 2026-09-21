@@ -51,7 +51,7 @@ class _ChannelsApi implements ChannelsApi {
   }
 
   @override
-  Future<ChannelResponse> getChannel({required String channelId}) async {
+  Future<ChannelResponse> getChannel({required SnowflakeType channelId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -79,14 +79,15 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<ChannelResponse> updateChannel({
-    required String channelId,
-    required ChannelUpdateRequest body,
+    required SnowflakeType channelId,
+    ChannelUpdateRequestBody? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<ChannelResponse>(
       Options(method: 'PATCH', headers: _headers, extra: _extra)
           .compose(
@@ -110,10 +111,10 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<void> deleteChannel({
-    required String channelId,
-    required SudoVerificationSchema body,
-    String? silent,
-    String? deleteMessages,
+    required SnowflakeType channelId,
+    SudoVerificationSchema? body,
+    String? silent = 'false',
+    String? deleteMessages = 'false',
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -123,7 +124,7 @@ class _ChannelsApi implements ChannelsApi {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<void>(
       Options(method: 'DELETE', headers: _headers, extra: _extra)
           .compose(
@@ -140,7 +141,7 @@ class _ChannelsApi implements ChannelsApi {
   @override
   Future<PresignedAttachmentUploadResponse>
   requestPresignedMessageAttachmentUploads({
-    required String channelId,
+    required SnowflakeType channelId,
     required PresignedAttachmentUploadRequest body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -172,7 +173,7 @@ class _ChannelsApi implements ChannelsApi {
   @override
   Future<CompleteMultipartAttachmentUploadResponse>
   completeMultipartMessageAttachmentUploads({
-    required String channelId,
+    required SnowflakeType channelId,
     required CompleteMultipartAttachmentUploadRequest body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -205,7 +206,7 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<CallEligibilityResponse> getCallEligibility({
-    required String channelId,
+    required SnowflakeType channelId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -234,14 +235,15 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<void> updateCallRegion({
-    required String channelId,
-    required CallUpdateBodySchema body,
+    required SnowflakeType channelId,
+    CallUpdateBodySchema? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<void>(
       Options(method: 'PATCH', headers: _headers, extra: _extra)
           .compose(
@@ -256,7 +258,7 @@ class _ChannelsApi implements ChannelsApi {
   }
 
   @override
-  Future<void> endCall({required String channelId}) async {
+  Future<void> endCall({required SnowflakeType channelId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -276,14 +278,15 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<void> ringCallRecipients({
-    required String channelId,
-    required CallRingBodySchema body,
+    required SnowflakeType channelId,
+    CallRingBodySchema? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<void>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -299,14 +302,15 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<void> stopRingingCallRecipients({
-    required String channelId,
-    required CallRingBodySchema body,
+    required SnowflakeType channelId,
+    CallRingBodySchema? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<void>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -322,18 +326,18 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<List<MessageResponseSchema>> listMessages({
-    required String channelId,
-    String? limit,
-    String? before,
-    String? after,
-    String? around,
+    required SnowflakeType channelId,
+    SnowflakeType? before,
+    SnowflakeType? after,
+    SnowflakeType? around,
+    String? limit = '50',
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
+      r'before': before?.toJson(),
+      r'after': after?.toJson(),
+      r'around': around?.toJson(),
       r'limit': limit,
-      r'before': before,
-      r'after': after,
-      r'around': around,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
@@ -366,16 +370,16 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<MessageResponseSchema> sendMessage({
-    required String channelId,
+    required SnowflakeType channelId,
+    int? flags = 0,
     String? content,
     List<RichEmbedRequest>? embeds,
     List<Object0>? attachments,
     MessageReferenceRequest? messageReference,
     AllowedMentionsRequest? allowedMentions,
-    int? flags,
-    String? nonce,
-    String? favoriteMemeId,
-    List<String>? stickerIds,
+    MessageNonceRequest? nonce,
+    SnowflakeType? favoriteMemeId,
+    List<SnowflakeType>? stickerIds,
     bool? tts,
   }) async {
     final _extra = <String, dynamic>{};
@@ -383,6 +387,9 @@ class _ChannelsApi implements ChannelsApi {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = FormData();
+    if (flags != null) {
+      _data.fields.add(MapEntry('flags', flags.toString()));
+    }
     if (content != null) {
       _data.fields.add(MapEntry('content', content));
     }
@@ -400,18 +407,16 @@ class _ChannelsApi implements ChannelsApi {
         jsonEncode(allowedMentions ?? <String, dynamic>{}),
       ),
     );
-    if (flags != null) {
-      _data.fields.add(MapEntry('flags', flags.toString()));
-    }
-    if (nonce != null) {
-      _data.fields.add(MapEntry('nonce', nonce));
-    }
-    if (favoriteMemeId != null) {
-      _data.fields.add(MapEntry('favorite_meme_id', favoriteMemeId));
-    }
-    stickerIds?.forEach((i) {
-      _data.fields.add(MapEntry('sticker_ids', i));
-    });
+    _data.fields.add(
+      MapEntry('nonce', jsonEncode(nonce ?? <String, dynamic>{})),
+    );
+    _data.fields.add(
+      MapEntry(
+        'favorite_meme_id',
+        jsonEncode(favoriteMemeId ?? <String, dynamic>{}),
+      ),
+    );
+    _data.fields.add(MapEntry('sticker_ids', jsonEncode(stickerIds)));
     if (tts != null) {
       _data.fields.add(MapEntry('tts', tts.toString()));
     }
@@ -442,7 +447,7 @@ class _ChannelsApi implements ChannelsApi {
   }
 
   @override
-  Future<void> clearChannelReadState({required String channelId}) async {
+  Future<void> clearChannelReadState({required SnowflakeType channelId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -462,7 +467,7 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<void> bulkDeleteMessages({
-    required String channelId,
+    required SnowflakeType channelId,
     required BulkDeleteMessagesRequest body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -485,14 +490,15 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<void> bulkDeleteMyMessagesInChannel({
-    required String channelId,
-    required SudoVerificationSchema body,
+    required SnowflakeType channelId,
+    SudoVerificationSchema? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<void>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -508,14 +514,14 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<ChannelPinsResponse> listPinnedMessages({
-    required String channelId,
+    required SnowflakeType channelId,
     int? limit,
-    DateTime? before,
+    String? before,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'limit': limit,
-      r'before': before?.toIso8601String(),
+      r'before': before,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
@@ -542,14 +548,14 @@ class _ChannelsApi implements ChannelsApi {
   }
 
   @override
-  Future<PurgePersonalNotesMessagesResponse> purgePersonalNotesMessages({
-    required String channelId,
+  Future<MessagePurgeResponse> purgePersonalNotesMessages({
+    required SnowflakeType channelId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<PurgePersonalNotesMessagesResponse>(
+    final _options = _setStreamType<MessagePurgeResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -560,9 +566,9 @@ class _ChannelsApi implements ChannelsApi {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, Object?>>(_options);
-    late PurgePersonalNotesMessagesResponse _value;
+    late MessagePurgeResponse _value;
     try {
-      _value = PurgePersonalNotesMessagesResponse.fromJson(_result.data!);
+      _value = MessagePurgeResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
@@ -572,8 +578,8 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<MessageResponseSchema> getMessage({
-    required String channelId,
-    required String messageId,
+    required SnowflakeType channelId,
+    required SnowflakeType messageId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -602,8 +608,8 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<MessageResponseSchema> editMessage({
-    required String channelId,
-    required String messageId,
+    required SnowflakeType channelId,
+    required SnowflakeType messageId,
     String? content,
     List<RichEmbedRequest>? embeds,
     AllowedMentionsRequest? allowedMentions,
@@ -661,8 +667,8 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<void> deleteMessage({
-    required String channelId,
-    required String messageId,
+    required SnowflakeType channelId,
+    required SnowflakeType messageId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -683,15 +689,16 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<void> acknowledgeMessage({
-    required String channelId,
-    required String messageId,
-    required MessageAckRequest body,
+    required SnowflakeType channelId,
+    required SnowflakeType messageId,
+    MessageAckRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<void>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -707,9 +714,9 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<void> deleteMessageAttachment({
-    required String channelId,
-    required String messageId,
-    required String attachmentId,
+    required SnowflakeType channelId,
+    required SnowflakeType messageId,
+    required SnowflakeType attachmentId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -730,8 +737,8 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<void> removeAllReactions({
-    required String channelId,
-    required String messageId,
+    required SnowflakeType channelId,
+    required SnowflakeType messageId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -752,14 +759,17 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<List<UserPartialResponse>> listReactionUsers({
-    required String channelId,
-    required String messageId,
+    required SnowflakeType channelId,
+    required SnowflakeType messageId,
     required String emoji,
     int? limit,
-    String? after,
+    SnowflakeType? after,
   }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'limit': limit, r'after': after};
+    final queryParameters = <String, dynamic>{
+      r'limit': limit,
+      r'after': after?.toJson(),
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
@@ -791,8 +801,8 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<void> removeAllReactionsForEmoji({
-    required String channelId,
-    required String messageId,
+    required SnowflakeType channelId,
+    required SnowflakeType messageId,
     required String emoji,
   }) async {
     final _extra = <String, dynamic>{};
@@ -814,8 +824,8 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<void> addReaction({
-    required String channelId,
-    required String messageId,
+    required SnowflakeType channelId,
+    required SnowflakeType messageId,
     required String emoji,
     String? sessionId,
   }) async {
@@ -839,8 +849,8 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<void> removeOwnReaction({
-    required String channelId,
-    required String messageId,
+    required SnowflakeType channelId,
+    required SnowflakeType messageId,
     required String emoji,
     String? sessionId,
   }) async {
@@ -864,14 +874,17 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<ReactionUsersPageResponse> listReactionUsersV2({
-    required String channelId,
-    required String messageId,
+    required SnowflakeType channelId,
+    required SnowflakeType messageId,
     required String emoji,
     int? limit,
-    String? after,
+    SnowflakeType? after,
   }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'limit': limit, r'after': after};
+    final queryParameters = <String, dynamic>{
+      r'limit': limit,
+      r'after': after?.toJson(),
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
@@ -898,10 +911,10 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<void> removeReaction({
-    required String channelId,
-    required String messageId,
+    required SnowflakeType channelId,
+    required SnowflakeType messageId,
     required String emoji,
-    required String targetId,
+    required SnowflakeType targetId,
     String? sessionId,
   }) async {
     final _extra = <String, dynamic>{};
@@ -924,8 +937,8 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<void> setChannelPermissionOverwrite({
-    required String channelId,
-    required String overwriteId,
+    required SnowflakeType channelId,
+    required SnowflakeType overwriteId,
     required PermissionOverwriteCreateRequest body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -948,8 +961,8 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<void> deleteChannelPermissionOverwrite({
-    required String channelId,
-    required String overwriteId,
+    required SnowflakeType channelId,
+    required SnowflakeType overwriteId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -969,7 +982,7 @@ class _ChannelsApi implements ChannelsApi {
   }
 
   @override
-  Future<void> acknowledgePins({required String channelId}) async {
+  Future<void> acknowledgePins({required SnowflakeType channelId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -989,8 +1002,8 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<void> pinMessage({
-    required String channelId,
-    required String messageId,
+    required SnowflakeType channelId,
+    required SnowflakeType messageId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1011,8 +1024,8 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<void> unpinMessage({
-    required String channelId,
-    required String messageId,
+    required SnowflakeType channelId,
+    required SnowflakeType messageId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1033,8 +1046,8 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<void> addGroupDmRecipient({
-    required String channelId,
-    required String userId,
+    required SnowflakeType channelId,
+    required SnowflakeType userId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1055,11 +1068,11 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<void> removeGroupDmRecipient({
-    required String channelId,
-    required String userId,
-    required SudoVerificationSchema body,
-    String? silent,
-    String? deleteMessages,
+    required SnowflakeType channelId,
+    required SnowflakeType userId,
+    SudoVerificationSchema? body,
+    String? silent = 'false',
+    String? deleteMessages = 'false',
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -1069,7 +1082,7 @@ class _ChannelsApi implements ChannelsApi {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<void>(
       Options(method: 'DELETE', headers: _headers, extra: _extra)
           .compose(
@@ -1085,7 +1098,7 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<List<RtcRegionResponse>> listRtcRegions({
-    required String channelId,
+    required SnowflakeType channelId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1119,7 +1132,7 @@ class _ChannelsApi implements ChannelsApi {
 
   @override
   Future<ChannelSlowmodeStateResponse> getChannelSlowmodeState({
-    required String channelId,
+    required SnowflakeType channelId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1147,7 +1160,7 @@ class _ChannelsApi implements ChannelsApi {
   }
 
   @override
-  Future<void> indicateTyping({required String channelId}) async {
+  Future<void> indicateTyping({required SnowflakeType channelId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -1166,12 +1179,12 @@ class _ChannelsApi implements ChannelsApi {
   }
 
   @override
-  Future<void> getStreamPreview({required String streamKey}) async {
+  Future<String> getStreamPreview({required String streamKey}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<void>(
+    final _options = _setStreamType<String>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -1181,7 +1194,15 @@ class _ChannelsApi implements ChannelsApi {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    await _dio.fetch<void>(_options);
+    final _result = await _dio.fetch<String>(_options);
+    late String _value;
+    try {
+      _value = _result.data!;
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, response: _result);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -1260,13 +1281,14 @@ class _ChannelsApi implements ChannelsApi {
   @override
   Future<void> updateStreamRegion({
     required String streamKey,
-    required StreamUpdateBodySchema body,
+    StreamUpdateBodySchema? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<void>(
       Options(method: 'PATCH', headers: _headers, extra: _extra)
           .compose(

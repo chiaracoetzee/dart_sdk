@@ -12,7 +12,7 @@ RichEmbedRequestFields _$RichEmbedRequestFieldsFromJson(
   final val = RichEmbedRequestFields(
     name: $checkedConvert('name', (v) => v as String),
     value: $checkedConvert('value', (v) => v as String),
-    inline: $checkedConvert('inline', (v) => v as bool?),
+    inline: $checkedConvert('inline', (v) => v as bool? ?? false),
   );
   return val;
 });
@@ -22,5 +22,5 @@ Map<String, dynamic> _$RichEmbedRequestFieldsToJson(
 ) => <String, dynamic>{
   'name': instance.name,
   'value': instance.value,
-  'inline': ?instance.inline,
+  'inline': instance.inline,
 };

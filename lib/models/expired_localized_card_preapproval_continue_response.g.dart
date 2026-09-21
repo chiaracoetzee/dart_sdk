@@ -13,13 +13,7 @@ _$ExpiredLocalizedCardPreapprovalContinueResponseFromJson(
   $checkedConvert,
 ) {
   final val = ExpiredLocalizedCardPreapprovalContinueResponse(
-    status: $checkedConvert(
-      'status',
-      (v) =>
-          ExpiredLocalizedCardPreapprovalContinueResponseStatusStatus.fromJson(
-            v as String,
-          ),
-    ),
+    status: $checkedConvert('status', (v) => v as String),
   );
   return val;
 });

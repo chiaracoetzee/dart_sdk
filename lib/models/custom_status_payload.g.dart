@@ -12,10 +12,10 @@ CustomStatusPayload _$CustomStatusPayloadFromJson(Map<String, dynamic> json) =>
       json,
       ($checkedConvert) {
         final val = CustomStatusPayload(
-          text: $checkedConvert('text', (v) => v as String?),
-          expiresAt: $checkedConvert('expires_at', (v) => v),
-          emojiId: $checkedConvert('emoji_id', (v) => v as String?),
-          emojiName: $checkedConvert('emoji_name', (v) => v as String?),
+          text: $checkedConvert('text', (v) => v ?? _omit),
+          expiresAt: $checkedConvert('expires_at', (v) => v ?? _omit),
+          emojiId: $checkedConvert('emoji_id', (v) => v ?? _omit),
+          emojiName: $checkedConvert('emoji_name', (v) => v ?? _omit),
         );
         return val;
       },

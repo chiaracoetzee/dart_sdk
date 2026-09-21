@@ -14,12 +14,7 @@ _$StreamPreviewUploadUrlResponseSchemaFromJson(Map<String, dynamic> json) =>
       ($checkedConvert) {
         final val = StreamPreviewUploadUrlResponseSchema(
           uploadUrl: $checkedConvert('upload_url', (v) => v as String),
-          method: $checkedConvert(
-            'method',
-            (v) => StreamPreviewUploadUrlResponseSchemaMethodMethod.fromJson(
-              v as String,
-            ),
-          ),
+          method: $checkedConvert('method', (v) => v as String),
           contentType: $checkedConvert('content_type', (v) => v as String),
           expiresAt: $checkedConvert(
             'expires_at',

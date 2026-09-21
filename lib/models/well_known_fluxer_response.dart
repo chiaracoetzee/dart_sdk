@@ -4,17 +4,17 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'well_known_fluxer_response_app_public.dart';
-import 'well_known_fluxer_response_captcha.dart';
-import 'well_known_fluxer_response_community.dart';
-import 'well_known_fluxer_response_endpoints.dart';
-import 'well_known_fluxer_response_features.dart';
-import 'well_known_fluxer_response_gif.dart';
+import 'instance_app_public_schema.dart';
+import 'instance_captcha_schema.dart';
+import 'instance_community_schema.dart';
+import 'instance_endpoints_schema.dart';
+import 'instance_features_schema.dart';
+import 'instance_gif_schema.dart';
+import 'instance_push_schema.dart';
+import 'instance_registration_schema.dart';
+import 'instance_services_schema.dart';
+import 'instance_sso_schema.dart';
 import 'well_known_fluxer_response_limits.dart';
-import 'well_known_fluxer_response_push.dart';
-import 'well_known_fluxer_response_registration.dart';
-import 'well_known_fluxer_response_services.dart';
-import 'well_known_fluxer_response_sso.dart';
 
 part 'well_known_fluxer_response.g.dart';
 
@@ -41,40 +41,22 @@ class WellKnownFluxerResponse {
   /// Version of the API server code
   @JsonKey(name: 'api_code_version')
   final int apiCodeVersion;
-
-  /// Endpoint URLs for various services
-  final WellKnownFluxerResponseEndpoints endpoints;
-
-  /// Captcha configuration
-  final WellKnownFluxerResponseCaptcha captcha;
-
-  /// Feature flags for this instance
-  final WellKnownFluxerResponseFeatures features;
-
-  /// GIF provider configuration for clients
-  final WellKnownFluxerResponseGif gif;
-
-  /// Single sign-on configuration
-  final WellKnownFluxerResponseSso sso;
-
-  /// Registration policy for this instance
-  final WellKnownFluxerResponseRegistration registration;
-
-  /// Community topology and direct-message policy for this instance
-  final WellKnownFluxerResponseCommunity community;
-
-  /// Optional third-party service integrations enabled for this instance
-  final WellKnownFluxerResponseServices services;
+  final InstanceEndpointsSchema endpoints;
+  final InstanceCaptchaSchema captcha;
+  final InstanceFeaturesSchema features;
+  final InstanceGifSchema gif;
+  final InstanceSsoSchema sso;
+  final InstanceRegistrationSchema registration;
+  final InstanceCommunitySchema community;
+  final InstanceServicesSchema services;
 
   /// Limit configuration with rules and trait definitions
   final WellKnownFluxerResponseLimits limits;
-
-  /// Push notification configuration
-  final WellKnownFluxerResponsePush push;
+  final InstancePushSchema push;
 
   /// Public application configuration for client-side features
   @JsonKey(name: 'app_public')
-  final WellKnownFluxerResponseAppPublic appPublic;
+  final InstanceAppPublicSchema appPublic;
 
   Map<String, Object?> toJson() => _$WellKnownFluxerResponseToJson(this);
 }

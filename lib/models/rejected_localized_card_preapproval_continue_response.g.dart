@@ -13,13 +13,7 @@ _$RejectedLocalizedCardPreapprovalContinueResponseFromJson(
   $checkedConvert,
 ) {
   final val = RejectedLocalizedCardPreapprovalContinueResponse(
-    status: $checkedConvert(
-      'status',
-      (v) =>
-          RejectedLocalizedCardPreapprovalContinueResponseStatusStatus.fromJson(
-            v as String,
-          ),
-    ),
+    status: $checkedConvert('status', (v) => v as String),
     reason: $checkedConvert(
       'reason',
       (v) =>
@@ -27,7 +21,7 @@ _$RejectedLocalizedCardPreapprovalContinueResponseFromJson(
             v as String,
           ),
     ),
-    actualCountry: $checkedConvert('actual_country', (v) => v as String?),
+    actualCountry: $checkedConvert('actual_country', (v) => v ?? _omit),
   );
   return val;
 }, fieldKeyMap: const {'actualCountry': 'actual_country'});

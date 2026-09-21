@@ -5,6 +5,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'bot_flags.dart';
+import 'snowflake_string_type.dart';
 
 part 'bot_profile_response.g.dart';
 
@@ -24,7 +25,7 @@ class BotProfileResponse {
       _$BotProfileResponseFromJson(json);
 
   /// The unique identifier of the bot user
-  final String id;
+  final SnowflakeStringType id;
 
   /// The username of the bot
   final String username;

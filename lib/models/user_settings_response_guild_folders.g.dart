@@ -15,16 +15,16 @@ UserSettingsResponseGuildFolders _$UserSettingsResponseGuildFoldersFromJson(
           'guild_ids',
           (v) => (v as List<dynamic>).map((e) => e as String).toList(),
         ),
-        id: $checkedConvert('id', (v) => (v as num?)?.toInt()),
-        name: $checkedConvert('name', (v) => v as String?),
-        color: $checkedConvert('color', (v) => (v as num?)?.toInt()),
-        flags: $checkedConvert('flags', (v) => (v as num?)?.toInt()),
+        flags: $checkedConvert('flags', (v) => (v as num?)?.toInt() ?? 0),
         icon: $checkedConvert(
           'icon',
           (v) => v == null
-              ? null
-              : UserSettingsResponseGuildFoldersIconIcon.fromJson(v as String),
+              ? GuildFolderIconType.folder
+              : GuildFolderIconType.fromJson(v as String),
         ),
+        id: $checkedConvert('id', (v) => v ?? _omit),
+        name: $checkedConvert('name', (v) => v ?? _omit),
+        color: $checkedConvert('color', (v) => v ?? _omit),
       );
       return val;
     }, fieldKeyMap: const {'guildIds': 'guild_ids'});
@@ -35,7 +35,7 @@ Map<String, dynamic> _$UserSettingsResponseGuildFoldersToJson(
   'id': ?instance.id,
   'name': ?instance.name,
   'color': ?instance.color,
-  'flags': ?instance.flags,
-  'icon': ?instance.icon,
+  'flags': instance.flags,
+  'icon': instance.icon,
   'guild_ids': instance.guildIds,
 };

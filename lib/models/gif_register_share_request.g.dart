@@ -11,11 +11,11 @@ GifRegisterShareRequest _$GifRegisterShareRequestFromJson(
 ) => $checkedCreate('GifRegisterShareRequest', json, ($checkedConvert) {
   final val = GifRegisterShareRequest(
     id: $checkedConvert('id', (v) => v as String),
-    q: $checkedConvert('q', (v) => v as String?),
     locale: $checkedConvert(
       'locale',
-      (v) => v == null ? null : Locale.fromJson(v as String),
+      (v) => v == null ? Locale.enUs : Locale.fromJson(v as String),
     ),
+    q: $checkedConvert('q', (v) => v ?? _omit),
   );
   return val;
 });
@@ -25,5 +25,5 @@ Map<String, dynamic> _$GifRegisterShareRequestToJson(
 ) => <String, dynamic>{
   'id': instance.id,
   'q': ?instance.q,
-  'locale': ?instance.locale,
+  'locale': instance.locale,
 };

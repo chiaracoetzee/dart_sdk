@@ -19,44 +19,35 @@ WellKnownFluxerResponse _$WellKnownFluxerResponseFromJson(
       ),
       endpoints: $checkedConvert(
         'endpoints',
-        (v) => WellKnownFluxerResponseEndpoints.fromJson(
-          v as Map<String, dynamic>,
-        ),
+        (v) => InstanceEndpointsSchema.fromJson(v as Map<String, dynamic>),
       ),
       captcha: $checkedConvert(
         'captcha',
-        (v) =>
-            WellKnownFluxerResponseCaptcha.fromJson(v as Map<String, dynamic>),
+        (v) => InstanceCaptchaSchema.fromJson(v as Map<String, dynamic>),
       ),
       features: $checkedConvert(
         'features',
-        (v) =>
-            WellKnownFluxerResponseFeatures.fromJson(v as Map<String, dynamic>),
+        (v) => InstanceFeaturesSchema.fromJson(v as Map<String, dynamic>),
       ),
       gif: $checkedConvert(
         'gif',
-        (v) => WellKnownFluxerResponseGif.fromJson(v as Map<String, dynamic>),
+        (v) => InstanceGifSchema.fromJson(v as Map<String, dynamic>),
       ),
       sso: $checkedConvert(
         'sso',
-        (v) => WellKnownFluxerResponseSso.fromJson(v as Map<String, dynamic>),
+        (v) => InstanceSsoSchema.fromJson(v as Map<String, dynamic>),
       ),
       registration: $checkedConvert(
         'registration',
-        (v) => WellKnownFluxerResponseRegistration.fromJson(
-          v as Map<String, dynamic>,
-        ),
+        (v) => InstanceRegistrationSchema.fromJson(v as Map<String, dynamic>),
       ),
       community: $checkedConvert(
         'community',
-        (v) => WellKnownFluxerResponseCommunity.fromJson(
-          v as Map<String, dynamic>,
-        ),
+        (v) => InstanceCommunitySchema.fromJson(v as Map<String, dynamic>),
       ),
       services: $checkedConvert(
         'services',
-        (v) =>
-            WellKnownFluxerResponseServices.fromJson(v as Map<String, dynamic>),
+        (v) => InstanceServicesSchema.fromJson(v as Map<String, dynamic>),
       ),
       limits: $checkedConvert(
         'limits',
@@ -65,13 +56,11 @@ WellKnownFluxerResponse _$WellKnownFluxerResponseFromJson(
       ),
       push: $checkedConvert(
         'push',
-        (v) => WellKnownFluxerResponsePush.fromJson(v as Map<String, dynamic>),
+        (v) => InstancePushSchema.fromJson(v as Map<String, dynamic>),
       ),
       appPublic: $checkedConvert(
         'app_public',
-        (v) => WellKnownFluxerResponseAppPublic.fromJson(
-          v as Map<String, dynamic>,
-        ),
+        (v) => InstanceAppPublicSchema.fromJson(v as Map<String, dynamic>),
       ),
     );
     return val;

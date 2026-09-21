@@ -4,9 +4,6 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'expired_localized_card_preapproval_continue_response_status_status.dart';
-import 'localized_card_preapproval_continue_response.dart';
-
 part 'expired_localized_card_preapproval_continue_response.g.dart';
 
 @JsonSerializable()
@@ -18,7 +15,7 @@ class ExpiredLocalizedCardPreapprovalContinueResponse {
   ) => _$ExpiredLocalizedCardPreapprovalContinueResponseFromJson(json);
 
   /// The preapproval token has expired or is unknown
-  final ExpiredLocalizedCardPreapprovalContinueResponseStatusStatus status;
+  final String status;
 
   Map<String, Object?> toJson() =>
       _$ExpiredLocalizedCardPreapprovalContinueResponseToJson(this);

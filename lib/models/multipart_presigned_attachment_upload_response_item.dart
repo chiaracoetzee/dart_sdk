@@ -6,9 +6,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'int32_type.dart';
 import 'multipart_presigned_attachment_upload_response_item_parts.dart';
-import 'multipart_presigned_attachment_upload_response_item_upload_mode_upload_mode.dart';
 import 'non_negative_safe_integer_type.dart';
-import 'presigned_attachment_upload_response_item.dart';
 
 part 'multipart_presigned_attachment_upload_response_item.g.dart';
 
@@ -17,9 +15,9 @@ class MultipartPresignedAttachmentUploadResponseItem {
   const MultipartPresignedAttachmentUploadResponseItem({
     required this.id,
     required this.filename,
-    required this.uploadFilename,
     required this.fileSize,
     required this.contentType,
+    required this.uploadFilename,
     required this.uploadMode,
     required this.uploadId,
     required this.partSize,
@@ -30,27 +28,31 @@ class MultipartPresignedAttachmentUploadResponseItem {
     Map<String, Object?> json,
   ) => _$MultipartPresignedAttachmentUploadResponseItemFromJson(json);
 
+  /// The client-side identifier for this attachment
   final Int32Type id;
 
   /// The original filename for this upload
   final String filename;
 
-  /// Temporary upload key to reference in message send payloads
-  @JsonKey(name: 'upload_filename')
-  final String uploadFilename;
+  /// Expected file size in bytes
   @JsonKey(name: 'file_size')
   final NonNegativeSafeIntegerType fileSize;
 
   /// Expected MIME type for this upload
   @JsonKey(name: 'content_type')
   final String contentType;
+
+  /// Temporary upload key to reference in message send payloads
+  @JsonKey(name: 'upload_filename')
+  final String uploadFilename;
   @JsonKey(name: 'upload_mode')
-  final MultipartPresignedAttachmentUploadResponseItemUploadModeUploadMode
-  uploadMode;
+  final String uploadMode;
 
   /// S3 multipart upload identifier; required to complete the upload
   @JsonKey(name: 'upload_id')
   final String uploadId;
+
+  /// Size in bytes of each part except the last
   @JsonKey(name: 'part_size')
   final NonNegativeSafeIntegerType partSize;
 

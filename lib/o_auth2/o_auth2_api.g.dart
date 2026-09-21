@@ -131,7 +131,7 @@ class _OAuth2Api implements OAuth2Api {
 
   @override
   Future<void> deleteUserOauth2Authorization({
-    required String applicationId,
+    required SnowflakeType applicationId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -208,7 +208,9 @@ class _OAuth2Api implements OAuth2Api {
   }
 
   @override
-  Future<ApplicationResponse> getOauthApplication({required String id}) async {
+  Future<ApplicationResponse> getOauthApplication({
+    required SnowflakeType id,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -236,14 +238,15 @@ class _OAuth2Api implements OAuth2Api {
 
   @override
   Future<ApplicationResponse> updateOauthApplication({
-    required String id,
-    required ApplicationUpdateRequest body,
+    required SnowflakeType id,
+    ApplicationUpdateRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<ApplicationResponse>(
       Options(method: 'PATCH', headers: _headers, extra: _extra)
           .compose(
@@ -267,14 +270,15 @@ class _OAuth2Api implements OAuth2Api {
 
   @override
   Future<void> deleteOauthApplication({
-    required String id,
-    required SudoVerificationSchema body,
+    required SnowflakeType id,
+    SudoVerificationSchema? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<void>(
       Options(method: 'DELETE', headers: _headers, extra: _extra)
           .compose(
@@ -290,14 +294,15 @@ class _OAuth2Api implements OAuth2Api {
 
   @override
   Future<BotProfileResponse> updateBotProfile({
-    required String id,
-    required BotProfileUpdateRequest body,
+    required SnowflakeType id,
+    BotProfileUpdateRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<BotProfileResponse>(
       Options(method: 'PATCH', headers: _headers, extra: _extra)
           .compose(
@@ -321,14 +326,15 @@ class _OAuth2Api implements OAuth2Api {
 
   @override
   Future<BotTokenResetResponse> resetBotToken({
-    required String id,
-    required SudoVerificationSchema body,
+    required SnowflakeType id,
+    SudoVerificationSchema? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<BotTokenResetResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -352,14 +358,15 @@ class _OAuth2Api implements OAuth2Api {
 
   @override
   Future<ApplicationResponse> resetClientSecret({
-    required String id,
-    required SudoVerificationSchema body,
+    required SnowflakeType id,
+    SudoVerificationSchema? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<ApplicationResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -383,7 +390,7 @@ class _OAuth2Api implements OAuth2Api {
 
   @override
   Future<ApplicationPublicResponse> getPublicApplication({
-    required String id,
+    required SnowflakeType id,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -443,7 +450,7 @@ class _OAuth2Api implements OAuth2Api {
   @override
   Future<OAuth2IntrospectResponse> introspectOauth2Token({
     required String token,
-    String? clientId,
+    SnowflakeType? clientId,
     String? clientSecret,
   }) async {
     final _extra = <String, dynamic>{};
@@ -452,9 +459,9 @@ class _OAuth2Api implements OAuth2Api {
     final _headers = <String, dynamic>{};
     final _data = FormData();
     _data.fields.add(MapEntry('token', token));
-    if (clientId != null) {
-      _data.fields.add(MapEntry('client_id', clientId));
-    }
+    _data.fields.add(
+      MapEntry('client_id', jsonEncode(clientId ?? <String, dynamic>{})),
+    );
     if (clientSecret != null) {
       _data.fields.add(MapEntry('client_secret', clientSecret));
     }
@@ -489,7 +496,7 @@ class _OAuth2Api implements OAuth2Api {
     String? grantType,
     String? code,
     String? redirectUri,
-    String? clientId,
+    SnowflakeType? clientId,
     String? clientSecret,
     String? codeVerifier,
     String? refreshToken,
@@ -508,9 +515,9 @@ class _OAuth2Api implements OAuth2Api {
     if (redirectUri != null) {
       _data.fields.add(MapEntry('redirect_uri', redirectUri));
     }
-    if (clientId != null) {
-      _data.fields.add(MapEntry('client_id', clientId));
-    }
+    _data.fields.add(
+      MapEntry('client_id', jsonEncode(clientId ?? <String, dynamic>{})),
+    );
     if (clientSecret != null) {
       _data.fields.add(MapEntry('client_secret', clientSecret));
     }
@@ -549,9 +556,9 @@ class _OAuth2Api implements OAuth2Api {
   @override
   Future<void> revokeOauth2Token({
     required String token,
-    Enum0? tokenTypeHint,
-    String? clientId,
+    SnowflakeType? clientId,
     String? clientSecret,
+    TokenTypeHint? tokenTypeHint,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -559,14 +566,14 @@ class _OAuth2Api implements OAuth2Api {
     final _headers = <String, dynamic>{};
     final _data = FormData();
     _data.fields.add(MapEntry('token', token));
-    if (tokenTypeHint != null) {
-      _data.fields.add(MapEntry('token_type_hint', tokenTypeHint.toJson()));
-    }
-    if (clientId != null) {
-      _data.fields.add(MapEntry('client_id', clientId));
-    }
+    _data.fields.add(
+      MapEntry('client_id', jsonEncode(clientId ?? <String, dynamic>{})),
+    );
     if (clientSecret != null) {
       _data.fields.add(MapEntry('client_secret', clientSecret));
+    }
+    if (tokenTypeHint != null) {
+      _data.fields.add(MapEntry('token_type_hint', tokenTypeHint.toJson()));
     }
     final _options = _setStreamType<void>(
       Options(

@@ -13,8 +13,11 @@ StreamPreviewUploadUrlBodySchema _$StreamPreviewUploadUrlBodySchemaFromJson(
   json,
   ($checkedConvert) {
     final val = StreamPreviewUploadUrlBodySchema(
-      channelId: $checkedConvert('channel_id', (v) => v as String),
-      contentType: $checkedConvert('content_type', (v) => v as String?),
+      channelId: $checkedConvert(
+        'channel_id',
+        (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
+      ),
+      contentType: $checkedConvert('content_type', (v) => v ?? _omit),
     );
     return val;
   },

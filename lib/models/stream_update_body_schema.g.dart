@@ -10,7 +10,7 @@ StreamUpdateBodySchema _$StreamUpdateBodySchemaFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('StreamUpdateBodySchema', json, ($checkedConvert) {
   final val = StreamUpdateBodySchema(
-    region: $checkedConvert('region', (v) => v as String?),
+    region: $checkedConvert('region', (v) => v ?? _omit),
   );
   return val;
 });

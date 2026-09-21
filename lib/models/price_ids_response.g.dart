@@ -14,32 +14,31 @@ PriceIdsResponse _$PriceIdsResponseFromJson(Map<String, dynamic> json) =>
         final val = PriceIdsResponse(
           currency: $checkedConvert(
             'currency',
-            (v) => PriceIdsResponseCurrencyCurrency.fromJson(v as String),
+            (v) => PremiumCurrency.fromJson(v as String),
           ),
           giftCurrency: $checkedConvert(
             'gift_currency',
-            (v) =>
-                PriceIdsResponseGiftCurrencyGiftCurrency.fromJson(v as String),
+            (v) => PremiumCurrency.fromJson(v as String),
           ),
-          monthly: $checkedConvert('monthly', (v) => v as String?),
-          yearly: $checkedConvert('yearly', (v) => v as String?),
-          gift1Month: $checkedConvert('gift_1_month', (v) => v as String?),
-          gift1Year: $checkedConvert('gift_1_year', (v) => v as String?),
+          monthly: $checkedConvert('monthly', (v) => v ?? _omit),
+          yearly: $checkedConvert('yearly', (v) => v ?? _omit),
+          gift1Month: $checkedConvert('gift_1_month', (v) => v ?? _omit),
+          gift1Year: $checkedConvert('gift_1_year', (v) => v ?? _omit),
           monthlyAmountMinor: $checkedConvert(
             'monthly_amount_minor',
-            (v) => (v as num?)?.toInt(),
+            (v) => v ?? _omit,
           ),
           yearlyAmountMinor: $checkedConvert(
             'yearly_amount_minor',
-            (v) => (v as num?)?.toInt(),
+            (v) => v ?? _omit,
           ),
           gift1MonthAmountMinor: $checkedConvert(
             'gift_1_month_amount_minor',
-            (v) => (v as num?)?.toInt(),
+            (v) => v ?? _omit,
           ),
           gift1YearAmountMinor: $checkedConvert(
             'gift_1_year_amount_minor',
-            (v) => (v as num?)?.toInt(),
+            (v) => v ?? _omit,
           ),
         );
         return val;

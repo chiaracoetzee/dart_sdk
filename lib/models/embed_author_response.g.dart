@@ -13,9 +13,9 @@ EmbedAuthorResponse _$EmbedAuthorResponseFromJson(Map<String, dynamic> json) =>
       ($checkedConvert) {
         final val = EmbedAuthorResponse(
           name: $checkedConvert('name', (v) => v as String),
-          url: $checkedConvert('url', (v) => v as String?),
-          iconUrl: $checkedConvert('icon_url', (v) => v as String?),
-          proxyIconUrl: $checkedConvert('proxy_icon_url', (v) => v as String?),
+          url: $checkedConvert('url', (v) => v ?? _omit),
+          iconUrl: $checkedConvert('icon_url', (v) => v ?? _omit),
+          proxyIconUrl: $checkedConvert('proxy_icon_url', (v) => v ?? _omit),
         );
         return val;
       },

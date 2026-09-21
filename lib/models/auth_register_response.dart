@@ -4,9 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'auth_token_with_user_id_response_user.dart';
-import 'auth_register_response_variant2_mfa_mfa.dart';
-import 'auth_registration_pending_approval_response_registration_pending_approval_registration_pending_approval.dart';
+import 'snowflake_string_type.dart';
+import 'user_partial_response.dart';
 
 part 'auth_register_response.g.dart';
 
@@ -36,8 +35,8 @@ class AuthRegisterResponse {
 class AuthRegisterResponseAuthTokenWithUserIdResponse {
   final String token;
   @JsonKey(name: 'user_id')
-  final String userId;
-  final AuthTokenWithUserIdResponseUser user;
+  final SnowflakeStringType userId;
+  final UserPartialResponse user;
 
   const AuthRegisterResponseAuthTokenWithUserIdResponse({
     required this.token,
@@ -55,12 +54,14 @@ class AuthRegisterResponseAuthTokenWithUserIdResponse {
 
 @JsonSerializable()
 class AuthRegisterResponseVariant2 {
-  final AuthRegisterResponseVariant2MfaMfa mfa;
+  final bool mfa;
   final String ticket;
   @JsonKey(name: 'allowed_methods')
   final List<String> allowedMethods;
   final bool totp;
   final bool webauthn;
+  @JsonKey(name: 'backup_codes')
+  final bool backupCodes;
 
   const AuthRegisterResponseVariant2({
     required this.mfa,
@@ -68,6 +69,7 @@ class AuthRegisterResponseVariant2 {
     required this.allowedMethods,
     required this.totp,
     required this.webauthn,
+    required this.backupCodes,
   });
 
   factory AuthRegisterResponseVariant2.fromJson(Map<String, dynamic> json) =>
@@ -79,10 +81,9 @@ class AuthRegisterResponseVariant2 {
 @JsonSerializable()
 class AuthRegisterResponseAuthRegistrationPendingApprovalResponse {
   @JsonKey(name: 'registration_pending_approval')
-  final AuthRegistrationPendingApprovalResponseRegistrationPendingApprovalRegistrationPendingApproval
-  registrationPendingApproval;
+  final bool registrationPendingApproval;
   @JsonKey(name: 'user_id')
-  final String userId;
+  final SnowflakeStringType userId;
 
   const AuthRegisterResponseAuthRegistrationPendingApprovalResponse({
     required this.registrationPendingApproval,

@@ -55,10 +55,7 @@ MessageSearchResponseVariant2 _$MessageSearchResponseVariant2FromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('MessageSearchResponseVariant2', json, ($checkedConvert) {
   final val = MessageSearchResponseVariant2(
-    indexing: $checkedConvert(
-      'indexing',
-      (v) => MessageSearchResponseVariant2IndexingIndexing.fromJson(v as bool),
-    ),
+    indexing: $checkedConvert('indexing', (v) => v as bool),
   );
   return val;
 });

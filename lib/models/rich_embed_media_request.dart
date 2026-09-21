@@ -16,26 +16,23 @@ class RichEmbedMediaRequest {
 
   Map<String, dynamic> toJson() => _json;
 
-  RichEmbedMediaRequestRichEmbedMediaRequestShape
-  toRichEmbedMediaRequestShape() =>
-      RichEmbedMediaRequestRichEmbedMediaRequestShape.fromJson(_json);
+  RichEmbedMediaRequestVariant1 toVariant1() =>
+      RichEmbedMediaRequestVariant1.fromJson(_json);
 }
 
 @JsonSerializable()
-class RichEmbedMediaRequestRichEmbedMediaRequestShape {
+class RichEmbedMediaRequestVariant1 {
   final String url;
   @JsonKey(includeIfNull: false)
   final String? description;
 
-  const RichEmbedMediaRequestRichEmbedMediaRequestShape({
+  const RichEmbedMediaRequestVariant1({
     required this.url,
     required this.description,
   });
 
-  factory RichEmbedMediaRequestRichEmbedMediaRequestShape.fromJson(
-    Map<String, dynamic> json,
-  ) => _$RichEmbedMediaRequestRichEmbedMediaRequestShapeFromJson(json);
+  factory RichEmbedMediaRequestVariant1.fromJson(Map<String, dynamic> json) =>
+      _$RichEmbedMediaRequestVariant1FromJson(json);
 
-  Map<String, dynamic> toJson() =>
-      _$RichEmbedMediaRequestRichEmbedMediaRequestShapeToJson(this);
+  Map<String, dynamic> toJson() => _$RichEmbedMediaRequestVariant1ToJson(this);
 }

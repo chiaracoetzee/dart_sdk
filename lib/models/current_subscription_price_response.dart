@@ -4,7 +4,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'current_subscription_price_response_variant1_currency_currency.dart';
+import 'premium_currency.dart';
 import 'current_subscription_price_response_variant1_billing_cycle_billing_cycle.dart';
 
 part 'current_subscription_price_response.g.dart';
@@ -30,7 +30,7 @@ class CurrentSubscriptionPriceResponseVariant1 {
   final String priceId;
   @JsonKey(name: 'amount_minor')
   final int amountMinor;
-  final CurrentSubscriptionPriceResponseVariant1CurrencyCurrency currency;
+  final PremiumCurrency currency;
   @JsonKey(name: 'billing_cycle')
   final CurrentSubscriptionPriceResponseVariant1BillingCycleBillingCycle
   billingCycle;

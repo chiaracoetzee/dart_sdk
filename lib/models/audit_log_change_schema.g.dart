@@ -11,8 +11,8 @@ AuditLogChangeSchema _$AuditLogChangeSchemaFromJson(
 ) => $checkedCreate('AuditLogChangeSchema', json, ($checkedConvert) {
   final val = AuditLogChangeSchema(
     key: $checkedConvert('key', (v) => v as String),
-    oldValue: $checkedConvert('old_value', (v) => v),
-    newValue: $checkedConvert('new_value', (v) => v),
+    oldValue: $checkedConvert('old_value', (v) => v ?? _omit),
+    newValue: $checkedConvert('new_value', (v) => v ?? _omit),
   );
   return val;
 }, fieldKeyMap: const {'oldValue': 'old_value', 'newValue': 'new_value'});

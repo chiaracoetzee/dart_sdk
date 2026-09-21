@@ -5,34 +5,58 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'channel_partial_response_recipients.dart';
+import 'channel_type.dart';
+import 'snowflake_string_type.dart';
 
 part 'channel_partial_response.g.dart';
+
+const Object _omit = Object();
 
 @JsonSerializable()
 class ChannelPartialResponse {
   const ChannelPartialResponse({
     required this.id,
     required this.type,
-    this.name,
-    this.recipients,
-  });
-
-  factory ChannelPartialResponse.fromJson(Map<String, Object?> json) =>
-      _$ChannelPartialResponseFromJson(json);
+    Object? name = _omit,
+    Object? recipients = _omit,
+  }) : name = identical(name, _omit) ? null : name as String?,
+       _namePresent = !identical(name, _omit),
+       recipients = identical(recipients, _omit)
+           ? null
+           : recipients as List<ChannelPartialResponseRecipients>?,
+       _recipientsPresent = !identical(recipients, _omit);
+  factory ChannelPartialResponse.fromJson(Map<String, Object?> json) {
+    final value = _$ChannelPartialResponseFromJson(json);
+    return ChannelPartialResponse(
+      id: value.id,
+      type: value.type,
+      name: json.containsKey('name') ? value.name : _omit,
+      recipients: json.containsKey('recipients') ? value.recipients : _omit,
+    );
+  }
 
   /// The unique identifier (snowflake) for this channel
-  final String id;
+  final SnowflakeStringType id;
 
   /// The name of the channel
   @JsonKey(includeIfNull: false)
   final String? name;
-
-  /// The type of the channel
-  final int type;
+  final ChannelType type;
 
   /// The recipients of the DM channel
   @JsonKey(includeIfNull: false)
   final List<ChannelPartialResponseRecipients>? recipients;
+  final bool _namePresent;
+  final bool _recipientsPresent;
 
-  Map<String, Object?> toJson() => _$ChannelPartialResponseToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$ChannelPartialResponseToJson(this);
+    if (_namePresent) {
+      json.putIfAbsent('name', () => name);
+    }
+    if (_recipientsPresent) {
+      json.putIfAbsent('recipients', () => recipients);
+    }
+    return json;
+  }
 }

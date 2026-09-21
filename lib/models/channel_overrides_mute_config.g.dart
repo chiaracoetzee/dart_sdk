@@ -13,23 +13,23 @@ ChannelOverridesMuteConfig _$ChannelOverridesMuteConfigFromJson(
   json,
   ($checkedConvert) {
     final val = ChannelOverridesMuteConfig(
-      endTime: $checkedConvert('end_time', (v) => v as String?),
       selectedTimeWindow: $checkedConvert(
         'selected_time_window',
         (v) => (v as num).toInt(),
       ),
+      endTime: $checkedConvert('end_time', (v) => v ?? _omit),
     );
     return val;
   },
   fieldKeyMap: const {
-    'endTime': 'end_time',
     'selectedTimeWindow': 'selected_time_window',
+    'endTime': 'end_time',
   },
 );
 
 Map<String, dynamic> _$ChannelOverridesMuteConfigToJson(
   ChannelOverridesMuteConfig instance,
 ) => <String, dynamic>{
-  'end_time': instance.endTime,
+  'end_time': ?instance.endTime,
   'selected_time_window': instance.selectedTimeWindow,
 };

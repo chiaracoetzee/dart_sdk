@@ -14,10 +14,7 @@ VerifyAndCreateConnectionRequest _$VerifyAndCreateConnectionRequestFromJson(
   ($checkedConvert) {
     final val = VerifyAndCreateConnectionRequest(
       initiationToken: $checkedConvert('initiation_token', (v) => v as String),
-      visibilityFlags: $checkedConvert(
-        'visibility_flags',
-        (v) => (v as num?)?.toInt(),
-      ),
+      visibilityFlags: $checkedConvert('visibility_flags', (v) => v ?? _omit),
     );
     return val;
   },

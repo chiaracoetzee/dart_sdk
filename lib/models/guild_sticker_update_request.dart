@@ -6,16 +6,26 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'guild_sticker_update_request.g.dart';
 
+const Object _omit = Object();
+
 @JsonSerializable()
 class GuildStickerUpdateRequest {
   const GuildStickerUpdateRequest({
     required this.name,
-    this.description,
-    this.tags,
-  });
-
-  factory GuildStickerUpdateRequest.fromJson(Map<String, Object?> json) =>
-      _$GuildStickerUpdateRequestFromJson(json);
+    this.tags = const [],
+    Object? description = _omit,
+  }) : description = identical(description, _omit)
+           ? null
+           : description as String?,
+       _descriptionPresent = !identical(description, _omit);
+  factory GuildStickerUpdateRequest.fromJson(Map<String, Object?> json) {
+    final value = _$GuildStickerUpdateRequestFromJson(json);
+    return GuildStickerUpdateRequest(
+      name: value.name,
+      tags: value.tags,
+      description: json.containsKey('description') ? value.description : _omit,
+    );
+  }
 
   /// The name of the sticker (2-30 characters)
   final String name;
@@ -25,8 +35,14 @@ class GuildStickerUpdateRequest {
   final String? description;
 
   /// Array of autocomplete/suggestion tags (max 10 tags, each 1-30 characters)
-  @JsonKey(includeIfNull: false)
-  final List<String>? tags;
+  final List<String> tags;
+  final bool _descriptionPresent;
 
-  Map<String, Object?> toJson() => _$GuildStickerUpdateRequestToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$GuildStickerUpdateRequestToJson(this);
+    if (_descriptionPresent) {
+      json.putIfAbsent('description', () => description);
+    }
+    return json;
+  }
 }

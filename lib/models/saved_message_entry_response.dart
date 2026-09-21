@@ -5,7 +5,8 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'message_response_schema.dart';
-import 'saved_message_entry_response_status_status.dart';
+import 'saved_message_status_schema.dart';
+import 'snowflake_string_type.dart';
 
 part 'saved_message_entry_response.g.dart';
 
@@ -23,18 +24,18 @@ class SavedMessageEntryResponse {
       _$SavedMessageEntryResponseFromJson(json);
 
   /// Unique identifier for the saved message entry
-  final String id;
+  final SnowflakeStringType id;
 
   /// ID of the channel containing the message
   @JsonKey(name: 'channel_id')
-  final String channelId;
+  final SnowflakeStringType channelId;
 
   /// ID of the saved message
   @JsonKey(name: 'message_id')
-  final String messageId;
+  final SnowflakeStringType messageId;
 
   /// Availability status of the saved message
-  final SavedMessageEntryResponseStatusStatus status;
+  final SavedMessageStatusSchema status;
 
   /// The message content if available
   @JsonKey(includeIfNull: true)

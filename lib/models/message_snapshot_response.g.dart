@@ -19,57 +19,17 @@ MessageSnapshotResponse _$MessageSnapshotResponseFromJson(
       ),
       type: $checkedConvert(
         'type',
-        (v) => MessageSnapshotResponseTypeType.fromJson((v as num).toInt()),
+        (v) => MessageType.fromJson((v as num).toInt()),
       ),
       flags: $checkedConvert('flags', (v) => (v as num).toInt()),
-      content: $checkedConvert('content', (v) => v as String?),
-      editedTimestamp: $checkedConvert(
-        'edited_timestamp',
-        (v) => v == null ? null : DateTime.parse(v as String),
-      ),
-      mentions: $checkedConvert(
-        'mentions',
-        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
-      ),
-      mentionRoles: $checkedConvert(
-        'mention_roles',
-        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
-      ),
-      mentionChannels: $checkedConvert(
-        'mention_channels',
-        (v) => (v as List<dynamic>?)
-            ?.map(
-              (e) => MessageChannelMentionResponse.fromJson(
-                e as Map<String, dynamic>,
-              ),
-            )
-            .toList(),
-      ),
-      embeds: $checkedConvert(
-        'embeds',
-        (v) => (v as List<dynamic>?)
-            ?.map(
-              (e) => MessageEmbedResponse.fromJson(e as Map<String, dynamic>),
-            )
-            .toList(),
-      ),
-      attachments: $checkedConvert(
-        'attachments',
-        (v) => (v as List<dynamic>?)
-            ?.map(
-              (e) =>
-                  MessageAttachmentResponse.fromJson(e as Map<String, dynamic>),
-            )
-            .toList(),
-      ),
-      stickers: $checkedConvert(
-        'stickers',
-        (v) => (v as List<dynamic>?)
-            ?.map(
-              (e) => MessageStickerResponse.fromJson(e as Map<String, dynamic>),
-            )
-            .toList(),
-      ),
+      content: $checkedConvert('content', (v) => v ?? _omit),
+      editedTimestamp: $checkedConvert('edited_timestamp', (v) => v ?? _omit),
+      mentions: $checkedConvert('mentions', (v) => v ?? _omit),
+      mentionRoles: $checkedConvert('mention_roles', (v) => v ?? _omit),
+      mentionChannels: $checkedConvert('mention_channels', (v) => v ?? _omit),
+      embeds: $checkedConvert('embeds', (v) => v ?? _omit),
+      attachments: $checkedConvert('attachments', (v) => v ?? _omit),
+      stickers: $checkedConvert('stickers', (v) => v ?? _omit),
     );
     return val;
   },

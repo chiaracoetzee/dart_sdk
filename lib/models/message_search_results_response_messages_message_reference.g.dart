@@ -20,7 +20,7 @@ _$MessageSearchResultsResponseMessagesMessageReferenceFromJson(
         'type',
         (v) => MessageReferenceType.fromJson((v as num).toInt()),
       ),
-      guildId: $checkedConvert('guild_id', (v) => v as String?),
+      guildId: $checkedConvert('guild_id', (v) => v ?? _omit),
     );
     return val;
   },

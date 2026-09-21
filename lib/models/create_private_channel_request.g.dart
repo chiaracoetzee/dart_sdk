@@ -10,11 +10,8 @@ CreatePrivateChannelRequest _$CreatePrivateChannelRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('CreatePrivateChannelRequest', json, ($checkedConvert) {
   final val = CreatePrivateChannelRequest(
-    recipientId: $checkedConvert('recipient_id', (v) => v as String?),
-    recipients: $checkedConvert(
-      'recipients',
-      (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
-    ),
+    recipientId: $checkedConvert('recipient_id', (v) => v ?? _omit),
+    recipients: $checkedConvert('recipients', (v) => v ?? _omit),
   );
   return val;
 }, fieldKeyMap: const {'recipientId': 'recipient_id'});

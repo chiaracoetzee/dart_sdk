@@ -4,10 +4,12 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'user_notification_settings.dart';
+import 'user_notification_settings_input.dart';
 import 'channel_overrides_mute_config.dart';
 
 part 'channel_overrides.g.dart';
+
+const Object _omit = Object();
 
 @JsonSerializable()
 class ChannelOverrides {
@@ -15,30 +17,57 @@ class ChannelOverrides {
     required this.collapsed,
     required this.messageNotifications,
     required this.muted,
-    required this.muteConfig,
-    this.unreadBadges,
-  });
+    Object? muteConfig = _omit,
+    Object? unreadBadges = _omit,
+  }) : muteConfig = identical(muteConfig, _omit)
+           ? null
+           : muteConfig as ChannelOverridesMuteConfig?,
+       _muteConfigPresent = !identical(muteConfig, _omit),
+       unreadBadges = identical(unreadBadges, _omit)
+           ? null
+           : unreadBadges as UserNotificationSettingsInput?,
+       _unreadBadgesPresent = !identical(unreadBadges, _omit);
+  factory ChannelOverrides.fromJson(Map<String, Object?> json) {
+    final value = _$ChannelOverridesFromJson(json);
+    return ChannelOverrides(
+      collapsed: value.collapsed,
+      messageNotifications: value.messageNotifications,
+      muted: value.muted,
+      muteConfig: json.containsKey('mute_config') ? value.muteConfig : _omit,
+      unreadBadges: json.containsKey('unread_badges')
+          ? value.unreadBadges
+          : _omit,
+    );
+  }
 
-  factory ChannelOverrides.fromJson(Map<String, Object?> json) =>
-      _$ChannelOverridesFromJson(json);
-
-  /// Whether the channel category is collapsed in the sidebar
+  /// Channel category collapsed
   final bool collapsed;
 
-  /// The notification level override for this channel
+  /// Channel notification level
   @JsonKey(name: 'message_notifications')
-  final UserNotificationSettings messageNotifications;
+  final UserNotificationSettingsInput messageNotifications;
 
-  /// Whether notifications are muted for this channel
+  /// Channel muted
   final bool muted;
 
-  /// The mute configuration for this channel
-  @JsonKey(includeIfNull: true, name: 'mute_config')
+  /// Channel mute configuration
+  @JsonKey(includeIfNull: false, name: 'mute_config')
   final ChannelOverridesMuteConfig? muteConfig;
 
   /// Unread badges level override for this channel
   @JsonKey(includeIfNull: false, name: 'unread_badges')
-  final UserNotificationSettings? unreadBadges;
+  final UserNotificationSettingsInput? unreadBadges;
+  final bool _muteConfigPresent;
+  final bool _unreadBadgesPresent;
 
-  Map<String, Object?> toJson() => _$ChannelOverridesToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$ChannelOverridesToJson(this);
+    if (_muteConfigPresent) {
+      json.putIfAbsent('mute_config', () => muteConfig);
+    }
+    if (_unreadBadgesPresent) {
+      json.putIfAbsent('unread_badges', () => unreadBadges);
+    }
+    return json;
+  }
 }

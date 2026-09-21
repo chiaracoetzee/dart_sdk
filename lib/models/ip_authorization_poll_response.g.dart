@@ -11,14 +11,9 @@ IpAuthorizationPollResponse _$IpAuthorizationPollResponseFromJson(
 ) => $checkedCreate('IpAuthorizationPollResponse', json, ($checkedConvert) {
   final val = IpAuthorizationPollResponse(
     completed: $checkedConvert('completed', (v) => v as bool),
-    token: $checkedConvert('token', (v) => v as String?),
-    userId: $checkedConvert('user_id', (v) => v as String?),
-    user: $checkedConvert(
-      'user',
-      (v) => v == null
-          ? null
-          : UserPartialResponse.fromJson(v as Map<String, dynamic>),
-    ),
+    token: $checkedConvert('token', (v) => v ?? _omit),
+    userId: $checkedConvert('user_id', (v) => v ?? _omit),
+    user: $checkedConvert('user', (v) => v ?? _omit),
   );
   return val;
 }, fieldKeyMap: const {'userId': 'user_id'});

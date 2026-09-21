@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'snowflake_string_type.dart';
+
 part 'phone_gate_escape_preview_response_guilds.g.dart';
 
 @JsonSerializable()
@@ -18,7 +20,7 @@ class PhoneGateEscapePreviewResponseGuilds {
   ) => _$PhoneGateEscapePreviewResponseGuildsFromJson(json);
 
   /// The unique identifier (snowflake) for the community
-  final String id;
+  final SnowflakeStringType id;
 
   /// The community name
   final String name;

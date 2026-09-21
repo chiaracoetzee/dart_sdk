@@ -10,7 +10,10 @@ WebAuthnAuthenticateRequest _$WebAuthnAuthenticateRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('WebAuthnAuthenticateRequest', json, ($checkedConvert) {
   final val = WebAuthnAuthenticateRequest(
-    response: $checkedConvert('response', (v) => v),
+    response: $checkedConvert(
+      'response',
+      (v) => WebAuthnAuthenticationResponse.fromJson(v as Map<String, dynamic>),
+    ),
     challenge: $checkedConvert('challenge', (v) => v as String),
   );
   return val;

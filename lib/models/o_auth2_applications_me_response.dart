@@ -4,7 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'applications_me_response_owner.dart';
+import 'snowflake_string_type.dart';
+import 'user_partial_response.dart';
 import 'applications_me_response_bot.dart';
 
 part 'o_auth2_applications_me_response.g.dart';
@@ -41,7 +42,7 @@ class OAuth2ApplicationsMeResponseApplicationListResponse {
 
 @JsonSerializable()
 class OAuth2ApplicationsMeResponseApplicationsMeResponse {
-  final String id;
+  final SnowflakeStringType id;
   final String name;
   @JsonKey(includeIfNull: true)
   final String? icon;
@@ -53,7 +54,7 @@ class OAuth2ApplicationsMeResponseApplicationsMeResponse {
   final bool botRequireCodeGrant;
   @JsonKey(name: 'verify_key')
   final String verifyKey;
-  final ApplicationsMeResponseOwner owner;
+  final UserPartialResponse owner;
   @JsonKey(includeIfNull: false)
   final ApplicationsMeResponseBot? bot;
   @JsonKey(includeIfNull: false, name: 'redirect_uris')

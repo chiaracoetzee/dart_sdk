@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'snowflake_string_type.dart';
+
 part 'message_sticker_response.g.dart';
 
 @JsonSerializable()
@@ -18,7 +20,7 @@ class MessageStickerResponse {
       _$MessageStickerResponseFromJson(json);
 
   /// The unique identifier of the sticker
-  final String id;
+  final SnowflakeStringType id;
 
   /// The name of the sticker
   final String name;

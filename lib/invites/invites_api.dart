@@ -7,6 +7,7 @@ import 'package:retrofit/retrofit.dart';
 import 'package:retrofit/error_logger.dart';
 
 import '../models/channel_invite_create_request.dart';
+import '../models/invite_metadata_list_response.dart';
 import '../models/invite_metadata_response_schema.dart';
 import '../models/invite_response_schema.dart';
 import '../models/snowflake_type.dart';
@@ -27,7 +28,7 @@ abstract class InvitesApi {
   @POST('/channels/{channel_id}/invites')
   Future<InviteMetadataResponseSchema> createChannelInvite({
     @Path('channel_id') required SnowflakeType channelId,
-    @Body() required ChannelInviteCreateRequest body,
+    @Body() ChannelInviteCreateRequest? body,
   });
 
   /// List channel invites.
@@ -36,7 +37,7 @@ abstract class InvitesApi {
   ///
   /// [channelId] - The ID of the channel.
   @GET('/channels/{channel_id}/invites')
-  Future<List<InviteMetadataResponseSchema>> listChannelInvites({
+  Future<InviteMetadataListResponse> listChannelInvites({
     @Path('channel_id') required SnowflakeType channelId,
   });
 
@@ -46,7 +47,7 @@ abstract class InvitesApi {
   ///
   /// [guildId] - The ID of the guild.
   @GET('/guilds/{guild_id}/invites')
-  Future<List<InviteMetadataResponseSchema>> listGuildInvites({
+  Future<InviteMetadataListResponse> listGuildInvites({
     @Path('guild_id') required SnowflakeType guildId,
   });
 
@@ -54,7 +55,7 @@ abstract class InvitesApi {
   ///
   /// Fetches detailed information about an invite using its code, including the guild or channel it belongs to and metadata such as expiration and usage limits. This endpoint does not require authentication and does not consume the invite.
   ///
-  /// [inviteCode] - The invite code.
+  /// [inviteCode] - The unique invite code.
   @GET('/invites/{invite_code}')
   Future<InviteResponseSchema> getInvite({
     @Path('invite_code') required String inviteCode,
@@ -64,7 +65,7 @@ abstract class InvitesApi {
   ///
   /// Accepts an invite using its code, adding the authenticated user to the corresponding guild or other entity. The invite usage count is incremented, and if it reaches its maximum usage limit or expiration, the invite is automatically revoked. Returns the accepted invite details.
   ///
-  /// [inviteCode] - The invite code.
+  /// [inviteCode] - The unique invite code.
   @POST('/invites/{invite_code}')
   Future<InviteResponseSchema> acceptInvite({
     @Path('invite_code') required String inviteCode,
@@ -74,7 +75,7 @@ abstract class InvitesApi {
   ///
   /// Permanently deletes an invite by its code, preventing any further usage. The authenticated user must have permission to manage invites for the guild or channel associated with the invite. This action can be logged in the audit log if an X-Audit-Log-Reason header is provided.
   ///
-  /// [inviteCode] - The invite code.
+  /// [inviteCode] - The unique invite code.
   @DELETE('/invites/{invite_code}')
   Future<void> deleteInvite({@Path('invite_code') required String inviteCode});
 }

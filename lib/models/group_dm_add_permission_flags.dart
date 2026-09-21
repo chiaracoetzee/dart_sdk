@@ -2,5 +2,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, unused_import, invalid_annotation_target, unnecessary_import
 
-/// Group DM add permissions
+/// Bitfield for group DM add permissions
 typedef GroupDmAddPermissionFlags = int;

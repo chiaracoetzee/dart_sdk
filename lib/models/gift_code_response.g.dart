@@ -15,20 +15,14 @@ GiftCodeResponse _$GiftCodeResponseFromJson(Map<String, dynamic> json) =>
           code: $checkedConvert('code', (v) => v as String),
           durationType: $checkedConvert(
             'duration_type',
-            (v) =>
-                GiftCodeResponseDurationTypeDurationType.fromJson(v as String),
+            (v) => GiftCodeDurationTypeSchema.fromJson(v as String),
           ),
           durationQuantity: $checkedConvert(
             'duration_quantity',
             (v) => (v as num).toInt(),
           ),
           redeemed: $checkedConvert('redeemed', (v) => v as bool),
-          createdBy: $checkedConvert(
-            'created_by',
-            (v) => v == null
-                ? null
-                : UserPartialResponse.fromJson(v as Map<String, dynamic>),
-          ),
+          createdBy: $checkedConvert('created_by', (v) => v ?? _omit),
         );
         return val;
       },

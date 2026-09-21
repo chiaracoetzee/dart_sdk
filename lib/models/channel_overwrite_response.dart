@@ -4,7 +4,9 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'channel_overwrite_response_type_type.dart';
+import 'channel_overwrite_type.dart';
+import 'permissions.dart';
+import 'snowflake_string_type.dart';
 
 part 'channel_overwrite_response.g.dart';
 
@@ -21,16 +23,14 @@ class ChannelOverwriteResponse {
       _$ChannelOverwriteResponseFromJson(json);
 
   /// The unique identifier for the role or user this overwrite applies to
-  final String id;
-
-  /// The type of entity the overwrite applies to
-  final ChannelOverwriteResponseTypeType type;
+  final SnowflakeStringType id;
+  final ChannelOverwriteType type;
 
   /// The bitwise value of allowed permissions
-  final String allow;
+  final Permissions allow;
 
   /// The bitwise value of denied permissions
-  final String deny;
+  final Permissions deny;
 
   Map<String, Object?> toJson() => _$ChannelOverwriteResponseToJson(this);
 }

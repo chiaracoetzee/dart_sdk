@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'snowflake_string_type.dart';
+
 part 'guild_emoji_response.g.dart';
 
 @JsonSerializable()
@@ -19,7 +21,7 @@ class GuildEmojiResponse {
       _$GuildEmojiResponseFromJson(json);
 
   /// The unique identifier for this emoji
-  final String id;
+  final SnowflakeStringType id;
 
   /// The name of the emoji
   final String name;

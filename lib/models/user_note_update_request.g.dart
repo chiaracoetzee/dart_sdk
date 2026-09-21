@@ -10,7 +10,7 @@ UserNoteUpdateRequest _$UserNoteUpdateRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('UserNoteUpdateRequest', json, ($checkedConvert) {
   final val = UserNoteUpdateRequest(
-    note: $checkedConvert('note', (v) => v as String?),
+    note: $checkedConvert('note', (v) => v ?? _omit),
   );
   return val;
 });

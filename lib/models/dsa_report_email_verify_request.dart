@@ -15,6 +15,7 @@ class DsaReportEmailVerifyRequest {
   factory DsaReportEmailVerifyRequest.fromJson(Map<String, Object?> json) =>
       _$DsaReportEmailVerifyRequestFromJson(json);
 
+  /// Email address that received the verification code
   final EmailType email;
 
   /// Verification code received via email

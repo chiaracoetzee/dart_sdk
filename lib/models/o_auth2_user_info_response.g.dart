@@ -16,9 +16,9 @@ OAuth2UserInfoResponse _$OAuth2UserInfoResponseFromJson(
     discriminator: $checkedConvert('discriminator', (v) => v as String),
     globalName: $checkedConvert('global_name', (v) => v as String?),
     avatar: $checkedConvert('avatar', (v) => v as String?),
-    email: $checkedConvert('email', (v) => v as String?),
-    verified: $checkedConvert('verified', (v) => v as bool?),
-    flags: $checkedConvert('flags', (v) => (v as num?)?.toInt()),
+    email: $checkedConvert('email', (v) => v ?? _omit),
+    verified: $checkedConvert('verified', (v) => v ?? _omit),
+    flags: $checkedConvert('flags', (v) => v ?? _omit),
   );
   return val;
 }, fieldKeyMap: const {'globalName': 'global_name'});

@@ -4,7 +4,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'voice_noise_suppression_assignment_response_guild_overrides_backend_backend.dart';
+import 'voice_noise_suppression_backend_schema.dart';
 
 part 'voice_noise_suppression_assignment_response_guild_overrides.g.dart';
 
@@ -21,8 +21,7 @@ class VoiceNoiseSuppressionAssignmentResponseGuildOverrides {
 
   @JsonKey(name: 'guild_id')
   final String guildId;
-  final VoiceNoiseSuppressionAssignmentResponseGuildOverridesBackendBackend
-  backend;
+  final VoiceNoiseSuppressionBackendSchema backend;
 
   Map<String, Object?> toJson() =>
       _$VoiceNoiseSuppressionAssignmentResponseGuildOverridesToJson(this);

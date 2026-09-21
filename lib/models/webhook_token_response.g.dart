@@ -15,7 +15,7 @@ WebhookTokenResponse _$WebhookTokenResponseFromJson(
     channelId: $checkedConvert('channel_id', (v) => v as String),
     name: $checkedConvert('name', (v) => v as String),
     token: $checkedConvert('token', (v) => v as String),
-    avatar: $checkedConvert('avatar', (v) => v as String?),
+    avatar: $checkedConvert('avatar', (v) => v ?? _omit),
   );
   return val;
 }, fieldKeyMap: const {'guildId': 'guild_id', 'channelId': 'channel_id'});

@@ -6,13 +6,13 @@ import 'package:dio/dio.dart' hide Headers;
 
 import 'instance/instance_api.dart';
 import 'o_auth2/o_auth2_api.dart';
+import 'messages/messages_api.dart';
 import 'auth/auth_api.dart';
 import 'channels/channels_api.dart';
 import 'invites/invites_api.dart';
 import 'saved_media/saved_media_api.dart';
 import 'webhooks/webhooks_api.dart';
 import 'discovery/discovery_api.dart';
-import 'downloads/downloads_api.dart';
 import 'donations/donations_api.dart';
 import 'emojis/emojis_api.dart';
 import 'experiments/experiments_api.dart';
@@ -47,13 +47,13 @@ class FluxerClient {
 
   InstanceApi? _instance;
   OAuth2Api? _oAuth2;
+  MessagesApi? _messages;
   AuthApi? _auth;
   ChannelsApi? _channels;
   InvitesApi? _invites;
   SavedMediaApi? _savedMedia;
   WebhooksApi? _webhooks;
   DiscoveryApi? _discovery;
-  DownloadsApi? _downloads;
   DonationsApi? _donations;
   EmojisApi? _emojis;
   ExperimentsApi? _experiments;
@@ -80,6 +80,9 @@ class FluxerClient {
 
   OAuth2Api get oAuth2 => _oAuth2 ??= OAuth2Api(_dio, baseUrl: _baseUrl);
 
+  MessagesApi get messages =>
+      _messages ??= MessagesApi(_dio, baseUrl: _baseUrl);
+
   AuthApi get auth => _auth ??= AuthApi(_dio, baseUrl: _baseUrl);
 
   ChannelsApi get channels =>
@@ -95,9 +98,6 @@ class FluxerClient {
 
   DiscoveryApi get discovery =>
       _discovery ??= DiscoveryApi(_dio, baseUrl: _baseUrl);
-
-  DownloadsApi get downloads =>
-      _downloads ??= DownloadsApi(_dio, baseUrl: _baseUrl);
 
   DonationsApi get donations =>
       _donations ??= DonationsApi(_dio, baseUrl: _baseUrl);

@@ -12,7 +12,9 @@ PreloadMessagesRequest _$PreloadMessagesRequestFromJson(
   final val = PreloadMessagesRequest(
     channels: $checkedConvert(
       'channels',
-      (v) => (v as List<dynamic>).map((e) => e as String).toList(),
+      (v) => (v as List<dynamic>)
+          .map((e) => SnowflakeType.fromJson(e as Map<String, dynamic>))
+          .toList(),
     ),
   );
   return val;

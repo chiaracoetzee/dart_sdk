@@ -5,9 +5,12 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'application_public_response_bot.dart';
+import 'snowflake_string_type.dart';
 import 'user_partial_response.dart';
 
 part 'application_public_response.g.dart';
+
+const Object _omit = Object();
 
 @JsonSerializable()
 class ApplicationPublicResponse {
@@ -20,14 +23,28 @@ class ApplicationPublicResponse {
     required this.scopes,
     required this.botPublic,
     required this.bot,
-    this.currentUser,
-  });
-
-  factory ApplicationPublicResponse.fromJson(Map<String, Object?> json) =>
-      _$ApplicationPublicResponseFromJson(json);
+    Object? currentUser = _omit,
+  }) : currentUser = identical(currentUser, _omit)
+           ? null
+           : currentUser as UserPartialResponse?,
+       _currentUserPresent = !identical(currentUser, _omit);
+  factory ApplicationPublicResponse.fromJson(Map<String, Object?> json) {
+    final value = _$ApplicationPublicResponseFromJson(json);
+    return ApplicationPublicResponse(
+      id: value.id,
+      name: value.name,
+      icon: value.icon,
+      description: value.description,
+      redirectUris: value.redirectUris,
+      scopes: value.scopes,
+      botPublic: value.botPublic,
+      bot: value.bot,
+      currentUser: json.containsKey('current_user') ? value.currentUser : _omit,
+    );
+  }
 
   /// The unique identifier of the application
-  final String id;
+  final SnowflakeStringType id;
 
   /// The name of the application
   final String name;
@@ -58,6 +75,13 @@ class ApplicationPublicResponse {
   /// Partial user data for the authenticated requester, when a session token is present
   @JsonKey(includeIfNull: false, name: 'current_user')
   final UserPartialResponse? currentUser;
+  final bool _currentUserPresent;
 
-  Map<String, Object?> toJson() => _$ApplicationPublicResponseToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$ApplicationPublicResponseToJson(this);
+    if (_currentUserPresent) {
+      json.putIfAbsent('current_user', () => currentUser);
+    }
+    return json;
+  }
 }

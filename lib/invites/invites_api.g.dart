@@ -22,14 +22,15 @@ class _InvitesApi implements InvitesApi {
 
   @override
   Future<InviteMetadataResponseSchema> createChannelInvite({
-    required String channelId,
-    required ChannelInviteCreateRequest body,
+    required SnowflakeType channelId,
+    ChannelInviteCreateRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<InviteMetadataResponseSchema>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -53,7 +54,7 @@ class _InvitesApi implements InvitesApi {
 
   @override
   Future<List<InviteMetadataResponseSchema>> listChannelInvites({
-    required String channelId,
+    required SnowflakeType channelId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -88,7 +89,7 @@ class _InvitesApi implements InvitesApi {
 
   @override
   Future<List<InviteMetadataResponseSchema>> listGuildInvites({
-    required String guildId,
+    required SnowflakeType guildId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

@@ -11,7 +11,7 @@ GuildVanityUrlResponse _$GuildVanityUrlResponseFromJson(
 ) => $checkedCreate('GuildVanityUrlResponse', json, ($checkedConvert) {
   final val = GuildVanityUrlResponse(
     uses: $checkedConvert('uses', (v) => (v as num).toInt()),
-    code: $checkedConvert('code', (v) => v as String?),
+    code: $checkedConvert('code', (v) => v ?? _omit),
   );
   return val;
 });

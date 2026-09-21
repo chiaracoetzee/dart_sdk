@@ -11,75 +11,24 @@ MessageEmbedResponse _$MessageEmbedResponseFromJson(
 ) => $checkedCreate('MessageEmbedResponse', json, ($checkedConvert) {
   final val = MessageEmbedResponse(
     type: $checkedConvert('type', (v) => v as String),
-    url: $checkedConvert('url', (v) => v as String?),
-    title: $checkedConvert('title', (v) => v as String?),
-    color: $checkedConvert('color', (v) => (v as num?)?.toInt()),
-    timestamp: $checkedConvert(
-      'timestamp',
-      (v) => v == null ? null : DateTime.parse(v as String),
-    ),
-    description: $checkedConvert('description', (v) => v as String?),
-    author: $checkedConvert(
-      'author',
-      (v) => v == null
-          ? null
-          : EmbedAuthorResponse.fromJson(v as Map<String, dynamic>),
-    ),
-    image: $checkedConvert(
-      'image',
-      (v) => v == null
-          ? null
-          : EmbedMediaResponse.fromJson(v as Map<String, dynamic>),
-    ),
-    thumbnail: $checkedConvert(
-      'thumbnail',
-      (v) => v == null
-          ? null
-          : EmbedMediaResponse.fromJson(v as Map<String, dynamic>),
-    ),
-    footer: $checkedConvert(
-      'footer',
-      (v) => v == null
-          ? null
-          : EmbedFooterResponse.fromJson(v as Map<String, dynamic>),
-    ),
-    fields: $checkedConvert(
-      'fields',
-      (v) => (v as List<dynamic>?)
-          ?.map((e) => EmbedFieldResponse.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    ),
-    provider: $checkedConvert(
-      'provider',
-      (v) => v == null
-          ? null
-          : EmbedAuthorResponse.fromJson(v as Map<String, dynamic>),
-    ),
-    video: $checkedConvert(
-      'video',
-      (v) => v == null
-          ? null
-          : EmbedMediaResponse.fromJson(v as Map<String, dynamic>),
-    ),
-    audio: $checkedConvert(
-      'audio',
-      (v) => v == null
-          ? null
-          : EmbedMediaResponse.fromJson(v as Map<String, dynamic>),
-    ),
-    html: $checkedConvert('html', (v) => v as String?),
-    htmlWidth: $checkedConvert('html_width', (v) => (v as num?)?.toInt()),
-    htmlHeight: $checkedConvert('html_height', (v) => (v as num?)?.toInt()),
-    nsfw: $checkedConvert('nsfw', (v) => v as bool?),
-    children: $checkedConvert(
-      'children',
-      (v) => (v as List<dynamic>?)
-          ?.map(
-            (e) =>
-                MessageEmbedChildResponse.fromJson(e as Map<String, dynamic>),
-          )
-          .toList(),
-    ),
+    url: $checkedConvert('url', (v) => v ?? _omit),
+    title: $checkedConvert('title', (v) => v ?? _omit),
+    color: $checkedConvert('color', (v) => v ?? _omit),
+    timestamp: $checkedConvert('timestamp', (v) => v ?? _omit),
+    description: $checkedConvert('description', (v) => v ?? _omit),
+    author: $checkedConvert('author', (v) => v ?? _omit),
+    image: $checkedConvert('image', (v) => v ?? _omit),
+    thumbnail: $checkedConvert('thumbnail', (v) => v ?? _omit),
+    footer: $checkedConvert('footer', (v) => v ?? _omit),
+    fields: $checkedConvert('fields', (v) => v ?? _omit),
+    provider: $checkedConvert('provider', (v) => v ?? _omit),
+    video: $checkedConvert('video', (v) => v ?? _omit),
+    audio: $checkedConvert('audio', (v) => v ?? _omit),
+    html: $checkedConvert('html', (v) => v ?? _omit),
+    htmlWidth: $checkedConvert('html_width', (v) => v ?? _omit),
+    htmlHeight: $checkedConvert('html_height', (v) => v ?? _omit),
+    nsfw: $checkedConvert('nsfw', (v) => v ?? _omit),
+    children: $checkedConvert('children', (v) => v ?? _omit),
   );
   return val;
 }, fieldKeyMap: const {'htmlWidth': 'html_width', 'htmlHeight': 'html_height'});

@@ -4,9 +4,13 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'snowflake_type.dart';
+import 'int32_type.dart';
+import 'snowflake_string_type.dart';
+import 'unsigned_int64_string_type.dart';
 
 part 'read_state_response.g.dart';
+
+const Object _omit = Object();
 
 @JsonSerializable()
 class ReadStateResponse {
@@ -15,22 +19,32 @@ class ReadStateResponse {
     required this.mentionCount,
     required this.lastMessageId,
     required this.lastPinTimestamp,
-    this.version,
-  });
-
-  factory ReadStateResponse.fromJson(Map<String, Object?> json) =>
-      _$ReadStateResponseFromJson(json);
+    Object? version = _omit,
+  }) : version = identical(version, _omit)
+           ? null
+           : version as UnsignedInt64StringType?,
+       _versionPresent = !identical(version, _omit);
+  factory ReadStateResponse.fromJson(Map<String, Object?> json) {
+    final value = _$ReadStateResponseFromJson(json);
+    return ReadStateResponse(
+      id: value.id,
+      mentionCount: value.mentionCount,
+      lastMessageId: value.lastMessageId,
+      lastPinTimestamp: value.lastPinTimestamp,
+      version: json.containsKey('version') ? value.version : _omit,
+    );
+  }
 
   /// The channel ID for this read state
-  final String id;
+  final SnowflakeStringType id;
 
   /// Number of unread mentions in the channel
   @JsonKey(name: 'mention_count')
-  final int mentionCount;
+  final Int32Type mentionCount;
 
   /// The ID of the last message read
   @JsonKey(includeIfNull: true, name: 'last_message_id')
-  final SnowflakeType? lastMessageId;
+  final SnowflakeStringType? lastMessageId;
 
   /// ISO8601 timestamp of the last pinned message acknowledged
   @JsonKey(includeIfNull: true, name: 'last_pin_timestamp')
@@ -38,7 +52,14 @@ class ReadStateResponse {
 
   /// Read-state version for ordering updates as a decimal uint64
   @JsonKey(includeIfNull: false)
-  final String? version;
+  final UnsignedInt64StringType? version;
+  final bool _versionPresent;
 
-  Map<String, Object?> toJson() => _$ReadStateResponseToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$ReadStateResponseToJson(this);
+    if (_versionPresent) {
+      json.putIfAbsent('version', () => version);
+    }
+    return json;
+  }
 }

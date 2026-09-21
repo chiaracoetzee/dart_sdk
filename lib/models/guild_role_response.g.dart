@@ -19,11 +19,8 @@ GuildRoleResponse _$GuildRoleResponseFromJson(Map<String, dynamic> json) =>
           permissions: $checkedConvert('permissions', (v) => v as String),
           hoist: $checkedConvert('hoist', (v) => v as bool),
           mentionable: $checkedConvert('mentionable', (v) => v as bool),
-          hoistPosition: $checkedConvert(
-            'hoist_position',
-            (v) => (v as num?)?.toInt(),
-          ),
-          unicodeEmoji: $checkedConvert('unicode_emoji', (v) => v as String?),
+          hoistPosition: $checkedConvert('hoist_position', (v) => v ?? _omit),
+          unicodeEmoji: $checkedConvert('unicode_emoji', (v) => v ?? _omit),
         );
         return val;
       },

@@ -15,17 +15,10 @@ AuthSessionResponse _$AuthSessionResponseFromJson(Map<String, dynamic> json) =>
           idHash: $checkedConvert('id_hash', (v) => v as String),
           maskedIp: $checkedConvert('masked_ip', (v) => v as String?),
           current: $checkedConvert('current', (v) => v as bool),
-          clientInfo: $checkedConvert(
-            'client_info',
-            (v) => v == null
-                ? null
-                : AuthSessionResponseClientInfo.fromJson(
-                    v as Map<String, dynamic>,
-                  ),
-          ),
+          clientInfo: $checkedConvert('client_info', (v) => v ?? _omit),
           approxLastUsedAt: $checkedConvert(
             'approx_last_used_at',
-            (v) => v == null ? null : DateTime.parse(v as String),
+            (v) => v ?? _omit,
           ),
         );
         return val;

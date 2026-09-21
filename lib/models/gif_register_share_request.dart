@@ -8,12 +8,24 @@ import 'locale.dart';
 
 part 'gif_register_share_request.g.dart';
 
+const Object _omit = Object();
+
 @JsonSerializable()
 class GifRegisterShareRequest {
-  const GifRegisterShareRequest({required this.id, this.q, this.locale});
-
-  factory GifRegisterShareRequest.fromJson(Map<String, Object?> json) =>
-      _$GifRegisterShareRequestFromJson(json);
+  const GifRegisterShareRequest({
+    required this.id,
+    this.locale = Locale.enUs,
+    Object? q = _omit,
+  }) : q = identical(q, _omit) ? null : q as String?,
+       _qPresent = !identical(q, _omit);
+  factory GifRegisterShareRequest.fromJson(Map<String, Object?> json) {
+    final value = _$GifRegisterShareRequestFromJson(json);
+    return GifRegisterShareRequest(
+      id: value.id,
+      locale: value.locale,
+      q: json.containsKey('q') ? value.q : _omit,
+    );
+  }
 
   /// Provider-issued share identifier (slug or slug-id token).
   final String id;
@@ -21,8 +33,14 @@ class GifRegisterShareRequest {
   /// Optional search query that produced the GIF.
   @JsonKey(includeIfNull: false)
   final String? q;
-  @JsonKey(includeIfNull: false)
-  final Locale? locale;
+  final Locale locale;
+  final bool _qPresent;
 
-  Map<String, Object?> toJson() => _$GifRegisterShareRequestToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$GifRegisterShareRequestToJson(this);
+    if (_qPresent) {
+      json.putIfAbsent('q', () => q);
+    }
+    return json;
+  }
 }

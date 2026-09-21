@@ -15,23 +15,11 @@ ChannelOverrides _$ChannelOverridesFromJson(Map<String, dynamic> json) =>
           collapsed: $checkedConvert('collapsed', (v) => v as bool),
           messageNotifications: $checkedConvert(
             'message_notifications',
-            (v) => UserNotificationSettings.fromJson((v as num).toInt()),
+            (v) => UserNotificationSettingsInput.fromJson((v as num).toInt()),
           ),
           muted: $checkedConvert('muted', (v) => v as bool),
-          muteConfig: $checkedConvert(
-            'mute_config',
-            (v) => v == null
-                ? null
-                : ChannelOverridesMuteConfig.fromJson(
-                    v as Map<String, dynamic>,
-                  ),
-          ),
-          unreadBadges: $checkedConvert(
-            'unread_badges',
-            (v) => v == null
-                ? null
-                : UserNotificationSettings.fromJson((v as num).toInt()),
-          ),
+          muteConfig: $checkedConvert('mute_config', (v) => v ?? _omit),
+          unreadBadges: $checkedConvert('unread_badges', (v) => v ?? _omit),
         );
         return val;
       },
@@ -47,6 +35,6 @@ Map<String, dynamic> _$ChannelOverridesToJson(ChannelOverrides instance) =>
       'collapsed': instance.collapsed,
       'message_notifications': instance.messageNotifications,
       'muted': instance.muted,
-      'mute_config': instance.muteConfig,
+      'mute_config': ?instance.muteConfig,
       'unread_badges': ?instance.unreadBadges,
     };

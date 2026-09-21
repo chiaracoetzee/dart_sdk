@@ -22,7 +22,7 @@ class _EmojisApi implements EmojisApi {
 
   @override
   Future<GuildEmojiMetadataResponse> getEmojiMetadata({
-    required String emojiId,
+    required SnowflakeType emojiId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -42,6 +42,35 @@ class _EmojisApi implements EmojisApi {
     late GuildEmojiMetadataResponse _value;
     try {
       _value = GuildEmojiMetadataResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, response: _result);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<GuildExpressionSourceGuildResponse> getEmojiSource({
+    required SnowflakeType emojiId,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<GuildExpressionSourceGuildResponse>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/emojis/${emojiId}/source',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, Object?>>(_options);
+    late GuildExpressionSourceGuildResponse _value;
+    try {
+      _value = GuildExpressionSourceGuildResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;

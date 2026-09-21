@@ -10,7 +10,10 @@ EntranceSoundPlayRequest _$EntranceSoundPlayRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('EntranceSoundPlayRequest', json, ($checkedConvert) {
   final val = EntranceSoundPlayRequest(
-    soundId: $checkedConvert('sound_id', (v) => v as String),
+    soundId: $checkedConvert(
+      'sound_id',
+      (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
+    ),
   );
   return val;
 }, fieldKeyMap: const {'soundId': 'sound_id'});

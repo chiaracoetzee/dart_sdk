@@ -17,7 +17,7 @@ _$UserGuildSettingsUpdateRequestMuteConfigFromJson(Map<String, dynamic> json) =>
             'selected_time_window',
             (v) => (v as num).toInt(),
           ),
-          endTime: $checkedConvert('end_time', (v) => v),
+          endTime: $checkedConvert('end_time', (v) => v ?? _omit),
         );
         return val;
       },

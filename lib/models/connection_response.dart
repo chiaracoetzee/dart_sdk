@@ -4,7 +4,9 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'connection_response_type_type.dart';
+import 'connection_type.dart';
+import 'connection_visibility_flags.dart';
+import 'int32_type.dart';
 
 part 'connection_response.g.dart';
 
@@ -26,7 +28,7 @@ class ConnectionResponse {
   final String id;
 
   /// The type of connection
-  final ConnectionResponseTypeType type;
+  final ConnectionType type;
 
   /// The display name of the connection (handle or domain)
   final String name;
@@ -36,11 +38,11 @@ class ConnectionResponse {
 
   /// Bitfield controlling who can see this connection
   @JsonKey(name: 'visibility_flags')
-  final int visibilityFlags;
+  final ConnectionVisibilityFlags visibilityFlags;
 
   /// The display order of this connection
   @JsonKey(name: 'sort_order')
-  final int sortOrder;
+  final Int32Type sortOrder;
 
   Map<String, Object?> toJson() => _$ConnectionResponseToJson(this);
 }

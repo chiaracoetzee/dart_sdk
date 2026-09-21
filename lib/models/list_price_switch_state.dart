@@ -6,7 +6,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'list_price_switch_ineligibility_reason.dart';
 import 'list_price_switch_state_billing_cycle_billing_cycle.dart';
-import 'list_price_switch_state_currency_currency.dart';
+import 'premium_currency.dart';
 
 part 'list_price_switch_state.g.dart';
 
@@ -56,7 +56,7 @@ class ListPriceSwitchState {
 
   /// Currency of both the current and the list amount
   @JsonKey(includeIfNull: true)
-  final ListPriceSwitchStateCurrencyCurrency? currency;
+  final PremiumCurrency? currency;
 
   /// Recurring billing cycle the switch applies to
   @JsonKey(includeIfNull: true, name: 'billing_cycle')

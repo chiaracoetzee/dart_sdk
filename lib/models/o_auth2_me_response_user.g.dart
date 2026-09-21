@@ -20,10 +20,10 @@ OAuth2MeResponseUser _$OAuth2MeResponseUserFromJson(
       avatar: $checkedConvert('avatar', (v) => v as String?),
       avatarColor: $checkedConvert('avatar_color', (v) => (v as num?)?.toInt()),
       flags: $checkedConvert('flags', (v) => (v as num).toInt()),
-      bot: $checkedConvert('bot', (v) => v as bool?),
-      system: $checkedConvert('system', (v) => v as bool?),
-      email: $checkedConvert('email', (v) => v as String?),
-      verified: $checkedConvert('verified', (v) => v as bool?),
+      bot: $checkedConvert('bot', (v) => v ?? _omit),
+      system: $checkedConvert('system', (v) => v ?? _omit),
+      email: $checkedConvert('email', (v) => v ?? _omit),
+      verified: $checkedConvert('verified', (v) => v ?? _omit),
     );
     return val;
   },

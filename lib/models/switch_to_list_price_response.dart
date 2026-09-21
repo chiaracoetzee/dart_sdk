@@ -4,67 +4,40 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'scheduled_switch_to_list_price_response_status_status.dart';
-import 'scheduled_switch_to_list_price_response_currency_currency.dart';
-import 'already_scheduled_switch_to_list_price_response_status_status.dart';
-import 'already_scheduled_switch_to_list_price_response_currency_currency.dart';
-import 'ineligible_switch_to_list_price_response_status_status.dart';
-import 'ineligible_switch_to_list_price_response_reason_reason.dart';
+import 'premium_currency.dart';
+import 'list_price_switch_ineligibility_reason.dart';
 
 part 'switch_to_list_price_response.g.dart';
 
-@JsonSerializable(createFactory: false)
-sealed class SwitchToListPriceResponse {
-  const SwitchToListPriceResponse();
+class SwitchToListPriceResponse {
+  final Map<String, dynamic> _json;
+
+  const SwitchToListPriceResponse(this._json);
 
   factory SwitchToListPriceResponse.fromJson(Map<String, dynamic> json) =>
-      SwitchToListPriceResponseUnionDeserializer.tryDeserialize(json);
+      SwitchToListPriceResponse(json);
 
-  Map<String, dynamic> toJson();
-}
+  Map<String, dynamic> toJson() => _json;
 
-extension SwitchToListPriceResponseUnionDeserializer
-    on SwitchToListPriceResponse {
-  static SwitchToListPriceResponse tryDeserialize(
-    Map<String, dynamic> json, {
-    String key = 'status',
-    Map<Type, Object?>? mapping,
-  }) {
-    final mappingFallback = const <Type, Object?>{
-      SwitchToListPriceResponseScheduled: 'scheduled',
-      SwitchToListPriceResponseAlreadyScheduled: 'already_scheduled',
-      SwitchToListPriceResponseIneligible: 'ineligible',
-    };
-    final value = json[key];
-    final effective = mapping ?? mappingFallback;
-    final valueAsString = value?.toString();
-    return switch (value) {
-      _
-          when value == effective[SwitchToListPriceResponseScheduled] ||
-              valueAsString ==
-                  effective[SwitchToListPriceResponseScheduled]?.toString() =>
-        SwitchToListPriceResponseScheduled.fromJson(json),
-      _
-          when value == effective[SwitchToListPriceResponseAlreadyScheduled] ||
-              valueAsString ==
-                  effective[SwitchToListPriceResponseAlreadyScheduled]
-                      ?.toString() =>
-        SwitchToListPriceResponseAlreadyScheduled.fromJson(json),
-      _
-          when value == effective[SwitchToListPriceResponseIneligible] ||
-              valueAsString ==
-                  effective[SwitchToListPriceResponseIneligible]?.toString() =>
-        SwitchToListPriceResponseIneligible.fromJson(json),
-      _ => throw FormatException(
-        'Unknown discriminator value "${json[key]}" for SwitchToListPriceResponse',
-      ),
-    };
-  }
+  SwitchToListPriceResponseScheduledSwitchToListPriceResponse
+  toScheduledSwitchToListPriceResponse() =>
+      SwitchToListPriceResponseScheduledSwitchToListPriceResponse.fromJson(
+        _json,
+      );
+  SwitchToListPriceResponseAlreadyScheduledSwitchToListPriceResponse
+  toAlreadyScheduledSwitchToListPriceResponse() =>
+      SwitchToListPriceResponseAlreadyScheduledSwitchToListPriceResponse.fromJson(
+        _json,
+      );
+  SwitchToListPriceResponseIneligibleSwitchToListPriceResponse
+  toIneligibleSwitchToListPriceResponse() =>
+      SwitchToListPriceResponseIneligibleSwitchToListPriceResponse.fromJson(
+        _json,
+      );
 }
 
 @JsonSerializable()
-class SwitchToListPriceResponseScheduled extends SwitchToListPriceResponse {
-  final ScheduledSwitchToListPriceResponseStatusStatus status;
+class SwitchToListPriceResponseScheduledSwitchToListPriceResponse {
   @JsonKey(name: 'effective_at')
   final String effectiveAt;
   @JsonKey(name: 'target_price_id')
@@ -73,30 +46,30 @@ class SwitchToListPriceResponseScheduled extends SwitchToListPriceResponse {
   final int targetAmountMinor;
   @JsonKey(name: 'current_amount_minor')
   final int currentAmountMinor;
-  final ScheduledSwitchToListPriceResponseCurrencyCurrency currency;
+  final PremiumCurrency currency;
+  final String status;
 
-  const SwitchToListPriceResponseScheduled({
-    required this.status,
+  const SwitchToListPriceResponseScheduledSwitchToListPriceResponse({
     required this.effectiveAt,
     required this.targetPriceId,
     required this.targetAmountMinor,
     required this.currentAmountMinor,
     required this.currency,
+    required this.status,
   });
 
-  factory SwitchToListPriceResponseScheduled.fromJson(
+  factory SwitchToListPriceResponseScheduledSwitchToListPriceResponse.fromJson(
     Map<String, dynamic> json,
-  ) => _$SwitchToListPriceResponseScheduledFromJson(json);
+  ) => _$SwitchToListPriceResponseScheduledSwitchToListPriceResponseFromJson(
+    json,
+  );
 
-  @override
   Map<String, dynamic> toJson() =>
-      _$SwitchToListPriceResponseScheduledToJson(this);
+      _$SwitchToListPriceResponseScheduledSwitchToListPriceResponseToJson(this);
 }
 
 @JsonSerializable()
-class SwitchToListPriceResponseAlreadyScheduled
-    extends SwitchToListPriceResponse {
-  final AlreadyScheduledSwitchToListPriceResponseStatusStatus status;
+class SwitchToListPriceResponseAlreadyScheduledSwitchToListPriceResponse {
   @JsonKey(name: 'effective_at')
   final String effectiveAt;
   @JsonKey(name: 'target_price_id')
@@ -105,41 +78,49 @@ class SwitchToListPriceResponseAlreadyScheduled
   final int targetAmountMinor;
   @JsonKey(name: 'current_amount_minor')
   final int currentAmountMinor;
-  final AlreadyScheduledSwitchToListPriceResponseCurrencyCurrency currency;
+  final PremiumCurrency currency;
+  final String status;
 
-  const SwitchToListPriceResponseAlreadyScheduled({
-    required this.status,
+  const SwitchToListPriceResponseAlreadyScheduledSwitchToListPriceResponse({
     required this.effectiveAt,
     required this.targetPriceId,
     required this.targetAmountMinor,
     required this.currentAmountMinor,
     required this.currency,
+    required this.status,
   });
 
-  factory SwitchToListPriceResponseAlreadyScheduled.fromJson(
+  factory SwitchToListPriceResponseAlreadyScheduledSwitchToListPriceResponse.fromJson(
     Map<String, dynamic> json,
-  ) => _$SwitchToListPriceResponseAlreadyScheduledFromJson(json);
+  ) =>
+      _$SwitchToListPriceResponseAlreadyScheduledSwitchToListPriceResponseFromJson(
+        json,
+      );
 
-  @override
   Map<String, dynamic> toJson() =>
-      _$SwitchToListPriceResponseAlreadyScheduledToJson(this);
+      _$SwitchToListPriceResponseAlreadyScheduledSwitchToListPriceResponseToJson(
+        this,
+      );
 }
 
 @JsonSerializable()
-class SwitchToListPriceResponseIneligible extends SwitchToListPriceResponse {
-  final IneligibleSwitchToListPriceResponseStatusStatus status;
-  final IneligibleSwitchToListPriceResponseReasonReason reason;
+class SwitchToListPriceResponseIneligibleSwitchToListPriceResponse {
+  final String status;
+  final ListPriceSwitchIneligibilityReason reason;
 
-  const SwitchToListPriceResponseIneligible({
+  const SwitchToListPriceResponseIneligibleSwitchToListPriceResponse({
     required this.status,
     required this.reason,
   });
 
-  factory SwitchToListPriceResponseIneligible.fromJson(
+  factory SwitchToListPriceResponseIneligibleSwitchToListPriceResponse.fromJson(
     Map<String, dynamic> json,
-  ) => _$SwitchToListPriceResponseIneligibleFromJson(json);
+  ) => _$SwitchToListPriceResponseIneligibleSwitchToListPriceResponseFromJson(
+    json,
+  );
 
-  @override
   Map<String, dynamic> toJson() =>
-      _$SwitchToListPriceResponseIneligibleToJson(this);
+      _$SwitchToListPriceResponseIneligibleSwitchToListPriceResponseToJson(
+        this,
+      );
 }

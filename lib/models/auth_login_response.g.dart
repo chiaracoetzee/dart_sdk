@@ -17,8 +17,7 @@ _$AuthLoginResponseAuthTokenWithUserIdResponseFromJson(
     userId: $checkedConvert('user_id', (v) => v as String),
     user: $checkedConvert(
       'user',
-      (v) =>
-          AuthTokenWithUserIdResponseUser.fromJson(v as Map<String, dynamic>),
+      (v) => UserPartialResponse.fromJson(v as Map<String, dynamic>),
     ),
   );
   return val;
@@ -34,22 +33,28 @@ Map<String, dynamic> _$AuthLoginResponseAuthTokenWithUserIdResponseToJson(
 
 AuthLoginResponseVariant2 _$AuthLoginResponseVariant2FromJson(
   Map<String, dynamic> json,
-) => $checkedCreate('AuthLoginResponseVariant2', json, ($checkedConvert) {
-  final val = AuthLoginResponseVariant2(
-    mfa: $checkedConvert(
-      'mfa',
-      (v) => AuthLoginResponseVariant2MfaMfa.fromJson(v as bool),
-    ),
-    ticket: $checkedConvert('ticket', (v) => v as String),
-    allowedMethods: $checkedConvert(
-      'allowed_methods',
-      (v) => (v as List<dynamic>).map((e) => e as String).toList(),
-    ),
-    totp: $checkedConvert('totp', (v) => v as bool),
-    webauthn: $checkedConvert('webauthn', (v) => v as bool),
-  );
-  return val;
-}, fieldKeyMap: const {'allowedMethods': 'allowed_methods'});
+) => $checkedCreate(
+  'AuthLoginResponseVariant2',
+  json,
+  ($checkedConvert) {
+    final val = AuthLoginResponseVariant2(
+      mfa: $checkedConvert('mfa', (v) => v as bool),
+      ticket: $checkedConvert('ticket', (v) => v as String),
+      allowedMethods: $checkedConvert(
+        'allowed_methods',
+        (v) => (v as List<dynamic>).map((e) => e as String).toList(),
+      ),
+      totp: $checkedConvert('totp', (v) => v as bool),
+      webauthn: $checkedConvert('webauthn', (v) => v as bool),
+      backupCodes: $checkedConvert('backup_codes', (v) => v as bool),
+    );
+    return val;
+  },
+  fieldKeyMap: const {
+    'allowedMethods': 'allowed_methods',
+    'backupCodes': 'backup_codes',
+  },
+);
 
 Map<String, dynamic> _$AuthLoginResponseVariant2ToJson(
   AuthLoginResponseVariant2 instance,
@@ -59,4 +64,5 @@ Map<String, dynamic> _$AuthLoginResponseVariant2ToJson(
   'allowed_methods': instance.allowedMethods,
   'totp': instance.totp,
   'webauthn': instance.webauthn,
+  'backup_codes': instance.backupCodes,
 };

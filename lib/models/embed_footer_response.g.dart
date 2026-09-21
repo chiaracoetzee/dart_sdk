@@ -13,8 +13,8 @@ EmbedFooterResponse _$EmbedFooterResponseFromJson(Map<String, dynamic> json) =>
       ($checkedConvert) {
         final val = EmbedFooterResponse(
           text: $checkedConvert('text', (v) => v as String),
-          iconUrl: $checkedConvert('icon_url', (v) => v as String?),
-          proxyIconUrl: $checkedConvert('proxy_icon_url', (v) => v as String?),
+          iconUrl: $checkedConvert('icon_url', (v) => v ?? _omit),
+          proxyIconUrl: $checkedConvert('proxy_icon_url', (v) => v ?? _omit),
         );
         return val;
       },

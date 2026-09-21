@@ -19,6 +19,7 @@ class GuildRoleHoistPositionsRequestItem {
     Map<String, Object?> json,
   ) => _$GuildRoleHoistPositionsRequestItemFromJson(json);
 
+  /// The ID of the role
   final SnowflakeType id;
 
   /// The new hoist position for the role

@@ -4,8 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'auth_token_with_user_id_response_user.dart';
-import 'auth_login_response_variant2_mfa_mfa.dart';
+import 'snowflake_string_type.dart';
+import 'user_partial_response.dart';
 
 part 'auth_login_response.g.dart';
 
@@ -30,8 +30,8 @@ class AuthLoginResponse {
 class AuthLoginResponseAuthTokenWithUserIdResponse {
   final String token;
   @JsonKey(name: 'user_id')
-  final String userId;
-  final AuthTokenWithUserIdResponseUser user;
+  final SnowflakeStringType userId;
+  final UserPartialResponse user;
 
   const AuthLoginResponseAuthTokenWithUserIdResponse({
     required this.token,
@@ -49,12 +49,14 @@ class AuthLoginResponseAuthTokenWithUserIdResponse {
 
 @JsonSerializable()
 class AuthLoginResponseVariant2 {
-  final AuthLoginResponseVariant2MfaMfa mfa;
+  final bool mfa;
   final String ticket;
   @JsonKey(name: 'allowed_methods')
   final List<String> allowedMethods;
   final bool totp;
   final bool webauthn;
+  @JsonKey(name: 'backup_codes')
+  final bool backupCodes;
 
   const AuthLoginResponseVariant2({
     required this.mfa,
@@ -62,6 +64,7 @@ class AuthLoginResponseVariant2 {
     required this.allowedMethods,
     required this.totp,
     required this.webauthn,
+    required this.backupCodes,
   });
 
   factory AuthLoginResponseVariant2.fromJson(Map<String, dynamic> json) =>

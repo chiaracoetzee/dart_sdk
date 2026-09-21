@@ -12,12 +12,12 @@ ClientAttachmentRequest _$ClientAttachmentRequestFromJson(
   final val = ClientAttachmentRequest(
     id: $checkedConvert('id', (v) => (v as num).toInt()),
     filename: $checkedConvert('filename', (v) => v as String),
-    title: $checkedConvert('title', (v) => v as String?),
-    description: $checkedConvert('description', (v) => v as String?),
-    flags: $checkedConvert('flags', (v) => (v as num?)?.toInt()),
-    duration: $checkedConvert('duration', (v) => (v as num?)?.toInt()),
-    waveform: $checkedConvert('waveform', (v) => v as String?),
-    contentType: $checkedConvert('content_type', (v) => v as String?),
+    title: $checkedConvert('title', (v) => v ?? _omit),
+    description: $checkedConvert('description', (v) => v ?? _omit),
+    flags: $checkedConvert('flags', (v) => v ?? _omit),
+    duration: $checkedConvert('duration', (v) => v ?? _omit),
+    waveform: $checkedConvert('waveform', (v) => v ?? _omit),
+    contentType: $checkedConvert('content_type', (v) => v ?? _omit),
   );
   return val;
 }, fieldKeyMap: const {'contentType': 'content_type'});

@@ -15,19 +15,19 @@ _$UserSettingsUpdateRequestGuildFoldersFromJson(Map<String, dynamic> json) =>
         id: $checkedConvert('id', (v) => (v as num).toInt()),
         guildIds: $checkedConvert(
           'guild_ids',
-          (v) => (v as List<dynamic>).map((e) => e as String).toList(),
+          (v) => (v as List<dynamic>)
+              .map((e) => SnowflakeType.fromJson(e as Map<String, dynamic>))
+              .toList(),
         ),
-        name: $checkedConvert('name', (v) => v as String?),
-        color: $checkedConvert('color', (v) => (v as num?)?.toInt()),
-        flags: $checkedConvert('flags', (v) => (v as num?)?.toInt()),
+        color: $checkedConvert('color', (v) => (v as num?)?.toInt() ?? 0),
+        flags: $checkedConvert('flags', (v) => (v as num?)?.toInt() ?? 0),
         icon: $checkedConvert(
           'icon',
           (v) => v == null
-              ? null
-              : UserSettingsUpdateRequestGuildFoldersIconIcon.fromJson(
-                  v as String,
-                ),
+              ? GuildFolderIconType.folder
+              : GuildFolderIconType.fromJson(v as String),
         ),
+        name: $checkedConvert('name', (v) => v ?? _omit),
       );
       return val;
     }, fieldKeyMap: const {'guildIds': 'guild_ids'});
@@ -37,8 +37,8 @@ Map<String, dynamic> _$UserSettingsUpdateRequestGuildFoldersToJson(
 ) => <String, dynamic>{
   'id': instance.id,
   'name': ?instance.name,
-  'color': ?instance.color,
-  'flags': ?instance.flags,
-  'icon': ?instance.icon,
+  'color': instance.color,
+  'flags': instance.flags,
+  'icon': instance.icon,
   'guild_ids': instance.guildIds,
 };

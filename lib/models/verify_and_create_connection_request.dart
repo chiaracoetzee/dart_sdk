@@ -8,23 +8,41 @@ import 'int32_type.dart';
 
 part 'verify_and_create_connection_request.g.dart';
 
+const Object _omit = Object();
+
 @JsonSerializable()
 class VerifyAndCreateConnectionRequest {
   const VerifyAndCreateConnectionRequest({
     required this.initiationToken,
-    this.visibilityFlags,
-  });
-
-  factory VerifyAndCreateConnectionRequest.fromJson(
-    Map<String, Object?> json,
-  ) => _$VerifyAndCreateConnectionRequestFromJson(json);
+    Object? visibilityFlags = _omit,
+  }) : visibilityFlags = identical(visibilityFlags, _omit)
+           ? null
+           : visibilityFlags as Int32Type?,
+       _visibilityFlagsPresent = !identical(visibilityFlags, _omit);
+  factory VerifyAndCreateConnectionRequest.fromJson(Map<String, Object?> json) {
+    final value = _$VerifyAndCreateConnectionRequestFromJson(json);
+    return VerifyAndCreateConnectionRequest(
+      initiationToken: value.initiationToken,
+      visibilityFlags: json.containsKey('visibility_flags')
+          ? value.visibilityFlags
+          : _omit,
+    );
+  }
 
   /// The signed initiation token returned from the create endpoint
   @JsonKey(name: 'initiation_token')
   final String initiationToken;
+
+  /// Bitfield controlling who can see this connection
   @JsonKey(includeIfNull: false, name: 'visibility_flags')
   final Int32Type? visibilityFlags;
+  final bool _visibilityFlagsPresent;
 
-  Map<String, Object?> toJson() =>
-      _$VerifyAndCreateConnectionRequestToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$VerifyAndCreateConnectionRequestToJson(this);
+    if (_visibilityFlagsPresent) {
+      json.putIfAbsent('visibility_flags', () => visibilityFlags);
+    }
+    return json;
+  }
 }

@@ -9,6 +9,8 @@ import 'git_hub_webhook_comment_user.dart';
 
 part 'git_hub_webhook_comment.g.dart';
 
+const Object _omit = Object();
+
 @JsonSerializable()
 class GitHubWebhookComment {
   const GitHubWebhookComment({
@@ -16,11 +18,19 @@ class GitHubWebhookComment {
     required this.htmlUrl,
     required this.user,
     required this.body,
-    this.commitId,
-  });
-
-  factory GitHubWebhookComment.fromJson(Map<String, Object?> json) =>
-      _$GitHubWebhookCommentFromJson(json);
+    Object? commitId = _omit,
+  }) : commitId = identical(commitId, _omit) ? null : commitId as String?,
+       _commitIdPresent = !identical(commitId, _omit);
+  factory GitHubWebhookComment.fromJson(Map<String, Object?> json) {
+    final value = _$GitHubWebhookCommentFromJson(json);
+    return GitHubWebhookComment(
+      id: value.id,
+      htmlUrl: value.htmlUrl,
+      user: value.user,
+      body: value.body,
+      commitId: json.containsKey('commit_id') ? value.commitId : _omit,
+    );
+  }
 
   final Int64Type id;
   @JsonKey(name: 'html_url')
@@ -29,6 +39,13 @@ class GitHubWebhookComment {
   @JsonKey(includeIfNull: false, name: 'commit_id')
   final String? commitId;
   final String body;
+  final bool _commitIdPresent;
 
-  Map<String, Object?> toJson() => _$GitHubWebhookCommentToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$GitHubWebhookCommentToJson(this);
+    if (_commitIdPresent) {
+      json.putIfAbsent('commit_id', () => commitId);
+    }
+    return json;
+  }
 }

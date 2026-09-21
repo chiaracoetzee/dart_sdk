@@ -4,9 +4,12 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'snowflake_string_type.dart';
 import 'user_partial_response.dart';
 
 part 'guild_ban_response.g.dart';
+
+const Object _omit = Object();
 
 @JsonSerializable()
 class GuildBanResponse {
@@ -14,13 +17,24 @@ class GuildBanResponse {
     required this.user,
     required this.moderatorId,
     required this.bannedAt,
-    this.reason,
-    this.expiresAt,
-  });
+    Object? reason = _omit,
+    Object? expiresAt = _omit,
+  }) : reason = identical(reason, _omit) ? null : reason as String?,
+       _reasonPresent = !identical(reason, _omit),
+       expiresAt = identical(expiresAt, _omit) ? null : expiresAt as DateTime?,
+       _expiresAtPresent = !identical(expiresAt, _omit);
+  factory GuildBanResponse.fromJson(Map<String, Object?> json) {
+    final value = _$GuildBanResponseFromJson(json);
+    return GuildBanResponse(
+      user: value.user,
+      moderatorId: value.moderatorId,
+      bannedAt: value.bannedAt,
+      reason: json.containsKey('reason') ? value.reason : _omit,
+      expiresAt: json.containsKey('expires_at') ? value.expiresAt : _omit,
+    );
+  }
 
-  factory GuildBanResponse.fromJson(Map<String, Object?> json) =>
-      _$GuildBanResponseFromJson(json);
-
+  /// The banned user
   final UserPartialResponse user;
 
   /// The reason for the ban
@@ -29,7 +43,7 @@ class GuildBanResponse {
 
   /// The ID of the moderator who issued the ban
   @JsonKey(name: 'moderator_id')
-  final String moderatorId;
+  final SnowflakeStringType moderatorId;
 
   /// ISO8601 timestamp of when the ban was issued
   @JsonKey(name: 'banned_at')
@@ -38,6 +52,17 @@ class GuildBanResponse {
   /// ISO8601 timestamp of when the ban expires (null if permanent)
   @JsonKey(includeIfNull: false, name: 'expires_at')
   final DateTime? expiresAt;
+  final bool _reasonPresent;
+  final bool _expiresAtPresent;
 
-  Map<String, Object?> toJson() => _$GuildBanResponseToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$GuildBanResponseToJson(this);
+    if (_reasonPresent) {
+      json.putIfAbsent('reason', () => reason);
+    }
+    if (_expiresAtPresent) {
+      json.putIfAbsent('expires_at', () => expiresAt);
+    }
+    return json;
+  }
 }

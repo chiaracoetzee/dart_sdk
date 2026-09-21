@@ -13,13 +13,13 @@ TemplateRole _$TemplateRoleFromJson(Map<String, dynamic> json) =>
       ($checkedConvert) {
         final val = TemplateRole(
           id: $checkedConvert('id', (v) => v),
-          name: $checkedConvert('name', (v) => v as String?),
-          permissions: $checkedConvert('permissions', (v) => v),
-          permissionsNew: $checkedConvert('permissions_new', (v) => v),
-          color: $checkedConvert('color', (v) => v as num?),
-          hoist: $checkedConvert('hoist', (v) => v as bool?),
-          mentionable: $checkedConvert('mentionable', (v) => v as bool?),
-          unicodeEmoji: $checkedConvert('unicode_emoji', (v) => v as String?),
+          name: $checkedConvert('name', (v) => v ?? _omit),
+          permissions: $checkedConvert('permissions', (v) => v ?? _omit),
+          permissionsNew: $checkedConvert('permissions_new', (v) => v ?? _omit),
+          color: $checkedConvert('color', (v) => v ?? _omit),
+          hoist: $checkedConvert('hoist', (v) => v ?? _omit),
+          mentionable: $checkedConvert('mentionable', (v) => v ?? _omit),
+          unicodeEmoji: $checkedConvert('unicode_emoji', (v) => v ?? _omit),
         );
         return val;
       },
@@ -33,8 +33,8 @@ Map<String, dynamic> _$TemplateRoleToJson(TemplateRole instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': ?instance.name,
-      'permissions': instance.permissions,
-      'permissions_new': instance.permissionsNew,
+      'permissions': ?instance.permissions,
+      'permissions_new': ?instance.permissionsNew,
       'color': ?instance.color,
       'hoist': ?instance.hoist,
       'mentionable': ?instance.mentionable,

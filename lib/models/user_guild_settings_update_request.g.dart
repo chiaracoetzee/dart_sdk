@@ -15,39 +15,19 @@ UserGuildSettingsUpdateRequest _$UserGuildSettingsUpdateRequestFromJson(
     final val = UserGuildSettingsUpdateRequest(
       messageNotifications: $checkedConvert(
         'message_notifications',
-        (v) => v == null
-            ? null
-            : UserNotificationSettings.fromJson((v as num).toInt()),
+        (v) => v ?? _omit,
       ),
-      muted: $checkedConvert('muted', (v) => v as bool?),
-      muteConfig: $checkedConvert(
-        'mute_config',
-        (v) => v == null
-            ? null
-            : UserGuildSettingsUpdateRequestMuteConfig.fromJson(
-                v as Map<String, dynamic>,
-              ),
-      ),
-      mobilePush: $checkedConvert('mobile_push', (v) => v as bool?),
-      suppressEveryone: $checkedConvert('suppress_everyone', (v) => v as bool?),
-      suppressRoles: $checkedConvert('suppress_roles', (v) => v as bool?),
+      muted: $checkedConvert('muted', (v) => v ?? _omit),
+      muteConfig: $checkedConvert('mute_config', (v) => v ?? _omit),
+      mobilePush: $checkedConvert('mobile_push', (v) => v ?? _omit),
+      suppressEveryone: $checkedConvert('suppress_everyone', (v) => v ?? _omit),
+      suppressRoles: $checkedConvert('suppress_roles', (v) => v ?? _omit),
       hideMutedChannels: $checkedConvert(
         'hide_muted_channels',
-        (v) => v as bool?,
+        (v) => v ?? _omit,
       ),
-      channelOverrides: $checkedConvert(
-        'channel_overrides',
-        (v) => (v as Map<String, dynamic>?)?.map(
-          (k, e) =>
-              MapEntry(k, ChannelOverrides.fromJson(e as Map<String, dynamic>)),
-        ),
-      ),
-      unreadBadges: $checkedConvert(
-        'unread_badges',
-        (v) => v == null
-            ? null
-            : UserNotificationSettings.fromJson((v as num).toInt()),
-      ),
+      channelOverrides: $checkedConvert('channel_overrides', (v) => v ?? _omit),
+      unreadBadges: $checkedConvert('unread_badges', (v) => v ?? _omit),
     );
     return val;
   },

@@ -10,9 +10,9 @@ WebhookUpdateRequest _$WebhookUpdateRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('WebhookUpdateRequest', json, ($checkedConvert) {
   final val = WebhookUpdateRequest(
-    name: $checkedConvert('name', (v) => v as String?),
-    avatar: $checkedConvert('avatar', (v) => v as String?),
-    channelId: $checkedConvert('channel_id', (v) => v as String?),
+    name: $checkedConvert('name', (v) => v ?? _omit),
+    avatar: $checkedConvert('avatar', (v) => v ?? _omit),
+    channelId: $checkedConvert('channel_id', (v) => v ?? _omit),
   );
   return val;
 }, fieldKeyMap: const {'channelId': 'channel_id'});

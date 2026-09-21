@@ -11,12 +11,7 @@ PhoneSendVerificationRequest _$PhoneSendVerificationRequestFromJson(
 ) => $checkedCreate('PhoneSendVerificationRequest', json, ($checkedConvert) {
   final val = PhoneSendVerificationRequest(
     phone: $checkedConvert('phone', (v) => v as String),
-    channel: $checkedConvert(
-      'channel',
-      (v) => v == null
-          ? null
-          : PhoneSendVerificationRequestChannelChannel.fromJson(v as String),
-    ),
+    channel: $checkedConvert('channel', (v) => v ?? _omit),
   );
   return val;
 });

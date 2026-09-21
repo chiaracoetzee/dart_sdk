@@ -9,18 +9,36 @@ import 'auth_session_location.dart';
 
 part 'auth_session_response_client_info.g.dart';
 
+const Object _omit = Object();
+
 @JsonSerializable()
 class AuthSessionResponseClientInfo {
   const AuthSessionResponseClientInfo({
     required this.device,
-    this.platform,
-    this.os,
-    this.browser,
-    this.location,
-  });
-
-  factory AuthSessionResponseClientInfo.fromJson(Map<String, Object?> json) =>
-      _$AuthSessionResponseClientInfoFromJson(json);
+    Object? platform = _omit,
+    Object? os = _omit,
+    Object? browser = _omit,
+    Object? location = _omit,
+  }) : platform = identical(platform, _omit) ? null : platform as String?,
+       _platformPresent = !identical(platform, _omit),
+       os = identical(os, _omit) ? null : os as String?,
+       _osPresent = !identical(os, _omit),
+       browser = identical(browser, _omit) ? null : browser as String?,
+       _browserPresent = !identical(browser, _omit),
+       location = identical(location, _omit)
+           ? null
+           : location as AuthSessionLocation?,
+       _locationPresent = !identical(location, _omit);
+  factory AuthSessionResponseClientInfo.fromJson(Map<String, Object?> json) {
+    final value = _$AuthSessionResponseClientInfoFromJson(json);
+    return AuthSessionResponseClientInfo(
+      device: value.device,
+      platform: json.containsKey('platform') ? value.platform : _omit,
+      os: json.containsKey('os') ? value.os : _omit,
+      browser: json.containsKey('browser') ? value.browser : _omit,
+      location: json.containsKey('location') ? value.location : _omit,
+    );
+  }
 
   /// The platform reported by the client
   @JsonKey(includeIfNull: false)
@@ -40,6 +58,25 @@ class AuthSessionResponseClientInfo {
   /// The geolocation data sent by the client
   @JsonKey(includeIfNull: false)
   final AuthSessionLocation? location;
+  final bool _platformPresent;
+  final bool _osPresent;
+  final bool _browserPresent;
+  final bool _locationPresent;
 
-  Map<String, Object?> toJson() => _$AuthSessionResponseClientInfoToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$AuthSessionResponseClientInfoToJson(this);
+    if (_platformPresent) {
+      json.putIfAbsent('platform', () => platform);
+    }
+    if (_osPresent) {
+      json.putIfAbsent('os', () => os);
+    }
+    if (_browserPresent) {
+      json.putIfAbsent('browser', () => browser);
+    }
+    if (_locationPresent) {
+      json.putIfAbsent('location', () => location);
+    }
+    return json;
+  }
 }

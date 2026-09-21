@@ -9,6 +9,7 @@ import 'package:retrofit/error_logger.dart';
 import '../models/bulk_delete_self_messages_request.dart';
 import '../models/bulk_ignore_friend_requests_request.dart';
 import '../models/bulk_ignore_friend_requests_response.dart';
+import '../models/channel_list_response.dart';
 import '../models/channel_response.dart';
 import '../models/create_private_channel_request.dart';
 import '../models/disable_totp_request.dart';
@@ -33,7 +34,8 @@ import '../models/entrance_sound_selection_request.dart';
 import '../models/entrance_sound_upload_request.dart';
 import '../models/friend_request_by_tag_request.dart';
 import '../models/friend_request_create_request.dart';
-import '../models/gift_code_metadata_response.dart';
+import '../models/gift_code_metadata_list_response.dart';
+import '../models/harvest_archive_response.dart';
 import '../models/harvest_creation_response_schema.dart';
 import '../models/harvest_download_url_response.dart';
 import '../models/harvest_self_data_request.dart';
@@ -69,6 +71,7 @@ import '../models/push_subscribe_response.dart';
 import '../models/push_subscriptions_list_response.dart';
 import '../models/register_mobile_device_request.dart';
 import '../models/register_mobile_device_response.dart';
+import '../models/relationship_list_response.dart';
 import '../models/relationship_nickname_update_request.dart';
 import '../models/relationship_response.dart';
 import '../models/relationship_type_put_request.dart';
@@ -97,6 +100,8 @@ import '../models/web_authn_challenge_response.dart';
 import '../models/web_authn_credential_list_response.dart';
 import '../models/web_authn_credential_update_request.dart';
 import '../models/web_authn_register_request.dart';
+import '../models/web_authn_two_factor_request.dart';
+import '../models/web_authn_two_factor_response.dart';
 
 part 'users_api.g.dart';
 
@@ -108,10 +113,10 @@ abstract class UsersApi {
   ///
   /// Streams a completed data harvest archive. Authorised by a signed, expiring token rather than a session, so the link works from the harvest completion email. Only active when presigned harvest downloads are disabled.
   ///
-  /// [harvestId] - The harvestId.
+  /// [harvestId] - The ID of the harvest request.
   @GET('/harvest-downloads/{harvestId}')
-  Future<void> downloadDataHarvestArchive({
-    @Path('harvestId') required String harvestId,
+  Future<HarvestArchiveResponse> downloadDataHarvestArchive({
+    @Path('harvestId') required SnowflakeType harvestId,
   });
 
   /// Get current user profile.
@@ -127,7 +132,7 @@ abstract class UsersApi {
   /// [body] - Name not received - field will be skipped.
   @PATCH('/users/@me')
   Future<UserPrivateResponse> updateCurrentUser({
-    @Body() required UserUpdateWithVerificationRequest body,
+    @Body() UserUpdateWithVerificationRequest? body,
   });
 
   /// Forget authorized IPs for current user.
@@ -136,15 +141,13 @@ abstract class UsersApi {
   ///
   /// [body] - Name not received - field will be skipped.
   @DELETE('/users/@me/authorized-ips')
-  Future<void> forgetAuthorizedIps({
-    @Body() required SudoVerificationSchema body,
-  });
+  Future<void> forgetAuthorizedIps({@Body() SudoVerificationSchema? body});
 
   /// List private channels.
   ///
   /// Retrieves all private channels (direct messages) accessible to the current user. Returns list of channel objects with metadata including recipient information.
   @GET('/users/@me/channels')
-  Future<List<ChannelResponse>> listPrivateChannels();
+  Future<ChannelListResponse> listPrivateChannels();
 
   /// Create private channel.
   ///
@@ -192,9 +195,7 @@ abstract class UsersApi {
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/users/@me/delete')
-  Future<void> deleteCurrentUserAccount({
-    @Body() required SudoVerificationSchema body,
-  });
+  Future<void> deleteCurrentUserAccount({@Body() SudoVerificationSchema? body});
 
   /// Disable current user account.
   ///
@@ -203,7 +204,7 @@ abstract class UsersApi {
   /// [body] - Name not received - field will be skipped.
   @POST('/users/@me/disable')
   Future<void> disableCurrentUserAccount({
-    @Body() required SudoVerificationSchema body,
+    @Body() SudoVerificationSchema? body,
   });
 
   /// Apply a verified email change.
@@ -283,7 +284,7 @@ abstract class UsersApi {
   /// [body] - Name not received - field will be skipped.
   @POST('/users/@me/email-change/start')
   Future<EmailChangeStartResponse> startEmailChange({
-    @Body() required EmptyBodyRequest body,
+    @Body() EmptyBodyRequest? body,
   });
 
   /// Verify new email address.
@@ -336,28 +337,26 @@ abstract class UsersApi {
   ///
   /// Updates the display label for a sound in the user's library. Audio bytes are unchanged.
   ///
-  /// [soundId] - The sound id.
-  ///
   /// [body] - Name not received - field will be skipped.
   @PATCH('/users/@me/entrance-sounds/{sound_id}')
   Future<EntranceSoundResponse> renameEntranceSound({
-    @Path('sound_id') required String soundId,
+    @Path('sound_id') required SnowflakeType soundId,
     @Body() required EntranceSoundRenameRequest body,
   });
 
   /// Delete an entrance sound.
   ///
   /// Removes the sound from the library and clears any per-scope selections that pointed at it.
-  ///
-  /// [soundId] - The sound id.
   @DELETE('/users/@me/entrance-sounds/{sound_id}')
-  Future<void> deleteEntranceSound({@Path('sound_id') required String soundId});
+  Future<void> deleteEntranceSound({
+    @Path('sound_id') required SnowflakeType soundId,
+  });
 
   /// List user gifts.
   ///
   /// Lists all gift codes created by the authenticated user.
   @GET('/users/@me/gifts')
-  Future<List<GiftCodeMetadataResponse>> listUserGifts();
+  Future<GiftCodeMetadataListResponse> listUserGifts();
 
   /// Update DM notification settings.
   ///
@@ -366,7 +365,7 @@ abstract class UsersApi {
   /// [body] - Name not received - field will be skipped.
   @PATCH('/users/@me/guilds/@me/settings')
   Future<UserGuildSettingsResponse> updateDmNotificationSettings({
-    @Body() required UserGuildSettingsUpdateRequest body,
+    @Body() UserGuildSettingsUpdateRequest? body,
   });
 
   /// Update guild settings for user.
@@ -379,7 +378,7 @@ abstract class UsersApi {
   @PATCH('/users/@me/guilds/{guild_id}/settings')
   Future<UserGuildSettingsResponse> updateGuildSettingsForUser({
     @Path('guild_id') required SnowflakeType guildId,
-    @Body() required UserGuildSettingsUpdateRequest body,
+    @Body() UserGuildSettingsUpdateRequest? body,
   });
 
   /// Request data harvest.
@@ -395,7 +394,7 @@ abstract class UsersApi {
   /// [body] - Name not received - field will be skipped.
   @POST('/users/@me/harvest/filtered')
   Future<HarvestCreationResponseSchema> requestFilteredDataHarvest({
-    @Body() required HarvestSelfDataRequest body,
+    @Body() HarvestSelfDataRequest? body,
   });
 
   /// Get latest data harvest.
@@ -408,32 +407,42 @@ abstract class UsersApi {
   ///
   /// Retrieves detailed status information for a specific data harvest. Shows progress, completion status, and other metadata about the harvest request.
   ///
-  /// [harvestId] - The harvestId.
+  /// [harvestId] - The ID of the harvest request.
   @GET('/users/@me/harvest/{harvestId}')
   Future<HarvestStatusResponseSchema> getDataHarvestStatus({
-    @Path('harvestId') required String harvestId,
+    @Path('harvestId') required SnowflakeType harvestId,
   });
 
   /// Get data harvest download URL.
   ///
   /// Retrieves the download URL for a completed data harvest. The URL is temporary and expires after a set time. Can only be accessed for completed harvests.
   ///
-  /// [harvestId] - The harvestId.
+  /// [harvestId] - The ID of the harvest request.
   @GET('/users/@me/harvest/{harvestId}/download')
   Future<HarvestDownloadUrlResponse> getDataHarvestDownloadUrl({
-    @Path('harvestId') required String harvestId,
+    @Path('harvestId') required SnowflakeType harvestId,
   });
 
   /// List mentions for current user.
   ///
   /// Retrieves messages where the current user was mentioned. Supports filtering by role mentions, everyone mentions, and specific guilds. Returns paginated list of messages.
+  ///
+  /// [limit] - Maximum number of mentions to return (1-100, default 25).
+  ///
+  /// [roles] - Whether to include role mentions.
+  ///
+  /// [everyone] - Whether to include @everyone mentions.
+  ///
+  /// [guilds] - Whether to include guild mentions.
+  ///
+  /// [before] - Get mentions before this message ID.
   @GET('/users/@me/mentions')
   Future<MessageListResponse> listMentionsForCurrentUser({
-    @Query('limit') String? limit,
-    @Query('roles') String? roles,
-    @Query('everyone') String? everyone,
-    @Query('guilds') String? guilds,
     @Query('before') SnowflakeType? before,
+    @Query('limit') String? limit = '25',
+    @Query('roles') String? roles = 'false',
+    @Query('everyone') String? everyone = 'false',
+    @Query('guilds') String? guilds = 'false',
   });
 
   /// Mark mentions read.
@@ -463,7 +472,7 @@ abstract class UsersApi {
   /// [body] - Name not received - field will be skipped.
   @POST('/users/@me/messages/bulk-delete-mine')
   Future<void> bulkDeleteMyMessages({
-    @Body() required BulkDeleteSelfMessagesRequest body,
+    @Body() BulkDeleteSelfMessagesRequest? body,
   });
 
   /// Request bulk message deletion.
@@ -473,7 +482,7 @@ abstract class UsersApi {
   /// [body] - Name not received - field will be skipped.
   @POST('/users/@me/messages/delete')
   Future<void> requestBulkMessageDeletion({
-    @Body() required SudoVerificationSchema body,
+    @Body() SudoVerificationSchema? body,
   });
 
   /// Cancel bulk message deletion.
@@ -499,7 +508,7 @@ abstract class UsersApi {
   /// [body] - Name not received - field will be skipped.
   @POST('/users/@me/mfa/backup-codes/challenge')
   Future<MfaBackupCodesChallengeStartResponse> startBackupCodesChallenge({
-    @Body() required EmptyBodyRequest body,
+    @Body() EmptyBodyRequest? body,
   });
 
   /// Regenerate backup codes with a verified challenge.
@@ -573,14 +582,14 @@ abstract class UsersApi {
   /// [body] - Name not received - field will be skipped.
   @POST('/users/@me/mfa/webauthn/credentials/registration-options')
   Future<WebAuthnChallengeResponse> getWebauthnRegistrationOptions({
-    @Body() required SudoVerificationSchema body,
+    @Body() SudoVerificationSchema? body,
   });
 
   /// Update WebAuthn credential.
   ///
   /// Update the name or settings of a registered WebAuthn credential. Requires sudo mode verification.
   ///
-  /// [credentialId] - The credential id.
+  /// [credentialId] - The ID of the WebAuthn credential.
   ///
   /// [body] - Name not received - field will be skipped.
   @PATCH('/users/@me/mfa/webauthn/credentials/{credential_id}')
@@ -593,13 +602,23 @@ abstract class UsersApi {
   ///
   /// Remove a registered WebAuthn credential from the current account. Requires sudo mode verification for security.
   ///
-  /// [credentialId] - The credential id.
+  /// [credentialId] - The ID of the WebAuthn credential.
   ///
   /// [body] - Name not received - field will be skipped.
   @DELETE('/users/@me/mfa/webauthn/credentials/{credential_id}')
   Future<void> deleteWebauthnCredential({
     @Path('credential_id') required String credentialId,
-    @Body() required SudoVerificationSchema body,
+    @Body() SudoVerificationSchema? body,
+  });
+
+  /// Set WebAuthn two-factor authentication.
+  ///
+  /// Choose whether registered passkeys are required as a second factor when signing in with email and password. Enabling requires at least one registered credential and mints backup codes when the account has none. Requires sudo mode verification.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @PUT('/users/@me/mfa/webauthn/two-factor')
+  Future<WebAuthnTwoFactorResponse> setWebauthnTwoFactor({
+    @Body() required WebAuthnTwoFactorRequest body,
   });
 
   /// Register mobile push device.
@@ -632,7 +651,7 @@ abstract class UsersApi {
   ///
   /// Deletes a registered mobile push device by device ID.
   ///
-  /// [deviceId] - The device id.
+  /// [deviceId] - The ID of the mobile push device.
   @DELETE('/users/@me/mobile-devices/{device_id}')
   Future<SuccessResponse> deleteMobilePushDevice({
     @Path('device_id') required String deviceId,
@@ -648,23 +667,23 @@ abstract class UsersApi {
   ///
   /// Retrieves a specific note the current user has written about another user. Returns the note text and metadata. These are private notes visible only to the authenticated user.
   ///
-  /// [targetId] - The target id.
+  /// [targetId] - The ID of the target user.
   @GET('/users/@me/notes/{target_id}')
   Future<UserNoteResponse> getNoteOnUser({
-    @Path('target_id') required String targetId,
+    @Path('target_id') required SnowflakeType targetId,
   });
 
   /// Set note on user.
   ///
   /// Creates or updates a private note on another user. The note is visible only to the authenticated user. Send null or empty string to delete an existing note.
   ///
-  /// [targetId] - The target id.
+  /// [targetId] - The ID of the target user.
   ///
   /// [body] - Name not received - field will be skipped.
   @PUT('/users/@me/notes/{target_id}')
   Future<void> setNoteOnUser({
-    @Path('target_id') required String targetId,
-    @Body() required UserNoteUpdateRequest body,
+    @Path('target_id') required SnowflakeType targetId,
+    @Body() UserNoteUpdateRequest? body,
   });
 
   /// Complete password change.
@@ -694,7 +713,7 @@ abstract class UsersApi {
   /// [body] - Name not received - field will be skipped.
   @POST('/users/@me/password-change/start')
   Future<PasswordChangeStartResponse> startPasswordChange({
-    @Body() required EmptyBodyRequest body,
+    @Body() EmptyBodyRequest? body,
   });
 
   /// Verify password change code.
@@ -779,7 +798,7 @@ abstract class UsersApi {
   ///
   /// Unregisters a push notification subscription for the current user. Push notifications will no longer be sent to this subscription endpoint.
   ///
-  /// [subscriptionId] - The subscription id.
+  /// [subscriptionId] - The ID of the push subscription.
   @DELETE('/users/@me/push/subscriptions/{subscription_id}')
   Future<SuccessResponse> unsubscribeFromPushNotifications({
     @Path('subscription_id') required String subscriptionId,
@@ -789,7 +808,7 @@ abstract class UsersApi {
   ///
   /// Retrieves all relationships for the current user, including friends, friend requests (incoming and outgoing), and blocked users. Returns list of relationship objects with type and metadata.
   @GET('/users/@me/relationships')
-  Future<List<RelationshipResponse>> listUserRelationships();
+  Future<RelationshipListResponse> listUserRelationships();
 
   /// Send friend request by tag.
   ///
@@ -808,7 +827,7 @@ abstract class UsersApi {
   /// [body] - Name not received - field will be skipped.
   @POST('/users/@me/relationships/bulk-ignore')
   Future<BulkIgnoreFriendRequestsResponse> bulkIgnoreFriendRequests({
-    @Body() required BulkIgnoreFriendRequestsRequest body,
+    @Body() BulkIgnoreFriendRequestsRequest? body,
   });
 
   /// Send friend request.
@@ -821,7 +840,7 @@ abstract class UsersApi {
   @POST('/users/@me/relationships/{user_id}')
   Future<RelationshipResponse> sendFriendRequest({
     @Path('user_id') required SnowflakeType userId,
-    @Body() required FriendRequestCreateRequest body,
+    @Body() FriendRequestCreateRequest? body,
   });
 
   /// Accept or update friend request.
@@ -834,7 +853,7 @@ abstract class UsersApi {
   @PUT('/users/@me/relationships/{user_id}')
   Future<RelationshipResponse> acceptOrUpdateFriendRequest({
     @Path('user_id') required SnowflakeType userId,
-    @Body() required RelationshipTypePutRequest body,
+    @Body() RelationshipTypePutRequest? body,
   });
 
   /// Remove relationship.
@@ -873,16 +892,20 @@ abstract class UsersApi {
   /// [body] - Name not received - field will be skipped.
   @POST('/users/@me/required-actions/phone-gate-escape')
   Future<UserPrivateResponse> executePhoneGateEscape({
-    @Body() required EmptyBodyRequest body,
+    @Body() EmptyBodyRequest? body,
   });
 
   /// List saved messages.
   ///
   /// Retrieves all messages saved by the current user. Messages are saved privately for easy reference. Returns paginated list of saved messages with metadata.
+  ///
+  /// [limit] - Maximum number of saved messages to return (1-100, default 25).
+  ///
+  /// [before] - Get saved messages before this message ID.
   @GET('/users/@me/saved-messages')
   Future<SavedMessageEntryListResponse> listSavedMessages({
-    @Query('limit') String? limit,
     @Query('before') SnowflakeType? before,
+    @Query('limit') String? limit = '25',
   });
 
   /// Save message.
@@ -916,7 +939,7 @@ abstract class UsersApi {
   /// [body] - Name not received - field will be skipped.
   @PATCH('/users/@me/settings')
   Future<UserSettingsResponse> updateCurrentUserSettings({
-    @Body() required UserSettingsUpdateRequest body,
+    @Body() UserSettingsUpdateRequest? body,
   });
 
   /// Update voice activity sharing default and apply to all friends.
@@ -948,12 +971,16 @@ abstract class UsersApi {
   /// [body] - Name not received - field will be skipped.
   @POST('/users/@me/terms-acceptance')
   Future<UserPrivateResponse> acceptUpdatedTerms({
-    @Body() required EmptyBodyRequest body,
+    @Body() EmptyBodyRequest? body,
   });
 
   /// Check username tag availability.
   ///
   /// Checks if a username and discriminator combination is available for registration. Returns whether the tag is taken by another user.
+  ///
+  /// [username] - The username to check.
+  ///
+  /// [discriminator] - The discriminator to check.
   @GET('/users/check-tag')
   Future<UserTagCheckResponse> checkUsernameTagAvailability({
     @Query('username') required UsernameType username,
@@ -964,13 +991,19 @@ abstract class UsersApi {
   ///
   /// Retrieves detailed profile information for a user, including bio, custom status, and badges. Optionally includes mutual friends and mutual guilds if requested. May respect privacy settings.
   ///
-  /// [targetId] - The target id.
+  /// [targetId] - The ID of the target user.
+  ///
+  /// [guildId] - Optional guild ID for guild-specific profile.
+  ///
+  /// [withMutualFriends] - Whether to include mutual friends.
+  ///
+  /// [withMutualGuilds] - Whether to include mutual guilds.
   @GET('/users/{target_id}/profile')
   Future<UserProfileFullResponse> getUserProfile({
-    @Path('target_id') required String targetId,
+    @Path('target_id') required SnowflakeType targetId,
+    @Query('with_mutual_friends') String? withMutualFriends = 'false',
+    @Query('with_mutual_guilds') String? withMutualGuilds = 'false',
     @Query('guild_id') SnowflakeType? guildId,
-    @Query('with_mutual_friends') String? withMutualFriends,
-    @Query('with_mutual_guilds') String? withMutualGuilds,
   });
 
   /// Get user by ID.

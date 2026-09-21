@@ -17,14 +17,7 @@ WellKnownFluxerResponseLimitsRules _$WellKnownFluxerResponseLimitsRulesFromJson(
       'overrides',
       (v) => Map<String, num>.from(v as Map),
     ),
-    filters: $checkedConvert(
-      'filters',
-      (v) => v == null
-          ? null
-          : WellKnownFluxerResponseLimitsRulesFilters.fromJson(
-              v as Map<String, dynamic>,
-            ),
-    ),
+    filters: $checkedConvert('filters', (v) => v ?? _omit),
   );
   return val;
 });

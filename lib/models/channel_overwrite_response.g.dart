@@ -13,7 +13,7 @@ ChannelOverwriteResponse _$ChannelOverwriteResponseFromJson(
     id: $checkedConvert('id', (v) => v as String),
     type: $checkedConvert(
       'type',
-      (v) => ChannelOverwriteResponseTypeType.fromJson((v as num).toInt()),
+      (v) => ChannelOverwriteType.fromJson((v as num).toInt()),
     ),
     allow: $checkedConvert('allow', (v) => v as String),
     deny: $checkedConvert('deny', (v) => v as String),

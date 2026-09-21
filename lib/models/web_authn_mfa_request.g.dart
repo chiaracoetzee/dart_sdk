@@ -9,7 +9,12 @@ part of 'web_authn_mfa_request.dart';
 WebAuthnMfaRequest _$WebAuthnMfaRequestFromJson(Map<String, dynamic> json) =>
     $checkedCreate('WebAuthnMfaRequest', json, ($checkedConvert) {
       final val = WebAuthnMfaRequest(
-        response: $checkedConvert('response', (v) => v),
+        response: $checkedConvert(
+          'response',
+          (v) => WebAuthnAuthenticationResponse.fromJson(
+            v as Map<String, dynamic>,
+          ),
+        ),
         challenge: $checkedConvert('challenge', (v) => v as String),
         ticket: $checkedConvert('ticket', (v) => v as String),
       );

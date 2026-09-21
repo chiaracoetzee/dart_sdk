@@ -4,25 +4,45 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'api_error_code.dart';
-import 'validation_error_item.dart';
+import 'error_errors.dart';
 
 part 'error.g.dart';
 
+const Object _omit = Object();
+
 @JsonSerializable()
 class Error {
-  const Error({required this.code, required this.message, this.errors});
+  const Error({
+    required this.code,
+    required this.message,
+    Object? errors = _omit,
+  }) : errors = identical(errors, _omit) ? null : errors as List<ErrorErrors>?,
+       _errorsPresent = !identical(errors, _omit);
+  factory Error.fromJson(Map<String, Object?> json) {
+    final value = _$ErrorFromJson(json);
+    return Error(
+      code: value.code,
+      message: value.message,
+      errors: json.containsKey('errors') ? value.errors : _omit,
+    );
+  }
 
-  factory Error.fromJson(Map<String, Object?> json) => _$ErrorFromJson(json);
-
-  final ApiErrorCode code;
+  /// Machine-readable error code
+  final String code;
 
   /// Human-readable error message
   final String message;
 
   /// Field-specific validation errors
   @JsonKey(includeIfNull: false)
-  final List<ValidationErrorItem>? errors;
+  final List<ErrorErrors>? errors;
+  final bool _errorsPresent;
 
-  Map<String, Object?> toJson() => _$ErrorToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$ErrorToJson(this);
+    if (_errorsPresent) {
+      json.putIfAbsent('errors', () => errors);
+    }
+    return json;
+  }
 }

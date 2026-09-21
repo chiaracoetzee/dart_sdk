@@ -8,11 +8,11 @@ import 'package:json_annotation/json_annotation.dart';
 @JsonEnum()
 enum GuildResponseSplashCardAlignmentSplashCardAlignment {
   @JsonValue(0)
-  value0(0),
+  center(0),
   @JsonValue(1)
-  value1(1),
+  left(1),
   @JsonValue(2)
-  value2(2),
+  right(2),
 
   /// Default value for all unparsed values, allows backward compatibility when adding new values on the backend.
   $unknown(null);

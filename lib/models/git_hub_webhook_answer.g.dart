@@ -9,14 +9,17 @@ part of 'git_hub_webhook_answer.dart';
 GitHubWebhookAnswer _$GitHubWebhookAnswerFromJson(Map<String, dynamic> json) =>
     $checkedCreate('GitHubWebhookAnswer', json, ($checkedConvert) {
       final val = GitHubWebhookAnswer(
-        id: $checkedConvert('id', (v) => v as String),
+        id: $checkedConvert(
+          'id',
+          (v) => Int64Type.fromJson(v as Map<String, dynamic>),
+        ),
         htmlUrl: $checkedConvert('html_url', (v) => v as String),
         user: $checkedConvert(
           'user',
           (v) => GitHubWebhookAnswerUser.fromJson(v as Map<String, dynamic>),
         ),
         body: $checkedConvert('body', (v) => v as String),
-        commitId: $checkedConvert('commit_id', (v) => v as String?),
+        commitId: $checkedConvert('commit_id', (v) => v ?? _omit),
       );
       return val;
     }, fieldKeyMap: const {'htmlUrl': 'html_url', 'commitId': 'commit_id'});

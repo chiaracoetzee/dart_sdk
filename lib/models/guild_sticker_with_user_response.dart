@@ -4,6 +4,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'snowflake_string_type.dart';
 import 'user_partial_response.dart';
 
 part 'guild_sticker_with_user_response.g.dart';
@@ -24,7 +25,7 @@ class GuildStickerWithUserResponse {
       _$GuildStickerWithUserResponseFromJson(json);
 
   /// The unique identifier for this sticker
-  final String id;
+  final SnowflakeStringType id;
 
   /// The name of the sticker
   final String name;
@@ -40,6 +41,8 @@ class GuildStickerWithUserResponse {
 
   /// Deprecated; always false. Retained for compatibility with older clients
   final bool nsfw;
+
+  /// The user who uploaded this sticker
   final UserPartialResponse user;
 
   Map<String, Object?> toJson() => _$GuildStickerWithUserResponseToJson(this);

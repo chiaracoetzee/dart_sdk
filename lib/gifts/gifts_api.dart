@@ -18,7 +18,7 @@ abstract class GiftsApi {
   ///
   /// Retrieves information about a gift code, including sender details and premium entitlements.
   ///
-  /// [code] - The code.
+  /// [code] - The gift code.
   @GET('/gifts/{code}')
   Future<GiftCodeResponse> getGiftCode({@Path('code') required String code});
 
@@ -26,7 +26,7 @@ abstract class GiftsApi {
   ///
   /// Redeems a gift code for the authenticated user, applying premium benefits.
   ///
-  /// [code] - The code.
+  /// [code] - The gift code.
   @POST('/gifts/{code}/redeem')
   Future<void> redeemGiftCode({@Path('code') required String code});
 }

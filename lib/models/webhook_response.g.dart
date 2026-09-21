@@ -18,7 +18,7 @@ WebhookResponse _$WebhookResponseFromJson(Map<String, dynamic> json) =>
           'user',
           (v) => UserPartialResponse.fromJson(v as Map<String, dynamic>),
         ),
-        avatar: $checkedConvert('avatar', (v) => v as String?),
+        avatar: $checkedConvert('avatar', (v) => v ?? _omit),
       );
       return val;
     }, fieldKeyMap: const {'guildId': 'guild_id', 'channelId': 'channel_id'});

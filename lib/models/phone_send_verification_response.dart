@@ -4,72 +4,42 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'phone_send_verification_response_inbound_challenge_reason.dart';
+import 'phone_send_verification_response_variant2_reason_reason.dart';
 
 part 'phone_send_verification_response.g.dart';
 
-@JsonSerializable(createFactory: false)
-sealed class PhoneSendVerificationResponse {
-  const PhoneSendVerificationResponse();
+class PhoneSendVerificationResponse {
+  final Map<String, dynamic> _json;
+
+  const PhoneSendVerificationResponse(this._json);
 
   factory PhoneSendVerificationResponse.fromJson(Map<String, dynamic> json) =>
-      PhoneSendVerificationResponseUnionDeserializer.tryDeserialize(json);
+      PhoneSendVerificationResponse(json);
 
-  Map<String, dynamic> toJson();
-}
+  Map<String, dynamic> toJson() => _json;
 
-extension PhoneSendVerificationResponseUnionDeserializer
-    on PhoneSendVerificationResponse {
-  static PhoneSendVerificationResponse tryDeserialize(
-    Map<String, dynamic> json, {
-    String key = 'channel',
-    Map<Type, Object?>? mapping,
-  }) {
-    final mappingFallback = const <Type, Object?>{
-      PhoneSendVerificationResponseSms: 'sms',
-      PhoneSendVerificationResponseInboundChallenge: 'inbound_challenge',
-    };
-    final value = json[key];
-    final effective = mapping ?? mappingFallback;
-    final valueAsString = value?.toString();
-    return switch (value) {
-      _
-          when value == effective[PhoneSendVerificationResponseSms] ||
-              valueAsString ==
-                  effective[PhoneSendVerificationResponseSms]?.toString() =>
-        PhoneSendVerificationResponseSms.fromJson(json),
-      _
-          when value ==
-                  effective[PhoneSendVerificationResponseInboundChallenge] ||
-              valueAsString ==
-                  effective[PhoneSendVerificationResponseInboundChallenge]
-                      ?.toString() =>
-        PhoneSendVerificationResponseInboundChallenge.fromJson(json),
-      _ => throw FormatException(
-        'Unknown discriminator value "${json[key]}" for PhoneSendVerificationResponse',
-      ),
-    };
-  }
+  PhoneSendVerificationResponseVariant1 toVariant1() =>
+      PhoneSendVerificationResponseVariant1.fromJson(_json);
+  PhoneSendVerificationResponseVariant2 toVariant2() =>
+      PhoneSendVerificationResponseVariant2.fromJson(_json);
 }
 
 @JsonSerializable()
-class PhoneSendVerificationResponseSms extends PhoneSendVerificationResponse {
+class PhoneSendVerificationResponseVariant1 {
   final String channel;
 
-  const PhoneSendVerificationResponseSms({required this.channel});
+  const PhoneSendVerificationResponseVariant1({required this.channel});
 
-  factory PhoneSendVerificationResponseSms.fromJson(
+  factory PhoneSendVerificationResponseVariant1.fromJson(
     Map<String, dynamic> json,
-  ) => _$PhoneSendVerificationResponseSmsFromJson(json);
+  ) => _$PhoneSendVerificationResponseVariant1FromJson(json);
 
-  @override
   Map<String, dynamic> toJson() =>
-      _$PhoneSendVerificationResponseSmsToJson(this);
+      _$PhoneSendVerificationResponseVariant1ToJson(this);
 }
 
 @JsonSerializable()
-class PhoneSendVerificationResponseInboundChallenge
-    extends PhoneSendVerificationResponse {
+class PhoneSendVerificationResponseVariant2 {
   final String channel;
   @JsonKey(name: 'challenge_code')
   final String challengeCode;
@@ -77,9 +47,9 @@ class PhoneSendVerificationResponseInboundChallenge
   final String ourNumber;
   @JsonKey(name: 'expires_at')
   final DateTime expiresAt;
-  final PhoneSendVerificationResponseInboundChallengeReason reason;
+  final PhoneSendVerificationResponseVariant2ReasonReason reason;
 
-  const PhoneSendVerificationResponseInboundChallenge({
+  const PhoneSendVerificationResponseVariant2({
     required this.channel,
     required this.challengeCode,
     required this.ourNumber,
@@ -87,11 +57,10 @@ class PhoneSendVerificationResponseInboundChallenge
     required this.reason,
   });
 
-  factory PhoneSendVerificationResponseInboundChallenge.fromJson(
+  factory PhoneSendVerificationResponseVariant2.fromJson(
     Map<String, dynamic> json,
-  ) => _$PhoneSendVerificationResponseInboundChallengeFromJson(json);
+  ) => _$PhoneSendVerificationResponseVariant2FromJson(json);
 
-  @override
   Map<String, dynamic> toJson() =>
-      _$PhoneSendVerificationResponseInboundChallengeToJson(this);
+      _$PhoneSendVerificationResponseVariant2ToJson(this);
 }

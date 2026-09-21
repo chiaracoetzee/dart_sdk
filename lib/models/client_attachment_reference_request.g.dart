@@ -11,13 +11,13 @@ ClientAttachmentReferenceRequest _$ClientAttachmentReferenceRequestFromJson(
 ) =>
     $checkedCreate('ClientAttachmentReferenceRequest', json, ($checkedConvert) {
       final val = ClientAttachmentReferenceRequest(
-        id: $checkedConvert('id', (v) => v),
-        title: $checkedConvert('title', (v) => v as String?),
-        description: $checkedConvert('description', (v) => v as String?),
-        flags: $checkedConvert('flags', (v) => (v as num?)?.toInt()),
-        duration: $checkedConvert('duration', (v) => (v as num?)?.toInt()),
-        waveform: $checkedConvert('waveform', (v) => v as String?),
-        filename: $checkedConvert('filename', (v) => v as String?),
+        title: $checkedConvert('title', (v) => v ?? _omit),
+        description: $checkedConvert('description', (v) => v ?? _omit),
+        flags: $checkedConvert('flags', (v) => v ?? _omit),
+        duration: $checkedConvert('duration', (v) => v ?? _omit),
+        waveform: $checkedConvert('waveform', (v) => v ?? _omit),
+        id: $checkedConvert('id', (v) => v ?? _omit),
+        filename: $checkedConvert('filename', (v) => v ?? _omit),
       );
       return val;
     });
@@ -30,6 +30,6 @@ Map<String, dynamic> _$ClientAttachmentReferenceRequestToJson(
   'flags': ?instance.flags,
   'duration': ?instance.duration,
   'waveform': ?instance.waveform,
-  'id': instance.id,
+  'id': ?instance.id,
   'filename': ?instance.filename,
 };

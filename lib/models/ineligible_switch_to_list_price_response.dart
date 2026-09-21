@@ -4,9 +4,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'ineligible_switch_to_list_price_response_reason_reason.dart';
-import 'ineligible_switch_to_list_price_response_status_status.dart';
-import 'switch_to_list_price_response.dart';
+import 'list_price_switch_ineligibility_reason.dart';
 
 part 'ineligible_switch_to_list_price_response.g.dart';
 
@@ -22,10 +20,10 @@ class IneligibleSwitchToListPriceResponse {
   ) => _$IneligibleSwitchToListPriceResponseFromJson(json);
 
   /// The subscription cannot be moved to the current list price
-  final IneligibleSwitchToListPriceResponseStatusStatus status;
+  final String status;
 
   /// Why the switch was refused
-  final IneligibleSwitchToListPriceResponseReasonReason reason;
+  final ListPriceSwitchIneligibilityReason reason;
 
   Map<String, Object?> toJson() =>
       _$IneligibleSwitchToListPriceResponseToJson(this);

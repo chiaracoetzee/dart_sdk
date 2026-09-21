@@ -6,17 +6,30 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'slack_webhook_request_attachments_fields.g.dart';
 
+const Object _omit = Object();
+
 @JsonSerializable()
 class SlackWebhookRequestAttachmentsFields {
   const SlackWebhookRequestAttachmentsFields({
-    this.title,
-    this.value,
-    this.short,
-  });
-
+    Object? title = _omit,
+    Object? value = _omit,
+    Object? short = _omit,
+  }) : title = identical(title, _omit) ? null : title as String?,
+       _titlePresent = !identical(title, _omit),
+       value = identical(value, _omit) ? null : value as String?,
+       _valuePresent = !identical(value, _omit),
+       short = identical(short, _omit) ? null : short as bool?,
+       _shortPresent = !identical(short, _omit);
   factory SlackWebhookRequestAttachmentsFields.fromJson(
     Map<String, Object?> json,
-  ) => _$SlackWebhookRequestAttachmentsFieldsFromJson(json);
+  ) {
+    final value = _$SlackWebhookRequestAttachmentsFieldsFromJson(json);
+    return SlackWebhookRequestAttachmentsFields(
+      title: json.containsKey('title') ? value.title : _omit,
+      value: json.containsKey('value') ? value.value : _omit,
+      short: json.containsKey('short') ? value.short : _omit,
+    );
+  }
 
   /// Title of the field
   @JsonKey(includeIfNull: false)
@@ -29,7 +42,21 @@ class SlackWebhookRequestAttachmentsFields {
   /// Whether the field should be displayed as a short column
   @JsonKey(includeIfNull: false)
   final bool? short;
+  final bool _titlePresent;
+  final bool _valuePresent;
+  final bool _shortPresent;
 
-  Map<String, Object?> toJson() =>
-      _$SlackWebhookRequestAttachmentsFieldsToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$SlackWebhookRequestAttachmentsFieldsToJson(this);
+    if (_titlePresent) {
+      json.putIfAbsent('title', () => title);
+    }
+    if (_valuePresent) {
+      json.putIfAbsent('value', () => value);
+    }
+    if (_shortPresent) {
+      json.putIfAbsent('short', () => short);
+    }
+    return json;
+  }
 }

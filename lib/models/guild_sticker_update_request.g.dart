@@ -11,11 +11,12 @@ GuildStickerUpdateRequest _$GuildStickerUpdateRequestFromJson(
 ) => $checkedCreate('GuildStickerUpdateRequest', json, ($checkedConvert) {
   final val = GuildStickerUpdateRequest(
     name: $checkedConvert('name', (v) => v as String),
-    description: $checkedConvert('description', (v) => v as String?),
     tags: $checkedConvert(
       'tags',
-      (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+      (v) =>
+          (v as List<dynamic>?)?.map((e) => e as String).toList() ?? const [],
     ),
+    description: $checkedConvert('description', (v) => v ?? _omit),
   );
   return val;
 });
@@ -25,5 +26,5 @@ Map<String, dynamic> _$GuildStickerUpdateRequestToJson(
 ) => <String, dynamic>{
   'name': instance.name,
   'description': ?instance.description,
-  'tags': ?instance.tags,
+  'tags': instance.tags,
 };

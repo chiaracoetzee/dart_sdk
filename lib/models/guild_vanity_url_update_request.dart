@@ -6,16 +6,30 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'guild_vanity_url_update_request.g.dart';
 
+const Object _omit = Object();
+
 @JsonSerializable()
 class GuildVanityUrlUpdateRequest {
-  const GuildVanityUrlUpdateRequest({this.code});
-
-  factory GuildVanityUrlUpdateRequest.fromJson(Map<String, Object?> json) =>
-      _$GuildVanityUrlUpdateRequestFromJson(json);
+  const GuildVanityUrlUpdateRequest({Object? code = _omit})
+    : code = identical(code, _omit) ? null : code as String?,
+      _codePresent = !identical(code, _omit);
+  factory GuildVanityUrlUpdateRequest.fromJson(Map<String, Object?> json) {
+    final value = _$GuildVanityUrlUpdateRequestFromJson(json);
+    return GuildVanityUrlUpdateRequest(
+      code: json.containsKey('code') ? value.code : _omit,
+    );
+  }
 
   /// The new vanity URL code (2-32 characters, alphanumeric and hyphens)
   @JsonKey(includeIfNull: false)
   final String? code;
+  final bool _codePresent;
 
-  Map<String, Object?> toJson() => _$GuildVanityUrlUpdateRequestToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$GuildVanityUrlUpdateRequestToJson(this);
+    if (_codePresent) {
+      json.putIfAbsent('code', () => code);
+    }
+    return json;
+  }
 }

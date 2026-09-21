@@ -13,12 +13,7 @@ _$ReadyLocalizedCardPreapprovalContinueResponseFromJson(
   $checkedConvert,
 ) {
   final val = ReadyLocalizedCardPreapprovalContinueResponse(
-    status: $checkedConvert(
-      'status',
-      (v) => ReadyLocalizedCardPreapprovalContinueResponseStatusStatus.fromJson(
-        v as String,
-      ),
-    ),
+    status: $checkedConvert('status', (v) => v as String),
     url: $checkedConvert('url', (v) => v as String),
   );
   return val;

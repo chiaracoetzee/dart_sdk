@@ -6,21 +6,18 @@ part of 'rich_embed_media_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-RichEmbedMediaRequestRichEmbedMediaRequestShape
-_$RichEmbedMediaRequestRichEmbedMediaRequestShapeFromJson(
+RichEmbedMediaRequestVariant1 _$RichEmbedMediaRequestVariant1FromJson(
   Map<String, dynamic> json,
-) => $checkedCreate('RichEmbedMediaRequestRichEmbedMediaRequestShape', json, (
-  $checkedConvert,
-) {
-  final val = RichEmbedMediaRequestRichEmbedMediaRequestShape(
+) => $checkedCreate('RichEmbedMediaRequestVariant1', json, ($checkedConvert) {
+  final val = RichEmbedMediaRequestVariant1(
     url: $checkedConvert('url', (v) => v as String),
     description: $checkedConvert('description', (v) => v as String?),
   );
   return val;
 });
 
-Map<String, dynamic> _$RichEmbedMediaRequestRichEmbedMediaRequestShapeToJson(
-  RichEmbedMediaRequestRichEmbedMediaRequestShape instance,
+Map<String, dynamic> _$RichEmbedMediaRequestVariant1ToJson(
+  RichEmbedMediaRequestVariant1 instance,
 ) => <String, dynamic>{
   'url': instance.url,
   'description': ?instance.description,

@@ -13,29 +13,20 @@ SlackWebhookRequestAttachments _$SlackWebhookRequestAttachmentsFromJson(
   json,
   ($checkedConvert) {
     final val = SlackWebhookRequestAttachments(
-      fallback: $checkedConvert('fallback', (v) => v as String?),
-      pretext: $checkedConvert('pretext', (v) => v as String?),
-      text: $checkedConvert('text', (v) => v as String?),
-      color: $checkedConvert('color', (v) => v as String?),
-      title: $checkedConvert('title', (v) => v as String?),
-      titleLink: $checkedConvert('title_link', (v) => v as String?),
-      fields: $checkedConvert(
-        'fields',
-        (v) => (v as List<dynamic>?)
-            ?.map(
-              (e) => SlackWebhookRequestAttachmentsFields.fromJson(
-                e as Map<String, dynamic>,
-              ),
-            )
-            .toList(),
-      ),
-      footer: $checkedConvert('footer', (v) => v as String?),
-      ts: $checkedConvert('ts', (v) => (v as num?)?.toInt()),
-      authorName: $checkedConvert('author_name', (v) => v as String?),
-      authorLink: $checkedConvert('author_link', (v) => v as String?),
-      authorIcon: $checkedConvert('author_icon', (v) => v as String?),
-      imageUrl: $checkedConvert('image_url', (v) => v as String?),
-      thumbUrl: $checkedConvert('thumb_url', (v) => v as String?),
+      fallback: $checkedConvert('fallback', (v) => v ?? _omit),
+      pretext: $checkedConvert('pretext', (v) => v ?? _omit),
+      text: $checkedConvert('text', (v) => v ?? _omit),
+      color: $checkedConvert('color', (v) => v ?? _omit),
+      title: $checkedConvert('title', (v) => v ?? _omit),
+      titleLink: $checkedConvert('title_link', (v) => v ?? _omit),
+      fields: $checkedConvert('fields', (v) => v ?? _omit),
+      footer: $checkedConvert('footer', (v) => v ?? _omit),
+      ts: $checkedConvert('ts', (v) => v ?? _omit),
+      authorName: $checkedConvert('author_name', (v) => v ?? _omit),
+      authorLink: $checkedConvert('author_link', (v) => v ?? _omit),
+      authorIcon: $checkedConvert('author_icon', (v) => v ?? _omit),
+      imageUrl: $checkedConvert('image_url', (v) => v ?? _omit),
+      thumbUrl: $checkedConvert('thumb_url', (v) => v ?? _omit),
     );
     return val;
   },

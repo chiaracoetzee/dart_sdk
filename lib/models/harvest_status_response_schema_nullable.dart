@@ -4,7 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'harvest_status_response_schema_status_status.dart';
+import 'snowflake_string_type.dart';
+import 'harvest_status.dart';
 
 part 'harvest_status_response_schema_nullable.g.dart';
 
@@ -19,18 +20,15 @@ class HarvestStatusResponseSchemaNullable {
 
   Map<String, dynamic> toJson() => _json;
 
-  HarvestStatusResponseSchemaNullableHarvestStatusResponseSchema
-  toHarvestStatusResponseSchema() =>
-      HarvestStatusResponseSchemaNullableHarvestStatusResponseSchema.fromJson(
-        _json,
-      );
+  HarvestStatusResponseSchemaNullableVariant1 toVariant1() =>
+      HarvestStatusResponseSchemaNullableVariant1.fromJson(_json);
 }
 
 @JsonSerializable()
-class HarvestStatusResponseSchemaNullableHarvestStatusResponseSchema {
+class HarvestStatusResponseSchemaNullableVariant1 {
   @JsonKey(name: 'harvest_id')
-  final String harvestId;
-  final HarvestStatusResponseSchemaStatusStatus status;
+  final SnowflakeStringType harvestId;
+  final HarvestStatus status;
   @JsonKey(name: 'created_at')
   final String createdAt;
   @JsonKey(includeIfNull: true, name: 'started_at')
@@ -52,7 +50,7 @@ class HarvestStatusResponseSchemaNullableHarvestStatusResponseSchema {
   @JsonKey(includeIfNull: true, name: 'expires_at')
   final String? expiresAt;
 
-  const HarvestStatusResponseSchemaNullableHarvestStatusResponseSchema({
+  const HarvestStatusResponseSchemaNullableVariant1({
     required this.harvestId,
     required this.status,
     required this.createdAt,
@@ -67,14 +65,10 @@ class HarvestStatusResponseSchemaNullableHarvestStatusResponseSchema {
     required this.expiresAt,
   });
 
-  factory HarvestStatusResponseSchemaNullableHarvestStatusResponseSchema.fromJson(
+  factory HarvestStatusResponseSchemaNullableVariant1.fromJson(
     Map<String, dynamic> json,
-  ) => _$HarvestStatusResponseSchemaNullableHarvestStatusResponseSchemaFromJson(
-    json,
-  );
+  ) => _$HarvestStatusResponseSchemaNullableVariant1FromJson(json);
 
   Map<String, dynamic> toJson() =>
-      _$HarvestStatusResponseSchemaNullableHarvestStatusResponseSchemaToJson(
-        this,
-      );
+      _$HarvestStatusResponseSchemaNullableVariant1ToJson(this);
 }

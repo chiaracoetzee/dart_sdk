@@ -4,9 +4,6 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'localized_card_preapproval_continue_response.dart';
-import 'pending_localized_card_preapproval_continue_response_status_status.dart';
-
 part 'pending_localized_card_preapproval_continue_response.g.dart';
 
 @JsonSerializable()
@@ -18,7 +15,7 @@ class PendingLocalizedCardPreapprovalContinueResponse {
   ) => _$PendingLocalizedCardPreapprovalContinueResponseFromJson(json);
 
   /// The preapproval result is still being processed
-  final PendingLocalizedCardPreapprovalContinueResponseStatusStatus status;
+  final String status;
 
   Map<String, Object?> toJson() =>
       _$PendingLocalizedCardPreapprovalContinueResponseToJson(this);

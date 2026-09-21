@@ -43,7 +43,7 @@ _$OAuth2ApplicationsMeResponseApplicationsMeResponseFromJson(
       verifyKey: $checkedConvert('verify_key', (v) => v as String),
       owner: $checkedConvert(
         'owner',
-        (v) => ApplicationsMeResponseOwner.fromJson(v as Map<String, dynamic>),
+        (v) => UserPartialResponse.fromJson(v as Map<String, dynamic>),
       ),
       bot: $checkedConvert(
         'bot',

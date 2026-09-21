@@ -9,44 +9,16 @@ part of 'rich_embed_request.dart';
 RichEmbedRequest _$RichEmbedRequestFromJson(Map<String, dynamic> json) =>
     $checkedCreate('RichEmbedRequest', json, ($checkedConvert) {
       final val = RichEmbedRequest(
-        url: $checkedConvert('url', (v) => v as String?),
-        title: $checkedConvert('title', (v) => v as String?),
-        color: $checkedConvert('color', (v) => (v as num?)?.toInt()),
-        timestamp: $checkedConvert('timestamp', (v) => v),
-        description: $checkedConvert('description', (v) => v as String?),
-        author: $checkedConvert(
-          'author',
-          (v) => v == null
-              ? null
-              : RichEmbedAuthorRequest.fromJson(v as Map<String, dynamic>),
-        ),
-        image: $checkedConvert(
-          'image',
-          (v) => v == null
-              ? null
-              : RichEmbedMediaRequest.fromJson(v as Map<String, dynamic>),
-        ),
-        thumbnail: $checkedConvert(
-          'thumbnail',
-          (v) => v == null
-              ? null
-              : RichEmbedMediaRequest.fromJson(v as Map<String, dynamic>),
-        ),
-        footer: $checkedConvert(
-          'footer',
-          (v) => v == null
-              ? null
-              : RichEmbedFooterRequest.fromJson(v as Map<String, dynamic>),
-        ),
-        fields: $checkedConvert(
-          'fields',
-          (v) => (v as List<dynamic>?)
-              ?.map(
-                (e) =>
-                    RichEmbedRequestFields.fromJson(e as Map<String, dynamic>),
-              )
-              .toList(),
-        ),
+        url: $checkedConvert('url', (v) => v ?? _omit),
+        title: $checkedConvert('title', (v) => v ?? _omit),
+        color: $checkedConvert('color', (v) => v ?? _omit),
+        timestamp: $checkedConvert('timestamp', (v) => v ?? _omit),
+        description: $checkedConvert('description', (v) => v ?? _omit),
+        author: $checkedConvert('author', (v) => v ?? _omit),
+        image: $checkedConvert('image', (v) => v ?? _omit),
+        thumbnail: $checkedConvert('thumbnail', (v) => v ?? _omit),
+        footer: $checkedConvert('footer', (v) => v ?? _omit),
+        fields: $checkedConvert('fields', (v) => v ?? _omit),
       );
       return val;
     });

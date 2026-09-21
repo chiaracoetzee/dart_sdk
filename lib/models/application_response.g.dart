@@ -23,13 +23,8 @@ ApplicationResponse _$ApplicationResponseFromJson(Map<String, dynamic> json) =>
             'bot_require_code_grant',
             (v) => v as bool,
           ),
-          clientSecret: $checkedConvert('client_secret', (v) => v as String?),
-          bot: $checkedConvert(
-            'bot',
-            (v) => v == null
-                ? null
-                : ApplicationResponseBot.fromJson(v as Map<String, dynamic>),
-          ),
+          clientSecret: $checkedConvert('client_secret', (v) => v ?? _omit),
+          bot: $checkedConvert('bot', (v) => v ?? _omit),
         );
         return val;
       },

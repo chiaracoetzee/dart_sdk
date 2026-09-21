@@ -21,7 +21,7 @@ import '../models/handoff_status_request.dart';
 import '../models/handoff_status_response.dart';
 import '../models/ip_authorization_poll_response.dart';
 import '../models/login_request.dart';
-import '../models/logout_auth_sessions_request.dart';
+import '../models/logout_auth_sessions_with_verification_request.dart';
 import '../models/mfa_ticket_request.dart';
 import '../models/mfa_totp_request.dart';
 import '../models/register_request.dart';
@@ -89,7 +89,7 @@ abstract class AuthApi {
   ///
   /// Cancel an ongoing handoff session. The handoff code will no longer be valid for authentication.
   ///
-  /// [code] - The code.
+  /// [code] - The handoff code.
   ///
   /// [body] - Name not received - field will be skipped.
   @DELETE('/auth/handoff/{code}')
@@ -102,7 +102,7 @@ abstract class AuthApi {
   ///
   /// Retrieve device and location information about a pending handoff request. Non-destructive – the code remains valid after this call.
   ///
-  /// [code] - The code.
+  /// [code] - The handoff code.
   @GET('/auth/handoff/{code}/info')
   Future<HandoffInfoResponse> getHandoffInfo({
     @Path('code') required String code,
@@ -112,7 +112,7 @@ abstract class AuthApi {
   ///
   /// Check the status of a handoff session. Returns whether the handoff has been completed or is still pending.
   ///
-  /// [code] - The code.
+  /// [code] - The handoff code.
   @GET('/auth/handoff/{code}/status')
   Future<HandoffStatusResponse> getHandoffStatus({
     @Path('code') required String code,
@@ -122,7 +122,7 @@ abstract class AuthApi {
   ///
   /// Check the status of a handoff session using the poll secret from initiation. Returns the authentication token once the handoff is complete and the presented secret matches.
   ///
-  /// [code] - The code.
+  /// [code] - The handoff code.
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/auth/handoff/{code}/status')
@@ -134,6 +134,8 @@ abstract class AuthApi {
   /// Poll IP authorization.
   ///
   /// Poll the status of an IP authorization request. Use the ticket parameter to check if verification has been completed.
+  ///
+  /// [ticket] - The IP authorization ticket.
   @GET('/auth/ip-authorization/poll')
   Future<IpAuthorizationPollResponse> pollIpAuthorization({
     @Query('ticket') required String ticket,
@@ -197,9 +199,7 @@ abstract class AuthApi {
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/auth/register')
-  Future<AuthRegisterResponse> registerAccount({
-    @Body() required RegisterRequest body,
-  });
+  Future<AuthRegisterResponse> registerAccount({@Body() RegisterRequest? body});
 
   /// Reset password.
   ///
@@ -215,7 +215,7 @@ abstract class AuthApi {
   ///
   /// Check whether a password reset token is valid and unexpired before allowing the user to submit a new password. Does not consume the token.
   ///
-  /// [token] - The token.
+  /// [token] - Password reset token from email.
   @GET('/auth/reset/{token}')
   Future<ValidateResetPasswordTokenResponse> validateResetPasswordToken({
     @Path('token') required String token,
@@ -234,7 +234,7 @@ abstract class AuthApi {
   /// [body] - Name not received - field will be skipped.
   @POST('/auth/sessions/logout')
   Future<void> logoutAllSessions({
-    @Body() required LogoutAuthSessionsRequest body,
+    @Body() required LogoutAuthSessionsWithVerificationRequest body,
   });
 
   /// Complete SSO.
@@ -253,7 +253,7 @@ abstract class AuthApi {
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/auth/sso/start')
-  Future<SsoStartResponse> startSso({@Body() required SsoStartRequest body});
+  Future<SsoStartResponse> startSso({@Body() SsoStartRequest? body});
 
   /// Get SSO status.
   ///

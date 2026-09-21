@@ -12,12 +12,7 @@ DiscoveryStatusResponse _$DiscoveryStatusResponseFromJson(
   final val = DiscoveryStatusResponse(
     eligible: $checkedConvert('eligible', (v) => v as bool),
     minMemberCount: $checkedConvert('min_member_count', (v) => v as num),
-    application: $checkedConvert(
-      'application',
-      (v) => v == null
-          ? null
-          : DiscoveryApplicationResponse.fromJson(v as Map<String, dynamic>),
-    ),
+    application: $checkedConvert('application', (v) => v ?? _omit),
   );
   return val;
 }, fieldKeyMap: const {'minMemberCount': 'min_member_count'});

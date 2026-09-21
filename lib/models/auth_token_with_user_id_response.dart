@@ -4,7 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'auth_token_with_user_id_response_user.dart';
+import 'snowflake_string_type.dart';
+import 'user_partial_response.dart';
 
 part 'auth_token_with_user_id_response.g.dart';
 
@@ -24,10 +25,10 @@ class AuthTokenWithUserIdResponse {
 
   /// ID of the authenticated user
   @JsonKey(name: 'user_id')
-  final String userId;
+  final SnowflakeStringType userId;
 
   /// Partial user data for the authenticated account
-  final AuthTokenWithUserIdResponseUser user;
+  final UserPartialResponse user;
 
   Map<String, Object?> toJson() => _$AuthTokenWithUserIdResponseToJson(this);
 }

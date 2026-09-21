@@ -13,70 +13,58 @@ UserUpdateWithVerificationRequest _$UserUpdateWithVerificationRequestFromJson(
   json,
   ($checkedConvert) {
     final val = UserUpdateWithVerificationRequest(
-      username: $checkedConvert('username', (v) => v as String?),
-      discriminator: $checkedConvert('discriminator', (v) => v as String?),
-      globalName: $checkedConvert('global_name', (v) => v as String?),
-      email: $checkedConvert('email', (v) => v as String?),
-      newPassword: $checkedConvert('new_password', (v) => v as String?),
-      password: $checkedConvert('password', (v) => v as String?),
-      avatar: $checkedConvert('avatar', (v) => v as String?),
-      banner: $checkedConvert('banner', (v) => v as String?),
-      bio: $checkedConvert('bio', (v) => v as String?),
-      pronouns: $checkedConvert('pronouns', (v) => v as String?),
-      accentColor: $checkedConvert('accent_color', (v) => (v as num?)?.toInt()),
-      timezone: $checkedConvert('timezone', (v) => v as String?),
+      username: $checkedConvert('username', (v) => v ?? _omit),
+      discriminator: $checkedConvert('discriminator', (v) => v ?? _omit),
+      globalName: $checkedConvert('global_name', (v) => v ?? _omit),
+      email: $checkedConvert('email', (v) => v ?? _omit),
+      newPassword: $checkedConvert('new_password', (v) => v ?? _omit),
+      password: $checkedConvert('password', (v) => v ?? _omit),
+      avatar: $checkedConvert('avatar', (v) => v ?? _omit),
+      banner: $checkedConvert('banner', (v) => v ?? _omit),
+      bio: $checkedConvert('bio', (v) => v ?? _omit),
+      pronouns: $checkedConvert('pronouns', (v) => v ?? _omit),
+      accentColor: $checkedConvert('accent_color', (v) => v ?? _omit),
+      timezone: $checkedConvert('timezone', (v) => v ?? _omit),
       timezonePrivacyFlags: $checkedConvert(
         'timezone_privacy_flags',
-        (v) => (v as num?)?.toInt(),
+        (v) => v ?? _omit,
       ),
       premiumBadgeHidden: $checkedConvert(
         'premium_badge_hidden',
-        (v) => v as bool?,
+        (v) => v ?? _omit,
       ),
       premiumBadgeMasked: $checkedConvert(
         'premium_badge_masked',
-        (v) => v as bool?,
+        (v) => v ?? _omit,
       ),
       premiumBadgeTimestampHidden: $checkedConvert(
         'premium_badge_timestamp_hidden',
-        (v) => v as bool?,
+        (v) => v ?? _omit,
       ),
       premiumBadgeSequenceHidden: $checkedConvert(
         'premium_badge_sequence_hidden',
-        (v) => v as bool?,
+        (v) => v ?? _omit,
       ),
       premiumEnabledOverride: $checkedConvert(
         'premium_enabled_override',
-        (v) => v as bool?,
+        (v) => v ?? _omit,
       ),
       hasDismissedPremiumOnboarding: $checkedConvert(
         'has_dismissed_premium_onboarding',
-        (v) => v as bool?,
+        (v) => v ?? _omit,
       ),
       hasUnreadGiftInventory: $checkedConvert(
         'has_unread_gift_inventory',
-        (v) => v as bool?,
+        (v) => v ?? _omit,
       ),
-      mentionFlags: $checkedConvert(
-        'mention_flags',
-        (v) => v == null
-            ? null
-            : MentionReplyPreferences.fromJson((v as num).toInt()),
-      ),
-      emailToken: $checkedConvert('email_token', (v) => v as String?),
-      mfaMethod: $checkedConvert(
-        'mfa_method',
-        (v) => v == null
-            ? null
-            : UserUpdateWithVerificationRequestMfaMethodMfaMethod.fromJson(
-                v as String,
-              ),
-      ),
-      mfaCode: $checkedConvert('mfa_code', (v) => v as String?),
-      webauthnResponse: $checkedConvert('webauthn_response', (v) => v),
+      mentionFlags: $checkedConvert('mention_flags', (v) => v ?? _omit),
+      emailToken: $checkedConvert('email_token', (v) => v ?? _omit),
+      mfaMethod: $checkedConvert('mfa_method', (v) => v ?? _omit),
+      mfaCode: $checkedConvert('mfa_code', (v) => v ?? _omit),
+      webauthnResponse: $checkedConvert('webauthn_response', (v) => v ?? _omit),
       webauthnChallenge: $checkedConvert(
         'webauthn_challenge',
-        (v) => v as String?,
+        (v) => v ?? _omit,
       ),
     );
     return val;

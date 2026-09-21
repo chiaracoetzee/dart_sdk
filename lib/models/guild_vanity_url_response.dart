@@ -4,21 +4,38 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'int32_type.dart';
+
 part 'guild_vanity_url_response.g.dart';
+
+const Object _omit = Object();
 
 @JsonSerializable()
 class GuildVanityUrlResponse {
-  const GuildVanityUrlResponse({required this.uses, this.code});
-
-  factory GuildVanityUrlResponse.fromJson(Map<String, Object?> json) =>
-      _$GuildVanityUrlResponseFromJson(json);
+  const GuildVanityUrlResponse({required this.uses, Object? code = _omit})
+    : code = identical(code, _omit) ? null : code as String?,
+      _codePresent = !identical(code, _omit);
+  factory GuildVanityUrlResponse.fromJson(Map<String, Object?> json) {
+    final value = _$GuildVanityUrlResponseFromJson(json);
+    return GuildVanityUrlResponse(
+      uses: value.uses,
+      code: json.containsKey('code') ? value.code : _omit,
+    );
+  }
 
   /// The vanity URL code for the guild
   @JsonKey(includeIfNull: false)
   final String? code;
 
   /// The number of times this vanity URL has been used
-  final int uses;
+  final Int32Type uses;
+  final bool _codePresent;
 
-  Map<String, Object?> toJson() => _$GuildVanityUrlResponseToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$GuildVanityUrlResponseToJson(this);
+    if (_codePresent) {
+      json.putIfAbsent('code', () => code);
+    }
+    return json;
+  }
 }

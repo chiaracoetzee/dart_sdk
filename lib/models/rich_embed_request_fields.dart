@@ -11,7 +11,7 @@ class RichEmbedRequestFields {
   const RichEmbedRequestFields({
     required this.name,
     required this.value,
-    this.inline,
+    this.inline = false,
   });
 
   factory RichEmbedRequestFields.fromJson(Map<String, Object?> json) =>
@@ -24,8 +24,7 @@ class RichEmbedRequestFields {
   final String value;
 
   /// Whether the field should display inline
-  @JsonKey(includeIfNull: false)
-  final bool? inline;
+  final bool inline;
 
   Map<String, Object?> toJson() => _$RichEmbedRequestFieldsToJson(this);
 }

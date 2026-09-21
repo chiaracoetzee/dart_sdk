@@ -8,12 +8,20 @@ import 'base64_image_type.dart';
 
 part 'webhook_create_request.g.dart';
 
+const Object _omit = Object();
+
 @JsonSerializable()
 class WebhookCreateRequest {
-  const WebhookCreateRequest({required this.name, this.avatar});
-
-  factory WebhookCreateRequest.fromJson(Map<String, Object?> json) =>
-      _$WebhookCreateRequestFromJson(json);
+  const WebhookCreateRequest({required this.name, Object? avatar = _omit})
+    : avatar = identical(avatar, _omit) ? null : avatar as Base64ImageType?,
+      _avatarPresent = !identical(avatar, _omit);
+  factory WebhookCreateRequest.fromJson(Map<String, Object?> json) {
+    final value = _$WebhookCreateRequestFromJson(json);
+    return WebhookCreateRequest(
+      name: value.name,
+      avatar: json.containsKey('avatar') ? value.avatar : _omit,
+    );
+  }
 
   /// The name of the webhook
   final String name;
@@ -21,6 +29,13 @@ class WebhookCreateRequest {
   /// The avatar image as a base64-encoded data URI
   @JsonKey(includeIfNull: false)
   final Base64ImageType? avatar;
+  final bool _avatarPresent;
 
-  Map<String, Object?> toJson() => _$WebhookCreateRequestToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$WebhookCreateRequestToJson(this);
+    if (_avatarPresent) {
+      json.putIfAbsent('avatar', () => avatar);
+    }
+    return json;
+  }
 }

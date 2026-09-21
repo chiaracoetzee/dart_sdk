@@ -15,7 +15,7 @@ MessageReactionResponse _$MessageReactionResponseFromJson(
       (v) => MessageReactionResponseEmoji.fromJson(v as Map<String, dynamic>),
     ),
     count: $checkedConvert('count', (v) => (v as num).toInt()),
-    me: $checkedConvert('me', (v) => v as bool?),
+    me: $checkedConvert('me', (v) => v ?? _omit),
   );
   return val;
 });

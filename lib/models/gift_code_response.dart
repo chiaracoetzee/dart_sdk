@@ -4,10 +4,12 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'gift_code_response_duration_type_duration_type.dart';
+import 'gift_code_duration_type_schema.dart';
 import 'user_partial_response.dart';
 
 part 'gift_code_response.g.dart';
+
+const Object _omit = Object();
 
 @JsonSerializable()
 class GiftCodeResponse {
@@ -16,18 +18,28 @@ class GiftCodeResponse {
     required this.durationType,
     required this.durationQuantity,
     required this.redeemed,
-    this.createdBy,
-  });
-
-  factory GiftCodeResponse.fromJson(Map<String, Object?> json) =>
-      _$GiftCodeResponseFromJson(json);
+    Object? createdBy = _omit,
+  }) : createdBy = identical(createdBy, _omit)
+           ? null
+           : createdBy as UserPartialResponse?,
+       _createdByPresent = !identical(createdBy, _omit);
+  factory GiftCodeResponse.fromJson(Map<String, Object?> json) {
+    final value = _$GiftCodeResponseFromJson(json);
+    return GiftCodeResponse(
+      code: value.code,
+      durationType: value.durationType,
+      durationQuantity: value.durationQuantity,
+      redeemed: value.redeemed,
+      createdBy: json.containsKey('created_by') ? value.createdBy : _omit,
+    );
+  }
 
   /// The unique gift code string
   final String code;
 
   /// Duration unit for the gift entitlement
   @JsonKey(name: 'duration_type')
-  final GiftCodeResponseDurationTypeDurationType durationType;
+  final GiftCodeDurationTypeSchema durationType;
 
   /// Duration quantity for the selected duration unit
   @JsonKey(name: 'duration_quantity')
@@ -39,6 +51,13 @@ class GiftCodeResponse {
   /// The user who created the gift code
   @JsonKey(includeIfNull: false, name: 'created_by')
   final UserPartialResponse? createdBy;
+  final bool _createdByPresent;
 
-  Map<String, Object?> toJson() => _$GiftCodeResponseToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$GiftCodeResponseToJson(this);
+    if (_createdByPresent) {
+      json.putIfAbsent('created_by', () => createdBy);
+    }
+    return json;
+  }
 }

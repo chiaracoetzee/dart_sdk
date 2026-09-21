@@ -8,17 +8,20 @@ import 'custom_status_response.dart';
 import 'friend_source_flags.dart';
 import 'group_dm_add_permission_flags.dart';
 import 'incoming_call_flags.dart';
+import 'int32_type.dart';
 import 'locale.dart';
 import 'profile_privacy_level.dart';
 import 'render_spoilers.dart';
 import 'sensitive_media_filter_level.dart';
 import 'sensitive_media_guild_filter_level.dart';
-import 'snowflake_type.dart';
+import 'snowflake_string_type.dart';
 import 'sticker_animation_options.dart';
 import 'time_format_types.dart';
 import 'user_settings_response_guild_folders.dart';
 
 part 'user_settings_response.g.dart';
+
+const Object _omit = Object();
 
 @JsonSerializable()
 class UserSettingsResponse {
@@ -58,12 +61,64 @@ class UserSettingsResponse {
     required this.suppressUnprivilegedSelfMentionsBypassUserIds,
     required this.staffDmAccessUserIds,
     required this.timeFormat,
-    this.statusResetsAt,
-    this.statusResetsTo,
-  });
-
-  factory UserSettingsResponse.fromJson(Map<String, Object?> json) =>
-      _$UserSettingsResponseFromJson(json);
+    Object? statusResetsAt = _omit,
+    Object? statusResetsTo = _omit,
+  }) : statusResetsAt = identical(statusResetsAt, _omit)
+           ? null
+           : statusResetsAt as DateTime?,
+       _statusResetsAtPresent = !identical(statusResetsAt, _omit),
+       statusResetsTo = identical(statusResetsTo, _omit)
+           ? null
+           : statusResetsTo as String?,
+       _statusResetsToPresent = !identical(statusResetsTo, _omit);
+  factory UserSettingsResponse.fromJson(Map<String, Object?> json) {
+    final value = _$UserSettingsResponseFromJson(json);
+    return UserSettingsResponse(
+      renderEmbeds: value.renderEmbeds,
+      profilePrivacy: value.profilePrivacy,
+      syncedPreferences: value.syncedPreferences,
+      theme: value.theme,
+      locale: value.locale,
+      restrictedGuilds: value.restrictedGuilds,
+      botRestrictedGuilds: value.botRestrictedGuilds,
+      defaultGuildsRestricted: value.defaultGuildsRestricted,
+      botDefaultGuildsRestricted: value.botDefaultGuildsRestricted,
+      inlineAttachmentMedia: value.inlineAttachmentMedia,
+      inlineEmbedMedia: value.inlineEmbedMedia,
+      gifAutoPlay: value.gifAutoPlay,
+      status: value.status,
+      renderReactions: value.renderReactions,
+      animateEmoji: value.animateEmoji,
+      animateStickers: value.animateStickers,
+      renderSpoilers: value.renderSpoilers,
+      messageDisplayCompact: value.messageDisplayCompact,
+      friendSourceFlags: value.friendSourceFlags,
+      incomingCallFlags: value.incomingCallFlags,
+      groupDmAddPermissionFlags: value.groupDmAddPermissionFlags,
+      guildFolders: value.guildFolders,
+      customStatus: value.customStatus,
+      afkTimeout: value.afkTimeout,
+      defaultShareVoiceActivity: value.defaultShareVoiceActivity,
+      developerMode: value.developerMode,
+      trustedDomains: value.trustedDomains,
+      defaultHideMutedChannels: value.defaultHideMutedChannels,
+      sensitiveContentFriendDmFilter: value.sensitiveContentFriendDmFilter,
+      sensitiveContentNonFriendDmFilter:
+          value.sensitiveContentNonFriendDmFilter,
+      sensitiveContentGuildFilter: value.sensitiveContentGuildFilter,
+      suppressUnprivilegedSelfMentions: value.suppressUnprivilegedSelfMentions,
+      suppressUnprivilegedSelfMentionsBypassUserIds:
+          value.suppressUnprivilegedSelfMentionsBypassUserIds,
+      staffDmAccessUserIds: value.staffDmAccessUserIds,
+      timeFormat: value.timeFormat,
+      statusResetsAt: json.containsKey('status_resets_at')
+          ? value.statusResetsAt
+          : _omit,
+      statusResetsTo: json.containsKey('status_resets_to')
+          ? value.statusResetsTo
+          : _omit,
+    );
+  }
 
   /// The current online status of the user
   final String status;
@@ -82,11 +137,11 @@ class UserSettingsResponse {
 
   /// Guild IDs where direct messages are restricted
   @JsonKey(name: 'restricted_guilds')
-  final List<SnowflakeType> restrictedGuilds;
+  final List<SnowflakeStringType> restrictedGuilds;
 
   /// Guild IDs where bot direct messages are restricted
   @JsonKey(name: 'bot_restricted_guilds')
-  final List<SnowflakeType> botRestrictedGuilds;
+  final List<SnowflakeStringType> botRestrictedGuilds;
 
   /// Whether new guilds have DM restrictions by default
   @JsonKey(name: 'default_guilds_restricted')
@@ -148,7 +203,7 @@ class UserSettingsResponse {
 
   /// The idle timeout in seconds before going AFK
   @JsonKey(name: 'afk_timeout')
-  final int afkTimeout;
+  final Int32Type afkTimeout;
 
   /// The preferred time format setting
   @JsonKey(name: 'time_format')
@@ -173,8 +228,6 @@ class UserSettingsResponse {
   /// Sensitive media filter level for DMs from non-friends
   @JsonKey(name: 'sensitive_content_non_friend_dm_filter')
   final SensitiveMediaFilterLevel sensitiveContentNonFriendDmFilter;
-
-  /// Sensitive media filter level for community channels
   @JsonKey(name: 'sensitive_content_guild_filter')
   final SensitiveMediaGuildFilterLevel sensitiveContentGuildFilter;
 
@@ -184,11 +237,11 @@ class UserSettingsResponse {
 
   /// User IDs that bypass self-mention suppression
   @JsonKey(name: 'suppress_unprivileged_self_mentions_bypass_user_ids')
-  final List<SnowflakeType> suppressUnprivilegedSelfMentionsBypassUserIds;
+  final List<SnowflakeStringType> suppressUnprivilegedSelfMentionsBypassUserIds;
 
   /// User IDs with Staff DM Access enabled
   @JsonKey(name: 'staff_dm_access_user_ids')
-  final List<SnowflakeType> staffDmAccessUserIds;
+  final List<SnowflakeStringType> staffDmAccessUserIds;
 
   /// Account-wide client preferences as a base64-encoded protobuf snapshot. Empty string when nothing has been synced yet.
   @JsonKey(name: 'synced_preferences')
@@ -201,6 +254,17 @@ class UserSettingsResponse {
   /// Default value of share_voice_activity applied to newly accepted friend relationships. Read-only here; mutated via PUT /users/@me/settings/voice-activity-sharing.
   @JsonKey(name: 'default_share_voice_activity')
   final bool defaultShareVoiceActivity;
+  final bool _statusResetsAtPresent;
+  final bool _statusResetsToPresent;
 
-  Map<String, Object?> toJson() => _$UserSettingsResponseToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$UserSettingsResponseToJson(this);
+    if (_statusResetsAtPresent) {
+      json.putIfAbsent('status_resets_at', () => statusResetsAt);
+    }
+    if (_statusResetsToPresent) {
+      json.putIfAbsent('status_resets_to', () => statusResetsTo);
+    }
+    return json;
+  }
 }

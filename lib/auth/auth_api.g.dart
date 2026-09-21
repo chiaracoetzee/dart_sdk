@@ -383,7 +383,7 @@ class _AuthApi implements AuthApi {
   }
 
   @override
-  Future<dynamic> getWebauthnMfaOptions({
+  Future<WebAuthnAuthenticationOptionsResponse> getWebauthnMfaOptions({
     required MfaTicketRequest body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -391,7 +391,7 @@ class _AuthApi implements AuthApi {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _options = _setStreamType<dynamic>(
+    final _options = _setStreamType<WebAuthnAuthenticationOptionsResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -401,8 +401,14 @@ class _AuthApi implements AuthApi {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch(_options);
-    final _value = _result.data;
+    final _result = await _dio.fetch<Map<String, Object?>>(_options);
+    late WebAuthnAuthenticationOptionsResponse _value;
+    try {
+      _value = WebAuthnAuthenticationOptionsResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, response: _result);
+      rethrow;
+    }
     return _value;
   }
 
@@ -426,14 +432,13 @@ class _AuthApi implements AuthApi {
   }
 
   @override
-  Future<AuthRegisterResponse> registerAccount({
-    required RegisterRequest body,
-  }) async {
+  Future<AuthRegisterResponse> registerAccount({RegisterRequest? body}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<AuthRegisterResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -548,7 +553,7 @@ class _AuthApi implements AuthApi {
 
   @override
   Future<void> logoutAllSessions({
-    required LogoutAuthSessionsRequest body,
+    required LogoutAuthSessionsWithVerificationRequest body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -599,12 +604,13 @@ class _AuthApi implements AuthApi {
   }
 
   @override
-  Future<SsoStartResponse> startSso({required SsoStartRequest body}) async {
+  Future<SsoStartResponse> startSso({SsoStartRequest? body}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<SsoStartResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -753,12 +759,13 @@ class _AuthApi implements AuthApi {
   }
 
   @override
-  Future<dynamic> getWebauthnAuthenticationOptions() async {
+  Future<WebAuthnAuthenticationOptionsResponse>
+  getWebauthnAuthenticationOptions() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<dynamic>(
+    final _options = _setStreamType<WebAuthnAuthenticationOptionsResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -768,8 +775,14 @@ class _AuthApi implements AuthApi {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch(_options);
-    final _value = _result.data;
+    final _result = await _dio.fetch<Map<String, Object?>>(_options);
+    late WebAuthnAuthenticationOptionsResponse _value;
+    try {
+      _value = WebAuthnAuthenticationOptionsResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, response: _result);
+      rethrow;
+    }
     return _value;
   }
 

@@ -67,30 +67,32 @@ abstract class SavedMediaApi {
   ///
   /// Retrieves a specific favorite meme by ID.
   ///
-  /// [memeId] - The meme id.
+  /// [memeId] - The ID of the favorite meme.
   @GET('/users/@me/memes/{meme_id}')
   Future<FavoriteMemeResponse> getFavoriteMeme({
-    @Path('meme_id') required String memeId,
+    @Path('meme_id') required SnowflakeType memeId,
   });
 
   /// Update favorite meme.
   ///
   /// Updates details of a favorite meme.
   ///
-  /// [memeId] - The meme id.
+  /// [memeId] - The ID of the favorite meme.
   ///
   /// [body] - Name not received - field will be skipped.
   @PATCH('/users/@me/memes/{meme_id}')
   Future<FavoriteMemeResponse> updateFavoriteMeme({
-    @Path('meme_id') required String memeId,
-    @Body() required UpdateFavoriteMemeBodySchema body,
+    @Path('meme_id') required SnowflakeType memeId,
+    @Body() UpdateFavoriteMemeBodySchema? body,
   });
 
   /// Delete favorite meme.
   ///
   /// Removes a favorite meme from the authenticated user's collection.
   ///
-  /// [memeId] - The meme id.
+  /// [memeId] - The ID of the favorite meme.
   @DELETE('/users/@me/memes/{meme_id}')
-  Future<void> deleteFavoriteMeme({@Path('meme_id') required String memeId});
+  Future<void> deleteFavoriteMeme({
+    @Path('meme_id') required SnowflakeType memeId,
+  });
 }

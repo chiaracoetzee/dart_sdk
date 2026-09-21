@@ -4,29 +4,24 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'already_scheduled_switch_to_list_price_response_currency_currency.dart';
-import 'already_scheduled_switch_to_list_price_response_status_status.dart';
-import 'switch_to_list_price_response.dart';
+import 'premium_currency.dart';
 
 part 'already_scheduled_switch_to_list_price_response.g.dart';
 
 @JsonSerializable()
 class AlreadyScheduledSwitchToListPriceResponse {
   const AlreadyScheduledSwitchToListPriceResponse({
-    required this.status,
     required this.effectiveAt,
     required this.targetPriceId,
     required this.targetAmountMinor,
     required this.currentAmountMinor,
     required this.currency,
+    required this.status,
   });
 
   factory AlreadyScheduledSwitchToListPriceResponse.fromJson(
     Map<String, Object?> json,
   ) => _$AlreadyScheduledSwitchToListPriceResponseFromJson(json);
-
-  /// The switch was already scheduled by an earlier request
-  final AlreadyScheduledSwitchToListPriceResponseStatusStatus status;
 
   /// ISO timestamp the switch takes effect
   @JsonKey(name: 'effective_at')
@@ -45,7 +40,10 @@ class AlreadyScheduledSwitchToListPriceResponse {
   final int currentAmountMinor;
 
   /// Currency of both amounts
-  final AlreadyScheduledSwitchToListPriceResponseCurrencyCurrency currency;
+  final PremiumCurrency currency;
+
+  /// The switch was already scheduled by an earlier request
+  final String status;
 
   Map<String, Object?> toJson() =>
       _$AlreadyScheduledSwitchToListPriceResponseToJson(this);

@@ -26,11 +26,21 @@ abstract class DonationsApi {
     @Body() required DonationCheckoutRequest body,
   });
 
-  /// Manage donation subscription.
+  /// Open donation management link.
   ///
-  /// Validates the magic link token and redirects to Stripe billing portal.
+  /// Checks the magic link token without consuming it and redirects to the donation management confirmation page.
+  ///
+  /// [token] - Magic link token for donor authentication.
   @GET('/donations/manage')
   Future<void> manageDonation({@Query('token') required String token});
+
+  /// Redeem donation management link.
+  ///
+  /// Consumes the magic link token and redirects to the Stripe billing portal.
+  ///
+  /// [token] - Magic link token for donor authentication.
+  @POST('/donations/manage')
+  Future<void> redeemDonationMagicLink({@Query('token') required String token});
 
   /// Request donation management link.
   ///

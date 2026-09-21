@@ -32,12 +32,7 @@ ApplicationPublicResponse _$ApplicationPublicResponseFromJson(
             ? null
             : ApplicationPublicResponseBot.fromJson(v as Map<String, dynamic>),
       ),
-      currentUser: $checkedConvert(
-        'current_user',
-        (v) => v == null
-            ? null
-            : UserPartialResponse.fromJson(v as Map<String, dynamic>),
-      ),
+      currentUser: $checkedConvert('current_user', (v) => v ?? _omit),
     );
     return val;
   },

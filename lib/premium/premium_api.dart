@@ -74,6 +74,8 @@ abstract class PremiumApi {
   /// Get Stripe price IDs.
   ///
   /// Retrieves Stripe price IDs for premium subscriptions based on geographic location.
+  ///
+  /// [countryCode] - Two-letter country code for regional pricing. Only used when the server cannot geolocate the request; otherwise the request GeoIP country wins.
   @GET('/premium/price-ids')
   Future<PriceIdsResponse> getPriceIds({
     @Query('country_code') String? countryCode,
@@ -88,6 +90,8 @@ abstract class PremiumApi {
   /// Get premium state.
   ///
   /// Returns the authenticated user actual premium entitlement, effective perk state, and mirrored billing data. When Stripe is enabled, missing payment-method mirror data may be repaired lazily.
+  ///
+  /// [countryCode] - Two-letter country code for regional pricing. Only used when the server cannot geolocate the request; otherwise the request GeoIP country wins.
   @GET('/premium/state')
   Future<PremiumStateResponse> getPremiumState({
     @Query('country_code') String? countryCode,

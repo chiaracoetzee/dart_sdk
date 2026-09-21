@@ -9,10 +9,7 @@ part of 'phone_verify_response.dart';
 PhoneVerifyResponse _$PhoneVerifyResponseFromJson(Map<String, dynamic> json) =>
     $checkedCreate('PhoneVerifyResponse', json, ($checkedConvert) {
       final val = PhoneVerifyResponse(
-        verified: $checkedConvert(
-          'verified',
-          (v) => PhoneVerifyResponseVerifiedVerified.fromJson(v as bool),
-        ),
+        verified: $checkedConvert('verified', (v) => v as bool),
       );
       return val;
     });

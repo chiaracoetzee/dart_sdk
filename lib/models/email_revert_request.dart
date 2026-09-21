@@ -17,6 +17,8 @@ class EmailRevertRequest {
 
   /// Email revert token from email
   final String token;
+
+  /// Account password for verification
   final PasswordType password;
 
   Map<String, Object?> toJson() => _$EmailRevertRequestToJson(this);

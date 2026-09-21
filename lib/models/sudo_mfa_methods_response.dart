@@ -11,6 +11,7 @@ class SudoMfaMethodsResponse {
   const SudoMfaMethodsResponse({
     required this.totp,
     required this.webauthn,
+    required this.backupCodes,
     required this.hasMfa,
   });
 
@@ -20,10 +21,14 @@ class SudoMfaMethodsResponse {
   /// Whether TOTP is enabled
   final bool totp;
 
-  /// Whether WebAuthn is enabled
+  /// Whether the account has at least one registered WebAuthn credential
   final bool webauthn;
 
-  /// Whether any MFA method is enabled
+  /// Whether the account has at least one unconsumed backup code
+  @JsonKey(name: 'backup_codes')
+  final bool backupCodes;
+
+  /// Whether the account can satisfy a sudo mode challenge
   @JsonKey(name: 'has_mfa')
   final bool hasMfa;
 

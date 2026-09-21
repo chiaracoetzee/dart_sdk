@@ -10,7 +10,10 @@ WebAuthnRegisterRequest _$WebAuthnRegisterRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('WebAuthnRegisterRequest', json, ($checkedConvert) {
   final val = WebAuthnRegisterRequest(
-    response: $checkedConvert('response', (v) => v),
+    response: $checkedConvert(
+      'response',
+      (v) => WebAuthnRegistrationResponse.fromJson(v as Map<String, dynamic>),
+    ),
     challenge: $checkedConvert('challenge', (v) => v as String),
     name: $checkedConvert('name', (v) => v as String),
   );

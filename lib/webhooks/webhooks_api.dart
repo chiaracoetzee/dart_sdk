@@ -19,8 +19,10 @@ import '../models/message_response_schema.dart';
 import '../models/object3.dart';
 import '../models/rich_embed_request.dart';
 import '../models/slack_webhook_request.dart';
+import '../models/slack_webhook_response.dart';
 import '../models/snowflake_type.dart';
 import '../models/webhook_create_request.dart';
+import '../models/webhook_list_response.dart';
 import '../models/webhook_message_edit_request.dart';
 import '../models/webhook_response.dart';
 import '../models/webhook_token_response.dart';
@@ -39,7 +41,7 @@ abstract class WebhooksApi {
   ///
   /// [channelId] - The ID of the channel.
   @GET('/channels/{channel_id}/webhooks')
-  Future<List<WebhookResponse>> listChannelWebhooks({
+  Future<WebhookListResponse> listChannelWebhooks({
     @Path('channel_id') required SnowflakeType channelId,
   });
 
@@ -62,7 +64,7 @@ abstract class WebhooksApi {
   ///
   /// [guildId] - The ID of the guild.
   @GET('/guilds/{guild_id}/webhooks')
-  Future<List<WebhookResponse>> listGuildWebhooks({
+  Future<WebhookListResponse> listGuildWebhooks({
     @Path('guild_id') required SnowflakeType guildId,
   });
 
@@ -86,7 +88,7 @@ abstract class WebhooksApi {
   @PATCH('/webhooks/{webhook_id}')
   Future<WebhookResponse> updateWebhook({
     @Path('webhook_id') required SnowflakeType webhookId,
-    @Body() required WebhookUpdateRequest body,
+    @Body() WebhookUpdateRequest? body,
   });
 
   /// Delete webhook.
@@ -105,7 +107,7 @@ abstract class WebhooksApi {
   ///
   /// [webhookId] - The ID of the webhook.
   ///
-  /// [token] - The token.
+  /// [token] - The webhook token.
   @GET('/webhooks/{webhook_id}/{token}')
   Future<WebhookTokenResponse> getWebhookWithToken({
     @Path('webhook_id') required SnowflakeType webhookId,
@@ -118,14 +120,14 @@ abstract class WebhooksApi {
   ///
   /// [webhookId] - The ID of the webhook.
   ///
-  /// [token] - The token.
+  /// [token] - The webhook token.
   ///
   /// [body] - Name not received - field will be skipped.
   @PATCH('/webhooks/{webhook_id}/{token}')
   Future<WebhookTokenResponse> updateWebhookWithToken({
     @Path('webhook_id') required SnowflakeType webhookId,
     @Path('token') required String token,
-    @Body() required WebhookTokenUpdateRequest body,
+    @Body() WebhookTokenUpdateRequest? body,
   });
 
   /// Delete webhook with token.
@@ -134,7 +136,7 @@ abstract class WebhooksApi {
   ///
   /// [webhookId] - The ID of the webhook.
   ///
-  /// [token] - The token.
+  /// [token] - The webhook token.
   @DELETE('/webhooks/{webhook_id}/{token}')
   Future<void> deleteWebhookWithToken({
     @Path('webhook_id') required SnowflakeType webhookId,
@@ -147,7 +149,9 @@ abstract class WebhooksApi {
   ///
   /// [webhookId] - The ID of the webhook.
   ///
-  /// [token] - The token.
+  /// [token] - The webhook token.
+  ///
+  /// [wait] - Whether to wait for the webhook response.
   ///
   /// [content] - Name not received - field will be skipped.
   /// Name not received - field will be skipped.
@@ -161,7 +165,8 @@ abstract class WebhooksApi {
   /// [allowedMentions] - Name not received - field will be skipped.
   /// Name not received - field will be skipped.
   ///
-  /// [flags] - Name not received - field will be skipped.
+  /// [flags] - Message flags bitfield.
+  /// Name not received - field will be skipped.
   ///
   /// [nonce] - Name not received - field will be skipped.
   ///
@@ -187,12 +192,10 @@ abstract class WebhooksApi {
   Future<MessageResponseSchema> executeWebhook({
     @Path('webhook_id') required SnowflakeType webhookId,
     @Path('token') required String token,
-    @Query('wait') String? wait,
     @Part(name: 'content') MessageContentRequest? content,
     @Part(name: 'embeds') List<RichEmbedRequest>? embeds,
     @Part(name: 'message_reference') MessageReferenceRequest? messageReference,
     @Part(name: 'allowed_mentions') AllowedMentionsRequest? allowedMentions,
-    @Part(name: 'flags') MessageFlags? flags,
     @Part(name: 'nonce') MessageNonceRequest? nonce,
     @Part(name: 'favorite_meme_id') SnowflakeType? favoriteMemeId,
     @Part(name: 'sticker_ids') List<SnowflakeType>? stickerIds,
@@ -200,6 +203,8 @@ abstract class WebhooksApi {
     @Part(name: 'username') String? username,
     @Part(name: 'avatar_url') String? avatarUrl,
     @Part(name: 'attachments') List<Object3>? attachments,
+    @Query('wait') String? wait = 'false',
+    @Part(name: 'flags') MessageFlags? flags = 0,
   });
 
   /// Execute GitHub webhook.
@@ -208,7 +213,7 @@ abstract class WebhooksApi {
   ///
   /// [webhookId] - The ID of the webhook.
   ///
-  /// [token] - The token.
+  /// [token] - The webhook token.
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/webhooks/{webhook_id}/{token}/github')
@@ -224,14 +229,14 @@ abstract class WebhooksApi {
   ///
   /// [webhookId] - The ID of the webhook.
   ///
-  /// [token] - The token.
+  /// [token] - The webhook token.
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/webhooks/{webhook_id}/{token}/instatus')
   Future<void> executeInstatusWebhook({
     @Path('webhook_id') required SnowflakeType webhookId,
     @Path('token') required String token,
-    @Body() required InstatusWebhook body,
+    @Body() InstatusWebhook? body,
   });
 
   /// Get webhook message.
@@ -240,7 +245,7 @@ abstract class WebhooksApi {
   ///
   /// [webhookId] - The ID of the webhook.
   ///
-  /// [token] - The token.
+  /// [token] - The webhook token.
   ///
   /// [messageId] - The ID of the message.
   @GET('/webhooks/{webhook_id}/{token}/messages/{message_id}')
@@ -256,7 +261,7 @@ abstract class WebhooksApi {
   ///
   /// [webhookId] - The ID of the webhook.
   ///
-  /// [token] - The token.
+  /// [token] - The webhook token.
   ///
   /// [messageId] - The ID of the message.
   ///
@@ -266,7 +271,7 @@ abstract class WebhooksApi {
     @Path('webhook_id') required SnowflakeType webhookId,
     @Path('token') required String token,
     @Path('message_id') required SnowflakeType messageId,
-    @Body() required WebhookMessageEditRequest body,
+    @Body() WebhookMessageEditRequest? body,
   });
 
   /// Delete webhook message.
@@ -275,7 +280,7 @@ abstract class WebhooksApi {
   ///
   /// [webhookId] - The ID of the webhook.
   ///
-  /// [token] - The token.
+  /// [token] - The webhook token.
   ///
   /// [messageId] - The ID of the message.
   @DELETE('/webhooks/{webhook_id}/{token}/messages/{message_id}')
@@ -291,13 +296,13 @@ abstract class WebhooksApi {
   ///
   /// [webhookId] - The ID of the webhook.
   ///
-  /// [token] - The token.
+  /// [token] - The webhook token.
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/webhooks/{webhook_id}/{token}/slack')
-  Future<String> executeSlackWebhook({
+  Future<SlackWebhookResponse> executeSlackWebhook({
     @Path('webhook_id') required SnowflakeType webhookId,
     @Path('token') required String token,
-    @Body() required SlackWebhookRequest body,
+    @Body() SlackWebhookRequest? body,
   });
 }

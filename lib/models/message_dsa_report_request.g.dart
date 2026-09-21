@@ -25,25 +25,18 @@ MessageDsaReportRequest _$MessageDsaReportRequestFromJson(
               v as String,
             ),
       ),
-      reportType: $checkedConvert(
-        'report_type',
-        (v) =>
-            MessageDsaReportRequestReportTypeReportType.fromJson(v as String),
-      ),
+      reportType: $checkedConvert('report_type', (v) => v as String),
       category: $checkedConvert(
         'category',
-        (v) => MessageDsaReportRequestCategoryCategory.fromJson(v as String),
+        (v) => MessageReportCategory.fromJson(v as String),
       ),
       messageLink: $checkedConvert('message_link', (v) => v as String),
-      additionalInfo: $checkedConvert('additional_info', (v) => v as String?),
+      additionalInfo: $checkedConvert('additional_info', (v) => v ?? _omit),
       reporterFluxerTag: $checkedConvert(
         'reporter_fluxer_tag',
-        (v) => v as String?,
+        (v) => v ?? _omit,
       ),
-      reportedUserTag: $checkedConvert(
-        'reported_user_tag',
-        (v) => v as String?,
-      ),
+      reportedUserTag: $checkedConvert('reported_user_tag', (v) => v ?? _omit),
     );
     return val;
   },

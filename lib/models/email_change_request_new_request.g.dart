@@ -16,7 +16,7 @@ EmailChangeRequestNewRequest _$EmailChangeRequestNewRequestFromJson(
       ticket: $checkedConvert('ticket', (v) => v as String),
       newEmail: $checkedConvert('new_email', (v) => v as String),
       originalProof: $checkedConvert('original_proof', (v) => v as String),
-      newPassword: $checkedConvert('new_password', (v) => v as String?),
+      newPassword: $checkedConvert('new_password', (v) => v ?? _omit),
     );
     return val;
   },

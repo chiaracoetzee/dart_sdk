@@ -25,21 +25,21 @@ GuildDsaReportRequest _$GuildDsaReportRequestFromJson(
               v as String,
             ),
       ),
-      reportType: $checkedConvert(
-        'report_type',
-        (v) => GuildDsaReportRequestReportTypeReportType.fromJson(v as String),
-      ),
+      reportType: $checkedConvert('report_type', (v) => v as String),
       category: $checkedConvert(
         'category',
-        (v) => GuildDsaReportRequestCategoryCategory.fromJson(v as String),
+        (v) => GuildReportCategory.fromJson(v as String),
       ),
-      guildId: $checkedConvert('guild_id', (v) => v as String),
-      additionalInfo: $checkedConvert('additional_info', (v) => v as String?),
+      guildId: $checkedConvert(
+        'guild_id',
+        (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
+      ),
+      additionalInfo: $checkedConvert('additional_info', (v) => v ?? _omit),
       reporterFluxerTag: $checkedConvert(
         'reporter_fluxer_tag',
-        (v) => v as String?,
+        (v) => v ?? _omit,
       ),
-      inviteCode: $checkedConvert('invite_code', (v) => v as String?),
+      inviteCode: $checkedConvert('invite_code', (v) => v ?? _omit),
     );
     return val;
   },

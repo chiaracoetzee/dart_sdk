@@ -13,12 +13,12 @@ _$InstatusWebhookIncidentIncidentUpdatesFromJson(Map<String, dynamic> json) =>
       json,
       ($checkedConvert) {
         final val = InstatusWebhookIncidentIncidentUpdates(
-          id: $checkedConvert('id', (v) => v as String?),
-          incidentId: $checkedConvert('incident_id', (v) => v as String?),
-          markdown: $checkedConvert('markdown', (v) => v as String?),
-          status: $checkedConvert('status', (v) => v as String?),
-          createdAt: $checkedConvert('created_at', (v) => v as String?),
-          updatedAt: $checkedConvert('updated_at', (v) => v as String?),
+          id: $checkedConvert('id', (v) => v ?? _omit),
+          incidentId: $checkedConvert('incident_id', (v) => v ?? _omit),
+          markdown: $checkedConvert('markdown', (v) => v ?? _omit),
+          status: $checkedConvert('status', (v) => v ?? _omit),
+          createdAt: $checkedConvert('created_at', (v) => v ?? _omit),
+          updatedAt: $checkedConvert('updated_at', (v) => v ?? _omit),
         );
         return val;
       },

@@ -10,8 +10,8 @@ Object2Attachments _$Object2AttachmentsFromJson(Map<String, dynamic> json) =>
     $checkedCreate('Object2Attachments', json, ($checkedConvert) {
       final val = Object2Attachments(
         id: $checkedConvert('id', (v) => v),
-        title: $checkedConvert('title', (v) => v as String?),
-        description: $checkedConvert('description', (v) => v as String?),
+        title: $checkedConvert('title', (v) => v ?? _omit),
+        description: $checkedConvert('description', (v) => v ?? _omit),
       );
       return val;
     });

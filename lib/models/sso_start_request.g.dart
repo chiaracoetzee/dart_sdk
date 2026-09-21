@@ -12,8 +12,8 @@ SsoStartRequest _$SsoStartRequestFromJson(Map<String, dynamic> json) =>
       json,
       ($checkedConvert) {
         final val = SsoStartRequest(
-          redirectTo: $checkedConvert('redirect_to', (v) => v as String?),
-          redirectUri: $checkedConvert('redirect_uri', (v) => v as String?),
+          redirectTo: $checkedConvert('redirect_to', (v) => v ?? _omit),
+          redirectUri: $checkedConvert('redirect_uri', (v) => v ?? _omit),
         );
         return val;
       },

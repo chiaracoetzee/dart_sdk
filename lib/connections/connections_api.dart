@@ -10,6 +10,7 @@ import '../models/bluesky_authorize_request.dart';
 import '../models/bluesky_authorize_response.dart';
 import '../models/connection_list_response.dart';
 import '../models/connection_response.dart';
+import '../models/connection_type.dart';
 import '../models/connection_verification_response.dart';
 import '../models/create_connection_request.dart';
 import '../models/reorder_connections_request.dart';
@@ -72,41 +73,28 @@ abstract class ConnectionsApi {
   ///
   /// Updates visibility and sort order settings for an external service connection.
   ///
-  /// [type] - The type.
+  /// [type] - The type of external connection.
   ///
-  /// [connectionId] - The connection id.
+  /// [connectionId] - The unique identifier of the connection.
   ///
   /// [body] - Name not received - field will be skipped.
   @PATCH('/users/@me/connections/{type}/{connection_id}')
   Future<void> updateConnection({
-    @Path('type') required String type,
+    @Path('type') required ConnectionType type,
     @Path('connection_id') required String connectionId,
-    @Body() required UpdateConnectionRequest body,
+    @Body() UpdateConnectionRequest? body,
   });
 
   /// Delete connection.
   ///
   /// Removes an external service connection from the authenticated user's profile.
   ///
-  /// [type] - The type.
+  /// [type] - The type of external connection.
   ///
-  /// [connectionId] - The connection id.
+  /// [connectionId] - The unique identifier of the connection.
   @DELETE('/users/@me/connections/{type}/{connection_id}')
   Future<void> deleteConnection({
-    @Path('type') required String type,
-    @Path('connection_id') required String connectionId,
-  });
-
-  /// Verify connection.
-  ///
-  /// Triggers verification for an external service connection.
-  ///
-  /// [type] - The type.
-  ///
-  /// [connectionId] - The connection id.
-  @POST('/users/@me/connections/{type}/{connection_id}/verify')
-  Future<ConnectionResponse> verifyConnection({
-    @Path('type') required String type,
+    @Path('type') required ConnectionType type,
     @Path('connection_id') required String connectionId,
   });
 }

@@ -5,8 +5,11 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'public_user_flags.dart';
+import 'snowflake_string_type.dart';
 
 part 'o_auth2_user_info_response.g.dart';
+
+const Object _omit = Object();
 
 @JsonSerializable()
 class OAuth2UserInfoResponse {
@@ -17,19 +20,35 @@ class OAuth2UserInfoResponse {
     required this.discriminator,
     required this.globalName,
     required this.avatar,
-    this.email,
-    this.verified,
-    this.flags,
-  });
-
-  factory OAuth2UserInfoResponse.fromJson(Map<String, Object?> json) =>
-      _$OAuth2UserInfoResponseFromJson(json);
+    Object? email = _omit,
+    Object? verified = _omit,
+    Object? flags = _omit,
+  }) : email = identical(email, _omit) ? null : email as String?,
+       _emailPresent = !identical(email, _omit),
+       verified = identical(verified, _omit) ? null : verified as bool?,
+       _verifiedPresent = !identical(verified, _omit),
+       flags = identical(flags, _omit) ? null : flags as PublicUserFlags?,
+       _flagsPresent = !identical(flags, _omit);
+  factory OAuth2UserInfoResponse.fromJson(Map<String, Object?> json) {
+    final value = _$OAuth2UserInfoResponseFromJson(json);
+    return OAuth2UserInfoResponse(
+      sub: value.sub,
+      id: value.id,
+      username: value.username,
+      discriminator: value.discriminator,
+      globalName: value.globalName,
+      avatar: value.avatar,
+      email: json.containsKey('email') ? value.email : _omit,
+      verified: json.containsKey('verified') ? value.verified : _omit,
+      flags: json.containsKey('flags') ? value.flags : _omit,
+    );
+  }
 
   /// The subject identifier of the user
-  final String sub;
+  final SnowflakeStringType sub;
 
   /// The unique identifier of the user
-  final String id;
+  final SnowflakeStringType id;
 
   /// The username of the user
   final String username;
@@ -52,8 +71,25 @@ class OAuth2UserInfoResponse {
   /// Whether the user has verified their email
   @JsonKey(includeIfNull: false)
   final bool? verified;
+
+  /// The user flags
   @JsonKey(includeIfNull: false)
   final PublicUserFlags? flags;
+  final bool _emailPresent;
+  final bool _verifiedPresent;
+  final bool _flagsPresent;
 
-  Map<String, Object?> toJson() => _$OAuth2UserInfoResponseToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$OAuth2UserInfoResponseToJson(this);
+    if (_emailPresent) {
+      json.putIfAbsent('email', () => email);
+    }
+    if (_verifiedPresent) {
+      json.putIfAbsent('verified', () => verified);
+    }
+    if (_flagsPresent) {
+      json.putIfAbsent('flags', () => flags);
+    }
+    return json;
+  }
 }

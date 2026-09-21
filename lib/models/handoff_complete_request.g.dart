@@ -12,7 +12,7 @@ HandoffCompleteRequest _$HandoffCompleteRequestFromJson(
   final val = HandoffCompleteRequest(
     code: $checkedConvert('code', (v) => v as String),
     userId: $checkedConvert('user_id', (v) => v as String),
-    token: $checkedConvert('token', (v) => v as String?),
+    token: $checkedConvert('token', (v) => v ?? _omit),
   );
   return val;
 }, fieldKeyMap: const {'userId': 'user_id'});

@@ -14,8 +14,7 @@ AuthTokenWithUserIdResponse _$AuthTokenWithUserIdResponseFromJson(
     userId: $checkedConvert('user_id', (v) => v as String),
     user: $checkedConvert(
       'user',
-      (v) =>
-          AuthTokenWithUserIdResponseUser.fromJson(v as Map<String, dynamic>),
+      (v) => UserPartialResponse.fromJson(v as Map<String, dynamic>),
     ),
   );
   return val;

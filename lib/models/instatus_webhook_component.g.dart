@@ -10,10 +10,10 @@ InstatusWebhookComponent _$InstatusWebhookComponentFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('InstatusWebhookComponent', json, ($checkedConvert) {
   final val = InstatusWebhookComponent(
-    id: $checkedConvert('id', (v) => v as String?),
-    name: $checkedConvert('name', (v) => v as String?),
-    status: $checkedConvert('status', (v) => v as String?),
-    createdAt: $checkedConvert('created_at', (v) => v as String?),
+    id: $checkedConvert('id', (v) => v ?? _omit),
+    name: $checkedConvert('name', (v) => v ?? _omit),
+    status: $checkedConvert('status', (v) => v ?? _omit),
+    createdAt: $checkedConvert('created_at', (v) => v ?? _omit),
   );
   return val;
 }, fieldKeyMap: const {'createdAt': 'created_at'});

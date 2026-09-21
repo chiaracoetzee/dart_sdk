@@ -14,14 +14,11 @@ ApplicationCreateRequest _$ApplicationCreateRequestFromJson(
   ($checkedConvert) {
     final val = ApplicationCreateRequest(
       name: $checkedConvert('name', (v) => v as String),
-      redirectUris: $checkedConvert(
-        'redirect_uris',
-        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
-      ),
-      botPublic: $checkedConvert('bot_public', (v) => v as bool?),
+      redirectUris: $checkedConvert('redirect_uris', (v) => v ?? _omit),
+      botPublic: $checkedConvert('bot_public', (v) => v ?? _omit),
       botRequireCodeGrant: $checkedConvert(
         'bot_require_code_grant',
-        (v) => v as bool?,
+        (v) => v ?? _omit,
       ),
     );
     return val;

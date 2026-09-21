@@ -31,10 +31,7 @@ RelationshipResponse _$RelationshipResponseFromJson(
         'friend_shares_voice_activity',
         (v) => v as bool,
       ),
-      since: $checkedConvert(
-        'since',
-        (v) => v == null ? null : DateTime.parse(v as String),
-      ),
+      since: $checkedConvert('since', (v) => v ?? _omit),
     );
     return val;
   },

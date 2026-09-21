@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'hex_string32_type.dart';
+
 part 'mobile_devices_list_response_devices.g.dart';
 
 @JsonSerializable()
@@ -22,7 +24,7 @@ class MobileDevicesListResponseDevices {
 
   /// The unique identifier for the device
   @JsonKey(name: 'device_id')
-  final String deviceId;
+  final HexString32Type deviceId;
 
   /// The mobile push notification platform
   final String platform;

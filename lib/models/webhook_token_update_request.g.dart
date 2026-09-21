@@ -10,8 +10,8 @@ WebhookTokenUpdateRequest _$WebhookTokenUpdateRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('WebhookTokenUpdateRequest', json, ($checkedConvert) {
   final val = WebhookTokenUpdateRequest(
-    name: $checkedConvert('name', (v) => v as String?),
-    avatar: $checkedConvert('avatar', (v) => v as String?),
+    name: $checkedConvert('name', (v) => v ?? _omit),
+    avatar: $checkedConvert('avatar', (v) => v ?? _omit),
   );
   return val;
 });

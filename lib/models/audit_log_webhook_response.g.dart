@@ -19,9 +19,9 @@ AuditLogWebhookResponse _$AuditLogWebhookResponseFromJson(
         (v) => WebhookType.fromJson((v as num).toInt()),
       ),
       name: $checkedConvert('name', (v) => v as String),
-      guildId: $checkedConvert('guild_id', (v) => v as String?),
-      channelId: $checkedConvert('channel_id', (v) => v as String?),
-      avatarHash: $checkedConvert('avatar_hash', (v) => v as String?),
+      guildId: $checkedConvert('guild_id', (v) => v ?? _omit),
+      channelId: $checkedConvert('channel_id', (v) => v ?? _omit),
+      avatarHash: $checkedConvert('avatar_hash', (v) => v ?? _omit),
     );
     return val;
   },

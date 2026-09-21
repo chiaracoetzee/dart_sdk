@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'web_authn_registration_response.dart';
+
 part 'web_authn_register_request.g.dart';
 
 @JsonSerializable()
@@ -18,7 +20,7 @@ class WebAuthnRegisterRequest {
       _$WebAuthnRegisterRequestFromJson(json);
 
   /// WebAuthn registration response
-  final dynamic response;
+  final WebAuthnRegistrationResponse response;
 
   /// The challenge from registration options
   final String challenge;

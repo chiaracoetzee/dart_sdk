@@ -21,11 +21,8 @@ GuildBanResponse _$GuildBanResponseFromJson(Map<String, dynamic> json) =>
             'banned_at',
             (v) => DateTime.parse(v as String),
           ),
-          reason: $checkedConvert('reason', (v) => v as String?),
-          expiresAt: $checkedConvert(
-            'expires_at',
-            (v) => v == null ? null : DateTime.parse(v as String),
-          ),
+          reason: $checkedConvert('reason', (v) => v ?? _omit),
+          expiresAt: $checkedConvert('expires_at', (v) => v ?? _omit),
         );
         return val;
       },

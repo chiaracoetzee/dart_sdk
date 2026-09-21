@@ -17,10 +17,7 @@ _$PendingSubscriptionChangeResponseVariant1FromJson(
       scheduleId: $checkedConvert('schedule_id', (v) => v as String),
       changeKind: $checkedConvert(
         'change_kind',
-        (v) =>
-            PendingSubscriptionChangeResponseVariant1ChangeKindChangeKind.fromJson(
-              v as String,
-            ),
+        (v) => PendingSubscriptionChangeKind.fromJson(v as String),
       ),
       currentBillingCycle: $checkedConvert(
         'current_billing_cycle',
@@ -46,11 +43,7 @@ _$PendingSubscriptionChangeResponseVariant1FromJson(
       ),
       currency: $checkedConvert(
         'currency',
-        (v) => v == null
-            ? null
-            : PendingSubscriptionChangeResponseVariant1CurrencyCurrency.fromJson(
-                v as String,
-              ),
+        (v) => v == null ? null : PremiumCurrency.fromJson(v as String),
       ),
       initialAmountMinor: $checkedConvert(
         'initial_amount_minor',

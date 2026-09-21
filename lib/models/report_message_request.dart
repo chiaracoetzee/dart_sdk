@@ -4,7 +4,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'report_message_request_category_category.dart';
+import 'message_report_category.dart';
 import 'snowflake_type.dart';
 
 part 'report_message_request.g.dart';
@@ -20,13 +20,14 @@ class ReportMessageRequest {
   factory ReportMessageRequest.fromJson(Map<String, Object?> json) =>
       _$ReportMessageRequestFromJson(json);
 
+  /// ID of the accessible channel containing the reported message
   @JsonKey(name: 'channel_id')
   final SnowflakeType channelId;
+
+  /// ID of the accessible message being reported
   @JsonKey(name: 'message_id')
   final SnowflakeType messageId;
-
-  /// Category of the message report
-  final ReportMessageRequestCategoryCategory category;
+  final MessageReportCategory category;
 
   Map<String, Object?> toJson() => _$ReportMessageRequestToJson(this);
 }

@@ -4,22 +4,37 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'snowflake_type.dart';
+import 'snowflake_string_type.dart';
 import 'user_partial_response.dart';
 
 part 'handoff_status_response.g.dart';
+
+const Object _omit = Object();
 
 @JsonSerializable()
 class HandoffStatusResponse {
   const HandoffStatusResponse({
     required this.status,
-    this.token,
-    this.userId,
-    this.user,
-  });
-
-  factory HandoffStatusResponse.fromJson(Map<String, Object?> json) =>
-      _$HandoffStatusResponseFromJson(json);
+    Object? token = _omit,
+    Object? userId = _omit,
+    Object? user = _omit,
+  }) : token = identical(token, _omit) ? null : token as String?,
+       _tokenPresent = !identical(token, _omit),
+       userId = identical(userId, _omit)
+           ? null
+           : userId as SnowflakeStringType?,
+       _userIdPresent = !identical(userId, _omit),
+       user = identical(user, _omit) ? null : user as UserPartialResponse?,
+       _userPresent = !identical(user, _omit);
+  factory HandoffStatusResponse.fromJson(Map<String, Object?> json) {
+    final value = _$HandoffStatusResponseFromJson(json);
+    return HandoffStatusResponse(
+      status: value.status,
+      token: json.containsKey('token') ? value.token : _omit,
+      userId: json.containsKey('user_id') ? value.userId : _omit,
+      user: json.containsKey('user') ? value.user : _omit,
+    );
+  }
 
   /// Current status of the handoff (pending, completed, expired)
   final String status;
@@ -30,11 +45,26 @@ class HandoffStatusResponse {
 
   /// User ID if handoff is complete
   @JsonKey(includeIfNull: false, name: 'user_id')
-  final SnowflakeType? userId;
+  final SnowflakeStringType? userId;
 
   /// Partial user data if handoff is complete
   @JsonKey(includeIfNull: false)
   final UserPartialResponse? user;
+  final bool _tokenPresent;
+  final bool _userIdPresent;
+  final bool _userPresent;
 
-  Map<String, Object?> toJson() => _$HandoffStatusResponseToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$HandoffStatusResponseToJson(this);
+    if (_tokenPresent) {
+      json.putIfAbsent('token', () => token);
+    }
+    if (_userIdPresent) {
+      json.putIfAbsent('user_id', () => userId);
+    }
+    if (_userPresent) {
+      json.putIfAbsent('user', () => user);
+    }
+    return json;
+  }
 }

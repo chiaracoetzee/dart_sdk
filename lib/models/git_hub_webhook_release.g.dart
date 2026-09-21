@@ -13,7 +13,7 @@ GitHubWebhookRelease _$GitHubWebhookReleaseFromJson(
     id: $checkedConvert('id', (v) => (v as num).toInt()),
     tagName: $checkedConvert('tag_name', (v) => v as String),
     htmlUrl: $checkedConvert('html_url', (v) => v as String),
-    body: $checkedConvert('body', (v) => v as String?),
+    body: $checkedConvert('body', (v) => v ?? _omit),
   );
   return val;
 }, fieldKeyMap: const {'tagName': 'tag_name', 'htmlUrl': 'html_url'});

@@ -4,10 +4,10 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'pending_subscription_change_response_variant1_change_kind_change_kind.dart';
+import 'pending_subscription_change_kind.dart';
 import 'pending_subscription_change_response_variant1_current_billing_cycle_current_billing_cycle.dart';
 import 'pending_subscription_change_response_variant1_target_billing_cycle_target_billing_cycle.dart';
-import 'pending_subscription_change_response_variant1_currency_currency.dart';
+import 'premium_currency.dart';
 
 part 'pending_subscription_change_response.g.dart';
 
@@ -31,8 +31,7 @@ class PendingSubscriptionChangeResponseVariant1 {
   @JsonKey(name: 'schedule_id')
   final String scheduleId;
   @JsonKey(name: 'change_kind')
-  final PendingSubscriptionChangeResponseVariant1ChangeKindChangeKind
-  changeKind;
+  final PendingSubscriptionChangeKind changeKind;
   @JsonKey(includeIfNull: true, name: 'current_billing_cycle')
   final PendingSubscriptionChangeResponseVariant1CurrentBillingCycleCurrentBillingCycle?
   currentBillingCycle;
@@ -48,7 +47,7 @@ class PendingSubscriptionChangeResponseVariant1 {
   @JsonKey(includeIfNull: true, name: 'target_amount_minor')
   final int? targetAmountMinor;
   @JsonKey(includeIfNull: true)
-  final PendingSubscriptionChangeResponseVariant1CurrencyCurrency? currency;
+  final PremiumCurrency? currency;
   @JsonKey(includeIfNull: true, name: 'initial_amount_minor')
   final int? initialAmountMinor;
   @JsonKey(includeIfNull: true, name: 'recurring_amount_minor')

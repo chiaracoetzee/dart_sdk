@@ -42,12 +42,7 @@ UserGuildSettingsResponse _$UserGuildSettingsResponseFromJson(
         ),
       ),
       version: $checkedConvert('version', (v) => (v as num).toInt()),
-      unreadBadges: $checkedConvert(
-        'unread_badges',
-        (v) => v == null
-            ? null
-            : UserNotificationSettings.fromJson((v as num).toInt()),
-      ),
+      unreadBadges: $checkedConvert('unread_badges', (v) => v ?? _omit),
     );
     return val;
   },

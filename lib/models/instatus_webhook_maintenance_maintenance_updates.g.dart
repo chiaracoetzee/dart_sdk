@@ -14,11 +14,11 @@ _$InstatusWebhookMaintenanceMaintenanceUpdatesFromJson(
   json,
   ($checkedConvert) {
     final val = InstatusWebhookMaintenanceMaintenanceUpdates(
-      id: $checkedConvert('id', (v) => v as String?),
-      maintenanceId: $checkedConvert('maintenance_id', (v) => v as String?),
-      markdown: $checkedConvert('markdown', (v) => v as String?),
-      createdAt: $checkedConvert('created_at', (v) => v as String?),
-      updatedAt: $checkedConvert('updated_at', (v) => v as String?),
+      id: $checkedConvert('id', (v) => v ?? _omit),
+      maintenanceId: $checkedConvert('maintenance_id', (v) => v ?? _omit),
+      markdown: $checkedConvert('markdown', (v) => v ?? _omit),
+      createdAt: $checkedConvert('created_at', (v) => v ?? _omit),
+      updatedAt: $checkedConvert('updated_at', (v) => v ?? _omit),
     );
     return val;
   },

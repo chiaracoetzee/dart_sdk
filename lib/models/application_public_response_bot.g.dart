@@ -15,9 +15,9 @@ ApplicationPublicResponseBot _$ApplicationPublicResponseBotFromJson(
     discriminator: $checkedConvert('discriminator', (v) => v as String),
     bio: $checkedConvert('bio', (v) => v as String?),
     flags: $checkedConvert('flags', (v) => (v as num).toInt()),
-    avatar: $checkedConvert('avatar', (v) => v as String?),
-    banner: $checkedConvert('banner', (v) => v as String?),
-    token: $checkedConvert('token', (v) => v as String?),
+    avatar: $checkedConvert('avatar', (v) => v ?? _omit),
+    banner: $checkedConvert('banner', (v) => v ?? _omit),
+    token: $checkedConvert('token', (v) => v ?? _omit),
   );
   return val;
 });

@@ -10,15 +10,15 @@ BulkIgnoreFriendRequestsRequest _$BulkIgnoreFriendRequestsRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('BulkIgnoreFriendRequestsRequest', json, ($checkedConvert) {
   final val = BulkIgnoreFriendRequestsRequest(
+    maxAccountAgeSeconds: $checkedConvert(
+      'max_account_age_seconds',
+      (v) => v ?? _omit,
+    ),
     filter: $checkedConvert(
       'filter',
       (v) => v == null
-          ? null
+          ? BulkIgnoreFriendRequestsRequestFilterFilter.all
           : BulkIgnoreFriendRequestsRequestFilterFilter.fromJson(v as String),
-    ),
-    maxAccountAgeSeconds: $checkedConvert(
-      'max_account_age_seconds',
-      (v) => (v as num?)?.toInt(),
     ),
   );
   return val;
@@ -27,6 +27,6 @@ BulkIgnoreFriendRequestsRequest _$BulkIgnoreFriendRequestsRequestFromJson(
 Map<String, dynamic> _$BulkIgnoreFriendRequestsRequestToJson(
   BulkIgnoreFriendRequestsRequest instance,
 ) => <String, dynamic>{
-  'filter': ?instance.filter,
+  'filter': instance.filter,
   'max_account_age_seconds': ?instance.maxAccountAgeSeconds,
 };

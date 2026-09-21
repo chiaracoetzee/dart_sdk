@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'hex_string16_type.dart';
+
 part 'theme_create_response.g.dart';
 
 @JsonSerializable()
@@ -14,7 +16,7 @@ class ThemeCreateResponse {
       _$ThemeCreateResponseFromJson(json);
 
   /// The unique identifier for the created theme
-  final String id;
+  final HexString16Type id;
 
   Map<String, Object?> toJson() => _$ThemeCreateResponseToJson(this);
 }

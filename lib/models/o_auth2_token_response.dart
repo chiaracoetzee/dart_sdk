@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'int32_type.dart';
+
 part 'o_auth2_token_response.g.dart';
 
 @JsonSerializable()
@@ -29,7 +31,7 @@ class OAuth2TokenResponse {
 
   /// The number of seconds until the access token expires
   @JsonKey(name: 'expires_in')
-  final int expiresIn;
+  final Int32Type expiresIn;
 
   /// The refresh token for obtaining new access tokens
   @JsonKey(name: 'refresh_token')

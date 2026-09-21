@@ -6,16 +6,14 @@ part of 'dsa_report_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Map<String, dynamic> _$DsaReportRequestToJson(DsaReportRequest instance) =>
-    <String, dynamic>{};
-
-DsaReportRequestMessage _$DsaReportRequestMessageFromJson(
+DsaReportRequestMessageDsaReportRequest
+_$DsaReportRequestMessageDsaReportRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate(
-  'DsaReportRequestMessage',
+  'DsaReportRequestMessageDsaReportRequest',
   json,
   ($checkedConvert) {
-    final val = DsaReportRequestMessage(
+    final val = DsaReportRequestMessageDsaReportRequest(
       ticket: $checkedConvert('ticket', (v) => v as String),
       additionalInfo: $checkedConvert('additional_info', (v) => v as String?),
       reporterFullLegalName: $checkedConvert(
@@ -33,14 +31,10 @@ DsaReportRequestMessage _$DsaReportRequestMessageFromJson(
         'reporter_fluxer_tag',
         (v) => v as String?,
       ),
-      reportType: $checkedConvert(
-        'report_type',
-        (v) =>
-            MessageDsaReportRequestReportTypeReportType.fromJson(v as String),
-      ),
+      reportType: $checkedConvert('report_type', (v) => v as String),
       category: $checkedConvert(
         'category',
-        (v) => MessageDsaReportRequestCategoryCategory.fromJson(v as String),
+        (v) => MessageReportCategory.fromJson(v as String),
       ),
       messageLink: $checkedConvert('message_link', (v) => v as String),
       reportedUserTag: $checkedConvert(
@@ -61,8 +55,8 @@ DsaReportRequestMessage _$DsaReportRequestMessageFromJson(
   },
 );
 
-Map<String, dynamic> _$DsaReportRequestMessageToJson(
-  DsaReportRequestMessage instance,
+Map<String, dynamic> _$DsaReportRequestMessageDsaReportRequestToJson(
+  DsaReportRequestMessageDsaReportRequest instance,
 ) => <String, dynamic>{
   'ticket': instance.ticket,
   'additional_info': ?instance.additionalInfo,
@@ -75,13 +69,14 @@ Map<String, dynamic> _$DsaReportRequestMessageToJson(
   'reported_user_tag': ?instance.reportedUserTag,
 };
 
-DsaReportRequestUser _$DsaReportRequestUserFromJson(
+DsaReportRequestUserDsaReportRequest
+_$DsaReportRequestUserDsaReportRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate(
-  'DsaReportRequestUser',
+  'DsaReportRequestUserDsaReportRequest',
   json,
   ($checkedConvert) {
-    final val = DsaReportRequestUser(
+    final val = DsaReportRequestUserDsaReportRequest(
       ticket: $checkedConvert('ticket', (v) => v as String),
       additionalInfo: $checkedConvert('additional_info', (v) => v as String?),
       reporterFullLegalName: $checkedConvert(
@@ -99,15 +94,17 @@ DsaReportRequestUser _$DsaReportRequestUserFromJson(
         'reporter_fluxer_tag',
         (v) => v as String?,
       ),
-      reportType: $checkedConvert(
-        'report_type',
-        (v) => UserDsaReportRequestReportTypeReportType.fromJson(v as String),
-      ),
+      reportType: $checkedConvert('report_type', (v) => v as String),
       category: $checkedConvert(
         'category',
-        (v) => UserDsaReportRequestCategoryCategory.fromJson(v as String),
+        (v) => UserReportCategory.fromJson(v as String),
       ),
-      userId: $checkedConvert('user_id', (v) => v as String?),
+      userId: $checkedConvert(
+        'user_id',
+        (v) => v == null
+            ? null
+            : SnowflakeType.fromJson(v as Map<String, dynamic>),
+      ),
       userTag: $checkedConvert('user_tag', (v) => v as String?),
     );
     return val;
@@ -123,8 +120,8 @@ DsaReportRequestUser _$DsaReportRequestUserFromJson(
   },
 );
 
-Map<String, dynamic> _$DsaReportRequestUserToJson(
-  DsaReportRequestUser instance,
+Map<String, dynamic> _$DsaReportRequestUserDsaReportRequestToJson(
+  DsaReportRequestUserDsaReportRequest instance,
 ) => <String, dynamic>{
   'ticket': instance.ticket,
   'additional_info': ?instance.additionalInfo,
@@ -137,13 +134,14 @@ Map<String, dynamic> _$DsaReportRequestUserToJson(
   'user_tag': ?instance.userTag,
 };
 
-DsaReportRequestGuild _$DsaReportRequestGuildFromJson(
+DsaReportRequestGuildDsaReportRequest
+_$DsaReportRequestGuildDsaReportRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate(
-  'DsaReportRequestGuild',
+  'DsaReportRequestGuildDsaReportRequest',
   json,
   ($checkedConvert) {
-    final val = DsaReportRequestGuild(
+    final val = DsaReportRequestGuildDsaReportRequest(
       ticket: $checkedConvert('ticket', (v) => v as String),
       additionalInfo: $checkedConvert('additional_info', (v) => v as String?),
       reporterFullLegalName: $checkedConvert(
@@ -161,15 +159,15 @@ DsaReportRequestGuild _$DsaReportRequestGuildFromJson(
         'reporter_fluxer_tag',
         (v) => v as String?,
       ),
-      reportType: $checkedConvert(
-        'report_type',
-        (v) => GuildDsaReportRequestReportTypeReportType.fromJson(v as String),
-      ),
+      reportType: $checkedConvert('report_type', (v) => v as String),
       category: $checkedConvert(
         'category',
-        (v) => GuildDsaReportRequestCategoryCategory.fromJson(v as String),
+        (v) => GuildReportCategory.fromJson(v as String),
       ),
-      guildId: $checkedConvert('guild_id', (v) => v as String),
+      guildId: $checkedConvert(
+        'guild_id',
+        (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
+      ),
       inviteCode: $checkedConvert('invite_code', (v) => v as String?),
     );
     return val;
@@ -185,8 +183,8 @@ DsaReportRequestGuild _$DsaReportRequestGuildFromJson(
   },
 );
 
-Map<String, dynamic> _$DsaReportRequestGuildToJson(
-  DsaReportRequestGuild instance,
+Map<String, dynamic> _$DsaReportRequestGuildDsaReportRequestToJson(
+  DsaReportRequestGuildDsaReportRequest instance,
 ) => <String, dynamic>{
   'ticket': instance.ticket,
   'additional_info': ?instance.additionalInfo,

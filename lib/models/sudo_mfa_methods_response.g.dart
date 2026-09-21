@@ -12,15 +12,17 @@ SudoMfaMethodsResponse _$SudoMfaMethodsResponseFromJson(
   final val = SudoMfaMethodsResponse(
     totp: $checkedConvert('totp', (v) => v as bool),
     webauthn: $checkedConvert('webauthn', (v) => v as bool),
+    backupCodes: $checkedConvert('backup_codes', (v) => v as bool),
     hasMfa: $checkedConvert('has_mfa', (v) => v as bool),
   );
   return val;
-}, fieldKeyMap: const {'hasMfa': 'has_mfa'});
+}, fieldKeyMap: const {'backupCodes': 'backup_codes', 'hasMfa': 'has_mfa'});
 
 Map<String, dynamic> _$SudoMfaMethodsResponseToJson(
   SudoMfaMethodsResponse instance,
 ) => <String, dynamic>{
   'totp': instance.totp,
   'webauthn': instance.webauthn,
+  'backup_codes': instance.backupCodes,
   'has_mfa': instance.hasMfa,
 };

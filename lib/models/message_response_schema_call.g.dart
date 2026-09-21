@@ -14,10 +14,7 @@ MessageResponseSchemaCall _$MessageResponseSchemaCallFromJson(
       'participants',
       (v) => (v as List<dynamic>).map((e) => e as String).toList(),
     ),
-    endedTimestamp: $checkedConvert(
-      'ended_timestamp',
-      (v) => v == null ? null : DateTime.parse(v as String),
-    ),
+    endedTimestamp: $checkedConvert('ended_timestamp', (v) => v ?? _omit),
   );
   return val;
 }, fieldKeyMap: const {'endedTimestamp': 'ended_timestamp'});

@@ -6,23 +6,14 @@ part of 'switch_to_list_price_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Map<String, dynamic> _$SwitchToListPriceResponseToJson(
-  SwitchToListPriceResponse instance,
-) => <String, dynamic>{};
-
-SwitchToListPriceResponseScheduled _$SwitchToListPriceResponseScheduledFromJson(
+SwitchToListPriceResponseScheduledSwitchToListPriceResponse
+_$SwitchToListPriceResponseScheduledSwitchToListPriceResponseFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate(
-  'SwitchToListPriceResponseScheduled',
+  'SwitchToListPriceResponseScheduledSwitchToListPriceResponse',
   json,
   ($checkedConvert) {
-    final val = SwitchToListPriceResponseScheduled(
-      status: $checkedConvert(
-        'status',
-        (v) => ScheduledSwitchToListPriceResponseStatusStatus.fromJson(
-          v as String,
-        ),
-      ),
+    final val = SwitchToListPriceResponseScheduledSwitchToListPriceResponse(
       effectiveAt: $checkedConvert('effective_at', (v) => v as String),
       targetPriceId: $checkedConvert('target_price_id', (v) => v as String),
       targetAmountMinor: $checkedConvert(
@@ -35,10 +26,9 @@ SwitchToListPriceResponseScheduled _$SwitchToListPriceResponseScheduledFromJson(
       ),
       currency: $checkedConvert(
         'currency',
-        (v) => ScheduledSwitchToListPriceResponseCurrencyCurrency.fromJson(
-          v as String,
-        ),
+        (v) => PremiumCurrency.fromJson(v as String),
       ),
+      status: $checkedConvert('status', (v) => v as String),
     );
     return val;
   },
@@ -50,49 +40,43 @@ SwitchToListPriceResponseScheduled _$SwitchToListPriceResponseScheduledFromJson(
   },
 );
 
-Map<String, dynamic> _$SwitchToListPriceResponseScheduledToJson(
-  SwitchToListPriceResponseScheduled instance,
+Map<String, dynamic>
+_$SwitchToListPriceResponseScheduledSwitchToListPriceResponseToJson(
+  SwitchToListPriceResponseScheduledSwitchToListPriceResponse instance,
 ) => <String, dynamic>{
-  'status': instance.status,
   'effective_at': instance.effectiveAt,
   'target_price_id': instance.targetPriceId,
   'target_amount_minor': instance.targetAmountMinor,
   'current_amount_minor': instance.currentAmountMinor,
   'currency': instance.currency,
+  'status': instance.status,
 };
 
-SwitchToListPriceResponseAlreadyScheduled
-_$SwitchToListPriceResponseAlreadyScheduledFromJson(
+SwitchToListPriceResponseAlreadyScheduledSwitchToListPriceResponse
+_$SwitchToListPriceResponseAlreadyScheduledSwitchToListPriceResponseFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate(
-  'SwitchToListPriceResponseAlreadyScheduled',
+  'SwitchToListPriceResponseAlreadyScheduledSwitchToListPriceResponse',
   json,
   ($checkedConvert) {
-    final val = SwitchToListPriceResponseAlreadyScheduled(
-      status: $checkedConvert(
-        'status',
-        (v) => AlreadyScheduledSwitchToListPriceResponseStatusStatus.fromJson(
-          v as String,
-        ),
-      ),
-      effectiveAt: $checkedConvert('effective_at', (v) => v as String),
-      targetPriceId: $checkedConvert('target_price_id', (v) => v as String),
-      targetAmountMinor: $checkedConvert(
-        'target_amount_minor',
-        (v) => (v as num).toInt(),
-      ),
-      currentAmountMinor: $checkedConvert(
-        'current_amount_minor',
-        (v) => (v as num).toInt(),
-      ),
-      currency: $checkedConvert(
-        'currency',
-        (v) =>
-            AlreadyScheduledSwitchToListPriceResponseCurrencyCurrency.fromJson(
-              v as String,
-            ),
-      ),
-    );
+    final val =
+        SwitchToListPriceResponseAlreadyScheduledSwitchToListPriceResponse(
+          effectiveAt: $checkedConvert('effective_at', (v) => v as String),
+          targetPriceId: $checkedConvert('target_price_id', (v) => v as String),
+          targetAmountMinor: $checkedConvert(
+            'target_amount_minor',
+            (v) => (v as num).toInt(),
+          ),
+          currentAmountMinor: $checkedConvert(
+            'current_amount_minor',
+            (v) => (v as num).toInt(),
+          ),
+          currency: $checkedConvert(
+            'currency',
+            (v) => PremiumCurrency.fromJson(v as String),
+          ),
+          status: $checkedConvert('status', (v) => v as String),
+        );
     return val;
   },
   fieldKeyMap: const {
@@ -103,38 +87,37 @@ _$SwitchToListPriceResponseAlreadyScheduledFromJson(
   },
 );
 
-Map<String, dynamic> _$SwitchToListPriceResponseAlreadyScheduledToJson(
-  SwitchToListPriceResponseAlreadyScheduled instance,
+Map<String, dynamic>
+_$SwitchToListPriceResponseAlreadyScheduledSwitchToListPriceResponseToJson(
+  SwitchToListPriceResponseAlreadyScheduledSwitchToListPriceResponse instance,
 ) => <String, dynamic>{
-  'status': instance.status,
   'effective_at': instance.effectiveAt,
   'target_price_id': instance.targetPriceId,
   'target_amount_minor': instance.targetAmountMinor,
   'current_amount_minor': instance.currentAmountMinor,
   'currency': instance.currency,
+  'status': instance.status,
 };
 
-SwitchToListPriceResponseIneligible
-_$SwitchToListPriceResponseIneligibleFromJson(
+SwitchToListPriceResponseIneligibleSwitchToListPriceResponse
+_$SwitchToListPriceResponseIneligibleSwitchToListPriceResponseFromJson(
   Map<String, dynamic> json,
-) => $checkedCreate('SwitchToListPriceResponseIneligible', json, (
-  $checkedConvert,
-) {
-  final val = SwitchToListPriceResponseIneligible(
-    status: $checkedConvert(
-      'status',
-      (v) =>
-          IneligibleSwitchToListPriceResponseStatusStatus.fromJson(v as String),
-    ),
-    reason: $checkedConvert(
-      'reason',
-      (v) =>
-          IneligibleSwitchToListPriceResponseReasonReason.fromJson(v as String),
-    ),
-  );
-  return val;
-});
+) => $checkedCreate(
+  'SwitchToListPriceResponseIneligibleSwitchToListPriceResponse',
+  json,
+  ($checkedConvert) {
+    final val = SwitchToListPriceResponseIneligibleSwitchToListPriceResponse(
+      status: $checkedConvert('status', (v) => v as String),
+      reason: $checkedConvert(
+        'reason',
+        (v) => ListPriceSwitchIneligibilityReason.fromJson(v as String),
+      ),
+    );
+    return val;
+  },
+);
 
-Map<String, dynamic> _$SwitchToListPriceResponseIneligibleToJson(
-  SwitchToListPriceResponseIneligible instance,
+Map<String, dynamic>
+_$SwitchToListPriceResponseIneligibleSwitchToListPriceResponseToJson(
+  SwitchToListPriceResponseIneligibleSwitchToListPriceResponse instance,
 ) => <String, dynamic>{'status': instance.status, 'reason': instance.reason};

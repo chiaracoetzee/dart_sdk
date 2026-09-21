@@ -17,10 +17,7 @@ _$VoiceNoiseSuppressionAssignmentResponseGuildOverridesFromJson(
       guildId: $checkedConvert('guild_id', (v) => v as String),
       backend: $checkedConvert(
         'backend',
-        (v) =>
-            VoiceNoiseSuppressionAssignmentResponseGuildOverridesBackendBackend.fromJson(
-              v as String,
-            ),
+        (v) => VoiceNoiseSuppressionBackendSchema.fromJson(v as String),
       ),
     );
     return val;

@@ -20,8 +20,7 @@ _$GuildMemberSearchResultSupplementalFromJson(Map<String, dynamic> json) =>
           inviterId: $checkedConvert('inviter_id', (v) => v as String?),
           joinSourceType: $checkedConvert(
             'join_source_type',
-            (v) =>
-                v == null ? null : JoinSourceType.fromJson((v as num).toInt()),
+            (v) => v ?? _omit,
           ),
         );
         return val;

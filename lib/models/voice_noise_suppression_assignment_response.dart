@@ -4,10 +4,9 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'voice_noise_suppression_assignment_response_backend_backend.dart';
-import 'voice_noise_suppression_assignment_response_enabled_backends_enabled_backends.dart';
 import 'voice_noise_suppression_assignment_response_guild_overrides.dart';
 import 'voice_noise_suppression_assignment_response_source_source.dart';
+import 'voice_noise_suppression_backend_schema.dart';
 
 part 'voice_noise_suppression_assignment_response.g.dart';
 
@@ -22,7 +21,6 @@ class VoiceNoiseSuppressionAssignmentResponse {
     required this.guildOverrides,
     required this.enabledBackends,
     required this.allowUserOverride,
-    required this.stereoEnabled,
     required this.suppressionStrength,
   });
 
@@ -36,21 +34,16 @@ class VoiceNoiseSuppressionAssignmentResponse {
   @JsonKey(name: 'user_targeted')
   final bool userTargeted;
   @JsonKey(includeIfNull: true)
-  final VoiceNoiseSuppressionAssignmentResponseBackendBackend? backend;
+  final VoiceNoiseSuppressionBackendSchema? backend;
   @JsonKey(includeIfNull: true)
   final VoiceNoiseSuppressionAssignmentResponseSourceSource? source;
   @JsonKey(name: 'guild_overrides')
   final List<VoiceNoiseSuppressionAssignmentResponseGuildOverrides>
   guildOverrides;
   @JsonKey(name: 'enabled_backends')
-  final List<
-    VoiceNoiseSuppressionAssignmentResponseEnabledBackendsEnabledBackends
-  >
-  enabledBackends;
+  final List<VoiceNoiseSuppressionBackendSchema> enabledBackends;
   @JsonKey(name: 'allow_user_override')
   final bool allowUserOverride;
-  @JsonKey(name: 'stereo_enabled')
-  final bool stereoEnabled;
   @JsonKey(name: 'suppression_strength')
   final int suppressionStrength;
 

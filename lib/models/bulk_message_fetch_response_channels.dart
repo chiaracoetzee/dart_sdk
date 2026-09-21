@@ -4,7 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'message_response_schema.dart';
+import 'snowflake_string_type.dart';
+import 'message_list_response.dart';
 
 part 'bulk_message_fetch_response_channels.g.dart';
 
@@ -21,10 +22,10 @@ class BulkMessageFetchResponseChannels {
 
   /// The ID of the channel whose messages were fetched
   @JsonKey(name: 'channel_id')
-  final String channelId;
+  final SnowflakeStringType channelId;
 
   /// Messages fetched for this channel
-  final List<MessageResponseSchema> messages;
+  final MessageListResponse messages;
 
   Map<String, Object?> toJson() =>
       _$BulkMessageFetchResponseChannelsToJson(this);

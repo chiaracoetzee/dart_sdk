@@ -16,98 +16,25 @@ GitHubWebhook _$GitHubWebhookFromJson(Map<String, dynamic> json) =>
             'sender',
             (v) => GitHubWebhookSender.fromJson(v as Map<String, dynamic>),
           ),
-          action: $checkedConvert('action', (v) => v as String?),
-          answer: $checkedConvert(
-            'answer',
-            (v) => v == null
-                ? null
-                : GitHubWebhookAnswer.fromJson(v as Map<String, dynamic>),
-          ),
-          checkRun: $checkedConvert(
-            'check_run',
-            (v) => v == null
-                ? null
-                : GitHubWebhookCheckRun.fromJson(v as Map<String, dynamic>),
-          ),
-          checkSuite: $checkedConvert(
-            'check_suite',
-            (v) => v == null
-                ? null
-                : GitHubWebhookCheckSuite.fromJson(v as Map<String, dynamic>),
-          ),
-          comment: $checkedConvert(
-            'comment',
-            (v) => v == null
-                ? null
-                : GitHubWebhookComment.fromJson(v as Map<String, dynamic>),
-          ),
-          commits: $checkedConvert(
-            'commits',
-            (v) => (v as List<dynamic>?)
-                ?.map(
-                  (e) =>
-                      GitHubWebhookCommits.fromJson(e as Map<String, dynamic>),
-                )
-                .toList(),
-          ),
-          compare: $checkedConvert('compare', (v) => v as String?),
-          discussion: $checkedConvert(
-            'discussion',
-            (v) => v == null
-                ? null
-                : GitHubWebhookDiscussion.fromJson(v as Map<String, dynamic>),
-          ),
-          forced: $checkedConvert('forced', (v) => v as bool?),
-          forkee: $checkedConvert(
-            'forkee',
-            (v) => v == null
-                ? null
-                : GitHubWebhookForkee.fromJson(v as Map<String, dynamic>),
-          ),
-          headCommit: $checkedConvert(
-            'head_commit',
-            (v) => v == null
-                ? null
-                : GitHubWebhookHeadCommit.fromJson(v as Map<String, dynamic>),
-          ),
-          issue: $checkedConvert(
-            'issue',
-            (v) => v == null
-                ? null
-                : GitHubWebhookIssue.fromJson(v as Map<String, dynamic>),
-          ),
-          member: $checkedConvert(
-            'member',
-            (v) => v == null
-                ? null
-                : GitHubWebhookMember.fromJson(v as Map<String, dynamic>),
-          ),
-          pullRequest: $checkedConvert(
-            'pull_request',
-            (v) => v == null
-                ? null
-                : GitHubWebhookPullRequest.fromJson(v as Map<String, dynamic>),
-          ),
-          refType: $checkedConvert('ref_type', (v) => v as String?),
-          ref: $checkedConvert('ref', (v) => v as String?),
-          release: $checkedConvert(
-            'release',
-            (v) => v == null
-                ? null
-                : GitHubWebhookRelease.fromJson(v as Map<String, dynamic>),
-          ),
-          repository: $checkedConvert(
-            'repository',
-            (v) => v == null
-                ? null
-                : GitHubWebhookRepository.fromJson(v as Map<String, dynamic>),
-          ),
-          review: $checkedConvert(
-            'review',
-            (v) => v == null
-                ? null
-                : GitHubWebhookReview.fromJson(v as Map<String, dynamic>),
-          ),
+          action: $checkedConvert('action', (v) => v ?? _omit),
+          answer: $checkedConvert('answer', (v) => v ?? _omit),
+          checkRun: $checkedConvert('check_run', (v) => v ?? _omit),
+          checkSuite: $checkedConvert('check_suite', (v) => v ?? _omit),
+          comment: $checkedConvert('comment', (v) => v ?? _omit),
+          commits: $checkedConvert('commits', (v) => v ?? _omit),
+          compare: $checkedConvert('compare', (v) => v ?? _omit),
+          discussion: $checkedConvert('discussion', (v) => v ?? _omit),
+          forced: $checkedConvert('forced', (v) => v ?? _omit),
+          forkee: $checkedConvert('forkee', (v) => v ?? _omit),
+          headCommit: $checkedConvert('head_commit', (v) => v ?? _omit),
+          issue: $checkedConvert('issue', (v) => v ?? _omit),
+          member: $checkedConvert('member', (v) => v ?? _omit),
+          pullRequest: $checkedConvert('pull_request', (v) => v ?? _omit),
+          refType: $checkedConvert('ref_type', (v) => v ?? _omit),
+          ref: $checkedConvert('ref', (v) => v ?? _omit),
+          release: $checkedConvert('release', (v) => v ?? _omit),
+          repository: $checkedConvert('repository', (v) => v ?? _omit),
+          review: $checkedConvert('review', (v) => v ?? _omit),
         );
         return val;
       },

@@ -131,34 +131,27 @@ UserPrivateResponse _$UserPrivateResponseFromJson(
         'required_actions',
         (v) => (v as List<dynamic>).map((e) => e as String).toList(),
       ),
-      mentionFlags: $checkedConvert(
-        'mention_flags',
-        (v) => v == null
-            ? null
-            : MentionReplyPreferences.fromJson((v as num).toInt()),
-      ),
+      mentionFlags: $checkedConvert('mention_flags', (v) => v ?? _omit),
       authenticatorTypes: $checkedConvert(
         'authenticator_types',
-        (v) => (v as List<dynamic>?)
-            ?.map((e) => UserAuthenticatorTypes.fromJson((e as num).toInt()))
-            .toList(),
+        (v) => v ?? _omit,
       ),
       timezonePrivacyFlags: $checkedConvert(
         'timezone_privacy_flags',
-        (v) => (v as num?)?.toInt(),
+        (v) => v ?? _omit,
       ),
-      timezone: $checkedConvert('timezone', (v) => v as String?),
-      phone: $checkedConvert('phone', (v) => v as String?),
-      emailBounced: $checkedConvert('email_bounced', (v) => v as bool?),
-      system: $checkedConvert('system', (v) => v as bool?),
+      timezone: $checkedConvert('timezone', (v) => v ?? _omit),
+      phone: $checkedConvert('phone', (v) => v ?? _omit),
+      emailBounced: $checkedConvert('email_bounced', (v) => v ?? _omit),
+      system: $checkedConvert('system', (v) => v ?? _omit),
       ageVerifiedAdult: $checkedConvert(
         'age_verified_adult',
-        (v) => v as bool?,
+        (v) => v ?? _omit,
       ),
-      bot: $checkedConvert('bot', (v) => v as bool?),
+      bot: $checkedConvert('bot', (v) => v ?? _omit),
       forceInboundPhoneVerification: $checkedConvert(
         'force_inbound_phone_verification',
-        (v) => v as bool?,
+        (v) => v ?? _omit,
       ),
     );
     return val;

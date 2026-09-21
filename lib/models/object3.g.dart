@@ -11,19 +11,19 @@ Object3 _$Object3FromJson(Map<String, dynamic> json) => $checkedCreate(
   json,
   ($checkedConvert) {
     final val = Object3(
-      id: $checkedConvert('id', (v) => v),
-      filename: $checkedConvert('filename', (v) => v as String?),
-      description: $checkedConvert('description', (v) => v as String?),
-      contentType: $checkedConvert('content_type', (v) => v as String?),
-      size: $checkedConvert('size', (v) => (v as num?)?.toInt()),
-      url: $checkedConvert('url', (v) => v as String?),
-      proxyUrl: $checkedConvert('proxy_url', (v) => v as String?),
-      height: $checkedConvert('height', (v) => (v as num?)?.toInt()),
-      width: $checkedConvert('width', (v) => (v as num?)?.toInt()),
-      ephemeral: $checkedConvert('ephemeral', (v) => v as bool?),
-      duration: $checkedConvert('duration', (v) => v as num?),
-      waveform: $checkedConvert('waveform', (v) => v as String?),
-      flags: $checkedConvert('flags', (v) => (v as num?)?.toInt()),
+      id: $checkedConvert('id', (v) => v ?? _omit),
+      filename: $checkedConvert('filename', (v) => v ?? _omit),
+      description: $checkedConvert('description', (v) => v ?? _omit),
+      contentType: $checkedConvert('content_type', (v) => v ?? _omit),
+      size: $checkedConvert('size', (v) => v ?? _omit),
+      url: $checkedConvert('url', (v) => v ?? _omit),
+      proxyUrl: $checkedConvert('proxy_url', (v) => v ?? _omit),
+      height: $checkedConvert('height', (v) => v ?? _omit),
+      width: $checkedConvert('width', (v) => v ?? _omit),
+      ephemeral: $checkedConvert('ephemeral', (v) => v ?? _omit),
+      duration: $checkedConvert('duration', (v) => v ?? _omit),
+      waveform: $checkedConvert('waveform', (v) => v ?? _omit),
+      flags: $checkedConvert('flags', (v) => v ?? _omit),
     );
     return val;
   },
@@ -31,7 +31,7 @@ Object3 _$Object3FromJson(Map<String, dynamic> json) => $checkedCreate(
 );
 
 Map<String, dynamic> _$Object3ToJson(Object3 instance) => <String, dynamic>{
-  'id': instance.id,
+  'id': ?instance.id,
   'filename': ?instance.filename,
   'description': ?instance.description,
   'content_type': ?instance.contentType,

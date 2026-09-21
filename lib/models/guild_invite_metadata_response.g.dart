@@ -14,15 +14,11 @@ GuildInviteMetadataResponse _$GuildInviteMetadataResponseFromJson(
   ($checkedConvert) {
     final val = GuildInviteMetadataResponse(
       code: $checkedConvert('code', (v) => v as String),
-      type: $checkedConvert(
-        'type',
-        (v) => GuildInviteMetadataResponseTypeType.fromJson((v as num).toInt()),
-      ),
+      temporary: $checkedConvert('temporary', (v) => v as bool),
+      type: $checkedConvert('type', (v) => v as num),
       guild: $checkedConvert(
         'guild',
-        (v) => GuildInviteMetadataResponseGuild.fromJson(
-          v as Map<String, dynamic>,
-        ),
+        (v) => GuildPartialResponse.fromJson(v as Map<String, dynamic>),
       ),
       channel: $checkedConvert(
         'channel',
@@ -33,7 +29,6 @@ GuildInviteMetadataResponse _$GuildInviteMetadataResponseFromJson(
         'presence_count',
         (v) => (v as num).toInt(),
       ),
-      temporary: $checkedConvert('temporary', (v) => v as bool),
       createdAt: $checkedConvert(
         'created_at',
         (v) => DateTime.parse(v as String),
@@ -41,16 +36,8 @@ GuildInviteMetadataResponse _$GuildInviteMetadataResponseFromJson(
       uses: $checkedConvert('uses', (v) => (v as num).toInt()),
       maxUses: $checkedConvert('max_uses', (v) => (v as num).toInt()),
       maxAge: $checkedConvert('max_age', (v) => (v as num).toInt()),
-      inviter: $checkedConvert(
-        'inviter',
-        (v) => v == null
-            ? null
-            : UserPartialResponse.fromJson(v as Map<String, dynamic>),
-      ),
-      expiresAt: $checkedConvert(
-        'expires_at',
-        (v) => v == null ? null : DateTime.parse(v as String),
-      ),
+      inviter: $checkedConvert('inviter', (v) => v ?? _omit),
+      expiresAt: $checkedConvert('expires_at', (v) => v ?? _omit),
     );
     return val;
   },
@@ -68,14 +55,14 @@ Map<String, dynamic> _$GuildInviteMetadataResponseToJson(
   GuildInviteMetadataResponse instance,
 ) => <String, dynamic>{
   'code': instance.code,
+  'inviter': ?instance.inviter,
+  'expires_at': ?instance.expiresAt?.toIso8601String(),
+  'temporary': instance.temporary,
   'type': instance.type,
   'guild': instance.guild,
   'channel': instance.channel,
-  'inviter': ?instance.inviter,
   'member_count': instance.memberCount,
   'presence_count': instance.presenceCount,
-  'expires_at': ?instance.expiresAt?.toIso8601String(),
-  'temporary': instance.temporary,
   'created_at': instance.createdAt.toIso8601String(),
   'uses': instance.uses,
   'max_uses': instance.maxUses,

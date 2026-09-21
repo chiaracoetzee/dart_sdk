@@ -10,14 +10,8 @@ BulkDeleteMessagesRequest _$BulkDeleteMessagesRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('BulkDeleteMessagesRequest', json, ($checkedConvert) {
   final val = BulkDeleteMessagesRequest(
-    messageIds: $checkedConvert(
-      'message_ids',
-      (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
-    ),
-    messages: $checkedConvert(
-      'messages',
-      (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
-    ),
+    messageIds: $checkedConvert('message_ids', (v) => v ?? _omit),
+    messages: $checkedConvert('messages', (v) => v ?? _omit),
   );
   return val;
 }, fieldKeyMap: const {'messageIds': 'message_ids'});

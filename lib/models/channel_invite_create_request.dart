@@ -9,29 +9,29 @@ part 'channel_invite_create_request.g.dart';
 @JsonSerializable()
 class ChannelInviteCreateRequest {
   const ChannelInviteCreateRequest({
-    this.maxUses,
-    this.maxAge,
-    this.unique,
-    this.temporary,
+    this.maxUses = 0,
+    this.maxAge = 0,
+    this.unique = false,
+    this.temporary = false,
   });
 
   factory ChannelInviteCreateRequest.fromJson(Map<String, Object?> json) =>
       _$ChannelInviteCreateRequestFromJson(json);
 
   /// Maximum number of times this invite can be used (0 for unlimited)
-  @JsonKey(includeIfNull: false, name: 'max_uses')
+  @JsonKey(includeIfNull: true, name: 'max_uses')
   final int? maxUses;
 
   /// Duration in seconds before the invite expires (0 for never)
-  @JsonKey(includeIfNull: false, name: 'max_age')
+  @JsonKey(includeIfNull: true, name: 'max_age')
   final int? maxAge;
 
   /// Whether to create a new unique invite or reuse an existing one
-  @JsonKey(includeIfNull: false)
+  @JsonKey(includeIfNull: true)
   final bool? unique;
 
   /// Whether members that joined via this invite should be kicked after disconnecting
-  @JsonKey(includeIfNull: false)
+  @JsonKey(includeIfNull: true)
   final bool? temporary;
 
   Map<String, Object?> toJson() => _$ChannelInviteCreateRequestToJson(this);

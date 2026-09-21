@@ -10,11 +10,17 @@ ReportMessageRequest _$ReportMessageRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('ReportMessageRequest', json, ($checkedConvert) {
   final val = ReportMessageRequest(
-    channelId: $checkedConvert('channel_id', (v) => v as String),
-    messageId: $checkedConvert('message_id', (v) => v as String),
+    channelId: $checkedConvert(
+      'channel_id',
+      (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
+    ),
+    messageId: $checkedConvert(
+      'message_id',
+      (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
+    ),
     category: $checkedConvert(
       'category',
-      (v) => ReportMessageRequestCategoryCategory.fromJson(v as String),
+      (v) => MessageReportCategory.fromJson(v as String),
     ),
   );
   return val;

@@ -15,7 +15,7 @@ SavedMessageEntryResponse _$SavedMessageEntryResponseFromJson(
     messageId: $checkedConvert('message_id', (v) => v as String),
     status: $checkedConvert(
       'status',
-      (v) => SavedMessageEntryResponseStatusStatus.fromJson(v as String),
+      (v) => SavedMessageStatusSchema.fromJson(v as String),
     ),
     message: $checkedConvert(
       'message',

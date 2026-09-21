@@ -24,9 +24,7 @@ _$VoiceNoiseSuppressionAssignmentResponseFromJson(
         'backend',
         (v) => v == null
             ? null
-            : VoiceNoiseSuppressionAssignmentResponseBackendBackend.fromJson(
-                v as String,
-              ),
+            : VoiceNoiseSuppressionBackendSchema.fromJson(v as String),
       ),
       source: $checkedConvert(
         'source',
@@ -51,10 +49,7 @@ _$VoiceNoiseSuppressionAssignmentResponseFromJson(
         'enabled_backends',
         (v) => (v as List<dynamic>)
             .map(
-              (e) =>
-                  VoiceNoiseSuppressionAssignmentResponseEnabledBackendsEnabledBackends.fromJson(
-                    e as String,
-                  ),
+              (e) => VoiceNoiseSuppressionBackendSchema.fromJson(e as String),
             )
             .toList(),
       ),
@@ -62,7 +57,6 @@ _$VoiceNoiseSuppressionAssignmentResponseFromJson(
         'allow_user_override',
         (v) => v as bool,
       ),
-      stereoEnabled: $checkedConvert('stereo_enabled', (v) => v as bool),
       suppressionStrength: $checkedConvert(
         'suppression_strength',
         (v) => (v as num).toInt(),
@@ -76,7 +70,6 @@ _$VoiceNoiseSuppressionAssignmentResponseFromJson(
     'guildOverrides': 'guild_overrides',
     'enabledBackends': 'enabled_backends',
     'allowUserOverride': 'allow_user_override',
-    'stereoEnabled': 'stereo_enabled',
     'suppressionStrength': 'suppression_strength',
   },
 );
@@ -92,6 +85,5 @@ Map<String, dynamic> _$VoiceNoiseSuppressionAssignmentResponseToJson(
   'guild_overrides': instance.guildOverrides,
   'enabled_backends': instance.enabledBackends,
   'allow_user_override': instance.allowUserOverride,
-  'stereo_enabled': instance.stereoEnabled,
   'suppression_strength': instance.suppressionStrength,
 };

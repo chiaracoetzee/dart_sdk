@@ -16,13 +16,13 @@ ResolvedGifEntrySchema _$ResolvedGifEntrySchemaFromJson(
     height: $checkedConvert('height', (v) => (v as num).toInt()),
     media: $checkedConvert(
       'media',
-      (v) => (v as Map<String, dynamic>?)?.map(
+      (v) => (v as Map<String, dynamic>).map(
         (k, e) =>
             MapEntry(k, GifMediaFormat.fromJson(e as Map<String, dynamic>)),
       ),
     ),
-    contentType: $checkedConvert('content_type', (v) => v as String?),
-    placeholder: $checkedConvert('placeholder', (v) => v as String?),
+    placeholder: $checkedConvert('placeholder', (v) => v ?? _omit),
+    contentType: $checkedConvert('content_type', (v) => v as String? ?? ''),
   );
   return val;
 }, fieldKeyMap: const {'proxyUrl': 'proxy_url', 'contentType': 'content_type'});
@@ -34,7 +34,7 @@ Map<String, dynamic> _$ResolvedGifEntrySchemaToJson(
   'proxy_url': instance.proxyUrl,
   'width': instance.width,
   'height': instance.height,
-  'media': ?instance.media,
-  'content_type': ?instance.contentType,
+  'media': instance.media,
+  'content_type': instance.contentType,
   'placeholder': ?instance.placeholder,
 };

@@ -6,17 +6,40 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'git_hub_webhook_check_run_output.g.dart';
 
+const Object _omit = Object();
+
 @JsonSerializable()
 class GitHubWebhookCheckRunOutput {
-  const GitHubWebhookCheckRunOutput({this.title, this.summary});
-
-  factory GitHubWebhookCheckRunOutput.fromJson(Map<String, Object?> json) =>
-      _$GitHubWebhookCheckRunOutputFromJson(json);
+  const GitHubWebhookCheckRunOutput({
+    Object? title = _omit,
+    Object? summary = _omit,
+  }) : title = identical(title, _omit) ? null : title as String?,
+       _titlePresent = !identical(title, _omit),
+       summary = identical(summary, _omit) ? null : summary as String?,
+       _summaryPresent = !identical(summary, _omit);
+  factory GitHubWebhookCheckRunOutput.fromJson(Map<String, Object?> json) {
+    final value = _$GitHubWebhookCheckRunOutputFromJson(json);
+    return GitHubWebhookCheckRunOutput(
+      title: json.containsKey('title') ? value.title : _omit,
+      summary: json.containsKey('summary') ? value.summary : _omit,
+    );
+  }
 
   @JsonKey(includeIfNull: false)
   final String? title;
   @JsonKey(includeIfNull: false)
   final String? summary;
+  final bool _titlePresent;
+  final bool _summaryPresent;
 
-  Map<String, Object?> toJson() => _$GitHubWebhookCheckRunOutputToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$GitHubWebhookCheckRunOutputToJson(this);
+    if (_titlePresent) {
+      json.putIfAbsent('title', () => title);
+    }
+    if (_summaryPresent) {
+      json.putIfAbsent('summary', () => summary);
+    }
+    return json;
+  }
 }

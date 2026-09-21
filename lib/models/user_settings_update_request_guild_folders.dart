@@ -4,27 +4,39 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'int32_type.dart';
+import 'color_type.dart';
 import 'guild_folder_flags.dart';
-import 'user_settings_update_request_guild_folders_icon_icon.dart';
+import 'guild_folder_icon_type.dart';
 import 'snowflake_type.dart';
 
 part 'user_settings_update_request_guild_folders.g.dart';
+
+const Object _omit = Object();
 
 @JsonSerializable()
 class UserSettingsUpdateRequestGuildFolders {
   const UserSettingsUpdateRequestGuildFolders({
     required this.id,
     required this.guildIds,
-    this.name,
-    this.color,
-    this.flags,
-    this.icon,
-  });
-
+    this.color = 0,
+    this.flags = 0,
+    this.icon = GuildFolderIconType.folder,
+    Object? name = _omit,
+  }) : name = identical(name, _omit) ? null : name as String?,
+       _namePresent = !identical(name, _omit);
   factory UserSettingsUpdateRequestGuildFolders.fromJson(
     Map<String, Object?> json,
-  ) => _$UserSettingsUpdateRequestGuildFoldersFromJson(json);
+  ) {
+    final value = _$UserSettingsUpdateRequestGuildFoldersFromJson(json);
+    return UserSettingsUpdateRequestGuildFolders(
+      id: value.id,
+      guildIds: value.guildIds,
+      color: value.color,
+      flags: value.flags,
+      icon: value.icon,
+      name: json.containsKey('name') ? value.name : _omit,
+    );
+  }
 
   /// Unique identifier for the folder (-1 for uncategorized)
   final int id;
@@ -34,19 +46,23 @@ class UserSettingsUpdateRequestGuildFolders {
   final String? name;
 
   /// Color of the folder as integer
-  @JsonKey(includeIfNull: false)
-  final Int32Type? color;
-  @JsonKey(includeIfNull: false)
-  final GuildFolderFlags? flags;
+  @JsonKey(includeIfNull: true)
+  final ColorType? color;
+  final GuildFolderFlags flags;
 
   /// Selected icon for the guild folder
-  @JsonKey(includeIfNull: false)
-  final UserSettingsUpdateRequestGuildFoldersIconIcon? icon;
+  final GuildFolderIconType icon;
 
   /// Guild IDs in this folder
   @JsonKey(name: 'guild_ids')
   final List<SnowflakeType> guildIds;
+  final bool _namePresent;
 
-  Map<String, Object?> toJson() =>
-      _$UserSettingsUpdateRequestGuildFoldersToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$UserSettingsUpdateRequestGuildFoldersToJson(this);
+    if (_namePresent) {
+      json.putIfAbsent('name', () => name);
+    }
+    return json;
+  }
 }

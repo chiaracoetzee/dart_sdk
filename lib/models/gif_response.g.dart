@@ -25,7 +25,7 @@ GifResponse _$GifResponseFromJson(Map<String, dynamic> json) =>
                 MapEntry(k, GifMediaFormat.fromJson(e as Map<String, dynamic>)),
           ),
         ),
-        placeholder: $checkedConvert('placeholder', (v) => v as String?),
+        placeholder: $checkedConvert('placeholder', (v) => v ?? _omit),
       );
       return val;
     }, fieldKeyMap: const {'proxySrc': 'proxy_src'});

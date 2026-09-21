@@ -22,7 +22,7 @@ class _WebhooksApi implements WebhooksApi {
 
   @override
   Future<List<WebhookResponse>> listChannelWebhooks({
-    required String channelId,
+    required SnowflakeType channelId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -55,7 +55,7 @@ class _WebhooksApi implements WebhooksApi {
 
   @override
   Future<WebhookResponse> createWebhook({
-    required String channelId,
+    required SnowflakeType channelId,
     required WebhookCreateRequest body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -86,7 +86,7 @@ class _WebhooksApi implements WebhooksApi {
 
   @override
   Future<List<WebhookResponse>> listGuildWebhooks({
-    required String guildId,
+    required SnowflakeType guildId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -118,7 +118,7 @@ class _WebhooksApi implements WebhooksApi {
   }
 
   @override
-  Future<WebhookResponse> getWebhook({required String webhookId}) async {
+  Future<WebhookResponse> getWebhook({required SnowflakeType webhookId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -146,14 +146,15 @@ class _WebhooksApi implements WebhooksApi {
 
   @override
   Future<WebhookResponse> updateWebhook({
-    required String webhookId,
-    required WebhookUpdateRequest body,
+    required SnowflakeType webhookId,
+    WebhookUpdateRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<WebhookResponse>(
       Options(method: 'PATCH', headers: _headers, extra: _extra)
           .compose(
@@ -176,7 +177,7 @@ class _WebhooksApi implements WebhooksApi {
   }
 
   @override
-  Future<void> deleteWebhook({required String webhookId}) async {
+  Future<void> deleteWebhook({required SnowflakeType webhookId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -196,7 +197,7 @@ class _WebhooksApi implements WebhooksApi {
 
   @override
   Future<WebhookTokenResponse> getWebhookWithToken({
-    required String webhookId,
+    required SnowflakeType webhookId,
     required String token,
   }) async {
     final _extra = <String, dynamic>{};
@@ -226,15 +227,16 @@ class _WebhooksApi implements WebhooksApi {
 
   @override
   Future<WebhookTokenResponse> updateWebhookWithToken({
-    required String webhookId,
+    required SnowflakeType webhookId,
     required String token,
-    required WebhookTokenUpdateRequest body,
+    WebhookTokenUpdateRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<WebhookTokenResponse>(
       Options(method: 'PATCH', headers: _headers, extra: _extra)
           .compose(
@@ -258,7 +260,7 @@ class _WebhooksApi implements WebhooksApi {
 
   @override
   Future<void> deleteWebhookWithToken({
-    required String webhookId,
+    required SnowflakeType webhookId,
     required String token,
   }) async {
     final _extra = <String, dynamic>{};
@@ -280,21 +282,21 @@ class _WebhooksApi implements WebhooksApi {
 
   @override
   Future<MessageResponseSchema> executeWebhook({
-    required String webhookId,
+    required SnowflakeType webhookId,
     required String token,
-    String? wait,
     String? content,
     List<RichEmbedRequest>? embeds,
     MessageReferenceRequest? messageReference,
     AllowedMentionsRequest? allowedMentions,
-    int? flags,
-    String? nonce,
-    String? favoriteMemeId,
-    List<String>? stickerIds,
+    MessageNonceRequest? nonce,
+    SnowflakeType? favoriteMemeId,
+    List<SnowflakeType>? stickerIds,
     bool? tts,
     String? username,
     String? avatarUrl,
     List<Object3>? attachments,
+    String? wait = 'false',
+    int? flags = 0,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'wait': wait};
@@ -317,18 +319,16 @@ class _WebhooksApi implements WebhooksApi {
         jsonEncode(allowedMentions ?? <String, dynamic>{}),
       ),
     );
-    if (flags != null) {
-      _data.fields.add(MapEntry('flags', flags.toString()));
-    }
-    if (nonce != null) {
-      _data.fields.add(MapEntry('nonce', nonce));
-    }
-    if (favoriteMemeId != null) {
-      _data.fields.add(MapEntry('favorite_meme_id', favoriteMemeId));
-    }
-    stickerIds?.forEach((i) {
-      _data.fields.add(MapEntry('sticker_ids', i));
-    });
+    _data.fields.add(
+      MapEntry('nonce', jsonEncode(nonce ?? <String, dynamic>{})),
+    );
+    _data.fields.add(
+      MapEntry(
+        'favorite_meme_id',
+        jsonEncode(favoriteMemeId ?? <String, dynamic>{}),
+      ),
+    );
+    _data.fields.add(MapEntry('sticker_ids', jsonEncode(stickerIds)));
     if (tts != null) {
       _data.fields.add(MapEntry('tts', tts.toString()));
     }
@@ -339,6 +339,9 @@ class _WebhooksApi implements WebhooksApi {
       _data.fields.add(MapEntry('avatar_url', avatarUrl));
     }
     _data.fields.add(MapEntry('attachments', jsonEncode(attachments)));
+    if (flags != null) {
+      _data.fields.add(MapEntry('flags', flags.toString()));
+    }
     final _options = _setStreamType<MessageResponseSchema>(
       Options(
             method: 'POST',
@@ -367,7 +370,7 @@ class _WebhooksApi implements WebhooksApi {
 
   @override
   Future<void> executeGithubWebhook({
-    required String webhookId,
+    required SnowflakeType webhookId,
     required String token,
     required GitHubWebhook body,
   }) async {
@@ -391,15 +394,16 @@ class _WebhooksApi implements WebhooksApi {
 
   @override
   Future<void> executeInstatusWebhook({
-    required String webhookId,
+    required SnowflakeType webhookId,
     required String token,
-    required InstatusWebhook body,
+    InstatusWebhook? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<void>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -415,9 +419,9 @@ class _WebhooksApi implements WebhooksApi {
 
   @override
   Future<MessageResponseSchema> getWebhookMessage({
-    required String webhookId,
+    required SnowflakeType webhookId,
     required String token,
-    required String messageId,
+    required SnowflakeType messageId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -446,16 +450,17 @@ class _WebhooksApi implements WebhooksApi {
 
   @override
   Future<MessageResponseSchema> editWebhookMessage({
-    required String webhookId,
+    required SnowflakeType webhookId,
     required String token,
-    required String messageId,
-    required WebhookMessageEditRequest body,
+    required SnowflakeType messageId,
+    WebhookMessageEditRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<MessageResponseSchema>(
       Options(method: 'PATCH', headers: _headers, extra: _extra)
           .compose(
@@ -479,9 +484,9 @@ class _WebhooksApi implements WebhooksApi {
 
   @override
   Future<void> deleteWebhookMessage({
-    required String webhookId,
+    required SnowflakeType webhookId,
     required String token,
-    required String messageId,
+    required SnowflakeType messageId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -502,15 +507,16 @@ class _WebhooksApi implements WebhooksApi {
 
   @override
   Future<String> executeSlackWebhook({
-    required String webhookId,
+    required SnowflakeType webhookId,
     required String token,
-    required SlackWebhookRequest body,
+    SlackWebhookRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<String>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(

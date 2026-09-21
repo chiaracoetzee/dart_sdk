@@ -21,7 +21,9 @@ class _GiFsDeprecatedApi implements GiFsDeprecatedApi {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<GifFeaturedResponse> getFeaturedKlipy({Locale? locale}) async {
+  Future<GifFeaturedResponse> getFeaturedKlipy({
+    Locale? locale = Locale.enUs,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'locale': locale?.toJson()};
     queryParameters.removeWhere((k, v) => v == null);
@@ -73,7 +75,7 @@ class _GiFsDeprecatedApi implements GiFsDeprecatedApi {
   @override
   Future<List<GifResponse>> searchKlipy({
     required String q,
-    Locale? locale,
+    Locale? locale = Locale.enUs,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -109,7 +111,7 @@ class _GiFsDeprecatedApi implements GiFsDeprecatedApi {
   @override
   Future<List<String>> getKlipySearchSuggestions({
     required String q,
-    Locale? locale,
+    Locale? locale = Locale.enUs,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -141,7 +143,9 @@ class _GiFsDeprecatedApi implements GiFsDeprecatedApi {
   }
 
   @override
-  Future<List<GifResponse>> getTrendingKlipy({Locale? locale}) async {
+  Future<List<GifResponse>> getTrendingKlipy({
+    Locale? locale = Locale.enUs,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'locale': locale?.toJson()};
     queryParameters.removeWhere((k, v) => v == null);
@@ -171,7 +175,9 @@ class _GiFsDeprecatedApi implements GiFsDeprecatedApi {
   }
 
   @override
-  Future<GifFeaturedResponse> getFeaturedTenor({Locale? locale}) async {
+  Future<GifFeaturedResponse> getFeaturedTenor({
+    Locale? locale = Locale.enUs,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'locale': locale?.toJson()};
     queryParameters.removeWhere((k, v) => v == null);
@@ -223,7 +229,7 @@ class _GiFsDeprecatedApi implements GiFsDeprecatedApi {
   @override
   Future<List<GifResponse>> searchTenor({
     required String q,
-    Locale? locale,
+    Locale? locale = Locale.enUs,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -259,7 +265,7 @@ class _GiFsDeprecatedApi implements GiFsDeprecatedApi {
   @override
   Future<List<String>> getTenorSearchSuggestions({
     required String q,
-    Locale? locale,
+    Locale? locale = Locale.enUs,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -291,7 +297,9 @@ class _GiFsDeprecatedApi implements GiFsDeprecatedApi {
   }
 
   @override
-  Future<List<GifResponse>> getTrendingTenor({Locale? locale}) async {
+  Future<List<GifResponse>> getTrendingTenor({
+    Locale? locale = Locale.enUs,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'locale': locale?.toJson()};
     queryParameters.removeWhere((k, v) => v == null);

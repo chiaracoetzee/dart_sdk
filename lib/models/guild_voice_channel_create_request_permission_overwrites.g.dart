@@ -14,7 +14,10 @@ _$GuildVoiceChannelCreateRequestPermissionOverwritesFromJson(
   json,
   ($checkedConvert) {
     final val = GuildVoiceChannelCreateRequestPermissionOverwrites(
-      id: $checkedConvert('id', (v) => v as String),
+      id: $checkedConvert(
+        'id',
+        (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
+      ),
       type: $checkedConvert(
         'type',
         (v) =>
@@ -22,8 +25,8 @@ _$GuildVoiceChannelCreateRequestPermissionOverwritesFromJson(
               (v as num).toInt(),
             ),
       ),
-      allow: $checkedConvert('allow', (v) => v as String?),
-      deny: $checkedConvert('deny', (v) => v as String?),
+      allow: $checkedConvert('allow', (v) => v ?? _omit),
+      deny: $checkedConvert('deny', (v) => v ?? _omit),
     );
     return val;
   },

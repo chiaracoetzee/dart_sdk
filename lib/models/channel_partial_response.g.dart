@@ -11,18 +11,12 @@ ChannelPartialResponse _$ChannelPartialResponseFromJson(
 ) => $checkedCreate('ChannelPartialResponse', json, ($checkedConvert) {
   final val = ChannelPartialResponse(
     id: $checkedConvert('id', (v) => v as String),
-    type: $checkedConvert('type', (v) => (v as num).toInt()),
-    name: $checkedConvert('name', (v) => v as String?),
-    recipients: $checkedConvert(
-      'recipients',
-      (v) => (v as List<dynamic>?)
-          ?.map(
-            (e) => ChannelPartialResponseRecipients.fromJson(
-              e as Map<String, dynamic>,
-            ),
-          )
-          .toList(),
+    type: $checkedConvert(
+      'type',
+      (v) => ChannelType.fromJson((v as num).toInt()),
     ),
+    name: $checkedConvert('name', (v) => v ?? _omit),
+    recipients: $checkedConvert('recipients', (v) => v ?? _omit),
   );
   return val;
 });

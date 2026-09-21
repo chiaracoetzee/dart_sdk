@@ -8,21 +8,37 @@ import 'bulk_ignore_friend_requests_request_filter_filter.dart';
 
 part 'bulk_ignore_friend_requests_request.g.dart';
 
+const Object _omit = Object();
+
 @JsonSerializable()
 class BulkIgnoreFriendRequestsRequest {
   const BulkIgnoreFriendRequestsRequest({
-    this.filter,
-    this.maxAccountAgeSeconds,
-  });
+    Object? maxAccountAgeSeconds = _omit,
+    this.filter = BulkIgnoreFriendRequestsRequestFilterFilter.all,
+  }) : maxAccountAgeSeconds = identical(maxAccountAgeSeconds, _omit)
+           ? null
+           : maxAccountAgeSeconds as int?,
+       _maxAccountAgeSecondsPresent = !identical(maxAccountAgeSeconds, _omit);
+  factory BulkIgnoreFriendRequestsRequest.fromJson(Map<String, Object?> json) {
+    final value = _$BulkIgnoreFriendRequestsRequestFromJson(json);
+    return BulkIgnoreFriendRequestsRequest(
+      maxAccountAgeSeconds: json.containsKey('max_account_age_seconds')
+          ? value.maxAccountAgeSeconds
+          : _omit,
+      filter: value.filter,
+    );
+  }
 
-  factory BulkIgnoreFriendRequestsRequest.fromJson(Map<String, Object?> json) =>
-      _$BulkIgnoreFriendRequestsRequestFromJson(json);
-
-  @JsonKey(includeIfNull: false)
-  final BulkIgnoreFriendRequestsRequestFilterFilter? filter;
+  final BulkIgnoreFriendRequestsRequestFilterFilter filter;
   @JsonKey(includeIfNull: false, name: 'max_account_age_seconds')
   final int? maxAccountAgeSeconds;
+  final bool _maxAccountAgeSecondsPresent;
 
-  Map<String, Object?> toJson() =>
-      _$BulkIgnoreFriendRequestsRequestToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$BulkIgnoreFriendRequestsRequestToJson(this);
+    if (_maxAccountAgeSecondsPresent) {
+      json.putIfAbsent('max_account_age_seconds', () => maxAccountAgeSeconds);
+    }
+    return json;
+  }
 }

@@ -131,11 +131,8 @@ UserSettingsResponse _$UserSettingsResponseFromJson(
         'time_format',
         (v) => TimeFormatTypes.fromJson((v as num).toInt()),
       ),
-      statusResetsAt: $checkedConvert(
-        'status_resets_at',
-        (v) => v == null ? null : DateTime.parse(v as String),
-      ),
-      statusResetsTo: $checkedConvert('status_resets_to', (v) => v as String?),
+      statusResetsAt: $checkedConvert('status_resets_at', (v) => v ?? _omit),
+      statusResetsTo: $checkedConvert('status_resets_to', (v) => v ?? _omit),
     );
     return val;
   },

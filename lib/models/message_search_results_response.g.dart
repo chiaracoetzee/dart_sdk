@@ -29,10 +29,7 @@ MessageSearchResultsResponse _$MessageSearchResultsResponseFromJson(
     total: $checkedConvert('total', (v) => (v as num).toInt()),
     hitsPerPage: $checkedConvert('hits_per_page', (v) => (v as num).toInt()),
     page: $checkedConvert('page', (v) => (v as num).toInt()),
-    cursor: $checkedConvert(
-      'cursor',
-      (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
-    ),
+    cursor: $checkedConvert('cursor', (v) => v ?? _omit),
   );
   return val;
 }, fieldKeyMap: const {'hitsPerPage': 'hits_per_page'});

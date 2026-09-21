@@ -14,14 +14,9 @@ HandoffInfoResponseClientInfo _$HandoffInfoResponseClientInfoFromJson(
       'device',
       (v) => HandoffInfoResponseClientInfoDeviceDevice.fromJson(v as String),
     ),
-    platform: $checkedConvert('platform', (v) => v as String?),
-    os: $checkedConvert('os', (v) => v as String?),
-    location: $checkedConvert(
-      'location',
-      (v) => v == null
-          ? null
-          : AuthSessionLocation.fromJson(v as Map<String, dynamic>),
-    ),
+    platform: $checkedConvert('platform', (v) => v ?? _omit),
+    os: $checkedConvert('os', (v) => v ?? _omit),
+    location: $checkedConvert('location', (v) => v ?? _omit),
   );
   return val;
 });

@@ -19,19 +19,15 @@ PremiumStateResponseBilling _$PremiumStateResponseBillingFromJson(
       ),
       currentSubscriptionPrice: $checkedConvert(
         'current_subscription_price',
-        (v) => v == null
-            ? null
-            : CurrentSubscriptionPriceResponse.fromJson(
-                v as Map<String, dynamic>,
-              ),
+        (v) => CurrentSubscriptionPriceResponse.fromJson(
+          v as Map<String, dynamic>,
+        ),
       ),
       pendingSubscriptionChange: $checkedConvert(
         'pending_subscription_change',
-        (v) => v == null
-            ? null
-            : PendingSubscriptionChangeResponse.fromJson(
-                v as Map<String, dynamic>,
-              ),
+        (v) => PendingSubscriptionChangeResponse.fromJson(
+          v as Map<String, dynamic>,
+        ),
       ),
       listPriceSwitch: $checkedConvert(
         'list_price_switch',

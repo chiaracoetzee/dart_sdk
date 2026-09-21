@@ -13,45 +13,18 @@ WebhookMessageRequest _$WebhookMessageRequestFromJson(
   json,
   ($checkedConvert) {
     final val = WebhookMessageRequest(
-      content: $checkedConvert('content', (v) => v as String?),
-      embeds: $checkedConvert(
-        'embeds',
-        (v) => (v as List<dynamic>?)
-            ?.map((e) => RichEmbedRequest.fromJson(e as Map<String, dynamic>))
-            .toList(),
-      ),
-      messageReference: $checkedConvert(
-        'message_reference',
-        (v) => v == null
-            ? null
-            : MessageReferenceRequest.fromJson(v as Map<String, dynamic>),
-      ),
-      allowedMentions: $checkedConvert(
-        'allowed_mentions',
-        (v) => v == null
-            ? null
-            : AllowedMentionsRequest.fromJson(v as Map<String, dynamic>),
-      ),
-      flags: $checkedConvert('flags', (v) => (v as num?)?.toInt()),
-      nonce: $checkedConvert('nonce', (v) => v as String?),
-      favoriteMemeId: $checkedConvert('favorite_meme_id', (v) => v as String?),
-      stickerIds: $checkedConvert(
-        'sticker_ids',
-        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
-      ),
-      tts: $checkedConvert('tts', (v) => v as bool?),
-      username: $checkedConvert('username', (v) => v as String?),
-      avatarUrl: $checkedConvert('avatar_url', (v) => v as String?),
-      attachments: $checkedConvert(
-        'attachments',
-        (v) => (v as List<dynamic>?)
-            ?.map(
-              (e) => ClientUploadedAttachmentRequest.fromJson(
-                e as Map<String, dynamic>,
-              ),
-            )
-            .toList(),
-      ),
+      flags: $checkedConvert('flags', (v) => (v as num?)?.toInt() ?? 0),
+      content: $checkedConvert('content', (v) => v ?? _omit),
+      embeds: $checkedConvert('embeds', (v) => v ?? _omit),
+      messageReference: $checkedConvert('message_reference', (v) => v ?? _omit),
+      allowedMentions: $checkedConvert('allowed_mentions', (v) => v ?? _omit),
+      nonce: $checkedConvert('nonce', (v) => v ?? _omit),
+      favoriteMemeId: $checkedConvert('favorite_meme_id', (v) => v ?? _omit),
+      stickerIds: $checkedConvert('sticker_ids', (v) => v ?? _omit),
+      tts: $checkedConvert('tts', (v) => v ?? _omit),
+      username: $checkedConvert('username', (v) => v ?? _omit),
+      avatarUrl: $checkedConvert('avatar_url', (v) => v ?? _omit),
+      attachments: $checkedConvert('attachments', (v) => v ?? _omit),
     );
     return val;
   },
@@ -71,7 +44,7 @@ Map<String, dynamic> _$WebhookMessageRequestToJson(
   'embeds': ?instance.embeds,
   'message_reference': ?instance.messageReference,
   'allowed_mentions': ?instance.allowedMentions,
-  'flags': ?instance.flags,
+  'flags': instance.flags,
   'nonce': ?instance.nonce,
   'favorite_meme_id': ?instance.favoriteMemeId,
   'sticker_ids': ?instance.stickerIds,

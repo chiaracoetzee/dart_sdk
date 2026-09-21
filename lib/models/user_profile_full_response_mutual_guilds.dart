@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'snowflake_string_type.dart';
+
 part 'user_profile_full_response_mutual_guilds.g.dart';
 
 @JsonSerializable()
@@ -18,7 +20,7 @@ class UserProfileFullResponseMutualGuilds {
   ) => _$UserProfileFullResponseMutualGuildsFromJson(json);
 
   /// The ID of the mutual guild
-  final String id;
+  final SnowflakeStringType id;
 
   /// The nickname of the target user in this guild
   @JsonKey(includeIfNull: true)

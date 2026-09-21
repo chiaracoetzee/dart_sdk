@@ -8,12 +8,30 @@ import 'snowflake_type.dart';
 
 part 'call_ring_body_schema.g.dart';
 
+const Object _omit = Object();
+
 @JsonSerializable()
 class CallRingBodySchema {
-  const CallRingBodySchema({this.recipients, this.latitude, this.longitude});
-
-  factory CallRingBodySchema.fromJson(Map<String, Object?> json) =>
-      _$CallRingBodySchemaFromJson(json);
+  const CallRingBodySchema({
+    Object? recipients = _omit,
+    Object? latitude = _omit,
+    Object? longitude = _omit,
+  }) : recipients = identical(recipients, _omit)
+           ? null
+           : recipients as List<SnowflakeType>?,
+       _recipientsPresent = !identical(recipients, _omit),
+       latitude = identical(latitude, _omit) ? null : latitude as String?,
+       _latitudePresent = !identical(latitude, _omit),
+       longitude = identical(longitude, _omit) ? null : longitude as String?,
+       _longitudePresent = !identical(longitude, _omit);
+  factory CallRingBodySchema.fromJson(Map<String, Object?> json) {
+    final value = _$CallRingBodySchemaFromJson(json);
+    return CallRingBodySchema(
+      recipients: json.containsKey('recipients') ? value.recipients : _omit,
+      latitude: json.containsKey('latitude') ? value.latitude : _omit,
+      longitude: json.containsKey('longitude') ? value.longitude : _omit,
+    );
+  }
 
   /// User IDs to ring for the call
   @JsonKey(includeIfNull: false)
@@ -26,6 +44,21 @@ class CallRingBodySchema {
   /// Client longitude used for automatic region selection
   @JsonKey(includeIfNull: false)
   final String? longitude;
+  final bool _recipientsPresent;
+  final bool _latitudePresent;
+  final bool _longitudePresent;
 
-  Map<String, Object?> toJson() => _$CallRingBodySchemaToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$CallRingBodySchemaToJson(this);
+    if (_recipientsPresent) {
+      json.putIfAbsent('recipients', () => recipients);
+    }
+    if (_latitudePresent) {
+      json.putIfAbsent('latitude', () => latitude);
+    }
+    if (_longitudePresent) {
+      json.putIfAbsent('longitude', () => longitude);
+    }
+    return json;
+  }
 }

@@ -19,14 +19,7 @@ ChangeSubscriptionRequest _$ChangeSubscriptionRequestFromJson(
           v as String,
         ),
       ),
-      effectiveAt: $checkedConvert(
-        'effective_at',
-        (v) => v == null
-            ? null
-            : ChangeSubscriptionRequestEffectiveAtEffectiveAt.fromJson(
-                v as String,
-              ),
-      ),
+      effectiveAt: $checkedConvert('effective_at', (v) => v ?? _omit),
     );
     return val;
   },

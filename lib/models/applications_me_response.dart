@@ -5,9 +5,12 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'applications_me_response_bot.dart';
-import 'applications_me_response_owner.dart';
+import 'snowflake_string_type.dart';
+import 'user_partial_response.dart';
 
 part 'applications_me_response.g.dart';
+
+const Object _omit = Object();
 
 @JsonSerializable()
 class ApplicationsMeResponse {
@@ -20,15 +23,34 @@ class ApplicationsMeResponse {
     required this.botRequireCodeGrant,
     required this.verifyKey,
     required this.owner,
-    this.bot,
-    this.redirectUris,
-  });
-
-  factory ApplicationsMeResponse.fromJson(Map<String, Object?> json) =>
-      _$ApplicationsMeResponseFromJson(json);
+    Object? bot = _omit,
+    Object? redirectUris = _omit,
+  }) : bot = identical(bot, _omit) ? null : bot as ApplicationsMeResponseBot?,
+       _botPresent = !identical(bot, _omit),
+       redirectUris = identical(redirectUris, _omit)
+           ? null
+           : redirectUris as List<String>?,
+       _redirectUrisPresent = !identical(redirectUris, _omit);
+  factory ApplicationsMeResponse.fromJson(Map<String, Object?> json) {
+    final value = _$ApplicationsMeResponseFromJson(json);
+    return ApplicationsMeResponse(
+      id: value.id,
+      name: value.name,
+      icon: value.icon,
+      description: value.description,
+      botPublic: value.botPublic,
+      botRequireCodeGrant: value.botRequireCodeGrant,
+      verifyKey: value.verifyKey,
+      owner: value.owner,
+      bot: json.containsKey('bot') ? value.bot : _omit,
+      redirectUris: json.containsKey('redirect_uris')
+          ? value.redirectUris
+          : _omit,
+    );
+  }
 
   /// The unique identifier of the application
-  final String id;
+  final SnowflakeStringType id;
 
   /// The name of the application
   final String name;
@@ -54,7 +76,7 @@ class ApplicationsMeResponse {
   final String verifyKey;
 
   /// The owner of the application
-  final ApplicationsMeResponseOwner owner;
+  final UserPartialResponse owner;
 
   /// The bot user associated with the application
   @JsonKey(includeIfNull: false)
@@ -63,6 +85,17 @@ class ApplicationsMeResponse {
   /// The registered redirect URIs for OAuth2
   @JsonKey(includeIfNull: false, name: 'redirect_uris')
   final List<String>? redirectUris;
+  final bool _botPresent;
+  final bool _redirectUrisPresent;
 
-  Map<String, Object?> toJson() => _$ApplicationsMeResponseToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$ApplicationsMeResponseToJson(this);
+    if (_botPresent) {
+      json.putIfAbsent('bot', () => bot);
+    }
+    if (_redirectUrisPresent) {
+      json.putIfAbsent('redirect_uris', () => redirectUris);
+    }
+    return json;
+  }
 }

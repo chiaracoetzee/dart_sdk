@@ -4,7 +4,6 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'well_known_fluxer_response_limits_version_version.dart';
 import 'well_known_fluxer_response_limits_rules.dart';
 
 part 'well_known_fluxer_response_limits.g.dart';
@@ -22,7 +21,7 @@ class WellKnownFluxerResponseLimits {
       _$WellKnownFluxerResponseLimitsFromJson(json);
 
   /// Wire format version
-  final WellKnownFluxerResponseLimitsVersionVersion version;
+  final num version;
 
   /// Available trait definitions (e.g., "premium")
   final List<String> traitDefinitions;

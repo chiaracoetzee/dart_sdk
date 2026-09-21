@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'snowflake_string_type.dart';
+
 part 'guild_sticker_metadata_response.g.dart';
 
 @JsonSerializable()
@@ -20,11 +22,11 @@ class GuildStickerMetadataResponse {
       _$GuildStickerMetadataResponseFromJson(json);
 
   /// The unique identifier for this sticker
-  final String id;
+  final SnowflakeStringType id;
 
   /// The guild this sticker belongs to
   @JsonKey(name: 'guild_id')
-  final String guildId;
+  final SnowflakeStringType guildId;
 
   /// The name of the sticker
   final String name;

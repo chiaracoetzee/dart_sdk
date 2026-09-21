@@ -4,10 +4,12 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'snowflake_type.dart';
+import 'snowflake_string_type.dart';
 import 'message_reference_type.dart';
 
 part 'message_response_schema_referenced_message_message_reference.g.dart';
+
+const Object _omit = Object();
 
 @JsonSerializable()
 class MessageResponseSchemaReferencedMessageMessageReference {
@@ -15,26 +17,45 @@ class MessageResponseSchemaReferencedMessageMessageReference {
     required this.channelId,
     required this.messageId,
     required this.type,
-    this.guildId,
-  });
-
+    Object? guildId = _omit,
+  }) : guildId = identical(guildId, _omit)
+           ? null
+           : guildId as SnowflakeStringType?,
+       _guildIdPresent = !identical(guildId, _omit);
   factory MessageResponseSchemaReferencedMessageMessageReference.fromJson(
     Map<String, Object?> json,
-  ) => _$MessageResponseSchemaReferencedMessageMessageReferenceFromJson(json);
+  ) {
+    final value =
+        _$MessageResponseSchemaReferencedMessageMessageReferenceFromJson(json);
+    return MessageResponseSchemaReferencedMessageMessageReference(
+      channelId: value.channelId,
+      messageId: value.messageId,
+      type: value.type,
+      guildId: json.containsKey('guild_id') ? value.guildId : _omit,
+    );
+  }
 
   /// The ID of the channel containing the referenced message
   @JsonKey(name: 'channel_id')
-  final String channelId;
+  final SnowflakeStringType channelId;
 
   /// The ID of the referenced message
   @JsonKey(name: 'message_id')
-  final String messageId;
+  final SnowflakeStringType messageId;
 
   /// The ID of the guild containing the referenced message
   @JsonKey(includeIfNull: false, name: 'guild_id')
-  final SnowflakeType? guildId;
+  final SnowflakeStringType? guildId;
   final MessageReferenceType type;
+  final bool _guildIdPresent;
 
-  Map<String, Object?> toJson() =>
-      _$MessageResponseSchemaReferencedMessageMessageReferenceToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$MessageResponseSchemaReferencedMessageMessageReferenceToJson(
+      this,
+    );
+    if (_guildIdPresent) {
+      json.putIfAbsent('guild_id', () => guildId);
+    }
+    return json;
+  }
 }

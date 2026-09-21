@@ -6,13 +6,14 @@ import 'package:dio/dio.dart' hide Headers;
 import 'package:retrofit/retrofit.dart';
 import 'package:retrofit/error_logger.dart';
 
-import '../models/audit_log_action_type.dart';
+import '../models/audit_log_action_type_input.dart';
 import '../models/channel_create_request.dart';
+import '../models/channel_list_response.dart';
 import '../models/channel_position_update_request.dart';
 import '../models/channel_response.dart';
 import '../models/guild_audit_log_list_response.dart';
 import '../models/guild_ban_create_request.dart';
-import '../models/guild_ban_response.dart';
+import '../models/guild_ban_list_response.dart';
 import '../models/guild_create_request.dart';
 import '../models/guild_delete_request.dart';
 import '../models/guild_emoji_bulk_create_request.dart';
@@ -22,6 +23,8 @@ import '../models/guild_emoji_create_request.dart';
 import '../models/guild_emoji_response.dart';
 import '../models/guild_emoji_update_request.dart';
 import '../models/guild_emoji_with_user_list_response.dart';
+import '../models/guild_list_response.dart';
+import '../models/guild_member_list_response.dart';
 import '../models/guild_member_response.dart';
 import '../models/guild_member_search_request.dart';
 import '../models/guild_member_search_response.dart';
@@ -29,6 +32,7 @@ import '../models/guild_member_update_request.dart';
 import '../models/guild_response.dart';
 import '../models/guild_role_create_request.dart';
 import '../models/guild_role_hoist_positions_request.dart';
+import '../models/guild_role_list_response.dart';
 import '../models/guild_role_positions_request.dart';
 import '../models/guild_role_response.dart';
 import '../models/guild_role_update_request.dart';
@@ -39,7 +43,7 @@ import '../models/guild_sticker_create_request.dart';
 import '../models/guild_sticker_response.dart';
 import '../models/guild_sticker_update_request.dart';
 import '../models/guild_sticker_with_user_list_response.dart';
-import '../models/guild_transfer_ownership_request.dart';
+import '../models/guild_transfer_ownership_with_verification_request.dart';
 import '../models/guild_update_request.dart';
 import '../models/guild_vanity_url_response.dart';
 import '../models/guild_vanity_url_update_request.dart';
@@ -83,7 +87,7 @@ abstract class GuildsApi {
   @PATCH('/guilds/{guild_id}')
   Future<GuildResponse> updateGuild({
     @Path('guild_id') required SnowflakeType guildId,
-    @Body() required GuildUpdateRequest body,
+    @Body() GuildUpdateRequest? body,
   });
 
   /// List guild audit logs.
@@ -91,6 +95,16 @@ abstract class GuildsApi {
   /// List guild audit logs. Requires view_audit_logs permission. Returns guild activity history with pagination and action filtering.
   ///
   /// [guildId] - The ID of the guild.
+  ///
+  /// [limit] - Maximum number of audit log entries to return (1-100).
+  ///
+  /// [before] - Get entries before this audit log entry ID.
+  ///
+  /// [after] - Get entries after this audit log entry ID.
+  ///
+  /// [userId] - Filter entries by the user who performed the action.
+  ///
+  /// [actionType] - Filter entries by the type of action.
   @GET('/guilds/{guild_id}/audit-logs')
   Future<GuildAuditLogListResponse> listGuildAuditLogs({
     @Path('guild_id') required SnowflakeType guildId,
@@ -98,7 +112,7 @@ abstract class GuildsApi {
     @Query('before') SnowflakeType? before,
     @Query('after') SnowflakeType? after,
     @Query('user_id') SnowflakeType? userId,
-    @Query('action_type') AuditLogActionType? actionType,
+    @Query('action_type') AuditLogActionTypeInput? actionType,
   });
 
   /// List guild bans.
@@ -107,7 +121,7 @@ abstract class GuildsApi {
   ///
   /// [guildId] - The ID of the guild.
   @GET('/guilds/{guild_id}/bans')
-  Future<List<GuildBanResponse>> listGuildBans({
+  Future<GuildBanListResponse> listGuildBans({
     @Path('guild_id') required SnowflakeType guildId,
   });
 
@@ -124,7 +138,7 @@ abstract class GuildsApi {
   Future<void> banGuildMember({
     @Path('guild_id') required SnowflakeType guildId,
     @Path('user_id') required SnowflakeType userId,
-    @Body() required GuildBanCreateRequest body,
+    @Body() GuildBanCreateRequest? body,
   });
 
   /// Unban guild member.
@@ -146,7 +160,7 @@ abstract class GuildsApi {
   ///
   /// [guildId] - The ID of the guild.
   @GET('/guilds/{guild_id}/channels')
-  Future<List<ChannelResponse>> listGuildChannels({
+  Future<ChannelListResponse> listGuildChannels({
     @Path('guild_id') required SnowflakeType guildId,
   });
 
@@ -186,7 +200,7 @@ abstract class GuildsApi {
   @POST('/guilds/{guild_id}/delete')
   Future<void> deleteGuild({
     @Path('guild_id') required SnowflakeType guildId,
-    @Body() required GuildDeleteRequest body,
+    @Body() GuildDeleteRequest? body,
   });
 
   /// Create guild emoji.
@@ -261,11 +275,13 @@ abstract class GuildsApi {
   /// [guildId] - The ID of the guild.
   ///
   /// [emojiId] - The ID of the emoji.
+  ///
+  /// [purge] - Whether to also purge the asset from storage.
   @DELETE('/guilds/{guild_id}/emojis/{emoji_id}')
   Future<void> deleteGuildEmoji({
     @Path('guild_id') required SnowflakeType guildId,
     @Path('emoji_id') required SnowflakeType emojiId,
-    @Query('purge') String? purge,
+    @Query('purge') String? purge = 'false',
   });
 
   /// List guild members.
@@ -273,11 +289,15 @@ abstract class GuildsApi {
   /// List guild members. Supports pagination with limit and after cursor. Returns member information for the specified guild.
   ///
   /// [guildId] - The ID of the guild.
+  ///
+  /// [limit] - Maximum number of members to return (1-1000, default 1).
+  ///
+  /// [after] - Get members after this user ID for pagination.
   @GET('/guilds/{guild_id}/members')
-  Future<List<GuildMemberResponse>> listGuildMembers({
+  Future<GuildMemberListResponse> listGuildMembers({
     @Path('guild_id') required SnowflakeType guildId,
-    @Query('limit') int? limit,
     @Query('after') SnowflakeType? after,
+    @Query('limit') int? limit = 1,
   });
 
   /// Search guild members.
@@ -290,7 +310,7 @@ abstract class GuildsApi {
   @POST('/guilds/{guild_id}/members-search')
   Future<GuildMemberSearchResponse> searchGuildMembers({
     @Path('guild_id') required SnowflakeType guildId,
-    @Body() required GuildMemberSearchRequest body,
+    @Body() GuildMemberSearchRequest? body,
   });
 
   /// Get current user guild member.
@@ -313,7 +333,7 @@ abstract class GuildsApi {
   @PATCH('/guilds/{guild_id}/members/@me')
   Future<GuildMemberResponse> updateCurrentGuildMember({
     @Path('guild_id') required SnowflakeType guildId,
-    @Body() required MyGuildMemberUpdateRequest body,
+    @Body() MyGuildMemberUpdateRequest? body,
   });
 
   /// Get guild member by user ID.
@@ -342,7 +362,7 @@ abstract class GuildsApi {
   Future<GuildMemberResponse> updateGuildMember({
     @Path('guild_id') required SnowflakeType guildId,
     @Path('user_id') required SnowflakeType userId,
-    @Body() required GuildMemberUpdateRequest body,
+    @Body() GuildMemberUpdateRequest? body,
   });
 
   /// Remove guild member.
@@ -364,14 +384,14 @@ abstract class GuildsApi {
   ///
   /// [guildId] - The ID of the guild.
   ///
-  /// [userId] - The ID of the user.
-  ///
   /// [roleId] - The ID of the role.
+  ///
+  /// [userId] - The ID of the user.
   @PUT('/guilds/{guild_id}/members/{user_id}/roles/{role_id}')
   Future<void> addGuildMemberRole({
     @Path('guild_id') required SnowflakeType guildId,
-    @Path('user_id') required SnowflakeType userId,
     @Path('role_id') required SnowflakeType roleId,
+    @Path('user_id') required SnowflakeType userId,
   });
 
   /// Remove role from guild member.
@@ -380,14 +400,14 @@ abstract class GuildsApi {
   ///
   /// [guildId] - The ID of the guild.
   ///
-  /// [userId] - The ID of the user.
-  ///
   /// [roleId] - The ID of the role.
+  ///
+  /// [userId] - The ID of the user.
   @DELETE('/guilds/{guild_id}/members/{user_id}/roles/{role_id}')
   Future<void> removeGuildMemberRole({
     @Path('guild_id') required SnowflakeType guildId,
-    @Path('user_id') required SnowflakeType userId,
     @Path('role_id') required SnowflakeType roleId,
+    @Path('user_id') required SnowflakeType userId,
   });
 
   /// List guild roles.
@@ -396,7 +416,7 @@ abstract class GuildsApi {
   ///
   /// [guildId] - The ID of the guild.
   @GET('/guilds/{guild_id}/roles')
-  Future<List<GuildRoleResponse>> listGuildRoles({
+  Future<GuildRoleListResponse> listGuildRoles({
     @Path('guild_id') required SnowflakeType guildId,
   });
 
@@ -462,7 +482,7 @@ abstract class GuildsApi {
   Future<GuildRoleResponse> updateGuildRole({
     @Path('guild_id') required SnowflakeType guildId,
     @Path('role_id') required SnowflakeType roleId,
-    @Body() required GuildRoleUpdateRequest body,
+    @Body() GuildRoleUpdateRequest? body,
   });
 
   /// Delete guild role.
@@ -550,11 +570,13 @@ abstract class GuildsApi {
   /// [guildId] - The ID of the guild.
   ///
   /// [stickerId] - The ID of the sticker.
+  ///
+  /// [purge] - Whether to also purge the asset from storage.
   @DELETE('/guilds/{guild_id}/stickers/{sticker_id}')
   Future<void> deleteGuildSticker({
     @Path('guild_id') required SnowflakeType guildId,
     @Path('sticker_id') required SnowflakeType stickerId,
-    @Query('purge') String? purge,
+    @Query('purge') String? purge = 'false',
   });
 
   /// Transfer guild ownership.
@@ -567,7 +589,7 @@ abstract class GuildsApi {
   @POST('/guilds/{guild_id}/transfer-ownership')
   Future<GuildResponse> transferGuildOwnership({
     @Path('guild_id') required SnowflakeType guildId,
-    @Body() required GuildTransferOwnershipRequest body,
+    @Body() required GuildTransferOwnershipWithVerificationRequest body,
   });
 
   /// Get guild vanity URL.
@@ -590,18 +612,26 @@ abstract class GuildsApi {
   @PATCH('/guilds/{guild_id}/vanity-url')
   Future<GuildVanityUrlUpdateResponse> updateGuildVanityUrl({
     @Path('guild_id') required SnowflakeType guildId,
-    @Body() required GuildVanityUrlUpdateRequest body,
+    @Body() GuildVanityUrlUpdateRequest? body,
   });
 
   /// List current user guilds.
   ///
   /// Requires guilds OAuth scope if using bearer token. Returns all guilds the user is a member of.
+  ///
+  /// [before] - Get guilds before this guild ID.
+  ///
+  /// [after] - Get guilds after this guild ID.
+  ///
+  /// [limit] - Maximum number of guilds to return (1-200).
+  ///
+  /// [withCounts] - Include approximate member and presence counts.
   @GET('/users/@me/guilds')
-  Future<List<GuildResponse>> listGuilds({
+  Future<GuildListResponse> listGuilds({
+    @Query('limit') int? limit = 200,
+    @Query('with_counts') String? withCounts = 'false',
     @Query('before') SnowflakeType? before,
     @Query('after') SnowflakeType? after,
-    @Query('limit') int? limit,
-    @Query('with_counts') String? withCounts,
   });
 
   /// Leave guild.
@@ -610,12 +640,14 @@ abstract class GuildsApi {
   ///
   /// [guildId] - The ID of the guild.
   ///
+  /// [deleteMessages] - Also delete every message the caller has authored in the guild before leaving.
+  ///
   /// [body] - Name not received - field will be skipped.
   @DELETE('/users/@me/guilds/{guild_id}')
   Future<void> leaveGuild({
     @Path('guild_id') required SnowflakeType guildId,
-    @Body() required SudoVerificationSchema body,
-    @Query('delete_messages') String? deleteMessages,
+    @Body() SudoVerificationSchema? body,
+    @Query('delete_messages') String? deleteMessages = 'false',
   });
 
   /// Bulk delete my messages in guild.
@@ -628,6 +660,6 @@ abstract class GuildsApi {
   @POST('/users/@me/guilds/{guild_id}/messages/bulk-delete-mine')
   Future<void> bulkDeleteMyMessagesInGuild({
     @Path('guild_id') required SnowflakeType guildId,
-    @Body() required SudoVerificationSchema body,
+    @Body() SudoVerificationSchema? body,
   });
 }

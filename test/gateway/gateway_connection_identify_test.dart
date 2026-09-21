@@ -65,9 +65,13 @@ void main() {
     );
 
     final Map<String, dynamic> identify = inbound.firstWhere(
-      (Map<String, dynamic> payload) => payload['op'] == GatewayOpcodes.identify,
+      (Map<String, dynamic> payload) =>
+          payload['op'] == GatewayOpcodes.identify,
     );
-    expect((identify['d'] as Map<String, dynamic>)['initial_guild_id'], 'guild-99');
+    expect(
+      (identify['d'] as Map<String, dynamic>)['initial_guild_id'],
+      'guild-99',
+    );
     expect(phases, <String>['gateway.ws.open', 'gateway.identify']);
   });
 
@@ -119,7 +123,8 @@ void main() {
     );
 
     final Map<String, dynamic> identify = inbound.firstWhere(
-      (Map<String, dynamic> payload) => payload['op'] == GatewayOpcodes.identify,
+      (Map<String, dynamic> payload) =>
+          payload['op'] == GatewayOpcodes.identify,
     );
     expect(
       (identify['d'] as Map<String, dynamic>).containsKey('initial_guild_id'),

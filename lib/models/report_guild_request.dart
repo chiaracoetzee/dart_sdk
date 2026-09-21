@@ -4,31 +4,45 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'report_guild_request_category_category.dart';
+import 'guild_report_category.dart';
 import 'snowflake_type.dart';
 
 part 'report_guild_request.g.dart';
+
+const Object _omit = Object();
 
 @JsonSerializable()
 class ReportGuildRequest {
   const ReportGuildRequest({
     required this.guildId,
     required this.category,
-    this.inviteCode,
-  });
+    Object? inviteCode = _omit,
+  }) : inviteCode = identical(inviteCode, _omit) ? null : inviteCode as String?,
+       _inviteCodePresent = !identical(inviteCode, _omit);
+  factory ReportGuildRequest.fromJson(Map<String, Object?> json) {
+    final value = _$ReportGuildRequestFromJson(json);
+    return ReportGuildRequest(
+      guildId: value.guildId,
+      category: value.category,
+      inviteCode: json.containsKey('invite_code') ? value.inviteCode : _omit,
+    );
+  }
 
-  factory ReportGuildRequest.fromJson(Map<String, Object?> json) =>
-      _$ReportGuildRequestFromJson(json);
-
+  /// ID of the guild being reported
   @JsonKey(name: 'guild_id')
   final SnowflakeType guildId;
-
-  /// Category of the guild report
-  final ReportGuildRequestCategoryCategory category;
+  final GuildReportCategory category;
 
   /// Invite code proving access to the guild (required when not a member of a non-discoverable guild)
   @JsonKey(includeIfNull: false, name: 'invite_code')
   final String? inviteCode;
+  final bool _inviteCodePresent;
 
-  Map<String, Object?> toJson() => _$ReportGuildRequestToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$ReportGuildRequestToJson(this);
+    if (_inviteCodePresent) {
+      json.putIfAbsent('invite_code', () => inviteCode);
+    }
+    return json;
+  }
 }

@@ -49,7 +49,7 @@ class _GuildsApi implements GuildsApi {
   }
 
   @override
-  Future<GuildResponse> getGuild({required String guildId}) async {
+  Future<GuildResponse> getGuild({required SnowflakeType guildId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -77,14 +77,15 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<GuildResponse> updateGuild({
-    required String guildId,
-    required GuildUpdateRequest body,
+    required SnowflakeType guildId,
+    GuildUpdateRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<GuildResponse>(
       Options(method: 'PATCH', headers: _headers, extra: _extra)
           .compose(
@@ -108,19 +109,19 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<GuildAuditLogListResponse> listGuildAuditLogs({
-    required String guildId,
+    required SnowflakeType guildId,
     int? limit,
-    String? before,
-    String? after,
-    String? userId,
-    AuditLogActionType? actionType,
+    SnowflakeType? before,
+    SnowflakeType? after,
+    SnowflakeType? userId,
+    AuditLogActionTypeInput? actionType,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'limit': limit,
-      r'before': before,
-      r'after': after,
-      r'user_id': userId,
+      r'before': before?.toJson(),
+      r'after': after?.toJson(),
+      r'user_id': userId?.toJson(),
       r'action_type': actionType?.toJson(),
     };
     queryParameters.removeWhere((k, v) => v == null);
@@ -149,7 +150,7 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<List<GuildBanResponse>> listGuildBans({
-    required String guildId,
+    required SnowflakeType guildId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -182,15 +183,16 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<void> banGuildMember({
-    required String guildId,
-    required String userId,
-    required GuildBanCreateRequest body,
+    required SnowflakeType guildId,
+    required SnowflakeType userId,
+    GuildBanCreateRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<void>(
       Options(method: 'PUT', headers: _headers, extra: _extra)
           .compose(
@@ -206,8 +208,8 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<void> unbanGuildMember({
-    required String guildId,
-    required String userId,
+    required SnowflakeType guildId,
+    required SnowflakeType userId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -228,7 +230,7 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<List<ChannelResponse>> listGuildChannels({
-    required String guildId,
+    required SnowflakeType guildId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -261,7 +263,7 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<ChannelResponse> createGuildChannel({
-    required String guildId,
+    required SnowflakeType guildId,
     required ChannelCreateRequest body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -292,7 +294,7 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<void> updateGuildChannelPositions({
-    required String guildId,
+    required SnowflakeType guildId,
     required List<ChannelPositionUpdateRequestItem> body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -314,14 +316,15 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<void> deleteGuild({
-    required String guildId,
-    required GuildDeleteRequest body,
+    required SnowflakeType guildId,
+    GuildDeleteRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<void>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -337,7 +340,7 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<GuildEmojiResponse> createGuildEmoji({
-    required String guildId,
+    required SnowflakeType guildId,
     required GuildEmojiCreateRequest body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -368,7 +371,7 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<List<GuildEmojiWithUserResponse>> listGuildEmojis({
-    required String guildId,
+    required SnowflakeType guildId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -402,7 +405,7 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<GuildEmojiBulkCreateResponse> bulkCreateGuildEmojis({
-    required String guildId,
+    required SnowflakeType guildId,
     required GuildEmojiBulkCreateRequest body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -433,7 +436,7 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<GuildEmojiResponse> cloneGuildEmoji({
-    required String guildId,
+    required SnowflakeType guildId,
     required GuildEmojiCloneRequest body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -464,8 +467,8 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<GuildEmojiResponse> updateGuildEmoji({
-    required String guildId,
-    required String emojiId,
+    required SnowflakeType guildId,
+    required SnowflakeType emojiId,
     required GuildEmojiUpdateRequest body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -496,9 +499,9 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<void> deleteGuildEmoji({
-    required String guildId,
-    required String emojiId,
-    String? purge,
+    required SnowflakeType guildId,
+    required SnowflakeType emojiId,
+    String? purge = 'false',
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'purge': purge};
@@ -520,12 +523,15 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<List<GuildMemberResponse>> listGuildMembers({
-    required String guildId,
-    int? limit,
-    String? after,
+    required SnowflakeType guildId,
+    SnowflakeType? after,
+    int? limit = 1,
   }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'limit': limit, r'after': after};
+    final queryParameters = <String, dynamic>{
+      r'after': after?.toJson(),
+      r'limit': limit,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
@@ -557,14 +563,15 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<GuildMemberSearchResponse> searchGuildMembers({
-    required String guildId,
-    required GuildMemberSearchRequest body,
+    required SnowflakeType guildId,
+    GuildMemberSearchRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<GuildMemberSearchResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
@@ -588,7 +595,7 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<GuildMemberResponse> getCurrentGuildMember({
-    required String guildId,
+    required SnowflakeType guildId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -617,14 +624,15 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<GuildMemberResponse> updateCurrentGuildMember({
-    required String guildId,
-    required MyGuildMemberUpdateRequest body,
+    required SnowflakeType guildId,
+    MyGuildMemberUpdateRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<GuildMemberResponse>(
       Options(method: 'PATCH', headers: _headers, extra: _extra)
           .compose(
@@ -648,8 +656,8 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<GuildMemberResponse> getGuildMember({
-    required String guildId,
-    required String userId,
+    required SnowflakeType guildId,
+    required SnowflakeType userId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -678,15 +686,16 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<GuildMemberResponse> updateGuildMember({
-    required String guildId,
-    required String userId,
-    required GuildMemberUpdateRequest body,
+    required SnowflakeType guildId,
+    required SnowflakeType userId,
+    GuildMemberUpdateRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<GuildMemberResponse>(
       Options(method: 'PATCH', headers: _headers, extra: _extra)
           .compose(
@@ -710,8 +719,8 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<void> removeGuildMember({
-    required String guildId,
-    required String userId,
+    required SnowflakeType guildId,
+    required SnowflakeType userId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -732,9 +741,9 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<void> addGuildMemberRole({
-    required String guildId,
-    required String userId,
-    required String roleId,
+    required SnowflakeType guildId,
+    required SnowflakeType roleId,
+    required SnowflakeType userId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -755,9 +764,9 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<void> removeGuildMemberRole({
-    required String guildId,
-    required String userId,
-    required String roleId,
+    required SnowflakeType guildId,
+    required SnowflakeType roleId,
+    required SnowflakeType userId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -778,7 +787,7 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<List<GuildRoleResponse>> listGuildRoles({
-    required String guildId,
+    required SnowflakeType guildId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -812,7 +821,7 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<GuildRoleResponse> createGuildRole({
-    required String guildId,
+    required SnowflakeType guildId,
     required GuildRoleCreateRequest body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -843,7 +852,7 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<void> updateGuildRolePositions({
-    required String guildId,
+    required SnowflakeType guildId,
     required List<GuildRolePositionsRequestItem> body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -865,7 +874,7 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<void> updateRoleHoistPositions({
-    required String guildId,
+    required SnowflakeType guildId,
     required List<GuildRoleHoistPositionsRequestItem> body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -886,7 +895,7 @@ class _GuildsApi implements GuildsApi {
   }
 
   @override
-  Future<void> resetRoleHoistPositions({required String guildId}) async {
+  Future<void> resetRoleHoistPositions({required SnowflakeType guildId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -906,15 +915,16 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<GuildRoleResponse> updateGuildRole({
-    required String guildId,
-    required String roleId,
-    required GuildRoleUpdateRequest body,
+    required SnowflakeType guildId,
+    required SnowflakeType roleId,
+    GuildRoleUpdateRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<GuildRoleResponse>(
       Options(method: 'PATCH', headers: _headers, extra: _extra)
           .compose(
@@ -938,8 +948,8 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<void> deleteGuildRole({
-    required String guildId,
-    required String roleId,
+    required SnowflakeType guildId,
+    required SnowflakeType roleId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -960,7 +970,7 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<GuildStickerResponse> createGuildSticker({
-    required String guildId,
+    required SnowflakeType guildId,
     required GuildStickerCreateRequest body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -991,7 +1001,7 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<List<GuildStickerWithUserResponse>> listGuildStickers({
-    required String guildId,
+    required SnowflakeType guildId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1026,7 +1036,7 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<GuildStickerBulkCreateResponse> bulkCreateGuildStickers({
-    required String guildId,
+    required SnowflakeType guildId,
     required GuildStickerBulkCreateRequest body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -1057,7 +1067,7 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<GuildStickerResponse> cloneGuildSticker({
-    required String guildId,
+    required SnowflakeType guildId,
     required GuildStickerCloneRequest body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -1088,8 +1098,8 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<GuildStickerResponse> updateGuildSticker({
-    required String guildId,
-    required String stickerId,
+    required SnowflakeType guildId,
+    required SnowflakeType stickerId,
     required GuildStickerUpdateRequest body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -1120,9 +1130,9 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<void> deleteGuildSticker({
-    required String guildId,
-    required String stickerId,
-    String? purge,
+    required SnowflakeType guildId,
+    required SnowflakeType stickerId,
+    String? purge = 'false',
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'purge': purge};
@@ -1144,8 +1154,8 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<GuildResponse> transferGuildOwnership({
-    required String guildId,
-    required GuildTransferOwnershipRequest body,
+    required SnowflakeType guildId,
+    required GuildTransferOwnershipWithVerificationRequest body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1175,7 +1185,7 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<GuildVanityUrlResponse> getGuildVanityUrl({
-    required String guildId,
+    required SnowflakeType guildId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -1204,14 +1214,15 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<GuildVanityUrlUpdateResponse> updateGuildVanityUrl({
-    required String guildId,
-    required GuildVanityUrlUpdateRequest body,
+    required SnowflakeType guildId,
+    GuildVanityUrlUpdateRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<GuildVanityUrlUpdateResponse>(
       Options(method: 'PATCH', headers: _headers, extra: _extra)
           .compose(
@@ -1235,17 +1246,17 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<List<GuildResponse>> listGuilds({
-    String? before,
-    String? after,
-    int? limit,
-    String? withCounts,
+    int? limit = 200,
+    String? withCounts = 'false',
+    SnowflakeType? before,
+    SnowflakeType? after,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'before': before,
-      r'after': after,
       r'limit': limit,
       r'with_counts': withCounts,
+      r'before': before?.toJson(),
+      r'after': after?.toJson(),
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
@@ -1275,9 +1286,9 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<void> leaveGuild({
-    required String guildId,
-    required SudoVerificationSchema body,
-    String? deleteMessages,
+    required SnowflakeType guildId,
+    SudoVerificationSchema? body,
+    String? deleteMessages = 'false',
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -1286,7 +1297,7 @@ class _GuildsApi implements GuildsApi {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<void>(
       Options(method: 'DELETE', headers: _headers, extra: _extra)
           .compose(
@@ -1302,14 +1313,15 @@ class _GuildsApi implements GuildsApi {
 
   @override
   Future<void> bulkDeleteMyMessagesInGuild({
-    required String guildId,
-    required SudoVerificationSchema body,
+    required SnowflakeType guildId,
+    SudoVerificationSchema? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
+    _data.addAll(body?.toJson() ?? <String, dynamic>{});
     final _options = _setStreamType<void>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(

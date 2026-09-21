@@ -8,17 +8,28 @@ import 'well_known_fluxer_response_limits_rules_filters.dart';
 
 part 'well_known_fluxer_response_limits_rules.g.dart';
 
+const Object _omit = Object();
+
 @JsonSerializable()
 class WellKnownFluxerResponseLimitsRules {
   const WellKnownFluxerResponseLimitsRules({
     required this.id,
     required this.overrides,
-    this.filters,
-  });
-
+    Object? filters = _omit,
+  }) : filters = identical(filters, _omit)
+           ? null
+           : filters as WellKnownFluxerResponseLimitsRulesFilters?,
+       _filtersPresent = !identical(filters, _omit);
   factory WellKnownFluxerResponseLimitsRules.fromJson(
     Map<String, Object?> json,
-  ) => _$WellKnownFluxerResponseLimitsRulesFromJson(json);
+  ) {
+    final value = _$WellKnownFluxerResponseLimitsRulesFromJson(json);
+    return WellKnownFluxerResponseLimitsRules(
+      id: value.id,
+      overrides: value.overrides,
+      filters: json.containsKey('filters') ? value.filters : _omit,
+    );
+  }
 
   /// Unique identifier for this limit rule
   final String id;
@@ -29,7 +40,13 @@ class WellKnownFluxerResponseLimitsRules {
 
   /// Map of limit keys to their override values (differences from defaults)
   final Map<String, num> overrides;
+  final bool _filtersPresent;
 
-  Map<String, Object?> toJson() =>
-      _$WellKnownFluxerResponseLimitsRulesToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$WellKnownFluxerResponseLimitsRulesToJson(this);
+    if (_filtersPresent) {
+      json.putIfAbsent('filters', () => filters);
+    }
+    return json;
+  }
 }
