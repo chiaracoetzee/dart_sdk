@@ -12,7 +12,7 @@ TemplateChannel _$TemplateChannelFromJson(Map<String, dynamic> json) =>
       json,
       ($checkedConvert) {
         final val = TemplateChannel(
-          id: $checkedConvert('id', (v) => v),
+          id: $checkedConvert('id', (v) => v as String),
           type: $checkedConvert('type', (v) => v as num),
           position: $checkedConvert('position', (v) => v as num),
           name: $checkedConvert('name', (v) => v ?? _omit),

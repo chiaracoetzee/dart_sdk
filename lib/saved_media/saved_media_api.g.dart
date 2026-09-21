@@ -22,8 +22,8 @@ class _SavedMediaApi implements SavedMediaApi {
 
   @override
   Future<FavoriteMemeResponse> createMemeFromMessage({
-    required SnowflakeType channelId,
-    required SnowflakeType messageId,
+    required String channelId,
+    required String messageId,
     required CreateFavoriteMemeBodySchema body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -145,9 +145,7 @@ class _SavedMediaApi implements SavedMediaApi {
   }
 
   @override
-  Future<FavoriteMemeResponse> getFavoriteMeme({
-    required SnowflakeType memeId,
-  }) async {
+  Future<FavoriteMemeResponse> getFavoriteMeme({required String memeId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -175,7 +173,7 @@ class _SavedMediaApi implements SavedMediaApi {
 
   @override
   Future<FavoriteMemeResponse> updateFavoriteMeme({
-    required SnowflakeType memeId,
+    required String memeId,
     UpdateFavoriteMemeBodySchema? body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -206,7 +204,7 @@ class _SavedMediaApi implements SavedMediaApi {
   }
 
   @override
-  Future<void> deleteFavoriteMeme({required SnowflakeType memeId}) async {
+  Future<void> deleteFavoriteMeme({required String memeId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

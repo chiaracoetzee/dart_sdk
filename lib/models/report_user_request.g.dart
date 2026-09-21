@@ -9,10 +9,7 @@ part of 'report_user_request.dart';
 ReportUserRequest _$ReportUserRequestFromJson(Map<String, dynamic> json) =>
     $checkedCreate('ReportUserRequest', json, ($checkedConvert) {
       final val = ReportUserRequest(
-        userId: $checkedConvert(
-          'user_id',
-          (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
-        ),
+        userId: $checkedConvert('user_id', (v) => v as String),
         category: $checkedConvert(
           'category',
           (v) => UserReportCategory.fromJson(v as String),

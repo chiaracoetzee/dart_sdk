@@ -21,9 +21,7 @@ class _UsersApi implements UsersApi {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<String> downloadDataHarvestArchive({
-    required SnowflakeType harvestId,
-  }) async {
+  Future<String> downloadDataHarvestArchive({required String harvestId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -225,9 +223,7 @@ class _UsersApi implements UsersApi {
   }
 
   @override
-  Future<void> pinDirectMessageChannel({
-    required SnowflakeType channelId,
-  }) async {
+  Future<void> pinDirectMessageChannel({required String channelId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -246,9 +242,7 @@ class _UsersApi implements UsersApi {
   }
 
   @override
-  Future<void> unpinDirectMessageChannel({
-    required SnowflakeType channelId,
-  }) async {
+  Future<void> unpinDirectMessageChannel({required String channelId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -666,7 +660,7 @@ class _UsersApi implements UsersApi {
 
   @override
   Future<EntranceSoundResponse> renameEntranceSound({
-    required SnowflakeType soundId,
+    required String soundId,
     required EntranceSoundRenameRequest body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -696,7 +690,7 @@ class _UsersApi implements UsersApi {
   }
 
   @override
-  Future<void> deleteEntranceSound({required SnowflakeType soundId}) async {
+  Future<void> deleteEntranceSound({required String soundId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -779,7 +773,7 @@ class _UsersApi implements UsersApi {
 
   @override
   Future<UserGuildSettingsResponse> updateGuildSettingsForUser({
-    required SnowflakeType guildId,
+    required String guildId,
     UserGuildSettingsUpdateRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -896,7 +890,7 @@ class _UsersApi implements UsersApi {
 
   @override
   Future<HarvestStatusResponseSchema> getDataHarvestStatus({
-    required SnowflakeType harvestId,
+    required String harvestId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -925,7 +919,7 @@ class _UsersApi implements UsersApi {
 
   @override
   Future<HarvestDownloadUrlResponse> getDataHarvestDownloadUrl({
-    required SnowflakeType harvestId,
+    required String harvestId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -954,7 +948,7 @@ class _UsersApi implements UsersApi {
 
   @override
   Future<List<MessageResponseSchema>> listMentionsForCurrentUser({
-    SnowflakeType? before,
+    String? before,
     String? limit = '25',
     String? roles = 'false',
     String? everyone = 'false',
@@ -962,7 +956,7 @@ class _UsersApi implements UsersApi {
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'before': before?.toJson(),
+      r'before': before,
       r'limit': limit,
       r'roles': roles,
       r'everyone': everyone,
@@ -1018,7 +1012,7 @@ class _UsersApi implements UsersApi {
   }
 
   @override
-  Future<void> deleteMention({required SnowflakeType messageId}) async {
+  Future<void> deleteMention({required String messageId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -1608,9 +1602,7 @@ class _UsersApi implements UsersApi {
   }
 
   @override
-  Future<UserNoteResponse> getNoteOnUser({
-    required SnowflakeType targetId,
-  }) async {
+  Future<UserNoteResponse> getNoteOnUser({required String targetId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -1638,7 +1630,7 @@ class _UsersApi implements UsersApi {
 
   @override
   Future<void> setNoteOnUser({
-    required SnowflakeType targetId,
+    required String targetId,
     UserNoteUpdateRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -2125,7 +2117,7 @@ class _UsersApi implements UsersApi {
 
   @override
   Future<RelationshipResponse> sendFriendRequest({
-    required SnowflakeType userId,
+    required String userId,
     FriendRequestCreateRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -2157,7 +2149,7 @@ class _UsersApi implements UsersApi {
 
   @override
   Future<RelationshipResponse> acceptOrUpdateFriendRequest({
-    required SnowflakeType userId,
+    required String userId,
     RelationshipTypePutRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -2188,7 +2180,7 @@ class _UsersApi implements UsersApi {
   }
 
   @override
-  Future<void> removeRelationship({required SnowflakeType userId}) async {
+  Future<void> removeRelationship({required String userId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -2208,7 +2200,7 @@ class _UsersApi implements UsersApi {
 
   @override
   Future<RelationshipResponse> updateRelationshipNickname({
-    required SnowflakeType userId,
+    required String userId,
     required RelationshipNicknameUpdateRequest body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -2297,12 +2289,12 @@ class _UsersApi implements UsersApi {
 
   @override
   Future<List<SavedMessageEntryResponse>> listSavedMessages({
-    SnowflakeType? before,
+    String? before,
     String? limit = '25',
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'before': before?.toJson(),
+      r'before': before,
       r'limit': limit,
     };
     queryParameters.removeWhere((k, v) => v == null);
@@ -2355,7 +2347,7 @@ class _UsersApi implements UsersApi {
   }
 
   @override
-  Future<void> unsaveMessage({required SnowflakeType messageId}) async {
+  Future<void> unsaveMessage({required String messageId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -2550,12 +2542,12 @@ class _UsersApi implements UsersApi {
   @override
   Future<UserTagCheckResponse> checkUsernameTagAvailability({
     required String username,
-    required dynamic discriminator,
+    required String discriminator,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'username': username,
-      r'discriminator': discriminator.toJson(),
+      r'discriminator': discriminator,
     };
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
@@ -2582,16 +2574,16 @@ class _UsersApi implements UsersApi {
 
   @override
   Future<UserProfileFullResponse> getUserProfile({
-    required SnowflakeType targetId,
+    required String targetId,
     String? withMutualFriends = 'false',
     String? withMutualGuilds = 'false',
-    SnowflakeType? guildId,
+    String? guildId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'with_mutual_friends': withMutualFriends,
       r'with_mutual_guilds': withMutualGuilds,
-      r'guild_id': guildId?.toJson(),
+      r'guild_id': guildId,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
@@ -2618,9 +2610,7 @@ class _UsersApi implements UsersApi {
   }
 
   @override
-  Future<UserPartialResponse> getUserById({
-    required SnowflakeType userId,
-  }) async {
+  Future<UserPartialResponse> getUserById({required String userId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

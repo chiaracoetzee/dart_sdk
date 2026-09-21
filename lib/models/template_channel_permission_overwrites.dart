@@ -20,16 +20,16 @@ class TemplateChannelPermissionOverwrites {
   ) => _$TemplateChannelPermissionOverwritesFromJson(json);
 
   /// The ID of the role or user for this overwrite
-  final dynamic id;
+  final String id;
 
   /// The type of overwrite (0/role = role, 1/member = member)
-  final dynamic type;
+  final String type;
 
   /// The allowed permissions bitfield as a string
-  final dynamic allow;
+  final String allow;
 
   /// The denied permissions bitfield as a string
-  final dynamic deny;
+  final String deny;
 
   Map<String, Object?> toJson() =>
       _$TemplateChannelPermissionOverwritesToJson(this);

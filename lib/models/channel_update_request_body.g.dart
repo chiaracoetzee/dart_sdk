@@ -15,12 +15,7 @@ ChannelUpdateRequestBodyVariant1 _$ChannelUpdateRequestBodyVariant1FromJson(
     final val = ChannelUpdateRequestBodyVariant1(
       topic: $checkedConvert('topic', (v) => v as String?),
       url: $checkedConvert('url', (v) => v as String?),
-      parentId: $checkedConvert(
-        'parent_id',
-        (v) => v == null
-            ? null
-            : SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
+      parentId: $checkedConvert('parent_id', (v) => v as String?),
       bitrate: $checkedConvert('bitrate', (v) => (v as num?)?.toInt()),
       userLimit: $checkedConvert('user_limit', (v) => (v as num?)?.toInt()),
       voiceConnectionLimit: $checkedConvert(
@@ -55,12 +50,7 @@ ChannelUpdateRequestBodyVariant1 _$ChannelUpdateRequestBodyVariant1FromJson(
         (v) => v as String?,
       ),
       icon: $checkedConvert('icon', (v) => v as String?),
-      ownerId: $checkedConvert(
-        'owner_id',
-        (v) => v == null
-            ? null
-            : SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
+      ownerId: $checkedConvert('owner_id', (v) => v as String?),
       nicks: $checkedConvert(
         'nicks',
         (v) => (v as Map<String, dynamic>?)?.map(
@@ -117,12 +107,7 @@ ChannelUpdateRequestBodyVariant2 _$ChannelUpdateRequestBodyVariant2FromJson(
     final val = ChannelUpdateRequestBodyVariant2(
       topic: $checkedConvert('topic', (v) => v as String?),
       url: $checkedConvert('url', (v) => v as String?),
-      parentId: $checkedConvert(
-        'parent_id',
-        (v) => v == null
-            ? null
-            : SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
+      parentId: $checkedConvert('parent_id', (v) => v as String?),
       bitrate: $checkedConvert('bitrate', (v) => (v as num?)?.toInt()),
       userLimit: $checkedConvert('user_limit', (v) => (v as num?)?.toInt()),
       voiceConnectionLimit: $checkedConvert(
@@ -157,12 +142,7 @@ ChannelUpdateRequestBodyVariant2 _$ChannelUpdateRequestBodyVariant2FromJson(
         (v) => v as String?,
       ),
       icon: $checkedConvert('icon', (v) => v as String?),
-      ownerId: $checkedConvert(
-        'owner_id',
-        (v) => v == null
-            ? null
-            : SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
+      ownerId: $checkedConvert('owner_id', (v) => v as String?),
       nicks: $checkedConvert(
         'nicks',
         (v) => (v as Map<String, dynamic>?)?.map(
@@ -219,12 +199,7 @@ ChannelUpdateRequestBodyVariant3 _$ChannelUpdateRequestBodyVariant3FromJson(
     final val = ChannelUpdateRequestBodyVariant3(
       topic: $checkedConvert('topic', (v) => v as String?),
       url: $checkedConvert('url', (v) => v as String?),
-      parentId: $checkedConvert(
-        'parent_id',
-        (v) => v == null
-            ? null
-            : SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
+      parentId: $checkedConvert('parent_id', (v) => v as String?),
       bitrate: $checkedConvert('bitrate', (v) => (v as num?)?.toInt()),
       userLimit: $checkedConvert('user_limit', (v) => (v as num?)?.toInt()),
       voiceConnectionLimit: $checkedConvert(
@@ -259,12 +234,7 @@ ChannelUpdateRequestBodyVariant3 _$ChannelUpdateRequestBodyVariant3FromJson(
         (v) => v as String?,
       ),
       icon: $checkedConvert('icon', (v) => v as String?),
-      ownerId: $checkedConvert(
-        'owner_id',
-        (v) => v == null
-            ? null
-            : SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
+      ownerId: $checkedConvert('owner_id', (v) => v as String?),
       nicks: $checkedConvert(
         'nicks',
         (v) => (v as Map<String, dynamic>?)?.map(
@@ -321,12 +291,7 @@ ChannelUpdateRequestBodyVariant4 _$ChannelUpdateRequestBodyVariant4FromJson(
     final val = ChannelUpdateRequestBodyVariant4(
       topic: $checkedConvert('topic', (v) => v as String?),
       url: $checkedConvert('url', (v) => v as String?),
-      parentId: $checkedConvert(
-        'parent_id',
-        (v) => v == null
-            ? null
-            : SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
+      parentId: $checkedConvert('parent_id', (v) => v as String?),
       bitrate: $checkedConvert('bitrate', (v) => (v as num?)?.toInt()),
       userLimit: $checkedConvert('user_limit', (v) => (v as num?)?.toInt()),
       voiceConnectionLimit: $checkedConvert(
@@ -361,12 +326,7 @@ ChannelUpdateRequestBodyVariant4 _$ChannelUpdateRequestBodyVariant4FromJson(
         (v) => v as String?,
       ),
       icon: $checkedConvert('icon', (v) => v as String?),
-      ownerId: $checkedConvert(
-        'owner_id',
-        (v) => v == null
-            ? null
-            : SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
+      ownerId: $checkedConvert('owner_id', (v) => v as String?),
       nicks: $checkedConvert(
         'nicks',
         (v) => (v as Map<String, dynamic>?)?.map(
@@ -416,26 +376,21 @@ Map<String, dynamic> _$ChannelUpdateRequestBodyVariant4ToJson(
 
 ChannelUpdateRequestBodyVariant5 _$ChannelUpdateRequestBodyVariant5FromJson(
   Map<String, dynamic> json,
-) => $checkedCreate('ChannelUpdateRequestBodyVariant5', json, (
-  $checkedConvert,
-) {
-  final val = ChannelUpdateRequestBodyVariant5(
-    name: $checkedConvert('name', (v) => v as String?),
-    icon: $checkedConvert('icon', (v) => v as String?),
-    ownerId: $checkedConvert(
-      'owner_id',
-      (v) =>
-          v == null ? null : SnowflakeType.fromJson(v as Map<String, dynamic>),
-    ),
-    nicks: $checkedConvert(
-      'nicks',
-      (v) => (v as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, e as String?),
-      ),
-    ),
-  );
-  return val;
-}, fieldKeyMap: const {'ownerId': 'owner_id'});
+) =>
+    $checkedCreate('ChannelUpdateRequestBodyVariant5', json, ($checkedConvert) {
+      final val = ChannelUpdateRequestBodyVariant5(
+        name: $checkedConvert('name', (v) => v as String?),
+        icon: $checkedConvert('icon', (v) => v as String?),
+        ownerId: $checkedConvert('owner_id', (v) => v as String?),
+        nicks: $checkedConvert(
+          'nicks',
+          (v) => (v as Map<String, dynamic>?)?.map(
+            (k, e) => MapEntry(k, e as String?),
+          ),
+        ),
+      );
+      return val;
+    }, fieldKeyMap: const {'ownerId': 'owner_id'});
 
 Map<String, dynamic> _$ChannelUpdateRequestBodyVariant5ToJson(
   ChannelUpdateRequestBodyVariant5 instance,

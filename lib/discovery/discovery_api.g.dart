@@ -97,7 +97,7 @@ class _DiscoveryApi implements DiscoveryApi {
   }
 
   @override
-  Future<void> joinDiscoveryGuild({required SnowflakeType guildId}) async {
+  Future<void> joinDiscoveryGuild({required String guildId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -117,7 +117,7 @@ class _DiscoveryApi implements DiscoveryApi {
 
   @override
   Future<DiscoveryApplicationResponse> applyForDiscovery({
-    required SnowflakeType guildId,
+    required String guildId,
     required DiscoveryApplicationRequest body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -148,7 +148,7 @@ class _DiscoveryApi implements DiscoveryApi {
 
   @override
   Future<DiscoveryApplicationResponse> editDiscoveryApplication({
-    required SnowflakeType guildId,
+    required String guildId,
     DiscoveryApplicationPatchRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -179,9 +179,7 @@ class _DiscoveryApi implements DiscoveryApi {
   }
 
   @override
-  Future<void> withdrawDiscoveryApplication({
-    required SnowflakeType guildId,
-  }) async {
+  Future<void> withdrawDiscoveryApplication({required String guildId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -201,7 +199,7 @@ class _DiscoveryApi implements DiscoveryApi {
 
   @override
   Future<DiscoveryStatusResponse> getDiscoveryStatus({
-    required SnowflakeType guildId,
+    required String guildId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

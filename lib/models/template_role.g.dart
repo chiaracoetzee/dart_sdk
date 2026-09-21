@@ -12,7 +12,7 @@ TemplateRole _$TemplateRoleFromJson(Map<String, dynamic> json) =>
       json,
       ($checkedConvert) {
         final val = TemplateRole(
-          id: $checkedConvert('id', (v) => v),
+          id: $checkedConvert('id', (v) => v as String),
           name: $checkedConvert('name', (v) => v ?? _omit),
           permissions: $checkedConvert('permissions', (v) => v ?? _omit),
           permissionsNew: $checkedConvert('permissions_new', (v) => v ?? _omit),

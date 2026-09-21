@@ -19,7 +19,7 @@ class CustomStatusPayload {
     Object? emojiName = _omit,
   }) : text = identical(text, _omit) ? null : text as String?,
        _textPresent = !identical(text, _omit),
-       expiresAt = identical(expiresAt, _omit) ? null : expiresAt,
+       expiresAt = identical(expiresAt, _omit) ? null : expiresAt as String?,
        _expiresAtPresent = !identical(expiresAt, _omit),
        emojiId = identical(emojiId, _omit) ? null : emojiId as SnowflakeType?,
        _emojiIdPresent = !identical(emojiId, _omit),
@@ -41,7 +41,7 @@ class CustomStatusPayload {
 
   /// When the custom status expires
   @JsonKey(includeIfNull: false, name: 'expires_at')
-  final dynamic expiresAt;
+  final String? expiresAt;
 
   /// ID of custom emoji to display
   @JsonKey(includeIfNull: false, name: 'emoji_id')

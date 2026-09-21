@@ -29,7 +29,7 @@ class TemplateChannel {
        _namePresent = !identical(name, _omit),
        topic = identical(topic, _omit) ? null : topic as String?,
        _topicPresent = !identical(topic, _omit),
-       parentId = identical(parentId, _omit) ? null : parentId,
+       parentId = identical(parentId, _omit) ? null : parentId as String?,
        _parentIdPresent = !identical(parentId, _omit),
        bitrate = identical(bitrate, _omit) ? null : bitrate as num?,
        _bitratePresent = !identical(bitrate, _omit),
@@ -74,7 +74,7 @@ class TemplateChannel {
   }
 
   /// The template-local channel ID
-  final dynamic id;
+  final String id;
 
   /// The channel type (0 = text, 2 = voice, 4 = category)
   final num type;
@@ -92,7 +92,7 @@ class TemplateChannel {
 
   /// The template-local numeric identifier
   @JsonKey(includeIfNull: false, name: 'parent_id')
-  final dynamic parentId;
+  final String? parentId;
 
   /// The bitrate for voice channels
   @JsonKey(includeIfNull: false)

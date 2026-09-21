@@ -13,10 +13,7 @@ MessageReferenceRequest _$MessageReferenceRequestFromJson(
   json,
   ($checkedConvert) {
     final val = MessageReferenceRequest(
-      messageId: $checkedConvert(
-        'message_id',
-        (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
+      messageId: $checkedConvert('message_id', (v) => v as String),
       channelId: $checkedConvert('channel_id', (v) => v ?? _omit),
       guildId: $checkedConvert('guild_id', (v) => v ?? _omit),
       type: $checkedConvert('type', (v) => v ?? _omit),

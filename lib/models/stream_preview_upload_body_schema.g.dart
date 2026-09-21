@@ -13,10 +13,7 @@ StreamPreviewUploadBodySchema _$StreamPreviewUploadBodySchemaFromJson(
   json,
   ($checkedConvert) {
     final val = StreamPreviewUploadBodySchema(
-      channelId: $checkedConvert(
-        'channel_id',
-        (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
+      channelId: $checkedConvert('channel_id', (v) => v as String),
       thumbnail: $checkedConvert('thumbnail', (v) => v as String),
       contentType: $checkedConvert('content_type', (v) => v ?? _omit),
     );

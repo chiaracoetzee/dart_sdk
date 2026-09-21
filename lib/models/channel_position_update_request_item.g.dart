@@ -13,10 +13,7 @@ ChannelPositionUpdateRequestItem _$ChannelPositionUpdateRequestItemFromJson(
   json,
   ($checkedConvert) {
     final val = ChannelPositionUpdateRequestItem(
-      id: $checkedConvert(
-        'id',
-        (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
+      id: $checkedConvert('id', (v) => v as String),
       position: $checkedConvert('position', (v) => v ?? _omit),
       parentId: $checkedConvert('parent_id', (v) => v ?? _omit),
       precedingSiblingId: $checkedConvert(

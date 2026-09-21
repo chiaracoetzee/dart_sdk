@@ -14,9 +14,7 @@ _$OAuth2AuthorizationsBulkRevokeRequestFromJson(Map<String, dynamic> json) =>
       final val = OAuth2AuthorizationsBulkRevokeRequest(
         applicationIds: $checkedConvert(
           'application_ids',
-          (v) => (v as List<dynamic>)
-              .map((e) => SnowflakeType.fromJson(e as Map<String, dynamic>))
-              .toList(),
+          (v) => (v as List<dynamic>).map((e) => e as String).toList(),
         ),
       );
       return val;

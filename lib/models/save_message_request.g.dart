@@ -12,14 +12,8 @@ SaveMessageRequest _$SaveMessageRequestFromJson(Map<String, dynamic> json) =>
       json,
       ($checkedConvert) {
         final val = SaveMessageRequest(
-          channelId: $checkedConvert(
-            'channel_id',
-            (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
-          ),
-          messageId: $checkedConvert(
-            'message_id',
-            (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
-          ),
+          channelId: $checkedConvert('channel_id', (v) => v as String),
+          messageId: $checkedConvert('message_id', (v) => v as String),
         );
         return val;
       },

@@ -13,14 +13,8 @@ ReadStateAckRequestReadStates _$ReadStateAckRequestReadStatesFromJson(
   json,
   ($checkedConvert) {
     final val = ReadStateAckRequestReadStates(
-      channelId: $checkedConvert(
-        'channel_id',
-        (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
-      messageId: $checkedConvert(
-        'message_id',
-        (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
+      channelId: $checkedConvert('channel_id', (v) => v as String),
+      messageId: $checkedConvert('message_id', (v) => v as String),
       mentionCount: $checkedConvert('mention_count', (v) => v ?? _omit),
       manual: $checkedConvert('manual', (v) => v ?? _omit),
     );

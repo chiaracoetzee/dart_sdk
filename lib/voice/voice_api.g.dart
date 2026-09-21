@@ -22,7 +22,7 @@ class _VoiceApi implements VoiceApi {
 
   @override
   Future<void> playEntranceSound({
-    required SnowflakeType channelId,
+    required String channelId,
     required EntranceSoundPlayRequest body,
   }) async {
     final _extra = <String, dynamic>{};

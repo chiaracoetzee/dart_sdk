@@ -33,7 +33,7 @@ class RichEmbedRequest {
        _titlePresent = !identical(title, _omit),
        color = identical(color, _omit) ? null : color as ColorType?,
        _colorPresent = !identical(color, _omit),
-       timestamp = identical(timestamp, _omit) ? null : timestamp,
+       timestamp = identical(timestamp, _omit) ? null : timestamp as String?,
        _timestampPresent = !identical(timestamp, _omit),
        description = identical(description, _omit)
            ? null
@@ -87,7 +87,7 @@ class RichEmbedRequest {
 
   /// ISO8601 timestamp for the embed
   @JsonKey(includeIfNull: false)
-  final dynamic timestamp;
+  final String? timestamp;
 
   /// Description of the embed (1-4096 characters)
   @JsonKey(includeIfNull: false)

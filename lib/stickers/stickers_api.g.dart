@@ -22,7 +22,7 @@ class _StickersApi implements StickersApi {
 
   @override
   Future<GuildStickerMetadataResponse> getStickerMetadata({
-    required SnowflakeType stickerId,
+    required String stickerId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -51,7 +51,7 @@ class _StickersApi implements StickersApi {
 
   @override
   Future<GuildExpressionSourceGuildResponse> getStickerSource({
-    required SnowflakeType stickerId,
+    required String stickerId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

@@ -14,10 +14,7 @@ _$ChannelUpdateRequestBodyVariant4PermissionOverwritesFromJson(
   json,
   ($checkedConvert) {
     final val = ChannelUpdateRequestBodyVariant4PermissionOverwrites(
-      id: $checkedConvert(
-        'id',
-        (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
+      id: $checkedConvert('id', (v) => v as String),
       type: $checkedConvert(
         'type',
         (v) =>

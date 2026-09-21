@@ -13,7 +13,7 @@ class ChannelOverridesMuteConfig {
   const ChannelOverridesMuteConfig({
     required this.selectedTimeWindow,
     Object? endTime = _omit,
-  }) : endTime = identical(endTime, _omit) ? null : endTime,
+  }) : endTime = identical(endTime, _omit) ? null : endTime as String?,
        _endTimePresent = !identical(endTime, _omit);
   factory ChannelOverridesMuteConfig.fromJson(Map<String, Object?> json) {
     final value = _$ChannelOverridesMuteConfigFromJson(json);
@@ -25,7 +25,7 @@ class ChannelOverridesMuteConfig {
 
   /// When the mute expires
   @JsonKey(includeIfNull: false, name: 'end_time')
-  final dynamic endTime;
+  final String? endTime;
 
   /// Selected mute duration
   @JsonKey(name: 'selected_time_window')

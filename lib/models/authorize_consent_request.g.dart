@@ -13,10 +13,7 @@ AuthorizeConsentRequest _$AuthorizeConsentRequestFromJson(
   json,
   ($checkedConvert) {
     final val = AuthorizeConsentRequest(
-      clientId: $checkedConvert(
-        'client_id',
-        (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
+      clientId: $checkedConvert('client_id', (v) => v as String),
       scope: $checkedConvert('scope', (v) => v as String),
       responseType: $checkedConvert('response_type', (v) => v ?? _omit),
       redirectUri: $checkedConvert('redirect_uri', (v) => v ?? _omit),

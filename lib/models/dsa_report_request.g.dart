@@ -99,12 +99,7 @@ _$DsaReportRequestUserDsaReportRequestFromJson(
         'category',
         (v) => UserReportCategory.fromJson(v as String),
       ),
-      userId: $checkedConvert(
-        'user_id',
-        (v) => v == null
-            ? null
-            : SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
+      userId: $checkedConvert('user_id', (v) => v as String?),
       userTag: $checkedConvert('user_tag', (v) => v as String?),
     );
     return val;
@@ -164,10 +159,7 @@ _$DsaReportRequestGuildDsaReportRequestFromJson(
         'category',
         (v) => GuildReportCategory.fromJson(v as String),
       ),
-      guildId: $checkedConvert(
-        'guild_id',
-        (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
+      guildId: $checkedConvert('guild_id', (v) => v as String),
       inviteCode: $checkedConvert('invite_code', (v) => v as String?),
     );
     return val;

@@ -13,7 +13,7 @@ class UserGuildSettingsUpdateRequestMuteConfig {
   const UserGuildSettingsUpdateRequestMuteConfig({
     required this.selectedTimeWindow,
     Object? endTime = _omit,
-  }) : endTime = identical(endTime, _omit) ? null : endTime,
+  }) : endTime = identical(endTime, _omit) ? null : endTime as String?,
        _endTimePresent = !identical(endTime, _omit);
   factory UserGuildSettingsUpdateRequestMuteConfig.fromJson(
     Map<String, Object?> json,
@@ -27,7 +27,7 @@ class UserGuildSettingsUpdateRequestMuteConfig {
 
   /// When the mute expires
   @JsonKey(includeIfNull: false, name: 'end_time')
-  final dynamic endTime;
+  final String? endTime;
 
   /// Selected mute duration
   @JsonKey(name: 'selected_time_window')

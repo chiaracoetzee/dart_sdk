@@ -12,9 +12,7 @@ MarkMentionsReadRequest _$MarkMentionsReadRequestFromJson(
   final val = MarkMentionsReadRequest(
     messageIds: $checkedConvert(
       'message_ids',
-      (v) => (v as List<dynamic>)
-          .map((e) => SnowflakeType.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      (v) => (v as List<dynamic>).map((e) => e as String).toList(),
     ),
   );
   return val;

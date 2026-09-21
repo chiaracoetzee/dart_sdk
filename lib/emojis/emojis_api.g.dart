@@ -22,7 +22,7 @@ class _EmojisApi implements EmojisApi {
 
   @override
   Future<GuildEmojiMetadataResponse> getEmojiMetadata({
-    required SnowflakeType emojiId,
+    required String emojiId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -51,7 +51,7 @@ class _EmojisApi implements EmojisApi {
 
   @override
   Future<GuildExpressionSourceGuildResponse> getEmojiSource({
-    required SnowflakeType emojiId,
+    required String emojiId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

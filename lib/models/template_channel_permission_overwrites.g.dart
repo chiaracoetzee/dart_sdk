@@ -12,10 +12,10 @@ _$TemplateChannelPermissionOverwritesFromJson(Map<String, dynamic> json) =>
       $checkedConvert,
     ) {
       final val = TemplateChannelPermissionOverwrites(
-        id: $checkedConvert('id', (v) => v),
-        type: $checkedConvert('type', (v) => v),
-        allow: $checkedConvert('allow', (v) => v),
-        deny: $checkedConvert('deny', (v) => v),
+        id: $checkedConvert('id', (v) => v as String),
+        type: $checkedConvert('type', (v) => v as String),
+        allow: $checkedConvert('allow', (v) => v as String),
+        deny: $checkedConvert('deny', (v) => v as String),
       );
       return val;
     });

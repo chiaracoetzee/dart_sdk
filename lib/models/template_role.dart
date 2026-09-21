@@ -21,11 +21,13 @@ class TemplateRole {
     Object? unicodeEmoji = _omit,
   }) : name = identical(name, _omit) ? null : name as String?,
        _namePresent = !identical(name, _omit),
-       permissions = identical(permissions, _omit) ? null : permissions,
+       permissions = identical(permissions, _omit)
+           ? null
+           : permissions as String?,
        _permissionsPresent = !identical(permissions, _omit),
        permissionsNew = identical(permissionsNew, _omit)
            ? null
-           : permissionsNew,
+           : permissionsNew as String?,
        _permissionsNewPresent = !identical(permissionsNew, _omit),
        color = identical(color, _omit) ? null : color as num?,
        _colorPresent = !identical(color, _omit),
@@ -58,7 +60,7 @@ class TemplateRole {
   }
 
   /// The template-local role ID
-  final dynamic id;
+  final String id;
 
   /// The name of the role
   @JsonKey(includeIfNull: false)
@@ -66,11 +68,11 @@ class TemplateRole {
 
   /// The permissions bitfield as a string (legacy)
   @JsonKey(includeIfNull: false)
-  final dynamic permissions;
+  final String? permissions;
 
   /// The permissions bitfield as a string (preferred)
   @JsonKey(includeIfNull: false, name: 'permissions_new')
-  final dynamic permissionsNew;
+  final String? permissionsNew;
 
   /// The colour of the role as an integer
   @JsonKey(includeIfNull: false)

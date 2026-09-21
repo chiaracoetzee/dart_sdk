@@ -46,7 +46,7 @@ class TemplateSerializedGuild {
        _explicitContentFilterPresent = !identical(explicitContentFilter, _omit),
        systemChannelId = identical(systemChannelId, _omit)
            ? null
-           : systemChannelId,
+           : systemChannelId as String?,
        _systemChannelIdPresent = !identical(systemChannelId, _omit),
        afkTimeout = identical(afkTimeout, _omit) ? null : afkTimeout as num?,
        _afkTimeoutPresent = !identical(afkTimeout, _omit),
@@ -102,7 +102,7 @@ class TemplateSerializedGuild {
 
   /// The template-local numeric identifier
   @JsonKey(includeIfNull: false, name: 'system_channel_id')
-  final dynamic systemChannelId;
+  final String? systemChannelId;
 
   /// The AFK timeout in seconds
   @JsonKey(includeIfNull: false, name: 'afk_timeout')

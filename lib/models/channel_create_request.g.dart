@@ -19,12 +19,7 @@ ChannelCreateRequest0 _$ChannelCreateRequest0FromJson(
     final val = ChannelCreateRequest0(
       topic: $checkedConvert('topic', (v) => v as String?),
       url: $checkedConvert('url', (v) => v as String?),
-      parentId: $checkedConvert(
-        'parent_id',
-        (v) => v == null
-            ? null
-            : SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
+      parentId: $checkedConvert('parent_id', (v) => v as String?),
       bitrate: $checkedConvert('bitrate', (v) => (v as num?)?.toInt()),
       userLimit: $checkedConvert('user_limit', (v) => (v as num?)?.toInt()),
       voiceConnectionLimit: $checkedConvert(
@@ -106,12 +101,7 @@ ChannelCreateRequest2 _$ChannelCreateRequest2FromJson(
     final val = ChannelCreateRequest2(
       topic: $checkedConvert('topic', (v) => v as String?),
       url: $checkedConvert('url', (v) => v as String?),
-      parentId: $checkedConvert(
-        'parent_id',
-        (v) => v == null
-            ? null
-            : SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
+      parentId: $checkedConvert('parent_id', (v) => v as String?),
       bitrate: $checkedConvert('bitrate', (v) => (v as num?)?.toInt()),
       userLimit: $checkedConvert('user_limit', (v) => (v as num?)?.toInt()),
       voiceConnectionLimit: $checkedConvert(
@@ -194,12 +184,7 @@ ChannelCreateRequest4 _$ChannelCreateRequest4FromJson(
     final val = ChannelCreateRequest4(
       topic: $checkedConvert('topic', (v) => v as String?),
       url: $checkedConvert('url', (v) => v as String?),
-      parentId: $checkedConvert(
-        'parent_id',
-        (v) => v == null
-            ? null
-            : SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
+      parentId: $checkedConvert('parent_id', (v) => v as String?),
       bitrate: $checkedConvert('bitrate', (v) => (v as num?)?.toInt()),
       userLimit: $checkedConvert('user_limit', (v) => (v as num?)?.toInt()),
       voiceConnectionLimit: $checkedConvert(
@@ -283,12 +268,7 @@ ChannelCreateRequest998 _$ChannelCreateRequest998FromJson(
     final val = ChannelCreateRequest998(
       topic: $checkedConvert('topic', (v) => v as String?),
       url: $checkedConvert('url', (v) => v as String?),
-      parentId: $checkedConvert(
-        'parent_id',
-        (v) => v == null
-            ? null
-            : SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
+      parentId: $checkedConvert('parent_id', (v) => v as String?),
       bitrate: $checkedConvert('bitrate', (v) => (v as num?)?.toInt()),
       userLimit: $checkedConvert('user_limit', (v) => (v as num?)?.toInt()),
       voiceConnectionLimit: $checkedConvert(

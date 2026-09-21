@@ -72,7 +72,7 @@ class UserSettingsUpdateRequest {
        _statusPresent = !identical(status, _omit),
        statusResetsAt = identical(statusResetsAt, _omit)
            ? null
-           : statusResetsAt,
+           : statusResetsAt as String?,
        _statusResetsAtPresent = !identical(statusResetsAt, _omit),
        statusResetsTo = identical(statusResetsTo, _omit)
            ? null
@@ -379,7 +379,7 @@ class UserSettingsUpdateRequest {
 
   /// When status resets
   @JsonKey(includeIfNull: false, name: 'status_resets_at')
-  final dynamic statusResetsAt;
+  final String? statusResetsAt;
   @JsonKey(includeIfNull: false, name: 'status_resets_to')
   final UserStatusType? statusResetsTo;
   @JsonKey(includeIfNull: false)

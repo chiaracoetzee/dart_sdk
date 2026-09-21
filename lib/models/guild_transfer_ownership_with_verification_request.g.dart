@@ -14,10 +14,7 @@ _$GuildTransferOwnershipWithVerificationRequestFromJson(
   json,
   ($checkedConvert) {
     final val = GuildTransferOwnershipWithVerificationRequest(
-      newOwnerId: $checkedConvert(
-        'new_owner_id',
-        (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
+      newOwnerId: $checkedConvert('new_owner_id', (v) => v as String),
       password: $checkedConvert('password', (v) => v ?? _omit),
       mfaMethod: $checkedConvert('mfa_method', (v) => v ?? _omit),
       mfaCode: $checkedConvert('mfa_code', (v) => v ?? _omit),

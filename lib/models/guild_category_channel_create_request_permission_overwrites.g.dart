@@ -14,10 +14,7 @@ _$GuildCategoryChannelCreateRequestPermissionOverwritesFromJson(
   json,
   ($checkedConvert) {
     final val = GuildCategoryChannelCreateRequestPermissionOverwrites(
-      id: $checkedConvert(
-        'id',
-        (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
+      id: $checkedConvert('id', (v) => v as String),
       type: $checkedConvert(
         'type',
         (v) =>

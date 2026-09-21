@@ -30,10 +30,7 @@ GuildDsaReportRequest _$GuildDsaReportRequestFromJson(
         'category',
         (v) => GuildReportCategory.fromJson(v as String),
       ),
-      guildId: $checkedConvert(
-        'guild_id',
-        (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
-      ),
+      guildId: $checkedConvert('guild_id', (v) => v as String),
       additionalInfo: $checkedConvert('additional_info', (v) => v ?? _omit),
       reporterFluxerTag: $checkedConvert(
         'reporter_fluxer_tag',

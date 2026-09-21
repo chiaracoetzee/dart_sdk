@@ -10,10 +10,7 @@ GuildEmojiCloneRequest _$GuildEmojiCloneRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('GuildEmojiCloneRequest', json, ($checkedConvert) {
   final val = GuildEmojiCloneRequest(
-    sourceEmojiId: $checkedConvert(
-      'source_emoji_id',
-      (v) => SnowflakeType.fromJson(v as Map<String, dynamic>),
-    ),
+    sourceEmojiId: $checkedConvert('source_emoji_id', (v) => v as String),
   );
   return val;
 }, fieldKeyMap: const {'sourceEmojiId': 'source_emoji_id'});
