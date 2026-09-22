@@ -22,6 +22,12 @@ WellKnownFluxerResponseCommunity _$WellKnownFluxerResponseCommunityFromJson(
         'direct_messages_disabled',
         (v) => v as bool,
       ),
+      serverListButtons: $checkedConvert(
+        'server_list_buttons',
+        (v) => (v as Map<String, dynamic>?)?.map(
+          (k, e) => MapEntry(k, e),
+        ),
+      ),
     );
     return val;
   },
@@ -29,6 +35,7 @@ WellKnownFluxerResponseCommunity _$WellKnownFluxerResponseCommunityFromJson(
     'singleCommunity': 'single_community',
     'singleCommunityGuildId': 'single_community_guild_id',
     'directMessagesDisabled': 'direct_messages_disabled',
+    'serverListButtons': 'server_list_buttons',
   },
 );
 
@@ -38,4 +45,5 @@ Map<String, dynamic> _$WellKnownFluxerResponseCommunityToJson(
   'single_community': instance.singleCommunity,
   'single_community_guild_id': instance.singleCommunityGuildId,
   'direct_messages_disabled': instance.directMessagesDisabled,
+  'server_list_buttons': instance.serverListButtons,
 };
