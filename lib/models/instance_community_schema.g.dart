@@ -26,6 +26,12 @@ InstanceCommunitySchema _$InstanceCommunitySchemaFromJson(
         'guild_create_access',
         (v) => v as bool,
       ),
+      serverListButtons: $checkedConvert(
+        'server_list_buttons',
+        (v) => (v as Map<String, dynamic>?)?.map(
+          (k, e) => MapEntry(k, e),
+        ),
+      ),
     );
     return val;
   },
@@ -34,6 +40,7 @@ InstanceCommunitySchema _$InstanceCommunitySchemaFromJson(
     'singleCommunityGuildId': 'single_community_guild_id',
     'directMessagesDisabled': 'direct_messages_disabled',
     'guildCreateAccess': 'guild_create_access',
+    'serverListButtons': 'server_list_buttons',
   },
 );
 
@@ -44,4 +51,5 @@ Map<String, dynamic> _$InstanceCommunitySchemaToJson(
   'single_community_guild_id': instance.singleCommunityGuildId,
   'direct_messages_disabled': instance.directMessagesDisabled,
   'guild_create_access': instance.guildCreateAccess,
+  'server_list_buttons': instance.serverListButtons,
 };
