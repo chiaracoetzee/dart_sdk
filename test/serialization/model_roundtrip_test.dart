@@ -125,7 +125,7 @@ void main() {
 
       final model = ChannelResponse.fromJson(json);
       expect(model.id, '100');
-      expect(model.type, 0);
+      expect(model.type, ChannelType.guildText);
       expect(model.guildId, '999');
       expect(model.name, 'general');
       expect(model.topic, 'General discussion');
@@ -134,7 +134,7 @@ void main() {
 
       final serialized = model.toJson();
       expect(serialized['id'], '100');
-      expect(serialized['type'], 0);
+      expect(serialized['type'], ChannelType.guildText);
       expect(serialized['name'], 'general');
     });
 
@@ -143,7 +143,7 @@ void main() {
 
       final model = ChannelResponse.fromJson(json);
       expect(model.id, '300');
-      expect(model.type, 1);
+      expect(model.type, ChannelType.dm);
       expect(model.name, isNull);
       expect(model.guildId, isNull);
     });
@@ -177,7 +177,7 @@ void main() {
       expect(model.content, 'Hello world');
       expect(model.author.id, '123');
       expect(model.author.username, 'sender');
-      expect(model.type, MessageResponseSchemaTypeType.valueDefault);
+      expect(model.type, MessageType.valueDefault);
       expect(model.pinned, false);
       expect(model.mentionEveryone, false);
       expect(model.embeds, isNull);
@@ -212,7 +212,7 @@ void main() {
       };
 
       final model = MessageResponseSchema.fromJson(json);
-      expect(model.type, MessageResponseSchemaTypeType.reply);
+      expect(model.type, MessageType.reply);
       expect(model.embeds, hasLength(1));
       expect(model.embeds!.first.type, 'image');
       expect(model.attachments, hasLength(1));
@@ -511,6 +511,7 @@ void main() {
         'sms': true,
         'totp': true,
         'webauthn': false,
+        'backup_codes': true,
       };
 
       final response = AuthLoginResponse.fromJson(json);
@@ -519,6 +520,7 @@ void main() {
       expect(mfaResponse.allowedMethods, ['totp', 'sms']);
       expect(mfaResponse.totp, true);
       expect(mfaResponse.webauthn, false);
+      expect(mfaResponse.backupCodes, true);
     });
 
     test('preserves raw json through toJson', () {
