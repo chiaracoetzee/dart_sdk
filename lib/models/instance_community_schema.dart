@@ -13,6 +13,7 @@ class InstanceCommunitySchema {
     required this.singleCommunity,
     required this.singleCommunityGuildId,
     required this.directMessagesDisabled,
+    this.serverListButtons,
   });
 
   factory InstanceCommunitySchema.fromJson(Map<String, Object?> json) =>
@@ -29,6 +30,9 @@ class InstanceCommunitySchema {
   /// Whether direct messages and friend requests are disabled instance-wide
   @JsonKey(name: 'direct_messages_disabled')
   final bool directMessagesDisabled;
+
+  @JsonKey(name: 'server_list_buttons')
+  final Map<String, dynamic>? serverListButtons;
 
   Map<String, Object?> toJson() => _$InstanceCommunitySchemaToJson(this);
 }
