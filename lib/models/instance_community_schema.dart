@@ -14,6 +14,7 @@ class InstanceCommunitySchema {
     required this.singleCommunityGuildId,
     required this.directMessagesDisabled,
     required this.guildCreateAccess,
+    this.serverListButtons,
   });
 
   factory InstanceCommunitySchema.fromJson(Map<String, Object?> json) =>
@@ -34,6 +35,9 @@ class InstanceCommunitySchema {
   /// Whether every account can create communities. When false, only admins and accounts granted the feature_guild_create limit can
   @JsonKey(name: 'guild_create_access')
   final bool guildCreateAccess;
+
+  @JsonKey(name: 'server_list_buttons')
+  final Map<String, dynamic>? serverListButtons;
 
   Map<String, Object?> toJson() => _$InstanceCommunitySchemaToJson(this);
 }
