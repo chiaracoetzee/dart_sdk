@@ -11,7 +11,7 @@ part 'permission_overwrite_create_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class PermissionOverwriteCreateRequest {
   const PermissionOverwriteCreateRequest({
     required this.type,
@@ -21,6 +21,13 @@ class PermissionOverwriteCreateRequest {
        _allowPresent = !identical(allow, _omit),
        deny = identical(deny, _omit) ? null : deny as UnsignedInt64Type?,
        _denyPresent = !identical(deny, _omit);
+
+  const PermissionOverwriteCreateRequest._({
+    required this.type,
+    this.allow,
+    this.deny,
+  }) : _allowPresent = false,
+       _denyPresent = false;
   factory PermissionOverwriteCreateRequest.fromJson(Map<String, Object?> json) {
     final value = _$PermissionOverwriteCreateRequestFromJson(json);
     return PermissionOverwriteCreateRequest(

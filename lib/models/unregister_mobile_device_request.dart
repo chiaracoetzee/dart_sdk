@@ -11,7 +11,7 @@ part 'unregister_mobile_device_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class UnregisterMobileDeviceRequest {
   const UnregisterMobileDeviceRequest({
     required this.platform,
@@ -25,6 +25,14 @@ class UnregisterMobileDeviceRequest {
            : providerEnvironment
                  as UnregisterMobileDeviceRequestProviderEnvironmentProviderEnvironment?,
        _providerEnvironmentPresent = !identical(providerEnvironment, _omit);
+
+  const UnregisterMobileDeviceRequest._({
+    required this.platform,
+    required this.token,
+    this.appId,
+    this.providerEnvironment,
+  }) : _appIdPresent = false,
+       _providerEnvironmentPresent = false;
   factory UnregisterMobileDeviceRequest.fromJson(Map<String, Object?> json) {
     final value = _$UnregisterMobileDeviceRequestFromJson(json);
     return UnregisterMobileDeviceRequest(

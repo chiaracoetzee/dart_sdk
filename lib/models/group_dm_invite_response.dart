@@ -12,7 +12,7 @@ part 'group_dm_invite_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GroupDmInviteResponse {
   const GroupDmInviteResponse({
     required this.code,
@@ -28,6 +28,17 @@ class GroupDmInviteResponse {
        _inviterPresent = !identical(inviter, _omit),
        expiresAt = identical(expiresAt, _omit) ? null : expiresAt as DateTime?,
        _expiresAtPresent = !identical(expiresAt, _omit);
+
+  const GroupDmInviteResponse._({
+    required this.code,
+    required this.temporary,
+    required this.type,
+    required this.channel,
+    required this.memberCount,
+    this.inviter,
+    this.expiresAt,
+  }) : _inviterPresent = false,
+       _expiresAtPresent = false;
   factory GroupDmInviteResponse.fromJson(Map<String, Object?> json) {
     final value = _$GroupDmInviteResponseFromJson(json);
     return GroupDmInviteResponse(

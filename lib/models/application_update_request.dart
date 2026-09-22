@@ -8,7 +8,7 @@ part 'application_update_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ApplicationUpdateRequest {
   const ApplicationUpdateRequest({
     Object? name = _omit,
@@ -27,6 +27,16 @@ class ApplicationUpdateRequest {
            ? null
            : redirectUris as List<String>?,
        _redirectUrisPresent = !identical(redirectUris, _omit);
+
+  const ApplicationUpdateRequest._({
+    this.name,
+    this.botPublic,
+    this.botRequireCodeGrant,
+    this.redirectUris,
+  }) : _namePresent = false,
+       _botPublicPresent = false,
+       _botRequireCodeGrantPresent = false,
+       _redirectUrisPresent = false;
   factory ApplicationUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$ApplicationUpdateRequestFromJson(json);
     return ApplicationUpdateRequest(

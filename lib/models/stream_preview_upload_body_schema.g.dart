@@ -12,10 +12,10 @@ StreamPreviewUploadBodySchema _$StreamPreviewUploadBodySchemaFromJson(
   'StreamPreviewUploadBodySchema',
   json,
   ($checkedConvert) {
-    final val = StreamPreviewUploadBodySchema(
+    final val = StreamPreviewUploadBodySchema._(
       channelId: $checkedConvert('channel_id', (v) => v as String),
       thumbnail: $checkedConvert('thumbnail', (v) => v as String),
-      contentType: $checkedConvert('content_type', (v) => v ?? _omit),
+      contentType: $checkedConvert('content_type', (v) => v as String?),
     );
     return val;
   },

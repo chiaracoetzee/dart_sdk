@@ -44,7 +44,7 @@ class MessageSearchResponseMessageSearchResultsResponse {
     required this.total,
     required this.hitsPerPage,
     required this.page,
-    required this.cursor,
+    this.cursor,
   });
 
   factory MessageSearchResponseMessageSearchResultsResponse.fromJson(

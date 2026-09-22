@@ -11,10 +11,10 @@ _$SlackWebhookRequestAttachmentsFieldsFromJson(Map<String, dynamic> json) =>
     $checkedCreate('SlackWebhookRequestAttachmentsFields', json, (
       $checkedConvert,
     ) {
-      final val = SlackWebhookRequestAttachmentsFields(
-        title: $checkedConvert('title', (v) => v ?? _omit),
-        value: $checkedConvert('value', (v) => v ?? _omit),
-        short: $checkedConvert('short', (v) => v ?? _omit),
+      final val = SlackWebhookRequestAttachmentsFields._(
+        title: $checkedConvert('title', (v) => v as String?),
+        value: $checkedConvert('value', (v) => v as String?),
+        short: $checkedConvert('short', (v) => v as bool?),
       );
       return val;
     });

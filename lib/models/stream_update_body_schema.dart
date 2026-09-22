@@ -8,11 +8,13 @@ part 'stream_update_body_schema.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class StreamUpdateBodySchema {
   const StreamUpdateBodySchema({Object? region = _omit})
     : region = identical(region, _omit) ? null : region as String?,
       _regionPresent = !identical(region, _omit);
+
+  const StreamUpdateBodySchema._({this.region}) : _regionPresent = false;
   factory StreamUpdateBodySchema.fromJson(Map<String, Object?> json) {
     final value = _$StreamUpdateBodySchemaFromJson(json);
     return StreamUpdateBodySchema(

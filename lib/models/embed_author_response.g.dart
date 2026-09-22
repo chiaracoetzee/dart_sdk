@@ -11,11 +11,11 @@ EmbedAuthorResponse _$EmbedAuthorResponseFromJson(Map<String, dynamic> json) =>
       'EmbedAuthorResponse',
       json,
       ($checkedConvert) {
-        final val = EmbedAuthorResponse(
+        final val = EmbedAuthorResponse._(
           name: $checkedConvert('name', (v) => v as String),
-          url: $checkedConvert('url', (v) => v ?? _omit),
-          iconUrl: $checkedConvert('icon_url', (v) => v ?? _omit),
-          proxyIconUrl: $checkedConvert('proxy_icon_url', (v) => v ?? _omit),
+          url: $checkedConvert('url', (v) => v as String?),
+          iconUrl: $checkedConvert('icon_url', (v) => v as String?),
+          proxyIconUrl: $checkedConvert('proxy_icon_url', (v) => v as String?),
         );
         return val;
       },

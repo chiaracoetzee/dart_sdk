@@ -48,11 +48,11 @@ class Object0ClientUploadedAttachmentRequest {
   final NonNegativeSafeIntegerType fileSize;
 
   const Object0ClientUploadedAttachmentRequest({
-    required this.title,
-    required this.description,
-    required this.flags,
-    required this.duration,
-    required this.waveform,
+    this.title,
+    this.description,
+    this.flags,
+    this.duration,
+    this.waveform,
     required this.id,
     required this.filename,
     required this.contentType,
@@ -86,14 +86,14 @@ class Object0ClientAttachmentRequest {
   final String? contentType;
 
   const Object0ClientAttachmentRequest({
-    required this.title,
-    required this.description,
-    required this.flags,
-    required this.duration,
-    required this.waveform,
+    this.title,
+    this.description,
+    this.flags,
+    this.duration,
+    this.waveform,
     required this.id,
     required this.filename,
-    required this.contentType,
+    this.contentType,
   });
 
   factory Object0ClientAttachmentRequest.fromJson(Map<String, dynamic> json) =>

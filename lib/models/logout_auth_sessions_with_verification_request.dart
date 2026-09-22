@@ -12,7 +12,7 @@ part 'logout_auth_sessions_with_verification_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class LogoutAuthSessionsWithVerificationRequest {
   const LogoutAuthSessionsWithVerificationRequest({
     required this.sessionIdHashes,
@@ -38,6 +38,19 @@ class LogoutAuthSessionsWithVerificationRequest {
            ? null
            : webauthnChallenge as String?,
        _webauthnChallengePresent = !identical(webauthnChallenge, _omit);
+
+  const LogoutAuthSessionsWithVerificationRequest._({
+    required this.sessionIdHashes,
+    this.password,
+    this.mfaMethod,
+    this.mfaCode,
+    this.webauthnResponse,
+    this.webauthnChallenge,
+  }) : _passwordPresent = false,
+       _mfaMethodPresent = false,
+       _mfaCodePresent = false,
+       _webauthnResponsePresent = false,
+       _webauthnChallengePresent = false;
   factory LogoutAuthSessionsWithVerificationRequest.fromJson(
     Map<String, Object?> json,
   ) {

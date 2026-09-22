@@ -11,7 +11,7 @@ part 'ip_authorization_poll_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class IpAuthorizationPollResponse {
   const IpAuthorizationPollResponse({
     required this.completed,
@@ -26,6 +26,15 @@ class IpAuthorizationPollResponse {
        _userIdPresent = !identical(userId, _omit),
        user = identical(user, _omit) ? null : user as UserPartialResponse?,
        _userPresent = !identical(user, _omit);
+
+  const IpAuthorizationPollResponse._({
+    required this.completed,
+    this.token,
+    this.userId,
+    this.user,
+  }) : _tokenPresent = false,
+       _userIdPresent = false,
+       _userPresent = false;
   factory IpAuthorizationPollResponse.fromJson(Map<String, Object?> json) {
     final value = _$IpAuthorizationPollResponseFromJson(json);
     return IpAuthorizationPollResponse(

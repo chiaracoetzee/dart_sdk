@@ -11,7 +11,7 @@ part 'embed_media_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class EmbedMediaResponse {
   const EmbedMediaResponse({
     required this.url,
@@ -48,6 +48,26 @@ class EmbedMediaResponse {
        _placeholderPresent = !identical(placeholder, _omit),
        duration = identical(duration, _omit) ? null : duration as Int32Type?,
        _durationPresent = !identical(duration, _omit);
+
+  const EmbedMediaResponse._({
+    required this.url,
+    required this.flags,
+    this.proxyUrl,
+    this.contentType,
+    this.contentHash,
+    this.width,
+    this.height,
+    this.description,
+    this.placeholder,
+    this.duration,
+  }) : _proxyUrlPresent = false,
+       _contentTypePresent = false,
+       _contentHashPresent = false,
+       _widthPresent = false,
+       _heightPresent = false,
+       _descriptionPresent = false,
+       _placeholderPresent = false,
+       _durationPresent = false;
   factory EmbedMediaResponse.fromJson(Map<String, Object?> json) {
     final value = _$EmbedMediaResponseFromJson(json);
     return EmbedMediaResponse(

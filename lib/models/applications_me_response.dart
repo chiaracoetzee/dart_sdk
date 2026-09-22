@@ -12,7 +12,7 @@ part 'applications_me_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ApplicationsMeResponse {
   const ApplicationsMeResponse({
     required this.id,
@@ -31,6 +31,20 @@ class ApplicationsMeResponse {
            ? null
            : redirectUris as List<String>?,
        _redirectUrisPresent = !identical(redirectUris, _omit);
+
+  const ApplicationsMeResponse._({
+    required this.id,
+    required this.name,
+    required this.icon,
+    required this.description,
+    required this.botPublic,
+    required this.botRequireCodeGrant,
+    required this.verifyKey,
+    required this.owner,
+    this.bot,
+    this.redirectUris,
+  }) : _botPresent = false,
+       _redirectUrisPresent = false;
   factory ApplicationsMeResponse.fromJson(Map<String, Object?> json) {
     final value = _$ApplicationsMeResponseFromJson(json);
     return ApplicationsMeResponse(

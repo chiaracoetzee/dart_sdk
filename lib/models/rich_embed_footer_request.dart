@@ -26,10 +26,7 @@ class RichEmbedFooterRequestVariant1 {
   @JsonKey(includeIfNull: false, name: 'icon_url')
   final String? iconUrl;
 
-  const RichEmbedFooterRequestVariant1({
-    required this.text,
-    required this.iconUrl,
-  });
+  const RichEmbedFooterRequestVariant1({required this.text, this.iconUrl});
 
   factory RichEmbedFooterRequestVariant1.fromJson(Map<String, dynamic> json) =>
       _$RichEmbedFooterRequestVariant1FromJson(json);

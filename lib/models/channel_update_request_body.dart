@@ -76,23 +76,23 @@ class ChannelUpdateRequestBodyVariant1 {
   final String? name;
 
   const ChannelUpdateRequestBodyVariant1({
-    required this.topic,
-    required this.url,
-    required this.parentId,
-    required this.bitrate,
-    required this.userLimit,
-    required this.voiceConnectionLimit,
-    required this.permissionOverwrites,
-    required this.rateLimitPerUser,
-    required this.nsfw,
-    required this.nsfwOverride,
-    required this.contentWarningLevel,
-    required this.contentWarningText,
-    required this.icon,
-    required this.ownerId,
-    required this.nicks,
-    required this.rtcRegion,
-    required this.name,
+    this.topic,
+    this.url,
+    this.parentId,
+    this.bitrate,
+    this.userLimit,
+    this.voiceConnectionLimit,
+    this.permissionOverwrites,
+    this.rateLimitPerUser,
+    this.nsfw,
+    this.nsfwOverride,
+    this.contentWarningLevel,
+    this.contentWarningText,
+    this.icon,
+    this.ownerId,
+    this.nicks,
+    this.rtcRegion,
+    this.name,
   });
 
   factory ChannelUpdateRequestBodyVariant1.fromJson(
@@ -142,23 +142,23 @@ class ChannelUpdateRequestBodyVariant2 {
   final String? name;
 
   const ChannelUpdateRequestBodyVariant2({
-    required this.topic,
-    required this.url,
-    required this.parentId,
-    required this.bitrate,
-    required this.userLimit,
-    required this.voiceConnectionLimit,
-    required this.permissionOverwrites,
-    required this.rateLimitPerUser,
-    required this.nsfw,
-    required this.nsfwOverride,
-    required this.contentWarningLevel,
-    required this.contentWarningText,
-    required this.icon,
-    required this.ownerId,
-    required this.nicks,
-    required this.rtcRegion,
-    required this.name,
+    this.topic,
+    this.url,
+    this.parentId,
+    this.bitrate,
+    this.userLimit,
+    this.voiceConnectionLimit,
+    this.permissionOverwrites,
+    this.rateLimitPerUser,
+    this.nsfw,
+    this.nsfwOverride,
+    this.contentWarningLevel,
+    this.contentWarningText,
+    this.icon,
+    this.ownerId,
+    this.nicks,
+    this.rtcRegion,
+    this.name,
   });
 
   factory ChannelUpdateRequestBodyVariant2.fromJson(
@@ -208,23 +208,23 @@ class ChannelUpdateRequestBodyVariant3 {
   final String? name;
 
   const ChannelUpdateRequestBodyVariant3({
-    required this.topic,
-    required this.url,
-    required this.parentId,
-    required this.bitrate,
-    required this.userLimit,
-    required this.voiceConnectionLimit,
-    required this.permissionOverwrites,
-    required this.rateLimitPerUser,
-    required this.nsfw,
-    required this.nsfwOverride,
-    required this.contentWarningLevel,
-    required this.contentWarningText,
-    required this.icon,
-    required this.ownerId,
-    required this.nicks,
-    required this.rtcRegion,
-    required this.name,
+    this.topic,
+    this.url,
+    this.parentId,
+    this.bitrate,
+    this.userLimit,
+    this.voiceConnectionLimit,
+    this.permissionOverwrites,
+    this.rateLimitPerUser,
+    this.nsfw,
+    this.nsfwOverride,
+    this.contentWarningLevel,
+    this.contentWarningText,
+    this.icon,
+    this.ownerId,
+    this.nicks,
+    this.rtcRegion,
+    this.name,
   });
 
   factory ChannelUpdateRequestBodyVariant3.fromJson(
@@ -274,23 +274,23 @@ class ChannelUpdateRequestBodyVariant4 {
   final String? name;
 
   const ChannelUpdateRequestBodyVariant4({
-    required this.topic,
-    required this.url,
-    required this.parentId,
-    required this.bitrate,
-    required this.userLimit,
-    required this.voiceConnectionLimit,
-    required this.permissionOverwrites,
-    required this.rateLimitPerUser,
-    required this.nsfw,
-    required this.nsfwOverride,
-    required this.contentWarningLevel,
-    required this.contentWarningText,
-    required this.icon,
-    required this.ownerId,
-    required this.nicks,
-    required this.rtcRegion,
-    required this.name,
+    this.topic,
+    this.url,
+    this.parentId,
+    this.bitrate,
+    this.userLimit,
+    this.voiceConnectionLimit,
+    this.permissionOverwrites,
+    this.rateLimitPerUser,
+    this.nsfw,
+    this.nsfwOverride,
+    this.contentWarningLevel,
+    this.contentWarningText,
+    this.icon,
+    this.ownerId,
+    this.nicks,
+    this.rtcRegion,
+    this.name,
   });
 
   factory ChannelUpdateRequestBodyVariant4.fromJson(
@@ -313,10 +313,10 @@ class ChannelUpdateRequestBodyVariant5 {
   final ChannelNicknameOverrides? nicks;
 
   const ChannelUpdateRequestBodyVariant5({
-    required this.name,
-    required this.icon,
-    required this.ownerId,
-    required this.nicks,
+    this.name,
+    this.icon,
+    this.ownerId,
+    this.nicks,
   });
 
   factory ChannelUpdateRequestBodyVariant5.fromJson(

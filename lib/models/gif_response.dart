@@ -11,7 +11,7 @@ part 'gif_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GifResponse {
   const GifResponse({
     required this.id,
@@ -29,6 +29,20 @@ class GifResponse {
            ? null
            : placeholder as String?,
        _placeholderPresent = !identical(placeholder, _omit);
+
+  const GifResponse._({
+    required this.id,
+    required this.slug,
+    required this.provider,
+    required this.title,
+    required this.url,
+    required this.src,
+    required this.proxySrc,
+    required this.width,
+    required this.height,
+    required this.media,
+    this.placeholder,
+  }) : _placeholderPresent = false;
   factory GifResponse.fromJson(Map<String, Object?> json) {
     final value = _$GifResponseFromJson(json);
     return GifResponse(

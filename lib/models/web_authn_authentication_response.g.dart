@@ -9,18 +9,29 @@ part of 'web_authn_authentication_response.dart';
 WebAuthnAuthenticationResponse _$WebAuthnAuthenticationResponseFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('WebAuthnAuthenticationResponse', json, ($checkedConvert) {
-  final val = WebAuthnAuthenticationResponse(
+  final val = WebAuthnAuthenticationResponse._(
     id: $checkedConvert('id', (v) => v as String),
     rawId: $checkedConvert('rawId', (v) => v as String),
     type: $checkedConvert('type', (v) => v as String),
     clientExtensionResults: $checkedConvert(
       'clientExtensionResults',
-      (v) => v as Map<String, dynamic>,
+      (v) => WebAuthnAuthenticationResponseClientExtensionResults.fromJson(
+        v as Map<String, dynamic>,
+      ),
     ),
-    response: $checkedConvert('response', (v) => v as Map<String, dynamic>),
+    response: $checkedConvert(
+      'response',
+      (v) => WebAuthnAuthenticationResponseResponse.fromJson(
+        v as Map<String, dynamic>,
+      ),
+    ),
     authenticatorAttachment: $checkedConvert(
       'authenticatorAttachment',
-      (v) => v ?? _omit,
+      (v) => v == null
+          ? null
+          : WebAuthnAuthenticationResponseAuthenticatorAttachmentAuthenticatorAttachment.fromJson(
+              v as String,
+            ),
     ),
   );
   return val;

@@ -12,7 +12,7 @@ ApplicationPublicResponse _$ApplicationPublicResponseFromJson(
   'ApplicationPublicResponse',
   json,
   ($checkedConvert) {
-    final val = ApplicationPublicResponse(
+    final val = ApplicationPublicResponse._(
       id: $checkedConvert('id', (v) => v as String),
       name: $checkedConvert('name', (v) => v as String),
       icon: $checkedConvert('icon', (v) => v as String?),
@@ -32,7 +32,12 @@ ApplicationPublicResponse _$ApplicationPublicResponseFromJson(
             ? null
             : ApplicationPublicResponseBot.fromJson(v as Map<String, dynamic>),
       ),
-      currentUser: $checkedConvert('current_user', (v) => v ?? _omit),
+      currentUser: $checkedConvert(
+        'current_user',
+        (v) => v == null
+            ? null
+            : UserPartialResponse.fromJson(v as Map<String, dynamic>),
+      ),
     );
     return val;
   },

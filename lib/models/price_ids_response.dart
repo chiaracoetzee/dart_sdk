@@ -10,7 +10,7 @@ part 'price_ids_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class PriceIdsResponse {
   const PriceIdsResponse({
     required this.currency,
@@ -47,6 +47,26 @@ class PriceIdsResponse {
            ? null
            : gift1YearAmountMinor as int?,
        _gift1YearAmountMinorPresent = !identical(gift1YearAmountMinor, _omit);
+
+  const PriceIdsResponse._({
+    required this.currency,
+    required this.giftCurrency,
+    this.monthly,
+    this.yearly,
+    this.gift1Month,
+    this.gift1Year,
+    this.monthlyAmountMinor,
+    this.yearlyAmountMinor,
+    this.gift1MonthAmountMinor,
+    this.gift1YearAmountMinor,
+  }) : _monthlyPresent = false,
+       _yearlyPresent = false,
+       _gift1MonthPresent = false,
+       _gift1YearPresent = false,
+       _monthlyAmountMinorPresent = false,
+       _yearlyAmountMinorPresent = false,
+       _gift1MonthAmountMinorPresent = false,
+       _gift1YearAmountMinorPresent = false;
   factory PriceIdsResponse.fromJson(Map<String, Object?> json) {
     final value = _$PriceIdsResponseFromJson(json);
     return PriceIdsResponse(

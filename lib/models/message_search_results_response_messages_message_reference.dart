@@ -11,7 +11,7 @@ part 'message_search_results_response_messages_message_reference.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class MessageSearchResultsResponseMessagesMessageReference {
   const MessageSearchResultsResponseMessagesMessageReference({
     required this.channelId,
@@ -22,6 +22,13 @@ class MessageSearchResultsResponseMessagesMessageReference {
            ? null
            : guildId as SnowflakeStringType?,
        _guildIdPresent = !identical(guildId, _omit);
+
+  const MessageSearchResultsResponseMessagesMessageReference._({
+    required this.channelId,
+    required this.messageId,
+    required this.type,
+    this.guildId,
+  }) : _guildIdPresent = false;
   factory MessageSearchResultsResponseMessagesMessageReference.fromJson(
     Map<String, Object?> json,
   ) {

@@ -9,14 +9,14 @@ part of 'guild_sticker_update_request.dart';
 GuildStickerUpdateRequest _$GuildStickerUpdateRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('GuildStickerUpdateRequest', json, ($checkedConvert) {
-  final val = GuildStickerUpdateRequest(
+  final val = GuildStickerUpdateRequest._(
     name: $checkedConvert('name', (v) => v as String),
     tags: $checkedConvert(
       'tags',
       (v) =>
           (v as List<dynamic>?)?.map((e) => e as String).toList() ?? const [],
     ),
-    description: $checkedConvert('description', (v) => v ?? _omit),
+    description: $checkedConvert('description', (v) => v as String?),
   );
   return val;
 });

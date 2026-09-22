@@ -8,7 +8,7 @@ part 'message_search_results_response_messages_call.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class MessageSearchResultsResponseMessagesCall {
   const MessageSearchResultsResponseMessagesCall({
     required this.participants,
@@ -17,6 +17,11 @@ class MessageSearchResultsResponseMessagesCall {
            ? null
            : endedTimestamp as DateTime?,
        _endedTimestampPresent = !identical(endedTimestamp, _omit);
+
+  const MessageSearchResultsResponseMessagesCall._({
+    required this.participants,
+    this.endedTimestamp,
+  }) : _endedTimestampPresent = false;
   factory MessageSearchResultsResponseMessagesCall.fromJson(
     Map<String, Object?> json,
   ) {

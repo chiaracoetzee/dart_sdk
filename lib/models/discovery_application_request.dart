@@ -8,7 +8,7 @@ part 'discovery_application_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class DiscoveryApplicationRequest {
   const DiscoveryApplicationRequest({
     required this.description,
@@ -23,6 +23,14 @@ class DiscoveryApplicationRequest {
            ? null
            : customTags as List<String>?,
        _customTagsPresent = !identical(customTags, _omit);
+
+  const DiscoveryApplicationRequest._({
+    required this.description,
+    required this.categoryType,
+    this.primaryLanguage,
+    this.customTags,
+  }) : _primaryLanguagePresent = false,
+       _customTagsPresent = false;
   factory DiscoveryApplicationRequest.fromJson(Map<String, Object?> json) {
     final value = _$DiscoveryApplicationRequestFromJson(json);
     return DiscoveryApplicationRequest(

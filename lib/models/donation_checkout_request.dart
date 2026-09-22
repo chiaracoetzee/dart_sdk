@@ -11,7 +11,7 @@ part 'donation_checkout_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class DonationCheckoutRequest {
   const DonationCheckoutRequest({
     required this.email,
@@ -21,6 +21,14 @@ class DonationCheckoutRequest {
     Object? isBusiness = _omit,
   }) : isBusiness = identical(isBusiness, _omit) ? null : isBusiness as bool?,
        _isBusinessPresent = !identical(isBusiness, _omit);
+
+  const DonationCheckoutRequest._({
+    required this.email,
+    required this.amountCents,
+    required this.currency,
+    required this.interval,
+    this.isBusiness,
+  }) : _isBusinessPresent = false;
   factory DonationCheckoutRequest.fromJson(Map<String, Object?> json) {
     final value = _$DonationCheckoutRequestFromJson(json);
     return DonationCheckoutRequest(

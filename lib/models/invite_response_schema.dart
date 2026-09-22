@@ -45,8 +45,8 @@ class InviteResponseSchemaGuildInviteResponse {
 
   const InviteResponseSchemaGuildInviteResponse({
     required this.code,
-    required this.inviter,
-    required this.expiresAt,
+    this.inviter,
+    this.expiresAt,
     required this.temporary,
     required this.type,
     required this.guild,
@@ -78,8 +78,8 @@ class InviteResponseSchemaGroupDmInviteResponse {
 
   const InviteResponseSchemaGroupDmInviteResponse({
     required this.code,
-    required this.inviter,
-    required this.expiresAt,
+    this.inviter,
+    this.expiresAt,
     required this.temporary,
     required this.type,
     required this.channel,

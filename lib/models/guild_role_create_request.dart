@@ -11,7 +11,7 @@ part 'guild_role_create_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildRoleCreateRequest {
   const GuildRoleCreateRequest({
     required this.name,
@@ -21,6 +21,12 @@ class GuildRoleCreateRequest {
            ? null
            : permissions as UnsignedInt64Type?,
        _permissionsPresent = !identical(permissions, _omit);
+
+  const GuildRoleCreateRequest._({
+    required this.name,
+    this.permissions,
+    this.color = 0,
+  }) : _permissionsPresent = false;
   factory GuildRoleCreateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildRoleCreateRequestFromJson(json);
     return GuildRoleCreateRequest(

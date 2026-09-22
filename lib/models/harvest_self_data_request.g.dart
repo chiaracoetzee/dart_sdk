@@ -12,17 +12,23 @@ HarvestSelfDataRequest _$HarvestSelfDataRequestFromJson(
   'HarvestSelfDataRequest',
   json,
   ($checkedConvert) {
-    final val = HarvestSelfDataRequest(
+    final val = HarvestSelfDataRequest._(
       excludedGuildIds: $checkedConvert(
         'excluded_guild_ids',
-        (v) => v ?? _omit,
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
       ),
       includedGuildIds: $checkedConvert(
         'included_guild_ids',
-        (v) => v ?? _omit,
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
       ),
-      startDate: $checkedConvert('start_date', (v) => v ?? _omit),
-      endDate: $checkedConvert('end_date', (v) => v ?? _omit),
+      startDate: $checkedConvert(
+        'start_date',
+        (v) => v == null ? null : DateTime.parse(v as String),
+      ),
+      endDate: $checkedConvert(
+        'end_date',
+        (v) => v == null ? null : DateTime.parse(v as String),
+      ),
       scope: $checkedConvert(
         'scope',
         (v) => v == null

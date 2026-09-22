@@ -19,7 +19,7 @@ part 'user_update_with_verification_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class UserUpdateWithVerificationRequest {
   const UserUpdateWithVerificationRequest({
     Object? username = _omit,
@@ -147,6 +147,60 @@ class UserUpdateWithVerificationRequest {
            ? null
            : webauthnChallenge as String?,
        _webauthnChallengePresent = !identical(webauthnChallenge, _omit);
+
+  const UserUpdateWithVerificationRequest._({
+    this.username,
+    this.discriminator,
+    this.globalName,
+    this.email,
+    this.newPassword,
+    this.password,
+    this.avatar,
+    this.banner,
+    this.bio,
+    this.pronouns,
+    this.accentColor,
+    this.timezone,
+    this.timezonePrivacyFlags,
+    this.premiumBadgeHidden,
+    this.premiumBadgeMasked,
+    this.premiumBadgeTimestampHidden,
+    this.premiumBadgeSequenceHidden,
+    this.premiumEnabledOverride,
+    this.hasDismissedPremiumOnboarding,
+    this.hasUnreadGiftInventory,
+    this.mentionFlags,
+    this.emailToken,
+    this.mfaMethod,
+    this.mfaCode,
+    this.webauthnResponse,
+    this.webauthnChallenge,
+  }) : _usernamePresent = false,
+       _discriminatorPresent = false,
+       _globalNamePresent = false,
+       _emailPresent = false,
+       _newPasswordPresent = false,
+       _passwordPresent = false,
+       _avatarPresent = false,
+       _bannerPresent = false,
+       _bioPresent = false,
+       _pronounsPresent = false,
+       _accentColorPresent = false,
+       _timezonePresent = false,
+       _timezonePrivacyFlagsPresent = false,
+       _premiumBadgeHiddenPresent = false,
+       _premiumBadgeMaskedPresent = false,
+       _premiumBadgeTimestampHiddenPresent = false,
+       _premiumBadgeSequenceHiddenPresent = false,
+       _premiumEnabledOverridePresent = false,
+       _hasDismissedPremiumOnboardingPresent = false,
+       _hasUnreadGiftInventoryPresent = false,
+       _mentionFlagsPresent = false,
+       _emailTokenPresent = false,
+       _mfaMethodPresent = false,
+       _mfaCodePresent = false,
+       _webauthnResponsePresent = false,
+       _webauthnChallengePresent = false;
   factory UserUpdateWithVerificationRequest.fromJson(
     Map<String, Object?> json,
   ) {

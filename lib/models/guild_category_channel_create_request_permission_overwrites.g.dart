@@ -13,7 +13,7 @@ _$GuildCategoryChannelCreateRequestPermissionOverwritesFromJson(
   'GuildCategoryChannelCreateRequestPermissionOverwrites',
   json,
   ($checkedConvert) {
-    final val = GuildCategoryChannelCreateRequestPermissionOverwrites(
+    final val = GuildCategoryChannelCreateRequestPermissionOverwrites._(
       id: $checkedConvert('id', (v) => v as String),
       type: $checkedConvert(
         'type',
@@ -22,8 +22,8 @@ _$GuildCategoryChannelCreateRequestPermissionOverwritesFromJson(
               (v as num).toInt(),
             ),
       ),
-      allow: $checkedConvert('allow', (v) => v ?? _omit),
-      deny: $checkedConvert('deny', (v) => v ?? _omit),
+      allow: $checkedConvert('allow', (v) => v as String?),
+      deny: $checkedConvert('deny', (v) => v as String?),
     );
     return val;
   },

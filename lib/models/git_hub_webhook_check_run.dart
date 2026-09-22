@@ -12,7 +12,7 @@ part 'git_hub_webhook_check_run.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GitHubWebhookCheckRun {
   const GitHubWebhookCheckRun({
     required this.name,
@@ -34,6 +34,19 @@ class GitHubWebhookCheckRun {
            ? null
            : pullRequests as List<GitHubWebhookCheckRunPullRequests>?,
        _pullRequestsPresent = !identical(pullRequests, _omit);
+
+  const GitHubWebhookCheckRun._({
+    required this.name,
+    required this.htmlUrl,
+    required this.checkSuite,
+    this.conclusion,
+    this.detailsUrl,
+    this.output,
+    this.pullRequests,
+  }) : _conclusionPresent = false,
+       _detailsUrlPresent = false,
+       _outputPresent = false,
+       _pullRequestsPresent = false;
   factory GitHubWebhookCheckRun.fromJson(Map<String, Object?> json) {
     final value = _$GitHubWebhookCheckRunFromJson(json);
     return GitHubWebhookCheckRun(

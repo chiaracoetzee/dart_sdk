@@ -10,7 +10,7 @@ part 'bulk_message_fetch_request_requests.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class BulkMessageFetchRequestRequests {
   const BulkMessageFetchRequestRequests({
     required this.channelId,
@@ -24,6 +24,16 @@ class BulkMessageFetchRequestRequests {
        _afterPresent = !identical(after, _omit),
        around = identical(around, _omit) ? null : around as SnowflakeType?,
        _aroundPresent = !identical(around, _omit);
+
+  const BulkMessageFetchRequestRequests._({
+    required this.channelId,
+    required this.limit,
+    this.before,
+    this.after,
+    this.around,
+  }) : _beforePresent = false,
+       _afterPresent = false,
+       _aroundPresent = false;
   factory BulkMessageFetchRequestRequests.fromJson(Map<String, Object?> json) {
     final value = _$BulkMessageFetchRequestRequestsFromJson(json);
     return BulkMessageFetchRequestRequests(

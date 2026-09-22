@@ -11,19 +11,24 @@ RegisterRequest _$RegisterRequestFromJson(Map<String, dynamic> json) =>
       'RegisterRequest',
       json,
       ($checkedConvert) {
-        final val = RegisterRequest(
+        final val = RegisterRequest._(
           consent: $checkedConvert('consent', (v) => v as bool? ?? false),
-          email: $checkedConvert('email', (v) => v ?? _omit),
-          username: $checkedConvert('username', (v) => v ?? _omit),
-          globalName: $checkedConvert('global_name', (v) => v ?? _omit),
-          password: $checkedConvert('password', (v) => v ?? _omit),
-          dateOfBirth: $checkedConvert('date_of_birth', (v) => v ?? _omit),
-          inviteCode: $checkedConvert('invite_code', (v) => v ?? _omit),
+          email: $checkedConvert('email', (v) => v as String?),
+          username: $checkedConvert('username', (v) => v as String?),
+          globalName: $checkedConvert('global_name', (v) => v as String?),
+          password: $checkedConvert('password', (v) => v as String?),
+          dateOfBirth: $checkedConvert('date_of_birth', (v) => v as String?),
+          inviteCode: $checkedConvert('invite_code', (v) => v as String?),
           registrationUrlCode: $checkedConvert(
             'registration_url_code',
-            (v) => v ?? _omit,
+            (v) => v as String?,
           ),
-          theme: $checkedConvert('theme', (v) => v ?? _omit),
+          theme: $checkedConvert(
+            'theme',
+            (v) => v == null
+                ? null
+                : RegisterRequestThemeTheme.fromJson(v as String),
+          ),
         );
         return val;
       },

@@ -11,7 +11,7 @@ part 'guild_role_update_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildRoleUpdateRequest {
   const GuildRoleUpdateRequest({
     Object? name = _omit,
@@ -38,6 +38,20 @@ class GuildRoleUpdateRequest {
            ? null
            : mentionable as bool?,
        _mentionablePresent = !identical(mentionable, _omit);
+
+  const GuildRoleUpdateRequest._({
+    this.name,
+    this.color,
+    this.permissions,
+    this.hoist,
+    this.hoistPosition,
+    this.mentionable,
+  }) : _namePresent = false,
+       _colorPresent = false,
+       _permissionsPresent = false,
+       _hoistPresent = false,
+       _hoistPositionPresent = false,
+       _mentionablePresent = false;
   factory GuildRoleUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildRoleUpdateRequestFromJson(json);
     return GuildRoleUpdateRequest(

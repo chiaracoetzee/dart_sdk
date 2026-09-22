@@ -11,7 +11,7 @@ part 'o_auth2_me_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class OAuth2MeResponse {
   const OAuth2MeResponse({
     required this.application,
@@ -20,6 +20,13 @@ class OAuth2MeResponse {
     Object? user = _omit,
   }) : user = identical(user, _omit) ? null : user as OAuth2MeResponseUser?,
        _userPresent = !identical(user, _omit);
+
+  const OAuth2MeResponse._({
+    required this.application,
+    required this.scopes,
+    required this.expires,
+    this.user,
+  }) : _userPresent = false;
   factory OAuth2MeResponse.fromJson(Map<String, Object?> json) {
     final value = _$OAuth2MeResponseFromJson(json);
     return OAuth2MeResponse(

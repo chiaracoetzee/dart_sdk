@@ -10,7 +10,7 @@ UserSettingsResponseGuildFolders _$UserSettingsResponseGuildFoldersFromJson(
   Map<String, dynamic> json,
 ) =>
     $checkedCreate('UserSettingsResponseGuildFolders', json, ($checkedConvert) {
-      final val = UserSettingsResponseGuildFolders(
+      final val = UserSettingsResponseGuildFolders._(
         guildIds: $checkedConvert(
           'guild_ids',
           (v) => (v as List<dynamic>).map((e) => e as String).toList(),
@@ -22,9 +22,9 @@ UserSettingsResponseGuildFolders _$UserSettingsResponseGuildFoldersFromJson(
               ? GuildFolderIconType.folder
               : GuildFolderIconType.fromJson(v as String),
         ),
-        id: $checkedConvert('id', (v) => v ?? _omit),
-        name: $checkedConvert('name', (v) => v ?? _omit),
-        color: $checkedConvert('color', (v) => v ?? _omit),
+        id: $checkedConvert('id', (v) => (v as num?)?.toInt()),
+        name: $checkedConvert('name', (v) => v as String?),
+        color: $checkedConvert('color', (v) => (v as num?)?.toInt()),
       );
       return val;
     }, fieldKeyMap: const {'guildIds': 'guild_ids'});

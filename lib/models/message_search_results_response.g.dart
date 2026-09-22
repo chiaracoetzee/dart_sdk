@@ -9,7 +9,7 @@ part of 'message_search_results_response.dart';
 MessageSearchResultsResponse _$MessageSearchResultsResponseFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('MessageSearchResultsResponse', json, ($checkedConvert) {
-  final val = MessageSearchResultsResponse(
+  final val = MessageSearchResultsResponse._(
     messages: $checkedConvert(
       'messages',
       (v) => (v as List<dynamic>)
@@ -29,7 +29,10 @@ MessageSearchResultsResponse _$MessageSearchResultsResponseFromJson(
     total: $checkedConvert('total', (v) => (v as num).toInt()),
     hitsPerPage: $checkedConvert('hits_per_page', (v) => (v as num).toInt()),
     page: $checkedConvert('page', (v) => (v as num).toInt()),
-    cursor: $checkedConvert('cursor', (v) => v ?? _omit),
+    cursor: $checkedConvert(
+      'cursor',
+      (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+    ),
   );
   return val;
 }, fieldKeyMap: const {'hitsPerPage': 'hits_per_page'});

@@ -11,7 +11,7 @@ part 'guild_create_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildCreateRequest {
   const GuildCreateRequest({
     required this.name,
@@ -28,6 +28,15 @@ class GuildCreateRequest {
            ? null
            : template as TemplateSerializedGuild?,
        _templatePresent = !identical(template, _omit);
+
+  const GuildCreateRequest._({
+    required this.name,
+    this.icon,
+    this.emptyFeatures,
+    this.template,
+  }) : _iconPresent = false,
+       _emptyFeaturesPresent = false,
+       _templatePresent = false;
   factory GuildCreateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildCreateRequestFromJson(json);
     return GuildCreateRequest(

@@ -8,7 +8,7 @@ part 'error_errors.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ErrorErrors {
   const ErrorErrors({
     required this.path,
@@ -16,6 +16,9 @@ class ErrorErrors {
     Object? code = _omit,
   }) : code = identical(code, _omit) ? null : code as String?,
        _codePresent = !identical(code, _omit);
+
+  const ErrorErrors._({required this.path, required this.message, this.code})
+    : _codePresent = false;
   factory ErrorErrors.fromJson(Map<String, Object?> json) {
     final value = _$ErrorErrorsFromJson(json);
     return ErrorErrors(

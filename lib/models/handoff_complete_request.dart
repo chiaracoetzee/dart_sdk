@@ -8,7 +8,7 @@ part 'handoff_complete_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class HandoffCompleteRequest {
   const HandoffCompleteRequest({
     required this.code,
@@ -16,6 +16,12 @@ class HandoffCompleteRequest {
     Object? token = _omit,
   }) : token = identical(token, _omit) ? null : token as String?,
        _tokenPresent = !identical(token, _omit);
+
+  const HandoffCompleteRequest._({
+    required this.code,
+    required this.userId,
+    this.token,
+  }) : _tokenPresent = false;
   factory HandoffCompleteRequest.fromJson(Map<String, Object?> json) {
     final value = _$HandoffCompleteRequestFromJson(json);
     return HandoffCompleteRequest(

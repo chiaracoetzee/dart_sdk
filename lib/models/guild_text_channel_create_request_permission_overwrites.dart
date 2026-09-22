@@ -12,7 +12,7 @@ part 'guild_text_channel_create_request_permission_overwrites.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildTextChannelCreateRequestPermissionOverwrites {
   const GuildTextChannelCreateRequestPermissionOverwrites({
     required this.id,
@@ -23,6 +23,14 @@ class GuildTextChannelCreateRequestPermissionOverwrites {
        _allowPresent = !identical(allow, _omit),
        deny = identical(deny, _omit) ? null : deny as UnsignedInt64Type?,
        _denyPresent = !identical(deny, _omit);
+
+  const GuildTextChannelCreateRequestPermissionOverwrites._({
+    required this.id,
+    required this.type,
+    this.allow,
+    this.deny,
+  }) : _allowPresent = false,
+       _denyPresent = false;
   factory GuildTextChannelCreateRequestPermissionOverwrites.fromJson(
     Map<String, Object?> json,
   ) {

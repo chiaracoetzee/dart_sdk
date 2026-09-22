@@ -12,12 +12,12 @@ _$UserGuildSettingsUpdateRequestMuteConfigFromJson(Map<String, dynamic> json) =>
       'UserGuildSettingsUpdateRequestMuteConfig',
       json,
       ($checkedConvert) {
-        final val = UserGuildSettingsUpdateRequestMuteConfig(
+        final val = UserGuildSettingsUpdateRequestMuteConfig._(
           selectedTimeWindow: $checkedConvert(
             'selected_time_window',
             (v) => (v as num).toInt(),
           ),
-          endTime: $checkedConvert('end_time', (v) => v ?? _omit),
+          endTime: $checkedConvert('end_time', (v) => v as String?),
         );
         return val;
       },

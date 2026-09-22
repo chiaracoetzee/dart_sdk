@@ -8,7 +8,7 @@ part 'instatus_webhook_meta.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class InstatusWebhookMeta {
   const InstatusWebhookMeta({
     Object? unsubscribe = _omit,
@@ -21,6 +21,10 @@ class InstatusWebhookMeta {
            ? null
            : documentation as String?,
        _documentationPresent = !identical(documentation, _omit);
+
+  const InstatusWebhookMeta._({this.unsubscribe, this.documentation})
+    : _unsubscribePresent = false,
+      _documentationPresent = false;
   factory InstatusWebhookMeta.fromJson(Map<String, Object?> json) {
     final value = _$InstatusWebhookMetaFromJson(json);
     return InstatusWebhookMeta(

@@ -24,7 +24,7 @@ part 'git_hub_webhook.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GitHubWebhook {
   const GitHubWebhook({
     required this.sender,
@@ -111,6 +111,47 @@ class GitHubWebhook {
            ? null
            : review as GitHubWebhookReview?,
        _reviewPresent = !identical(review, _omit);
+
+  const GitHubWebhook._({
+    required this.sender,
+    this.action,
+    this.answer,
+    this.checkRun,
+    this.checkSuite,
+    this.comment,
+    this.commits,
+    this.compare,
+    this.discussion,
+    this.forced,
+    this.forkee,
+    this.headCommit,
+    this.issue,
+    this.member,
+    this.pullRequest,
+    this.refType,
+    this.ref,
+    this.release,
+    this.repository,
+    this.review,
+  }) : _actionPresent = false,
+       _answerPresent = false,
+       _checkRunPresent = false,
+       _checkSuitePresent = false,
+       _commentPresent = false,
+       _commitsPresent = false,
+       _comparePresent = false,
+       _discussionPresent = false,
+       _forcedPresent = false,
+       _forkeePresent = false,
+       _headCommitPresent = false,
+       _issuePresent = false,
+       _memberPresent = false,
+       _pullRequestPresent = false,
+       _refTypePresent = false,
+       _refPresent = false,
+       _releasePresent = false,
+       _repositoryPresent = false,
+       _reviewPresent = false;
   factory GitHubWebhook.fromJson(Map<String, Object?> json) {
     final value = _$GitHubWebhookFromJson(json);
     return GitHubWebhook(

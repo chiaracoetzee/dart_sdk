@@ -12,7 +12,7 @@ part 'sudo_verification_schema.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class SudoVerificationSchema {
   const SudoVerificationSchema({
     Object? password = _omit,
@@ -36,6 +36,18 @@ class SudoVerificationSchema {
            ? null
            : webauthnChallenge as String?,
        _webauthnChallengePresent = !identical(webauthnChallenge, _omit);
+
+  const SudoVerificationSchema._({
+    this.password,
+    this.mfaMethod,
+    this.mfaCode,
+    this.webauthnResponse,
+    this.webauthnChallenge,
+  }) : _passwordPresent = false,
+       _mfaMethodPresent = false,
+       _mfaCodePresent = false,
+       _webauthnResponsePresent = false,
+       _webauthnChallengePresent = false;
   factory SudoVerificationSchema.fromJson(Map<String, Object?> json) {
     final value = _$SudoVerificationSchemaFromJson(json);
     return SudoVerificationSchema(

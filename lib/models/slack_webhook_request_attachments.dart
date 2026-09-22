@@ -10,7 +10,7 @@ part 'slack_webhook_request_attachments.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class SlackWebhookRequestAttachments {
   const SlackWebhookRequestAttachments({
     Object? fallback = _omit,
@@ -57,6 +57,36 @@ class SlackWebhookRequestAttachments {
        _imageUrlPresent = !identical(imageUrl, _omit),
        thumbUrl = identical(thumbUrl, _omit) ? null : thumbUrl as String?,
        _thumbUrlPresent = !identical(thumbUrl, _omit);
+
+  const SlackWebhookRequestAttachments._({
+    this.fallback,
+    this.pretext,
+    this.text,
+    this.color,
+    this.title,
+    this.titleLink,
+    this.fields,
+    this.footer,
+    this.ts,
+    this.authorName,
+    this.authorLink,
+    this.authorIcon,
+    this.imageUrl,
+    this.thumbUrl,
+  }) : _fallbackPresent = false,
+       _pretextPresent = false,
+       _textPresent = false,
+       _colorPresent = false,
+       _titlePresent = false,
+       _titleLinkPresent = false,
+       _fieldsPresent = false,
+       _footerPresent = false,
+       _tsPresent = false,
+       _authorNamePresent = false,
+       _authorLinkPresent = false,
+       _authorIconPresent = false,
+       _imageUrlPresent = false,
+       _thumbUrlPresent = false;
   factory SlackWebhookRequestAttachments.fromJson(Map<String, Object?> json) {
     final value = _$SlackWebhookRequestAttachmentsFromJson(json);
     return SlackWebhookRequestAttachments(

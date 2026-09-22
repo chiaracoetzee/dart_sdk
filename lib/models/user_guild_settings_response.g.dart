@@ -12,7 +12,7 @@ UserGuildSettingsResponse _$UserGuildSettingsResponseFromJson(
   'UserGuildSettingsResponse',
   json,
   ($checkedConvert) {
-    final val = UserGuildSettingsResponse(
+    final val = UserGuildSettingsResponse._(
       guildId: $checkedConvert('guild_id', (v) => v as String?),
       messageNotifications: $checkedConvert(
         'message_notifications',
@@ -42,7 +42,12 @@ UserGuildSettingsResponse _$UserGuildSettingsResponseFromJson(
         ),
       ),
       version: $checkedConvert('version', (v) => (v as num).toInt()),
-      unreadBadges: $checkedConvert('unread_badges', (v) => v ?? _omit),
+      unreadBadges: $checkedConvert(
+        'unread_badges',
+        (v) => v == null
+            ? null
+            : UserNotificationSettings.fromJson((v as num).toInt()),
+      ),
     );
     return val;
   },

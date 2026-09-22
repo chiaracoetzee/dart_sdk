@@ -69,8 +69,8 @@ class OAuth2ApplicationsMeResponseApplicationsMeResponse {
     required this.botRequireCodeGrant,
     required this.verifyKey,
     required this.owner,
-    required this.bot,
-    required this.redirectUris,
+    this.bot,
+    this.redirectUris,
   });
 
   factory OAuth2ApplicationsMeResponseApplicationsMeResponse.fromJson(

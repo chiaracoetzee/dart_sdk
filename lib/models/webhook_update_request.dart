@@ -11,7 +11,7 @@ part 'webhook_update_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class WebhookUpdateRequest {
   const WebhookUpdateRequest({
     Object? name = _omit,
@@ -25,6 +25,11 @@ class WebhookUpdateRequest {
            ? null
            : channelId as SnowflakeType?,
        _channelIdPresent = !identical(channelId, _omit);
+
+  const WebhookUpdateRequest._({this.name, this.avatar, this.channelId})
+    : _namePresent = false,
+      _avatarPresent = false,
+      _channelIdPresent = false;
   factory WebhookUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$WebhookUpdateRequestFromJson(json);
     return WebhookUpdateRequest(

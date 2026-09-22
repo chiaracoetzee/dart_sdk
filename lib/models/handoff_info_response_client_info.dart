@@ -11,7 +11,7 @@ part 'handoff_info_response_client_info.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class HandoffInfoResponseClientInfo {
   const HandoffInfoResponseClientInfo({
     required this.device,
@@ -26,6 +26,15 @@ class HandoffInfoResponseClientInfo {
            ? null
            : location as AuthSessionLocation?,
        _locationPresent = !identical(location, _omit);
+
+  const HandoffInfoResponseClientInfo._({
+    required this.device,
+    this.platform,
+    this.os,
+    this.location,
+  }) : _platformPresent = false,
+       _osPresent = false,
+       _locationPresent = false;
   factory HandoffInfoResponseClientInfo.fromJson(Map<String, Object?> json) {
     final value = _$HandoffInfoResponseClientInfoFromJson(json);
     return HandoffInfoResponseClientInfo(

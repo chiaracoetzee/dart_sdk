@@ -11,7 +11,7 @@ UserPartialResponse _$UserPartialResponseFromJson(Map<String, dynamic> json) =>
       'UserPartialResponse',
       json,
       ($checkedConvert) {
-        final val = UserPartialResponse(
+        final val = UserPartialResponse._(
           id: $checkedConvert('id', (v) => v as String),
           username: $checkedConvert('username', (v) => v as String),
           discriminator: $checkedConvert('discriminator', (v) => v as String),
@@ -22,9 +22,14 @@ UserPartialResponse _$UserPartialResponseFromJson(Map<String, dynamic> json) =>
             (v) => (v as num?)?.toInt(),
           ),
           flags: $checkedConvert('flags', (v) => (v as num).toInt()),
-          bot: $checkedConvert('bot', (v) => v ?? _omit),
-          system: $checkedConvert('system', (v) => v ?? _omit),
-          mentionFlags: $checkedConvert('mention_flags', (v) => v ?? _omit),
+          bot: $checkedConvert('bot', (v) => v as bool?),
+          system: $checkedConvert('system', (v) => v as bool?),
+          mentionFlags: $checkedConvert(
+            'mention_flags',
+            (v) => v == null
+                ? null
+                : MentionReplyPreferences.fromJson((v as num).toInt()),
+          ),
         );
         return val;
       },

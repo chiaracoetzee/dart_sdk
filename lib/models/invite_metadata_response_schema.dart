@@ -54,8 +54,8 @@ class InviteMetadataResponseSchemaGuildInviteMetadataResponse {
 
   const InviteMetadataResponseSchemaGuildInviteMetadataResponse({
     required this.code,
-    required this.inviter,
-    required this.expiresAt,
+    this.inviter,
+    this.expiresAt,
     required this.temporary,
     required this.type,
     required this.guild,
@@ -96,8 +96,8 @@ class InviteMetadataResponseSchemaGroupDmInviteMetadataResponse {
 
   const InviteMetadataResponseSchemaGroupDmInviteMetadataResponse({
     required this.code,
-    required this.inviter,
-    required this.expiresAt,
+    this.inviter,
+    this.expiresAt,
     required this.temporary,
     required this.type,
     required this.channel,

@@ -13,7 +13,7 @@ part 'guild_invite_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildInviteResponse {
   const GuildInviteResponse({
     required this.code,
@@ -31,6 +31,19 @@ class GuildInviteResponse {
        _inviterPresent = !identical(inviter, _omit),
        expiresAt = identical(expiresAt, _omit) ? null : expiresAt as DateTime?,
        _expiresAtPresent = !identical(expiresAt, _omit);
+
+  const GuildInviteResponse._({
+    required this.code,
+    required this.temporary,
+    required this.type,
+    required this.guild,
+    required this.channel,
+    required this.memberCount,
+    required this.presenceCount,
+    this.inviter,
+    this.expiresAt,
+  }) : _inviterPresent = false,
+       _expiresAtPresent = false;
   factory GuildInviteResponse.fromJson(Map<String, Object?> json) {
     final value = _$GuildInviteResponseFromJson(json);
     return GuildInviteResponse(

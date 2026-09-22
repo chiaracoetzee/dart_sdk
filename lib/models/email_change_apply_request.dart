@@ -12,7 +12,7 @@ part 'email_change_apply_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class EmailChangeApplyRequest {
   const EmailChangeApplyRequest({
     required this.emailToken,
@@ -37,6 +37,19 @@ class EmailChangeApplyRequest {
            ? null
            : webauthnChallenge as String?,
        _webauthnChallengePresent = !identical(webauthnChallenge, _omit);
+
+  const EmailChangeApplyRequest._({
+    required this.emailToken,
+    this.password,
+    this.mfaMethod,
+    this.mfaCode,
+    this.webauthnResponse,
+    this.webauthnChallenge,
+  }) : _passwordPresent = false,
+       _mfaMethodPresent = false,
+       _mfaCodePresent = false,
+       _webauthnResponsePresent = false,
+       _webauthnChallengePresent = false;
   factory EmailChangeApplyRequest.fromJson(Map<String, Object?> json) {
     final value = _$EmailChangeApplyRequestFromJson(json);
     return EmailChangeApplyRequest(

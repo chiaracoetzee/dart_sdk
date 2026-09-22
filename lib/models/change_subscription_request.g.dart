@@ -12,14 +12,21 @@ ChangeSubscriptionRequest _$ChangeSubscriptionRequestFromJson(
   'ChangeSubscriptionRequest',
   json,
   ($checkedConvert) {
-    final val = ChangeSubscriptionRequest(
+    final val = ChangeSubscriptionRequest._(
       billingCycle: $checkedConvert(
         'billing_cycle',
         (v) => ChangeSubscriptionRequestBillingCycleBillingCycle.fromJson(
           v as String,
         ),
       ),
-      effectiveAt: $checkedConvert('effective_at', (v) => v ?? _omit),
+      effectiveAt: $checkedConvert(
+        'effective_at',
+        (v) => v == null
+            ? null
+            : ChangeSubscriptionRequestEffectiveAtEffectiveAt.fromJson(
+                v as String,
+              ),
+      ),
     );
     return val;
   },

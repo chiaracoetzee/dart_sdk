@@ -8,13 +8,16 @@ part 'friend_request_create_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class FriendRequestCreateRequest {
   const FriendRequestCreateRequest({Object? staffForceAccept = _omit})
     : staffForceAccept = identical(staffForceAccept, _omit)
           ? null
           : staffForceAccept as bool?,
       _staffForceAcceptPresent = !identical(staffForceAccept, _omit);
+
+  const FriendRequestCreateRequest._({this.staffForceAccept})
+    : _staffForceAcceptPresent = false;
   factory FriendRequestCreateRequest.fromJson(Map<String, Object?> json) {
     final value = _$FriendRequestCreateRequestFromJson(json);
     return FriendRequestCreateRequest(

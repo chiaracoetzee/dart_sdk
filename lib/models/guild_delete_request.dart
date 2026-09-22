@@ -12,7 +12,7 @@ part 'guild_delete_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildDeleteRequest {
   const GuildDeleteRequest({
     Object? password = _omit,
@@ -36,6 +36,18 @@ class GuildDeleteRequest {
            ? null
            : webauthnChallenge as String?,
        _webauthnChallengePresent = !identical(webauthnChallenge, _omit);
+
+  const GuildDeleteRequest._({
+    this.password,
+    this.mfaMethod,
+    this.mfaCode,
+    this.webauthnResponse,
+    this.webauthnChallenge,
+  }) : _passwordPresent = false,
+       _mfaMethodPresent = false,
+       _mfaCodePresent = false,
+       _webauthnResponsePresent = false,
+       _webauthnChallengePresent = false;
   factory GuildDeleteRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildDeleteRequestFromJson(json);
     return GuildDeleteRequest(

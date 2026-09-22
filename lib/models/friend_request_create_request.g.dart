@@ -9,8 +9,8 @@ part of 'friend_request_create_request.dart';
 FriendRequestCreateRequest _$FriendRequestCreateRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('FriendRequestCreateRequest', json, ($checkedConvert) {
-  final val = FriendRequestCreateRequest(
-    staffForceAccept: $checkedConvert('staff_force_accept', (v) => v ?? _omit),
+  final val = FriendRequestCreateRequest._(
+    staffForceAccept: $checkedConvert('staff_force_accept', (v) => v as bool?),
   );
   return val;
 }, fieldKeyMap: const {'staffForceAccept': 'staff_force_accept'});

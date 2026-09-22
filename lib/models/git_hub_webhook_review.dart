@@ -10,7 +10,7 @@ part 'git_hub_webhook_review.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GitHubWebhookReview {
   const GitHubWebhookReview({
     required this.user,
@@ -19,6 +19,13 @@ class GitHubWebhookReview {
     Object? body = _omit,
   }) : body = identical(body, _omit) ? null : body as String?,
        _bodyPresent = !identical(body, _omit);
+
+  const GitHubWebhookReview._({
+    required this.user,
+    required this.htmlUrl,
+    required this.state,
+    this.body,
+  }) : _bodyPresent = false;
   factory GitHubWebhookReview.fromJson(Map<String, Object?> json) {
     final value = _$GitHubWebhookReviewFromJson(json);
     return GitHubWebhookReview(

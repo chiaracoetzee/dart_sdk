@@ -12,7 +12,7 @@ part 'client_uploaded_attachment_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ClientUploadedAttachmentRequest {
   const ClientUploadedAttachmentRequest({
     required this.id,
@@ -39,6 +39,23 @@ class ClientUploadedAttachmentRequest {
        _durationPresent = !identical(duration, _omit),
        waveform = identical(waveform, _omit) ? null : waveform as String?,
        _waveformPresent = !identical(waveform, _omit);
+
+  const ClientUploadedAttachmentRequest._({
+    required this.id,
+    required this.filename,
+    required this.contentType,
+    required this.uploadFilename,
+    required this.fileSize,
+    this.title,
+    this.description,
+    this.flags,
+    this.duration,
+    this.waveform,
+  }) : _titlePresent = false,
+       _descriptionPresent = false,
+       _flagsPresent = false,
+       _durationPresent = false,
+       _waveformPresent = false;
   factory ClientUploadedAttachmentRequest.fromJson(Map<String, Object?> json) {
     final value = _$ClientUploadedAttachmentRequestFromJson(json);
     return ClientUploadedAttachmentRequest(

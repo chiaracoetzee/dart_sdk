@@ -11,7 +11,7 @@ GuildMemberResponse _$GuildMemberResponseFromJson(Map<String, dynamic> json) =>
       'GuildMemberResponse',
       json,
       ($checkedConvert) {
-        final val = GuildMemberResponse(
+        final val = GuildMemberResponse._(
           user: $checkedConvert(
             'user',
             (v) => UserPartialResponse.fromJson(v as Map<String, dynamic>),
@@ -26,16 +26,27 @@ GuildMemberResponse _$GuildMemberResponseFromJson(Map<String, dynamic> json) =>
           ),
           mute: $checkedConvert('mute', (v) => v as bool),
           deaf: $checkedConvert('deaf', (v) => v as bool),
-          nick: $checkedConvert('nick', (v) => v ?? _omit),
-          avatar: $checkedConvert('avatar', (v) => v ?? _omit),
-          banner: $checkedConvert('banner', (v) => v ?? _omit),
-          accentColor: $checkedConvert('accent_color', (v) => v ?? _omit),
+          nick: $checkedConvert('nick', (v) => v as String?),
+          avatar: $checkedConvert('avatar', (v) => v as String?),
+          banner: $checkedConvert('banner', (v) => v as String?),
+          accentColor: $checkedConvert(
+            'accent_color',
+            (v) => (v as num?)?.toInt(),
+          ),
           communicationDisabledUntil: $checkedConvert(
             'communication_disabled_until',
-            (v) => v ?? _omit,
+            (v) => v == null ? null : DateTime.parse(v as String),
           ),
-          profileFlags: $checkedConvert('profile_flags', (v) => v ?? _omit),
-          mentionFlags: $checkedConvert('mention_flags', (v) => v ?? _omit),
+          profileFlags: $checkedConvert(
+            'profile_flags',
+            (v) => (v as num?)?.toInt(),
+          ),
+          mentionFlags: $checkedConvert(
+            'mention_flags',
+            (v) => v == null
+                ? null
+                : MentionReplyPreferences.fromJson((v as num).toInt()),
+          ),
         );
         return val;
       },

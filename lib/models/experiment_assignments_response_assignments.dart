@@ -11,7 +11,7 @@ part 'experiment_assignments_response_assignments.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ExperimentAssignmentsResponseAssignments {
   const ExperimentAssignmentsResponseAssignments({
     Object? voiceNoiseSuppression = _omit,
@@ -24,6 +24,12 @@ class ExperimentAssignmentsResponseAssignments {
            ? null
            : screenShareDelivery as ScreenShareDeliveryAssignmentResponse?,
        _screenShareDeliveryPresent = !identical(screenShareDelivery, _omit);
+
+  const ExperimentAssignmentsResponseAssignments._({
+    this.voiceNoiseSuppression,
+    this.screenShareDelivery,
+  }) : _voiceNoiseSuppressionPresent = false,
+       _screenShareDeliveryPresent = false;
   factory ExperimentAssignmentsResponseAssignments.fromJson(
     Map<String, Object?> json,
   ) {

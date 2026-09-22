@@ -8,11 +8,13 @@ part 'user_note_update_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class UserNoteUpdateRequest {
   const UserNoteUpdateRequest({Object? note = _omit})
     : note = identical(note, _omit) ? null : note as String?,
       _notePresent = !identical(note, _omit);
+
+  const UserNoteUpdateRequest._({this.note}) : _notePresent = false;
   factory UserNoteUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$UserNoteUpdateRequestFromJson(json);
     return UserNoteUpdateRequest(

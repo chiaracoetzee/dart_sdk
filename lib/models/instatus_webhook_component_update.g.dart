@@ -12,10 +12,10 @@ InstatusWebhookComponentUpdate _$InstatusWebhookComponentUpdateFromJson(
   'InstatusWebhookComponentUpdate',
   json,
   ($checkedConvert) {
-    final val = InstatusWebhookComponentUpdate(
-      createdAt: $checkedConvert('created_at', (v) => v ?? _omit),
-      newStatus: $checkedConvert('new_status', (v) => v ?? _omit),
-      componentId: $checkedConvert('component_id', (v) => v ?? _omit),
+    final val = InstatusWebhookComponentUpdate._(
+      createdAt: $checkedConvert('created_at', (v) => v as String?),
+      newStatus: $checkedConvert('new_status', (v) => v as String?),
+      componentId: $checkedConvert('component_id', (v) => v as String?),
     );
     return val;
   },

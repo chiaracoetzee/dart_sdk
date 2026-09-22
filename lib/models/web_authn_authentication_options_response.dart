@@ -4,13 +4,14 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'web_authn_authentication_options_response_allow_credentials.dart';
 import 'web_authn_authentication_options_response_user_verification_user_verification.dart';
 
 part 'web_authn_authentication_options_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class WebAuthnAuthenticationOptionsResponse {
   const WebAuthnAuthenticationOptionsResponse({
     required this.challenge,
@@ -24,13 +25,27 @@ class WebAuthnAuthenticationOptionsResponse {
        _rpIdPresent = !identical(rpId, _omit),
        allowCredentials = identical(allowCredentials, _omit)
            ? null
-           : allowCredentials as List<Map<String, dynamic>>?,
+           : allowCredentials
+                 as List<
+                   WebAuthnAuthenticationOptionsResponseAllowCredentials
+                 >?,
        _allowCredentialsPresent = !identical(allowCredentials, _omit),
        userVerification = identical(userVerification, _omit)
            ? null
            : userVerification
                  as WebAuthnAuthenticationOptionsResponseUserVerificationUserVerification?,
        _userVerificationPresent = !identical(userVerification, _omit);
+
+  const WebAuthnAuthenticationOptionsResponse._({
+    required this.challenge,
+    this.timeout,
+    this.rpId,
+    this.allowCredentials,
+    this.userVerification,
+  }) : _timeoutPresent = false,
+       _rpIdPresent = false,
+       _allowCredentialsPresent = false,
+       _userVerificationPresent = false;
   factory WebAuthnAuthenticationOptionsResponse.fromJson(
     Map<String, Object?> json,
   ) {
@@ -54,7 +69,8 @@ class WebAuthnAuthenticationOptionsResponse {
   @JsonKey(includeIfNull: false)
   final String? rpId;
   @JsonKey(includeIfNull: false)
-  final List<Map<String, dynamic>>? allowCredentials;
+  final List<WebAuthnAuthenticationOptionsResponseAllowCredentials>?
+  allowCredentials;
   @JsonKey(includeIfNull: false)
   final WebAuthnAuthenticationOptionsResponseUserVerificationUserVerification?
   userVerification;

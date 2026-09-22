@@ -8,13 +8,13 @@ part of 'report_guild_request.dart';
 
 ReportGuildRequest _$ReportGuildRequestFromJson(Map<String, dynamic> json) =>
     $checkedCreate('ReportGuildRequest', json, ($checkedConvert) {
-      final val = ReportGuildRequest(
+      final val = ReportGuildRequest._(
         guildId: $checkedConvert('guild_id', (v) => v as String),
         category: $checkedConvert(
           'category',
           (v) => GuildReportCategory.fromJson(v as String),
         ),
-        inviteCode: $checkedConvert('invite_code', (v) => v ?? _omit),
+        inviteCode: $checkedConvert('invite_code', (v) => v as String?),
       );
       return val;
     }, fieldKeyMap: const {'guildId': 'guild_id', 'inviteCode': 'invite_code'});

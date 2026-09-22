@@ -12,7 +12,7 @@ MessageDsaReportRequest _$MessageDsaReportRequestFromJson(
   'MessageDsaReportRequest',
   json,
   ($checkedConvert) {
-    final val = MessageDsaReportRequest(
+    final val = MessageDsaReportRequest._(
       ticket: $checkedConvert('ticket', (v) => v as String),
       reporterFullLegalName: $checkedConvert(
         'reporter_full_legal_name',
@@ -31,12 +31,15 @@ MessageDsaReportRequest _$MessageDsaReportRequestFromJson(
         (v) => MessageReportCategory.fromJson(v as String),
       ),
       messageLink: $checkedConvert('message_link', (v) => v as String),
-      additionalInfo: $checkedConvert('additional_info', (v) => v ?? _omit),
+      additionalInfo: $checkedConvert('additional_info', (v) => v as String?),
       reporterFluxerTag: $checkedConvert(
         'reporter_fluxer_tag',
-        (v) => v ?? _omit,
+        (v) => v as String?,
       ),
-      reportedUserTag: $checkedConvert('reported_user_tag', (v) => v ?? _omit),
+      reportedUserTag: $checkedConvert(
+        'reported_user_tag',
+        (v) => v as String?,
+      ),
     );
     return val;
   },

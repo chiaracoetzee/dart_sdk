@@ -12,7 +12,7 @@ part 'git_hub_webhook_issue.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GitHubWebhookIssue {
   const GitHubWebhookIssue({
     required this.id,
@@ -23,6 +23,15 @@ class GitHubWebhookIssue {
     Object? body = _omit,
   }) : body = identical(body, _omit) ? null : body as String?,
        _bodyPresent = !identical(body, _omit);
+
+  const GitHubWebhookIssue._({
+    required this.id,
+    required this.number,
+    required this.htmlUrl,
+    required this.user,
+    required this.title,
+    this.body,
+  }) : _bodyPresent = false;
   factory GitHubWebhookIssue.fromJson(Map<String, Object?> json) {
     final value = _$GitHubWebhookIssueFromJson(json);
     return GitHubWebhookIssue(

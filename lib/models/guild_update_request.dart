@@ -23,7 +23,7 @@ part 'guild_update_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildUpdateRequest {
   const GuildUpdateRequest({
     Object? name = _omit,
@@ -140,6 +140,58 @@ class GuildUpdateRequest {
            ? null
            : webauthnChallenge as String?,
        _webauthnChallengePresent = !identical(webauthnChallenge, _omit);
+
+  const GuildUpdateRequest._({
+    this.name,
+    this.icon,
+    this.systemChannelId,
+    this.systemChannelFlags,
+    this.afkChannelId,
+    this.afkTimeout,
+    this.defaultMessageNotifications,
+    this.verificationLevel,
+    this.mfaLevel,
+    this.nsfwLevel,
+    this.nsfw,
+    this.contentWarningLevel,
+    this.contentWarningText,
+    this.explicitContentFilter,
+    this.banner,
+    this.splash,
+    this.embedSplash,
+    this.splashCardAlignment,
+    this.features,
+    this.messageHistoryCutoff,
+    this.password,
+    this.mfaMethod,
+    this.mfaCode,
+    this.webauthnResponse,
+    this.webauthnChallenge,
+  }) : _namePresent = false,
+       _iconPresent = false,
+       _systemChannelIdPresent = false,
+       _systemChannelFlagsPresent = false,
+       _afkChannelIdPresent = false,
+       _afkTimeoutPresent = false,
+       _defaultMessageNotificationsPresent = false,
+       _verificationLevelPresent = false,
+       _mfaLevelPresent = false,
+       _nsfwLevelPresent = false,
+       _nsfwPresent = false,
+       _contentWarningLevelPresent = false,
+       _contentWarningTextPresent = false,
+       _explicitContentFilterPresent = false,
+       _bannerPresent = false,
+       _splashPresent = false,
+       _embedSplashPresent = false,
+       _splashCardAlignmentPresent = false,
+       _featuresPresent = false,
+       _messageHistoryCutoffPresent = false,
+       _passwordPresent = false,
+       _mfaMethodPresent = false,
+       _mfaCodePresent = false,
+       _webauthnResponsePresent = false,
+       _webauthnChallengePresent = false;
   factory GuildUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildUpdateRequestFromJson(json);
     return GuildUpdateRequest(

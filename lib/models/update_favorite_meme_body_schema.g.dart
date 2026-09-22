@@ -9,10 +9,13 @@ part of 'update_favorite_meme_body_schema.dart';
 UpdateFavoriteMemeBodySchema _$UpdateFavoriteMemeBodySchemaFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('UpdateFavoriteMemeBodySchema', json, ($checkedConvert) {
-  final val = UpdateFavoriteMemeBodySchema(
-    name: $checkedConvert('name', (v) => v ?? _omit),
-    altText: $checkedConvert('alt_text', (v) => v ?? _omit),
-    tags: $checkedConvert('tags', (v) => v ?? _omit),
+  final val = UpdateFavoriteMemeBodySchema._(
+    name: $checkedConvert('name', (v) => v as String?),
+    altText: $checkedConvert('alt_text', (v) => v as String?),
+    tags: $checkedConvert(
+      'tags',
+      (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+    ),
   );
   return val;
 }, fieldKeyMap: const {'altText': 'alt_text'});

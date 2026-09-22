@@ -11,17 +11,17 @@ InstatusWebhookPage _$InstatusWebhookPageFromJson(Map<String, dynamic> json) =>
       'InstatusWebhookPage',
       json,
       ($checkedConvert) {
-        final val = InstatusWebhookPage(
-          id: $checkedConvert('id', (v) => v ?? _omit),
+        final val = InstatusWebhookPage._(
+          id: $checkedConvert('id', (v) => v as String?),
           statusIndicator: $checkedConvert(
             'status_indicator',
-            (v) => v ?? _omit,
+            (v) => v as String?,
           ),
           statusDescription: $checkedConvert(
             'status_description',
-            (v) => v ?? _omit,
+            (v) => v as String?,
           ),
-          url: $checkedConvert('url', (v) => v ?? _omit),
+          url: $checkedConvert('url', (v) => v as String?),
         );
         return val;
       },

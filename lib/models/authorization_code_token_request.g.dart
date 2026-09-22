@@ -12,13 +12,13 @@ AuthorizationCodeTokenRequest _$AuthorizationCodeTokenRequestFromJson(
   'AuthorizationCodeTokenRequest',
   json,
   ($checkedConvert) {
-    final val = AuthorizationCodeTokenRequest(
+    final val = AuthorizationCodeTokenRequest._(
       grantType: $checkedConvert('grant_type', (v) => v as String),
       code: $checkedConvert('code', (v) => v as String),
       redirectUri: $checkedConvert('redirect_uri', (v) => v as String),
-      clientId: $checkedConvert('client_id', (v) => v ?? _omit),
-      clientSecret: $checkedConvert('client_secret', (v) => v ?? _omit),
-      codeVerifier: $checkedConvert('code_verifier', (v) => v ?? _omit),
+      clientId: $checkedConvert('client_id', (v) => v as String?),
+      clientSecret: $checkedConvert('client_secret', (v) => v as String?),
+      codeVerifier: $checkedConvert('code_verifier', (v) => v as String?),
     );
     return val;
   },

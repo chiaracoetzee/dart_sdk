@@ -10,7 +10,7 @@ part 'create_favorite_meme_body_schema.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class CreateFavoriteMemeBodySchema {
   const CreateFavoriteMemeBodySchema({
     required this.name,
@@ -26,6 +26,16 @@ class CreateFavoriteMemeBodySchema {
        _attachmentIdPresent = !identical(attachmentId, _omit),
        embedIndex = identical(embedIndex, _omit) ? null : embedIndex as int?,
        _embedIndexPresent = !identical(embedIndex, _omit);
+
+  const CreateFavoriteMemeBodySchema._({
+    required this.name,
+    this.tags = const [],
+    this.altText,
+    this.attachmentId,
+    this.embedIndex,
+  }) : _altTextPresent = false,
+       _attachmentIdPresent = false,
+       _embedIndexPresent = false;
   factory CreateFavoriteMemeBodySchema.fromJson(Map<String, Object?> json) {
     final value = _$CreateFavoriteMemeBodySchemaFromJson(json);
     return CreateFavoriteMemeBodySchema(

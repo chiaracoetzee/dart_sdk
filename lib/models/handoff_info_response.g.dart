@@ -8,9 +8,16 @@ part of 'handoff_info_response.dart';
 
 HandoffInfoResponse _$HandoffInfoResponseFromJson(Map<String, dynamic> json) =>
     $checkedCreate('HandoffInfoResponse', json, ($checkedConvert) {
-      final val = HandoffInfoResponse(
+      final val = HandoffInfoResponse._(
         status: $checkedConvert('status', (v) => v as String),
-        clientInfo: $checkedConvert('client_info', (v) => v ?? _omit),
+        clientInfo: $checkedConvert(
+          'client_info',
+          (v) => v == null
+              ? null
+              : HandoffInfoResponseClientInfo.fromJson(
+                  v as Map<String, dynamic>,
+                ),
+        ),
       );
       return val;
     }, fieldKeyMap: const {'clientInfo': 'client_info'});

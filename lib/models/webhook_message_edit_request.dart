@@ -13,7 +13,7 @@ part 'webhook_message_edit_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class WebhookMessageEditRequest {
   const WebhookMessageEditRequest({
     Object? content = _omit,
@@ -34,6 +34,16 @@ class WebhookMessageEditRequest {
            ? null
            : allowedMentions as AllowedMentionsRequest?,
        _allowedMentionsPresent = !identical(allowedMentions, _omit);
+
+  const WebhookMessageEditRequest._({
+    this.content,
+    this.embeds,
+    this.flags,
+    this.allowedMentions,
+  }) : _contentPresent = false,
+       _embedsPresent = false,
+       _flagsPresent = false,
+       _allowedMentionsPresent = false;
   factory WebhookMessageEditRequest.fromJson(Map<String, Object?> json) {
     final value = _$WebhookMessageEditRequestFromJson(json);
     return WebhookMessageEditRequest(

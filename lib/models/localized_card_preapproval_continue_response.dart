@@ -95,7 +95,7 @@ class LocalizedCardPreapprovalContinueResponseRejectedLocalizedCardPreapprovalCo
   const LocalizedCardPreapprovalContinueResponseRejectedLocalizedCardPreapprovalContinueResponse({
     required this.status,
     required this.reason,
-    required this.actualCountry,
+    this.actualCountry,
   });
 
   factory LocalizedCardPreapprovalContinueResponseRejectedLocalizedCardPreapprovalContinueResponse.fromJson(

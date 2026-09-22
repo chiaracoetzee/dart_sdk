@@ -12,7 +12,7 @@ part 'harvest_self_data_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class HarvestSelfDataRequest {
   const HarvestSelfDataRequest({
     Object? excludedGuildIds = _omit,
@@ -37,6 +37,22 @@ class HarvestSelfDataRequest {
        _startDatePresent = !identical(startDate, _omit),
        endDate = identical(endDate, _omit) ? null : endDate as DateTime?,
        _endDatePresent = !identical(endDate, _omit);
+
+  const HarvestSelfDataRequest._({
+    this.excludedGuildIds,
+    this.includedGuildIds,
+    this.startDate,
+    this.endDate,
+    this.scope = BulkDeleteSelfMessagesScope.selected,
+    this.includeDms = true,
+    this.includeDmsClosed = true,
+    this.includeGroupDms = true,
+    this.includeGuilds = true,
+    this.guildFilterMode = BulkDeleteSelfMessagesGuildFilterMode.exclude,
+  }) : _excludedGuildIdsPresent = false,
+       _includedGuildIdsPresent = false,
+       _startDatePresent = false,
+       _endDatePresent = false;
   factory HarvestSelfDataRequest.fromJson(Map<String, Object?> json) {
     final value = _$HarvestSelfDataRequestFromJson(json);
     return HarvestSelfDataRequest(

@@ -12,16 +12,16 @@ CreateFavoriteMemeBodySchema _$CreateFavoriteMemeBodySchemaFromJson(
   'CreateFavoriteMemeBodySchema',
   json,
   ($checkedConvert) {
-    final val = CreateFavoriteMemeBodySchema(
+    final val = CreateFavoriteMemeBodySchema._(
       name: $checkedConvert('name', (v) => v as String),
       tags: $checkedConvert(
         'tags',
         (v) =>
             (v as List<dynamic>?)?.map((e) => e as String).toList() ?? const [],
       ),
-      altText: $checkedConvert('alt_text', (v) => v ?? _omit),
-      attachmentId: $checkedConvert('attachment_id', (v) => v ?? _omit),
-      embedIndex: $checkedConvert('embed_index', (v) => v ?? _omit),
+      altText: $checkedConvert('alt_text', (v) => v as String?),
+      attachmentId: $checkedConvert('attachment_id', (v) => v as String?),
+      embedIndex: $checkedConvert('embed_index', (v) => (v as num?)?.toInt()),
     );
     return val;
   },

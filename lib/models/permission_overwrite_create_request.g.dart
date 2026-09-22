@@ -10,13 +10,13 @@ PermissionOverwriteCreateRequest _$PermissionOverwriteCreateRequestFromJson(
   Map<String, dynamic> json,
 ) =>
     $checkedCreate('PermissionOverwriteCreateRequest', json, ($checkedConvert) {
-      final val = PermissionOverwriteCreateRequest(
+      final val = PermissionOverwriteCreateRequest._(
         type: $checkedConvert(
           'type',
           (v) => ChannelOverwriteType.fromJson((v as num).toInt()),
         ),
-        allow: $checkedConvert('allow', (v) => v ?? _omit),
-        deny: $checkedConvert('deny', (v) => v ?? _omit),
+        allow: $checkedConvert('allow', (v) => v as String?),
+        deny: $checkedConvert('deny', (v) => v as String?),
       );
       return val;
     });

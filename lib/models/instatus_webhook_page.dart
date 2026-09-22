@@ -8,7 +8,7 @@ part 'instatus_webhook_page.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class InstatusWebhookPage {
   const InstatusWebhookPage({
     Object? id = _omit,
@@ -27,6 +27,16 @@ class InstatusWebhookPage {
        _statusDescriptionPresent = !identical(statusDescription, _omit),
        url = identical(url, _omit) ? null : url as String?,
        _urlPresent = !identical(url, _omit);
+
+  const InstatusWebhookPage._({
+    this.id,
+    this.statusIndicator,
+    this.statusDescription,
+    this.url,
+  }) : _idPresent = false,
+       _statusIndicatorPresent = false,
+       _statusDescriptionPresent = false,
+       _urlPresent = false;
   factory InstatusWebhookPage.fromJson(Map<String, Object?> json) {
     final value = _$InstatusWebhookPageFromJson(json);
     return InstatusWebhookPage(

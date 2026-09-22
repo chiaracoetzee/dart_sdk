@@ -10,7 +10,7 @@ part 'user_profile_full_response_user_profile.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class UserProfileFullResponseUserProfile {
   const UserProfileFullResponseUserProfile({
     required this.bio,
@@ -22,6 +22,14 @@ class UserProfileFullResponseUserProfile {
            ? null
            : bannerColor as Int32Type?,
        _bannerColorPresent = !identical(bannerColor, _omit);
+
+  const UserProfileFullResponseUserProfile._({
+    required this.bio,
+    required this.pronouns,
+    required this.banner,
+    required this.accentColor,
+    this.bannerColor,
+  }) : _bannerColorPresent = false;
   factory UserProfileFullResponseUserProfile.fromJson(
     Map<String, Object?> json,
   ) {

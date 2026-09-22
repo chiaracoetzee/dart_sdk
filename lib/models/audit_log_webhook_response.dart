@@ -11,7 +11,7 @@ part 'audit_log_webhook_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class AuditLogWebhookResponse {
   const AuditLogWebhookResponse({
     required this.id,
@@ -30,6 +30,17 @@ class AuditLogWebhookResponse {
        _channelIdPresent = !identical(channelId, _omit),
        avatarHash = identical(avatarHash, _omit) ? null : avatarHash as String?,
        _avatarHashPresent = !identical(avatarHash, _omit);
+
+  const AuditLogWebhookResponse._({
+    required this.id,
+    required this.type,
+    required this.name,
+    this.guildId,
+    this.channelId,
+    this.avatarHash,
+  }) : _guildIdPresent = false,
+       _channelIdPresent = false,
+       _avatarHashPresent = false;
   factory AuditLogWebhookResponse.fromJson(Map<String, Object?> json) {
     final value = _$AuditLogWebhookResponseFromJson(json);
     return AuditLogWebhookResponse(

@@ -8,7 +8,7 @@ part of 'git_hub_webhook_answer.dart';
 
 GitHubWebhookAnswer _$GitHubWebhookAnswerFromJson(Map<String, dynamic> json) =>
     $checkedCreate('GitHubWebhookAnswer', json, ($checkedConvert) {
-      final val = GitHubWebhookAnswer(
+      final val = GitHubWebhookAnswer._(
         id: $checkedConvert('id', (v) => v as String),
         htmlUrl: $checkedConvert('html_url', (v) => v as String),
         user: $checkedConvert(
@@ -16,7 +16,7 @@ GitHubWebhookAnswer _$GitHubWebhookAnswerFromJson(Map<String, dynamic> json) =>
           (v) => GitHubWebhookAnswerUser.fromJson(v as Map<String, dynamic>),
         ),
         body: $checkedConvert('body', (v) => v as String),
-        commitId: $checkedConvert('commit_id', (v) => v ?? _omit),
+        commitId: $checkedConvert('commit_id', (v) => v as String?),
       );
       return val;
     }, fieldKeyMap: const {'htmlUrl': 'html_url', 'commitId': 'commit_id'});

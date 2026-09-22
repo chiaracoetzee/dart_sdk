@@ -11,7 +11,7 @@ part 'handoff_status_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class HandoffStatusResponse {
   const HandoffStatusResponse({
     required this.status,
@@ -26,6 +26,15 @@ class HandoffStatusResponse {
        _userIdPresent = !identical(userId, _omit),
        user = identical(user, _omit) ? null : user as UserPartialResponse?,
        _userPresent = !identical(user, _omit);
+
+  const HandoffStatusResponse._({
+    required this.status,
+    this.token,
+    this.userId,
+    this.user,
+  }) : _tokenPresent = false,
+       _userIdPresent = false,
+       _userPresent = false;
   factory HandoffStatusResponse.fromJson(Map<String, Object?> json) {
     final value = _$HandoffStatusResponseFromJson(json);
     return HandoffStatusResponse(

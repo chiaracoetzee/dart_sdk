@@ -12,7 +12,7 @@ part 'channel_partial_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ChannelPartialResponse {
   const ChannelPartialResponse({
     required this.id,
@@ -25,6 +25,14 @@ class ChannelPartialResponse {
            ? null
            : recipients as List<ChannelPartialResponseRecipients>?,
        _recipientsPresent = !identical(recipients, _omit);
+
+  const ChannelPartialResponse._({
+    required this.id,
+    required this.type,
+    this.name,
+    this.recipients,
+  }) : _namePresent = false,
+       _recipientsPresent = false;
   factory ChannelPartialResponse.fromJson(Map<String, Object?> json) {
     final value = _$ChannelPartialResponseFromJson(json);
     return ChannelPartialResponse(

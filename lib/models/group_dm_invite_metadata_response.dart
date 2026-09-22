@@ -12,7 +12,7 @@ part 'group_dm_invite_metadata_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GroupDmInviteMetadataResponse {
   const GroupDmInviteMetadataResponse({
     required this.code,
@@ -31,6 +31,20 @@ class GroupDmInviteMetadataResponse {
        _inviterPresent = !identical(inviter, _omit),
        expiresAt = identical(expiresAt, _omit) ? null : expiresAt as DateTime?,
        _expiresAtPresent = !identical(expiresAt, _omit);
+
+  const GroupDmInviteMetadataResponse._({
+    required this.code,
+    required this.temporary,
+    required this.type,
+    required this.channel,
+    required this.memberCount,
+    required this.createdAt,
+    required this.uses,
+    required this.maxUses,
+    this.inviter,
+    this.expiresAt,
+  }) : _inviterPresent = false,
+       _expiresAtPresent = false;
   factory GroupDmInviteMetadataResponse.fromJson(Map<String, Object?> json) {
     final value = _$GroupDmInviteMetadataResponseFromJson(json);
     return GroupDmInviteMetadataResponse(

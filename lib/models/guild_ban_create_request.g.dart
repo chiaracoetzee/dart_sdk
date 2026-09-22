@@ -12,15 +12,15 @@ GuildBanCreateRequest _$GuildBanCreateRequestFromJson(
   'GuildBanCreateRequest',
   json,
   ($checkedConvert) {
-    final val = GuildBanCreateRequest(
+    final val = GuildBanCreateRequest._(
       deleteMessageSeconds: $checkedConvert(
         'delete_message_seconds',
-        (v) => v ?? _omit,
+        (v) => (v as num?)?.toInt(),
       ),
-      reason: $checkedConvert('reason', (v) => v ?? _omit),
+      reason: $checkedConvert('reason', (v) => v as String?),
       banDurationSeconds: $checkedConvert(
         'ban_duration_seconds',
-        (v) => v ?? _omit,
+        (v) => (v as num?)?.toInt(),
       ),
       deleteMessageDays: $checkedConvert(
         'delete_message_days',

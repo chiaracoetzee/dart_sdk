@@ -12,7 +12,7 @@ part 'user_dsa_report_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class UserDsaReportRequest {
   const UserDsaReportRequest({
     required this.ticket,
@@ -36,6 +36,21 @@ class UserDsaReportRequest {
        _userIdPresent = !identical(userId, _omit),
        userTag = identical(userTag, _omit) ? null : userTag as String?,
        _userTagPresent = !identical(userTag, _omit);
+
+  const UserDsaReportRequest._({
+    required this.ticket,
+    required this.reporterFullLegalName,
+    required this.reporterCountryOfResidence,
+    required this.reportType,
+    required this.category,
+    this.additionalInfo,
+    this.reporterFluxerTag,
+    this.userId,
+    this.userTag,
+  }) : _additionalInfoPresent = false,
+       _reporterFluxerTagPresent = false,
+       _userIdPresent = false,
+       _userTagPresent = false;
   factory UserDsaReportRequest.fromJson(Map<String, Object?> json) {
     final value = _$UserDsaReportRequestFromJson(json);
     return UserDsaReportRequest(

@@ -12,17 +12,31 @@ GuildAuditLogEntryResponse _$GuildAuditLogEntryResponseFromJson(
   'GuildAuditLogEntryResponse',
   json,
   ($checkedConvert) {
-    final val = GuildAuditLogEntryResponse(
+    final val = GuildAuditLogEntryResponse._(
       id: $checkedConvert('id', (v) => v as String),
       actionType: $checkedConvert(
         'action_type',
         (v) => AuditLogActionType.fromJson((v as num).toInt()),
       ),
-      userId: $checkedConvert('user_id', (v) => v ?? _omit),
-      targetId: $checkedConvert('target_id', (v) => v ?? _omit),
-      reason: $checkedConvert('reason', (v) => v ?? _omit),
-      options: $checkedConvert('options', (v) => v ?? _omit),
-      changes: $checkedConvert('changes', (v) => v ?? _omit),
+      userId: $checkedConvert('user_id', (v) => v as String?),
+      targetId: $checkedConvert('target_id', (v) => v as String?),
+      reason: $checkedConvert('reason', (v) => v as String?),
+      options: $checkedConvert(
+        'options',
+        (v) => v == null
+            ? null
+            : GuildAuditLogEntryResponseOptions.fromJson(
+                v as Map<String, dynamic>,
+              ),
+      ),
+      changes: $checkedConvert(
+        'changes',
+        (v) => (v as List<dynamic>?)
+            ?.map(
+              (e) => AuditLogChangeSchema.fromJson(e as Map<String, dynamic>),
+            )
+            .toList(),
+      ),
     );
     return val;
   },

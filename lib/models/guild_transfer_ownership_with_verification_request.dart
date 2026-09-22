@@ -13,7 +13,7 @@ part 'guild_transfer_ownership_with_verification_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildTransferOwnershipWithVerificationRequest {
   const GuildTransferOwnershipWithVerificationRequest({
     required this.newOwnerId,
@@ -39,6 +39,19 @@ class GuildTransferOwnershipWithVerificationRequest {
            ? null
            : webauthnChallenge as String?,
        _webauthnChallengePresent = !identical(webauthnChallenge, _omit);
+
+  const GuildTransferOwnershipWithVerificationRequest._({
+    required this.newOwnerId,
+    this.password,
+    this.mfaMethod,
+    this.mfaCode,
+    this.webauthnResponse,
+    this.webauthnChallenge,
+  }) : _passwordPresent = false,
+       _mfaMethodPresent = false,
+       _mfaCodePresent = false,
+       _webauthnResponsePresent = false,
+       _webauthnChallengePresent = false;
   factory GuildTransferOwnershipWithVerificationRequest.fromJson(
     Map<String, Object?> json,
   ) {

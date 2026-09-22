@@ -14,7 +14,7 @@ part 'my_guild_member_update_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class MyGuildMemberUpdateRequest {
   const MyGuildMemberUpdateRequest({
     Object? nick = _omit,
@@ -76,6 +76,36 @@ class MyGuildMemberUpdateRequest {
            ? null
            : connectionId as String?,
        _connectionIdPresent = !identical(connectionId, _omit);
+
+  const MyGuildMemberUpdateRequest._({
+    this.nick,
+    this.avatar,
+    this.banner,
+    this.bio,
+    this.pronouns,
+    this.accentColor,
+    this.profileFlags,
+    this.mentionFlags,
+    this.mute,
+    this.deaf,
+    this.communicationDisabledUntil,
+    this.timeoutReason,
+    this.channelId,
+    this.connectionId,
+  }) : _nickPresent = false,
+       _avatarPresent = false,
+       _bannerPresent = false,
+       _bioPresent = false,
+       _pronounsPresent = false,
+       _accentColorPresent = false,
+       _profileFlagsPresent = false,
+       _mentionFlagsPresent = false,
+       _mutePresent = false,
+       _deafPresent = false,
+       _communicationDisabledUntilPresent = false,
+       _timeoutReasonPresent = false,
+       _channelIdPresent = false,
+       _connectionIdPresent = false;
   factory MyGuildMemberUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$MyGuildMemberUpdateRequestFromJson(json);
     return MyGuildMemberUpdateRequest(

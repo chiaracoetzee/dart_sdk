@@ -9,14 +9,19 @@ part of 'handoff_info_response_client_info.dart';
 HandoffInfoResponseClientInfo _$HandoffInfoResponseClientInfoFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('HandoffInfoResponseClientInfo', json, ($checkedConvert) {
-  final val = HandoffInfoResponseClientInfo(
+  final val = HandoffInfoResponseClientInfo._(
     device: $checkedConvert(
       'device',
       (v) => HandoffInfoResponseClientInfoDeviceDevice.fromJson(v as String),
     ),
-    platform: $checkedConvert('platform', (v) => v ?? _omit),
-    os: $checkedConvert('os', (v) => v ?? _omit),
-    location: $checkedConvert('location', (v) => v ?? _omit),
+    platform: $checkedConvert('platform', (v) => v as String?),
+    os: $checkedConvert('os', (v) => v as String?),
+    location: $checkedConvert(
+      'location',
+      (v) => v == null
+          ? null
+          : AuthSessionLocation.fromJson(v as Map<String, dynamic>),
+    ),
   );
   return val;
 });

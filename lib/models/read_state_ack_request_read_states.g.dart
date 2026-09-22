@@ -12,11 +12,14 @@ ReadStateAckRequestReadStates _$ReadStateAckRequestReadStatesFromJson(
   'ReadStateAckRequestReadStates',
   json,
   ($checkedConvert) {
-    final val = ReadStateAckRequestReadStates(
+    final val = ReadStateAckRequestReadStates._(
       channelId: $checkedConvert('channel_id', (v) => v as String),
       messageId: $checkedConvert('message_id', (v) => v as String),
-      mentionCount: $checkedConvert('mention_count', (v) => v ?? _omit),
-      manual: $checkedConvert('manual', (v) => v ?? _omit),
+      mentionCount: $checkedConvert(
+        'mention_count',
+        (v) => (v as num?)?.toInt(),
+      ),
+      manual: $checkedConvert('manual', (v) => v as bool?),
     );
     return val;
   },

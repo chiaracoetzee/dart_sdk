@@ -49,11 +49,11 @@ class Object1ClientUploadedAttachmentRequest {
   final NonNegativeSafeIntegerType fileSize;
 
   const Object1ClientUploadedAttachmentRequest({
-    required this.title,
-    required this.description,
-    required this.flags,
-    required this.duration,
-    required this.waveform,
+    this.title,
+    this.description,
+    this.flags,
+    this.duration,
+    this.waveform,
     required this.id,
     required this.filename,
     required this.contentType,
@@ -81,18 +81,19 @@ class Object1ClientAttachmentReferenceRequest {
   final Int32Type? duration;
   @JsonKey(includeIfNull: false)
   final String? waveform;
-  final dynamic id;
+  @JsonKey(includeIfNull: false)
+  final String? id;
   @JsonKey(includeIfNull: false)
   final String? filename;
 
   const Object1ClientAttachmentReferenceRequest({
-    required this.title,
-    required this.description,
-    required this.flags,
-    required this.duration,
-    required this.waveform,
-    required this.id,
-    required this.filename,
+    this.title,
+    this.description,
+    this.flags,
+    this.duration,
+    this.waveform,
+    this.id,
+    this.filename,
   });
 
   factory Object1ClientAttachmentReferenceRequest.fromJson(

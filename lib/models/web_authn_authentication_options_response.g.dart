@@ -12,12 +12,29 @@ _$WebAuthnAuthenticationOptionsResponseFromJson(
 ) => $checkedCreate('WebAuthnAuthenticationOptionsResponse', json, (
   $checkedConvert,
 ) {
-  final val = WebAuthnAuthenticationOptionsResponse(
+  final val = WebAuthnAuthenticationOptionsResponse._(
     challenge: $checkedConvert('challenge', (v) => v as String),
-    timeout: $checkedConvert('timeout', (v) => v ?? _omit),
-    rpId: $checkedConvert('rpId', (v) => v ?? _omit),
-    allowCredentials: $checkedConvert('allowCredentials', (v) => v ?? _omit),
-    userVerification: $checkedConvert('userVerification', (v) => v ?? _omit),
+    timeout: $checkedConvert('timeout', (v) => v as num?),
+    rpId: $checkedConvert('rpId', (v) => v as String?),
+    allowCredentials: $checkedConvert(
+      'allowCredentials',
+      (v) => (v as List<dynamic>?)
+          ?.map(
+            (e) =>
+                WebAuthnAuthenticationOptionsResponseAllowCredentials.fromJson(
+                  e as Map<String, dynamic>,
+                ),
+          )
+          .toList(),
+    ),
+    userVerification: $checkedConvert(
+      'userVerification',
+      (v) => v == null
+          ? null
+          : WebAuthnAuthenticationOptionsResponseUserVerificationUserVerification.fromJson(
+              v as String,
+            ),
+    ),
   );
   return val;
 });

@@ -12,19 +12,23 @@ AuthorizeConsentRequest _$AuthorizeConsentRequestFromJson(
   'AuthorizeConsentRequest',
   json,
   ($checkedConvert) {
-    final val = AuthorizeConsentRequest(
+    final val = AuthorizeConsentRequest._(
       clientId: $checkedConvert('client_id', (v) => v as String),
       scope: $checkedConvert('scope', (v) => v as String),
-      responseType: $checkedConvert('response_type', (v) => v ?? _omit),
-      redirectUri: $checkedConvert('redirect_uri', (v) => v ?? _omit),
-      state: $checkedConvert('state', (v) => v ?? _omit),
-      guildId: $checkedConvert('guild_id', (v) => v ?? _omit),
-      channelId: $checkedConvert('channel_id', (v) => v ?? _omit),
-      permissions: $checkedConvert('permissions', (v) => v ?? _omit),
-      codeChallenge: $checkedConvert('code_challenge', (v) => v ?? _omit),
+      responseType: $checkedConvert('response_type', (v) => v as String?),
+      redirectUri: $checkedConvert('redirect_uri', (v) => v as String?),
+      state: $checkedConvert('state', (v) => v as String?),
+      guildId: $checkedConvert('guild_id', (v) => v as String?),
+      channelId: $checkedConvert('channel_id', (v) => v as String?),
+      permissions: $checkedConvert('permissions', (v) => v as String?),
+      codeChallenge: $checkedConvert('code_challenge', (v) => v as String?),
       codeChallengeMethod: $checkedConvert(
         'code_challenge_method',
-        (v) => v ?? _omit,
+        (v) => v == null
+            ? null
+            : AuthorizeConsentRequestCodeChallengeMethodCodeChallengeMethod.fromJson(
+                v as String,
+              ),
       ),
     );
     return val;

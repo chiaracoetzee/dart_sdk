@@ -13,14 +13,14 @@ _$MessageSearchResultsResponseMessagesMessageReferenceFromJson(
   'MessageSearchResultsResponseMessagesMessageReference',
   json,
   ($checkedConvert) {
-    final val = MessageSearchResultsResponseMessagesMessageReference(
+    final val = MessageSearchResultsResponseMessagesMessageReference._(
       channelId: $checkedConvert('channel_id', (v) => v as String),
       messageId: $checkedConvert('message_id', (v) => v as String),
       type: $checkedConvert(
         'type',
         (v) => MessageReferenceType.fromJson((v as num).toInt()),
       ),
-      guildId: $checkedConvert('guild_id', (v) => v ?? _omit),
+      guildId: $checkedConvert('guild_id', (v) => v as String?),
     );
     return val;
   },

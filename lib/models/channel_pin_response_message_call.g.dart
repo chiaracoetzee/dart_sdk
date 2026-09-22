@@ -9,12 +9,15 @@ part of 'channel_pin_response_message_call.dart';
 ChannelPinResponseMessageCall _$ChannelPinResponseMessageCallFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('ChannelPinResponseMessageCall', json, ($checkedConvert) {
-  final val = ChannelPinResponseMessageCall(
+  final val = ChannelPinResponseMessageCall._(
     participants: $checkedConvert(
       'participants',
       (v) => (v as List<dynamic>).map((e) => e as String).toList(),
     ),
-    endedTimestamp: $checkedConvert('ended_timestamp', (v) => v ?? _omit),
+    endedTimestamp: $checkedConvert(
+      'ended_timestamp',
+      (v) => v == null ? null : DateTime.parse(v as String),
+    ),
   );
   return val;
 }, fieldKeyMap: const {'endedTimestamp': 'ended_timestamp'});

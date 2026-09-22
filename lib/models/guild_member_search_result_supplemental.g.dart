@@ -12,7 +12,7 @@ _$GuildMemberSearchResultSupplementalFromJson(Map<String, dynamic> json) =>
       'GuildMemberSearchResultSupplemental',
       json,
       ($checkedConvert) {
-        final val = GuildMemberSearchResultSupplemental(
+        final val = GuildMemberSearchResultSupplemental._(
           sourceInviteCode: $checkedConvert(
             'source_invite_code',
             (v) => v as String?,
@@ -20,7 +20,8 @@ _$GuildMemberSearchResultSupplementalFromJson(Map<String, dynamic> json) =>
           inviterId: $checkedConvert('inviter_id', (v) => v as String?),
           joinSourceType: $checkedConvert(
             'join_source_type',
-            (v) => v ?? _omit,
+            (v) =>
+                v == null ? null : JoinSourceType.fromJson((v as num).toInt()),
           ),
         );
         return val;

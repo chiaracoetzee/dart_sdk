@@ -10,7 +10,7 @@ part 'create_private_channel_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class CreatePrivateChannelRequest {
   const CreatePrivateChannelRequest({
     Object? recipientId = _omit,
@@ -23,6 +23,10 @@ class CreatePrivateChannelRequest {
            ? null
            : recipients as List<SnowflakeType>?,
        _recipientsPresent = !identical(recipients, _omit);
+
+  const CreatePrivateChannelRequest._({this.recipientId, this.recipients})
+    : _recipientIdPresent = false,
+      _recipientsPresent = false;
   factory CreatePrivateChannelRequest.fromJson(Map<String, Object?> json) {
     final value = _$CreatePrivateChannelRequestFromJson(json);
     return CreatePrivateChannelRequest(

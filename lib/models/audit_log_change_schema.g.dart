@@ -9,10 +9,10 @@ part of 'audit_log_change_schema.dart';
 AuditLogChangeSchema _$AuditLogChangeSchemaFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('AuditLogChangeSchema', json, ($checkedConvert) {
-  final val = AuditLogChangeSchema(
+  final val = AuditLogChangeSchema._(
     key: $checkedConvert('key', (v) => v as String),
-    oldValue: $checkedConvert('old_value', (v) => v ?? _omit),
-    newValue: $checkedConvert('new_value', (v) => v ?? _omit),
+    oldValue: $checkedConvert('old_value', (v) => v),
+    newValue: $checkedConvert('new_value', (v) => v),
   );
   return val;
 }, fieldKeyMap: const {'oldValue': 'old_value', 'newValue': 'new_value'});

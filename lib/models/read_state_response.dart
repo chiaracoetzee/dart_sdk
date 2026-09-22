@@ -12,7 +12,7 @@ part 'read_state_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ReadStateResponse {
   const ReadStateResponse({
     required this.id,
@@ -24,6 +24,14 @@ class ReadStateResponse {
            ? null
            : version as UnsignedInt64StringType?,
        _versionPresent = !identical(version, _omit);
+
+  const ReadStateResponse._({
+    required this.id,
+    required this.mentionCount,
+    required this.lastMessageId,
+    required this.lastPinTimestamp,
+    this.version,
+  }) : _versionPresent = false;
   factory ReadStateResponse.fromJson(Map<String, Object?> json) {
     final value = _$ReadStateResponseFromJson(json);
     return ReadStateResponse(

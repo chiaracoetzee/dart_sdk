@@ -10,13 +10,16 @@ part 'guild_role_positions_request_item.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildRolePositionsRequestItem {
   const GuildRolePositionsRequestItem({
     required this.id,
     Object? position = _omit,
   }) : position = identical(position, _omit) ? null : position as int?,
        _positionPresent = !identical(position, _omit);
+
+  const GuildRolePositionsRequestItem._({required this.id, this.position})
+    : _positionPresent = false;
   factory GuildRolePositionsRequestItem.fromJson(Map<String, Object?> json) {
     final value = _$GuildRolePositionsRequestItemFromJson(json);
     return GuildRolePositionsRequestItem(

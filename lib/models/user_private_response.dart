@@ -17,7 +17,7 @@ part 'user_private_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class UserPrivateResponse {
   const UserPrivateResponse({
     required this.premiumType,
@@ -111,6 +111,73 @@ class UserPrivateResponse {
            ? null
            : ageVerifiedAdult as bool?,
        _ageVerifiedAdultPresent = !identical(ageVerifiedAdult, _omit);
+
+  const UserPrivateResponse._({
+    required this.premiumType,
+    required this.username,
+    required this.discriminator,
+    required this.globalName,
+    required this.avatar,
+    required this.avatarColor,
+    required this.termsAgreedAt,
+    required this.pendingBulkMessageDeletion,
+    required this.flags,
+    required this.pronouns,
+    required this.isStaff,
+    required this.acls,
+    required this.traits,
+    required this.email,
+    required this.unreadGiftInventoryCount,
+    required this.hasUnreadGiftInventory,
+    required this.hasVerifiedPhone,
+    required this.bio,
+    required this.id,
+    required this.accentColor,
+    required this.hasEverPurchased,
+    required this.hasDismissedPremiumOnboarding,
+    required this.banner,
+    required this.bannerColor,
+    required this.mfaEnabled,
+    required this.nsfwAllowed,
+    required this.verified,
+    required this.premiumBadgeMasked,
+    required this.premiumSince,
+    required this.premiumUntil,
+    required this.premiumWillCancel,
+    required this.premiumBillingCycle,
+    required this.premiumLifetimeSequence,
+    required this.premiumGraceEndsAt,
+    required this.premiumDiscriminator,
+    required this.premiumBadgeHidden,
+    required this.privacyAgreedAt,
+    required this.premiumBadgeTimestampHidden,
+    required this.premiumBadgeSequenceHidden,
+    required this.premiumPurchaseDisabled,
+    required this.premiumEnabledOverride,
+    required this.premiumPerksDisabled,
+    required this.lastVoiceActivitySharingChangeAt,
+    required this.passwordLastChangedAt,
+    required this.requiredActions,
+    this.mentionFlags,
+    this.authenticatorTypes,
+    this.timezonePrivacyFlags,
+    this.timezone,
+    this.phone,
+    this.emailBounced,
+    this.system,
+    this.ageVerifiedAdult,
+    this.bot,
+    this.forceInboundPhoneVerification,
+  }) : _botPresent = false,
+       _systemPresent = false,
+       _mentionFlagsPresent = false,
+       _emailBouncedPresent = false,
+       _phonePresent = false,
+       _timezonePresent = false,
+       _timezonePrivacyFlagsPresent = false,
+       _authenticatorTypesPresent = false,
+       _forceInboundPhoneVerificationPresent = false,
+       _ageVerifiedAdultPresent = false;
   factory UserPrivateResponse.fromJson(Map<String, Object?> json) {
     final value = _$UserPrivateResponseFromJson(json);
     return UserPrivateResponse(

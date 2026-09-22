@@ -23,7 +23,7 @@ part 'user_settings_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class UserSettingsResponse {
   const UserSettingsResponse({
     required this.renderEmbeds,
@@ -71,6 +71,47 @@ class UserSettingsResponse {
            ? null
            : statusResetsTo as String?,
        _statusResetsToPresent = !identical(statusResetsTo, _omit);
+
+  const UserSettingsResponse._({
+    required this.renderEmbeds,
+    required this.profilePrivacy,
+    required this.syncedPreferences,
+    required this.theme,
+    required this.locale,
+    required this.restrictedGuilds,
+    required this.botRestrictedGuilds,
+    required this.defaultGuildsRestricted,
+    required this.botDefaultGuildsRestricted,
+    required this.inlineAttachmentMedia,
+    required this.inlineEmbedMedia,
+    required this.gifAutoPlay,
+    required this.status,
+    required this.renderReactions,
+    required this.animateEmoji,
+    required this.animateStickers,
+    required this.renderSpoilers,
+    required this.messageDisplayCompact,
+    required this.friendSourceFlags,
+    required this.incomingCallFlags,
+    required this.groupDmAddPermissionFlags,
+    required this.guildFolders,
+    required this.customStatus,
+    required this.afkTimeout,
+    required this.defaultShareVoiceActivity,
+    required this.developerMode,
+    required this.trustedDomains,
+    required this.defaultHideMutedChannels,
+    required this.sensitiveContentFriendDmFilter,
+    required this.sensitiveContentNonFriendDmFilter,
+    required this.sensitiveContentGuildFilter,
+    required this.suppressUnprivilegedSelfMentions,
+    required this.suppressUnprivilegedSelfMentionsBypassUserIds,
+    required this.staffDmAccessUserIds,
+    required this.timeFormat,
+    this.statusResetsAt,
+    this.statusResetsTo,
+  }) : _statusResetsAtPresent = false,
+       _statusResetsToPresent = false;
   factory UserSettingsResponse.fromJson(Map<String, Object?> json) {
     final value = _$UserSettingsResponseFromJson(json);
     return UserSettingsResponse(

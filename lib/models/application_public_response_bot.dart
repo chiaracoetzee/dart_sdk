@@ -11,7 +11,7 @@ part 'application_public_response_bot.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ApplicationPublicResponseBot {
   const ApplicationPublicResponseBot({
     required this.id,
@@ -28,6 +28,19 @@ class ApplicationPublicResponseBot {
        _bannerPresent = !identical(banner, _omit),
        token = identical(token, _omit) ? null : token as String?,
        _tokenPresent = !identical(token, _omit);
+
+  const ApplicationPublicResponseBot._({
+    required this.id,
+    required this.username,
+    required this.discriminator,
+    required this.bio,
+    required this.flags,
+    this.avatar,
+    this.banner,
+    this.token,
+  }) : _avatarPresent = false,
+       _bannerPresent = false,
+       _tokenPresent = false;
   factory ApplicationPublicResponseBot.fromJson(Map<String, Object?> json) {
     final value = _$ApplicationPublicResponseBotFromJson(json);
     return ApplicationPublicResponseBot(

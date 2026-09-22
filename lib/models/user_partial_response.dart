@@ -13,7 +13,7 @@ part 'user_partial_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class UserPartialResponse {
   const UserPartialResponse({
     required this.id,
@@ -34,6 +34,21 @@ class UserPartialResponse {
            ? null
            : mentionFlags as MentionReplyPreferences?,
        _mentionFlagsPresent = !identical(mentionFlags, _omit);
+
+  const UserPartialResponse._({
+    required this.id,
+    required this.username,
+    required this.discriminator,
+    required this.globalName,
+    required this.avatar,
+    required this.avatarColor,
+    required this.flags,
+    this.bot,
+    this.system,
+    this.mentionFlags,
+  }) : _botPresent = false,
+       _systemPresent = false,
+       _mentionFlagsPresent = false;
   factory UserPartialResponse.fromJson(Map<String, Object?> json) {
     final value = _$UserPartialResponseFromJson(json);
     return UserPartialResponse(

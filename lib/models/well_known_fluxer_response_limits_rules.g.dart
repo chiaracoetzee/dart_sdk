@@ -11,13 +11,20 @@ WellKnownFluxerResponseLimitsRules _$WellKnownFluxerResponseLimitsRulesFromJson(
 ) => $checkedCreate('WellKnownFluxerResponseLimitsRules', json, (
   $checkedConvert,
 ) {
-  final val = WellKnownFluxerResponseLimitsRules(
+  final val = WellKnownFluxerResponseLimitsRules._(
     id: $checkedConvert('id', (v) => v as String),
     overrides: $checkedConvert(
       'overrides',
       (v) => Map<String, num>.from(v as Map),
     ),
-    filters: $checkedConvert('filters', (v) => v ?? _omit),
+    filters: $checkedConvert(
+      'filters',
+      (v) => v == null
+          ? null
+          : WellKnownFluxerResponseLimitsRulesFilters.fromJson(
+              v as Map<String, dynamic>,
+            ),
+    ),
   );
   return val;
 });

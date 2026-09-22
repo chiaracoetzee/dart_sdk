@@ -12,7 +12,7 @@ part 'guild_role_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildRoleResponse {
   const GuildRoleResponse({
     required this.id,
@@ -32,6 +32,19 @@ class GuildRoleResponse {
            ? null
            : unicodeEmoji as String?,
        _unicodeEmojiPresent = !identical(unicodeEmoji, _omit);
+
+  const GuildRoleResponse._({
+    required this.id,
+    required this.name,
+    required this.color,
+    required this.position,
+    required this.permissions,
+    required this.hoist,
+    required this.mentionable,
+    this.hoistPosition,
+    this.unicodeEmoji,
+  }) : _hoistPositionPresent = false,
+       _unicodeEmojiPresent = false;
   factory GuildRoleResponse.fromJson(Map<String, Object?> json) {
     final value = _$GuildRoleResponseFromJson(json);
     return GuildRoleResponse(

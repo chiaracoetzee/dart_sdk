@@ -13,7 +13,7 @@ part 'register_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class RegisterRequest {
   const RegisterRequest({
     this.consent = false,
@@ -47,6 +47,25 @@ class RegisterRequest {
            ? null
            : theme as RegisterRequestThemeTheme?,
        _themePresent = !identical(theme, _omit);
+
+  const RegisterRequest._({
+    this.consent = false,
+    this.email,
+    this.username,
+    this.globalName,
+    this.password,
+    this.dateOfBirth,
+    this.inviteCode,
+    this.registrationUrlCode,
+    this.theme,
+  }) : _emailPresent = false,
+       _usernamePresent = false,
+       _globalNamePresent = false,
+       _passwordPresent = false,
+       _dateOfBirthPresent = false,
+       _inviteCodePresent = false,
+       _registrationUrlCodePresent = false,
+       _themePresent = false;
   factory RegisterRequest.fromJson(Map<String, Object?> json) {
     final value = _$RegisterRequestFromJson(json);
     return RegisterRequest(

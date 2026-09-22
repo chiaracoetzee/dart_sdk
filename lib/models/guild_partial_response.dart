@@ -13,7 +13,7 @@ part 'guild_partial_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildPartialResponse {
   const GuildPartialResponse({
     required this.id,
@@ -64,6 +64,32 @@ class GuildPartialResponse {
            ? null
            : embedSplashHeight as Int32Type?,
        _embedSplashHeightPresent = !identical(embedSplashHeight, _omit);
+
+  const GuildPartialResponse._({
+    required this.id,
+    required this.name,
+    required this.splashCardAlignment,
+    required this.features,
+    this.icon,
+    this.banner,
+    this.bannerWidth,
+    this.bannerHeight,
+    this.splash,
+    this.splashWidth,
+    this.splashHeight,
+    this.embedSplash,
+    this.embedSplashWidth,
+    this.embedSplashHeight,
+  }) : _iconPresent = false,
+       _bannerPresent = false,
+       _bannerWidthPresent = false,
+       _bannerHeightPresent = false,
+       _splashPresent = false,
+       _splashWidthPresent = false,
+       _splashHeightPresent = false,
+       _embedSplashPresent = false,
+       _embedSplashWidthPresent = false,
+       _embedSplashHeightPresent = false;
   factory GuildPartialResponse.fromJson(Map<String, Object?> json) {
     final value = _$GuildPartialResponseFromJson(json);
     return GuildPartialResponse(

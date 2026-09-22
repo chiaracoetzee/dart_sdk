@@ -10,7 +10,7 @@ part 'resolved_gif_entry_schema.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ResolvedGifEntrySchema {
   const ResolvedGifEntrySchema({
     required this.url,
@@ -24,6 +24,16 @@ class ResolvedGifEntrySchema {
            ? null
            : placeholder as String?,
        _placeholderPresent = !identical(placeholder, _omit);
+
+  const ResolvedGifEntrySchema._({
+    required this.url,
+    required this.proxyUrl,
+    required this.width,
+    required this.height,
+    required this.media,
+    this.placeholder,
+    this.contentType = '',
+  }) : _placeholderPresent = false;
   factory ResolvedGifEntrySchema.fromJson(Map<String, Object?> json) {
     final value = _$ResolvedGifEntrySchemaFromJson(json);
     return ResolvedGifEntrySchema(

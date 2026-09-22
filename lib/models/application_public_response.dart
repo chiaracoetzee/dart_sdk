@@ -12,7 +12,7 @@ part 'application_public_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ApplicationPublicResponse {
   const ApplicationPublicResponse({
     required this.id,
@@ -28,6 +28,18 @@ class ApplicationPublicResponse {
            ? null
            : currentUser as UserPartialResponse?,
        _currentUserPresent = !identical(currentUser, _omit);
+
+  const ApplicationPublicResponse._({
+    required this.id,
+    required this.name,
+    required this.icon,
+    required this.description,
+    required this.redirectUris,
+    required this.scopes,
+    required this.botPublic,
+    required this.bot,
+    this.currentUser,
+  }) : _currentUserPresent = false;
   factory ApplicationPublicResponse.fromJson(Map<String, Object?> json) {
     final value = _$ApplicationPublicResponseFromJson(json);
     return ApplicationPublicResponse(

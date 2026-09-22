@@ -14,7 +14,7 @@ part 'user_guild_settings_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class UserGuildSettingsResponse {
   const UserGuildSettingsResponse({
     required this.guildId,
@@ -32,6 +32,20 @@ class UserGuildSettingsResponse {
            ? null
            : unreadBadges as UserNotificationSettings?,
        _unreadBadgesPresent = !identical(unreadBadges, _omit);
+
+  const UserGuildSettingsResponse._({
+    required this.guildId,
+    required this.messageNotifications,
+    required this.muted,
+    required this.muteConfig,
+    required this.mobilePush,
+    required this.suppressEveryone,
+    required this.suppressRoles,
+    required this.hideMutedChannels,
+    required this.channelOverrides,
+    required this.version,
+    this.unreadBadges,
+  }) : _unreadBadgesPresent = false;
   factory UserGuildSettingsResponse.fromJson(Map<String, Object?> json) {
     final value = _$UserGuildSettingsResponseFromJson(json);
     return UserGuildSettingsResponse(

@@ -62,7 +62,7 @@ _$Object1ClientAttachmentReferenceRequestFromJson(Map<String, dynamic> json) =>
         flags: $checkedConvert('flags', (v) => (v as num?)?.toInt()),
         duration: $checkedConvert('duration', (v) => (v as num?)?.toInt()),
         waveform: $checkedConvert('waveform', (v) => v as String?),
-        id: $checkedConvert('id', (v) => v),
+        id: $checkedConvert('id', (v) => v as String?),
         filename: $checkedConvert('filename', (v) => v as String?),
       );
       return val;
@@ -76,6 +76,6 @@ Map<String, dynamic> _$Object1ClientAttachmentReferenceRequestToJson(
   'flags': ?instance.flags,
   'duration': ?instance.duration,
   'waveform': ?instance.waveform,
-  'id': instance.id,
+  'id': ?instance.id,
   'filename': ?instance.filename,
 };

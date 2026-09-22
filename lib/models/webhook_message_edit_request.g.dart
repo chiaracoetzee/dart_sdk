@@ -9,11 +9,21 @@ part of 'webhook_message_edit_request.dart';
 WebhookMessageEditRequest _$WebhookMessageEditRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('WebhookMessageEditRequest', json, ($checkedConvert) {
-  final val = WebhookMessageEditRequest(
-    content: $checkedConvert('content', (v) => v ?? _omit),
-    embeds: $checkedConvert('embeds', (v) => v ?? _omit),
-    flags: $checkedConvert('flags', (v) => v ?? _omit),
-    allowedMentions: $checkedConvert('allowed_mentions', (v) => v ?? _omit),
+  final val = WebhookMessageEditRequest._(
+    content: $checkedConvert('content', (v) => v as String?),
+    embeds: $checkedConvert(
+      'embeds',
+      (v) => (v as List<dynamic>?)
+          ?.map((e) => RichEmbedRequest.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    ),
+    flags: $checkedConvert('flags', (v) => (v as num?)?.toInt()),
+    allowedMentions: $checkedConvert(
+      'allowed_mentions',
+      (v) => v == null
+          ? null
+          : AllowedMentionsRequest.fromJson(v as Map<String, dynamic>),
+    ),
   );
   return val;
 }, fieldKeyMap: const {'allowedMentions': 'allowed_mentions'});

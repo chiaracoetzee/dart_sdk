@@ -14,7 +14,7 @@ part 'user_settings_response_guild_folders.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class UserSettingsResponseGuildFolders {
   const UserSettingsResponseGuildFolders({
     required this.guildIds,
@@ -29,6 +29,17 @@ class UserSettingsResponseGuildFolders {
        _namePresent = !identical(name, _omit),
        color = identical(color, _omit) ? null : color as Int32Type?,
        _colorPresent = !identical(color, _omit);
+
+  const UserSettingsResponseGuildFolders._({
+    required this.guildIds,
+    this.flags = 0,
+    this.icon = GuildFolderIconType.folder,
+    this.id,
+    this.name,
+    this.color,
+  }) : _idPresent = false,
+       _namePresent = false,
+       _colorPresent = false;
   factory UserSettingsResponseGuildFolders.fromJson(Map<String, Object?> json) {
     final value = _$UserSettingsResponseGuildFoldersFromJson(json);
     return UserSettingsResponseGuildFolders(

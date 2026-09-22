@@ -12,11 +12,14 @@ DiscoveryApplicationRequest _$DiscoveryApplicationRequestFromJson(
   'DiscoveryApplicationRequest',
   json,
   ($checkedConvert) {
-    final val = DiscoveryApplicationRequest(
+    final val = DiscoveryApplicationRequest._(
       description: $checkedConvert('description', (v) => v as String),
       categoryType: $checkedConvert('category_type', (v) => (v as num).toInt()),
-      primaryLanguage: $checkedConvert('primary_language', (v) => v ?? _omit),
-      customTags: $checkedConvert('custom_tags', (v) => v ?? _omit),
+      primaryLanguage: $checkedConvert('primary_language', (v) => v as String?),
+      customTags: $checkedConvert(
+        'custom_tags',
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+      ),
     );
     return val;
   },

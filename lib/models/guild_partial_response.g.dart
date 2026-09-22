@@ -12,7 +12,7 @@ GuildPartialResponse _$GuildPartialResponseFromJson(
   'GuildPartialResponse',
   json,
   ($checkedConvert) {
-    final val = GuildPartialResponse(
+    final val = GuildPartialResponse._(
       id: $checkedConvert('id', (v) => v as String),
       name: $checkedConvert('name', (v) => v as String),
       splashCardAlignment: $checkedConvert(
@@ -26,21 +26,27 @@ GuildPartialResponse _$GuildPartialResponseFromJson(
         'features',
         (v) => (v as List<dynamic>).map((e) => e as String).toList(),
       ),
-      icon: $checkedConvert('icon', (v) => v ?? _omit),
-      banner: $checkedConvert('banner', (v) => v ?? _omit),
-      bannerWidth: $checkedConvert('banner_width', (v) => v ?? _omit),
-      bannerHeight: $checkedConvert('banner_height', (v) => v ?? _omit),
-      splash: $checkedConvert('splash', (v) => v ?? _omit),
-      splashWidth: $checkedConvert('splash_width', (v) => v ?? _omit),
-      splashHeight: $checkedConvert('splash_height', (v) => v ?? _omit),
-      embedSplash: $checkedConvert('embed_splash', (v) => v ?? _omit),
+      icon: $checkedConvert('icon', (v) => v as String?),
+      banner: $checkedConvert('banner', (v) => v as String?),
+      bannerWidth: $checkedConvert('banner_width', (v) => (v as num?)?.toInt()),
+      bannerHeight: $checkedConvert(
+        'banner_height',
+        (v) => (v as num?)?.toInt(),
+      ),
+      splash: $checkedConvert('splash', (v) => v as String?),
+      splashWidth: $checkedConvert('splash_width', (v) => (v as num?)?.toInt()),
+      splashHeight: $checkedConvert(
+        'splash_height',
+        (v) => (v as num?)?.toInt(),
+      ),
+      embedSplash: $checkedConvert('embed_splash', (v) => v as String?),
       embedSplashWidth: $checkedConvert(
         'embed_splash_width',
-        (v) => v ?? _omit,
+        (v) => (v as num?)?.toInt(),
       ),
       embedSplashHeight: $checkedConvert(
         'embed_splash_height',
-        (v) => v ?? _omit,
+        (v) => (v as num?)?.toInt(),
       ),
     );
     return val;

@@ -12,7 +12,7 @@ DonationCheckoutRequest _$DonationCheckoutRequestFromJson(
   'DonationCheckoutRequest',
   json,
   ($checkedConvert) {
-    final val = DonationCheckoutRequest(
+    final val = DonationCheckoutRequest._(
       email: $checkedConvert('email', (v) => v as String),
       amountCents: $checkedConvert('amount_cents', (v) => (v as num).toInt()),
       currency: $checkedConvert(
@@ -25,7 +25,7 @@ DonationCheckoutRequest _$DonationCheckoutRequestFromJson(
             ? null
             : DonationCheckoutRequestIntervalInterval.fromJson(v as String),
       ),
-      isBusiness: $checkedConvert('is_business', (v) => v ?? _omit),
+      isBusiness: $checkedConvert('is_business', (v) => v as bool?),
     );
     return val;
   },

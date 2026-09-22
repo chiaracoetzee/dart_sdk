@@ -8,7 +8,7 @@ part of 'webhook_response.dart';
 
 WebhookResponse _$WebhookResponseFromJson(Map<String, dynamic> json) =>
     $checkedCreate('WebhookResponse', json, ($checkedConvert) {
-      final val = WebhookResponse(
+      final val = WebhookResponse._(
         id: $checkedConvert('id', (v) => v as String),
         guildId: $checkedConvert('guild_id', (v) => v as String),
         channelId: $checkedConvert('channel_id', (v) => v as String),
@@ -18,7 +18,7 @@ WebhookResponse _$WebhookResponseFromJson(Map<String, dynamic> json) =>
           'user',
           (v) => UserPartialResponse.fromJson(v as Map<String, dynamic>),
         ),
-        avatar: $checkedConvert('avatar', (v) => v ?? _omit),
+        avatar: $checkedConvert('avatar', (v) => v as String?),
       );
       return val;
     }, fieldKeyMap: const {'guildId': 'guild_id', 'channelId': 'channel_id'});

@@ -13,7 +13,7 @@ part 'bot_profile_update_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class BotProfileUpdateRequest {
   const BotProfileUpdateRequest({
     Object? username = _omit,
@@ -36,6 +36,20 @@ class BotProfileUpdateRequest {
        _bioPresent = !identical(bio, _omit),
        botFlags = identical(botFlags, _omit) ? null : botFlags as BotFlags?,
        _botFlagsPresent = !identical(botFlags, _omit);
+
+  const BotProfileUpdateRequest._({
+    this.username,
+    this.discriminator,
+    this.avatar,
+    this.banner,
+    this.bio,
+    this.botFlags,
+  }) : _usernamePresent = false,
+       _discriminatorPresent = false,
+       _avatarPresent = false,
+       _bannerPresent = false,
+       _bioPresent = false,
+       _botFlagsPresent = false;
   factory BotProfileUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$BotProfileUpdateRequestFromJson(json);
     return BotProfileUpdateRequest(

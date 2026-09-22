@@ -12,7 +12,7 @@ part 'guild_voice_channel_create_request_permission_overwrites.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildVoiceChannelCreateRequestPermissionOverwrites {
   const GuildVoiceChannelCreateRequestPermissionOverwrites({
     required this.id,
@@ -23,6 +23,14 @@ class GuildVoiceChannelCreateRequestPermissionOverwrites {
        _allowPresent = !identical(allow, _omit),
        deny = identical(deny, _omit) ? null : deny as UnsignedInt64Type?,
        _denyPresent = !identical(deny, _omit);
+
+  const GuildVoiceChannelCreateRequestPermissionOverwrites._({
+    required this.id,
+    required this.type,
+    this.allow,
+    this.deny,
+  }) : _allowPresent = false,
+       _denyPresent = false;
   factory GuildVoiceChannelCreateRequestPermissionOverwrites.fromJson(
     Map<String, Object?> json,
   ) {

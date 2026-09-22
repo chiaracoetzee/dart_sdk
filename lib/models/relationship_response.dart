@@ -12,7 +12,7 @@ part 'relationship_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class RelationshipResponse {
   const RelationshipResponse({
     required this.id,
@@ -24,6 +24,16 @@ class RelationshipResponse {
     Object? since = _omit,
   }) : since = identical(since, _omit) ? null : since as DateTime?,
        _sincePresent = !identical(since, _omit);
+
+  const RelationshipResponse._({
+    required this.id,
+    required this.type,
+    required this.user,
+    required this.nickname,
+    required this.shareVoiceActivity,
+    required this.friendSharesVoiceActivity,
+    this.since,
+  }) : _sincePresent = false;
   factory RelationshipResponse.fromJson(Map<String, Object?> json) {
     final value = _$RelationshipResponseFromJson(json);
     return RelationshipResponse(

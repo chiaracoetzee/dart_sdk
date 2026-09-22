@@ -12,7 +12,7 @@ GuildInviteMetadataResponse _$GuildInviteMetadataResponseFromJson(
   'GuildInviteMetadataResponse',
   json,
   ($checkedConvert) {
-    final val = GuildInviteMetadataResponse(
+    final val = GuildInviteMetadataResponse._(
       code: $checkedConvert('code', (v) => v as String),
       temporary: $checkedConvert('temporary', (v) => v as bool),
       type: $checkedConvert('type', (v) => v as num),
@@ -36,8 +36,16 @@ GuildInviteMetadataResponse _$GuildInviteMetadataResponseFromJson(
       uses: $checkedConvert('uses', (v) => (v as num).toInt()),
       maxUses: $checkedConvert('max_uses', (v) => (v as num).toInt()),
       maxAge: $checkedConvert('max_age', (v) => (v as num).toInt()),
-      inviter: $checkedConvert('inviter', (v) => v ?? _omit),
-      expiresAt: $checkedConvert('expires_at', (v) => v ?? _omit),
+      inviter: $checkedConvert(
+        'inviter',
+        (v) => v == null
+            ? null
+            : UserPartialResponse.fromJson(v as Map<String, dynamic>),
+      ),
+      expiresAt: $checkedConvert(
+        'expires_at',
+        (v) => v == null ? null : DateTime.parse(v as String),
+      ),
     );
     return val;
   },

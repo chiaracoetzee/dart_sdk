@@ -10,13 +10,16 @@ part 'handoff_info_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class HandoffInfoResponse {
   const HandoffInfoResponse({required this.status, Object? clientInfo = _omit})
     : clientInfo = identical(clientInfo, _omit)
           ? null
           : clientInfo as HandoffInfoResponseClientInfo?,
       _clientInfoPresent = !identical(clientInfo, _omit);
+
+  const HandoffInfoResponse._({required this.status, this.clientInfo})
+    : _clientInfoPresent = false;
   factory HandoffInfoResponse.fromJson(Map<String, Object?> json) {
     final value = _$HandoffInfoResponseFromJson(json);
     return HandoffInfoResponse(

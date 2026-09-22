@@ -8,7 +8,7 @@ part 'git_hub_webhook_check_run_output.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GitHubWebhookCheckRunOutput {
   const GitHubWebhookCheckRunOutput({
     Object? title = _omit,
@@ -17,6 +17,10 @@ class GitHubWebhookCheckRunOutput {
        _titlePresent = !identical(title, _omit),
        summary = identical(summary, _omit) ? null : summary as String?,
        _summaryPresent = !identical(summary, _omit);
+
+  const GitHubWebhookCheckRunOutput._({this.title, this.summary})
+    : _titlePresent = false,
+      _summaryPresent = false;
   factory GitHubWebhookCheckRunOutput.fromJson(Map<String, Object?> json) {
     final value = _$GitHubWebhookCheckRunOutputFromJson(json);
     return GitHubWebhookCheckRunOutput(

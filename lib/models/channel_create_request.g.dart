@@ -40,7 +40,7 @@ ChannelCreateRequest0 _$ChannelCreateRequest0FromJson(
         'rate_limit_per_user',
         (v) => (v as num?)?.toInt(),
       ),
-      nsfw: $checkedConvert('nsfw', (v) => v as bool),
+      nsfw: $checkedConvert('nsfw', (v) => v as bool? ?? false),
       nsfwOverride: $checkedConvert('nsfw_override', (v) => v as bool?),
       contentWarningLevel: $checkedConvert(
         'content_warning_level',
@@ -123,7 +123,7 @@ ChannelCreateRequest2 _$ChannelCreateRequest2FromJson(
         'rate_limit_per_user',
         (v) => (v as num?)?.toInt(),
       ),
-      nsfw: $checkedConvert('nsfw', (v) => v as bool),
+      nsfw: $checkedConvert('nsfw', (v) => v as bool? ?? false),
       nsfwOverride: $checkedConvert('nsfw_override', (v) => v as bool?),
       contentWarningLevel: $checkedConvert(
         'content_warning_level',
@@ -206,7 +206,7 @@ ChannelCreateRequest4 _$ChannelCreateRequest4FromJson(
         'rate_limit_per_user',
         (v) => (v as num?)?.toInt(),
       ),
-      nsfw: $checkedConvert('nsfw', (v) => v as bool),
+      nsfw: $checkedConvert('nsfw', (v) => v as bool? ?? false),
       nsfwOverride: $checkedConvert('nsfw_override', (v) => v as bool?),
       contentWarningLevel: $checkedConvert(
         'content_warning_level',
@@ -289,7 +289,7 @@ ChannelCreateRequest998 _$ChannelCreateRequest998FromJson(
         'rate_limit_per_user',
         (v) => (v as num?)?.toInt(),
       ),
-      nsfw: $checkedConvert('nsfw', (v) => v as bool),
+      nsfw: $checkedConvert('nsfw', (v) => v as bool? ?? false),
       nsfwOverride: $checkedConvert('nsfw_override', (v) => v as bool?),
       contentWarningLevel: $checkedConvert(
         'content_warning_level',

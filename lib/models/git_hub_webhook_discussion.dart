@@ -11,7 +11,7 @@ part 'git_hub_webhook_discussion.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GitHubWebhookDiscussion {
   const GitHubWebhookDiscussion({
     required this.title,
@@ -26,6 +26,16 @@ class GitHubWebhookDiscussion {
        _answerHtmlUrlPresent = !identical(answerHtmlUrl, _omit),
        body = identical(body, _omit) ? null : body as String?,
        _bodyPresent = !identical(body, _omit);
+
+  const GitHubWebhookDiscussion._({
+    required this.title,
+    required this.number,
+    required this.htmlUrl,
+    required this.user,
+    this.answerHtmlUrl,
+    this.body,
+  }) : _answerHtmlUrlPresent = false,
+       _bodyPresent = false;
   factory GitHubWebhookDiscussion.fromJson(Map<String, Object?> json) {
     final value = _$GitHubWebhookDiscussionFromJson(json);
     return GitHubWebhookDiscussion(

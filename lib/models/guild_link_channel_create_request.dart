@@ -14,7 +14,7 @@ part 'guild_link_channel_create_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildLinkChannelCreateRequest {
   const GuildLinkChannelCreateRequest({
     required this.type,
@@ -68,6 +68,33 @@ class GuildLinkChannelCreateRequest {
            ? null
            : contentWarningText as String?,
        _contentWarningTextPresent = !identical(contentWarningText, _omit);
+
+  const GuildLinkChannelCreateRequest._({
+    required this.type,
+    required this.name,
+    this.nsfw = false,
+    this.topic,
+    this.url,
+    this.parentId,
+    this.bitrate,
+    this.userLimit,
+    this.voiceConnectionLimit,
+    this.permissionOverwrites,
+    this.rateLimitPerUser,
+    this.nsfwOverride,
+    this.contentWarningLevel,
+    this.contentWarningText,
+  }) : _topicPresent = false,
+       _urlPresent = false,
+       _parentIdPresent = false,
+       _bitratePresent = false,
+       _userLimitPresent = false,
+       _voiceConnectionLimitPresent = false,
+       _permissionOverwritesPresent = false,
+       _rateLimitPerUserPresent = false,
+       _nsfwOverridePresent = false,
+       _contentWarningLevelPresent = false,
+       _contentWarningTextPresent = false;
   factory GuildLinkChannelCreateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildLinkChannelCreateRequestFromJson(json);
     return GuildLinkChannelCreateRequest(

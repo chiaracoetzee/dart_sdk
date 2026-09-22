@@ -11,7 +11,7 @@ part 'message_reaction_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class MessageReactionResponse {
   const MessageReactionResponse({
     required this.emoji,
@@ -19,6 +19,12 @@ class MessageReactionResponse {
     Object? me = _omit,
   }) : me = identical(me, _omit) ? null : me as bool?,
        _mePresent = !identical(me, _omit);
+
+  const MessageReactionResponse._({
+    required this.emoji,
+    required this.count,
+    this.me,
+  }) : _mePresent = false;
   factory MessageReactionResponse.fromJson(Map<String, Object?> json) {
     final value = _$MessageReactionResponseFromJson(json);
     return MessageReactionResponse(

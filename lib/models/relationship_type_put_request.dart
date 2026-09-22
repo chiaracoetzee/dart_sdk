@@ -10,11 +10,13 @@ part 'relationship_type_put_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class RelationshipTypePutRequest {
   const RelationshipTypePutRequest({Object? type = _omit})
     : type = identical(type, _omit) ? null : type as RelationshipTypesInput?,
       _typePresent = !identical(type, _omit);
+
+  const RelationshipTypePutRequest._({this.type}) : _typePresent = false;
   factory RelationshipTypePutRequest.fromJson(Map<String, Object?> json) {
     final value = _$RelationshipTypePutRequestFromJson(json);
     return RelationshipTypePutRequest(

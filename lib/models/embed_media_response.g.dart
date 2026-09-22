@@ -11,17 +11,17 @@ EmbedMediaResponse _$EmbedMediaResponseFromJson(Map<String, dynamic> json) =>
       'EmbedMediaResponse',
       json,
       ($checkedConvert) {
-        final val = EmbedMediaResponse(
+        final val = EmbedMediaResponse._(
           url: $checkedConvert('url', (v) => v as String),
           flags: $checkedConvert('flags', (v) => (v as num).toInt()),
-          proxyUrl: $checkedConvert('proxy_url', (v) => v ?? _omit),
-          contentType: $checkedConvert('content_type', (v) => v ?? _omit),
-          contentHash: $checkedConvert('content_hash', (v) => v ?? _omit),
-          width: $checkedConvert('width', (v) => v ?? _omit),
-          height: $checkedConvert('height', (v) => v ?? _omit),
-          description: $checkedConvert('description', (v) => v ?? _omit),
-          placeholder: $checkedConvert('placeholder', (v) => v ?? _omit),
-          duration: $checkedConvert('duration', (v) => v ?? _omit),
+          proxyUrl: $checkedConvert('proxy_url', (v) => v as String?),
+          contentType: $checkedConvert('content_type', (v) => v as String?),
+          contentHash: $checkedConvert('content_hash', (v) => v as String?),
+          width: $checkedConvert('width', (v) => (v as num?)?.toInt()),
+          height: $checkedConvert('height', (v) => (v as num?)?.toInt()),
+          description: $checkedConvert('description', (v) => v as String?),
+          placeholder: $checkedConvert('placeholder', (v) => v as String?),
+          duration: $checkedConvert('duration', (v) => (v as num?)?.toInt()),
         );
         return val;
       },

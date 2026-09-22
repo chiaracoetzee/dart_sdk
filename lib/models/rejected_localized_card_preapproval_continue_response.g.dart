@@ -12,7 +12,7 @@ _$RejectedLocalizedCardPreapprovalContinueResponseFromJson(
 ) => $checkedCreate('RejectedLocalizedCardPreapprovalContinueResponse', json, (
   $checkedConvert,
 ) {
-  final val = RejectedLocalizedCardPreapprovalContinueResponse(
+  final val = RejectedLocalizedCardPreapprovalContinueResponse._(
     status: $checkedConvert('status', (v) => v as String),
     reason: $checkedConvert(
       'reason',
@@ -21,7 +21,7 @@ _$RejectedLocalizedCardPreapprovalContinueResponseFromJson(
             v as String,
           ),
     ),
-    actualCountry: $checkedConvert('actual_country', (v) => v ?? _omit),
+    actualCountry: $checkedConvert('actual_country', (v) => v as String?),
   );
   return val;
 }, fieldKeyMap: const {'actualCountry': 'actual_country'});

@@ -10,7 +10,7 @@ part 'create_checkout_session_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class CreateCheckoutSessionRequest {
   const CreateCheckoutSessionRequest({
     required this.priceId,
@@ -43,6 +43,19 @@ class CreateCheckoutSessionRequest {
        _paymentMethodPresent = !identical(paymentMethod, _omit),
        isBusiness = identical(isBusiness, _omit) ? null : isBusiness as bool?,
        _isBusinessPresent = !identical(isBusiness, _omit);
+
+  const CreateCheckoutSessionRequest._({
+    required this.priceId,
+    this.countryCode,
+    this.clientGeoipCountryCode,
+    this.euWithdrawalWaiverAccepted,
+    this.paymentMethod,
+    this.isBusiness,
+  }) : _countryCodePresent = false,
+       _clientGeoipCountryCodePresent = false,
+       _euWithdrawalWaiverAcceptedPresent = false,
+       _paymentMethodPresent = false,
+       _isBusinessPresent = false;
   factory CreateCheckoutSessionRequest.fromJson(Map<String, Object?> json) {
     final value = _$CreateCheckoutSessionRequestFromJson(json);
     return CreateCheckoutSessionRequest(

@@ -12,7 +12,7 @@ part 'message_search_results_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class MessageSearchResultsResponse {
   const MessageSearchResultsResponse({
     required this.messages,
@@ -23,6 +23,15 @@ class MessageSearchResultsResponse {
     Object? cursor = _omit,
   }) : cursor = identical(cursor, _omit) ? null : cursor as List<String>?,
        _cursorPresent = !identical(cursor, _omit);
+
+  const MessageSearchResultsResponse._({
+    required this.messages,
+    required this.channels,
+    required this.total,
+    required this.hitsPerPage,
+    required this.page,
+    this.cursor,
+  }) : _cursorPresent = false;
   factory MessageSearchResultsResponse.fromJson(Map<String, Object?> json) {
     final value = _$MessageSearchResultsResponseFromJson(json);
     return MessageSearchResultsResponse(

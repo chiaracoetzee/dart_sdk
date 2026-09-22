@@ -12,15 +12,15 @@ ChannelPositionUpdateRequestItem _$ChannelPositionUpdateRequestItemFromJson(
   'ChannelPositionUpdateRequestItem',
   json,
   ($checkedConvert) {
-    final val = ChannelPositionUpdateRequestItem(
+    final val = ChannelPositionUpdateRequestItem._(
       id: $checkedConvert('id', (v) => v as String),
-      position: $checkedConvert('position', (v) => v ?? _omit),
-      parentId: $checkedConvert('parent_id', (v) => v ?? _omit),
+      position: $checkedConvert('position', (v) => (v as num?)?.toInt()),
+      parentId: $checkedConvert('parent_id', (v) => v as String?),
       precedingSiblingId: $checkedConvert(
         'preceding_sibling_id',
-        (v) => v ?? _omit,
+        (v) => v as String?,
       ),
-      lockPermissions: $checkedConvert('lock_permissions', (v) => v ?? _omit),
+      lockPermissions: $checkedConvert('lock_permissions', (v) => v as bool?),
     );
     return val;
   },

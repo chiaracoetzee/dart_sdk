@@ -12,7 +12,7 @@ part 'applications_me_response_bot.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ApplicationsMeResponseBot {
   const ApplicationsMeResponseBot({
     required this.id,
@@ -37,6 +37,23 @@ class ApplicationsMeResponseBot {
            ? null
            : authenticatorTypes as List<AuthenticatorType>?,
        _authenticatorTypesPresent = !identical(authenticatorTypes, _omit);
+
+  const ApplicationsMeResponseBot._({
+    required this.id,
+    required this.username,
+    required this.discriminator,
+    required this.bio,
+    required this.flags,
+    this.avatar,
+    this.banner,
+    this.token,
+    this.mfaEnabled,
+    this.authenticatorTypes,
+  }) : _avatarPresent = false,
+       _bannerPresent = false,
+       _tokenPresent = false,
+       _mfaEnabledPresent = false,
+       _authenticatorTypesPresent = false;
   factory ApplicationsMeResponseBot.fromJson(Map<String, Object?> json) {
     final value = _$ApplicationsMeResponseBotFromJson(json);
     return ApplicationsMeResponseBot(

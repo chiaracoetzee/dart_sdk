@@ -12,7 +12,7 @@ part 'disable_totp_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class DisableTotpRequest {
   const DisableTotpRequest({
     required this.code,
@@ -37,6 +37,19 @@ class DisableTotpRequest {
            ? null
            : webauthnChallenge as String?,
        _webauthnChallengePresent = !identical(webauthnChallenge, _omit);
+
+  const DisableTotpRequest._({
+    required this.code,
+    this.password,
+    this.mfaMethod,
+    this.mfaCode,
+    this.webauthnResponse,
+    this.webauthnChallenge,
+  }) : _passwordPresent = false,
+       _mfaMethodPresent = false,
+       _mfaCodePresent = false,
+       _webauthnResponsePresent = false,
+       _webauthnChallengePresent = false;
   factory DisableTotpRequest.fromJson(Map<String, Object?> json) {
     final value = _$DisableTotpRequestFromJson(json);
     return DisableTotpRequest(

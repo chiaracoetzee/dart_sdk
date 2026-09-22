@@ -22,7 +22,7 @@ part 'message_response_schema.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class MessageResponseSchema {
   const MessageResponseSchema({
     required this.id,
@@ -100,6 +100,46 @@ class MessageResponseSchema {
            ? null
            : referencedMessage as MessageResponseSchemaReferencedMessage?,
        _referencedMessagePresent = !identical(referencedMessage, _omit);
+
+  const MessageResponseSchema._({
+    required this.id,
+    required this.channelId,
+    required this.author,
+    required this.type,
+    required this.flags,
+    required this.content,
+    required this.timestamp,
+    required this.pinned,
+    required this.mentionEveryone,
+    required this.tts,
+    required this.mentions,
+    required this.mentionRoles,
+    this.webhookId,
+    this.editedTimestamp,
+    this.mentionChannels,
+    this.users,
+    this.embeds,
+    this.attachments,
+    this.stickers,
+    this.reactions,
+    this.messageReference,
+    this.messageSnapshots,
+    this.nonce,
+    this.call,
+    this.referencedMessage,
+  }) : _webhookIdPresent = false,
+       _editedTimestampPresent = false,
+       _mentionChannelsPresent = false,
+       _usersPresent = false,
+       _embedsPresent = false,
+       _attachmentsPresent = false,
+       _stickersPresent = false,
+       _reactionsPresent = false,
+       _messageReferencePresent = false,
+       _messageSnapshotsPresent = false,
+       _noncePresent = false,
+       _callPresent = false,
+       _referencedMessagePresent = false;
   factory MessageResponseSchema.fromJson(Map<String, Object?> json) {
     final value = _$MessageResponseSchemaFromJson(json);
     return MessageResponseSchema(

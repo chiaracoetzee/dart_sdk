@@ -8,7 +8,7 @@ part 'template_role.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class TemplateRole {
   const TemplateRole({
     required this.id,
@@ -41,6 +41,23 @@ class TemplateRole {
            ? null
            : unicodeEmoji as String?,
        _unicodeEmojiPresent = !identical(unicodeEmoji, _omit);
+
+  const TemplateRole._({
+    required this.id,
+    this.name,
+    this.permissions,
+    this.permissionsNew,
+    this.color,
+    this.hoist,
+    this.mentionable,
+    this.unicodeEmoji,
+  }) : _namePresent = false,
+       _permissionsPresent = false,
+       _permissionsNewPresent = false,
+       _colorPresent = false,
+       _hoistPresent = false,
+       _mentionablePresent = false,
+       _unicodeEmojiPresent = false;
   factory TemplateRole.fromJson(Map<String, Object?> json) {
     final value = _$TemplateRoleFromJson(json);
     return TemplateRole(

@@ -8,7 +8,7 @@ part 'audit_log_change_schema.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class AuditLogChangeSchema {
   const AuditLogChangeSchema({
     required this.key,
@@ -18,6 +18,13 @@ class AuditLogChangeSchema {
        _oldValuePresent = !identical(oldValue, _omit),
        newValue = identical(newValue, _omit) ? null : newValue,
        _newValuePresent = !identical(newValue, _omit);
+
+  const AuditLogChangeSchema._({
+    required this.key,
+    this.oldValue,
+    this.newValue,
+  }) : _oldValuePresent = false,
+       _newValuePresent = false;
   factory AuditLogChangeSchema.fromJson(Map<String, Object?> json) {
     final value = _$AuditLogChangeSchemaFromJson(json);
     return AuditLogChangeSchema(

@@ -9,7 +9,7 @@ part of 'resolved_gif_entry_schema.dart';
 ResolvedGifEntrySchema _$ResolvedGifEntrySchemaFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('ResolvedGifEntrySchema', json, ($checkedConvert) {
-  final val = ResolvedGifEntrySchema(
+  final val = ResolvedGifEntrySchema._(
     url: $checkedConvert('url', (v) => v as String),
     proxyUrl: $checkedConvert('proxy_url', (v) => v as String),
     width: $checkedConvert('width', (v) => (v as num).toInt()),
@@ -21,7 +21,7 @@ ResolvedGifEntrySchema _$ResolvedGifEntrySchemaFromJson(
             MapEntry(k, GifMediaFormat.fromJson(e as Map<String, dynamic>)),
       ),
     ),
-    placeholder: $checkedConvert('placeholder', (v) => v ?? _omit),
+    placeholder: $checkedConvert('placeholder', (v) => v as String?),
     contentType: $checkedConvert('content_type', (v) => v as String? ?? ''),
   );
   return val;

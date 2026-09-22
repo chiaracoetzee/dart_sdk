@@ -10,7 +10,7 @@ part 'gif_register_share_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GifRegisterShareRequest {
   const GifRegisterShareRequest({
     required this.id,
@@ -18,6 +18,12 @@ class GifRegisterShareRequest {
     Object? q = _omit,
   }) : q = identical(q, _omit) ? null : q as String?,
        _qPresent = !identical(q, _omit);
+
+  const GifRegisterShareRequest._({
+    required this.id,
+    this.locale = Locale.enUs,
+    this.q,
+  }) : _qPresent = false;
   factory GifRegisterShareRequest.fromJson(Map<String, Object?> json) {
     final value = _$GifRegisterShareRequestFromJson(json);
     return GifRegisterShareRequest(

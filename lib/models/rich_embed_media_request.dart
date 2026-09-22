@@ -26,10 +26,7 @@ class RichEmbedMediaRequestVariant1 {
   @JsonKey(includeIfNull: false)
   final String? description;
 
-  const RichEmbedMediaRequestVariant1({
-    required this.url,
-    required this.description,
-  });
+  const RichEmbedMediaRequestVariant1({required this.url, this.description});
 
   factory RichEmbedMediaRequestVariant1.fromJson(Map<String, dynamic> json) =>
       _$RichEmbedMediaRequestVariant1FromJson(json);

@@ -9,15 +9,15 @@ part of 'application_public_response_bot.dart';
 ApplicationPublicResponseBot _$ApplicationPublicResponseBotFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('ApplicationPublicResponseBot', json, ($checkedConvert) {
-  final val = ApplicationPublicResponseBot(
+  final val = ApplicationPublicResponseBot._(
     id: $checkedConvert('id', (v) => v as String),
     username: $checkedConvert('username', (v) => v as String),
     discriminator: $checkedConvert('discriminator', (v) => v as String),
     bio: $checkedConvert('bio', (v) => v as String?),
     flags: $checkedConvert('flags', (v) => (v as num).toInt()),
-    avatar: $checkedConvert('avatar', (v) => v ?? _omit),
-    banner: $checkedConvert('banner', (v) => v ?? _omit),
-    token: $checkedConvert('token', (v) => v ?? _omit),
+    avatar: $checkedConvert('avatar', (v) => v as String?),
+    banner: $checkedConvert('banner', (v) => v as String?),
+    token: $checkedConvert('token', (v) => v as String?),
   );
   return val;
 });

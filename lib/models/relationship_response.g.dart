@@ -12,7 +12,7 @@ RelationshipResponse _$RelationshipResponseFromJson(
   'RelationshipResponse',
   json,
   ($checkedConvert) {
-    final val = RelationshipResponse(
+    final val = RelationshipResponse._(
       id: $checkedConvert('id', (v) => v as String),
       type: $checkedConvert(
         'type',
@@ -31,7 +31,10 @@ RelationshipResponse _$RelationshipResponseFromJson(
         'friend_shares_voice_activity',
         (v) => v as bool,
       ),
-      since: $checkedConvert('since', (v) => v ?? _omit),
+      since: $checkedConvert(
+        'since',
+        (v) => v == null ? null : DateTime.parse(v as String),
+      ),
     );
     return val;
   },

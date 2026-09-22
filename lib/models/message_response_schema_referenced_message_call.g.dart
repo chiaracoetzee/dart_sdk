@@ -12,12 +12,15 @@ _$MessageResponseSchemaReferencedMessageCallFromJson(
 ) => $checkedCreate('MessageResponseSchemaReferencedMessageCall', json, (
   $checkedConvert,
 ) {
-  final val = MessageResponseSchemaReferencedMessageCall(
+  final val = MessageResponseSchemaReferencedMessageCall._(
     participants: $checkedConvert(
       'participants',
       (v) => (v as List<dynamic>).map((e) => e as String).toList(),
     ),
-    endedTimestamp: $checkedConvert('ended_timestamp', (v) => v ?? _omit),
+    endedTimestamp: $checkedConvert(
+      'ended_timestamp',
+      (v) => v == null ? null : DateTime.parse(v as String),
+    ),
   );
   return val;
 }, fieldKeyMap: const {'endedTimestamp': 'ended_timestamp'});

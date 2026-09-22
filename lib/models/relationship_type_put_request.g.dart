@@ -9,8 +9,13 @@ part of 'relationship_type_put_request.dart';
 RelationshipTypePutRequest _$RelationshipTypePutRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('RelationshipTypePutRequest', json, ($checkedConvert) {
-  final val = RelationshipTypePutRequest(
-    type: $checkedConvert('type', (v) => v ?? _omit),
+  final val = RelationshipTypePutRequest._(
+    type: $checkedConvert(
+      'type',
+      (v) => v == null
+          ? null
+          : RelationshipTypesInput.fromJson((v as num).toInt()),
+    ),
   );
   return val;
 });

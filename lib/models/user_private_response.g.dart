@@ -12,7 +12,7 @@ UserPrivateResponse _$UserPrivateResponseFromJson(
   'UserPrivateResponse',
   json,
   ($checkedConvert) {
-    final val = UserPrivateResponse(
+    final val = UserPrivateResponse._(
       premiumType: $checkedConvert(
         'premium_type',
         (v) => v == null ? null : UserPremiumTypes.fromJson((v as num).toInt()),
@@ -131,27 +131,34 @@ UserPrivateResponse _$UserPrivateResponseFromJson(
         'required_actions',
         (v) => (v as List<dynamic>).map((e) => e as String).toList(),
       ),
-      mentionFlags: $checkedConvert('mention_flags', (v) => v ?? _omit),
+      mentionFlags: $checkedConvert(
+        'mention_flags',
+        (v) => v == null
+            ? null
+            : MentionReplyPreferences.fromJson((v as num).toInt()),
+      ),
       authenticatorTypes: $checkedConvert(
         'authenticator_types',
-        (v) => v ?? _omit,
+        (v) => (v as List<dynamic>?)
+            ?.map((e) => UserAuthenticatorTypes.fromJson((e as num).toInt()))
+            .toList(),
       ),
       timezonePrivacyFlags: $checkedConvert(
         'timezone_privacy_flags',
-        (v) => v ?? _omit,
+        (v) => (v as num?)?.toInt(),
       ),
-      timezone: $checkedConvert('timezone', (v) => v ?? _omit),
-      phone: $checkedConvert('phone', (v) => v ?? _omit),
-      emailBounced: $checkedConvert('email_bounced', (v) => v ?? _omit),
-      system: $checkedConvert('system', (v) => v ?? _omit),
+      timezone: $checkedConvert('timezone', (v) => v as String?),
+      phone: $checkedConvert('phone', (v) => v as String?),
+      emailBounced: $checkedConvert('email_bounced', (v) => v as bool?),
+      system: $checkedConvert('system', (v) => v as bool?),
       ageVerifiedAdult: $checkedConvert(
         'age_verified_adult',
-        (v) => v ?? _omit,
+        (v) => v as bool?,
       ),
-      bot: $checkedConvert('bot', (v) => v ?? _omit),
+      bot: $checkedConvert('bot', (v) => v as bool?),
       forceInboundPhoneVerification: $checkedConvert(
         'force_inbound_phone_verification',
-        (v) => v ?? _omit,
+        (v) => v as bool?,
       ),
     );
     return val;

@@ -8,7 +8,7 @@ part 'object2_attachments.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class Object2Attachments {
   const Object2Attachments({
     required this.id,
@@ -20,6 +20,10 @@ class Object2Attachments {
            ? null
            : description as String?,
        _descriptionPresent = !identical(description, _omit);
+
+  const Object2Attachments._({required this.id, this.title, this.description})
+    : _titlePresent = false,
+      _descriptionPresent = false;
   factory Object2Attachments.fromJson(Map<String, Object?> json) {
     final value = _$Object2AttachmentsFromJson(json);
     return Object2Attachments(
@@ -30,7 +34,7 @@ class Object2Attachments {
   }
 
   /// The identifier of the snapshot attachment
-  final dynamic id;
+  final String id;
 
   /// A title for the attachment (1-1024 characters)
   @JsonKey(includeIfNull: false)

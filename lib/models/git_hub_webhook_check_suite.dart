@@ -11,7 +11,7 @@ part 'git_hub_webhook_check_suite.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GitHubWebhookCheckSuite {
   const GitHubWebhookCheckSuite({
     required this.headSha,
@@ -27,6 +27,16 @@ class GitHubWebhookCheckSuite {
            ? null
            : pullRequests as List<GitHubWebhookCheckSuitePullRequests>?,
        _pullRequestsPresent = !identical(pullRequests, _omit);
+
+  const GitHubWebhookCheckSuite._({
+    required this.headSha,
+    required this.app,
+    this.conclusion,
+    this.headBranch,
+    this.pullRequests,
+  }) : _conclusionPresent = false,
+       _headBranchPresent = false,
+       _pullRequestsPresent = false;
   factory GitHubWebhookCheckSuite.fromJson(Map<String, Object?> json) {
     final value = _$GitHubWebhookCheckSuiteFromJson(json);
     return GitHubWebhookCheckSuite(

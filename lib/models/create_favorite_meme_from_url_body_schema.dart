@@ -10,7 +10,7 @@ part 'create_favorite_meme_from_url_body_schema.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class CreateFavoriteMemeFromUrlBodySchema {
   const CreateFavoriteMemeFromUrlBodySchema({
     required this.url,
@@ -34,6 +34,20 @@ class CreateFavoriteMemeFromUrlBodySchema {
        _mediaPresent = !identical(media, _omit),
        name = identical(name, _omit) ? null : name as String?,
        _namePresent = !identical(name, _omit);
+
+  const CreateFavoriteMemeFromUrlBodySchema._({
+    required this.url,
+    this.tags = const [],
+    this.altText,
+    this.gifSlug,
+    this.gifProvider,
+    this.media,
+    this.name,
+  }) : _altTextPresent = false,
+       _gifSlugPresent = false,
+       _gifProviderPresent = false,
+       _mediaPresent = false,
+       _namePresent = false;
   factory CreateFavoriteMemeFromUrlBodySchema.fromJson(
     Map<String, Object?> json,
   ) {

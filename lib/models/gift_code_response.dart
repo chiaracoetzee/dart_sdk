@@ -11,7 +11,7 @@ part 'gift_code_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GiftCodeResponse {
   const GiftCodeResponse({
     required this.code,
@@ -23,6 +23,14 @@ class GiftCodeResponse {
            ? null
            : createdBy as UserPartialResponse?,
        _createdByPresent = !identical(createdBy, _omit);
+
+  const GiftCodeResponse._({
+    required this.code,
+    required this.durationType,
+    required this.durationQuantity,
+    required this.redeemed,
+    this.createdBy,
+  }) : _createdByPresent = false;
   factory GiftCodeResponse.fromJson(Map<String, Object?> json) {
     final value = _$GiftCodeResponseFromJson(json);
     return GiftCodeResponse(

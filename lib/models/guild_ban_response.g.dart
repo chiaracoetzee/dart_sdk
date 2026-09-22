@@ -11,7 +11,7 @@ GuildBanResponse _$GuildBanResponseFromJson(Map<String, dynamic> json) =>
       'GuildBanResponse',
       json,
       ($checkedConvert) {
-        final val = GuildBanResponse(
+        final val = GuildBanResponse._(
           user: $checkedConvert(
             'user',
             (v) => UserPartialResponse.fromJson(v as Map<String, dynamic>),
@@ -21,8 +21,11 @@ GuildBanResponse _$GuildBanResponseFromJson(Map<String, dynamic> json) =>
             'banned_at',
             (v) => DateTime.parse(v as String),
           ),
-          reason: $checkedConvert('reason', (v) => v ?? _omit),
-          expiresAt: $checkedConvert('expires_at', (v) => v ?? _omit),
+          reason: $checkedConvert('reason', (v) => v as String?),
+          expiresAt: $checkedConvert(
+            'expires_at',
+            (v) => v == null ? null : DateTime.parse(v as String),
+          ),
         );
         return val;
       },

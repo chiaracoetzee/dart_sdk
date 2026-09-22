@@ -9,15 +9,20 @@ part of 'auth_session_response_client_info.dart';
 AuthSessionResponseClientInfo _$AuthSessionResponseClientInfoFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('AuthSessionResponseClientInfo', json, ($checkedConvert) {
-  final val = AuthSessionResponseClientInfo(
+  final val = AuthSessionResponseClientInfo._(
     device: $checkedConvert(
       'device',
       (v) => AuthSessionResponseClientInfoDeviceDevice.fromJson(v as String),
     ),
-    platform: $checkedConvert('platform', (v) => v ?? _omit),
-    os: $checkedConvert('os', (v) => v ?? _omit),
-    browser: $checkedConvert('browser', (v) => v ?? _omit),
-    location: $checkedConvert('location', (v) => v ?? _omit),
+    platform: $checkedConvert('platform', (v) => v as String?),
+    os: $checkedConvert('os', (v) => v as String?),
+    browser: $checkedConvert('browser', (v) => v as String?),
+    location: $checkedConvert(
+      'location',
+      (v) => v == null
+          ? null
+          : AuthSessionLocation.fromJson(v as Map<String, dynamic>),
+    ),
   );
   return val;
 });

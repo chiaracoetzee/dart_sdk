@@ -10,11 +10,14 @@ part 'guild_vanity_url_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildVanityUrlResponse {
   const GuildVanityUrlResponse({required this.uses, Object? code = _omit})
     : code = identical(code, _omit) ? null : code as String?,
       _codePresent = !identical(code, _omit);
+
+  const GuildVanityUrlResponse._({required this.uses, this.code})
+    : _codePresent = false;
   factory GuildVanityUrlResponse.fromJson(Map<String, Object?> json) {
     final value = _$GuildVanityUrlResponseFromJson(json);
     return GuildVanityUrlResponse(

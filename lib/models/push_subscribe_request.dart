@@ -10,7 +10,7 @@ part 'push_subscribe_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class PushSubscribeRequest {
   const PushSubscribeRequest({
     required this.endpoint,
@@ -18,6 +18,12 @@ class PushSubscribeRequest {
     Object? userAgent = _omit,
   }) : userAgent = identical(userAgent, _omit) ? null : userAgent as String?,
        _userAgentPresent = !identical(userAgent, _omit);
+
+  const PushSubscribeRequest._({
+    required this.endpoint,
+    required this.keys,
+    this.userAgent,
+  }) : _userAgentPresent = false;
   factory PushSubscribeRequest.fromJson(Map<String, Object?> json) {
     final value = _$PushSubscribeRequestFromJson(json);
     return PushSubscribeRequest(

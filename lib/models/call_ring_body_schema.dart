@@ -10,7 +10,7 @@ part 'call_ring_body_schema.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class CallRingBodySchema {
   const CallRingBodySchema({
     Object? recipients = _omit,
@@ -24,6 +24,11 @@ class CallRingBodySchema {
        _latitudePresent = !identical(latitude, _omit),
        longitude = identical(longitude, _omit) ? null : longitude as String?,
        _longitudePresent = !identical(longitude, _omit);
+
+  const CallRingBodySchema._({this.recipients, this.latitude, this.longitude})
+    : _recipientsPresent = false,
+      _latitudePresent = false,
+      _longitudePresent = false;
   factory CallRingBodySchema.fromJson(Map<String, Object?> json) {
     final value = _$CallRingBodySchemaFromJson(json);
     return CallRingBodySchema(

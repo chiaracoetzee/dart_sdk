@@ -12,7 +12,7 @@ OAuth2MeResponseUser _$OAuth2MeResponseUserFromJson(
   'OAuth2MeResponseUser',
   json,
   ($checkedConvert) {
-    final val = OAuth2MeResponseUser(
+    final val = OAuth2MeResponseUser._(
       id: $checkedConvert('id', (v) => v as String),
       username: $checkedConvert('username', (v) => v as String),
       discriminator: $checkedConvert('discriminator', (v) => v as String),
@@ -20,10 +20,10 @@ OAuth2MeResponseUser _$OAuth2MeResponseUserFromJson(
       avatar: $checkedConvert('avatar', (v) => v as String?),
       avatarColor: $checkedConvert('avatar_color', (v) => (v as num?)?.toInt()),
       flags: $checkedConvert('flags', (v) => (v as num).toInt()),
-      bot: $checkedConvert('bot', (v) => v ?? _omit),
-      system: $checkedConvert('system', (v) => v ?? _omit),
-      email: $checkedConvert('email', (v) => v ?? _omit),
-      verified: $checkedConvert('verified', (v) => v ?? _omit),
+      bot: $checkedConvert('bot', (v) => v as bool?),
+      system: $checkedConvert('system', (v) => v as bool?),
+      email: $checkedConvert('email', (v) => v as String?),
+      verified: $checkedConvert('verified', (v) => v as bool?),
     );
     return val;
   },

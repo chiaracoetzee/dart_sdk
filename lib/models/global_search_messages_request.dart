@@ -16,7 +16,7 @@ part 'global_search_messages_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GlobalSearchMessagesRequest {
   const GlobalSearchMessagesRequest({
     Object? authorId = _omit,
@@ -174,6 +174,77 @@ class GlobalSearchMessagesRequest {
            ? null
            : channelIds as List<SnowflakeType>?,
        _channelIdsPresent = !identical(channelIds, _omit);
+
+  const GlobalSearchMessagesRequest._({
+    this.authorId,
+    this.contextGuildId,
+    this.cursor,
+    this.maxId,
+    this.minId,
+    this.content,
+    this.contextChannelId,
+    this.exactPhrases,
+    this.channelId,
+    this.excludeChannelId,
+    this.authorType,
+    this.excludeAuthorType,
+    this.scope,
+    this.excludeAuthorId,
+    this.mentions,
+    this.excludeMentions,
+    this.mentionEveryone,
+    this.pinned,
+    this.has,
+    this.excludeHas,
+    this.embedType,
+    this.excludeEmbedType,
+    this.embedProvider,
+    this.excludeEmbedProvider,
+    this.channelIds,
+    this.excludeLinkHostname,
+    this.attachmentFilename,
+    this.excludeAttachmentFilename,
+    this.attachmentExtension,
+    this.excludeAttachmentExtension,
+    this.contents,
+    this.includeNsfw = false,
+    this.hitsPerPage = 25,
+    this.sortBy = MessageSortField.timestamp,
+    this.page = 1,
+    this.sortOrder = MessageSortOrder.desc,
+    this.linkHostname,
+  }) : _cursorPresent = false,
+       _maxIdPresent = false,
+       _minIdPresent = false,
+       _contentPresent = false,
+       _contentsPresent = false,
+       _exactPhrasesPresent = false,
+       _channelIdPresent = false,
+       _excludeChannelIdPresent = false,
+       _authorTypePresent = false,
+       _excludeAuthorTypePresent = false,
+       _authorIdPresent = false,
+       _excludeAuthorIdPresent = false,
+       _mentionsPresent = false,
+       _excludeMentionsPresent = false,
+       _mentionEveryonePresent = false,
+       _pinnedPresent = false,
+       _hasPresent = false,
+       _excludeHasPresent = false,
+       _embedTypePresent = false,
+       _excludeEmbedTypePresent = false,
+       _embedProviderPresent = false,
+       _excludeEmbedProviderPresent = false,
+       _linkHostnamePresent = false,
+       _excludeLinkHostnamePresent = false,
+       _attachmentFilenamePresent = false,
+       _excludeAttachmentFilenamePresent = false,
+       _attachmentExtensionPresent = false,
+       _excludeAttachmentExtensionPresent = false,
+       _scopePresent = false,
+       _contextChannelIdPresent = false,
+       _contextGuildIdPresent = false,
+       _channelIdsPresent = false;
   factory GlobalSearchMessagesRequest.fromJson(Map<String, Object?> json) {
     final value = _$GlobalSearchMessagesRequestFromJson(json);
     return GlobalSearchMessagesRequest(

@@ -11,7 +11,7 @@ part 'git_hub_webhook_check_run_check_suite.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GitHubWebhookCheckRunCheckSuite {
   const GitHubWebhookCheckRunCheckSuite({
     required this.headSha,
@@ -27,6 +27,16 @@ class GitHubWebhookCheckRunCheckSuite {
            ? null
            : pullRequests as List<GitHubWebhookCheckRunCheckSuitePullRequests>?,
        _pullRequestsPresent = !identical(pullRequests, _omit);
+
+  const GitHubWebhookCheckRunCheckSuite._({
+    required this.headSha,
+    required this.app,
+    this.conclusion,
+    this.headBranch,
+    this.pullRequests,
+  }) : _conclusionPresent = false,
+       _headBranchPresent = false,
+       _pullRequestsPresent = false;
   factory GitHubWebhookCheckRunCheckSuite.fromJson(Map<String, Object?> json) {
     final value = _$GitHubWebhookCheckRunCheckSuiteFromJson(json);
     return GitHubWebhookCheckRunCheckSuite(

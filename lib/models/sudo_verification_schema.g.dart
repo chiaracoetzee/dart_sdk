@@ -12,14 +12,26 @@ SudoVerificationSchema _$SudoVerificationSchemaFromJson(
   'SudoVerificationSchema',
   json,
   ($checkedConvert) {
-    final val = SudoVerificationSchema(
-      password: $checkedConvert('password', (v) => v ?? _omit),
-      mfaMethod: $checkedConvert('mfa_method', (v) => v ?? _omit),
-      mfaCode: $checkedConvert('mfa_code', (v) => v ?? _omit),
-      webauthnResponse: $checkedConvert('webauthn_response', (v) => v ?? _omit),
+    final val = SudoVerificationSchema._(
+      password: $checkedConvert('password', (v) => v as String?),
+      mfaMethod: $checkedConvert(
+        'mfa_method',
+        (v) => v == null
+            ? null
+            : SudoVerificationSchemaMfaMethodMfaMethod.fromJson(v as String),
+      ),
+      mfaCode: $checkedConvert('mfa_code', (v) => v as String?),
+      webauthnResponse: $checkedConvert(
+        'webauthn_response',
+        (v) => v == null
+            ? null
+            : WebAuthnAuthenticationResponse.fromJson(
+                v as Map<String, dynamic>,
+              ),
+      ),
       webauthnChallenge: $checkedConvert(
         'webauthn_challenge',
-        (v) => v ?? _omit,
+        (v) => v as String?,
       ),
     );
     return val;

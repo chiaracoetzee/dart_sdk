@@ -8,7 +8,7 @@ part 'message_response_schema_referenced_message_call.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class MessageResponseSchemaReferencedMessageCall {
   const MessageResponseSchemaReferencedMessageCall({
     required this.participants,
@@ -17,6 +17,11 @@ class MessageResponseSchemaReferencedMessageCall {
            ? null
            : endedTimestamp as DateTime?,
        _endedTimestampPresent = !identical(endedTimestamp, _omit);
+
+  const MessageResponseSchemaReferencedMessageCall._({
+    required this.participants,
+    this.endedTimestamp,
+  }) : _endedTimestampPresent = false;
   factory MessageResponseSchemaReferencedMessageCall.fromJson(
     Map<String, Object?> json,
   ) {

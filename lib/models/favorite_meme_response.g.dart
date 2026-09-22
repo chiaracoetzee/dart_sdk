@@ -12,7 +12,7 @@ FavoriteMemeResponse _$FavoriteMemeResponseFromJson(
   'FavoriteMemeResponse',
   json,
   ($checkedConvert) {
-    final val = FavoriteMemeResponse(
+    final val = FavoriteMemeResponse._(
       id: $checkedConvert('id', (v) => v as String),
       userId: $checkedConvert('user_id', (v) => v as String),
       name: $checkedConvert('name', (v) => v as String),
@@ -26,15 +26,21 @@ FavoriteMemeResponse _$FavoriteMemeResponseFromJson(
       size: $checkedConvert('size', (v) => (v as num).toInt()),
       url: $checkedConvert('url', (v) => v as String),
       isGifv: $checkedConvert('is_gifv', (v) => v as bool? ?? false),
-      altText: $checkedConvert('alt_text', (v) => v ?? _omit),
-      contentHash: $checkedConvert('content_hash', (v) => v ?? _omit),
-      width: $checkedConvert('width', (v) => v ?? _omit),
-      height: $checkedConvert('height', (v) => v ?? _omit),
-      duration: $checkedConvert('duration', (v) => v ?? _omit),
-      gifSlug: $checkedConvert('gif_slug', (v) => v ?? _omit),
-      gifProvider: $checkedConvert('gif_provider', (v) => v ?? _omit),
-      media: $checkedConvert('media', (v) => v ?? _omit),
-      placeholder: $checkedConvert('placeholder', (v) => v ?? _omit),
+      altText: $checkedConvert('alt_text', (v) => v as String?),
+      contentHash: $checkedConvert('content_hash', (v) => v as String?),
+      width: $checkedConvert('width', (v) => (v as num?)?.toInt()),
+      height: $checkedConvert('height', (v) => (v as num?)?.toInt()),
+      duration: $checkedConvert('duration', (v) => v as num?),
+      gifSlug: $checkedConvert('gif_slug', (v) => v as String?),
+      gifProvider: $checkedConvert('gif_provider', (v) => v as String?),
+      media: $checkedConvert(
+        'media',
+        (v) => (v as Map<String, dynamic>?)?.map(
+          (k, e) =>
+              MapEntry(k, GifMediaFormat.fromJson(e as Map<String, dynamic>)),
+        ),
+      ),
+      placeholder: $checkedConvert('placeholder', (v) => v as String?),
     );
     return val;
   },

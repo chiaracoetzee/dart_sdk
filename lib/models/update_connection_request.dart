@@ -10,7 +10,7 @@ part 'update_connection_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class UpdateConnectionRequest {
   const UpdateConnectionRequest({
     Object? visibilityFlags = _omit,
@@ -21,6 +21,10 @@ class UpdateConnectionRequest {
        _visibilityFlagsPresent = !identical(visibilityFlags, _omit),
        sortOrder = identical(sortOrder, _omit) ? null : sortOrder as Int32Type?,
        _sortOrderPresent = !identical(sortOrder, _omit);
+
+  const UpdateConnectionRequest._({this.visibilityFlags, this.sortOrder})
+    : _visibilityFlagsPresent = false,
+      _sortOrderPresent = false;
   factory UpdateConnectionRequest.fromJson(Map<String, Object?> json) {
     final value = _$UpdateConnectionRequestFromJson(json);
     return UpdateConnectionRequest(

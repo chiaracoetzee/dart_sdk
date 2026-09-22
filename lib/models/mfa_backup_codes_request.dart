@@ -12,7 +12,7 @@ part 'mfa_backup_codes_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class MfaBackupCodesRequest {
   const MfaBackupCodesRequest({
     required this.regenerate,
@@ -37,6 +37,19 @@ class MfaBackupCodesRequest {
            ? null
            : webauthnChallenge as String?,
        _webauthnChallengePresent = !identical(webauthnChallenge, _omit);
+
+  const MfaBackupCodesRequest._({
+    required this.regenerate,
+    this.password,
+    this.mfaMethod,
+    this.mfaCode,
+    this.webauthnResponse,
+    this.webauthnChallenge,
+  }) : _passwordPresent = false,
+       _mfaMethodPresent = false,
+       _mfaCodePresent = false,
+       _webauthnResponsePresent = false,
+       _webauthnChallengePresent = false;
   factory MfaBackupCodesRequest.fromJson(Map<String, Object?> json) {
     final value = _$MfaBackupCodesRequestFromJson(json);
     return MfaBackupCodesRequest(

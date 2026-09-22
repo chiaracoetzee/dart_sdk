@@ -12,7 +12,7 @@ part 'guild_member_search_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildMemberSearchRequest {
   const GuildMemberSearchRequest({
     this.limit = 25,
@@ -62,6 +62,32 @@ class GuildMemberSearchRequest {
            ? null
            : sortOrder as GuildMemberSearchRequestSortOrderSortOrder?,
        _sortOrderPresent = !identical(sortOrder, _omit);
+
+  const GuildMemberSearchRequest._({
+    this.limit = 25,
+    this.offset = 0,
+    this.query,
+    this.roleIds,
+    this.joinedAtGte,
+    this.joinedAtLte,
+    this.joinSourceType,
+    this.sourceInviteCode,
+    this.isBot,
+    this.userCreatedAtGte,
+    this.userCreatedAtLte,
+    this.sortBy,
+    this.sortOrder,
+  }) : _queryPresent = false,
+       _roleIdsPresent = false,
+       _joinedAtGtePresent = false,
+       _joinedAtLtePresent = false,
+       _joinSourceTypePresent = false,
+       _sourceInviteCodePresent = false,
+       _isBotPresent = false,
+       _userCreatedAtGtePresent = false,
+       _userCreatedAtLtePresent = false,
+       _sortByPresent = false,
+       _sortOrderPresent = false;
   factory GuildMemberSearchRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildMemberSearchRequestFromJson(json);
     return GuildMemberSearchRequest(

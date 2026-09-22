@@ -10,7 +10,7 @@ part 'template_channel.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class TemplateChannel {
   const TemplateChannel({
     required this.id,
@@ -49,6 +49,29 @@ class TemplateChannel {
            ? null
            : permissionOverwrites as List<TemplateChannelPermissionOverwrites>?,
        _permissionOverwritesPresent = !identical(permissionOverwrites, _omit);
+
+  const TemplateChannel._({
+    required this.id,
+    required this.type,
+    required this.position,
+    this.name,
+    this.topic,
+    this.parentId,
+    this.bitrate,
+    this.userLimit,
+    this.voiceConnectionLimit,
+    this.nsfw,
+    this.rateLimitPerUser,
+    this.permissionOverwrites,
+  }) : _namePresent = false,
+       _topicPresent = false,
+       _parentIdPresent = false,
+       _bitratePresent = false,
+       _userLimitPresent = false,
+       _voiceConnectionLimitPresent = false,
+       _nsfwPresent = false,
+       _rateLimitPerUserPresent = false,
+       _permissionOverwritesPresent = false;
   factory TemplateChannel.fromJson(Map<String, Object?> json) {
     final value = _$TemplateChannelFromJson(json);
     return TemplateChannel(

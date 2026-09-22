@@ -54,14 +54,14 @@ class DsaReportRequestMessageDsaReportRequest {
 
   const DsaReportRequestMessageDsaReportRequest({
     required this.ticket,
-    required this.additionalInfo,
+    this.additionalInfo,
     required this.reporterFullLegalName,
     required this.reporterCountryOfResidence,
-    required this.reporterFluxerTag,
+    this.reporterFluxerTag,
     required this.reportType,
     required this.category,
     required this.messageLink,
-    required this.reportedUserTag,
+    this.reportedUserTag,
   });
 
   factory DsaReportRequestMessageDsaReportRequest.fromJson(
@@ -94,14 +94,14 @@ class DsaReportRequestUserDsaReportRequest {
 
   const DsaReportRequestUserDsaReportRequest({
     required this.ticket,
-    required this.additionalInfo,
+    this.additionalInfo,
     required this.reporterFullLegalName,
     required this.reporterCountryOfResidence,
-    required this.reporterFluxerTag,
+    this.reporterFluxerTag,
     required this.reportType,
     required this.category,
-    required this.userId,
-    required this.userTag,
+    this.userId,
+    this.userTag,
   });
 
   factory DsaReportRequestUserDsaReportRequest.fromJson(
@@ -134,14 +134,14 @@ class DsaReportRequestGuildDsaReportRequest {
 
   const DsaReportRequestGuildDsaReportRequest({
     required this.ticket,
-    required this.additionalInfo,
+    this.additionalInfo,
     required this.reporterFullLegalName,
     required this.reporterCountryOfResidence,
-    required this.reporterFluxerTag,
+    this.reporterFluxerTag,
     required this.reportType,
     required this.category,
     required this.guildId,
-    required this.inviteCode,
+    this.inviteCode,
   });
 
   factory DsaReportRequestGuildDsaReportRequest.fromJson(

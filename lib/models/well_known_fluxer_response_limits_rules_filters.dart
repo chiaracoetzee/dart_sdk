@@ -8,7 +8,7 @@ part 'well_known_fluxer_response_limits_rules_filters.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class WellKnownFluxerResponseLimitsRulesFilters {
   const WellKnownFluxerResponseLimitsRulesFilters({
     Object? traits = _omit,
@@ -19,6 +19,12 @@ class WellKnownFluxerResponseLimitsRulesFilters {
            ? null
            : guildFeatures as List<String>?,
        _guildFeaturesPresent = !identical(guildFeatures, _omit);
+
+  const WellKnownFluxerResponseLimitsRulesFilters._({
+    this.traits,
+    this.guildFeatures,
+  }) : _traitsPresent = false,
+       _guildFeaturesPresent = false;
   factory WellKnownFluxerResponseLimitsRulesFilters.fromJson(
     Map<String, Object?> json,
   ) {

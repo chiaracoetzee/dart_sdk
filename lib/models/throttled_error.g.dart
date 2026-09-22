@@ -8,12 +8,19 @@ part of 'throttled_error.dart';
 
 ThrottledError _$ThrottledErrorFromJson(Map<String, dynamic> json) =>
     $checkedCreate('ThrottledError', json, ($checkedConvert) {
-      final val = ThrottledError(
+      final val = ThrottledError._(
         code: $checkedConvert('code', (v) => v as String),
         message: $checkedConvert('message', (v) => v as String),
-        errors: $checkedConvert('errors', (v) => v ?? _omit),
-        retryAfter: $checkedConvert('retry_after', (v) => v ?? _omit),
-        global: $checkedConvert('global', (v) => v ?? _omit),
+        errors: $checkedConvert(
+          'errors',
+          (v) => (v as List<dynamic>?)
+              ?.map(
+                (e) => ThrottledErrorErrors.fromJson(e as Map<String, dynamic>),
+              )
+              .toList(),
+        ),
+        retryAfter: $checkedConvert('retry_after', (v) => v as num?),
+        global: $checkedConvert('global', (v) => v as bool?),
       );
       return val;
     }, fieldKeyMap: const {'retryAfter': 'retry_after'});

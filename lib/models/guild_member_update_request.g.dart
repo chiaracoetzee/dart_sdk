@@ -12,25 +12,36 @@ GuildMemberUpdateRequest _$GuildMemberUpdateRequestFromJson(
   'GuildMemberUpdateRequest',
   json,
   ($checkedConvert) {
-    final val = GuildMemberUpdateRequest(
-      nick: $checkedConvert('nick', (v) => v ?? _omit),
-      roles: $checkedConvert('roles', (v) => v ?? _omit),
-      avatar: $checkedConvert('avatar', (v) => v ?? _omit),
-      banner: $checkedConvert('banner', (v) => v ?? _omit),
-      bio: $checkedConvert('bio', (v) => v ?? _omit),
-      pronouns: $checkedConvert('pronouns', (v) => v ?? _omit),
-      accentColor: $checkedConvert('accent_color', (v) => v ?? _omit),
-      profileFlags: $checkedConvert('profile_flags', (v) => v ?? _omit),
-      mentionFlags: $checkedConvert('mention_flags', (v) => v ?? _omit),
-      mute: $checkedConvert('mute', (v) => v ?? _omit),
-      deaf: $checkedConvert('deaf', (v) => v ?? _omit),
+    final val = GuildMemberUpdateRequest._(
+      nick: $checkedConvert('nick', (v) => v as String?),
+      roles: $checkedConvert(
+        'roles',
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+      ),
+      avatar: $checkedConvert('avatar', (v) => v as String?),
+      banner: $checkedConvert('banner', (v) => v as String?),
+      bio: $checkedConvert('bio', (v) => v as String?),
+      pronouns: $checkedConvert('pronouns', (v) => v as String?),
+      accentColor: $checkedConvert('accent_color', (v) => (v as num?)?.toInt()),
+      profileFlags: $checkedConvert(
+        'profile_flags',
+        (v) => (v as num?)?.toInt(),
+      ),
+      mentionFlags: $checkedConvert(
+        'mention_flags',
+        (v) => v == null
+            ? null
+            : MentionReplyPreferencesInput.fromJson((v as num).toInt()),
+      ),
+      mute: $checkedConvert('mute', (v) => v as bool?),
+      deaf: $checkedConvert('deaf', (v) => v as bool?),
       communicationDisabledUntil: $checkedConvert(
         'communication_disabled_until',
-        (v) => v ?? _omit,
+        (v) => v == null ? null : DateTime.parse(v as String),
       ),
-      timeoutReason: $checkedConvert('timeout_reason', (v) => v ?? _omit),
-      channelId: $checkedConvert('channel_id', (v) => v ?? _omit),
-      connectionId: $checkedConvert('connection_id', (v) => v ?? _omit),
+      timeoutReason: $checkedConvert('timeout_reason', (v) => v as String?),
+      channelId: $checkedConvert('channel_id', (v) => v as String?),
+      connectionId: $checkedConvert('connection_id', (v) => v as String?),
     );
     return val;
   },

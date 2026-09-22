@@ -11,7 +11,7 @@ part 'phone_send_verification_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class PhoneSendVerificationRequest {
   const PhoneSendVerificationRequest({
     required this.phone,
@@ -20,6 +20,9 @@ class PhoneSendVerificationRequest {
            ? null
            : channel as PhoneSendVerificationRequestChannelChannel?,
        _channelPresent = !identical(channel, _omit);
+
+  const PhoneSendVerificationRequest._({required this.phone, this.channel})
+    : _channelPresent = false;
   factory PhoneSendVerificationRequest.fromJson(Map<String, Object?> json) {
     final value = _$PhoneSendVerificationRequestFromJson(json);
     return PhoneSendVerificationRequest(

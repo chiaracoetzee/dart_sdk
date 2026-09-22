@@ -12,14 +12,22 @@ _$ExperimentAssignmentsResponseAssignmentsFromJson(Map<String, dynamic> json) =>
       'ExperimentAssignmentsResponseAssignments',
       json,
       ($checkedConvert) {
-        final val = ExperimentAssignmentsResponseAssignments(
+        final val = ExperimentAssignmentsResponseAssignments._(
           voiceNoiseSuppression: $checkedConvert(
             'voice_noise_suppression',
-            (v) => v ?? _omit,
+            (v) => v == null
+                ? null
+                : VoiceNoiseSuppressionAssignmentResponse.fromJson(
+                    v as Map<String, dynamic>,
+                  ),
           ),
           screenShareDelivery: $checkedConvert(
             'screen_share_delivery',
-            (v) => v ?? _omit,
+            (v) => v == null
+                ? null
+                : ScreenShareDeliveryAssignmentResponse.fromJson(
+                    v as Map<String, dynamic>,
+                  ),
           ),
         );
         return val;

@@ -10,7 +10,7 @@ part 'channel_position_update_request_item.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ChannelPositionUpdateRequestItem {
   const ChannelPositionUpdateRequestItem({
     required this.id,
@@ -32,6 +32,17 @@ class ChannelPositionUpdateRequestItem {
            ? null
            : lockPermissions as bool?,
        _lockPermissionsPresent = !identical(lockPermissions, _omit);
+
+  const ChannelPositionUpdateRequestItem._({
+    required this.id,
+    this.position,
+    this.parentId,
+    this.precedingSiblingId,
+    this.lockPermissions,
+  }) : _positionPresent = false,
+       _parentIdPresent = false,
+       _precedingSiblingIdPresent = false,
+       _lockPermissionsPresent = false;
   factory ChannelPositionUpdateRequestItem.fromJson(Map<String, Object?> json) {
     final value = _$ChannelPositionUpdateRequestItemFromJson(json);
     return ChannelPositionUpdateRequestItem(

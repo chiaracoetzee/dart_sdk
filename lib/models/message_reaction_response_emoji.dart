@@ -10,7 +10,7 @@ part 'message_reaction_response_emoji.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class MessageReactionResponseEmoji {
   const MessageReactionResponseEmoji({
     required this.name,
@@ -20,6 +20,13 @@ class MessageReactionResponseEmoji {
        _idPresent = !identical(id, _omit),
        animated = identical(animated, _omit) ? null : animated as bool?,
        _animatedPresent = !identical(animated, _omit);
+
+  const MessageReactionResponseEmoji._({
+    required this.name,
+    this.id,
+    this.animated,
+  }) : _idPresent = false,
+       _animatedPresent = false;
   factory MessageReactionResponseEmoji.fromJson(Map<String, Object?> json) {
     final value = _$MessageReactionResponseEmojiFromJson(json);
     return MessageReactionResponseEmoji(

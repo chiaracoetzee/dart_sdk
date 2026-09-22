@@ -10,7 +10,7 @@ part 'push_rotate_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class PushRotateRequest {
   const PushRotateRequest({
     required this.oldEndpoint,
@@ -19,6 +19,13 @@ class PushRotateRequest {
     Object? userAgent = _omit,
   }) : userAgent = identical(userAgent, _omit) ? null : userAgent as String?,
        _userAgentPresent = !identical(userAgent, _omit);
+
+  const PushRotateRequest._({
+    required this.oldEndpoint,
+    required this.endpoint,
+    required this.keys,
+    this.userAgent,
+  }) : _userAgentPresent = false;
   factory PushRotateRequest.fromJson(Map<String, Object?> json) {
     final value = _$PushRotateRequestFromJson(json);
     return PushRotateRequest(

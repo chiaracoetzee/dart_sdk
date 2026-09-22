@@ -10,7 +10,7 @@ part 'discovery_guild_list_response_guilds.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class DiscoveryGuildListResponseGuilds {
   const DiscoveryGuildListResponseGuilds({
     required this.id,
@@ -37,6 +37,24 @@ class DiscoveryGuildListResponseGuilds {
            ? null
            : primaryLanguage as String?,
        _primaryLanguagePresent = !identical(primaryLanguage, _omit);
+
+  const DiscoveryGuildListResponseGuilds._({
+    required this.id,
+    required this.name,
+    required this.categoryType,
+    required this.customTags,
+    required this.memberCount,
+    required this.onlineCount,
+    required this.features,
+    required this.verificationLevel,
+    this.icon,
+    this.banner,
+    this.description,
+    this.primaryLanguage,
+  }) : _iconPresent = false,
+       _bannerPresent = false,
+       _descriptionPresent = false,
+       _primaryLanguagePresent = false;
   factory DiscoveryGuildListResponseGuilds.fromJson(Map<String, Object?> json) {
     final value = _$DiscoveryGuildListResponseGuildsFromJson(json);
     return DiscoveryGuildListResponseGuilds(

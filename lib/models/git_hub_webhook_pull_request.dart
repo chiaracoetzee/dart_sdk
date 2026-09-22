@@ -12,7 +12,7 @@ part 'git_hub_webhook_pull_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GitHubWebhookPullRequest {
   const GitHubWebhookPullRequest({
     required this.id,
@@ -23,6 +23,15 @@ class GitHubWebhookPullRequest {
     Object? body = _omit,
   }) : body = identical(body, _omit) ? null : body as String?,
        _bodyPresent = !identical(body, _omit);
+
+  const GitHubWebhookPullRequest._({
+    required this.id,
+    required this.number,
+    required this.htmlUrl,
+    required this.user,
+    required this.title,
+    this.body,
+  }) : _bodyPresent = false;
   factory GitHubWebhookPullRequest.fromJson(Map<String, Object?> json) {
     final value = _$GitHubWebhookPullRequestFromJson(json);
     return GitHubWebhookPullRequest(

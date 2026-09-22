@@ -11,7 +11,7 @@ part 'git_hub_webhook_comment.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GitHubWebhookComment {
   const GitHubWebhookComment({
     required this.id,
@@ -21,6 +21,14 @@ class GitHubWebhookComment {
     Object? commitId = _omit,
   }) : commitId = identical(commitId, _omit) ? null : commitId as String?,
        _commitIdPresent = !identical(commitId, _omit);
+
+  const GitHubWebhookComment._({
+    required this.id,
+    required this.htmlUrl,
+    required this.user,
+    required this.body,
+    this.commitId,
+  }) : _commitIdPresent = false;
   factory GitHubWebhookComment.fromJson(Map<String, Object?> json) {
     final value = _$GitHubWebhookCommentFromJson(json);
     return GitHubWebhookComment(

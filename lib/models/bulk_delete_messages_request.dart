@@ -10,7 +10,7 @@ part 'bulk_delete_messages_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class BulkDeleteMessagesRequest {
   const BulkDeleteMessagesRequest({
     Object? messageIds = _omit,
@@ -23,6 +23,10 @@ class BulkDeleteMessagesRequest {
            ? null
            : messages as List<SnowflakeType>?,
        _messagesPresent = !identical(messages, _omit);
+
+  const BulkDeleteMessagesRequest._({this.messageIds, this.messages})
+    : _messageIdsPresent = false,
+      _messagesPresent = false;
   factory BulkDeleteMessagesRequest.fromJson(Map<String, Object?> json) {
     final value = _$BulkDeleteMessagesRequestFromJson(json);
     return BulkDeleteMessagesRequest(

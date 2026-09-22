@@ -10,7 +10,7 @@ part 'verify_and_create_connection_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class VerifyAndCreateConnectionRequest {
   const VerifyAndCreateConnectionRequest({
     required this.initiationToken,
@@ -19,6 +19,11 @@ class VerifyAndCreateConnectionRequest {
            ? null
            : visibilityFlags as Int32Type?,
        _visibilityFlagsPresent = !identical(visibilityFlags, _omit);
+
+  const VerifyAndCreateConnectionRequest._({
+    required this.initiationToken,
+    this.visibilityFlags,
+  }) : _visibilityFlagsPresent = false;
   factory VerifyAndCreateConnectionRequest.fromJson(Map<String, Object?> json) {
     final value = _$VerifyAndCreateConnectionRequestFromJson(json);
     return VerifyAndCreateConnectionRequest(

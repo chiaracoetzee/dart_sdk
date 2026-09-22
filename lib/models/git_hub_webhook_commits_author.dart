@@ -8,13 +8,16 @@ part 'git_hub_webhook_commits_author.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GitHubWebhookCommitsAuthor {
   const GitHubWebhookCommitsAuthor({
     required this.name,
     Object? username = _omit,
   }) : username = identical(username, _omit) ? null : username as String?,
        _usernamePresent = !identical(username, _omit);
+
+  const GitHubWebhookCommitsAuthor._({required this.name, this.username})
+    : _usernamePresent = false;
   factory GitHubWebhookCommitsAuthor.fromJson(Map<String, Object?> json) {
     final value = _$GitHubWebhookCommitsAuthorFromJson(json);
     return GitHubWebhookCommitsAuthor(

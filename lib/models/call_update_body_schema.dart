@@ -8,7 +8,7 @@ part 'call_update_body_schema.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class CallUpdateBodySchema {
   const CallUpdateBodySchema({
     Object? region = _omit,
@@ -20,6 +20,11 @@ class CallUpdateBodySchema {
        _latitudePresent = !identical(latitude, _omit),
        longitude = identical(longitude, _omit) ? null : longitude as String?,
        _longitudePresent = !identical(longitude, _omit);
+
+  const CallUpdateBodySchema._({this.region, this.latitude, this.longitude})
+    : _regionPresent = false,
+      _latitudePresent = false,
+      _longitudePresent = false;
   factory CallUpdateBodySchema.fromJson(Map<String, Object?> json) {
     final value = _$CallUpdateBodySchemaFromJson(json);
     return CallUpdateBodySchema(

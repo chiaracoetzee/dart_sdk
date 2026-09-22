@@ -10,7 +10,7 @@ part 'stream_preview_upload_url_body_schema.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class StreamPreviewUploadUrlBodySchema {
   const StreamPreviewUploadUrlBodySchema({
     required this.channelId,
@@ -19,6 +19,11 @@ class StreamPreviewUploadUrlBodySchema {
            ? null
            : contentType as String?,
        _contentTypePresent = !identical(contentType, _omit);
+
+  const StreamPreviewUploadUrlBodySchema._({
+    required this.channelId,
+    this.contentType,
+  }) : _contentTypePresent = false;
   factory StreamPreviewUploadUrlBodySchema.fromJson(Map<String, Object?> json) {
     final value = _$StreamPreviewUploadUrlBodySchemaFromJson(json);
     return StreamPreviewUploadUrlBodySchema(

@@ -11,27 +11,33 @@ TemplateChannel _$TemplateChannelFromJson(Map<String, dynamic> json) =>
       'TemplateChannel',
       json,
       ($checkedConvert) {
-        final val = TemplateChannel(
+        final val = TemplateChannel._(
           id: $checkedConvert('id', (v) => v as String),
           type: $checkedConvert('type', (v) => v as num),
           position: $checkedConvert('position', (v) => v as num),
-          name: $checkedConvert('name', (v) => v ?? _omit),
-          topic: $checkedConvert('topic', (v) => v ?? _omit),
-          parentId: $checkedConvert('parent_id', (v) => v ?? _omit),
-          bitrate: $checkedConvert('bitrate', (v) => v ?? _omit),
-          userLimit: $checkedConvert('user_limit', (v) => v ?? _omit),
+          name: $checkedConvert('name', (v) => v as String?),
+          topic: $checkedConvert('topic', (v) => v as String?),
+          parentId: $checkedConvert('parent_id', (v) => v as String?),
+          bitrate: $checkedConvert('bitrate', (v) => v as num?),
+          userLimit: $checkedConvert('user_limit', (v) => v as num?),
           voiceConnectionLimit: $checkedConvert(
             'voice_connection_limit',
-            (v) => v ?? _omit,
+            (v) => v as num?,
           ),
-          nsfw: $checkedConvert('nsfw', (v) => v ?? _omit),
+          nsfw: $checkedConvert('nsfw', (v) => v as bool?),
           rateLimitPerUser: $checkedConvert(
             'rate_limit_per_user',
-            (v) => v ?? _omit,
+            (v) => v as num?,
           ),
           permissionOverwrites: $checkedConvert(
             'permission_overwrites',
-            (v) => v ?? _omit,
+            (v) => (v as List<dynamic>?)
+                ?.map(
+                  (e) => TemplateChannelPermissionOverwrites.fromJson(
+                    e as Map<String, dynamic>,
+                  ),
+                )
+                .toList(),
           ),
         );
         return val;

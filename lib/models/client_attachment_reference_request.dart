@@ -11,7 +11,7 @@ part 'client_attachment_reference_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ClientAttachmentReferenceRequest {
   const ClientAttachmentReferenceRequest({
     Object? title = _omit,
@@ -35,10 +35,26 @@ class ClientAttachmentReferenceRequest {
        _durationPresent = !identical(duration, _omit),
        waveform = identical(waveform, _omit) ? null : waveform as String?,
        _waveformPresent = !identical(waveform, _omit),
-       id = identical(id, _omit) ? null : id,
+       id = identical(id, _omit) ? null : id as String?,
        _idPresent = !identical(id, _omit),
        filename = identical(filename, _omit) ? null : filename as String?,
        _filenamePresent = !identical(filename, _omit);
+
+  const ClientAttachmentReferenceRequest._({
+    this.title,
+    this.description,
+    this.flags,
+    this.duration,
+    this.waveform,
+    this.id,
+    this.filename,
+  }) : _titlePresent = false,
+       _descriptionPresent = false,
+       _flagsPresent = false,
+       _durationPresent = false,
+       _waveformPresent = false,
+       _idPresent = false,
+       _filenamePresent = false;
   factory ClientAttachmentReferenceRequest.fromJson(Map<String, Object?> json) {
     final value = _$ClientAttachmentReferenceRequestFromJson(json);
     return ClientAttachmentReferenceRequest(
@@ -74,7 +90,7 @@ class ClientAttachmentReferenceRequest {
 
   /// The identifier of the attachment being referenced (snowflake ID or file index)
   @JsonKey(includeIfNull: false)
-  final dynamic id;
+  final String? id;
 
   /// A new filename for the attachment
   @JsonKey(includeIfNull: false)

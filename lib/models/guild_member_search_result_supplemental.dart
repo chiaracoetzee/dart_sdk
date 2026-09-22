@@ -10,7 +10,7 @@ part 'guild_member_search_result_supplemental.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildMemberSearchResultSupplemental {
   const GuildMemberSearchResultSupplemental({
     required this.sourceInviteCode,
@@ -20,6 +20,12 @@ class GuildMemberSearchResultSupplemental {
            ? null
            : joinSourceType as JoinSourceType?,
        _joinSourceTypePresent = !identical(joinSourceType, _omit);
+
+  const GuildMemberSearchResultSupplemental._({
+    required this.sourceInviteCode,
+    required this.inviterId,
+    this.joinSourceType,
+  }) : _joinSourceTypePresent = false;
   factory GuildMemberSearchResultSupplemental.fromJson(
     Map<String, Object?> json,
   ) {

@@ -26,7 +26,7 @@ part 'guild_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildResponse {
   const GuildResponse({
     required this.contentWarningLevel,
@@ -169,6 +169,73 @@ class GuildResponse {
          approximatePresenceCount,
          _omit,
        );
+
+  const GuildResponse._({
+    required this.contentWarningLevel,
+    required this.name,
+    required this.afkTimeout,
+    required this.splashCardAlignment,
+    required this.id,
+    required this.ownerId,
+    required this.disabledOperations,
+    required this.nsfwLevel,
+    required this.mfaLevel,
+    required this.defaultMessageNotifications,
+    required this.verificationLevel,
+    required this.features,
+    required this.systemChannelFlags,
+    required this.explicitContentFilter,
+    required this.nsfw,
+    this.systemChannelId,
+    this.embedSplashHeight,
+    this.rulesChannelId,
+    this.afkChannelId,
+    this.vanityUrlCode,
+    this.embedSplashWidth,
+    this.embedSplash,
+    this.splashHeight,
+    this.splashWidth,
+    this.bannerHeight,
+    this.approximatePresenceCount,
+    this.contentWarningText,
+    this.bannerWidth,
+    this.banner,
+    this.icon,
+    this.messageHistoryCutoff,
+    this.permissions,
+    this.roles,
+    this.emojis,
+    this.stickers,
+    this.channels,
+    this.memberCount,
+    this.onlineCount,
+    this.approximateMemberCount,
+    this.splash,
+  }) : _iconPresent = false,
+       _bannerPresent = false,
+       _bannerWidthPresent = false,
+       _bannerHeightPresent = false,
+       _splashPresent = false,
+       _splashWidthPresent = false,
+       _splashHeightPresent = false,
+       _embedSplashPresent = false,
+       _embedSplashWidthPresent = false,
+       _embedSplashHeightPresent = false,
+       _vanityUrlCodePresent = false,
+       _systemChannelIdPresent = false,
+       _rulesChannelIdPresent = false,
+       _afkChannelIdPresent = false,
+       _contentWarningTextPresent = false,
+       _messageHistoryCutoffPresent = false,
+       _permissionsPresent = false,
+       _rolesPresent = false,
+       _emojisPresent = false,
+       _stickersPresent = false,
+       _channelsPresent = false,
+       _memberCountPresent = false,
+       _onlineCountPresent = false,
+       _approximateMemberCountPresent = false,
+       _approximatePresenceCountPresent = false;
   factory GuildResponse.fromJson(Map<String, Object?> json) {
     final value = _$GuildResponseFromJson(json);
     return GuildResponse(

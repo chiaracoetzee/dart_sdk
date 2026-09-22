@@ -12,7 +12,7 @@ _$GuildLinkChannelCreateRequestPermissionOverwritesFromJson(
 ) => $checkedCreate('GuildLinkChannelCreateRequestPermissionOverwrites', json, (
   $checkedConvert,
 ) {
-  final val = GuildLinkChannelCreateRequestPermissionOverwrites(
+  final val = GuildLinkChannelCreateRequestPermissionOverwrites._(
     id: $checkedConvert('id', (v) => v as String),
     type: $checkedConvert(
       'type',
@@ -20,8 +20,8 @@ _$GuildLinkChannelCreateRequestPermissionOverwritesFromJson(
         (v as num).toInt(),
       ),
     ),
-    allow: $checkedConvert('allow', (v) => v ?? _omit),
-    deny: $checkedConvert('deny', (v) => v ?? _omit),
+    allow: $checkedConvert('allow', (v) => v as String?),
+    deny: $checkedConvert('deny', (v) => v as String?),
   );
   return val;
 });

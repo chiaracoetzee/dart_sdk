@@ -10,7 +10,7 @@ part 'message_ack_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class MessageAckRequest {
   const MessageAckRequest({
     Object? mentionCount = _omit,
@@ -21,6 +21,10 @@ class MessageAckRequest {
        _mentionCountPresent = !identical(mentionCount, _omit),
        manual = identical(manual, _omit) ? null : manual as bool?,
        _manualPresent = !identical(manual, _omit);
+
+  const MessageAckRequest._({this.mentionCount, this.manual})
+    : _mentionCountPresent = false,
+      _manualPresent = false;
   factory MessageAckRequest.fromJson(Map<String, Object?> json) {
     final value = _$MessageAckRequestFromJson(json);
     return MessageAckRequest(

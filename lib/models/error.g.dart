@@ -8,10 +8,15 @@ part of 'error.dart';
 
 Error _$ErrorFromJson(Map<String, dynamic> json) =>
     $checkedCreate('Error', json, ($checkedConvert) {
-      final val = Error(
+      final val = Error._(
         code: $checkedConvert('code', (v) => v as String),
         message: $checkedConvert('message', (v) => v as String),
-        errors: $checkedConvert('errors', (v) => v ?? _omit),
+        errors: $checkedConvert(
+          'errors',
+          (v) => (v as List<dynamic>?)
+              ?.map((e) => ErrorErrors.fromJson(e as Map<String, dynamic>))
+              .toList(),
+        ),
       );
       return val;
     });

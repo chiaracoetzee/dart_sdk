@@ -12,59 +12,78 @@ UserUpdateWithVerificationRequest _$UserUpdateWithVerificationRequestFromJson(
   'UserUpdateWithVerificationRequest',
   json,
   ($checkedConvert) {
-    final val = UserUpdateWithVerificationRequest(
-      username: $checkedConvert('username', (v) => v ?? _omit),
-      discriminator: $checkedConvert('discriminator', (v) => v ?? _omit),
-      globalName: $checkedConvert('global_name', (v) => v ?? _omit),
-      email: $checkedConvert('email', (v) => v ?? _omit),
-      newPassword: $checkedConvert('new_password', (v) => v ?? _omit),
-      password: $checkedConvert('password', (v) => v ?? _omit),
-      avatar: $checkedConvert('avatar', (v) => v ?? _omit),
-      banner: $checkedConvert('banner', (v) => v ?? _omit),
-      bio: $checkedConvert('bio', (v) => v ?? _omit),
-      pronouns: $checkedConvert('pronouns', (v) => v ?? _omit),
-      accentColor: $checkedConvert('accent_color', (v) => v ?? _omit),
-      timezone: $checkedConvert('timezone', (v) => v ?? _omit),
+    final val = UserUpdateWithVerificationRequest._(
+      username: $checkedConvert('username', (v) => v as String?),
+      discriminator: $checkedConvert('discriminator', (v) => v as String?),
+      globalName: $checkedConvert('global_name', (v) => v as String?),
+      email: $checkedConvert('email', (v) => v as String?),
+      newPassword: $checkedConvert('new_password', (v) => v as String?),
+      password: $checkedConvert('password', (v) => v as String?),
+      avatar: $checkedConvert('avatar', (v) => v as String?),
+      banner: $checkedConvert('banner', (v) => v as String?),
+      bio: $checkedConvert('bio', (v) => v as String?),
+      pronouns: $checkedConvert('pronouns', (v) => v as String?),
+      accentColor: $checkedConvert('accent_color', (v) => (v as num?)?.toInt()),
+      timezone: $checkedConvert('timezone', (v) => v as String?),
       timezonePrivacyFlags: $checkedConvert(
         'timezone_privacy_flags',
-        (v) => v ?? _omit,
+        (v) => (v as num?)?.toInt(),
       ),
       premiumBadgeHidden: $checkedConvert(
         'premium_badge_hidden',
-        (v) => v ?? _omit,
+        (v) => v as bool?,
       ),
       premiumBadgeMasked: $checkedConvert(
         'premium_badge_masked',
-        (v) => v ?? _omit,
+        (v) => v as bool?,
       ),
       premiumBadgeTimestampHidden: $checkedConvert(
         'premium_badge_timestamp_hidden',
-        (v) => v ?? _omit,
+        (v) => v as bool?,
       ),
       premiumBadgeSequenceHidden: $checkedConvert(
         'premium_badge_sequence_hidden',
-        (v) => v ?? _omit,
+        (v) => v as bool?,
       ),
       premiumEnabledOverride: $checkedConvert(
         'premium_enabled_override',
-        (v) => v ?? _omit,
+        (v) => v as bool?,
       ),
       hasDismissedPremiumOnboarding: $checkedConvert(
         'has_dismissed_premium_onboarding',
-        (v) => v ?? _omit,
+        (v) => v as bool?,
       ),
       hasUnreadGiftInventory: $checkedConvert(
         'has_unread_gift_inventory',
-        (v) => v ?? _omit,
+        (v) => v as bool?,
       ),
-      mentionFlags: $checkedConvert('mention_flags', (v) => v ?? _omit),
-      emailToken: $checkedConvert('email_token', (v) => v ?? _omit),
-      mfaMethod: $checkedConvert('mfa_method', (v) => v ?? _omit),
-      mfaCode: $checkedConvert('mfa_code', (v) => v ?? _omit),
-      webauthnResponse: $checkedConvert('webauthn_response', (v) => v ?? _omit),
+      mentionFlags: $checkedConvert(
+        'mention_flags',
+        (v) => v == null
+            ? null
+            : MentionReplyPreferencesInput.fromJson((v as num).toInt()),
+      ),
+      emailToken: $checkedConvert('email_token', (v) => v as String?),
+      mfaMethod: $checkedConvert(
+        'mfa_method',
+        (v) => v == null
+            ? null
+            : UserUpdateWithVerificationRequestMfaMethodMfaMethod.fromJson(
+                v as String,
+              ),
+      ),
+      mfaCode: $checkedConvert('mfa_code', (v) => v as String?),
+      webauthnResponse: $checkedConvert(
+        'webauthn_response',
+        (v) => v == null
+            ? null
+            : WebAuthnAuthenticationResponse.fromJson(
+                v as Map<String, dynamic>,
+              ),
+      ),
       webauthnChallenge: $checkedConvert(
         'webauthn_challenge',
-        (v) => v ?? _omit,
+        (v) => v as String?,
       ),
     );
     return val;

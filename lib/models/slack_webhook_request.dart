@@ -10,7 +10,7 @@ part 'slack_webhook_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class SlackWebhookRequest {
   const SlackWebhookRequest({
     Object? text = _omit,
@@ -27,6 +27,16 @@ class SlackWebhookRequest {
            ? null
            : attachments as List<SlackWebhookRequestAttachments>?,
        _attachmentsPresent = !identical(attachments, _omit);
+
+  const SlackWebhookRequest._({
+    this.text,
+    this.username,
+    this.iconUrl,
+    this.attachments,
+  }) : _textPresent = false,
+       _usernamePresent = false,
+       _iconUrlPresent = false,
+       _attachmentsPresent = false;
   factory SlackWebhookRequest.fromJson(Map<String, Object?> json) {
     final value = _$SlackWebhookRequestFromJson(json);
     return SlackWebhookRequest(

@@ -10,7 +10,7 @@ part 'webhook_token_update_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class WebhookTokenUpdateRequest {
   const WebhookTokenUpdateRequest({
     Object? name = _omit,
@@ -19,6 +19,10 @@ class WebhookTokenUpdateRequest {
        _namePresent = !identical(name, _omit),
        avatar = identical(avatar, _omit) ? null : avatar as Base64ImageType?,
        _avatarPresent = !identical(avatar, _omit);
+
+  const WebhookTokenUpdateRequest._({this.name, this.avatar})
+    : _namePresent = false,
+      _avatarPresent = false;
   factory WebhookTokenUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$WebhookTokenUpdateRequestFromJson(json);
     return WebhookTokenUpdateRequest(

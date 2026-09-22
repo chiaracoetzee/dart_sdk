@@ -11,7 +11,7 @@ part 'application_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ApplicationResponse {
   const ApplicationResponse({
     required this.id,
@@ -27,6 +27,17 @@ class ApplicationResponse {
        _clientSecretPresent = !identical(clientSecret, _omit),
        bot = identical(bot, _omit) ? null : bot as ApplicationResponseBot?,
        _botPresent = !identical(bot, _omit);
+
+  const ApplicationResponse._({
+    required this.id,
+    required this.name,
+    required this.redirectUris,
+    required this.botPublic,
+    required this.botRequireCodeGrant,
+    this.clientSecret,
+    this.bot,
+  }) : _clientSecretPresent = false,
+       _botPresent = false;
   factory ApplicationResponse.fromJson(Map<String, Object?> json) {
     final value = _$ApplicationResponseFromJson(json);
     return ApplicationResponse(

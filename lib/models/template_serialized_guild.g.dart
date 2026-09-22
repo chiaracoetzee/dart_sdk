@@ -12,7 +12,7 @@ TemplateSerializedGuild _$TemplateSerializedGuildFromJson(
   'TemplateSerializedGuild',
   json,
   ($checkedConvert) {
-    final val = TemplateSerializedGuild(
+    final val = TemplateSerializedGuild._(
       name: $checkedConvert('name', (v) => v as String),
       roles: $checkedConvert(
         'roles',
@@ -26,24 +26,27 @@ TemplateSerializedGuild _$TemplateSerializedGuildFromJson(
             .map((e) => TemplateChannel.fromJson(e as Map<String, dynamic>))
             .toList(),
       ),
-      description: $checkedConvert('description', (v) => v ?? _omit),
+      description: $checkedConvert('description', (v) => v as String?),
       verificationLevel: $checkedConvert(
         'verification_level',
-        (v) => v ?? _omit,
+        (v) => v as num?,
       ),
       defaultMessageNotifications: $checkedConvert(
         'default_message_notifications',
-        (v) => v ?? _omit,
+        (v) => v as num?,
       ),
       explicitContentFilter: $checkedConvert(
         'explicit_content_filter',
-        (v) => v ?? _omit,
+        (v) => v as num?,
       ),
-      systemChannelId: $checkedConvert('system_channel_id', (v) => v ?? _omit),
-      afkTimeout: $checkedConvert('afk_timeout', (v) => v ?? _omit),
+      systemChannelId: $checkedConvert(
+        'system_channel_id',
+        (v) => v as String?,
+      ),
+      afkTimeout: $checkedConvert('afk_timeout', (v) => v as num?),
       systemChannelFlags: $checkedConvert(
         'system_channel_flags',
-        (v) => v ?? _omit,
+        (v) => v as num?,
       ),
     );
     return val;

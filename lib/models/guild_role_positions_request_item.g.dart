@@ -9,9 +9,9 @@ part of 'guild_role_positions_request_item.dart';
 GuildRolePositionsRequestItem _$GuildRolePositionsRequestItemFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('GuildRolePositionsRequestItem', json, ($checkedConvert) {
-  final val = GuildRolePositionsRequestItem(
+  final val = GuildRolePositionsRequestItem._(
     id: $checkedConvert('id', (v) => v as String),
-    position: $checkedConvert('position', (v) => v ?? _omit),
+    position: $checkedConvert('position', (v) => (v as num?)?.toInt()),
   );
   return val;
 });

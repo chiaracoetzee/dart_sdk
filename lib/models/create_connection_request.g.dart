@@ -9,10 +9,13 @@ part of 'create_connection_request.dart';
 CreateConnectionRequest _$CreateConnectionRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('CreateConnectionRequest', json, ($checkedConvert) {
-  final val = CreateConnectionRequest(
+  final val = CreateConnectionRequest._(
     type: $checkedConvert('type', (v) => ConnectionType.fromJson(v as String)),
     identifier: $checkedConvert('identifier', (v) => v as String),
-    visibilityFlags: $checkedConvert('visibility_flags', (v) => v ?? _omit),
+    visibilityFlags: $checkedConvert(
+      'visibility_flags',
+      (v) => (v as num?)?.toInt(),
+    ),
   );
   return val;
 }, fieldKeyMap: const {'visibilityFlags': 'visibility_flags'});

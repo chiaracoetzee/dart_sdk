@@ -11,12 +11,15 @@ _$MessageSearchResultsResponseMessagesCallFromJson(Map<String, dynamic> json) =>
     $checkedCreate('MessageSearchResultsResponseMessagesCall', json, (
       $checkedConvert,
     ) {
-      final val = MessageSearchResultsResponseMessagesCall(
+      final val = MessageSearchResultsResponseMessagesCall._(
         participants: $checkedConvert(
           'participants',
           (v) => (v as List<dynamic>).map((e) => e as String).toList(),
         ),
-        endedTimestamp: $checkedConvert('ended_timestamp', (v) => v ?? _omit),
+        endedTimestamp: $checkedConvert(
+          'ended_timestamp',
+          (v) => v == null ? null : DateTime.parse(v as String),
+        ),
       );
       return val;
     }, fieldKeyMap: const {'endedTimestamp': 'ended_timestamp'});

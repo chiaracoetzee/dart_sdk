@@ -14,7 +14,7 @@ part 'rich_embed_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class RichEmbedRequest {
   const RichEmbedRequest({
     Object? url = _omit,
@@ -57,6 +57,28 @@ class RichEmbedRequest {
            ? null
            : fields as List<RichEmbedRequestFields>?,
        _fieldsPresent = !identical(fields, _omit);
+
+  const RichEmbedRequest._({
+    this.url,
+    this.title,
+    this.color,
+    this.timestamp,
+    this.description,
+    this.author,
+    this.image,
+    this.thumbnail,
+    this.footer,
+    this.fields,
+  }) : _urlPresent = false,
+       _titlePresent = false,
+       _colorPresent = false,
+       _timestampPresent = false,
+       _descriptionPresent = false,
+       _authorPresent = false,
+       _imagePresent = false,
+       _thumbnailPresent = false,
+       _footerPresent = false,
+       _fieldsPresent = false;
   factory RichEmbedRequest.fromJson(Map<String, Object?> json) {
     final value = _$RichEmbedRequestFromJson(json);
     return RichEmbedRequest(

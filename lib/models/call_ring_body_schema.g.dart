@@ -8,10 +8,13 @@ part of 'call_ring_body_schema.dart';
 
 CallRingBodySchema _$CallRingBodySchemaFromJson(Map<String, dynamic> json) =>
     $checkedCreate('CallRingBodySchema', json, ($checkedConvert) {
-      final val = CallRingBodySchema(
-        recipients: $checkedConvert('recipients', (v) => v ?? _omit),
-        latitude: $checkedConvert('latitude', (v) => v ?? _omit),
-        longitude: $checkedConvert('longitude', (v) => v ?? _omit),
+      final val = CallRingBodySchema._(
+        recipients: $checkedConvert(
+          'recipients',
+          (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+        ),
+        latitude: $checkedConvert('latitude', (v) => v as String?),
+        longitude: $checkedConvert('longitude', (v) => v as String?),
       );
       return val;
     });

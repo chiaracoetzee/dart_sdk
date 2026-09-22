@@ -18,7 +18,7 @@ part 'user_profile_full_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class UserProfileFullResponse {
   const UserProfileFullResponse({
     required this.user,
@@ -72,6 +72,29 @@ class UserProfileFullResponse {
            ? null
            : profileLimited as bool?,
        _profileLimitedPresent = !identical(profileLimited, _omit);
+
+  const UserProfileFullResponse._({
+    required this.user,
+    required this.userProfile,
+    required this.timezoneOffset,
+    this.guildMember,
+    this.guildMemberProfile,
+    this.premiumType,
+    this.premiumSince,
+    this.premiumLifetimeSequence,
+    this.mutualFriends,
+    this.mutualGuilds,
+    this.connectedAccounts,
+    this.profileLimited,
+  }) : _guildMemberPresent = false,
+       _guildMemberProfilePresent = false,
+       _premiumTypePresent = false,
+       _premiumSincePresent = false,
+       _premiumLifetimeSequencePresent = false,
+       _mutualFriendsPresent = false,
+       _mutualGuildsPresent = false,
+       _connectedAccountsPresent = false,
+       _profileLimitedPresent = false;
   factory UserProfileFullResponse.fromJson(Map<String, Object?> json) {
     final value = _$UserProfileFullResponseFromJson(json);
     return UserProfileFullResponse(

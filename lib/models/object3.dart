@@ -11,7 +11,7 @@ part 'object3.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class Object3 {
   const Object3({
     Object? id = _omit,
@@ -27,7 +27,7 @@ class Object3 {
     Object? duration = _omit,
     Object? waveform = _omit,
     Object? flags = _omit,
-  }) : id = identical(id, _omit) ? null : id,
+  }) : id = identical(id, _omit) ? null : id as String?,
        _idPresent = !identical(id, _omit),
        filename = identical(filename, _omit) ? null : filename as String?,
        _filenamePresent = !identical(filename, _omit),
@@ -61,6 +61,34 @@ class Object3 {
            ? null
            : flags as MessageAttachmentFlags?,
        _flagsPresent = !identical(flags, _omit);
+
+  const Object3._({
+    this.id,
+    this.filename,
+    this.description,
+    this.contentType,
+    this.size,
+    this.url,
+    this.proxyUrl,
+    this.height,
+    this.width,
+    this.ephemeral,
+    this.duration,
+    this.waveform,
+    this.flags,
+  }) : _idPresent = false,
+       _filenamePresent = false,
+       _descriptionPresent = false,
+       _contentTypePresent = false,
+       _sizePresent = false,
+       _urlPresent = false,
+       _proxyUrlPresent = false,
+       _heightPresent = false,
+       _widthPresent = false,
+       _ephemeralPresent = false,
+       _durationPresent = false,
+       _waveformPresent = false,
+       _flagsPresent = false;
   factory Object3.fromJson(Map<String, Object?> json) {
     final value = _$Object3FromJson(json);
     return Object3(
@@ -82,7 +110,7 @@ class Object3 {
 
   /// Attachment ID for referencing uploaded files
   @JsonKey(includeIfNull: false)
-  final dynamic id;
+  final String? id;
 
   /// Name of the file (1-1024 characters)
   @JsonKey(includeIfNull: false)

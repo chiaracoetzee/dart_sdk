@@ -20,7 +20,7 @@ part 'channel_pin_response_message.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ChannelPinResponseMessage {
   const ChannelPinResponseMessage({
     required this.id,
@@ -88,6 +88,42 @@ class ChannelPinResponseMessage {
            ? null
            : call as ChannelPinResponseMessageCall?,
        _callPresent = !identical(call, _omit);
+
+  const ChannelPinResponseMessage._({
+    required this.id,
+    required this.channelId,
+    required this.author,
+    required this.type,
+    required this.flags,
+    required this.content,
+    required this.timestamp,
+    required this.pinned,
+    required this.mentionEveryone,
+    required this.tts,
+    required this.mentions,
+    required this.mentionRoles,
+    this.webhookId,
+    this.editedTimestamp,
+    this.mentionChannels,
+    this.users,
+    this.embeds,
+    this.attachments,
+    this.stickers,
+    this.messageReference,
+    this.messageSnapshots,
+    this.nonce,
+    this.call,
+  }) : _webhookIdPresent = false,
+       _editedTimestampPresent = false,
+       _mentionChannelsPresent = false,
+       _usersPresent = false,
+       _embedsPresent = false,
+       _attachmentsPresent = false,
+       _stickersPresent = false,
+       _messageReferencePresent = false,
+       _messageSnapshotsPresent = false,
+       _noncePresent = false,
+       _callPresent = false;
   factory ChannelPinResponseMessage.fromJson(Map<String, Object?> json) {
     final value = _$ChannelPinResponseMessageFromJson(json);
     return ChannelPinResponseMessage(

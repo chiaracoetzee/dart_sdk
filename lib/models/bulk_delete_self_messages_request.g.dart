@@ -12,24 +12,44 @@ BulkDeleteSelfMessagesRequest _$BulkDeleteSelfMessagesRequestFromJson(
   'BulkDeleteSelfMessagesRequest',
   json,
   ($checkedConvert) {
-    final val = BulkDeleteSelfMessagesRequest(
+    final val = BulkDeleteSelfMessagesRequest._(
       excludedGuildIds: $checkedConvert(
         'excluded_guild_ids',
-        (v) => v ?? _omit,
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
       ),
       includedGuildIds: $checkedConvert(
         'included_guild_ids',
-        (v) => v ?? _omit,
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
       ),
-      startDate: $checkedConvert('start_date', (v) => v ?? _omit),
-      endDate: $checkedConvert('end_date', (v) => v ?? _omit),
-      password: $checkedConvert('password', (v) => v ?? _omit),
-      mfaMethod: $checkedConvert('mfa_method', (v) => v ?? _omit),
-      mfaCode: $checkedConvert('mfa_code', (v) => v ?? _omit),
-      webauthnResponse: $checkedConvert('webauthn_response', (v) => v ?? _omit),
+      startDate: $checkedConvert(
+        'start_date',
+        (v) => v == null ? null : DateTime.parse(v as String),
+      ),
+      endDate: $checkedConvert(
+        'end_date',
+        (v) => v == null ? null : DateTime.parse(v as String),
+      ),
+      password: $checkedConvert('password', (v) => v as String?),
+      mfaMethod: $checkedConvert(
+        'mfa_method',
+        (v) => v == null
+            ? null
+            : BulkDeleteSelfMessagesRequestMfaMethodMfaMethod.fromJson(
+                v as String,
+              ),
+      ),
+      mfaCode: $checkedConvert('mfa_code', (v) => v as String?),
+      webauthnResponse: $checkedConvert(
+        'webauthn_response',
+        (v) => v == null
+            ? null
+            : WebAuthnAuthenticationResponse.fromJson(
+                v as Map<String, dynamic>,
+              ),
+      ),
       webauthnChallenge: $checkedConvert(
         'webauthn_challenge',
-        (v) => v ?? _omit,
+        (v) => v as String?,
       ),
       scope: $checkedConvert(
         'scope',

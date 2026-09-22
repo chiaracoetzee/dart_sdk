@@ -11,7 +11,7 @@ part 'register_mobile_device_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class RegisterMobileDeviceRequest {
   const RegisterMobileDeviceRequest({
     required this.platform,
@@ -36,6 +36,20 @@ class RegisterMobileDeviceRequest {
        _encryptionKeyPresent = !identical(encryptionKey, _omit),
        authSecret = identical(authSecret, _omit) ? null : authSecret as String?,
        _authSecretPresent = !identical(authSecret, _omit);
+
+  const RegisterMobileDeviceRequest._({
+    required this.platform,
+    required this.token,
+    this.userAgent,
+    this.appId,
+    this.providerEnvironment,
+    this.encryptionKey,
+    this.authSecret,
+  }) : _userAgentPresent = false,
+       _appIdPresent = false,
+       _providerEnvironmentPresent = false,
+       _encryptionKeyPresent = false,
+       _authSecretPresent = false;
   factory RegisterMobileDeviceRequest.fromJson(Map<String, Object?> json) {
     final value = _$RegisterMobileDeviceRequestFromJson(json);
     return RegisterMobileDeviceRequest(

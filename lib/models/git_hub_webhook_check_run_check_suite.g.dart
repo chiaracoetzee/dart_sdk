@@ -12,7 +12,7 @@ GitHubWebhookCheckRunCheckSuite _$GitHubWebhookCheckRunCheckSuiteFromJson(
   'GitHubWebhookCheckRunCheckSuite',
   json,
   ($checkedConvert) {
-    final val = GitHubWebhookCheckRunCheckSuite(
+    final val = GitHubWebhookCheckRunCheckSuite._(
       headSha: $checkedConvert('head_sha', (v) => v as String),
       app: $checkedConvert(
         'app',
@@ -20,9 +20,18 @@ GitHubWebhookCheckRunCheckSuite _$GitHubWebhookCheckRunCheckSuiteFromJson(
           v as Map<String, dynamic>,
         ),
       ),
-      conclusion: $checkedConvert('conclusion', (v) => v ?? _omit),
-      headBranch: $checkedConvert('head_branch', (v) => v ?? _omit),
-      pullRequests: $checkedConvert('pull_requests', (v) => v ?? _omit),
+      conclusion: $checkedConvert('conclusion', (v) => v as String?),
+      headBranch: $checkedConvert('head_branch', (v) => v as String?),
+      pullRequests: $checkedConvert(
+        'pull_requests',
+        (v) => (v as List<dynamic>?)
+            ?.map(
+              (e) => GitHubWebhookCheckRunCheckSuitePullRequests.fromJson(
+                e as Map<String, dynamic>,
+              ),
+            )
+            .toList(),
+      ),
     );
     return val;
   },

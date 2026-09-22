@@ -12,17 +12,21 @@ UnregisterMobileDeviceRequest _$UnregisterMobileDeviceRequestFromJson(
   'UnregisterMobileDeviceRequest',
   json,
   ($checkedConvert) {
-    final val = UnregisterMobileDeviceRequest(
+    final val = UnregisterMobileDeviceRequest._(
       platform: $checkedConvert(
         'platform',
         (v) =>
             UnregisterMobileDeviceRequestPlatformPlatform.fromJson(v as String),
       ),
       token: $checkedConvert('token', (v) => v as String),
-      appId: $checkedConvert('app_id', (v) => v ?? _omit),
+      appId: $checkedConvert('app_id', (v) => v as String?),
       providerEnvironment: $checkedConvert(
         'provider_environment',
-        (v) => v ?? _omit,
+        (v) => v == null
+            ? null
+            : UnregisterMobileDeviceRequestProviderEnvironmentProviderEnvironment.fromJson(
+                v as String,
+              ),
       ),
     );
     return val;

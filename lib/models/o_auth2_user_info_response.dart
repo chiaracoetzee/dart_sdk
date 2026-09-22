@@ -11,7 +11,7 @@ part 'o_auth2_user_info_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class OAuth2UserInfoResponse {
   const OAuth2UserInfoResponse({
     required this.sub,
@@ -29,6 +29,20 @@ class OAuth2UserInfoResponse {
        _verifiedPresent = !identical(verified, _omit),
        flags = identical(flags, _omit) ? null : flags as PublicUserFlags?,
        _flagsPresent = !identical(flags, _omit);
+
+  const OAuth2UserInfoResponse._({
+    required this.sub,
+    required this.id,
+    required this.username,
+    required this.discriminator,
+    required this.globalName,
+    required this.avatar,
+    this.email,
+    this.verified,
+    this.flags,
+  }) : _emailPresent = false,
+       _verifiedPresent = false,
+       _flagsPresent = false;
   factory OAuth2UserInfoResponse.fromJson(Map<String, Object?> json) {
     final value = _$OAuth2UserInfoResponseFromJson(json);
     return OAuth2UserInfoResponse(

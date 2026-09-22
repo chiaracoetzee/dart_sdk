@@ -11,7 +11,7 @@ part 'discovery_application_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class DiscoveryApplicationResponse {
   const DiscoveryApplicationResponse({
     required this.guildId,
@@ -46,6 +46,26 @@ class DiscoveryApplicationResponse {
            ? null
            : removalReason as String?,
        _removalReasonPresent = !identical(removalReason, _omit);
+
+  const DiscoveryApplicationResponse._({
+    required this.guildId,
+    required this.status,
+    required this.description,
+    required this.categoryType,
+    required this.customTags,
+    required this.appliedAt,
+    this.guildNsfwLevel,
+    this.primaryLanguage,
+    this.reviewedAt,
+    this.reviewReason,
+    this.removedAt,
+    this.removalReason,
+  }) : _guildNsfwLevelPresent = false,
+       _primaryLanguagePresent = false,
+       _reviewedAtPresent = false,
+       _reviewReasonPresent = false,
+       _removedAtPresent = false,
+       _removalReasonPresent = false;
   factory DiscoveryApplicationResponse.fromJson(Map<String, Object?> json) {
     final value = _$DiscoveryApplicationResponseFromJson(json);
     return DiscoveryApplicationResponse(

@@ -10,7 +10,7 @@ part 'bulk_ignore_friend_requests_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class BulkIgnoreFriendRequestsRequest {
   const BulkIgnoreFriendRequestsRequest({
     Object? maxAccountAgeSeconds = _omit,
@@ -19,6 +19,11 @@ class BulkIgnoreFriendRequestsRequest {
            ? null
            : maxAccountAgeSeconds as int?,
        _maxAccountAgeSecondsPresent = !identical(maxAccountAgeSeconds, _omit);
+
+  const BulkIgnoreFriendRequestsRequest._({
+    this.maxAccountAgeSeconds,
+    this.filter = BulkIgnoreFriendRequestsRequestFilterFilter.all,
+  }) : _maxAccountAgeSecondsPresent = false;
   factory BulkIgnoreFriendRequestsRequest.fromJson(Map<String, Object?> json) {
     final value = _$BulkIgnoreFriendRequestsRequestFromJson(json);
     return BulkIgnoreFriendRequestsRequest(

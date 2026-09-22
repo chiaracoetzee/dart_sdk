@@ -10,14 +10,14 @@ ClientAttachmentReferenceRequest _$ClientAttachmentReferenceRequestFromJson(
   Map<String, dynamic> json,
 ) =>
     $checkedCreate('ClientAttachmentReferenceRequest', json, ($checkedConvert) {
-      final val = ClientAttachmentReferenceRequest(
-        title: $checkedConvert('title', (v) => v ?? _omit),
-        description: $checkedConvert('description', (v) => v ?? _omit),
-        flags: $checkedConvert('flags', (v) => v ?? _omit),
-        duration: $checkedConvert('duration', (v) => v ?? _omit),
-        waveform: $checkedConvert('waveform', (v) => v ?? _omit),
-        id: $checkedConvert('id', (v) => v ?? _omit),
-        filename: $checkedConvert('filename', (v) => v ?? _omit),
+      final val = ClientAttachmentReferenceRequest._(
+        title: $checkedConvert('title', (v) => v as String?),
+        description: $checkedConvert('description', (v) => v as String?),
+        flags: $checkedConvert('flags', (v) => (v as num?)?.toInt()),
+        duration: $checkedConvert('duration', (v) => (v as num?)?.toInt()),
+        waveform: $checkedConvert('waveform', (v) => v as String?),
+        id: $checkedConvert('id', (v) => v as String?),
+        filename: $checkedConvert('filename', (v) => v as String?),
       );
       return val;
     });

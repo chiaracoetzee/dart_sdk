@@ -8,7 +8,7 @@ part 'embed_author_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class EmbedAuthorResponse {
   const EmbedAuthorResponse({
     required this.name,
@@ -23,6 +23,15 @@ class EmbedAuthorResponse {
            ? null
            : proxyIconUrl as String?,
        _proxyIconUrlPresent = !identical(proxyIconUrl, _omit);
+
+  const EmbedAuthorResponse._({
+    required this.name,
+    this.url,
+    this.iconUrl,
+    this.proxyIconUrl,
+  }) : _urlPresent = false,
+       _iconUrlPresent = false,
+       _proxyIconUrlPresent = false;
   factory EmbedAuthorResponse.fromJson(Map<String, Object?> json) {
     final value = _$EmbedAuthorResponseFromJson(json);
     return EmbedAuthorResponse(

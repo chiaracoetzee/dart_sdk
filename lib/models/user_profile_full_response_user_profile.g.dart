@@ -12,12 +12,12 @@ UserProfileFullResponseUserProfile _$UserProfileFullResponseUserProfileFromJson(
   'UserProfileFullResponseUserProfile',
   json,
   ($checkedConvert) {
-    final val = UserProfileFullResponseUserProfile(
+    final val = UserProfileFullResponseUserProfile._(
       bio: $checkedConvert('bio', (v) => v as String?),
       pronouns: $checkedConvert('pronouns', (v) => v as String?),
       banner: $checkedConvert('banner', (v) => v as String?),
       accentColor: $checkedConvert('accent_color', (v) => (v as num?)?.toInt()),
-      bannerColor: $checkedConvert('banner_color', (v) => v ?? _omit),
+      bannerColor: $checkedConvert('banner_color', (v) => (v as num?)?.toInt()),
     );
     return val;
   },

@@ -12,7 +12,7 @@ part 'o_auth2_me_response_user.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class OAuth2MeResponseUser {
   const OAuth2MeResponseUser({
     required this.id,
@@ -34,6 +34,23 @@ class OAuth2MeResponseUser {
        _emailPresent = !identical(email, _omit),
        verified = identical(verified, _omit) ? null : verified as bool?,
        _verifiedPresent = !identical(verified, _omit);
+
+  const OAuth2MeResponseUser._({
+    required this.id,
+    required this.username,
+    required this.discriminator,
+    required this.globalName,
+    required this.avatar,
+    required this.avatarColor,
+    required this.flags,
+    this.bot,
+    this.system,
+    this.email,
+    this.verified,
+  }) : _botPresent = false,
+       _systemPresent = false,
+       _emailPresent = false,
+       _verifiedPresent = false;
   factory OAuth2MeResponseUser.fromJson(Map<String, Object?> json) {
     final value = _$OAuth2MeResponseUserFromJson(json);
     return OAuth2MeResponseUser(

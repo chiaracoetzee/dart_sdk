@@ -8,7 +8,7 @@ part 'embed_footer_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class EmbedFooterResponse {
   const EmbedFooterResponse({
     required this.text,
@@ -20,6 +20,13 @@ class EmbedFooterResponse {
            ? null
            : proxyIconUrl as String?,
        _proxyIconUrlPresent = !identical(proxyIconUrl, _omit);
+
+  const EmbedFooterResponse._({
+    required this.text,
+    this.iconUrl,
+    this.proxyIconUrl,
+  }) : _iconUrlPresent = false,
+       _proxyIconUrlPresent = false;
   factory EmbedFooterResponse.fromJson(Map<String, Object?> json) {
     final value = _$EmbedFooterResponseFromJson(json);
     return EmbedFooterResponse(

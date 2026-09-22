@@ -11,7 +11,7 @@ part 'channel_overrides.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ChannelOverrides {
   const ChannelOverrides({
     required this.collapsed,
@@ -27,6 +27,15 @@ class ChannelOverrides {
            ? null
            : unreadBadges as UserNotificationSettingsInput?,
        _unreadBadgesPresent = !identical(unreadBadges, _omit);
+
+  const ChannelOverrides._({
+    required this.collapsed,
+    required this.messageNotifications,
+    required this.muted,
+    this.muteConfig,
+    this.unreadBadges,
+  }) : _muteConfigPresent = false,
+       _unreadBadgesPresent = false;
   factory ChannelOverrides.fromJson(Map<String, Object?> json) {
     final value = _$ChannelOverridesFromJson(json);
     return ChannelOverrides(

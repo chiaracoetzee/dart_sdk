@@ -8,7 +8,7 @@ part 'guild_audit_log_entry_response_options.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildAuditLogEntryResponseOptions {
   const GuildAuditLogEntryResponseOptions({
     Object? channelId = _omit,
@@ -64,6 +64,38 @@ class GuildAuditLogEntryResponseOptions {
        _temporaryPresent = !identical(temporary, _omit),
        uses = identical(uses, _omit) ? null : uses as num?,
        _usesPresent = !identical(uses, _omit);
+
+  const GuildAuditLogEntryResponseOptions._({
+    this.channelId,
+    this.count,
+    this.deleteMemberDays,
+    this.deleteMessageSeconds,
+    this.id,
+    this.integrationType,
+    this.messageId,
+    this.membersRemoved,
+    this.roleName,
+    this.type,
+    this.inviterId,
+    this.maxAge,
+    this.maxUses,
+    this.temporary,
+    this.uses,
+  }) : _channelIdPresent = false,
+       _countPresent = false,
+       _deleteMemberDaysPresent = false,
+       _deleteMessageSecondsPresent = false,
+       _idPresent = false,
+       _integrationTypePresent = false,
+       _messageIdPresent = false,
+       _membersRemovedPresent = false,
+       _roleNamePresent = false,
+       _typePresent = false,
+       _inviterIdPresent = false,
+       _maxAgePresent = false,
+       _maxUsesPresent = false,
+       _temporaryPresent = false,
+       _usesPresent = false;
   factory GuildAuditLogEntryResponseOptions.fromJson(
     Map<String, Object?> json,
   ) {

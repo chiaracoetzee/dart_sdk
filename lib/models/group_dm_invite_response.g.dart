@@ -12,7 +12,7 @@ GroupDmInviteResponse _$GroupDmInviteResponseFromJson(
   'GroupDmInviteResponse',
   json,
   ($checkedConvert) {
-    final val = GroupDmInviteResponse(
+    final val = GroupDmInviteResponse._(
       code: $checkedConvert('code', (v) => v as String),
       temporary: $checkedConvert('temporary', (v) => v as bool),
       type: $checkedConvert('type', (v) => v as num),
@@ -21,8 +21,16 @@ GroupDmInviteResponse _$GroupDmInviteResponseFromJson(
         (v) => ChannelPartialResponse.fromJson(v as Map<String, dynamic>),
       ),
       memberCount: $checkedConvert('member_count', (v) => (v as num).toInt()),
-      inviter: $checkedConvert('inviter', (v) => v ?? _omit),
-      expiresAt: $checkedConvert('expires_at', (v) => v ?? _omit),
+      inviter: $checkedConvert(
+        'inviter',
+        (v) => v == null
+            ? null
+            : UserPartialResponse.fromJson(v as Map<String, dynamic>),
+      ),
+      expiresAt: $checkedConvert(
+        'expires_at',
+        (v) => v == null ? null : DateTime.parse(v as String),
+      ),
     );
     return val;
   },

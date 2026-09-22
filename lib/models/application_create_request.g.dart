@@ -12,13 +12,16 @@ ApplicationCreateRequest _$ApplicationCreateRequestFromJson(
   'ApplicationCreateRequest',
   json,
   ($checkedConvert) {
-    final val = ApplicationCreateRequest(
+    final val = ApplicationCreateRequest._(
       name: $checkedConvert('name', (v) => v as String),
-      redirectUris: $checkedConvert('redirect_uris', (v) => v ?? _omit),
-      botPublic: $checkedConvert('bot_public', (v) => v ?? _omit),
+      redirectUris: $checkedConvert(
+        'redirect_uris',
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+      ),
+      botPublic: $checkedConvert('bot_public', (v) => v as bool?),
       botRequireCodeGrant: $checkedConvert(
         'bot_require_code_grant',
-        (v) => v ?? _omit,
+        (v) => v as bool?,
       ),
     );
     return val;

@@ -12,7 +12,7 @@ GitHubWebhookCheckRun _$GitHubWebhookCheckRunFromJson(
   'GitHubWebhookCheckRun',
   json,
   ($checkedConvert) {
-    final val = GitHubWebhookCheckRun(
+    final val = GitHubWebhookCheckRun._(
       name: $checkedConvert('name', (v) => v as String),
       htmlUrl: $checkedConvert('html_url', (v) => v as String),
       checkSuite: $checkedConvert(
@@ -20,10 +20,24 @@ GitHubWebhookCheckRun _$GitHubWebhookCheckRunFromJson(
         (v) =>
             GitHubWebhookCheckRunCheckSuite.fromJson(v as Map<String, dynamic>),
       ),
-      conclusion: $checkedConvert('conclusion', (v) => v ?? _omit),
-      detailsUrl: $checkedConvert('details_url', (v) => v ?? _omit),
-      output: $checkedConvert('output', (v) => v ?? _omit),
-      pullRequests: $checkedConvert('pull_requests', (v) => v ?? _omit),
+      conclusion: $checkedConvert('conclusion', (v) => v as String?),
+      detailsUrl: $checkedConvert('details_url', (v) => v as String?),
+      output: $checkedConvert(
+        'output',
+        (v) => v == null
+            ? null
+            : GitHubWebhookCheckRunOutput.fromJson(v as Map<String, dynamic>),
+      ),
+      pullRequests: $checkedConvert(
+        'pull_requests',
+        (v) => (v as List<dynamic>?)
+            ?.map(
+              (e) => GitHubWebhookCheckRunPullRequests.fromJson(
+                e as Map<String, dynamic>,
+              ),
+            )
+            .toList(),
+      ),
     );
     return val;
   },

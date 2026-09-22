@@ -15,7 +15,7 @@ part 'message_snapshot_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class MessageSnapshotResponse {
   const MessageSnapshotResponse({
     required this.timestamp,
@@ -57,6 +57,27 @@ class MessageSnapshotResponse {
            ? null
            : stickers as List<MessageStickerResponse>?,
        _stickersPresent = !identical(stickers, _omit);
+
+  const MessageSnapshotResponse._({
+    required this.timestamp,
+    required this.type,
+    required this.flags,
+    this.content,
+    this.editedTimestamp,
+    this.mentions,
+    this.mentionRoles,
+    this.mentionChannels,
+    this.embeds,
+    this.attachments,
+    this.stickers,
+  }) : _contentPresent = false,
+       _editedTimestampPresent = false,
+       _mentionsPresent = false,
+       _mentionRolesPresent = false,
+       _mentionChannelsPresent = false,
+       _embedsPresent = false,
+       _attachmentsPresent = false,
+       _stickersPresent = false;
   factory MessageSnapshotResponse.fromJson(Map<String, Object?> json) {
     final value = _$MessageSnapshotResponseFromJson(json);
     return MessageSnapshotResponse(

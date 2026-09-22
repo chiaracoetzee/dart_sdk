@@ -11,7 +11,7 @@ _$UserSettingsUpdateRequestGuildFoldersFromJson(Map<String, dynamic> json) =>
     $checkedCreate('UserSettingsUpdateRequestGuildFolders', json, (
       $checkedConvert,
     ) {
-      final val = UserSettingsUpdateRequestGuildFolders(
+      final val = UserSettingsUpdateRequestGuildFolders._(
         id: $checkedConvert('id', (v) => (v as num).toInt()),
         guildIds: $checkedConvert(
           'guild_ids',
@@ -25,7 +25,7 @@ _$UserSettingsUpdateRequestGuildFoldersFromJson(Map<String, dynamic> json) =>
               ? GuildFolderIconType.folder
               : GuildFolderIconType.fromJson(v as String),
         ),
-        name: $checkedConvert('name', (v) => v ?? _omit),
+        name: $checkedConvert('name', (v) => v as String?),
       );
       return val;
     }, fieldKeyMap: const {'guildIds': 'guild_ids'});

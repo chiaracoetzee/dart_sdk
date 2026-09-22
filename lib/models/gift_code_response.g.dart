@@ -11,7 +11,7 @@ GiftCodeResponse _$GiftCodeResponseFromJson(Map<String, dynamic> json) =>
       'GiftCodeResponse',
       json,
       ($checkedConvert) {
-        final val = GiftCodeResponse(
+        final val = GiftCodeResponse._(
           code: $checkedConvert('code', (v) => v as String),
           durationType: $checkedConvert(
             'duration_type',
@@ -22,7 +22,12 @@ GiftCodeResponse _$GiftCodeResponseFromJson(Map<String, dynamic> json) =>
             (v) => (v as num).toInt(),
           ),
           redeemed: $checkedConvert('redeemed', (v) => v as bool),
-          createdBy: $checkedConvert('created_by', (v) => v ?? _omit),
+          createdBy: $checkedConvert(
+            'created_by',
+            (v) => v == null
+                ? null
+                : UserPartialResponse.fromJson(v as Map<String, dynamic>),
+          ),
         );
         return val;
       },

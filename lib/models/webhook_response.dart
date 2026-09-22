@@ -11,7 +11,7 @@ part 'webhook_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class WebhookResponse {
   const WebhookResponse({
     required this.id,
@@ -23,6 +23,16 @@ class WebhookResponse {
     Object? avatar = _omit,
   }) : avatar = identical(avatar, _omit) ? null : avatar as String?,
        _avatarPresent = !identical(avatar, _omit);
+
+  const WebhookResponse._({
+    required this.id,
+    required this.guildId,
+    required this.channelId,
+    required this.name,
+    required this.token,
+    required this.user,
+    this.avatar,
+  }) : _avatarPresent = false;
   factory WebhookResponse.fromJson(Map<String, Object?> json) {
     final value = _$WebhookResponseFromJson(json);
     return WebhookResponse(

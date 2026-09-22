@@ -13,7 +13,7 @@ part 'user_settings_update_request_guild_folders.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class UserSettingsUpdateRequestGuildFolders {
   const UserSettingsUpdateRequestGuildFolders({
     required this.id,
@@ -24,6 +24,15 @@ class UserSettingsUpdateRequestGuildFolders {
     Object? name = _omit,
   }) : name = identical(name, _omit) ? null : name as String?,
        _namePresent = !identical(name, _omit);
+
+  const UserSettingsUpdateRequestGuildFolders._({
+    required this.id,
+    required this.guildIds,
+    this.color = 0,
+    this.flags = 0,
+    this.icon = GuildFolderIconType.folder,
+    this.name,
+  }) : _namePresent = false;
   factory UserSettingsUpdateRequestGuildFolders.fromJson(
     Map<String, Object?> json,
   ) {

@@ -14,7 +14,7 @@ part 'message_embed_child_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class MessageEmbedChildResponse {
   const MessageEmbedChildResponse({
     required this.type,
@@ -83,6 +83,43 @@ class MessageEmbedChildResponse {
        _htmlHeightPresent = !identical(htmlHeight, _omit),
        nsfw = identical(nsfw, _omit) ? null : nsfw as bool?,
        _nsfwPresent = !identical(nsfw, _omit);
+
+  const MessageEmbedChildResponse._({
+    required this.type,
+    this.url,
+    this.title,
+    this.color,
+    this.timestamp,
+    this.description,
+    this.author,
+    this.image,
+    this.thumbnail,
+    this.footer,
+    this.fields,
+    this.provider,
+    this.video,
+    this.audio,
+    this.html,
+    this.htmlWidth,
+    this.htmlHeight,
+    this.nsfw,
+  }) : _urlPresent = false,
+       _titlePresent = false,
+       _colorPresent = false,
+       _timestampPresent = false,
+       _descriptionPresent = false,
+       _authorPresent = false,
+       _imagePresent = false,
+       _thumbnailPresent = false,
+       _footerPresent = false,
+       _fieldsPresent = false,
+       _providerPresent = false,
+       _videoPresent = false,
+       _audioPresent = false,
+       _htmlPresent = false,
+       _htmlWidthPresent = false,
+       _htmlHeightPresent = false,
+       _nsfwPresent = false;
   factory MessageEmbedChildResponse.fromJson(Map<String, Object?> json) {
     final value = _$MessageEmbedChildResponseFromJson(json);
     return MessageEmbedChildResponse(

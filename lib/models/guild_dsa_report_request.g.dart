@@ -12,7 +12,7 @@ GuildDsaReportRequest _$GuildDsaReportRequestFromJson(
   'GuildDsaReportRequest',
   json,
   ($checkedConvert) {
-    final val = GuildDsaReportRequest(
+    final val = GuildDsaReportRequest._(
       ticket: $checkedConvert('ticket', (v) => v as String),
       reporterFullLegalName: $checkedConvert(
         'reporter_full_legal_name',
@@ -31,12 +31,12 @@ GuildDsaReportRequest _$GuildDsaReportRequestFromJson(
         (v) => GuildReportCategory.fromJson(v as String),
       ),
       guildId: $checkedConvert('guild_id', (v) => v as String),
-      additionalInfo: $checkedConvert('additional_info', (v) => v ?? _omit),
+      additionalInfo: $checkedConvert('additional_info', (v) => v as String?),
       reporterFluxerTag: $checkedConvert(
         'reporter_fluxer_tag',
-        (v) => v ?? _omit,
+        (v) => v as String?,
       ),
-      inviteCode: $checkedConvert('invite_code', (v) => v ?? _omit),
+      inviteCode: $checkedConvert('invite_code', (v) => v as String?),
     );
     return val;
   },

@@ -10,7 +10,7 @@ part 'guild_sticker_create_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildStickerCreateRequest {
   const GuildStickerCreateRequest({
     required this.name,
@@ -21,6 +21,13 @@ class GuildStickerCreateRequest {
            ? null
            : description as String?,
        _descriptionPresent = !identical(description, _omit);
+
+  const GuildStickerCreateRequest._({
+    required this.name,
+    required this.image,
+    this.tags = const [],
+    this.description,
+  }) : _descriptionPresent = false;
   factory GuildStickerCreateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildStickerCreateRequestFromJson(json);
     return GuildStickerCreateRequest(

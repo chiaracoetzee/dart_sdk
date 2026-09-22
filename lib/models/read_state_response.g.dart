@@ -12,7 +12,7 @@ ReadStateResponse _$ReadStateResponseFromJson(
   'ReadStateResponse',
   json,
   ($checkedConvert) {
-    final val = ReadStateResponse(
+    final val = ReadStateResponse._(
       id: $checkedConvert('id', (v) => v as String),
       mentionCount: $checkedConvert('mention_count', (v) => (v as num).toInt()),
       lastMessageId: $checkedConvert('last_message_id', (v) => v as String?),
@@ -20,7 +20,7 @@ ReadStateResponse _$ReadStateResponseFromJson(
         'last_pin_timestamp',
         (v) => v as String?,
       ),
-      version: $checkedConvert('version', (v) => v ?? _omit),
+      version: $checkedConvert('version', (v) => v as String?),
     );
     return val;
   },

@@ -12,19 +12,23 @@ CreateCheckoutSessionRequest _$CreateCheckoutSessionRequestFromJson(
   'CreateCheckoutSessionRequest',
   json,
   ($checkedConvert) {
-    final val = CreateCheckoutSessionRequest(
+    final val = CreateCheckoutSessionRequest._(
       priceId: $checkedConvert('price_id', (v) => v as String),
-      countryCode: $checkedConvert('country_code', (v) => v ?? _omit),
+      countryCode: $checkedConvert('country_code', (v) => v as String?),
       clientGeoipCountryCode: $checkedConvert(
         'client_geoip_country_code',
-        (v) => v ?? _omit,
+        (v) => v as String?,
       ),
       euWithdrawalWaiverAccepted: $checkedConvert(
         'eu_withdrawal_waiver_accepted',
-        (v) => v ?? _omit,
+        (v) => v as bool?,
       ),
-      paymentMethod: $checkedConvert('payment_method', (v) => v ?? _omit),
-      isBusiness: $checkedConvert('is_business', (v) => v ?? _omit),
+      paymentMethod: $checkedConvert(
+        'payment_method',
+        (v) =>
+            v == null ? null : CheckoutPaymentMethodEnum.fromJson(v as String),
+      ),
+      isBusiness: $checkedConvert('is_business', (v) => v as bool?),
     );
     return val;
   },

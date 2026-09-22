@@ -12,16 +12,28 @@ EnableMfaTotpRequest _$EnableMfaTotpRequestFromJson(
   'EnableMfaTotpRequest',
   json,
   ($checkedConvert) {
-    final val = EnableMfaTotpRequest(
+    final val = EnableMfaTotpRequest._(
       secret: $checkedConvert('secret', (v) => v as String),
       code: $checkedConvert('code', (v) => v as String),
-      password: $checkedConvert('password', (v) => v ?? _omit),
-      mfaMethod: $checkedConvert('mfa_method', (v) => v ?? _omit),
-      mfaCode: $checkedConvert('mfa_code', (v) => v ?? _omit),
-      webauthnResponse: $checkedConvert('webauthn_response', (v) => v ?? _omit),
+      password: $checkedConvert('password', (v) => v as String?),
+      mfaMethod: $checkedConvert(
+        'mfa_method',
+        (v) => v == null
+            ? null
+            : EnableMfaTotpRequestMfaMethodMfaMethod.fromJson(v as String),
+      ),
+      mfaCode: $checkedConvert('mfa_code', (v) => v as String?),
+      webauthnResponse: $checkedConvert(
+        'webauthn_response',
+        (v) => v == null
+            ? null
+            : WebAuthnAuthenticationResponse.fromJson(
+                v as Map<String, dynamic>,
+              ),
+      ),
       webauthnChallenge: $checkedConvert(
         'webauthn_challenge',
-        (v) => v ?? _omit,
+        (v) => v as String?,
       ),
     );
     return val;

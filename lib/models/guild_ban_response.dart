@@ -11,7 +11,7 @@ part 'guild_ban_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildBanResponse {
   const GuildBanResponse({
     required this.user,
@@ -23,6 +23,15 @@ class GuildBanResponse {
        _reasonPresent = !identical(reason, _omit),
        expiresAt = identical(expiresAt, _omit) ? null : expiresAt as DateTime?,
        _expiresAtPresent = !identical(expiresAt, _omit);
+
+  const GuildBanResponse._({
+    required this.user,
+    required this.moderatorId,
+    required this.bannedAt,
+    this.reason,
+    this.expiresAt,
+  }) : _reasonPresent = false,
+       _expiresAtPresent = false;
   factory GuildBanResponse.fromJson(Map<String, Object?> json) {
     final value = _$GuildBanResponseFromJson(json);
     return GuildBanResponse(

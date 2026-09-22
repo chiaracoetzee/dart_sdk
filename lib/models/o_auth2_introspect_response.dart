@@ -11,7 +11,7 @@ part 'o_auth2_introspect_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class OAuth2IntrospectResponse {
   const OAuth2IntrospectResponse({
     required this.active,
@@ -38,6 +38,23 @@ class OAuth2IntrospectResponse {
        _iatPresent = !identical(iat, _omit),
        sub = identical(sub, _omit) ? null : sub as SnowflakeStringType?,
        _subPresent = !identical(sub, _omit);
+
+  const OAuth2IntrospectResponse._({
+    required this.active,
+    this.scope,
+    this.clientId,
+    this.username,
+    this.tokenType,
+    this.exp,
+    this.iat,
+    this.sub,
+  }) : _scopePresent = false,
+       _clientIdPresent = false,
+       _usernamePresent = false,
+       _tokenTypePresent = false,
+       _expPresent = false,
+       _iatPresent = false,
+       _subPresent = false;
   factory OAuth2IntrospectResponse.fromJson(Map<String, Object?> json) {
     final value = _$OAuth2IntrospectResponseFromJson(json);
     return OAuth2IntrospectResponse(

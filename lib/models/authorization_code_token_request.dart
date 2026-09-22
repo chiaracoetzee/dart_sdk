@@ -10,7 +10,7 @@ part 'authorization_code_token_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class AuthorizationCodeTokenRequest {
   const AuthorizationCodeTokenRequest({
     required this.grantType,
@@ -31,6 +31,17 @@ class AuthorizationCodeTokenRequest {
            ? null
            : codeVerifier as String?,
        _codeVerifierPresent = !identical(codeVerifier, _omit);
+
+  const AuthorizationCodeTokenRequest._({
+    required this.grantType,
+    required this.code,
+    required this.redirectUri,
+    this.clientId,
+    this.clientSecret,
+    this.codeVerifier,
+  }) : _clientIdPresent = false,
+       _clientSecretPresent = false,
+       _codeVerifierPresent = false;
   factory AuthorizationCodeTokenRequest.fromJson(Map<String, Object?> json) {
     final value = _$AuthorizationCodeTokenRequestFromJson(json);
     return AuthorizationCodeTokenRequest(

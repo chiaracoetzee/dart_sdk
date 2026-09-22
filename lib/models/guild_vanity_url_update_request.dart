@@ -8,11 +8,13 @@ part 'guild_vanity_url_update_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildVanityUrlUpdateRequest {
   const GuildVanityUrlUpdateRequest({Object? code = _omit})
     : code = identical(code, _omit) ? null : code as String?,
       _codePresent = !identical(code, _omit);
+
+  const GuildVanityUrlUpdateRequest._({this.code}) : _codePresent = false;
   factory GuildVanityUrlUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildVanityUrlUpdateRequestFromJson(json);
     return GuildVanityUrlUpdateRequest(

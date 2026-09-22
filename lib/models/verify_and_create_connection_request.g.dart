@@ -12,9 +12,12 @@ VerifyAndCreateConnectionRequest _$VerifyAndCreateConnectionRequestFromJson(
   'VerifyAndCreateConnectionRequest',
   json,
   ($checkedConvert) {
-    final val = VerifyAndCreateConnectionRequest(
+    final val = VerifyAndCreateConnectionRequest._(
       initiationToken: $checkedConvert('initiation_token', (v) => v as String),
-      visibilityFlags: $checkedConvert('visibility_flags', (v) => v ?? _omit),
+      visibilityFlags: $checkedConvert(
+        'visibility_flags',
+        (v) => (v as num?)?.toInt(),
+      ),
     );
     return val;
   },

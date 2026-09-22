@@ -9,9 +9,9 @@ part of 'webhook_token_update_request.dart';
 WebhookTokenUpdateRequest _$WebhookTokenUpdateRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('WebhookTokenUpdateRequest', json, ($checkedConvert) {
-  final val = WebhookTokenUpdateRequest(
-    name: $checkedConvert('name', (v) => v ?? _omit),
-    avatar: $checkedConvert('avatar', (v) => v ?? _omit),
+  final val = WebhookTokenUpdateRequest._(
+    name: $checkedConvert('name', (v) => v as String?),
+    avatar: $checkedConvert('avatar', (v) => v as String?),
   );
   return val;
 });

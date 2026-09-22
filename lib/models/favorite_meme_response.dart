@@ -12,7 +12,7 @@ part 'favorite_meme_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class FavoriteMemeResponse {
   const FavoriteMemeResponse({
     required this.id,
@@ -60,6 +60,36 @@ class FavoriteMemeResponse {
            ? null
            : placeholder as String?,
        _placeholderPresent = !identical(placeholder, _omit);
+
+  const FavoriteMemeResponse._({
+    required this.id,
+    required this.userId,
+    required this.name,
+    required this.tags,
+    required this.attachmentId,
+    required this.filename,
+    required this.contentType,
+    required this.size,
+    required this.url,
+    this.isGifv = false,
+    this.altText,
+    this.contentHash,
+    this.width,
+    this.height,
+    this.duration,
+    this.gifSlug,
+    this.gifProvider,
+    this.media,
+    this.placeholder,
+  }) : _altTextPresent = false,
+       _contentHashPresent = false,
+       _widthPresent = false,
+       _heightPresent = false,
+       _durationPresent = false,
+       _gifSlugPresent = false,
+       _gifProviderPresent = false,
+       _mediaPresent = false,
+       _placeholderPresent = false;
   factory FavoriteMemeResponse.fromJson(Map<String, Object?> json) {
     final value = _$FavoriteMemeResponseFromJson(json);
     return FavoriteMemeResponse(

@@ -12,14 +12,17 @@ ApplicationUpdateRequest _$ApplicationUpdateRequestFromJson(
   'ApplicationUpdateRequest',
   json,
   ($checkedConvert) {
-    final val = ApplicationUpdateRequest(
-      name: $checkedConvert('name', (v) => v ?? _omit),
-      botPublic: $checkedConvert('bot_public', (v) => v ?? _omit),
+    final val = ApplicationUpdateRequest._(
+      name: $checkedConvert('name', (v) => v as String?),
+      botPublic: $checkedConvert('bot_public', (v) => v as bool?),
       botRequireCodeGrant: $checkedConvert(
         'bot_require_code_grant',
-        (v) => v ?? _omit,
+        (v) => v as bool?,
       ),
-      redirectUris: $checkedConvert('redirect_uris', (v) => v ?? _omit),
+      redirectUris: $checkedConvert(
+        'redirect_uris',
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+      ),
     );
     return val;
   },

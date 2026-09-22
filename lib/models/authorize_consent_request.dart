@@ -11,7 +11,7 @@ part 'authorize_consent_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class AuthorizeConsentRequest {
   const AuthorizeConsentRequest({
     required this.clientId,
@@ -53,6 +53,26 @@ class AuthorizeConsentRequest {
            : codeChallengeMethod
                  as AuthorizeConsentRequestCodeChallengeMethodCodeChallengeMethod?,
        _codeChallengeMethodPresent = !identical(codeChallengeMethod, _omit);
+
+  const AuthorizeConsentRequest._({
+    required this.clientId,
+    required this.scope,
+    this.responseType,
+    this.redirectUri,
+    this.state,
+    this.guildId,
+    this.channelId,
+    this.permissions,
+    this.codeChallenge,
+    this.codeChallengeMethod,
+  }) : _responseTypePresent = false,
+       _redirectUriPresent = false,
+       _statePresent = false,
+       _guildIdPresent = false,
+       _channelIdPresent = false,
+       _permissionsPresent = false,
+       _codeChallengePresent = false,
+       _codeChallengeMethodPresent = false;
   factory AuthorizeConsentRequest.fromJson(Map<String, Object?> json) {
     final value = _$AuthorizeConsentRequestFromJson(json);
     return AuthorizeConsentRequest(

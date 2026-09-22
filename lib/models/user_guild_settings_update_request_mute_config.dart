@@ -8,13 +8,18 @@ part 'user_guild_settings_update_request_mute_config.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class UserGuildSettingsUpdateRequestMuteConfig {
   const UserGuildSettingsUpdateRequestMuteConfig({
     required this.selectedTimeWindow,
     Object? endTime = _omit,
   }) : endTime = identical(endTime, _omit) ? null : endTime as String?,
        _endTimePresent = !identical(endTime, _omit);
+
+  const UserGuildSettingsUpdateRequestMuteConfig._({
+    required this.selectedTimeWindow,
+    this.endTime,
+  }) : _endTimePresent = false;
   factory UserGuildSettingsUpdateRequestMuteConfig.fromJson(
     Map<String, Object?> json,
   ) {

@@ -9,9 +9,9 @@ part of 'guild_vanity_url_response.dart';
 GuildVanityUrlResponse _$GuildVanityUrlResponseFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('GuildVanityUrlResponse', json, ($checkedConvert) {
-  final val = GuildVanityUrlResponse(
+  final val = GuildVanityUrlResponse._(
     uses: $checkedConvert('uses', (v) => (v as num).toInt()),
-    code: $checkedConvert('code', (v) => v ?? _omit),
+    code: $checkedConvert('code', (v) => v as String?),
   );
   return val;
 });

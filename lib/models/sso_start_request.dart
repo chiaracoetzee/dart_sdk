@@ -8,7 +8,7 @@ part 'sso_start_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class SsoStartRequest {
   const SsoStartRequest({
     Object? redirectTo = _omit,
@@ -19,6 +19,10 @@ class SsoStartRequest {
            ? null
            : redirectUri as String?,
        _redirectUriPresent = !identical(redirectUri, _omit);
+
+  const SsoStartRequest._({this.redirectTo, this.redirectUri})
+    : _redirectToPresent = false,
+      _redirectUriPresent = false;
   factory SsoStartRequest.fromJson(Map<String, Object?> json) {
     final value = _$SsoStartRequestFromJson(json);
     return SsoStartRequest(

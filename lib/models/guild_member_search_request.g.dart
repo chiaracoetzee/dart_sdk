@@ -12,29 +12,53 @@ GuildMemberSearchRequest _$GuildMemberSearchRequestFromJson(
   'GuildMemberSearchRequest',
   json,
   ($checkedConvert) {
-    final val = GuildMemberSearchRequest(
+    final val = GuildMemberSearchRequest._(
       limit: $checkedConvert('limit', (v) => (v as num?)?.toInt() ?? 25),
       offset: $checkedConvert('offset', (v) => (v as num?)?.toInt() ?? 0),
-      query: $checkedConvert('query', (v) => v ?? _omit),
-      roleIds: $checkedConvert('role_ids', (v) => v ?? _omit),
-      joinedAtGte: $checkedConvert('joined_at_gte', (v) => v ?? _omit),
-      joinedAtLte: $checkedConvert('joined_at_lte', (v) => v ?? _omit),
-      joinSourceType: $checkedConvert('join_source_type', (v) => v ?? _omit),
+      query: $checkedConvert('query', (v) => v as String?),
+      roleIds: $checkedConvert(
+        'role_ids',
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+      ),
+      joinedAtGte: $checkedConvert(
+        'joined_at_gte',
+        (v) => (v as num?)?.toInt(),
+      ),
+      joinedAtLte: $checkedConvert(
+        'joined_at_lte',
+        (v) => (v as num?)?.toInt(),
+      ),
+      joinSourceType: $checkedConvert(
+        'join_source_type',
+        (v) => (v as List<dynamic>?)
+            ?.map((e) => JoinSourceTypeInput.fromJson((e as num).toInt()))
+            .toList(),
+      ),
       sourceInviteCode: $checkedConvert(
         'source_invite_code',
-        (v) => v ?? _omit,
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
       ),
-      isBot: $checkedConvert('is_bot', (v) => v ?? _omit),
+      isBot: $checkedConvert('is_bot', (v) => v as bool?),
       userCreatedAtGte: $checkedConvert(
         'user_created_at_gte',
-        (v) => v ?? _omit,
+        (v) => (v as num?)?.toInt(),
       ),
       userCreatedAtLte: $checkedConvert(
         'user_created_at_lte',
-        (v) => v ?? _omit,
+        (v) => (v as num?)?.toInt(),
       ),
-      sortBy: $checkedConvert('sort_by', (v) => v ?? _omit),
-      sortOrder: $checkedConvert('sort_order', (v) => v ?? _omit),
+      sortBy: $checkedConvert(
+        'sort_by',
+        (v) => v == null
+            ? null
+            : GuildMemberSearchRequestSortBySortBy.fromJson(v as String),
+      ),
+      sortOrder: $checkedConvert(
+        'sort_order',
+        (v) => v == null
+            ? null
+            : GuildMemberSearchRequestSortOrderSortOrder.fromJson(v as String),
+      ),
     );
     return val;
   },

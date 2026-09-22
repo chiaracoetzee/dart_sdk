@@ -12,7 +12,7 @@ part 'message_reference_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class MessageReferenceRequest {
   const MessageReferenceRequest({
     required this.messageId,
@@ -39,6 +39,19 @@ class MessageReferenceRequest {
            ? null
            : embedIndices as List<Int32Type>?,
        _embedIndicesPresent = !identical(embedIndices, _omit);
+
+  const MessageReferenceRequest._({
+    required this.messageId,
+    this.channelId,
+    this.guildId,
+    this.type,
+    this.attachmentIds,
+    this.embedIndices,
+  }) : _channelIdPresent = false,
+       _guildIdPresent = false,
+       _typePresent = false,
+       _attachmentIdsPresent = false,
+       _embedIndicesPresent = false;
   factory MessageReferenceRequest.fromJson(Map<String, Object?> json) {
     final value = _$MessageReferenceRequestFromJson(json);
     return MessageReferenceRequest(

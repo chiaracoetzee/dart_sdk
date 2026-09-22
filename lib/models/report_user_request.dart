@@ -11,7 +11,7 @@ part 'report_user_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ReportUserRequest {
   const ReportUserRequest({
     required this.userId,
@@ -19,6 +19,12 @@ class ReportUserRequest {
     Object? guildId = _omit,
   }) : guildId = identical(guildId, _omit) ? null : guildId as SnowflakeType?,
        _guildIdPresent = !identical(guildId, _omit);
+
+  const ReportUserRequest._({
+    required this.userId,
+    required this.category,
+    this.guildId,
+  }) : _guildIdPresent = false;
   factory ReportUserRequest.fromJson(Map<String, Object?> json) {
     final value = _$ReportUserRequestFromJson(json);
     return ReportUserRequest(

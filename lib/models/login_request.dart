@@ -11,7 +11,7 @@ part 'login_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class LoginRequest {
   const LoginRequest({
     required this.email,
@@ -19,6 +19,12 @@ class LoginRequest {
     Object? inviteCode = _omit,
   }) : inviteCode = identical(inviteCode, _omit) ? null : inviteCode as String?,
        _inviteCodePresent = !identical(inviteCode, _omit);
+
+  const LoginRequest._({
+    required this.email,
+    required this.password,
+    this.inviteCode,
+  }) : _inviteCodePresent = false;
   factory LoginRequest.fromJson(Map<String, Object?> json) {
     final value = _$LoginRequestFromJson(json);
     return LoginRequest(

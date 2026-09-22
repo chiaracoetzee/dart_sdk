@@ -8,7 +8,7 @@ part of 'gif_response.dart';
 
 GifResponse _$GifResponseFromJson(Map<String, dynamic> json) =>
     $checkedCreate('GifResponse', json, ($checkedConvert) {
-      final val = GifResponse(
+      final val = GifResponse._(
         id: $checkedConvert('id', (v) => v as String),
         slug: $checkedConvert('slug', (v) => v as String),
         provider: $checkedConvert('provider', (v) => v as String),
@@ -25,7 +25,7 @@ GifResponse _$GifResponseFromJson(Map<String, dynamic> json) =>
                 MapEntry(k, GifMediaFormat.fromJson(e as Map<String, dynamic>)),
           ),
         ),
-        placeholder: $checkedConvert('placeholder', (v) => v ?? _omit),
+        placeholder: $checkedConvert('placeholder', (v) => v as String?),
       );
       return val;
     }, fieldKeyMap: const {'proxySrc': 'proxy_src'});

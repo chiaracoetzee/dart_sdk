@@ -13,7 +13,7 @@ part 'guild_member_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildMemberResponse {
   const GuildMemberResponse({
     required this.user,
@@ -53,6 +53,27 @@ class GuildMemberResponse {
            ? null
            : mentionFlags as MentionReplyPreferences?,
        _mentionFlagsPresent = !identical(mentionFlags, _omit);
+
+  const GuildMemberResponse._({
+    required this.user,
+    required this.roles,
+    required this.joinedAt,
+    required this.mute,
+    required this.deaf,
+    this.nick,
+    this.avatar,
+    this.banner,
+    this.accentColor,
+    this.communicationDisabledUntil,
+    this.profileFlags,
+    this.mentionFlags,
+  }) : _nickPresent = false,
+       _avatarPresent = false,
+       _bannerPresent = false,
+       _accentColorPresent = false,
+       _communicationDisabledUntilPresent = false,
+       _profileFlagsPresent = false,
+       _mentionFlagsPresent = false;
   factory GuildMemberResponse.fromJson(Map<String, Object?> json) {
     final value = _$GuildMemberResponseFromJson(json);
     return GuildMemberResponse(

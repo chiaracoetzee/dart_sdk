@@ -10,7 +10,7 @@ part 'refresh_token_token_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class RefreshTokenTokenRequest {
   const RefreshTokenTokenRequest({
     required this.grantType,
@@ -25,6 +25,14 @@ class RefreshTokenTokenRequest {
            ? null
            : clientSecret as String?,
        _clientSecretPresent = !identical(clientSecret, _omit);
+
+  const RefreshTokenTokenRequest._({
+    required this.grantType,
+    required this.refreshToken,
+    this.clientId,
+    this.clientSecret,
+  }) : _clientIdPresent = false,
+       _clientSecretPresent = false;
   factory RefreshTokenTokenRequest.fromJson(Map<String, Object?> json) {
     final value = _$RefreshTokenTokenRequestFromJson(json);
     return RefreshTokenTokenRequest(

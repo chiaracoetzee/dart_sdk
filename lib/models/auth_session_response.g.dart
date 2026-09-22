@@ -11,14 +11,21 @@ AuthSessionResponse _$AuthSessionResponseFromJson(Map<String, dynamic> json) =>
       'AuthSessionResponse',
       json,
       ($checkedConvert) {
-        final val = AuthSessionResponse(
+        final val = AuthSessionResponse._(
           idHash: $checkedConvert('id_hash', (v) => v as String),
           maskedIp: $checkedConvert('masked_ip', (v) => v as String?),
           current: $checkedConvert('current', (v) => v as bool),
-          clientInfo: $checkedConvert('client_info', (v) => v ?? _omit),
+          clientInfo: $checkedConvert(
+            'client_info',
+            (v) => v == null
+                ? null
+                : AuthSessionResponseClientInfo.fromJson(
+                    v as Map<String, dynamic>,
+                  ),
+          ),
           approxLastUsedAt: $checkedConvert(
             'approx_last_used_at',
-            (v) => v ?? _omit,
+            (v) => v == null ? null : DateTime.parse(v as String),
           ),
         );
         return val;

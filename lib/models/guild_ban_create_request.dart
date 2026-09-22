@@ -8,7 +8,7 @@ part 'guild_ban_create_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildBanCreateRequest {
   const GuildBanCreateRequest({
     Object? deleteMessageSeconds = _omit,
@@ -25,6 +25,15 @@ class GuildBanCreateRequest {
            ? null
            : banDurationSeconds as int?,
        _banDurationSecondsPresent = !identical(banDurationSeconds, _omit);
+
+  const GuildBanCreateRequest._({
+    this.deleteMessageSeconds,
+    this.reason,
+    this.banDurationSeconds,
+    this.deleteMessageDays = 0,
+  }) : _deleteMessageSecondsPresent = false,
+       _reasonPresent = false,
+       _banDurationSecondsPresent = false;
   factory GuildBanCreateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildBanCreateRequestFromJson(json);
     return GuildBanCreateRequest(

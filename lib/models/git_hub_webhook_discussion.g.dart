@@ -12,7 +12,7 @@ GitHubWebhookDiscussion _$GitHubWebhookDiscussionFromJson(
   'GitHubWebhookDiscussion',
   json,
   ($checkedConvert) {
-    final val = GitHubWebhookDiscussion(
+    final val = GitHubWebhookDiscussion._(
       title: $checkedConvert('title', (v) => v as String),
       number: $checkedConvert('number', (v) => (v as num).toInt()),
       htmlUrl: $checkedConvert('html_url', (v) => v as String),
@@ -20,8 +20,8 @@ GitHubWebhookDiscussion _$GitHubWebhookDiscussionFromJson(
         'user',
         (v) => GitHubWebhookDiscussionUser.fromJson(v as Map<String, dynamic>),
       ),
-      answerHtmlUrl: $checkedConvert('answer_html_url', (v) => v ?? _omit),
-      body: $checkedConvert('body', (v) => v ?? _omit),
+      answerHtmlUrl: $checkedConvert('answer_html_url', (v) => v as String?),
+      body: $checkedConvert('body', (v) => v as String?),
     );
     return val;
   },

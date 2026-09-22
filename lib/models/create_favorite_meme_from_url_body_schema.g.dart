@@ -12,7 +12,7 @@ _$CreateFavoriteMemeFromUrlBodySchemaFromJson(Map<String, dynamic> json) =>
       'CreateFavoriteMemeFromUrlBodySchema',
       json,
       ($checkedConvert) {
-        final val = CreateFavoriteMemeFromUrlBodySchema(
+        final val = CreateFavoriteMemeFromUrlBodySchema._(
           url: $checkedConvert('url', (v) => v as String),
           tags: $checkedConvert(
             'tags',
@@ -20,11 +20,19 @@ _$CreateFavoriteMemeFromUrlBodySchemaFromJson(Map<String, dynamic> json) =>
                 (v as List<dynamic>?)?.map((e) => e as String).toList() ??
                 const [],
           ),
-          altText: $checkedConvert('alt_text', (v) => v ?? _omit),
-          gifSlug: $checkedConvert('gif_slug', (v) => v ?? _omit),
-          gifProvider: $checkedConvert('gif_provider', (v) => v ?? _omit),
-          media: $checkedConvert('media', (v) => v ?? _omit),
-          name: $checkedConvert('name', (v) => v ?? _omit),
+          altText: $checkedConvert('alt_text', (v) => v as String?),
+          gifSlug: $checkedConvert('gif_slug', (v) => v as String?),
+          gifProvider: $checkedConvert('gif_provider', (v) => v as String?),
+          media: $checkedConvert(
+            'media',
+            (v) => (v as Map<String, dynamic>?)?.map(
+              (k, e) => MapEntry(
+                k,
+                GifMediaFormatInput.fromJson(e as Map<String, dynamic>),
+              ),
+            ),
+          ),
+          name: $checkedConvert('name', (v) => v as String?),
         );
         return val;
       },

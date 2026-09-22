@@ -12,7 +12,7 @@ GuildResponse _$GuildResponseFromJson(
   'GuildResponse',
   json,
   ($checkedConvert) {
-    final val = GuildResponse(
+    final val = GuildResponse._(
       contentWarningLevel: $checkedConvert(
         'content_warning_level',
         (v) => ContentWarningLevel.fromJson((v as num).toInt()),
@@ -60,49 +60,80 @@ GuildResponse _$GuildResponseFromJson(
         (v) => GuildExplicitContentFilter.fromJson((v as num).toInt()),
       ),
       nsfw: $checkedConvert('nsfw', (v) => v as bool),
-      systemChannelId: $checkedConvert('system_channel_id', (v) => v ?? _omit),
+      systemChannelId: $checkedConvert(
+        'system_channel_id',
+        (v) => v as String?,
+      ),
       embedSplashHeight: $checkedConvert(
         'embed_splash_height',
-        (v) => v ?? _omit,
+        (v) => (v as num?)?.toInt(),
       ),
-      rulesChannelId: $checkedConvert('rules_channel_id', (v) => v ?? _omit),
-      afkChannelId: $checkedConvert('afk_channel_id', (v) => v ?? _omit),
-      vanityUrlCode: $checkedConvert('vanity_url_code', (v) => v ?? _omit),
+      rulesChannelId: $checkedConvert('rules_channel_id', (v) => v as String?),
+      afkChannelId: $checkedConvert('afk_channel_id', (v) => v as String?),
+      vanityUrlCode: $checkedConvert('vanity_url_code', (v) => v as String?),
       embedSplashWidth: $checkedConvert(
         'embed_splash_width',
-        (v) => v ?? _omit,
+        (v) => (v as num?)?.toInt(),
       ),
-      embedSplash: $checkedConvert('embed_splash', (v) => v ?? _omit),
-      splashHeight: $checkedConvert('splash_height', (v) => v ?? _omit),
-      splashWidth: $checkedConvert('splash_width', (v) => v ?? _omit),
-      bannerHeight: $checkedConvert('banner_height', (v) => v ?? _omit),
+      embedSplash: $checkedConvert('embed_splash', (v) => v as String?),
+      splashHeight: $checkedConvert(
+        'splash_height',
+        (v) => (v as num?)?.toInt(),
+      ),
+      splashWidth: $checkedConvert('splash_width', (v) => (v as num?)?.toInt()),
+      bannerHeight: $checkedConvert(
+        'banner_height',
+        (v) => (v as num?)?.toInt(),
+      ),
       approximatePresenceCount: $checkedConvert(
         'approximate_presence_count',
-        (v) => v ?? _omit,
+        (v) => (v as num?)?.toInt(),
       ),
       contentWarningText: $checkedConvert(
         'content_warning_text',
-        (v) => v ?? _omit,
+        (v) => v as String?,
       ),
-      bannerWidth: $checkedConvert('banner_width', (v) => v ?? _omit),
-      banner: $checkedConvert('banner', (v) => v ?? _omit),
-      icon: $checkedConvert('icon', (v) => v ?? _omit),
+      bannerWidth: $checkedConvert('banner_width', (v) => (v as num?)?.toInt()),
+      banner: $checkedConvert('banner', (v) => v as String?),
+      icon: $checkedConvert('icon', (v) => v as String?),
       messageHistoryCutoff: $checkedConvert(
         'message_history_cutoff',
-        (v) => v ?? _omit,
+        (v) => v == null ? null : DateTime.parse(v as String),
       ),
-      permissions: $checkedConvert('permissions', (v) => v ?? _omit),
-      roles: $checkedConvert('roles', (v) => v ?? _omit),
-      emojis: $checkedConvert('emojis', (v) => v ?? _omit),
-      stickers: $checkedConvert('stickers', (v) => v ?? _omit),
-      channels: $checkedConvert('channels', (v) => v ?? _omit),
-      memberCount: $checkedConvert('member_count', (v) => v ?? _omit),
-      onlineCount: $checkedConvert('online_count', (v) => v ?? _omit),
+      permissions: $checkedConvert('permissions', (v) => v as String?),
+      roles: $checkedConvert(
+        'roles',
+        (v) => (v as List<dynamic>?)
+            ?.map((e) => GuildRoleResponse.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      ),
+      emojis: $checkedConvert(
+        'emojis',
+        (v) => (v as List<dynamic>?)
+            ?.map((e) => GuildEmojiResponse.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      ),
+      stickers: $checkedConvert(
+        'stickers',
+        (v) => (v as List<dynamic>?)
+            ?.map(
+              (e) => GuildStickerResponse.fromJson(e as Map<String, dynamic>),
+            )
+            .toList(),
+      ),
+      channels: $checkedConvert(
+        'channels',
+        (v) => (v as List<dynamic>?)
+            ?.map((e) => ChannelResponse.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      ),
+      memberCount: $checkedConvert('member_count', (v) => (v as num?)?.toInt()),
+      onlineCount: $checkedConvert('online_count', (v) => (v as num?)?.toInt()),
       approximateMemberCount: $checkedConvert(
         'approximate_member_count',
-        (v) => v ?? _omit,
+        (v) => (v as num?)?.toInt(),
       ),
-      splash: $checkedConvert('splash', (v) => v ?? _omit),
+      splash: $checkedConvert('splash', (v) => v as String?),
     );
     return val;
   },

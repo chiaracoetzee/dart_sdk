@@ -13,7 +13,7 @@ part 'message_attachment_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class MessageAttachmentResponse {
   const MessageAttachmentResponse({
     required this.id,
@@ -70,6 +70,40 @@ class MessageAttachmentResponse {
        _expiresAtPresent = !identical(expiresAt, _omit),
        expired = identical(expired, _omit) ? null : expired as bool?,
        _expiredPresent = !identical(expired, _omit);
+
+  const MessageAttachmentResponse._({
+    required this.id,
+    required this.filename,
+    required this.size,
+    required this.flags,
+    this.title,
+    this.description,
+    this.contentType,
+    this.contentHash,
+    this.url,
+    this.proxyUrl,
+    this.width,
+    this.height,
+    this.placeholder,
+    this.nsfw,
+    this.duration,
+    this.waveform,
+    this.expiresAt,
+    this.expired,
+  }) : _titlePresent = false,
+       _descriptionPresent = false,
+       _contentTypePresent = false,
+       _contentHashPresent = false,
+       _urlPresent = false,
+       _proxyUrlPresent = false,
+       _widthPresent = false,
+       _heightPresent = false,
+       _placeholderPresent = false,
+       _nsfwPresent = false,
+       _durationPresent = false,
+       _waveformPresent = false,
+       _expiresAtPresent = false,
+       _expiredPresent = false;
   factory MessageAttachmentResponse.fromJson(Map<String, Object?> json) {
     final value = _$MessageAttachmentResponseFromJson(json);
     return MessageAttachmentResponse(

@@ -12,12 +12,15 @@ CustomStatusResponse _$CustomStatusResponseFromJson(
   'CustomStatusResponse',
   json,
   ($checkedConvert) {
-    final val = CustomStatusResponse(
+    final val = CustomStatusResponse._(
       emojiAnimated: $checkedConvert('emoji_animated', (v) => v as bool),
-      text: $checkedConvert('text', (v) => v ?? _omit),
-      expiresAt: $checkedConvert('expires_at', (v) => v ?? _omit),
-      emojiId: $checkedConvert('emoji_id', (v) => v ?? _omit),
-      emojiName: $checkedConvert('emoji_name', (v) => v ?? _omit),
+      text: $checkedConvert('text', (v) => v as String?),
+      expiresAt: $checkedConvert(
+        'expires_at',
+        (v) => v == null ? null : DateTime.parse(v as String),
+      ),
+      emojiId: $checkedConvert('emoji_id', (v) => v as String?),
+      emojiName: $checkedConvert('emoji_name', (v) => v as String?),
     );
     return val;
   },

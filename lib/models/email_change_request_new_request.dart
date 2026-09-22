@@ -11,7 +11,7 @@ part 'email_change_request_new_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class EmailChangeRequestNewRequest {
   const EmailChangeRequestNewRequest({
     required this.ticket,
@@ -22,6 +22,13 @@ class EmailChangeRequestNewRequest {
            ? null
            : newPassword as PasswordType?,
        _newPasswordPresent = !identical(newPassword, _omit);
+
+  const EmailChangeRequestNewRequest._({
+    required this.ticket,
+    required this.newEmail,
+    required this.originalProof,
+    this.newPassword,
+  }) : _newPasswordPresent = false;
   factory EmailChangeRequestNewRequest.fromJson(Map<String, Object?> json) {
     final value = _$EmailChangeRequestNewRequestFromJson(json);
     return EmailChangeRequestNewRequest(

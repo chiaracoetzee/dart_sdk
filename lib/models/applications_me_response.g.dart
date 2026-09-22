@@ -12,7 +12,7 @@ ApplicationsMeResponse _$ApplicationsMeResponseFromJson(
   'ApplicationsMeResponse',
   json,
   ($checkedConvert) {
-    final val = ApplicationsMeResponse(
+    final val = ApplicationsMeResponse._(
       id: $checkedConvert('id', (v) => v as String),
       name: $checkedConvert('name', (v) => v as String),
       icon: $checkedConvert('icon', (v) => v as String?),
@@ -27,8 +27,16 @@ ApplicationsMeResponse _$ApplicationsMeResponseFromJson(
         'owner',
         (v) => UserPartialResponse.fromJson(v as Map<String, dynamic>),
       ),
-      bot: $checkedConvert('bot', (v) => v ?? _omit),
-      redirectUris: $checkedConvert('redirect_uris', (v) => v ?? _omit),
+      bot: $checkedConvert(
+        'bot',
+        (v) => v == null
+            ? null
+            : ApplicationsMeResponseBot.fromJson(v as Map<String, dynamic>),
+      ),
+      redirectUris: $checkedConvert(
+        'redirect_uris',
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+      ),
     );
     return val;
   },

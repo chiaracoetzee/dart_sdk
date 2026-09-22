@@ -11,7 +11,7 @@ GuildRoleResponse _$GuildRoleResponseFromJson(Map<String, dynamic> json) =>
       'GuildRoleResponse',
       json,
       ($checkedConvert) {
-        final val = GuildRoleResponse(
+        final val = GuildRoleResponse._(
           id: $checkedConvert('id', (v) => v as String),
           name: $checkedConvert('name', (v) => v as String),
           color: $checkedConvert('color', (v) => (v as num).toInt()),
@@ -19,8 +19,11 @@ GuildRoleResponse _$GuildRoleResponseFromJson(Map<String, dynamic> json) =>
           permissions: $checkedConvert('permissions', (v) => v as String),
           hoist: $checkedConvert('hoist', (v) => v as bool),
           mentionable: $checkedConvert('mentionable', (v) => v as bool),
-          hoistPosition: $checkedConvert('hoist_position', (v) => v ?? _omit),
-          unicodeEmoji: $checkedConvert('unicode_emoji', (v) => v ?? _omit),
+          hoistPosition: $checkedConvert(
+            'hoist_position',
+            (v) => (v as num?)?.toInt(),
+          ),
+          unicodeEmoji: $checkedConvert('unicode_emoji', (v) => v as String?),
         );
         return val;
       },

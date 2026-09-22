@@ -8,7 +8,7 @@ part 'update_favorite_meme_body_schema.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class UpdateFavoriteMemeBodySchema {
   const UpdateFavoriteMemeBodySchema({
     Object? name = _omit,
@@ -20,6 +20,11 @@ class UpdateFavoriteMemeBodySchema {
        _altTextPresent = !identical(altText, _omit),
        tags = identical(tags, _omit) ? null : tags as List<String>?,
        _tagsPresent = !identical(tags, _omit);
+
+  const UpdateFavoriteMemeBodySchema._({this.name, this.altText, this.tags})
+    : _namePresent = false,
+      _altTextPresent = false,
+      _tagsPresent = false;
   factory UpdateFavoriteMemeBodySchema.fromJson(Map<String, Object?> json) {
     final value = _$UpdateFavoriteMemeBodySchemaFromJson(json);
     return UpdateFavoriteMemeBodySchema(

@@ -9,9 +9,9 @@ part of 'git_hub_webhook_commits_author.dart';
 GitHubWebhookCommitsAuthor _$GitHubWebhookCommitsAuthorFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('GitHubWebhookCommitsAuthor', json, ($checkedConvert) {
-  final val = GitHubWebhookCommitsAuthor(
+  final val = GitHubWebhookCommitsAuthor._(
     name: $checkedConvert('name', (v) => v as String),
-    username: $checkedConvert('username', (v) => v ?? _omit),
+    username: $checkedConvert('username', (v) => v as String?),
   );
   return val;
 });

@@ -11,7 +11,7 @@ part 'instatus_webhook_maintenance.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class InstatusWebhookMaintenance {
   const InstatusWebhookMaintenance({
     Object? id = _omit,
@@ -60,6 +60,32 @@ class InstatusWebhookMaintenance {
            : affectedComponents
                  as List<InstatusWebhookMaintenanceAffectedComponents>?,
        _affectedComponentsPresent = !identical(affectedComponents, _omit);
+
+  const InstatusWebhookMaintenance._({
+    this.id,
+    this.name,
+    this.url,
+    this.status,
+    this.maintenanceStartDate,
+    this.maintenanceEndDate,
+    this.backfilled,
+    this.createdAt,
+    this.updatedAt,
+    this.resolvedAt,
+    this.maintenanceUpdates,
+    this.affectedComponents,
+  }) : _idPresent = false,
+       _namePresent = false,
+       _urlPresent = false,
+       _statusPresent = false,
+       _maintenanceStartDatePresent = false,
+       _maintenanceEndDatePresent = false,
+       _backfilledPresent = false,
+       _createdAtPresent = false,
+       _updatedAtPresent = false,
+       _resolvedAtPresent = false,
+       _maintenanceUpdatesPresent = false,
+       _affectedComponentsPresent = false;
   factory InstatusWebhookMaintenance.fromJson(Map<String, Object?> json) {
     final value = _$InstatusWebhookMaintenanceFromJson(json);
     return InstatusWebhookMaintenance(

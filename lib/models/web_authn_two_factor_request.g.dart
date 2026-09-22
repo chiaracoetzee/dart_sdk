@@ -12,15 +12,27 @@ WebAuthnTwoFactorRequest _$WebAuthnTwoFactorRequestFromJson(
   'WebAuthnTwoFactorRequest',
   json,
   ($checkedConvert) {
-    final val = WebAuthnTwoFactorRequest(
+    final val = WebAuthnTwoFactorRequest._(
       enabled: $checkedConvert('enabled', (v) => v as bool),
-      password: $checkedConvert('password', (v) => v ?? _omit),
-      mfaMethod: $checkedConvert('mfa_method', (v) => v ?? _omit),
-      mfaCode: $checkedConvert('mfa_code', (v) => v ?? _omit),
-      webauthnResponse: $checkedConvert('webauthn_response', (v) => v ?? _omit),
+      password: $checkedConvert('password', (v) => v as String?),
+      mfaMethod: $checkedConvert(
+        'mfa_method',
+        (v) => v == null
+            ? null
+            : WebAuthnTwoFactorRequestMfaMethodMfaMethod.fromJson(v as String),
+      ),
+      mfaCode: $checkedConvert('mfa_code', (v) => v as String?),
+      webauthnResponse: $checkedConvert(
+        'webauthn_response',
+        (v) => v == null
+            ? null
+            : WebAuthnAuthenticationResponse.fromJson(
+                v as Map<String, dynamic>,
+              ),
+      ),
       webauthnChallenge: $checkedConvert(
         'webauthn_challenge',
-        (v) => v ?? _omit,
+        (v) => v as String?,
       ),
     );
     return val;

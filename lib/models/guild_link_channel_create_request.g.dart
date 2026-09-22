@@ -12,7 +12,7 @@ GuildLinkChannelCreateRequest _$GuildLinkChannelCreateRequestFromJson(
   'GuildLinkChannelCreateRequest',
   json,
   ($checkedConvert) {
-    final val = GuildLinkChannelCreateRequest(
+    final val = GuildLinkChannelCreateRequest._(
       type: $checkedConvert(
         'type',
         (v) =>
@@ -20,31 +20,39 @@ GuildLinkChannelCreateRequest _$GuildLinkChannelCreateRequestFromJson(
       ),
       name: $checkedConvert('name', (v) => v as String),
       nsfw: $checkedConvert('nsfw', (v) => v as bool? ?? false),
-      topic: $checkedConvert('topic', (v) => v ?? _omit),
-      url: $checkedConvert('url', (v) => v ?? _omit),
-      parentId: $checkedConvert('parent_id', (v) => v ?? _omit),
-      bitrate: $checkedConvert('bitrate', (v) => v ?? _omit),
-      userLimit: $checkedConvert('user_limit', (v) => v ?? _omit),
+      topic: $checkedConvert('topic', (v) => v as String?),
+      url: $checkedConvert('url', (v) => v as String?),
+      parentId: $checkedConvert('parent_id', (v) => v as String?),
+      bitrate: $checkedConvert('bitrate', (v) => (v as num?)?.toInt()),
+      userLimit: $checkedConvert('user_limit', (v) => (v as num?)?.toInt()),
       voiceConnectionLimit: $checkedConvert(
         'voice_connection_limit',
-        (v) => v ?? _omit,
+        (v) => (v as num?)?.toInt(),
       ),
       permissionOverwrites: $checkedConvert(
         'permission_overwrites',
-        (v) => v ?? _omit,
+        (v) => (v as List<dynamic>?)
+            ?.map(
+              (e) => GuildLinkChannelCreateRequestPermissionOverwrites.fromJson(
+                e as Map<String, dynamic>,
+              ),
+            )
+            .toList(),
       ),
       rateLimitPerUser: $checkedConvert(
         'rate_limit_per_user',
-        (v) => v ?? _omit,
+        (v) => (v as num?)?.toInt(),
       ),
-      nsfwOverride: $checkedConvert('nsfw_override', (v) => v ?? _omit),
+      nsfwOverride: $checkedConvert('nsfw_override', (v) => v as bool?),
       contentWarningLevel: $checkedConvert(
         'content_warning_level',
-        (v) => v ?? _omit,
+        (v) => v == null
+            ? null
+            : ContentWarningLevelInput.fromJson((v as num).toInt()),
       ),
       contentWarningText: $checkedConvert(
         'content_warning_text',
-        (v) => v ?? _omit,
+        (v) => v as String?,
       ),
     );
     return val;

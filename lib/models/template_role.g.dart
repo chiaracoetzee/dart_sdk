@@ -11,15 +11,18 @@ TemplateRole _$TemplateRoleFromJson(Map<String, dynamic> json) =>
       'TemplateRole',
       json,
       ($checkedConvert) {
-        final val = TemplateRole(
+        final val = TemplateRole._(
           id: $checkedConvert('id', (v) => v as String),
-          name: $checkedConvert('name', (v) => v ?? _omit),
-          permissions: $checkedConvert('permissions', (v) => v ?? _omit),
-          permissionsNew: $checkedConvert('permissions_new', (v) => v ?? _omit),
-          color: $checkedConvert('color', (v) => v ?? _omit),
-          hoist: $checkedConvert('hoist', (v) => v ?? _omit),
-          mentionable: $checkedConvert('mentionable', (v) => v ?? _omit),
-          unicodeEmoji: $checkedConvert('unicode_emoji', (v) => v ?? _omit),
+          name: $checkedConvert('name', (v) => v as String?),
+          permissions: $checkedConvert('permissions', (v) => v as String?),
+          permissionsNew: $checkedConvert(
+            'permissions_new',
+            (v) => v as String?,
+          ),
+          color: $checkedConvert('color', (v) => v as num?),
+          hoist: $checkedConvert('hoist', (v) => v as bool?),
+          mentionable: $checkedConvert('mentionable', (v) => v as bool?),
+          unicodeEmoji: $checkedConvert('unicode_emoji', (v) => v as String?),
         );
         return val;
       },

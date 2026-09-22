@@ -10,7 +10,7 @@ part 'discovery_status_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class DiscoveryStatusResponse {
   const DiscoveryStatusResponse({
     required this.eligible,
@@ -20,6 +20,12 @@ class DiscoveryStatusResponse {
            ? null
            : application as DiscoveryApplicationResponse?,
        _applicationPresent = !identical(application, _omit);
+
+  const DiscoveryStatusResponse._({
+    required this.eligible,
+    required this.minMemberCount,
+    this.application,
+  }) : _applicationPresent = false;
   factory DiscoveryStatusResponse.fromJson(Map<String, Object?> json) {
     final value = _$DiscoveryStatusResponseFromJson(json);
     return DiscoveryStatusResponse(

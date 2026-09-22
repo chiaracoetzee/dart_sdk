@@ -12,7 +12,7 @@ part 'guild_dsa_report_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildDsaReportRequest {
   const GuildDsaReportRequest({
     required this.ticket,
@@ -34,6 +34,20 @@ class GuildDsaReportRequest {
        _reporterFluxerTagPresent = !identical(reporterFluxerTag, _omit),
        inviteCode = identical(inviteCode, _omit) ? null : inviteCode as String?,
        _inviteCodePresent = !identical(inviteCode, _omit);
+
+  const GuildDsaReportRequest._({
+    required this.ticket,
+    required this.reporterFullLegalName,
+    required this.reporterCountryOfResidence,
+    required this.reportType,
+    required this.category,
+    required this.guildId,
+    this.additionalInfo,
+    this.reporterFluxerTag,
+    this.inviteCode,
+  }) : _additionalInfoPresent = false,
+       _reporterFluxerTagPresent = false,
+       _inviteCodePresent = false;
   factory GuildDsaReportRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildDsaReportRequestFromJson(json);
     return GuildDsaReportRequest(

@@ -10,7 +10,7 @@ part 'rejected_localized_card_preapproval_continue_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class RejectedLocalizedCardPreapprovalContinueResponse {
   const RejectedLocalizedCardPreapprovalContinueResponse({
     required this.status,
@@ -20,6 +20,12 @@ class RejectedLocalizedCardPreapprovalContinueResponse {
            ? null
            : actualCountry as String?,
        _actualCountryPresent = !identical(actualCountry, _omit);
+
+  const RejectedLocalizedCardPreapprovalContinueResponse._({
+    required this.status,
+    required this.reason,
+    this.actualCountry,
+  }) : _actualCountryPresent = false;
   factory RejectedLocalizedCardPreapprovalContinueResponse.fromJson(
     Map<String, Object?> json,
   ) {

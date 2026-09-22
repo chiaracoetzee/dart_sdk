@@ -17,7 +17,7 @@ part 'webhook_message_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class WebhookMessageRequest {
   const WebhookMessageRequest({
     this.flags = 0,
@@ -68,6 +68,31 @@ class WebhookMessageRequest {
            ? null
            : attachments as List<ClientUploadedAttachmentRequest>?,
        _attachmentsPresent = !identical(attachments, _omit);
+
+  const WebhookMessageRequest._({
+    this.flags = 0,
+    this.content,
+    this.embeds,
+    this.messageReference,
+    this.allowedMentions,
+    this.nonce,
+    this.favoriteMemeId,
+    this.stickerIds,
+    this.tts,
+    this.username,
+    this.avatarUrl,
+    this.attachments,
+  }) : _contentPresent = false,
+       _embedsPresent = false,
+       _messageReferencePresent = false,
+       _allowedMentionsPresent = false,
+       _noncePresent = false,
+       _favoriteMemeIdPresent = false,
+       _stickerIdsPresent = false,
+       _ttsPresent = false,
+       _usernamePresent = false,
+       _avatarUrlPresent = false,
+       _attachmentsPresent = false;
   factory WebhookMessageRequest.fromJson(Map<String, Object?> json) {
     final value = _$WebhookMessageRequestFromJson(json);
     return WebhookMessageRequest(

@@ -9,16 +9,16 @@ part of 'o_auth2_user_info_response.dart';
 OAuth2UserInfoResponse _$OAuth2UserInfoResponseFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('OAuth2UserInfoResponse', json, ($checkedConvert) {
-  final val = OAuth2UserInfoResponse(
+  final val = OAuth2UserInfoResponse._(
     sub: $checkedConvert('sub', (v) => v as String),
     id: $checkedConvert('id', (v) => v as String),
     username: $checkedConvert('username', (v) => v as String),
     discriminator: $checkedConvert('discriminator', (v) => v as String),
     globalName: $checkedConvert('global_name', (v) => v as String?),
     avatar: $checkedConvert('avatar', (v) => v as String?),
-    email: $checkedConvert('email', (v) => v ?? _omit),
-    verified: $checkedConvert('verified', (v) => v ?? _omit),
-    flags: $checkedConvert('flags', (v) => v ?? _omit),
+    email: $checkedConvert('email', (v) => v as String?),
+    verified: $checkedConvert('verified', (v) => v as bool?),
+    flags: $checkedConvert('flags', (v) => (v as num?)?.toInt()),
   );
   return val;
 }, fieldKeyMap: const {'globalName': 'global_name'});

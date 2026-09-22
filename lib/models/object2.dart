@@ -10,13 +10,15 @@ part 'object2.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class Object2 {
   const Object2({Object? attachments = _omit})
     : attachments = identical(attachments, _omit)
           ? null
           : attachments as List<Object2Attachments>?,
       _attachmentsPresent = !identical(attachments, _omit);
+
+  const Object2._({this.attachments}) : _attachmentsPresent = false;
   factory Object2.fromJson(Map<String, Object?> json) {
     final value = _$Object2FromJson(json);
     return Object2(

@@ -11,7 +11,7 @@ part 'client_attachment_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ClientAttachmentRequest {
   const ClientAttachmentRequest({
     required this.id,
@@ -40,6 +40,22 @@ class ClientAttachmentRequest {
            ? null
            : contentType as String?,
        _contentTypePresent = !identical(contentType, _omit);
+
+  const ClientAttachmentRequest._({
+    required this.id,
+    required this.filename,
+    this.title,
+    this.description,
+    this.flags,
+    this.duration,
+    this.waveform,
+    this.contentType,
+  }) : _titlePresent = false,
+       _descriptionPresent = false,
+       _flagsPresent = false,
+       _durationPresent = false,
+       _waveformPresent = false,
+       _contentTypePresent = false;
   factory ClientAttachmentRequest.fromJson(Map<String, Object?> json) {
     final value = _$ClientAttachmentRequestFromJson(json);
     return ClientAttachmentRequest(

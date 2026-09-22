@@ -10,7 +10,7 @@ part 'throttled_error.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ThrottledError {
   const ThrottledError({
     required this.code,
@@ -26,6 +26,16 @@ class ThrottledError {
        _retryAfterPresent = !identical(retryAfter, _omit),
        global = identical(global, _omit) ? null : global as bool?,
        _globalPresent = !identical(global, _omit);
+
+  const ThrottledError._({
+    required this.code,
+    required this.message,
+    this.errors,
+    this.retryAfter,
+    this.global,
+  }) : _errorsPresent = false,
+       _retryAfterPresent = false,
+       _globalPresent = false;
   factory ThrottledError.fromJson(Map<String, Object?> json) {
     final value = _$ThrottledErrorFromJson(json);
     return ThrottledError(

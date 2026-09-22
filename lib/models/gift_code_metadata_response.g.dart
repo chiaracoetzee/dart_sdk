@@ -12,7 +12,7 @@ GiftCodeMetadataResponse _$GiftCodeMetadataResponseFromJson(
   'GiftCodeMetadataResponse',
   json,
   ($checkedConvert) {
-    final val = GiftCodeMetadataResponse(
+    final val = GiftCodeMetadataResponse._(
       code: $checkedConvert('code', (v) => v as String),
       durationType: $checkedConvert(
         'duration_type',
@@ -30,8 +30,16 @@ GiftCodeMetadataResponse _$GiftCodeMetadataResponseFromJson(
         'created_at',
         (v) => DateTime.parse(v as String),
       ),
-      redeemedAt: $checkedConvert('redeemed_at', (v) => v ?? _omit),
-      redeemedBy: $checkedConvert('redeemed_by', (v) => v ?? _omit),
+      redeemedAt: $checkedConvert(
+        'redeemed_at',
+        (v) => v == null ? null : DateTime.parse(v as String),
+      ),
+      redeemedBy: $checkedConvert(
+        'redeemed_by',
+        (v) => v == null
+            ? null
+            : UserPartialResponse.fromJson(v as Map<String, dynamic>),
+      ),
     );
     return val;
   },

@@ -10,7 +10,7 @@ part 'custom_status_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class CustomStatusResponse {
   const CustomStatusResponse({
     required this.emojiAnimated,
@@ -28,6 +28,17 @@ class CustomStatusResponse {
        _emojiIdPresent = !identical(emojiId, _omit),
        emojiName = identical(emojiName, _omit) ? null : emojiName as String?,
        _emojiNamePresent = !identical(emojiName, _omit);
+
+  const CustomStatusResponse._({
+    required this.emojiAnimated,
+    this.text,
+    this.expiresAt,
+    this.emojiId,
+    this.emojiName,
+  }) : _textPresent = false,
+       _expiresAtPresent = false,
+       _emojiIdPresent = false,
+       _emojiNamePresent = false;
   factory CustomStatusResponse.fromJson(Map<String, Object?> json) {
     final value = _$CustomStatusResponseFromJson(json);
     return CustomStatusResponse(

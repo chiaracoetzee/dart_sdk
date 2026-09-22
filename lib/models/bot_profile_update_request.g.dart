@@ -9,13 +9,13 @@ part of 'bot_profile_update_request.dart';
 BotProfileUpdateRequest _$BotProfileUpdateRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('BotProfileUpdateRequest', json, ($checkedConvert) {
-  final val = BotProfileUpdateRequest(
-    username: $checkedConvert('username', (v) => v ?? _omit),
-    discriminator: $checkedConvert('discriminator', (v) => v ?? _omit),
-    avatar: $checkedConvert('avatar', (v) => v ?? _omit),
-    banner: $checkedConvert('banner', (v) => v ?? _omit),
-    bio: $checkedConvert('bio', (v) => v ?? _omit),
-    botFlags: $checkedConvert('bot_flags', (v) => v ?? _omit),
+  final val = BotProfileUpdateRequest._(
+    username: $checkedConvert('username', (v) => v as String?),
+    discriminator: $checkedConvert('discriminator', (v) => v as String?),
+    avatar: $checkedConvert('avatar', (v) => v as String?),
+    banner: $checkedConvert('banner', (v) => v as String?),
+    bio: $checkedConvert('bio', (v) => v as String?),
+    botFlags: $checkedConvert('bot_flags', (v) => (v as num?)?.toInt()),
   );
   return val;
 }, fieldKeyMap: const {'botFlags': 'bot_flags'});

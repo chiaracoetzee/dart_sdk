@@ -8,7 +8,7 @@ part 'handoff_initiate_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class HandoffInitiateResponse {
   const HandoffInitiateResponse({
     required this.code,
@@ -16,6 +16,12 @@ class HandoffInitiateResponse {
     Object? pollSecret = _omit,
   }) : pollSecret = identical(pollSecret, _omit) ? null : pollSecret as String?,
        _pollSecretPresent = !identical(pollSecret, _omit);
+
+  const HandoffInitiateResponse._({
+    required this.code,
+    required this.expiresAt,
+    this.pollSecret,
+  }) : _pollSecretPresent = false;
   factory HandoffInitiateResponse.fromJson(Map<String, Object?> json) {
     final value = _$HandoffInitiateResponseFromJson(json);
     return HandoffInitiateResponse(

@@ -8,7 +8,7 @@ part 'instatus_webhook_incident_affected_components.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class InstatusWebhookIncidentAffectedComponents {
   const InstatusWebhookIncidentAffectedComponents({
     Object? id = _omit,
@@ -20,6 +20,14 @@ class InstatusWebhookIncidentAffectedComponents {
        _namePresent = !identical(name, _omit),
        status = identical(status, _omit) ? null : status as String?,
        _statusPresent = !identical(status, _omit);
+
+  const InstatusWebhookIncidentAffectedComponents._({
+    this.id,
+    this.name,
+    this.status,
+  }) : _idPresent = false,
+       _namePresent = false,
+       _statusPresent = false;
   factory InstatusWebhookIncidentAffectedComponents.fromJson(
     Map<String, Object?> json,
   ) {

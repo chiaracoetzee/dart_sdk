@@ -12,7 +12,7 @@ part 'channel_update_request_body_variant2_permission_overwrites.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ChannelUpdateRequestBodyVariant2PermissionOverwrites {
   const ChannelUpdateRequestBodyVariant2PermissionOverwrites({
     required this.id,
@@ -23,6 +23,14 @@ class ChannelUpdateRequestBodyVariant2PermissionOverwrites {
        _allowPresent = !identical(allow, _omit),
        deny = identical(deny, _omit) ? null : deny as UnsignedInt64Type?,
        _denyPresent = !identical(deny, _omit);
+
+  const ChannelUpdateRequestBodyVariant2PermissionOverwrites._({
+    required this.id,
+    required this.type,
+    this.allow,
+    this.deny,
+  }) : _allowPresent = false,
+       _denyPresent = false;
   factory ChannelUpdateRequestBodyVariant2PermissionOverwrites.fromJson(
     Map<String, Object?> json,
   ) {

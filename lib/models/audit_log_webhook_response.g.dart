@@ -12,16 +12,16 @@ AuditLogWebhookResponse _$AuditLogWebhookResponseFromJson(
   'AuditLogWebhookResponse',
   json,
   ($checkedConvert) {
-    final val = AuditLogWebhookResponse(
+    final val = AuditLogWebhookResponse._(
       id: $checkedConvert('id', (v) => v as String),
       type: $checkedConvert(
         'type',
         (v) => WebhookType.fromJson((v as num).toInt()),
       ),
       name: $checkedConvert('name', (v) => v as String),
-      guildId: $checkedConvert('guild_id', (v) => v ?? _omit),
-      channelId: $checkedConvert('channel_id', (v) => v ?? _omit),
-      avatarHash: $checkedConvert('avatar_hash', (v) => v ?? _omit),
+      guildId: $checkedConvert('guild_id', (v) => v as String?),
+      channelId: $checkedConvert('channel_id', (v) => v as String?),
+      avatarHash: $checkedConvert('avatar_hash', (v) => v as String?),
     );
     return val;
   },

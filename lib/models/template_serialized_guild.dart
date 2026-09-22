@@ -11,7 +11,7 @@ part 'template_serialized_guild.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class TemplateSerializedGuild {
   const TemplateSerializedGuild({
     required this.name,
@@ -54,6 +54,25 @@ class TemplateSerializedGuild {
            ? null
            : systemChannelFlags as num?,
        _systemChannelFlagsPresent = !identical(systemChannelFlags, _omit);
+
+  const TemplateSerializedGuild._({
+    required this.name,
+    required this.roles,
+    required this.channels,
+    this.description,
+    this.verificationLevel,
+    this.defaultMessageNotifications,
+    this.explicitContentFilter,
+    this.systemChannelId,
+    this.afkTimeout,
+    this.systemChannelFlags,
+  }) : _descriptionPresent = false,
+       _verificationLevelPresent = false,
+       _defaultMessageNotificationsPresent = false,
+       _explicitContentFilterPresent = false,
+       _systemChannelIdPresent = false,
+       _afkTimeoutPresent = false,
+       _systemChannelFlagsPresent = false;
   factory TemplateSerializedGuild.fromJson(Map<String, Object?> json) {
     final value = _$TemplateSerializedGuildFromJson(json);
     return TemplateSerializedGuild(

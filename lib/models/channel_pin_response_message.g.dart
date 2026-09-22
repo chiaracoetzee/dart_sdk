@@ -12,7 +12,7 @@ ChannelPinResponseMessage _$ChannelPinResponseMessageFromJson(
   'ChannelPinResponseMessage',
   json,
   ($checkedConvert) {
-    final val = ChannelPinResponseMessage(
+    final val = ChannelPinResponseMessage._(
       id: $checkedConvert('id', (v) => v as String),
       channelId: $checkedConvert('channel_id', (v) => v as String),
       author: $checkedConvert(
@@ -42,17 +42,78 @@ ChannelPinResponseMessage _$ChannelPinResponseMessageFromJson(
         'mention_roles',
         (v) => (v as List<dynamic>).map((e) => e as String).toList(),
       ),
-      webhookId: $checkedConvert('webhook_id', (v) => v ?? _omit),
-      editedTimestamp: $checkedConvert('edited_timestamp', (v) => v ?? _omit),
-      mentionChannels: $checkedConvert('mention_channels', (v) => v ?? _omit),
-      users: $checkedConvert('users', (v) => v ?? _omit),
-      embeds: $checkedConvert('embeds', (v) => v ?? _omit),
-      attachments: $checkedConvert('attachments', (v) => v ?? _omit),
-      stickers: $checkedConvert('stickers', (v) => v ?? _omit),
-      messageReference: $checkedConvert('message_reference', (v) => v ?? _omit),
-      messageSnapshots: $checkedConvert('message_snapshots', (v) => v ?? _omit),
-      nonce: $checkedConvert('nonce', (v) => v ?? _omit),
-      call: $checkedConvert('call', (v) => v ?? _omit),
+      webhookId: $checkedConvert('webhook_id', (v) => v as String?),
+      editedTimestamp: $checkedConvert(
+        'edited_timestamp',
+        (v) => v == null ? null : DateTime.parse(v as String),
+      ),
+      mentionChannels: $checkedConvert(
+        'mention_channels',
+        (v) => (v as List<dynamic>?)
+            ?.map(
+              (e) => MessageChannelMentionResponse.fromJson(
+                e as Map<String, dynamic>,
+              ),
+            )
+            .toList(),
+      ),
+      users: $checkedConvert(
+        'users',
+        (v) => (v as List<dynamic>?)
+            ?.map(
+              (e) => UserPartialResponse.fromJson(e as Map<String, dynamic>),
+            )
+            .toList(),
+      ),
+      embeds: $checkedConvert(
+        'embeds',
+        (v) => (v as List<dynamic>?)
+            ?.map(
+              (e) => MessageEmbedResponse.fromJson(e as Map<String, dynamic>),
+            )
+            .toList(),
+      ),
+      attachments: $checkedConvert(
+        'attachments',
+        (v) => (v as List<dynamic>?)
+            ?.map(
+              (e) =>
+                  MessageAttachmentResponse.fromJson(e as Map<String, dynamic>),
+            )
+            .toList(),
+      ),
+      stickers: $checkedConvert(
+        'stickers',
+        (v) => (v as List<dynamic>?)
+            ?.map(
+              (e) => MessageStickerResponse.fromJson(e as Map<String, dynamic>),
+            )
+            .toList(),
+      ),
+      messageReference: $checkedConvert(
+        'message_reference',
+        (v) => v == null
+            ? null
+            : ChannelPinResponseMessageMessageReference.fromJson(
+                v as Map<String, dynamic>,
+              ),
+      ),
+      messageSnapshots: $checkedConvert(
+        'message_snapshots',
+        (v) => (v as List<dynamic>?)
+            ?.map(
+              (e) =>
+                  MessageSnapshotResponse.fromJson(e as Map<String, dynamic>),
+            )
+            .toList(),
+      ),
+      nonce: $checkedConvert('nonce', (v) => v as String?),
+      call: $checkedConvert(
+        'call',
+        (v) => v == null
+            ? null
+            : ChannelPinResponseMessageCall.fromJson(v as Map<String, dynamic>),
+      ),
     );
     return val;
   },

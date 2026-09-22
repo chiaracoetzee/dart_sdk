@@ -8,7 +8,7 @@ part 'application_create_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ApplicationCreateRequest {
   const ApplicationCreateRequest({
     required this.name,
@@ -25,6 +25,15 @@ class ApplicationCreateRequest {
            ? null
            : botRequireCodeGrant as bool?,
        _botRequireCodeGrantPresent = !identical(botRequireCodeGrant, _omit);
+
+  const ApplicationCreateRequest._({
+    required this.name,
+    this.redirectUris,
+    this.botPublic,
+    this.botRequireCodeGrant,
+  }) : _redirectUrisPresent = false,
+       _botPublicPresent = false,
+       _botRequireCodeGrantPresent = false;
   factory ApplicationCreateRequest.fromJson(Map<String, Object?> json) {
     final value = _$ApplicationCreateRequestFromJson(json);
     return ApplicationCreateRequest(

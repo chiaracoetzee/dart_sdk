@@ -11,7 +11,7 @@ part 'report_guild_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ReportGuildRequest {
   const ReportGuildRequest({
     required this.guildId,
@@ -19,6 +19,12 @@ class ReportGuildRequest {
     Object? inviteCode = _omit,
   }) : inviteCode = identical(inviteCode, _omit) ? null : inviteCode as String?,
        _inviteCodePresent = !identical(inviteCode, _omit);
+
+  const ReportGuildRequest._({
+    required this.guildId,
+    required this.category,
+    this.inviteCode,
+  }) : _inviteCodePresent = false;
   factory ReportGuildRequest.fromJson(Map<String, Object?> json) {
     final value = _$ReportGuildRequestFromJson(json);
     return ReportGuildRequest(

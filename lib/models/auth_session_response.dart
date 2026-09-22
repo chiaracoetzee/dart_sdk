@@ -10,7 +10,7 @@ part 'auth_session_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class AuthSessionResponse {
   const AuthSessionResponse({
     required this.idHash,
@@ -26,6 +26,15 @@ class AuthSessionResponse {
            ? null
            : approxLastUsedAt as DateTime?,
        _approxLastUsedAtPresent = !identical(approxLastUsedAt, _omit);
+
+  const AuthSessionResponse._({
+    required this.idHash,
+    required this.maskedIp,
+    required this.current,
+    this.clientInfo,
+    this.approxLastUsedAt,
+  }) : _clientInfoPresent = false,
+       _approxLastUsedAtPresent = false;
   factory AuthSessionResponse.fromJson(Map<String, Object?> json) {
     final value = _$AuthSessionResponseFromJson(json);
     return AuthSessionResponse(

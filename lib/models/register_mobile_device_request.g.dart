@@ -12,21 +12,25 @@ RegisterMobileDeviceRequest _$RegisterMobileDeviceRequestFromJson(
   'RegisterMobileDeviceRequest',
   json,
   ($checkedConvert) {
-    final val = RegisterMobileDeviceRequest(
+    final val = RegisterMobileDeviceRequest._(
       platform: $checkedConvert(
         'platform',
         (v) =>
             RegisterMobileDeviceRequestPlatformPlatform.fromJson(v as String),
       ),
       token: $checkedConvert('token', (v) => v as String),
-      userAgent: $checkedConvert('user_agent', (v) => v ?? _omit),
-      appId: $checkedConvert('app_id', (v) => v ?? _omit),
+      userAgent: $checkedConvert('user_agent', (v) => v as String?),
+      appId: $checkedConvert('app_id', (v) => v as String?),
       providerEnvironment: $checkedConvert(
         'provider_environment',
-        (v) => v ?? _omit,
+        (v) => v == null
+            ? null
+            : RegisterMobileDeviceRequestProviderEnvironmentProviderEnvironment.fromJson(
+                v as String,
+              ),
       ),
-      encryptionKey: $checkedConvert('encryption_key', (v) => v ?? _omit),
-      authSecret: $checkedConvert('auth_secret', (v) => v ?? _omit),
+      encryptionKey: $checkedConvert('encryption_key', (v) => v as String?),
+      authSecret: $checkedConvert('auth_secret', (v) => v as String?),
     );
     return val;
   },

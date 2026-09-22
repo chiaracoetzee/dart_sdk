@@ -8,9 +8,12 @@ part of 'message_ack_request.dart';
 
 MessageAckRequest _$MessageAckRequestFromJson(Map<String, dynamic> json) =>
     $checkedCreate('MessageAckRequest', json, ($checkedConvert) {
-      final val = MessageAckRequest(
-        mentionCount: $checkedConvert('mention_count', (v) => v ?? _omit),
-        manual: $checkedConvert('manual', (v) => v ?? _omit),
+      final val = MessageAckRequest._(
+        mentionCount: $checkedConvert(
+          'mention_count',
+          (v) => (v as num?)?.toInt(),
+        ),
+        manual: $checkedConvert('manual', (v) => v as bool?),
       );
       return val;
     }, fieldKeyMap: const {'mentionCount': 'mention_count'});

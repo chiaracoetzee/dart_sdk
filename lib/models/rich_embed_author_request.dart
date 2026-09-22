@@ -30,8 +30,8 @@ class RichEmbedAuthorRequestVariant1 {
 
   const RichEmbedAuthorRequestVariant1({
     required this.name,
-    required this.url,
-    required this.iconUrl,
+    this.url,
+    this.iconUrl,
   });
 
   factory RichEmbedAuthorRequestVariant1.fromJson(Map<String, dynamic> json) =>

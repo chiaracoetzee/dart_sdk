@@ -8,7 +8,7 @@ part 'slack_webhook_request_attachments_fields.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class SlackWebhookRequestAttachmentsFields {
   const SlackWebhookRequestAttachmentsFields({
     Object? title = _omit,
@@ -20,6 +20,14 @@ class SlackWebhookRequestAttachmentsFields {
        _valuePresent = !identical(value, _omit),
        short = identical(short, _omit) ? null : short as bool?,
        _shortPresent = !identical(short, _omit);
+
+  const SlackWebhookRequestAttachmentsFields._({
+    this.title,
+    this.value,
+    this.short,
+  }) : _titlePresent = false,
+       _valuePresent = false,
+       _shortPresent = false;
   factory SlackWebhookRequestAttachmentsFields.fromJson(
     Map<String, Object?> json,
   ) {

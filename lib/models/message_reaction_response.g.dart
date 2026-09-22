@@ -9,13 +9,13 @@ part of 'message_reaction_response.dart';
 MessageReactionResponse _$MessageReactionResponseFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('MessageReactionResponse', json, ($checkedConvert) {
-  final val = MessageReactionResponse(
+  final val = MessageReactionResponse._(
     emoji: $checkedConvert(
       'emoji',
       (v) => MessageReactionResponseEmoji.fromJson(v as Map<String, dynamic>),
     ),
     count: $checkedConvert('count', (v) => (v as num).toInt()),
-    me: $checkedConvert('me', (v) => v ?? _omit),
+    me: $checkedConvert('me', (v) => v as bool?),
   );
   return val;
 });

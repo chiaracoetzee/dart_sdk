@@ -11,7 +11,7 @@ part 'auth_session_response_client_info.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class AuthSessionResponseClientInfo {
   const AuthSessionResponseClientInfo({
     required this.device,
@@ -29,6 +29,17 @@ class AuthSessionResponseClientInfo {
            ? null
            : location as AuthSessionLocation?,
        _locationPresent = !identical(location, _omit);
+
+  const AuthSessionResponseClientInfo._({
+    required this.device,
+    this.platform,
+    this.os,
+    this.browser,
+    this.location,
+  }) : _platformPresent = false,
+       _osPresent = false,
+       _browserPresent = false,
+       _locationPresent = false;
   factory AuthSessionResponseClientInfo.fromJson(Map<String, Object?> json) {
     final value = _$AuthSessionResponseClientInfoFromJson(json);
     return AuthSessionResponseClientInfo(

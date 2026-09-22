@@ -11,7 +11,7 @@ part 'change_subscription_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ChangeSubscriptionRequest {
   const ChangeSubscriptionRequest({
     required this.billingCycle,
@@ -20,6 +20,11 @@ class ChangeSubscriptionRequest {
            ? null
            : effectiveAt as ChangeSubscriptionRequestEffectiveAtEffectiveAt?,
        _effectiveAtPresent = !identical(effectiveAt, _omit);
+
+  const ChangeSubscriptionRequest._({
+    required this.billingCycle,
+    this.effectiveAt,
+  }) : _effectiveAtPresent = false;
   factory ChangeSubscriptionRequest.fromJson(Map<String, Object?> json) {
     final value = _$ChangeSubscriptionRequestFromJson(json);
     return ChangeSubscriptionRequest(

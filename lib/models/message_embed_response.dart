@@ -15,7 +15,7 @@ part 'message_embed_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class MessageEmbedResponse {
   const MessageEmbedResponse({
     required this.type,
@@ -89,6 +89,45 @@ class MessageEmbedResponse {
            ? null
            : children as List<MessageEmbedChildResponse>?,
        _childrenPresent = !identical(children, _omit);
+
+  const MessageEmbedResponse._({
+    required this.type,
+    this.url,
+    this.title,
+    this.color,
+    this.timestamp,
+    this.description,
+    this.author,
+    this.image,
+    this.thumbnail,
+    this.footer,
+    this.fields,
+    this.provider,
+    this.video,
+    this.audio,
+    this.html,
+    this.htmlWidth,
+    this.htmlHeight,
+    this.nsfw,
+    this.children,
+  }) : _urlPresent = false,
+       _titlePresent = false,
+       _colorPresent = false,
+       _timestampPresent = false,
+       _descriptionPresent = false,
+       _authorPresent = false,
+       _imagePresent = false,
+       _thumbnailPresent = false,
+       _footerPresent = false,
+       _fieldsPresent = false,
+       _providerPresent = false,
+       _videoPresent = false,
+       _audioPresent = false,
+       _htmlPresent = false,
+       _htmlWidthPresent = false,
+       _htmlHeightPresent = false,
+       _nsfwPresent = false,
+       _childrenPresent = false;
   factory MessageEmbedResponse.fromJson(Map<String, Object?> json) {
     final value = _$MessageEmbedResponseFromJson(json);
     return MessageEmbedResponse(

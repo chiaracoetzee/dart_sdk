@@ -11,7 +11,7 @@ part 'allowed_mentions_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class AllowedMentionsRequest {
   const AllowedMentionsRequest({
     Object? parse = _omit,
@@ -30,6 +30,16 @@ class AllowedMentionsRequest {
            ? null
            : repliedUser as bool?,
        _repliedUserPresent = !identical(repliedUser, _omit);
+
+  const AllowedMentionsRequest._({
+    this.parse,
+    this.users,
+    this.roles,
+    this.repliedUser,
+  }) : _parsePresent = false,
+       _usersPresent = false,
+       _rolesPresent = false,
+       _repliedUserPresent = false;
   factory AllowedMentionsRequest.fromJson(Map<String, Object?> json) {
     final value = _$AllowedMentionsRequestFromJson(json);
     return AllowedMentionsRequest(

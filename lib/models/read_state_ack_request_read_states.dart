@@ -11,7 +11,7 @@ part 'read_state_ack_request_read_states.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ReadStateAckRequestReadStates {
   const ReadStateAckRequestReadStates({
     required this.channelId,
@@ -24,6 +24,14 @@ class ReadStateAckRequestReadStates {
        _mentionCountPresent = !identical(mentionCount, _omit),
        manual = identical(manual, _omit) ? null : manual as bool?,
        _manualPresent = !identical(manual, _omit);
+
+  const ReadStateAckRequestReadStates._({
+    required this.channelId,
+    required this.messageId,
+    this.mentionCount,
+    this.manual,
+  }) : _mentionCountPresent = false,
+       _manualPresent = false;
   factory ReadStateAckRequestReadStates.fromJson(Map<String, Object?> json) {
     final value = _$ReadStateAckRequestReadStatesFromJson(json);
     return ReadStateAckRequestReadStates(

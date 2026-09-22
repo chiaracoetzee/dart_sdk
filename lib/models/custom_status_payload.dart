@@ -10,7 +10,7 @@ part 'custom_status_payload.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class CustomStatusPayload {
   const CustomStatusPayload({
     Object? text = _omit,
@@ -25,6 +25,16 @@ class CustomStatusPayload {
        _emojiIdPresent = !identical(emojiId, _omit),
        emojiName = identical(emojiName, _omit) ? null : emojiName as String?,
        _emojiNamePresent = !identical(emojiName, _omit);
+
+  const CustomStatusPayload._({
+    this.text,
+    this.expiresAt,
+    this.emojiId,
+    this.emojiName,
+  }) : _textPresent = false,
+       _expiresAtPresent = false,
+       _emojiIdPresent = false,
+       _emojiNamePresent = false;
   factory CustomStatusPayload.fromJson(Map<String, Object?> json) {
     final value = _$CustomStatusPayloadFromJson(json);
     return CustomStatusPayload(

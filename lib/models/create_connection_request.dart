@@ -11,7 +11,7 @@ part 'create_connection_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class CreateConnectionRequest {
   const CreateConnectionRequest({
     required this.type,
@@ -21,6 +21,12 @@ class CreateConnectionRequest {
            ? null
            : visibilityFlags as Int32Type?,
        _visibilityFlagsPresent = !identical(visibilityFlags, _omit);
+
+  const CreateConnectionRequest._({
+    required this.type,
+    required this.identifier,
+    this.visibilityFlags,
+  }) : _visibilityFlagsPresent = false;
   factory CreateConnectionRequest.fromJson(Map<String, Object?> json) {
     final value = _$CreateConnectionRequestFromJson(json);
     return CreateConnectionRequest(

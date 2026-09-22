@@ -8,7 +8,7 @@ part 'guild_sticker_update_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildStickerUpdateRequest {
   const GuildStickerUpdateRequest({
     required this.name,
@@ -18,6 +18,12 @@ class GuildStickerUpdateRequest {
            ? null
            : description as String?,
        _descriptionPresent = !identical(description, _omit);
+
+  const GuildStickerUpdateRequest._({
+    required this.name,
+    this.tags = const [],
+    this.description,
+  }) : _descriptionPresent = false;
   factory GuildStickerUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildStickerUpdateRequestFromJson(json);
     return GuildStickerUpdateRequest(

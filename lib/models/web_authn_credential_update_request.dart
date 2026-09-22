@@ -12,7 +12,7 @@ part 'web_authn_credential_update_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class WebAuthnCredentialUpdateRequest {
   const WebAuthnCredentialUpdateRequest({
     required this.name,
@@ -37,6 +37,19 @@ class WebAuthnCredentialUpdateRequest {
            ? null
            : webauthnChallenge as String?,
        _webauthnChallengePresent = !identical(webauthnChallenge, _omit);
+
+  const WebAuthnCredentialUpdateRequest._({
+    required this.name,
+    this.password,
+    this.mfaMethod,
+    this.mfaCode,
+    this.webauthnResponse,
+    this.webauthnChallenge,
+  }) : _passwordPresent = false,
+       _mfaMethodPresent = false,
+       _mfaCodePresent = false,
+       _webauthnResponsePresent = false,
+       _webauthnChallengePresent = false;
   factory WebAuthnCredentialUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$WebAuthnCredentialUpdateRequestFromJson(json);
     return WebAuthnCredentialUpdateRequest(

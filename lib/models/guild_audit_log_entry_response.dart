@@ -13,7 +13,7 @@ part 'guild_audit_log_entry_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GuildAuditLogEntryResponse {
   const GuildAuditLogEntryResponse({
     required this.id,
@@ -39,6 +39,20 @@ class GuildAuditLogEntryResponse {
            ? null
            : changes as List<AuditLogChangeSchema>?,
        _changesPresent = !identical(changes, _omit);
+
+  const GuildAuditLogEntryResponse._({
+    required this.id,
+    required this.actionType,
+    this.userId,
+    this.targetId,
+    this.reason,
+    this.options,
+    this.changes,
+  }) : _userIdPresent = false,
+       _targetIdPresent = false,
+       _reasonPresent = false,
+       _optionsPresent = false,
+       _changesPresent = false;
   factory GuildAuditLogEntryResponse.fromJson(Map<String, Object?> json) {
     final value = _$GuildAuditLogEntryResponseFromJson(json);
     return GuildAuditLogEntryResponse(

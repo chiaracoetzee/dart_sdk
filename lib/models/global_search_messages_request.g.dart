@@ -12,68 +12,125 @@ GlobalSearchMessagesRequest _$GlobalSearchMessagesRequestFromJson(
   'GlobalSearchMessagesRequest',
   json,
   ($checkedConvert) {
-    final val = GlobalSearchMessagesRequest(
-      authorId: $checkedConvert('author_id', (v) => v ?? _omit),
-      contextGuildId: $checkedConvert('context_guild_id', (v) => v ?? _omit),
-      cursor: $checkedConvert('cursor', (v) => v ?? _omit),
-      maxId: $checkedConvert('max_id', (v) => v ?? _omit),
-      minId: $checkedConvert('min_id', (v) => v ?? _omit),
-      content: $checkedConvert('content', (v) => v ?? _omit),
+    final val = GlobalSearchMessagesRequest._(
+      authorId: $checkedConvert(
+        'author_id',
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+      ),
+      contextGuildId: $checkedConvert('context_guild_id', (v) => v as String?),
+      cursor: $checkedConvert(
+        'cursor',
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+      ),
+      maxId: $checkedConvert('max_id', (v) => v as String?),
+      minId: $checkedConvert('min_id', (v) => v as String?),
+      content: $checkedConvert('content', (v) => v as String?),
       contextChannelId: $checkedConvert(
         'context_channel_id',
-        (v) => v ?? _omit,
+        (v) => v as String?,
       ),
-      exactPhrases: $checkedConvert('exact_phrases', (v) => v ?? _omit),
-      channelId: $checkedConvert('channel_id', (v) => v ?? _omit),
+      exactPhrases: $checkedConvert(
+        'exact_phrases',
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+      ),
+      channelId: $checkedConvert(
+        'channel_id',
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+      ),
       excludeChannelId: $checkedConvert(
         'exclude_channel_id',
-        (v) => v ?? _omit,
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
       ),
-      authorType: $checkedConvert('author_type', (v) => v ?? _omit),
+      authorType: $checkedConvert(
+        'author_type',
+        (v) => (v as List<dynamic>?)
+            ?.map((e) => MessageAuthorType.fromJson(e as String))
+            .toList(),
+      ),
       excludeAuthorType: $checkedConvert(
         'exclude_author_type',
-        (v) => v ?? _omit,
+        (v) => (v as List<dynamic>?)
+            ?.map((e) => MessageAuthorType.fromJson(e as String))
+            .toList(),
       ),
-      scope: $checkedConvert('scope', (v) => v ?? _omit),
-      excludeAuthorId: $checkedConvert('exclude_author_id', (v) => v ?? _omit),
-      mentions: $checkedConvert('mentions', (v) => v ?? _omit),
-      excludeMentions: $checkedConvert('exclude_mentions', (v) => v ?? _omit),
-      mentionEveryone: $checkedConvert('mention_everyone', (v) => v ?? _omit),
-      pinned: $checkedConvert('pinned', (v) => v ?? _omit),
-      has: $checkedConvert('has', (v) => v ?? _omit),
-      excludeHas: $checkedConvert('exclude_has', (v) => v ?? _omit),
-      embedType: $checkedConvert('embed_type', (v) => v ?? _omit),
+      scope: $checkedConvert(
+        'scope',
+        (v) => v == null ? null : MessageSearchScope.fromJson(v as String),
+      ),
+      excludeAuthorId: $checkedConvert(
+        'exclude_author_id',
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+      ),
+      mentions: $checkedConvert(
+        'mentions',
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+      ),
+      excludeMentions: $checkedConvert(
+        'exclude_mentions',
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+      ),
+      mentionEveryone: $checkedConvert('mention_everyone', (v) => v as bool?),
+      pinned: $checkedConvert('pinned', (v) => v as bool?),
+      has: $checkedConvert(
+        'has',
+        (v) => (v as List<dynamic>?)
+            ?.map((e) => MessageContentType.fromJson(e as String))
+            .toList(),
+      ),
+      excludeHas: $checkedConvert(
+        'exclude_has',
+        (v) => (v as List<dynamic>?)
+            ?.map((e) => MessageContentType.fromJson(e as String))
+            .toList(),
+      ),
+      embedType: $checkedConvert(
+        'embed_type',
+        (v) => (v as List<dynamic>?)
+            ?.map((e) => MessageEmbedType.fromJson(e as String))
+            .toList(),
+      ),
       excludeEmbedType: $checkedConvert(
         'exclude_embed_type',
-        (v) => v ?? _omit,
+        (v) => (v as List<dynamic>?)
+            ?.map((e) => MessageEmbedType.fromJson(e as String))
+            .toList(),
       ),
-      embedProvider: $checkedConvert('embed_provider', (v) => v ?? _omit),
+      embedProvider: $checkedConvert(
+        'embed_provider',
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+      ),
       excludeEmbedProvider: $checkedConvert(
         'exclude_embed_provider',
-        (v) => v ?? _omit,
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
       ),
-      channelIds: $checkedConvert('channel_ids', (v) => v ?? _omit),
+      channelIds: $checkedConvert(
+        'channel_ids',
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+      ),
       excludeLinkHostname: $checkedConvert(
         'exclude_link_hostname',
-        (v) => v ?? _omit,
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
       ),
       attachmentFilename: $checkedConvert(
         'attachment_filename',
-        (v) => v ?? _omit,
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
       ),
       excludeAttachmentFilename: $checkedConvert(
         'exclude_attachment_filename',
-        (v) => v ?? _omit,
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
       ),
       attachmentExtension: $checkedConvert(
         'attachment_extension',
-        (v) => v ?? _omit,
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
       ),
       excludeAttachmentExtension: $checkedConvert(
         'exclude_attachment_extension',
-        (v) => v ?? _omit,
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
       ),
-      contents: $checkedConvert('contents', (v) => v ?? _omit),
+      contents: $checkedConvert(
+        'contents',
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+      ),
       includeNsfw: $checkedConvert('include_nsfw', (v) => v as bool? ?? false),
       hitsPerPage: $checkedConvert(
         'hits_per_page',
@@ -92,7 +149,10 @@ GlobalSearchMessagesRequest _$GlobalSearchMessagesRequestFromJson(
             ? MessageSortOrder.desc
             : MessageSortOrder.fromJson(v as String),
       ),
-      linkHostname: $checkedConvert('link_hostname', (v) => v ?? _omit),
+      linkHostname: $checkedConvert(
+        'link_hostname',
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+      ),
     );
     return val;
   },

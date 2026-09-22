@@ -9,10 +9,10 @@ part of 'handoff_complete_request.dart';
 HandoffCompleteRequest _$HandoffCompleteRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('HandoffCompleteRequest', json, ($checkedConvert) {
-  final val = HandoffCompleteRequest(
+  final val = HandoffCompleteRequest._(
     code: $checkedConvert('code', (v) => v as String),
     userId: $checkedConvert('user_id', (v) => v as String),
-    token: $checkedConvert('token', (v) => v ?? _omit),
+    token: $checkedConvert('token', (v) => v as String?),
   );
   return val;
 }, fieldKeyMap: const {'userId': 'user_id'});

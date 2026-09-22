@@ -8,7 +8,7 @@ part 'channel_pin_response_message_call.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class ChannelPinResponseMessageCall {
   const ChannelPinResponseMessageCall({
     required this.participants,
@@ -17,6 +17,11 @@ class ChannelPinResponseMessageCall {
            ? null
            : endedTimestamp as DateTime?,
        _endedTimestampPresent = !identical(endedTimestamp, _omit);
+
+  const ChannelPinResponseMessageCall._({
+    required this.participants,
+    this.endedTimestamp,
+  }) : _endedTimestampPresent = false;
   factory ChannelPinResponseMessageCall.fromJson(Map<String, Object?> json) {
     final value = _$ChannelPinResponseMessageCallFromJson(json);
     return ChannelPinResponseMessageCall(

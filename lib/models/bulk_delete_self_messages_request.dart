@@ -15,7 +15,7 @@ part 'bulk_delete_self_messages_request.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class BulkDeleteSelfMessagesRequest {
   const BulkDeleteSelfMessagesRequest({
     Object? excludedGuildIds = _omit,
@@ -61,6 +61,32 @@ class BulkDeleteSelfMessagesRequest {
            ? null
            : webauthnChallenge as String?,
        _webauthnChallengePresent = !identical(webauthnChallenge, _omit);
+
+  const BulkDeleteSelfMessagesRequest._({
+    this.excludedGuildIds,
+    this.includedGuildIds,
+    this.startDate,
+    this.endDate,
+    this.password,
+    this.mfaMethod,
+    this.mfaCode,
+    this.webauthnResponse,
+    this.webauthnChallenge,
+    this.scope = BulkDeleteSelfMessagesScope.selected,
+    this.includeDms = true,
+    this.includeDmsClosed = true,
+    this.includeGroupDms = true,
+    this.includeGuilds = true,
+    this.guildFilterMode = BulkDeleteSelfMessagesGuildFilterMode.exclude,
+  }) : _excludedGuildIdsPresent = false,
+       _includedGuildIdsPresent = false,
+       _startDatePresent = false,
+       _endDatePresent = false,
+       _passwordPresent = false,
+       _mfaMethodPresent = false,
+       _mfaCodePresent = false,
+       _webauthnResponsePresent = false,
+       _webauthnChallengePresent = false;
   factory BulkDeleteSelfMessagesRequest.fromJson(Map<String, Object?> json) {
     final value = _$BulkDeleteSelfMessagesRequestFromJson(json);
     return BulkDeleteSelfMessagesRequest(

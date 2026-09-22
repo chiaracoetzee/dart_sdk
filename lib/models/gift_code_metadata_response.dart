@@ -11,7 +11,7 @@ part 'gift_code_metadata_response.g.dart';
 
 const Object _omit = Object();
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class GiftCodeMetadataResponse {
   const GiftCodeMetadataResponse({
     required this.code,
@@ -29,6 +29,17 @@ class GiftCodeMetadataResponse {
            ? null
            : redeemedBy as UserPartialResponse?,
        _redeemedByPresent = !identical(redeemedBy, _omit);
+
+  const GiftCodeMetadataResponse._({
+    required this.code,
+    required this.durationType,
+    required this.durationQuantity,
+    required this.createdBy,
+    required this.createdAt,
+    this.redeemedAt,
+    this.redeemedBy,
+  }) : _redeemedAtPresent = false,
+       _redeemedByPresent = false;
   factory GiftCodeMetadataResponse.fromJson(Map<String, Object?> json) {
     final value = _$GiftCodeMetadataResponseFromJson(json);
     return GiftCodeMetadataResponse(
