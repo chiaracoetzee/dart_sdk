@@ -461,7 +461,7 @@ void main() {
         return;
       }
       for (final msg in messages.take(5)) {
-        expect(msg.type, isA<MessageResponseSchemaTypeType>());
+        expect(msg.type, isA<MessageType>());
         expect(msg.type.json, isNotNull);
         expect(msg.timestamp, isA<DateTime>());
         expect(msg.author.id, isNotEmpty);

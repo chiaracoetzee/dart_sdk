@@ -1,6 +1,7 @@
 import 'package:fluxer_dart/gateway_client/event_parser.dart';
 import 'package:fluxer_dart/gateway_client/gateway_event.dart';
 import 'package:fluxer_dart/gateway_client/gateway_types.dart';
+import 'package:fluxer_dart/models/channel_type.dart';
 import 'package:fluxer_dart/models/relationship_types.dart';
 import 'package:fluxer_dart/models/user_guild_settings_response.dart';
 import 'package:fluxer_dart/models/user_notification_settings.dart';
@@ -405,7 +406,7 @@ void main() {
       expect(event, isA<ChannelCreateEvent>());
       final e = event as ChannelCreateEvent;
       expect(e.channel.id, '500');
-      expect(e.channel.type, 0);
+      expect(e.channel.type, ChannelType.guildText);
     });
 
     test('CHANNEL_UPDATE → ChannelUpdateEvent', () {
