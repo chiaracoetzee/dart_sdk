@@ -149,6 +149,14 @@ jobs:
           git push --force-with-lease origin features/subprofiles
           echo "Successfully rebased and pushed features/subprofiles."
 
+      - name: Trigger Downstream flutter_client Nightly Rebase
+        if: steps.check_upstream.outputs.skip_rebase != 'true' && (github.event_name == 'schedule' || inputs.dry_run == false || inputs.dry_run == 'false')
+        env:
+          GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN || secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Dispatching downstream flutter_client nightly rebase workflow..."
+          gh workflow run nightly-rebase.yaml --repo chiaracoetzee/flutter_client --ref automation || echo "Notice: Downstream flutter_client trigger returned non-zero, crontab fallback will run."
+
       - name: Stage 2 - Escalate to Human Developer on Failure
         if: (failure() || cancelled()) && steps.check_upstream.outputs.skip_rebase != 'true'
         env:
