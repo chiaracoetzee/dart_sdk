@@ -12,7 +12,7 @@ DiscoveryApplicationPatchRequest _$DiscoveryApplicationPatchRequestFromJson(
   'DiscoveryApplicationPatchRequest',
   json,
   ($checkedConvert) {
-    final val = DiscoveryApplicationPatchRequest._(
+    final val = DiscoveryApplicationPatchRequest(
       description: $checkedConvert('description', (v) => v as String?),
       categoryType: $checkedConvert(
         'category_type',

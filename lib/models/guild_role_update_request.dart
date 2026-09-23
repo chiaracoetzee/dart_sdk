@@ -14,30 +14,16 @@ const Object _omit = Object();
 @JsonSerializable(constructor: '_')
 class GuildRoleUpdateRequest {
   const GuildRoleUpdateRequest({
-    Object? name = _omit,
-    Object? color = _omit,
-    Object? permissions = _omit,
-    Object? hoist = _omit,
+    this.name,
+    this.color,
+    this.permissions,
+    this.hoist,
     Object? hoistPosition = _omit,
-    Object? mentionable = _omit,
-  }) : name = identical(name, _omit) ? null : name as String?,
-       _namePresent = !identical(name, _omit),
-       color = identical(color, _omit) ? null : color as ColorType?,
-       _colorPresent = !identical(color, _omit),
-       permissions = identical(permissions, _omit)
-           ? null
-           : permissions as UnsignedInt64Type?,
-       _permissionsPresent = !identical(permissions, _omit),
-       hoist = identical(hoist, _omit) ? null : hoist as bool?,
-       _hoistPresent = !identical(hoist, _omit),
-       hoistPosition = identical(hoistPosition, _omit)
+    this.mentionable,
+  }) : hoistPosition = identical(hoistPosition, _omit)
            ? null
            : hoistPosition as int?,
-       _hoistPositionPresent = !identical(hoistPosition, _omit),
-       mentionable = identical(mentionable, _omit)
-           ? null
-           : mentionable as bool?,
-       _mentionablePresent = !identical(mentionable, _omit);
+       _hoistPositionPresent = !identical(hoistPosition, _omit);
 
   const GuildRoleUpdateRequest._({
     this.name,
@@ -46,23 +32,18 @@ class GuildRoleUpdateRequest {
     this.hoist,
     this.hoistPosition,
     this.mentionable,
-  }) : _namePresent = false,
-       _colorPresent = false,
-       _permissionsPresent = false,
-       _hoistPresent = false,
-       _hoistPositionPresent = false,
-       _mentionablePresent = false;
+  }) : _hoistPositionPresent = false;
   factory GuildRoleUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildRoleUpdateRequestFromJson(json);
     return GuildRoleUpdateRequest(
-      name: json.containsKey('name') ? value.name : _omit,
-      color: json.containsKey('color') ? value.color : _omit,
-      permissions: json.containsKey('permissions') ? value.permissions : _omit,
-      hoist: json.containsKey('hoist') ? value.hoist : _omit,
+      name: value.name,
+      color: value.color,
+      permissions: value.permissions,
+      hoist: value.hoist,
       hoistPosition: json.containsKey('hoist_position')
           ? value.hoistPosition
           : _omit,
-      mentionable: json.containsKey('mentionable') ? value.mentionable : _omit,
+      mentionable: value.mentionable,
     );
   }
 
@@ -89,32 +70,12 @@ class GuildRoleUpdateRequest {
   /// Whether the role can be mentioned by anyone
   @JsonKey(includeIfNull: false)
   final bool? mentionable;
-  final bool _namePresent;
-  final bool _colorPresent;
-  final bool _permissionsPresent;
-  final bool _hoistPresent;
   final bool _hoistPositionPresent;
-  final bool _mentionablePresent;
 
   Map<String, Object?> toJson() {
     final json = _$GuildRoleUpdateRequestToJson(this);
-    if (_namePresent) {
-      json.putIfAbsent('name', () => name);
-    }
-    if (_colorPresent) {
-      json.putIfAbsent('color', () => color);
-    }
-    if (_permissionsPresent) {
-      json.putIfAbsent('permissions', () => permissions);
-    }
-    if (_hoistPresent) {
-      json.putIfAbsent('hoist', () => hoist);
-    }
     if (_hoistPositionPresent) {
       json.putIfAbsent('hoist_position', () => hoistPosition);
-    }
-    if (_mentionablePresent) {
-      json.putIfAbsent('mentionable', () => mentionable);
     }
     return json;
   }

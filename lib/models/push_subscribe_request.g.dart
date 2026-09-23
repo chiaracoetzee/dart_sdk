@@ -9,7 +9,7 @@ part of 'push_subscribe_request.dart';
 PushSubscribeRequest _$PushSubscribeRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('PushSubscribeRequest', json, ($checkedConvert) {
-  final val = PushSubscribeRequest._(
+  final val = PushSubscribeRequest(
     endpoint: $checkedConvert('endpoint', (v) => v as String),
     keys: $checkedConvert(
       'keys',

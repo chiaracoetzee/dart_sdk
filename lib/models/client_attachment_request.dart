@@ -18,28 +18,20 @@ class ClientAttachmentRequest {
     required this.filename,
     Object? title = _omit,
     Object? description = _omit,
-    Object? flags = _omit,
+    this.flags,
     Object? duration = _omit,
     Object? waveform = _omit,
-    Object? contentType = _omit,
+    this.contentType,
   }) : title = identical(title, _omit) ? null : title as String?,
        _titlePresent = !identical(title, _omit),
        description = identical(description, _omit)
            ? null
            : description as String?,
        _descriptionPresent = !identical(description, _omit),
-       flags = identical(flags, _omit)
-           ? null
-           : flags as MessageAttachmentFlags?,
-       _flagsPresent = !identical(flags, _omit),
        duration = identical(duration, _omit) ? null : duration as Int32Type?,
        _durationPresent = !identical(duration, _omit),
        waveform = identical(waveform, _omit) ? null : waveform as String?,
-       _waveformPresent = !identical(waveform, _omit),
-       contentType = identical(contentType, _omit)
-           ? null
-           : contentType as String?,
-       _contentTypePresent = !identical(contentType, _omit);
+       _waveformPresent = !identical(waveform, _omit);
 
   const ClientAttachmentRequest._({
     required this.id,
@@ -52,10 +44,8 @@ class ClientAttachmentRequest {
     this.contentType,
   }) : _titlePresent = false,
        _descriptionPresent = false,
-       _flagsPresent = false,
        _durationPresent = false,
-       _waveformPresent = false,
-       _contentTypePresent = false;
+       _waveformPresent = false;
   factory ClientAttachmentRequest.fromJson(Map<String, Object?> json) {
     final value = _$ClientAttachmentRequestFromJson(json);
     return ClientAttachmentRequest(
@@ -63,10 +53,10 @@ class ClientAttachmentRequest {
       filename: value.filename,
       title: json.containsKey('title') ? value.title : _omit,
       description: json.containsKey('description') ? value.description : _omit,
-      flags: json.containsKey('flags') ? value.flags : _omit,
+      flags: value.flags,
       duration: json.containsKey('duration') ? value.duration : _omit,
       waveform: json.containsKey('waveform') ? value.waveform : _omit,
-      contentType: json.containsKey('content_type') ? value.contentType : _omit,
+      contentType: value.contentType,
     );
   }
 
@@ -101,10 +91,8 @@ class ClientAttachmentRequest {
   final String? contentType;
   final bool _titlePresent;
   final bool _descriptionPresent;
-  final bool _flagsPresent;
   final bool _durationPresent;
   final bool _waveformPresent;
-  final bool _contentTypePresent;
 
   Map<String, Object?> toJson() {
     final json = _$ClientAttachmentRequestToJson(this);
@@ -114,17 +102,11 @@ class ClientAttachmentRequest {
     if (_descriptionPresent) {
       json.putIfAbsent('description', () => description);
     }
-    if (_flagsPresent) {
-      json.putIfAbsent('flags', () => flags);
-    }
     if (_durationPresent) {
       json.putIfAbsent('duration', () => duration);
     }
     if (_waveformPresent) {
       json.putIfAbsent('waveform', () => waveform);
-    }
-    if (_contentTypePresent) {
-      json.putIfAbsent('content_type', () => contentType);
     }
     return json;
   }

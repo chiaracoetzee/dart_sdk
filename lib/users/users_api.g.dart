@@ -862,12 +862,12 @@ class _UsersApi implements UsersApi {
   }
 
   @override
-  Future<HarvestStatusResponseSchemaNullable> getLatestDataHarvest() async {
+  Future<HarvestStatusResponseSchemaNullable?> getLatestDataHarvest() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<HarvestStatusResponseSchemaNullable>(
+    final _options = _setStreamType<HarvestStatusResponseSchemaNullable?>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -877,10 +877,12 @@ class _UsersApi implements UsersApi {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late HarvestStatusResponseSchemaNullable _value;
+    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
+    late HarvestStatusResponseSchemaNullable? _value;
     try {
-      _value = HarvestStatusResponseSchemaNullable.fromJson(_result.data!);
+      _value = _result.data == null
+          ? null
+          : HarvestStatusResponseSchemaNullable.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;

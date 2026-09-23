@@ -11,24 +11,21 @@ const Object _omit = Object();
 @JsonSerializable(constructor: '_')
 class UpdateFavoriteMemeBodySchema {
   const UpdateFavoriteMemeBodySchema({
-    Object? name = _omit,
+    this.name,
     Object? altText = _omit,
     Object? tags = _omit,
-  }) : name = identical(name, _omit) ? null : name as String?,
-       _namePresent = !identical(name, _omit),
-       altText = identical(altText, _omit) ? null : altText as String?,
+  }) : altText = identical(altText, _omit) ? null : altText as String?,
        _altTextPresent = !identical(altText, _omit),
        tags = identical(tags, _omit) ? null : tags as List<String>?,
        _tagsPresent = !identical(tags, _omit);
 
   const UpdateFavoriteMemeBodySchema._({this.name, this.altText, this.tags})
-    : _namePresent = false,
-      _altTextPresent = false,
+    : _altTextPresent = false,
       _tagsPresent = false;
   factory UpdateFavoriteMemeBodySchema.fromJson(Map<String, Object?> json) {
     final value = _$UpdateFavoriteMemeBodySchemaFromJson(json);
     return UpdateFavoriteMemeBodySchema(
-      name: json.containsKey('name') ? value.name : _omit,
+      name: value.name,
       altText: json.containsKey('alt_text') ? value.altText : _omit,
       tags: json.containsKey('tags') ? value.tags : _omit,
     );
@@ -45,15 +42,11 @@ class UpdateFavoriteMemeBodySchema {
   /// New tags for categorizing and searching the meme
   @JsonKey(includeIfNull: false)
   final List<String>? tags;
-  final bool _namePresent;
   final bool _altTextPresent;
   final bool _tagsPresent;
 
   Map<String, Object?> toJson() {
     final json = _$UpdateFavoriteMemeBodySchemaToJson(this);
-    if (_namePresent) {
-      json.putIfAbsent('name', () => name);
-    }
     if (_altTextPresent) {
       json.putIfAbsent('alt_text', () => altText);
     }

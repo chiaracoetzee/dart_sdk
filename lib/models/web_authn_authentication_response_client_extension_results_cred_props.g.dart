@@ -13,7 +13,7 @@ _$WebAuthnAuthenticationResponseClientExtensionResultsCredPropsFromJson(
   'WebAuthnAuthenticationResponseClientExtensionResultsCredProps',
   json,
   ($checkedConvert) {
-    final val = WebAuthnAuthenticationResponseClientExtensionResultsCredProps._(
+    final val = WebAuthnAuthenticationResponseClientExtensionResultsCredProps(
       rk: $checkedConvert('rk', (v) => v as bool?),
     );
     return val;

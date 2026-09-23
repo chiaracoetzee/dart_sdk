@@ -9,7 +9,7 @@ part of 'throttled_error_errors.dart';
 ThrottledErrorErrors _$ThrottledErrorErrorsFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('ThrottledErrorErrors', json, ($checkedConvert) {
-  final val = ThrottledErrorErrors._(
+  final val = ThrottledErrorErrors(
     path: $checkedConvert('path', (v) => v as String),
     message: $checkedConvert('message', (v) => v as String),
     code: $checkedConvert('code', (v) => v as String?),

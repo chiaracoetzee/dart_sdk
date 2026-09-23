@@ -12,7 +12,7 @@ _$WellKnownFluxerResponseLimitsRulesFiltersFromJson(
 ) => $checkedCreate('WellKnownFluxerResponseLimitsRulesFilters', json, (
   $checkedConvert,
 ) {
-  final val = WellKnownFluxerResponseLimitsRulesFilters._(
+  final val = WellKnownFluxerResponseLimitsRulesFilters(
     traits: $checkedConvert(
       'traits',
       (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),

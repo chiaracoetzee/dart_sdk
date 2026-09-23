@@ -8,7 +8,7 @@ part of 'slack_webhook_request.dart';
 
 SlackWebhookRequest _$SlackWebhookRequestFromJson(Map<String, dynamic> json) =>
     $checkedCreate('SlackWebhookRequest', json, ($checkedConvert) {
-      final val = SlackWebhookRequest._(
+      final val = SlackWebhookRequest(
         text: $checkedConvert('text', (v) => v as String?),
         username: $checkedConvert('username', (v) => v as String?),
         iconUrl: $checkedConvert('icon_url', (v) => v as String?),

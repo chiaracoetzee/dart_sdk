@@ -12,7 +12,7 @@ GuildAuditLogEntryResponseOptions _$GuildAuditLogEntryResponseOptionsFromJson(
   'GuildAuditLogEntryResponseOptions',
   json,
   ($checkedConvert) {
-    final val = GuildAuditLogEntryResponseOptions._(
+    final val = GuildAuditLogEntryResponseOptions(
       channelId: $checkedConvert('channel_id', (v) => v as String?),
       count: $checkedConvert('count', (v) => v as num?),
       deleteMemberDays: $checkedConvert(

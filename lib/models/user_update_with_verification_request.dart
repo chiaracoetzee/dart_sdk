@@ -22,48 +22,34 @@ const Object _omit = Object();
 @JsonSerializable(constructor: '_')
 class UserUpdateWithVerificationRequest {
   const UserUpdateWithVerificationRequest({
-    Object? username = _omit,
-    Object? discriminator = _omit,
+    this.username,
+    this.discriminator,
     Object? globalName = _omit,
-    Object? email = _omit,
-    Object? newPassword = _omit,
-    Object? password = _omit,
+    this.email,
+    this.newPassword,
+    this.password,
     Object? avatar = _omit,
     Object? banner = _omit,
     Object? bio = _omit,
     Object? pronouns = _omit,
     Object? accentColor = _omit,
     Object? timezone = _omit,
-    Object? timezonePrivacyFlags = _omit,
-    Object? premiumBadgeHidden = _omit,
-    Object? premiumBadgeMasked = _omit,
-    Object? premiumBadgeTimestampHidden = _omit,
-    Object? premiumBadgeSequenceHidden = _omit,
-    Object? premiumEnabledOverride = _omit,
-    Object? hasDismissedPremiumOnboarding = _omit,
-    Object? hasUnreadGiftInventory = _omit,
-    Object? mentionFlags = _omit,
-    Object? emailToken = _omit,
-    Object? mfaMethod = _omit,
-    Object? mfaCode = _omit,
-    Object? webauthnResponse = _omit,
-    Object? webauthnChallenge = _omit,
-  }) : username = identical(username, _omit) ? null : username as UsernameType?,
-       _usernamePresent = !identical(username, _omit),
-       discriminator = identical(discriminator, _omit)
-           ? null
-           : discriminator as DiscriminatorType?,
-       _discriminatorPresent = !identical(discriminator, _omit),
-       globalName = identical(globalName, _omit) ? null : globalName as String?,
+    this.timezonePrivacyFlags,
+    this.premiumBadgeHidden,
+    this.premiumBadgeMasked,
+    this.premiumBadgeTimestampHidden,
+    this.premiumBadgeSequenceHidden,
+    this.premiumEnabledOverride,
+    this.hasDismissedPremiumOnboarding,
+    this.hasUnreadGiftInventory,
+    this.mentionFlags,
+    this.emailToken,
+    this.mfaMethod,
+    this.mfaCode,
+    this.webauthnResponse,
+    this.webauthnChallenge,
+  }) : globalName = identical(globalName, _omit) ? null : globalName as String?,
        _globalNamePresent = !identical(globalName, _omit),
-       email = identical(email, _omit) ? null : email as EmailType?,
-       _emailPresent = !identical(email, _omit),
-       newPassword = identical(newPassword, _omit)
-           ? null
-           : newPassword as PasswordType?,
-       _newPasswordPresent = !identical(newPassword, _omit),
-       password = identical(password, _omit) ? null : password as PasswordType?,
-       _passwordPresent = !identical(password, _omit),
        avatar = identical(avatar, _omit) ? null : avatar as Base64ImageType?,
        _avatarPresent = !identical(avatar, _omit),
        banner = identical(banner, _omit) ? null : banner as Base64ImageType?,
@@ -77,76 +63,7 @@ class UserUpdateWithVerificationRequest {
            : accentColor as ColorType?,
        _accentColorPresent = !identical(accentColor, _omit),
        timezone = identical(timezone, _omit) ? null : timezone as String?,
-       _timezonePresent = !identical(timezone, _omit),
-       timezonePrivacyFlags = identical(timezonePrivacyFlags, _omit)
-           ? null
-           : timezonePrivacyFlags as ProfileFieldPrivacyFlags?,
-       _timezonePrivacyFlagsPresent = !identical(timezonePrivacyFlags, _omit),
-       premiumBadgeHidden = identical(premiumBadgeHidden, _omit)
-           ? null
-           : premiumBadgeHidden as bool?,
-       _premiumBadgeHiddenPresent = !identical(premiumBadgeHidden, _omit),
-       premiumBadgeMasked = identical(premiumBadgeMasked, _omit)
-           ? null
-           : premiumBadgeMasked as bool?,
-       _premiumBadgeMaskedPresent = !identical(premiumBadgeMasked, _omit),
-       premiumBadgeTimestampHidden =
-           identical(premiumBadgeTimestampHidden, _omit)
-           ? null
-           : premiumBadgeTimestampHidden as bool?,
-       _premiumBadgeTimestampHiddenPresent = !identical(
-         premiumBadgeTimestampHidden,
-         _omit,
-       ),
-       premiumBadgeSequenceHidden = identical(premiumBadgeSequenceHidden, _omit)
-           ? null
-           : premiumBadgeSequenceHidden as bool?,
-       _premiumBadgeSequenceHiddenPresent = !identical(
-         premiumBadgeSequenceHidden,
-         _omit,
-       ),
-       premiumEnabledOverride = identical(premiumEnabledOverride, _omit)
-           ? null
-           : premiumEnabledOverride as bool?,
-       _premiumEnabledOverridePresent = !identical(
-         premiumEnabledOverride,
-         _omit,
-       ),
-       hasDismissedPremiumOnboarding =
-           identical(hasDismissedPremiumOnboarding, _omit)
-           ? null
-           : hasDismissedPremiumOnboarding as bool?,
-       _hasDismissedPremiumOnboardingPresent = !identical(
-         hasDismissedPremiumOnboarding,
-         _omit,
-       ),
-       hasUnreadGiftInventory = identical(hasUnreadGiftInventory, _omit)
-           ? null
-           : hasUnreadGiftInventory as bool?,
-       _hasUnreadGiftInventoryPresent = !identical(
-         hasUnreadGiftInventory,
-         _omit,
-       ),
-       mentionFlags = identical(mentionFlags, _omit)
-           ? null
-           : mentionFlags as MentionReplyPreferencesInput?,
-       _mentionFlagsPresent = !identical(mentionFlags, _omit),
-       emailToken = identical(emailToken, _omit) ? null : emailToken as String?,
-       _emailTokenPresent = !identical(emailToken, _omit),
-       mfaMethod = identical(mfaMethod, _omit)
-           ? null
-           : mfaMethod as UserUpdateWithVerificationRequestMfaMethodMfaMethod?,
-       _mfaMethodPresent = !identical(mfaMethod, _omit),
-       mfaCode = identical(mfaCode, _omit) ? null : mfaCode as String?,
-       _mfaCodePresent = !identical(mfaCode, _omit),
-       webauthnResponse = identical(webauthnResponse, _omit)
-           ? null
-           : webauthnResponse as WebAuthnAuthenticationResponse?,
-       _webauthnResponsePresent = !identical(webauthnResponse, _omit),
-       webauthnChallenge = identical(webauthnChallenge, _omit)
-           ? null
-           : webauthnChallenge as String?,
-       _webauthnChallengePresent = !identical(webauthnChallenge, _omit);
+       _timezonePresent = !identical(timezone, _omit);
 
   const UserUpdateWithVerificationRequest._({
     this.username,
@@ -175,90 +92,44 @@ class UserUpdateWithVerificationRequest {
     this.mfaCode,
     this.webauthnResponse,
     this.webauthnChallenge,
-  }) : _usernamePresent = false,
-       _discriminatorPresent = false,
-       _globalNamePresent = false,
-       _emailPresent = false,
-       _newPasswordPresent = false,
-       _passwordPresent = false,
+  }) : _globalNamePresent = false,
        _avatarPresent = false,
        _bannerPresent = false,
        _bioPresent = false,
        _pronounsPresent = false,
        _accentColorPresent = false,
-       _timezonePresent = false,
-       _timezonePrivacyFlagsPresent = false,
-       _premiumBadgeHiddenPresent = false,
-       _premiumBadgeMaskedPresent = false,
-       _premiumBadgeTimestampHiddenPresent = false,
-       _premiumBadgeSequenceHiddenPresent = false,
-       _premiumEnabledOverridePresent = false,
-       _hasDismissedPremiumOnboardingPresent = false,
-       _hasUnreadGiftInventoryPresent = false,
-       _mentionFlagsPresent = false,
-       _emailTokenPresent = false,
-       _mfaMethodPresent = false,
-       _mfaCodePresent = false,
-       _webauthnResponsePresent = false,
-       _webauthnChallengePresent = false;
+       _timezonePresent = false;
   factory UserUpdateWithVerificationRequest.fromJson(
     Map<String, Object?> json,
   ) {
     final value = _$UserUpdateWithVerificationRequestFromJson(json);
     return UserUpdateWithVerificationRequest(
-      username: json.containsKey('username') ? value.username : _omit,
-      discriminator: json.containsKey('discriminator')
-          ? value.discriminator
-          : _omit,
+      username: value.username,
+      discriminator: value.discriminator,
       globalName: json.containsKey('global_name') ? value.globalName : _omit,
-      email: json.containsKey('email') ? value.email : _omit,
-      newPassword: json.containsKey('new_password') ? value.newPassword : _omit,
-      password: json.containsKey('password') ? value.password : _omit,
+      email: value.email,
+      newPassword: value.newPassword,
+      password: value.password,
       avatar: json.containsKey('avatar') ? value.avatar : _omit,
       banner: json.containsKey('banner') ? value.banner : _omit,
       bio: json.containsKey('bio') ? value.bio : _omit,
       pronouns: json.containsKey('pronouns') ? value.pronouns : _omit,
       accentColor: json.containsKey('accent_color') ? value.accentColor : _omit,
       timezone: json.containsKey('timezone') ? value.timezone : _omit,
-      timezonePrivacyFlags: json.containsKey('timezone_privacy_flags')
-          ? value.timezonePrivacyFlags
-          : _omit,
-      premiumBadgeHidden: json.containsKey('premium_badge_hidden')
-          ? value.premiumBadgeHidden
-          : _omit,
-      premiumBadgeMasked: json.containsKey('premium_badge_masked')
-          ? value.premiumBadgeMasked
-          : _omit,
-      premiumBadgeTimestampHidden:
-          json.containsKey('premium_badge_timestamp_hidden')
-          ? value.premiumBadgeTimestampHidden
-          : _omit,
-      premiumBadgeSequenceHidden:
-          json.containsKey('premium_badge_sequence_hidden')
-          ? value.premiumBadgeSequenceHidden
-          : _omit,
-      premiumEnabledOverride: json.containsKey('premium_enabled_override')
-          ? value.premiumEnabledOverride
-          : _omit,
-      hasDismissedPremiumOnboarding:
-          json.containsKey('has_dismissed_premium_onboarding')
-          ? value.hasDismissedPremiumOnboarding
-          : _omit,
-      hasUnreadGiftInventory: json.containsKey('has_unread_gift_inventory')
-          ? value.hasUnreadGiftInventory
-          : _omit,
-      mentionFlags: json.containsKey('mention_flags')
-          ? value.mentionFlags
-          : _omit,
-      emailToken: json.containsKey('email_token') ? value.emailToken : _omit,
-      mfaMethod: json.containsKey('mfa_method') ? value.mfaMethod : _omit,
-      mfaCode: json.containsKey('mfa_code') ? value.mfaCode : _omit,
-      webauthnResponse: json.containsKey('webauthn_response')
-          ? value.webauthnResponse
-          : _omit,
-      webauthnChallenge: json.containsKey('webauthn_challenge')
-          ? value.webauthnChallenge
-          : _omit,
+      timezonePrivacyFlags: value.timezonePrivacyFlags,
+      premiumBadgeHidden: value.premiumBadgeHidden,
+      premiumBadgeMasked: value.premiumBadgeMasked,
+      premiumBadgeTimestampHidden: value.premiumBadgeTimestampHidden,
+      premiumBadgeSequenceHidden: value.premiumBadgeSequenceHidden,
+      premiumEnabledOverride: value.premiumEnabledOverride,
+      hasDismissedPremiumOnboarding: value.hasDismissedPremiumOnboarding,
+      hasUnreadGiftInventory: value.hasUnreadGiftInventory,
+      mentionFlags: value.mentionFlags,
+      emailToken: value.emailToken,
+      mfaMethod: value.mfaMethod,
+      mfaCode: value.mfaCode,
+      webauthnResponse: value.webauthnResponse,
+      webauthnChallenge: value.webauthnChallenge,
     );
   }
 
@@ -365,52 +236,18 @@ class UserUpdateWithVerificationRequest {
   /// WebAuthn challenge string
   @JsonKey(includeIfNull: false, name: 'webauthn_challenge')
   final String? webauthnChallenge;
-  final bool _usernamePresent;
-  final bool _discriminatorPresent;
   final bool _globalNamePresent;
-  final bool _emailPresent;
-  final bool _newPasswordPresent;
-  final bool _passwordPresent;
   final bool _avatarPresent;
   final bool _bannerPresent;
   final bool _bioPresent;
   final bool _pronounsPresent;
   final bool _accentColorPresent;
   final bool _timezonePresent;
-  final bool _timezonePrivacyFlagsPresent;
-  final bool _premiumBadgeHiddenPresent;
-  final bool _premiumBadgeMaskedPresent;
-  final bool _premiumBadgeTimestampHiddenPresent;
-  final bool _premiumBadgeSequenceHiddenPresent;
-  final bool _premiumEnabledOverridePresent;
-  final bool _hasDismissedPremiumOnboardingPresent;
-  final bool _hasUnreadGiftInventoryPresent;
-  final bool _mentionFlagsPresent;
-  final bool _emailTokenPresent;
-  final bool _mfaMethodPresent;
-  final bool _mfaCodePresent;
-  final bool _webauthnResponsePresent;
-  final bool _webauthnChallengePresent;
 
   Map<String, Object?> toJson() {
     final json = _$UserUpdateWithVerificationRequestToJson(this);
-    if (_usernamePresent) {
-      json.putIfAbsent('username', () => username);
-    }
-    if (_discriminatorPresent) {
-      json.putIfAbsent('discriminator', () => discriminator);
-    }
     if (_globalNamePresent) {
       json.putIfAbsent('global_name', () => globalName);
-    }
-    if (_emailPresent) {
-      json.putIfAbsent('email', () => email);
-    }
-    if (_newPasswordPresent) {
-      json.putIfAbsent('new_password', () => newPassword);
-    }
-    if (_passwordPresent) {
-      json.putIfAbsent('password', () => password);
     }
     if (_avatarPresent) {
       json.putIfAbsent('avatar', () => avatar);
@@ -429,63 +266,6 @@ class UserUpdateWithVerificationRequest {
     }
     if (_timezonePresent) {
       json.putIfAbsent('timezone', () => timezone);
-    }
-    if (_timezonePrivacyFlagsPresent) {
-      json.putIfAbsent('timezone_privacy_flags', () => timezonePrivacyFlags);
-    }
-    if (_premiumBadgeHiddenPresent) {
-      json.putIfAbsent('premium_badge_hidden', () => premiumBadgeHidden);
-    }
-    if (_premiumBadgeMaskedPresent) {
-      json.putIfAbsent('premium_badge_masked', () => premiumBadgeMasked);
-    }
-    if (_premiumBadgeTimestampHiddenPresent) {
-      json.putIfAbsent(
-        'premium_badge_timestamp_hidden',
-        () => premiumBadgeTimestampHidden,
-      );
-    }
-    if (_premiumBadgeSequenceHiddenPresent) {
-      json.putIfAbsent(
-        'premium_badge_sequence_hidden',
-        () => premiumBadgeSequenceHidden,
-      );
-    }
-    if (_premiumEnabledOverridePresent) {
-      json.putIfAbsent(
-        'premium_enabled_override',
-        () => premiumEnabledOverride,
-      );
-    }
-    if (_hasDismissedPremiumOnboardingPresent) {
-      json.putIfAbsent(
-        'has_dismissed_premium_onboarding',
-        () => hasDismissedPremiumOnboarding,
-      );
-    }
-    if (_hasUnreadGiftInventoryPresent) {
-      json.putIfAbsent(
-        'has_unread_gift_inventory',
-        () => hasUnreadGiftInventory,
-      );
-    }
-    if (_mentionFlagsPresent) {
-      json.putIfAbsent('mention_flags', () => mentionFlags);
-    }
-    if (_emailTokenPresent) {
-      json.putIfAbsent('email_token', () => emailToken);
-    }
-    if (_mfaMethodPresent) {
-      json.putIfAbsent('mfa_method', () => mfaMethod);
-    }
-    if (_mfaCodePresent) {
-      json.putIfAbsent('mfa_code', () => mfaCode);
-    }
-    if (_webauthnResponsePresent) {
-      json.putIfAbsent('webauthn_response', () => webauthnResponse);
-    }
-    if (_webauthnChallengePresent) {
-      json.putIfAbsent('webauthn_challenge', () => webauthnChallenge);
     }
     return json;
   }

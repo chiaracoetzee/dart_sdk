@@ -22,7 +22,7 @@ class ClientUploadedAttachmentRequest {
     required this.fileSize,
     Object? title = _omit,
     Object? description = _omit,
-    Object? flags = _omit,
+    this.flags,
     Object? duration = _omit,
     Object? waveform = _omit,
   }) : title = identical(title, _omit) ? null : title as String?,
@@ -31,10 +31,6 @@ class ClientUploadedAttachmentRequest {
            ? null
            : description as String?,
        _descriptionPresent = !identical(description, _omit),
-       flags = identical(flags, _omit)
-           ? null
-           : flags as MessageAttachmentFlags?,
-       _flagsPresent = !identical(flags, _omit),
        duration = identical(duration, _omit) ? null : duration as Int32Type?,
        _durationPresent = !identical(duration, _omit),
        waveform = identical(waveform, _omit) ? null : waveform as String?,
@@ -53,7 +49,6 @@ class ClientUploadedAttachmentRequest {
     this.waveform,
   }) : _titlePresent = false,
        _descriptionPresent = false,
-       _flagsPresent = false,
        _durationPresent = false,
        _waveformPresent = false;
   factory ClientUploadedAttachmentRequest.fromJson(Map<String, Object?> json) {
@@ -66,7 +61,7 @@ class ClientUploadedAttachmentRequest {
       fileSize: value.fileSize,
       title: json.containsKey('title') ? value.title : _omit,
       description: json.containsKey('description') ? value.description : _omit,
-      flags: json.containsKey('flags') ? value.flags : _omit,
+      flags: value.flags,
       duration: json.containsKey('duration') ? value.duration : _omit,
       waveform: json.containsKey('waveform') ? value.waveform : _omit,
     );
@@ -111,7 +106,6 @@ class ClientUploadedAttachmentRequest {
   final NonNegativeSafeIntegerType fileSize;
   final bool _titlePresent;
   final bool _descriptionPresent;
-  final bool _flagsPresent;
   final bool _durationPresent;
   final bool _waveformPresent;
 
@@ -122,9 +116,6 @@ class ClientUploadedAttachmentRequest {
     }
     if (_descriptionPresent) {
       json.putIfAbsent('description', () => description);
-    }
-    if (_flagsPresent) {
-      json.putIfAbsent('flags', () => flags);
     }
     if (_durationPresent) {
       json.putIfAbsent('duration', () => duration);

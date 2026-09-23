@@ -11,7 +11,7 @@ _$WebAuthnAuthenticationResponseResponseFromJson(Map<String, dynamic> json) =>
     $checkedCreate('WebAuthnAuthenticationResponseResponse', json, (
       $checkedConvert,
     ) {
-      final val = WebAuthnAuthenticationResponseResponse._(
+      final val = WebAuthnAuthenticationResponseResponse(
         clientDataJson: $checkedConvert('clientDataJSON', (v) => v as String),
         authenticatorData: $checkedConvert(
           'authenticatorData',

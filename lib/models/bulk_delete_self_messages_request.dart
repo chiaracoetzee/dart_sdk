@@ -18,49 +18,25 @@ const Object _omit = Object();
 @JsonSerializable(constructor: '_')
 class BulkDeleteSelfMessagesRequest {
   const BulkDeleteSelfMessagesRequest({
-    Object? excludedGuildIds = _omit,
-    Object? includedGuildIds = _omit,
+    this.excludedGuildIds,
+    this.includedGuildIds,
     Object? startDate = _omit,
     Object? endDate = _omit,
-    Object? password = _omit,
-    Object? mfaMethod = _omit,
-    Object? mfaCode = _omit,
-    Object? webauthnResponse = _omit,
-    Object? webauthnChallenge = _omit,
+    this.password,
+    this.mfaMethod,
+    this.mfaCode,
+    this.webauthnResponse,
+    this.webauthnChallenge,
     this.scope = BulkDeleteSelfMessagesScope.selected,
     this.includeDms = true,
     this.includeDmsClosed = true,
     this.includeGroupDms = true,
     this.includeGuilds = true,
     this.guildFilterMode = BulkDeleteSelfMessagesGuildFilterMode.exclude,
-  }) : excludedGuildIds = identical(excludedGuildIds, _omit)
-           ? null
-           : excludedGuildIds as List<SnowflakeType>?,
-       _excludedGuildIdsPresent = !identical(excludedGuildIds, _omit),
-       includedGuildIds = identical(includedGuildIds, _omit)
-           ? null
-           : includedGuildIds as List<SnowflakeType>?,
-       _includedGuildIdsPresent = !identical(includedGuildIds, _omit),
-       startDate = identical(startDate, _omit) ? null : startDate as DateTime?,
+  }) : startDate = identical(startDate, _omit) ? null : startDate as DateTime?,
        _startDatePresent = !identical(startDate, _omit),
        endDate = identical(endDate, _omit) ? null : endDate as DateTime?,
-       _endDatePresent = !identical(endDate, _omit),
-       password = identical(password, _omit) ? null : password as PasswordType?,
-       _passwordPresent = !identical(password, _omit),
-       mfaMethod = identical(mfaMethod, _omit)
-           ? null
-           : mfaMethod as BulkDeleteSelfMessagesRequestMfaMethodMfaMethod?,
-       _mfaMethodPresent = !identical(mfaMethod, _omit),
-       mfaCode = identical(mfaCode, _omit) ? null : mfaCode as String?,
-       _mfaCodePresent = !identical(mfaCode, _omit),
-       webauthnResponse = identical(webauthnResponse, _omit)
-           ? null
-           : webauthnResponse as WebAuthnAuthenticationResponse?,
-       _webauthnResponsePresent = !identical(webauthnResponse, _omit),
-       webauthnChallenge = identical(webauthnChallenge, _omit)
-           ? null
-           : webauthnChallenge as String?,
-       _webauthnChallengePresent = !identical(webauthnChallenge, _omit);
+       _endDatePresent = !identical(endDate, _omit);
 
   const BulkDeleteSelfMessagesRequest._({
     this.excludedGuildIds,
@@ -78,35 +54,20 @@ class BulkDeleteSelfMessagesRequest {
     this.includeGroupDms = true,
     this.includeGuilds = true,
     this.guildFilterMode = BulkDeleteSelfMessagesGuildFilterMode.exclude,
-  }) : _excludedGuildIdsPresent = false,
-       _includedGuildIdsPresent = false,
-       _startDatePresent = false,
-       _endDatePresent = false,
-       _passwordPresent = false,
-       _mfaMethodPresent = false,
-       _mfaCodePresent = false,
-       _webauthnResponsePresent = false,
-       _webauthnChallengePresent = false;
+  }) : _startDatePresent = false,
+       _endDatePresent = false;
   factory BulkDeleteSelfMessagesRequest.fromJson(Map<String, Object?> json) {
     final value = _$BulkDeleteSelfMessagesRequestFromJson(json);
     return BulkDeleteSelfMessagesRequest(
-      excludedGuildIds: json.containsKey('excluded_guild_ids')
-          ? value.excludedGuildIds
-          : _omit,
-      includedGuildIds: json.containsKey('included_guild_ids')
-          ? value.includedGuildIds
-          : _omit,
+      excludedGuildIds: value.excludedGuildIds,
+      includedGuildIds: value.includedGuildIds,
       startDate: json.containsKey('start_date') ? value.startDate : _omit,
       endDate: json.containsKey('end_date') ? value.endDate : _omit,
-      password: json.containsKey('password') ? value.password : _omit,
-      mfaMethod: json.containsKey('mfa_method') ? value.mfaMethod : _omit,
-      mfaCode: json.containsKey('mfa_code') ? value.mfaCode : _omit,
-      webauthnResponse: json.containsKey('webauthn_response')
-          ? value.webauthnResponse
-          : _omit,
-      webauthnChallenge: json.containsKey('webauthn_challenge')
-          ? value.webauthnChallenge
-          : _omit,
+      password: value.password,
+      mfaMethod: value.mfaMethod,
+      mfaCode: value.mfaCode,
+      webauthnResponse: value.webauthnResponse,
+      webauthnChallenge: value.webauthnChallenge,
       scope: value.scope,
       includeDms: value.includeDms,
       includeDmsClosed: value.includeDmsClosed,
@@ -171,44 +132,16 @@ class BulkDeleteSelfMessagesRequest {
   /// WebAuthn challenge string
   @JsonKey(includeIfNull: false, name: 'webauthn_challenge')
   final String? webauthnChallenge;
-  final bool _excludedGuildIdsPresent;
-  final bool _includedGuildIdsPresent;
   final bool _startDatePresent;
   final bool _endDatePresent;
-  final bool _passwordPresent;
-  final bool _mfaMethodPresent;
-  final bool _mfaCodePresent;
-  final bool _webauthnResponsePresent;
-  final bool _webauthnChallengePresent;
 
   Map<String, Object?> toJson() {
     final json = _$BulkDeleteSelfMessagesRequestToJson(this);
-    if (_excludedGuildIdsPresent) {
-      json.putIfAbsent('excluded_guild_ids', () => excludedGuildIds);
-    }
-    if (_includedGuildIdsPresent) {
-      json.putIfAbsent('included_guild_ids', () => includedGuildIds);
-    }
     if (_startDatePresent) {
       json.putIfAbsent('start_date', () => startDate);
     }
     if (_endDatePresent) {
       json.putIfAbsent('end_date', () => endDate);
-    }
-    if (_passwordPresent) {
-      json.putIfAbsent('password', () => password);
-    }
-    if (_mfaMethodPresent) {
-      json.putIfAbsent('mfa_method', () => mfaMethod);
-    }
-    if (_mfaCodePresent) {
-      json.putIfAbsent('mfa_code', () => mfaCode);
-    }
-    if (_webauthnResponsePresent) {
-      json.putIfAbsent('webauthn_response', () => webauthnResponse);
-    }
-    if (_webauthnChallengePresent) {
-      json.putIfAbsent('webauthn_challenge', () => webauthnChallenge);
     }
     return json;
   }

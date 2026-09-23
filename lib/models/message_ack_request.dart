@@ -8,32 +8,12 @@ import 'int32_type.dart';
 
 part 'message_ack_request.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class MessageAckRequest {
-  const MessageAckRequest({
-    Object? mentionCount = _omit,
-    Object? manual = _omit,
-  }) : mentionCount = identical(mentionCount, _omit)
-           ? null
-           : mentionCount as Int32Type?,
-       _mentionCountPresent = !identical(mentionCount, _omit),
-       manual = identical(manual, _omit) ? null : manual as bool?,
-       _manualPresent = !identical(manual, _omit);
+  const MessageAckRequest({this.mentionCount, this.manual});
 
-  const MessageAckRequest._({this.mentionCount, this.manual})
-    : _mentionCountPresent = false,
-      _manualPresent = false;
-  factory MessageAckRequest.fromJson(Map<String, Object?> json) {
-    final value = _$MessageAckRequestFromJson(json);
-    return MessageAckRequest(
-      mentionCount: json.containsKey('mention_count')
-          ? value.mentionCount
-          : _omit,
-      manual: json.containsKey('manual') ? value.manual : _omit,
-    );
-  }
+  factory MessageAckRequest.fromJson(Map<String, Object?> json) =>
+      _$MessageAckRequestFromJson(json);
 
   /// Number of mentions to acknowledge
   @JsonKey(includeIfNull: false, name: 'mention_count')
@@ -42,17 +22,6 @@ class MessageAckRequest {
   /// Whether this is a manual acknowledgement
   @JsonKey(includeIfNull: false)
   final bool? manual;
-  final bool _mentionCountPresent;
-  final bool _manualPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$MessageAckRequestToJson(this);
-    if (_mentionCountPresent) {
-      json.putIfAbsent('mention_count', () => mentionCount);
-    }
-    if (_manualPresent) {
-      json.putIfAbsent('manual', () => manual);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$MessageAckRequestToJson(this);
 }

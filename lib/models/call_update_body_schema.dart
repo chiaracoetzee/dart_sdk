@@ -12,25 +12,19 @@ const Object _omit = Object();
 class CallUpdateBodySchema {
   const CallUpdateBodySchema({
     Object? region = _omit,
-    Object? latitude = _omit,
-    Object? longitude = _omit,
+    this.latitude,
+    this.longitude,
   }) : region = identical(region, _omit) ? null : region as String?,
-       _regionPresent = !identical(region, _omit),
-       latitude = identical(latitude, _omit) ? null : latitude as String?,
-       _latitudePresent = !identical(latitude, _omit),
-       longitude = identical(longitude, _omit) ? null : longitude as String?,
-       _longitudePresent = !identical(longitude, _omit);
+       _regionPresent = !identical(region, _omit);
 
   const CallUpdateBodySchema._({this.region, this.latitude, this.longitude})
-    : _regionPresent = false,
-      _latitudePresent = false,
-      _longitudePresent = false;
+    : _regionPresent = false;
   factory CallUpdateBodySchema.fromJson(Map<String, Object?> json) {
     final value = _$CallUpdateBodySchemaFromJson(json);
     return CallUpdateBodySchema(
       region: json.containsKey('region') ? value.region : _omit,
-      latitude: json.containsKey('latitude') ? value.latitude : _omit,
-      longitude: json.containsKey('longitude') ? value.longitude : _omit,
+      latitude: value.latitude,
+      longitude: value.longitude,
     );
   }
 
@@ -46,19 +40,11 @@ class CallUpdateBodySchema {
   @JsonKey(includeIfNull: false)
   final String? longitude;
   final bool _regionPresent;
-  final bool _latitudePresent;
-  final bool _longitudePresent;
 
   Map<String, Object?> toJson() {
     final json = _$CallUpdateBodySchemaToJson(this);
     if (_regionPresent) {
       json.putIfAbsent('region', () => region);
-    }
-    if (_latitudePresent) {
-      json.putIfAbsent('latitude', () => latitude);
-    }
-    if (_longitudePresent) {
-      json.putIfAbsent('longitude', () => longitude);
     }
     return json;
   }

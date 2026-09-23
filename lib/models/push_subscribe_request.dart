@@ -8,30 +8,16 @@ import 'push_subscribe_request_keys.dart';
 
 part 'push_subscribe_request.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class PushSubscribeRequest {
   const PushSubscribeRequest({
     required this.endpoint,
     required this.keys,
-    Object? userAgent = _omit,
-  }) : userAgent = identical(userAgent, _omit) ? null : userAgent as String?,
-       _userAgentPresent = !identical(userAgent, _omit);
-
-  const PushSubscribeRequest._({
-    required this.endpoint,
-    required this.keys,
     this.userAgent,
-  }) : _userAgentPresent = false;
-  factory PushSubscribeRequest.fromJson(Map<String, Object?> json) {
-    final value = _$PushSubscribeRequestFromJson(json);
-    return PushSubscribeRequest(
-      endpoint: value.endpoint,
-      keys: value.keys,
-      userAgent: json.containsKey('user_agent') ? value.userAgent : _omit,
-    );
-  }
+  });
+
+  factory PushSubscribeRequest.fromJson(Map<String, Object?> json) =>
+      _$PushSubscribeRequestFromJson(json);
 
   /// The push subscription endpoint URL
   final String endpoint;
@@ -42,13 +28,6 @@ class PushSubscribeRequest {
   /// The user agent string identifying the client
   @JsonKey(includeIfNull: false, name: 'user_agent')
   final String? userAgent;
-  final bool _userAgentPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$PushSubscribeRequestToJson(this);
-    if (_userAgentPresent) {
-      json.putIfAbsent('user_agent', () => userAgent);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$PushSubscribeRequestToJson(this);
 }

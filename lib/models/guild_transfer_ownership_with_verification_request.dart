@@ -11,64 +11,20 @@ import 'web_authn_authentication_response.dart';
 
 part 'guild_transfer_ownership_with_verification_request.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class GuildTransferOwnershipWithVerificationRequest {
   const GuildTransferOwnershipWithVerificationRequest({
-    required this.newOwnerId,
-    Object? password = _omit,
-    Object? mfaMethod = _omit,
-    Object? mfaCode = _omit,
-    Object? webauthnResponse = _omit,
-    Object? webauthnChallenge = _omit,
-  }) : password = identical(password, _omit) ? null : password as PasswordType?,
-       _passwordPresent = !identical(password, _omit),
-       mfaMethod = identical(mfaMethod, _omit)
-           ? null
-           : mfaMethod
-                 as GuildTransferOwnershipWithVerificationRequestMfaMethodMfaMethod?,
-       _mfaMethodPresent = !identical(mfaMethod, _omit),
-       mfaCode = identical(mfaCode, _omit) ? null : mfaCode as String?,
-       _mfaCodePresent = !identical(mfaCode, _omit),
-       webauthnResponse = identical(webauthnResponse, _omit)
-           ? null
-           : webauthnResponse as WebAuthnAuthenticationResponse?,
-       _webauthnResponsePresent = !identical(webauthnResponse, _omit),
-       webauthnChallenge = identical(webauthnChallenge, _omit)
-           ? null
-           : webauthnChallenge as String?,
-       _webauthnChallengePresent = !identical(webauthnChallenge, _omit);
-
-  const GuildTransferOwnershipWithVerificationRequest._({
     required this.newOwnerId,
     this.password,
     this.mfaMethod,
     this.mfaCode,
     this.webauthnResponse,
     this.webauthnChallenge,
-  }) : _passwordPresent = false,
-       _mfaMethodPresent = false,
-       _mfaCodePresent = false,
-       _webauthnResponsePresent = false,
-       _webauthnChallengePresent = false;
+  });
+
   factory GuildTransferOwnershipWithVerificationRequest.fromJson(
     Map<String, Object?> json,
-  ) {
-    final value = _$GuildTransferOwnershipWithVerificationRequestFromJson(json);
-    return GuildTransferOwnershipWithVerificationRequest(
-      newOwnerId: value.newOwnerId,
-      password: json.containsKey('password') ? value.password : _omit,
-      mfaMethod: json.containsKey('mfa_method') ? value.mfaMethod : _omit,
-      mfaCode: json.containsKey('mfa_code') ? value.mfaCode : _omit,
-      webauthnResponse: json.containsKey('webauthn_response')
-          ? value.webauthnResponse
-          : _omit,
-      webauthnChallenge: json.containsKey('webauthn_challenge')
-          ? value.webauthnChallenge
-          : _omit,
-    );
-  }
+  ) => _$GuildTransferOwnershipWithVerificationRequestFromJson(json);
 
   /// The ID of the user to transfer ownership to
   @JsonKey(name: 'new_owner_id')
@@ -94,29 +50,7 @@ class GuildTransferOwnershipWithVerificationRequest {
   /// WebAuthn challenge string
   @JsonKey(includeIfNull: false, name: 'webauthn_challenge')
   final String? webauthnChallenge;
-  final bool _passwordPresent;
-  final bool _mfaMethodPresent;
-  final bool _mfaCodePresent;
-  final bool _webauthnResponsePresent;
-  final bool _webauthnChallengePresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$GuildTransferOwnershipWithVerificationRequestToJson(this);
-    if (_passwordPresent) {
-      json.putIfAbsent('password', () => password);
-    }
-    if (_mfaMethodPresent) {
-      json.putIfAbsent('mfa_method', () => mfaMethod);
-    }
-    if (_mfaCodePresent) {
-      json.putIfAbsent('mfa_code', () => mfaCode);
-    }
-    if (_webauthnResponsePresent) {
-      json.putIfAbsent('webauthn_response', () => webauthnResponse);
-    }
-    if (_webauthnChallengePresent) {
-      json.putIfAbsent('webauthn_challenge', () => webauthnChallenge);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() =>
+      _$GuildTransferOwnershipWithVerificationRequestToJson(this);
 }

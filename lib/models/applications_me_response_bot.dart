@@ -22,21 +22,13 @@ class ApplicationsMeResponseBot {
     required this.flags,
     Object? avatar = _omit,
     Object? banner = _omit,
-    Object? token = _omit,
-    Object? mfaEnabled = _omit,
-    Object? authenticatorTypes = _omit,
+    this.token,
+    this.mfaEnabled,
+    this.authenticatorTypes,
   }) : avatar = identical(avatar, _omit) ? null : avatar as String?,
        _avatarPresent = !identical(avatar, _omit),
        banner = identical(banner, _omit) ? null : banner as String?,
-       _bannerPresent = !identical(banner, _omit),
-       token = identical(token, _omit) ? null : token as String?,
-       _tokenPresent = !identical(token, _omit),
-       mfaEnabled = identical(mfaEnabled, _omit) ? null : mfaEnabled as bool?,
-       _mfaEnabledPresent = !identical(mfaEnabled, _omit),
-       authenticatorTypes = identical(authenticatorTypes, _omit)
-           ? null
-           : authenticatorTypes as List<AuthenticatorType>?,
-       _authenticatorTypesPresent = !identical(authenticatorTypes, _omit);
+       _bannerPresent = !identical(banner, _omit);
 
   const ApplicationsMeResponseBot._({
     required this.id,
@@ -50,10 +42,7 @@ class ApplicationsMeResponseBot {
     this.mfaEnabled,
     this.authenticatorTypes,
   }) : _avatarPresent = false,
-       _bannerPresent = false,
-       _tokenPresent = false,
-       _mfaEnabledPresent = false,
-       _authenticatorTypesPresent = false;
+       _bannerPresent = false;
   factory ApplicationsMeResponseBot.fromJson(Map<String, Object?> json) {
     final value = _$ApplicationsMeResponseBotFromJson(json);
     return ApplicationsMeResponseBot(
@@ -64,11 +53,9 @@ class ApplicationsMeResponseBot {
       flags: value.flags,
       avatar: json.containsKey('avatar') ? value.avatar : _omit,
       banner: json.containsKey('banner') ? value.banner : _omit,
-      token: json.containsKey('token') ? value.token : _omit,
-      mfaEnabled: json.containsKey('mfa_enabled') ? value.mfaEnabled : _omit,
-      authenticatorTypes: json.containsKey('authenticator_types')
-          ? value.authenticatorTypes
-          : _omit,
+      token: value.token,
+      mfaEnabled: value.mfaEnabled,
+      authenticatorTypes: value.authenticatorTypes,
     );
   }
 
@@ -107,9 +94,6 @@ class ApplicationsMeResponseBot {
   final BotFlags flags;
   final bool _avatarPresent;
   final bool _bannerPresent;
-  final bool _tokenPresent;
-  final bool _mfaEnabledPresent;
-  final bool _authenticatorTypesPresent;
 
   Map<String, Object?> toJson() {
     final json = _$ApplicationsMeResponseBotToJson(this);
@@ -118,15 +102,6 @@ class ApplicationsMeResponseBot {
     }
     if (_bannerPresent) {
       json.putIfAbsent('banner', () => banner);
-    }
-    if (_tokenPresent) {
-      json.putIfAbsent('token', () => token);
-    }
-    if (_mfaEnabledPresent) {
-      json.putIfAbsent('mfa_enabled', () => mfaEnabled);
-    }
-    if (_authenticatorTypesPresent) {
-      json.putIfAbsent('authenticator_types', () => authenticatorTypes);
     }
     return json;
   }

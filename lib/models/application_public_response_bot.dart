@@ -21,13 +21,11 @@ class ApplicationPublicResponseBot {
     required this.flags,
     Object? avatar = _omit,
     Object? banner = _omit,
-    Object? token = _omit,
+    this.token,
   }) : avatar = identical(avatar, _omit) ? null : avatar as String?,
        _avatarPresent = !identical(avatar, _omit),
        banner = identical(banner, _omit) ? null : banner as String?,
-       _bannerPresent = !identical(banner, _omit),
-       token = identical(token, _omit) ? null : token as String?,
-       _tokenPresent = !identical(token, _omit);
+       _bannerPresent = !identical(banner, _omit);
 
   const ApplicationPublicResponseBot._({
     required this.id,
@@ -39,8 +37,7 @@ class ApplicationPublicResponseBot {
     this.banner,
     this.token,
   }) : _avatarPresent = false,
-       _bannerPresent = false,
-       _tokenPresent = false;
+       _bannerPresent = false;
   factory ApplicationPublicResponseBot.fromJson(Map<String, Object?> json) {
     final value = _$ApplicationPublicResponseBotFromJson(json);
     return ApplicationPublicResponseBot(
@@ -51,7 +48,7 @@ class ApplicationPublicResponseBot {
       flags: value.flags,
       avatar: json.containsKey('avatar') ? value.avatar : _omit,
       banner: json.containsKey('banner') ? value.banner : _omit,
-      token: json.containsKey('token') ? value.token : _omit,
+      token: value.token,
     );
   }
 
@@ -82,7 +79,6 @@ class ApplicationPublicResponseBot {
   final BotFlags flags;
   final bool _avatarPresent;
   final bool _bannerPresent;
-  final bool _tokenPresent;
 
   Map<String, Object?> toJson() {
     final json = _$ApplicationPublicResponseBotToJson(this);
@@ -91,9 +87,6 @@ class ApplicationPublicResponseBot {
     }
     if (_bannerPresent) {
       json.putIfAbsent('banner', () => banner);
-    }
-    if (_tokenPresent) {
-      json.putIfAbsent('token', () => token);
     }
     return json;
   }

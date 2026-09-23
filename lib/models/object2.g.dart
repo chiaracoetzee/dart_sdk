@@ -10,7 +10,7 @@ Object2 _$Object2FromJson(Map<String, dynamic> json) => $checkedCreate(
   'Object2',
   json,
   ($checkedConvert) {
-    final val = Object2._(
+    final val = Object2(
       attachments: $checkedConvert(
         'attachments',
         (v) => (v as List<dynamic>?)

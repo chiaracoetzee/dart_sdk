@@ -10,9 +10,7 @@ import 'user_partial_response.dart';
 
 part 'applications_me_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class ApplicationsMeResponse {
   const ApplicationsMeResponse({
     required this.id,
@@ -23,45 +21,12 @@ class ApplicationsMeResponse {
     required this.botRequireCodeGrant,
     required this.verifyKey,
     required this.owner,
-    Object? bot = _omit,
-    Object? redirectUris = _omit,
-  }) : bot = identical(bot, _omit) ? null : bot as ApplicationsMeResponseBot?,
-       _botPresent = !identical(bot, _omit),
-       redirectUris = identical(redirectUris, _omit)
-           ? null
-           : redirectUris as List<String>?,
-       _redirectUrisPresent = !identical(redirectUris, _omit);
-
-  const ApplicationsMeResponse._({
-    required this.id,
-    required this.name,
-    required this.icon,
-    required this.description,
-    required this.botPublic,
-    required this.botRequireCodeGrant,
-    required this.verifyKey,
-    required this.owner,
     this.bot,
     this.redirectUris,
-  }) : _botPresent = false,
-       _redirectUrisPresent = false;
-  factory ApplicationsMeResponse.fromJson(Map<String, Object?> json) {
-    final value = _$ApplicationsMeResponseFromJson(json);
-    return ApplicationsMeResponse(
-      id: value.id,
-      name: value.name,
-      icon: value.icon,
-      description: value.description,
-      botPublic: value.botPublic,
-      botRequireCodeGrant: value.botRequireCodeGrant,
-      verifyKey: value.verifyKey,
-      owner: value.owner,
-      bot: json.containsKey('bot') ? value.bot : _omit,
-      redirectUris: json.containsKey('redirect_uris')
-          ? value.redirectUris
-          : _omit,
-    );
-  }
+  });
+
+  factory ApplicationsMeResponse.fromJson(Map<String, Object?> json) =>
+      _$ApplicationsMeResponseFromJson(json);
 
   /// The unique identifier of the application
   final SnowflakeStringType id;
@@ -99,17 +64,6 @@ class ApplicationsMeResponse {
   /// The registered redirect URIs for OAuth2
   @JsonKey(includeIfNull: false, name: 'redirect_uris')
   final List<String>? redirectUris;
-  final bool _botPresent;
-  final bool _redirectUrisPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$ApplicationsMeResponseToJson(this);
-    if (_botPresent) {
-      json.putIfAbsent('bot', () => bot);
-    }
-    if (_redirectUrisPresent) {
-      json.putIfAbsent('redirect_uris', () => redirectUris);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$ApplicationsMeResponseToJson(this);
 }

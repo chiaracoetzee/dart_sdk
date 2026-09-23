@@ -65,52 +65,20 @@ class UserPrivateResponse {
     required this.lastVoiceActivitySharingChangeAt,
     required this.passwordLastChangedAt,
     required this.requiredActions,
-    Object? mentionFlags = _omit,
-    Object? authenticatorTypes = _omit,
-    Object? timezonePrivacyFlags = _omit,
+    this.mentionFlags,
+    this.authenticatorTypes,
+    this.timezonePrivacyFlags,
     Object? timezone = _omit,
     Object? phone = _omit,
-    Object? emailBounced = _omit,
-    Object? system = _omit,
-    Object? ageVerifiedAdult = _omit,
-    Object? bot = _omit,
-    Object? forceInboundPhoneVerification = _omit,
-  }) : bot = identical(bot, _omit) ? null : bot as bool?,
-       _botPresent = !identical(bot, _omit),
-       system = identical(system, _omit) ? null : system as bool?,
-       _systemPresent = !identical(system, _omit),
-       mentionFlags = identical(mentionFlags, _omit)
-           ? null
-           : mentionFlags as MentionReplyPreferences?,
-       _mentionFlagsPresent = !identical(mentionFlags, _omit),
-       emailBounced = identical(emailBounced, _omit)
-           ? null
-           : emailBounced as bool?,
-       _emailBouncedPresent = !identical(emailBounced, _omit),
-       phone = identical(phone, _omit) ? null : phone as String?,
+    this.emailBounced,
+    this.system,
+    this.ageVerifiedAdult,
+    this.bot,
+    this.forceInboundPhoneVerification,
+  }) : phone = identical(phone, _omit) ? null : phone as String?,
        _phonePresent = !identical(phone, _omit),
        timezone = identical(timezone, _omit) ? null : timezone as String?,
-       _timezonePresent = !identical(timezone, _omit),
-       timezonePrivacyFlags = identical(timezonePrivacyFlags, _omit)
-           ? null
-           : timezonePrivacyFlags as ProfileFieldPrivacyFlags?,
-       _timezonePrivacyFlagsPresent = !identical(timezonePrivacyFlags, _omit),
-       authenticatorTypes = identical(authenticatorTypes, _omit)
-           ? null
-           : authenticatorTypes as List<UserAuthenticatorTypes>?,
-       _authenticatorTypesPresent = !identical(authenticatorTypes, _omit),
-       forceInboundPhoneVerification =
-           identical(forceInboundPhoneVerification, _omit)
-           ? null
-           : forceInboundPhoneVerification as bool?,
-       _forceInboundPhoneVerificationPresent = !identical(
-         forceInboundPhoneVerification,
-         _omit,
-       ),
-       ageVerifiedAdult = identical(ageVerifiedAdult, _omit)
-           ? null
-           : ageVerifiedAdult as bool?,
-       _ageVerifiedAdultPresent = !identical(ageVerifiedAdult, _omit);
+       _timezonePresent = !identical(timezone, _omit);
 
   const UserPrivateResponse._({
     required this.premiumType,
@@ -168,16 +136,8 @@ class UserPrivateResponse {
     this.ageVerifiedAdult,
     this.bot,
     this.forceInboundPhoneVerification,
-  }) : _botPresent = false,
-       _systemPresent = false,
-       _mentionFlagsPresent = false,
-       _emailBouncedPresent = false,
-       _phonePresent = false,
-       _timezonePresent = false,
-       _timezonePrivacyFlagsPresent = false,
-       _authenticatorTypesPresent = false,
-       _forceInboundPhoneVerificationPresent = false,
-       _ageVerifiedAdultPresent = false;
+  }) : _phonePresent = false,
+       _timezonePresent = false;
   factory UserPrivateResponse.fromJson(Map<String, Object?> json) {
     final value = _$UserPrivateResponseFromJson(json);
     return UserPrivateResponse(
@@ -226,29 +186,16 @@ class UserPrivateResponse {
       lastVoiceActivitySharingChangeAt: value.lastVoiceActivitySharingChangeAt,
       passwordLastChangedAt: value.passwordLastChangedAt,
       requiredActions: value.requiredActions,
-      mentionFlags: json.containsKey('mention_flags')
-          ? value.mentionFlags
-          : _omit,
-      authenticatorTypes: json.containsKey('authenticator_types')
-          ? value.authenticatorTypes
-          : _omit,
-      timezonePrivacyFlags: json.containsKey('timezone_privacy_flags')
-          ? value.timezonePrivacyFlags
-          : _omit,
+      mentionFlags: value.mentionFlags,
+      authenticatorTypes: value.authenticatorTypes,
+      timezonePrivacyFlags: value.timezonePrivacyFlags,
       timezone: json.containsKey('timezone') ? value.timezone : _omit,
       phone: json.containsKey('phone') ? value.phone : _omit,
-      emailBounced: json.containsKey('email_bounced')
-          ? value.emailBounced
-          : _omit,
-      system: json.containsKey('system') ? value.system : _omit,
-      ageVerifiedAdult: json.containsKey('age_verified_adult')
-          ? value.ageVerifiedAdult
-          : _omit,
-      bot: json.containsKey('bot') ? value.bot : _omit,
-      forceInboundPhoneVerification:
-          json.containsKey('force_inbound_phone_verification')
-          ? value.forceInboundPhoneVerification
-          : _omit,
+      emailBounced: value.emailBounced,
+      system: value.system,
+      ageVerifiedAdult: value.ageVerifiedAdult,
+      bot: value.bot,
+      forceInboundPhoneVerification: value.forceInboundPhoneVerification,
     );
   }
 
@@ -463,51 +410,16 @@ class UserPrivateResponse {
   /// ISO8601 timestamp of when the user last agreed to the privacy policy
   @JsonKey(includeIfNull: true, name: 'privacy_agreed_at')
   final String? privacyAgreedAt;
-  final bool _botPresent;
-  final bool _systemPresent;
-  final bool _mentionFlagsPresent;
-  final bool _emailBouncedPresent;
   final bool _phonePresent;
   final bool _timezonePresent;
-  final bool _timezonePrivacyFlagsPresent;
-  final bool _authenticatorTypesPresent;
-  final bool _forceInboundPhoneVerificationPresent;
-  final bool _ageVerifiedAdultPresent;
 
   Map<String, Object?> toJson() {
     final json = _$UserPrivateResponseToJson(this);
-    if (_botPresent) {
-      json.putIfAbsent('bot', () => bot);
-    }
-    if (_systemPresent) {
-      json.putIfAbsent('system', () => system);
-    }
-    if (_mentionFlagsPresent) {
-      json.putIfAbsent('mention_flags', () => mentionFlags);
-    }
-    if (_emailBouncedPresent) {
-      json.putIfAbsent('email_bounced', () => emailBounced);
-    }
     if (_phonePresent) {
       json.putIfAbsent('phone', () => phone);
     }
     if (_timezonePresent) {
       json.putIfAbsent('timezone', () => timezone);
-    }
-    if (_timezonePrivacyFlagsPresent) {
-      json.putIfAbsent('timezone_privacy_flags', () => timezonePrivacyFlags);
-    }
-    if (_authenticatorTypesPresent) {
-      json.putIfAbsent('authenticator_types', () => authenticatorTypes);
-    }
-    if (_forceInboundPhoneVerificationPresent) {
-      json.putIfAbsent(
-        'force_inbound_phone_verification',
-        () => forceInboundPhoneVerification,
-      );
-    }
-    if (_ageVerifiedAdultPresent) {
-      json.putIfAbsent('age_verified_adult', () => ageVerifiedAdult);
     }
     return json;
   }

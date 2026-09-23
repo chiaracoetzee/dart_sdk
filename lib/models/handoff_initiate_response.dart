@@ -6,30 +6,16 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'handoff_initiate_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class HandoffInitiateResponse {
   const HandoffInitiateResponse({
     required this.code,
     required this.expiresAt,
-    Object? pollSecret = _omit,
-  }) : pollSecret = identical(pollSecret, _omit) ? null : pollSecret as String?,
-       _pollSecretPresent = !identical(pollSecret, _omit);
-
-  const HandoffInitiateResponse._({
-    required this.code,
-    required this.expiresAt,
     this.pollSecret,
-  }) : _pollSecretPresent = false;
-  factory HandoffInitiateResponse.fromJson(Map<String, Object?> json) {
-    final value = _$HandoffInitiateResponseFromJson(json);
-    return HandoffInitiateResponse(
-      code: value.code,
-      expiresAt: value.expiresAt,
-      pollSecret: json.containsKey('poll_secret') ? value.pollSecret : _omit,
-    );
-  }
+  });
+
+  factory HandoffInitiateResponse.fromJson(Map<String, Object?> json) =>
+      _$HandoffInitiateResponseFromJson(json);
 
   /// Handoff code to share with the receiving device
   final String code;
@@ -41,13 +27,6 @@ class HandoffInitiateResponse {
   /// Secret the initiating device must present to retrieve the token
   @JsonKey(includeIfNull: false, name: 'poll_secret')
   final String? pollSecret;
-  final bool _pollSecretPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$HandoffInitiateResponseToJson(this);
-    if (_pollSecretPresent) {
-      json.putIfAbsent('poll_secret', () => pollSecret);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$HandoffInitiateResponseToJson(this);
 }

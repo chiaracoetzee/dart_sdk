@@ -12,7 +12,7 @@ UnregisterMobileDeviceRequest _$UnregisterMobileDeviceRequestFromJson(
   'UnregisterMobileDeviceRequest',
   json,
   ($checkedConvert) {
-    final val = UnregisterMobileDeviceRequest._(
+    final val = UnregisterMobileDeviceRequest(
       platform: $checkedConvert(
         'platform',
         (v) =>

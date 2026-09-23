@@ -9,7 +9,7 @@ part of 'bulk_ignore_friend_requests_request.dart';
 BulkIgnoreFriendRequestsRequest _$BulkIgnoreFriendRequestsRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('BulkIgnoreFriendRequestsRequest', json, ($checkedConvert) {
-  final val = BulkIgnoreFriendRequestsRequest._(
+  final val = BulkIgnoreFriendRequestsRequest(
     maxAccountAgeSeconds: $checkedConvert(
       'max_account_age_seconds',
       (v) => (v as num?)?.toInt(),

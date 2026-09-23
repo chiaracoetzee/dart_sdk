@@ -12,7 +12,7 @@ AuthorizationCodeTokenRequest _$AuthorizationCodeTokenRequestFromJson(
   'AuthorizationCodeTokenRequest',
   json,
   ($checkedConvert) {
-    final val = AuthorizationCodeTokenRequest._(
+    final val = AuthorizationCodeTokenRequest(
       grantType: $checkedConvert('grant_type', (v) => v as String),
       code: $checkedConvert('code', (v) => v as String),
       redirectUri: $checkedConvert('redirect_uri', (v) => v as String),

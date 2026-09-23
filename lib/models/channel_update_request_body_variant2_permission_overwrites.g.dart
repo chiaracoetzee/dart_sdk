@@ -13,7 +13,7 @@ _$ChannelUpdateRequestBodyVariant2PermissionOverwritesFromJson(
   'ChannelUpdateRequestBodyVariant2PermissionOverwrites',
   json,
   ($checkedConvert) {
-    final val = ChannelUpdateRequestBodyVariant2PermissionOverwrites._(
+    final val = ChannelUpdateRequestBodyVariant2PermissionOverwrites(
       id: $checkedConvert('id', (v) => v as String),
       type: $checkedConvert(
         'type',

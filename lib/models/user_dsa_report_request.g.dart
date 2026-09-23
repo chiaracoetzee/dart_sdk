@@ -12,7 +12,7 @@ UserDsaReportRequest _$UserDsaReportRequestFromJson(
   'UserDsaReportRequest',
   json,
   ($checkedConvert) {
-    final val = UserDsaReportRequest._(
+    final val = UserDsaReportRequest(
       ticket: $checkedConvert('ticket', (v) => v as String),
       reporterFullLegalName: $checkedConvert(
         'reporter_full_legal_name',

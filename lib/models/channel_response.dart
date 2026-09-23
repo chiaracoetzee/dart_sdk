@@ -20,13 +20,13 @@ class ChannelResponse {
   const ChannelResponse({
     required this.id,
     required this.type,
-    Object? guildId = _omit,
+    this.guildId,
     Object? name = _omit,
     Object? topic = _omit,
     Object? url = _omit,
     Object? icon = _omit,
     Object? ownerId = _omit,
-    Object? position = _omit,
+    this.position,
     Object? parentId = _omit,
     Object? bitrate = _omit,
     Object? userLimit = _omit,
@@ -34,19 +34,15 @@ class ChannelResponse {
     Object? rtcRegion = _omit,
     Object? lastMessageId = _omit,
     Object? lastPinTimestamp = _omit,
-    Object? permissionOverwrites = _omit,
-    Object? recipients = _omit,
-    Object? nsfw = _omit,
+    this.permissionOverwrites,
+    this.recipients,
+    this.nsfw,
     Object? nsfwOverride = _omit,
-    Object? contentWarningLevel = _omit,
+    this.contentWarningLevel,
     Object? contentWarningText = _omit,
-    Object? rateLimitPerUser = _omit,
-    Object? nicks = _omit,
-  }) : guildId = identical(guildId, _omit)
-           ? null
-           : guildId as SnowflakeStringType?,
-       _guildIdPresent = !identical(guildId, _omit),
-       name = identical(name, _omit) ? null : name as String?,
+    this.rateLimitPerUser,
+    this.nicks,
+  }) : name = identical(name, _omit) ? null : name as String?,
        _namePresent = !identical(name, _omit),
        topic = identical(topic, _omit) ? null : topic as String?,
        _topicPresent = !identical(topic, _omit),
@@ -58,8 +54,6 @@ class ChannelResponse {
            ? null
            : ownerId as SnowflakeStringType?,
        _ownerIdPresent = !identical(ownerId, _omit),
-       position = identical(position, _omit) ? null : position as Int32Type?,
-       _positionPresent = !identical(position, _omit),
        parentId = identical(parentId, _omit)
            ? null
            : parentId as SnowflakeStringType?,
@@ -82,34 +76,14 @@ class ChannelResponse {
            ? null
            : lastPinTimestamp as DateTime?,
        _lastPinTimestampPresent = !identical(lastPinTimestamp, _omit),
-       permissionOverwrites = identical(permissionOverwrites, _omit)
-           ? null
-           : permissionOverwrites as List<ChannelOverwriteResponse>?,
-       _permissionOverwritesPresent = !identical(permissionOverwrites, _omit),
-       recipients = identical(recipients, _omit)
-           ? null
-           : recipients as List<UserPartialResponse>?,
-       _recipientsPresent = !identical(recipients, _omit),
-       nsfw = identical(nsfw, _omit) ? null : nsfw as bool?,
-       _nsfwPresent = !identical(nsfw, _omit),
        nsfwOverride = identical(nsfwOverride, _omit)
            ? null
            : nsfwOverride as bool?,
        _nsfwOverridePresent = !identical(nsfwOverride, _omit),
-       contentWarningLevel = identical(contentWarningLevel, _omit)
-           ? null
-           : contentWarningLevel as ContentWarningLevel?,
-       _contentWarningLevelPresent = !identical(contentWarningLevel, _omit),
        contentWarningText = identical(contentWarningText, _omit)
            ? null
            : contentWarningText as String?,
-       _contentWarningTextPresent = !identical(contentWarningText, _omit),
-       rateLimitPerUser = identical(rateLimitPerUser, _omit)
-           ? null
-           : rateLimitPerUser as Int32Type?,
-       _rateLimitPerUserPresent = !identical(rateLimitPerUser, _omit),
-       nicks = identical(nicks, _omit) ? null : nicks as Map<String, String>?,
-       _nicksPresent = !identical(nicks, _omit);
+       _contentWarningTextPresent = !identical(contentWarningText, _omit);
 
   const ChannelResponse._({
     required this.id,
@@ -136,13 +110,11 @@ class ChannelResponse {
     this.contentWarningText,
     this.rateLimitPerUser,
     this.nicks,
-  }) : _guildIdPresent = false,
-       _namePresent = false,
+  }) : _namePresent = false,
        _topicPresent = false,
        _urlPresent = false,
        _iconPresent = false,
        _ownerIdPresent = false,
-       _positionPresent = false,
        _parentIdPresent = false,
        _bitratePresent = false,
        _userLimitPresent = false,
@@ -150,26 +122,20 @@ class ChannelResponse {
        _rtcRegionPresent = false,
        _lastMessageIdPresent = false,
        _lastPinTimestampPresent = false,
-       _permissionOverwritesPresent = false,
-       _recipientsPresent = false,
-       _nsfwPresent = false,
        _nsfwOverridePresent = false,
-       _contentWarningLevelPresent = false,
-       _contentWarningTextPresent = false,
-       _rateLimitPerUserPresent = false,
-       _nicksPresent = false;
+       _contentWarningTextPresent = false;
   factory ChannelResponse.fromJson(Map<String, Object?> json) {
     final value = _$ChannelResponseFromJson(json);
     return ChannelResponse(
       id: value.id,
       type: value.type,
-      guildId: json.containsKey('guild_id') ? value.guildId : _omit,
+      guildId: value.guildId,
       name: json.containsKey('name') ? value.name : _omit,
       topic: json.containsKey('topic') ? value.topic : _omit,
       url: json.containsKey('url') ? value.url : _omit,
       icon: json.containsKey('icon') ? value.icon : _omit,
       ownerId: json.containsKey('owner_id') ? value.ownerId : _omit,
-      position: json.containsKey('position') ? value.position : _omit,
+      position: value.position,
       parentId: json.containsKey('parent_id') ? value.parentId : _omit,
       bitrate: json.containsKey('bitrate') ? value.bitrate : _omit,
       userLimit: json.containsKey('user_limit') ? value.userLimit : _omit,
@@ -183,24 +149,18 @@ class ChannelResponse {
       lastPinTimestamp: json.containsKey('last_pin_timestamp')
           ? value.lastPinTimestamp
           : _omit,
-      permissionOverwrites: json.containsKey('permission_overwrites')
-          ? value.permissionOverwrites
-          : _omit,
-      recipients: json.containsKey('recipients') ? value.recipients : _omit,
-      nsfw: json.containsKey('nsfw') ? value.nsfw : _omit,
+      permissionOverwrites: value.permissionOverwrites,
+      recipients: value.recipients,
+      nsfw: value.nsfw,
       nsfwOverride: json.containsKey('nsfw_override')
           ? value.nsfwOverride
           : _omit,
-      contentWarningLevel: json.containsKey('content_warning_level')
-          ? value.contentWarningLevel
-          : _omit,
+      contentWarningLevel: value.contentWarningLevel,
       contentWarningText: json.containsKey('content_warning_text')
           ? value.contentWarningText
           : _omit,
-      rateLimitPerUser: json.containsKey('rate_limit_per_user')
-          ? value.rateLimitPerUser
-          : _omit,
-      nicks: json.containsKey('nicks') ? value.nicks : _omit,
+      rateLimitPerUser: value.rateLimitPerUser,
+      nicks: value.nicks,
     );
   }
 
@@ -295,13 +255,11 @@ class ChannelResponse {
   /// Custom nicknames for users in this channel (for group DMs)
   @JsonKey(includeIfNull: false)
   final Map<String, String>? nicks;
-  final bool _guildIdPresent;
   final bool _namePresent;
   final bool _topicPresent;
   final bool _urlPresent;
   final bool _iconPresent;
   final bool _ownerIdPresent;
-  final bool _positionPresent;
   final bool _parentIdPresent;
   final bool _bitratePresent;
   final bool _userLimitPresent;
@@ -309,20 +267,11 @@ class ChannelResponse {
   final bool _rtcRegionPresent;
   final bool _lastMessageIdPresent;
   final bool _lastPinTimestampPresent;
-  final bool _permissionOverwritesPresent;
-  final bool _recipientsPresent;
-  final bool _nsfwPresent;
   final bool _nsfwOverridePresent;
-  final bool _contentWarningLevelPresent;
   final bool _contentWarningTextPresent;
-  final bool _rateLimitPerUserPresent;
-  final bool _nicksPresent;
 
   Map<String, Object?> toJson() {
     final json = _$ChannelResponseToJson(this);
-    if (_guildIdPresent) {
-      json.putIfAbsent('guild_id', () => guildId);
-    }
     if (_namePresent) {
       json.putIfAbsent('name', () => name);
     }
@@ -337,9 +286,6 @@ class ChannelResponse {
     }
     if (_ownerIdPresent) {
       json.putIfAbsent('owner_id', () => ownerId);
-    }
-    if (_positionPresent) {
-      json.putIfAbsent('position', () => position);
     }
     if (_parentIdPresent) {
       json.putIfAbsent('parent_id', () => parentId);
@@ -362,29 +308,11 @@ class ChannelResponse {
     if (_lastPinTimestampPresent) {
       json.putIfAbsent('last_pin_timestamp', () => lastPinTimestamp);
     }
-    if (_permissionOverwritesPresent) {
-      json.putIfAbsent('permission_overwrites', () => permissionOverwrites);
-    }
-    if (_recipientsPresent) {
-      json.putIfAbsent('recipients', () => recipients);
-    }
-    if (_nsfwPresent) {
-      json.putIfAbsent('nsfw', () => nsfw);
-    }
     if (_nsfwOverridePresent) {
       json.putIfAbsent('nsfw_override', () => nsfwOverride);
     }
-    if (_contentWarningLevelPresent) {
-      json.putIfAbsent('content_warning_level', () => contentWarningLevel);
-    }
     if (_contentWarningTextPresent) {
       json.putIfAbsent('content_warning_text', () => contentWarningText);
-    }
-    if (_rateLimitPerUserPresent) {
-      json.putIfAbsent('rate_limit_per_user', () => rateLimitPerUser);
-    }
-    if (_nicksPresent) {
-      json.putIfAbsent('nicks', () => nicks);
     }
     return json;
   }

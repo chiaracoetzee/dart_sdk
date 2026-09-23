@@ -54,20 +54,20 @@ class GuildResponse {
     Object? splashHeight = _omit,
     Object? splashWidth = _omit,
     Object? bannerHeight = _omit,
-    Object? approximatePresenceCount = _omit,
+    this.approximatePresenceCount,
     Object? contentWarningText = _omit,
     Object? bannerWidth = _omit,
     Object? banner = _omit,
     Object? icon = _omit,
     Object? messageHistoryCutoff = _omit,
-    Object? permissions = _omit,
-    Object? roles = _omit,
-    Object? emojis = _omit,
-    Object? stickers = _omit,
-    Object? channels = _omit,
-    Object? memberCount = _omit,
-    Object? onlineCount = _omit,
-    Object? approximateMemberCount = _omit,
+    this.permissions,
+    this.roles,
+    this.emojis,
+    this.stickers,
+    this.channels,
+    this.memberCount,
+    this.onlineCount,
+    this.approximateMemberCount,
     Object? splash = _omit,
   }) : icon = identical(icon, _omit) ? null : icon as String?,
        _iconPresent = !identical(icon, _omit),
@@ -126,49 +126,7 @@ class GuildResponse {
        messageHistoryCutoff = identical(messageHistoryCutoff, _omit)
            ? null
            : messageHistoryCutoff as DateTime?,
-       _messageHistoryCutoffPresent = !identical(messageHistoryCutoff, _omit),
-       permissions = identical(permissions, _omit)
-           ? null
-           : permissions as Permissions?,
-       _permissionsPresent = !identical(permissions, _omit),
-       roles = identical(roles, _omit)
-           ? null
-           : roles as List<GuildRoleResponse>?,
-       _rolesPresent = !identical(roles, _omit),
-       emojis = identical(emojis, _omit)
-           ? null
-           : emojis as List<GuildEmojiResponse>?,
-       _emojisPresent = !identical(emojis, _omit),
-       stickers = identical(stickers, _omit)
-           ? null
-           : stickers as List<GuildStickerResponse>?,
-       _stickersPresent = !identical(stickers, _omit),
-       channels = identical(channels, _omit)
-           ? null
-           : channels as List<ChannelResponse>?,
-       _channelsPresent = !identical(channels, _omit),
-       memberCount = identical(memberCount, _omit)
-           ? null
-           : memberCount as Int32Type?,
-       _memberCountPresent = !identical(memberCount, _omit),
-       onlineCount = identical(onlineCount, _omit)
-           ? null
-           : onlineCount as Int32Type?,
-       _onlineCountPresent = !identical(onlineCount, _omit),
-       approximateMemberCount = identical(approximateMemberCount, _omit)
-           ? null
-           : approximateMemberCount as Int32Type?,
-       _approximateMemberCountPresent = !identical(
-         approximateMemberCount,
-         _omit,
-       ),
-       approximatePresenceCount = identical(approximatePresenceCount, _omit)
-           ? null
-           : approximatePresenceCount as Int32Type?,
-       _approximatePresenceCountPresent = !identical(
-         approximatePresenceCount,
-         _omit,
-       );
+       _messageHistoryCutoffPresent = !identical(messageHistoryCutoff, _omit);
 
   const GuildResponse._({
     required this.contentWarningLevel,
@@ -226,16 +184,7 @@ class GuildResponse {
        _rulesChannelIdPresent = false,
        _afkChannelIdPresent = false,
        _contentWarningTextPresent = false,
-       _messageHistoryCutoffPresent = false,
-       _permissionsPresent = false,
-       _rolesPresent = false,
-       _emojisPresent = false,
-       _stickersPresent = false,
-       _channelsPresent = false,
-       _memberCountPresent = false,
-       _onlineCountPresent = false,
-       _approximateMemberCountPresent = false,
-       _approximatePresenceCountPresent = false;
+       _messageHistoryCutoffPresent = false;
   factory GuildResponse.fromJson(Map<String, Object?> json) {
     final value = _$GuildResponseFromJson(json);
     return GuildResponse(
@@ -280,9 +229,7 @@ class GuildResponse {
       bannerHeight: json.containsKey('banner_height')
           ? value.bannerHeight
           : _omit,
-      approximatePresenceCount: json.containsKey('approximate_presence_count')
-          ? value.approximatePresenceCount
-          : _omit,
+      approximatePresenceCount: value.approximatePresenceCount,
       contentWarningText: json.containsKey('content_warning_text')
           ? value.contentWarningText
           : _omit,
@@ -292,16 +239,14 @@ class GuildResponse {
       messageHistoryCutoff: json.containsKey('message_history_cutoff')
           ? value.messageHistoryCutoff
           : _omit,
-      permissions: json.containsKey('permissions') ? value.permissions : _omit,
-      roles: json.containsKey('roles') ? value.roles : _omit,
-      emojis: json.containsKey('emojis') ? value.emojis : _omit,
-      stickers: json.containsKey('stickers') ? value.stickers : _omit,
-      channels: json.containsKey('channels') ? value.channels : _omit,
-      memberCount: json.containsKey('member_count') ? value.memberCount : _omit,
-      onlineCount: json.containsKey('online_count') ? value.onlineCount : _omit,
-      approximateMemberCount: json.containsKey('approximate_member_count')
-          ? value.approximateMemberCount
-          : _omit,
+      permissions: value.permissions,
+      roles: value.roles,
+      emojis: value.emojis,
+      stickers: value.stickers,
+      channels: value.channels,
+      memberCount: value.memberCount,
+      onlineCount: value.onlineCount,
+      approximateMemberCount: value.approximateMemberCount,
       splash: json.containsKey('splash') ? value.splash : _omit,
     );
   }
@@ -467,15 +412,6 @@ class GuildResponse {
   final bool _afkChannelIdPresent;
   final bool _contentWarningTextPresent;
   final bool _messageHistoryCutoffPresent;
-  final bool _permissionsPresent;
-  final bool _rolesPresent;
-  final bool _emojisPresent;
-  final bool _stickersPresent;
-  final bool _channelsPresent;
-  final bool _memberCountPresent;
-  final bool _onlineCountPresent;
-  final bool _approximateMemberCountPresent;
-  final bool _approximatePresenceCountPresent;
 
   Map<String, Object?> toJson() {
     final json = _$GuildResponseToJson(this);
@@ -526,39 +462,6 @@ class GuildResponse {
     }
     if (_messageHistoryCutoffPresent) {
       json.putIfAbsent('message_history_cutoff', () => messageHistoryCutoff);
-    }
-    if (_permissionsPresent) {
-      json.putIfAbsent('permissions', () => permissions);
-    }
-    if (_rolesPresent) {
-      json.putIfAbsent('roles', () => roles);
-    }
-    if (_emojisPresent) {
-      json.putIfAbsent('emojis', () => emojis);
-    }
-    if (_stickersPresent) {
-      json.putIfAbsent('stickers', () => stickers);
-    }
-    if (_channelsPresent) {
-      json.putIfAbsent('channels', () => channels);
-    }
-    if (_memberCountPresent) {
-      json.putIfAbsent('member_count', () => memberCount);
-    }
-    if (_onlineCountPresent) {
-      json.putIfAbsent('online_count', () => onlineCount);
-    }
-    if (_approximateMemberCountPresent) {
-      json.putIfAbsent(
-        'approximate_member_count',
-        () => approximateMemberCount,
-      );
-    }
-    if (_approximatePresenceCountPresent) {
-      json.putIfAbsent(
-        'approximate_presence_count',
-        () => approximatePresenceCount,
-      );
     }
     return json;
   }

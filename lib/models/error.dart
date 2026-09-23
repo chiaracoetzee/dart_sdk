@@ -8,27 +8,11 @@ import 'error_errors.dart';
 
 part 'error.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class Error {
-  const Error({
-    required this.code,
-    required this.message,
-    Object? errors = _omit,
-  }) : errors = identical(errors, _omit) ? null : errors as List<ErrorErrors>?,
-       _errorsPresent = !identical(errors, _omit);
+  const Error({required this.code, required this.message, this.errors});
 
-  const Error._({required this.code, required this.message, this.errors})
-    : _errorsPresent = false;
-  factory Error.fromJson(Map<String, Object?> json) {
-    final value = _$ErrorFromJson(json);
-    return Error(
-      code: value.code,
-      message: value.message,
-      errors: json.containsKey('errors') ? value.errors : _omit,
-    );
-  }
+  factory Error.fromJson(Map<String, Object?> json) => _$ErrorFromJson(json);
 
   /// Machine-readable error code
   final String code;
@@ -39,13 +23,6 @@ class Error {
   /// Field-specific validation errors
   @JsonKey(includeIfNull: false)
   final List<ErrorErrors>? errors;
-  final bool _errorsPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$ErrorToJson(this);
-    if (_errorsPresent) {
-      json.putIfAbsent('errors', () => errors);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$ErrorToJson(this);
 }

@@ -13,27 +13,19 @@ class ApplicationCreateRequest {
   const ApplicationCreateRequest({
     required this.name,
     Object? redirectUris = _omit,
-    Object? botPublic = _omit,
-    Object? botRequireCodeGrant = _omit,
+    this.botPublic,
+    this.botRequireCodeGrant,
   }) : redirectUris = identical(redirectUris, _omit)
            ? null
            : redirectUris as List<String>?,
-       _redirectUrisPresent = !identical(redirectUris, _omit),
-       botPublic = identical(botPublic, _omit) ? null : botPublic as bool?,
-       _botPublicPresent = !identical(botPublic, _omit),
-       botRequireCodeGrant = identical(botRequireCodeGrant, _omit)
-           ? null
-           : botRequireCodeGrant as bool?,
-       _botRequireCodeGrantPresent = !identical(botRequireCodeGrant, _omit);
+       _redirectUrisPresent = !identical(redirectUris, _omit);
 
   const ApplicationCreateRequest._({
     required this.name,
     this.redirectUris,
     this.botPublic,
     this.botRequireCodeGrant,
-  }) : _redirectUrisPresent = false,
-       _botPublicPresent = false,
-       _botRequireCodeGrantPresent = false;
+  }) : _redirectUrisPresent = false;
   factory ApplicationCreateRequest.fromJson(Map<String, Object?> json) {
     final value = _$ApplicationCreateRequestFromJson(json);
     return ApplicationCreateRequest(
@@ -41,10 +33,8 @@ class ApplicationCreateRequest {
       redirectUris: json.containsKey('redirect_uris')
           ? value.redirectUris
           : _omit,
-      botPublic: json.containsKey('bot_public') ? value.botPublic : _omit,
-      botRequireCodeGrant: json.containsKey('bot_require_code_grant')
-          ? value.botRequireCodeGrant
-          : _omit,
+      botPublic: value.botPublic,
+      botRequireCodeGrant: value.botRequireCodeGrant,
     );
   }
 
@@ -63,19 +53,11 @@ class ApplicationCreateRequest {
   @JsonKey(includeIfNull: false, name: 'bot_require_code_grant')
   final bool? botRequireCodeGrant;
   final bool _redirectUrisPresent;
-  final bool _botPublicPresent;
-  final bool _botRequireCodeGrantPresent;
 
   Map<String, Object?> toJson() {
     final json = _$ApplicationCreateRequestToJson(this);
     if (_redirectUrisPresent) {
       json.putIfAbsent('redirect_uris', () => redirectUris);
-    }
-    if (_botPublicPresent) {
-      json.putIfAbsent('bot_public', () => botPublic);
-    }
-    if (_botRequireCodeGrantPresent) {
-      json.putIfAbsent('bot_require_code_grant', () => botRequireCodeGrant);
     }
     return json;
   }

@@ -12,7 +12,7 @@ RelationshipResponse _$RelationshipResponseFromJson(
   'RelationshipResponse',
   json,
   ($checkedConvert) {
-    final val = RelationshipResponse._(
+    final val = RelationshipResponse(
       id: $checkedConvert('id', (v) => v as String),
       type: $checkedConvert(
         'type',

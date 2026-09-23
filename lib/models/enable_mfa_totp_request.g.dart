@@ -12,7 +12,7 @@ EnableMfaTotpRequest _$EnableMfaTotpRequestFromJson(
   'EnableMfaTotpRequest',
   json,
   ($checkedConvert) {
-    final val = EnableMfaTotpRequest._(
+    final val = EnableMfaTotpRequest(
       secret: $checkedConvert('secret', (v) => v as String),
       code: $checkedConvert('code', (v) => v as String),
       password: $checkedConvert('password', (v) => v as String?),

@@ -12,7 +12,7 @@ ChangeSubscriptionRequest _$ChangeSubscriptionRequestFromJson(
   'ChangeSubscriptionRequest',
   json,
   ($checkedConvert) {
-    final val = ChangeSubscriptionRequest._(
+    final val = ChangeSubscriptionRequest(
       billingCycle: $checkedConvert(
         'billing_cycle',
         (v) => ChangeSubscriptionRequestBillingCycleBillingCycle.fromJson(

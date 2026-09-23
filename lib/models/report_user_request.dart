@@ -9,30 +9,16 @@ import 'user_report_category.dart';
 
 part 'report_user_request.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class ReportUserRequest {
   const ReportUserRequest({
     required this.userId,
     required this.category,
-    Object? guildId = _omit,
-  }) : guildId = identical(guildId, _omit) ? null : guildId as SnowflakeType?,
-       _guildIdPresent = !identical(guildId, _omit);
-
-  const ReportUserRequest._({
-    required this.userId,
-    required this.category,
     this.guildId,
-  }) : _guildIdPresent = false;
-  factory ReportUserRequest.fromJson(Map<String, Object?> json) {
-    final value = _$ReportUserRequestFromJson(json);
-    return ReportUserRequest(
-      userId: value.userId,
-      category: value.category,
-      guildId: json.containsKey('guild_id') ? value.guildId : _omit,
-    );
-  }
+  });
+
+  factory ReportUserRequest.fromJson(Map<String, Object?> json) =>
+      _$ReportUserRequestFromJson(json);
 
   /// ID of the user being reported
   @JsonKey(name: 'user_id')
@@ -42,13 +28,6 @@ class ReportUserRequest {
   /// ID of the guild where the violation occurred
   @JsonKey(includeIfNull: false, name: 'guild_id')
   final SnowflakeType? guildId;
-  final bool _guildIdPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$ReportUserRequestToJson(this);
-    if (_guildIdPresent) {
-      json.putIfAbsent('guild_id', () => guildId);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$ReportUserRequestToJson(this);
 }

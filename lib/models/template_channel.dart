@@ -22,9 +22,9 @@ class TemplateChannel {
     Object? bitrate = _omit,
     Object? userLimit = _omit,
     Object? voiceConnectionLimit = _omit,
-    Object? nsfw = _omit,
-    Object? rateLimitPerUser = _omit,
-    Object? permissionOverwrites = _omit,
+    this.nsfw,
+    this.rateLimitPerUser,
+    this.permissionOverwrites,
   }) : name = identical(name, _omit) ? null : name as String?,
        _namePresent = !identical(name, _omit),
        topic = identical(topic, _omit) ? null : topic as String?,
@@ -38,17 +38,7 @@ class TemplateChannel {
        voiceConnectionLimit = identical(voiceConnectionLimit, _omit)
            ? null
            : voiceConnectionLimit as num?,
-       _voiceConnectionLimitPresent = !identical(voiceConnectionLimit, _omit),
-       nsfw = identical(nsfw, _omit) ? null : nsfw as bool?,
-       _nsfwPresent = !identical(nsfw, _omit),
-       rateLimitPerUser = identical(rateLimitPerUser, _omit)
-           ? null
-           : rateLimitPerUser as num?,
-       _rateLimitPerUserPresent = !identical(rateLimitPerUser, _omit),
-       permissionOverwrites = identical(permissionOverwrites, _omit)
-           ? null
-           : permissionOverwrites as List<TemplateChannelPermissionOverwrites>?,
-       _permissionOverwritesPresent = !identical(permissionOverwrites, _omit);
+       _voiceConnectionLimitPresent = !identical(voiceConnectionLimit, _omit);
 
   const TemplateChannel._({
     required this.id,
@@ -68,10 +58,7 @@ class TemplateChannel {
        _parentIdPresent = false,
        _bitratePresent = false,
        _userLimitPresent = false,
-       _voiceConnectionLimitPresent = false,
-       _nsfwPresent = false,
-       _rateLimitPerUserPresent = false,
-       _permissionOverwritesPresent = false;
+       _voiceConnectionLimitPresent = false;
   factory TemplateChannel.fromJson(Map<String, Object?> json) {
     final value = _$TemplateChannelFromJson(json);
     return TemplateChannel(
@@ -86,13 +73,9 @@ class TemplateChannel {
       voiceConnectionLimit: json.containsKey('voice_connection_limit')
           ? value.voiceConnectionLimit
           : _omit,
-      nsfw: json.containsKey('nsfw') ? value.nsfw : _omit,
-      rateLimitPerUser: json.containsKey('rate_limit_per_user')
-          ? value.rateLimitPerUser
-          : _omit,
-      permissionOverwrites: json.containsKey('permission_overwrites')
-          ? value.permissionOverwrites
-          : _omit,
+      nsfw: value.nsfw,
+      rateLimitPerUser: value.rateLimitPerUser,
+      permissionOverwrites: value.permissionOverwrites,
     );
   }
 
@@ -146,9 +129,6 @@ class TemplateChannel {
   final bool _bitratePresent;
   final bool _userLimitPresent;
   final bool _voiceConnectionLimitPresent;
-  final bool _nsfwPresent;
-  final bool _rateLimitPerUserPresent;
-  final bool _permissionOverwritesPresent;
 
   Map<String, Object?> toJson() {
     final json = _$TemplateChannelToJson(this);
@@ -169,15 +149,6 @@ class TemplateChannel {
     }
     if (_voiceConnectionLimitPresent) {
       json.putIfAbsent('voice_connection_limit', () => voiceConnectionLimit);
-    }
-    if (_nsfwPresent) {
-      json.putIfAbsent('nsfw', () => nsfw);
-    }
-    if (_rateLimitPerUserPresent) {
-      json.putIfAbsent('rate_limit_per_user', () => rateLimitPerUser);
-    }
-    if (_permissionOverwritesPresent) {
-      json.putIfAbsent('permission_overwrites', () => permissionOverwrites);
     }
     return json;
   }

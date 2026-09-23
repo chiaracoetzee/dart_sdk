@@ -12,7 +12,7 @@ GuildMemberSearchRequest _$GuildMemberSearchRequestFromJson(
   'GuildMemberSearchRequest',
   json,
   ($checkedConvert) {
-    final val = GuildMemberSearchRequest._(
+    final val = GuildMemberSearchRequest(
       limit: $checkedConvert('limit', (v) => (v as num?)?.toInt() ?? 25),
       offset: $checkedConvert('offset', (v) => (v as num?)?.toInt() ?? 0),
       query: $checkedConvert('query', (v) => v as String?),

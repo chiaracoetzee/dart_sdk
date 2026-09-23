@@ -12,21 +12,16 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class WebhookTokenUpdateRequest {
-  const WebhookTokenUpdateRequest({
-    Object? name = _omit,
-    Object? avatar = _omit,
-  }) : name = identical(name, _omit) ? null : name as String?,
-       _namePresent = !identical(name, _omit),
-       avatar = identical(avatar, _omit) ? null : avatar as Base64ImageType?,
-       _avatarPresent = !identical(avatar, _omit);
+  const WebhookTokenUpdateRequest({this.name, Object? avatar = _omit})
+    : avatar = identical(avatar, _omit) ? null : avatar as Base64ImageType?,
+      _avatarPresent = !identical(avatar, _omit);
 
   const WebhookTokenUpdateRequest._({this.name, this.avatar})
-    : _namePresent = false,
-      _avatarPresent = false;
+    : _avatarPresent = false;
   factory WebhookTokenUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$WebhookTokenUpdateRequestFromJson(json);
     return WebhookTokenUpdateRequest(
-      name: json.containsKey('name') ? value.name : _omit,
+      name: value.name,
       avatar: json.containsKey('avatar') ? value.avatar : _omit,
     );
   }
@@ -38,14 +33,10 @@ class WebhookTokenUpdateRequest {
   /// The new avatar image as a base64-encoded data URI
   @JsonKey(includeIfNull: false)
   final Base64ImageType? avatar;
-  final bool _namePresent;
   final bool _avatarPresent;
 
   Map<String, Object?> toJson() {
     final json = _$WebhookTokenUpdateRequestToJson(this);
-    if (_namePresent) {
-      json.putIfAbsent('name', () => name);
-    }
     if (_avatarPresent) {
       json.putIfAbsent('avatar', () => avatar);
     }

@@ -8,7 +8,7 @@ part of 'message_ack_request.dart';
 
 MessageAckRequest _$MessageAckRequestFromJson(Map<String, dynamic> json) =>
     $checkedCreate('MessageAckRequest', json, ($checkedConvert) {
-      final val = MessageAckRequest._(
+      final val = MessageAckRequest(
         mentionCount: $checkedConvert(
           'mention_count',
           (v) => (v as num?)?.toInt(),

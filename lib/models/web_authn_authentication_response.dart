@@ -10,9 +10,7 @@ import 'web_authn_authentication_response_response.dart';
 
 part 'web_authn_authentication_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class WebAuthnAuthenticationResponse {
   const WebAuthnAuthenticationResponse({
     required this.id,
@@ -20,37 +18,11 @@ class WebAuthnAuthenticationResponse {
     required this.type,
     required this.clientExtensionResults,
     required this.response,
-    Object? authenticatorAttachment = _omit,
-  }) : authenticatorAttachment = identical(authenticatorAttachment, _omit)
-           ? null
-           : authenticatorAttachment
-                 as WebAuthnAuthenticationResponseAuthenticatorAttachmentAuthenticatorAttachment?,
-       _authenticatorAttachmentPresent = !identical(
-         authenticatorAttachment,
-         _omit,
-       );
-
-  const WebAuthnAuthenticationResponse._({
-    required this.id,
-    required this.rawId,
-    required this.type,
-    required this.clientExtensionResults,
-    required this.response,
     this.authenticatorAttachment,
-  }) : _authenticatorAttachmentPresent = false;
-  factory WebAuthnAuthenticationResponse.fromJson(Map<String, Object?> json) {
-    final value = _$WebAuthnAuthenticationResponseFromJson(json);
-    return WebAuthnAuthenticationResponse(
-      id: value.id,
-      rawId: value.rawId,
-      type: value.type,
-      clientExtensionResults: value.clientExtensionResults,
-      response: value.response,
-      authenticatorAttachment: json.containsKey('authenticatorAttachment')
-          ? value.authenticatorAttachment
-          : _omit,
-    );
-  }
+  });
+
+  factory WebAuthnAuthenticationResponse.fromJson(Map<String, Object?> json) =>
+      _$WebAuthnAuthenticationResponseFromJson(json);
 
   final String id;
   final String rawId;
@@ -61,16 +33,6 @@ class WebAuthnAuthenticationResponse {
   final WebAuthnAuthenticationResponseClientExtensionResults
   clientExtensionResults;
   final WebAuthnAuthenticationResponseResponse response;
-  final bool _authenticatorAttachmentPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$WebAuthnAuthenticationResponseToJson(this);
-    if (_authenticatorAttachmentPresent) {
-      json.putIfAbsent(
-        'authenticatorAttachment',
-        () => authenticatorAttachment,
-      );
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$WebAuthnAuthenticationResponseToJson(this);
 }

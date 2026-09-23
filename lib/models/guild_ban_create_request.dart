@@ -11,39 +11,25 @@ const Object _omit = Object();
 @JsonSerializable(constructor: '_')
 class GuildBanCreateRequest {
   const GuildBanCreateRequest({
-    Object? deleteMessageSeconds = _omit,
+    this.deleteMessageSeconds,
     Object? reason = _omit,
-    Object? banDurationSeconds = _omit,
+    this.banDurationSeconds,
     this.deleteMessageDays = 0,
-  }) : deleteMessageSeconds = identical(deleteMessageSeconds, _omit)
-           ? null
-           : deleteMessageSeconds as int?,
-       _deleteMessageSecondsPresent = !identical(deleteMessageSeconds, _omit),
-       reason = identical(reason, _omit) ? null : reason as String?,
-       _reasonPresent = !identical(reason, _omit),
-       banDurationSeconds = identical(banDurationSeconds, _omit)
-           ? null
-           : banDurationSeconds as int?,
-       _banDurationSecondsPresent = !identical(banDurationSeconds, _omit);
+  }) : reason = identical(reason, _omit) ? null : reason as String?,
+       _reasonPresent = !identical(reason, _omit);
 
   const GuildBanCreateRequest._({
     this.deleteMessageSeconds,
     this.reason,
     this.banDurationSeconds,
     this.deleteMessageDays = 0,
-  }) : _deleteMessageSecondsPresent = false,
-       _reasonPresent = false,
-       _banDurationSecondsPresent = false;
+  }) : _reasonPresent = false;
   factory GuildBanCreateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildBanCreateRequestFromJson(json);
     return GuildBanCreateRequest(
-      deleteMessageSeconds: json.containsKey('delete_message_seconds')
-          ? value.deleteMessageSeconds
-          : _omit,
+      deleteMessageSeconds: value.deleteMessageSeconds,
       reason: json.containsKey('reason') ? value.reason : _omit,
-      banDurationSeconds: json.containsKey('ban_duration_seconds')
-          ? value.banDurationSeconds
-          : _omit,
+      banDurationSeconds: value.banDurationSeconds,
       deleteMessageDays: value.deleteMessageDays,
     );
   }
@@ -63,20 +49,12 @@ class GuildBanCreateRequest {
   /// Duration of the ban in seconds (0 for permanent, or between 60 and 63072000 seconds for a temporary ban)
   @JsonKey(includeIfNull: false, name: 'ban_duration_seconds')
   final int? banDurationSeconds;
-  final bool _deleteMessageSecondsPresent;
   final bool _reasonPresent;
-  final bool _banDurationSecondsPresent;
 
   Map<String, Object?> toJson() {
     final json = _$GuildBanCreateRequestToJson(this);
-    if (_deleteMessageSecondsPresent) {
-      json.putIfAbsent('delete_message_seconds', () => deleteMessageSeconds);
-    }
     if (_reasonPresent) {
       json.putIfAbsent('reason', () => reason);
-    }
-    if (_banDurationSecondsPresent) {
-      json.putIfAbsent('ban_duration_seconds', () => banDurationSeconds);
     }
     return json;
   }

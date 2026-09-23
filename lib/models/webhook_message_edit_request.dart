@@ -17,19 +17,13 @@ const Object _omit = Object();
 class WebhookMessageEditRequest {
   const WebhookMessageEditRequest({
     Object? content = _omit,
-    Object? embeds = _omit,
-    Object? flags = _omit,
+    this.embeds,
+    this.flags,
     Object? allowedMentions = _omit,
   }) : content = identical(content, _omit)
            ? null
            : content as MessageContentRequest?,
        _contentPresent = !identical(content, _omit),
-       embeds = identical(embeds, _omit)
-           ? null
-           : embeds as List<RichEmbedRequest>?,
-       _embedsPresent = !identical(embeds, _omit),
-       flags = identical(flags, _omit) ? null : flags as MessageFlags?,
-       _flagsPresent = !identical(flags, _omit),
        allowedMentions = identical(allowedMentions, _omit)
            ? null
            : allowedMentions as AllowedMentionsRequest?,
@@ -41,15 +35,13 @@ class WebhookMessageEditRequest {
     this.flags,
     this.allowedMentions,
   }) : _contentPresent = false,
-       _embedsPresent = false,
-       _flagsPresent = false,
        _allowedMentionsPresent = false;
   factory WebhookMessageEditRequest.fromJson(Map<String, Object?> json) {
     final value = _$WebhookMessageEditRequestFromJson(json);
     return WebhookMessageEditRequest(
       content: json.containsKey('content') ? value.content : _omit,
-      embeds: json.containsKey('embeds') ? value.embeds : _omit,
-      flags: json.containsKey('flags') ? value.flags : _omit,
+      embeds: value.embeds,
+      flags: value.flags,
       allowedMentions: json.containsKey('allowed_mentions')
           ? value.allowedMentions
           : _omit,
@@ -72,20 +64,12 @@ class WebhookMessageEditRequest {
   @JsonKey(includeIfNull: false, name: 'allowed_mentions')
   final AllowedMentionsRequest? allowedMentions;
   final bool _contentPresent;
-  final bool _embedsPresent;
-  final bool _flagsPresent;
   final bool _allowedMentionsPresent;
 
   Map<String, Object?> toJson() {
     final json = _$WebhookMessageEditRequestToJson(this);
     if (_contentPresent) {
       json.putIfAbsent('content', () => content);
-    }
-    if (_embedsPresent) {
-      json.putIfAbsent('embeds', () => embeds);
-    }
-    if (_flagsPresent) {
-      json.putIfAbsent('flags', () => flags);
     }
     if (_allowedMentionsPresent) {
       json.putIfAbsent('allowed_mentions', () => allowedMentions);

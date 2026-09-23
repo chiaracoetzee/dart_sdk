@@ -9,7 +9,7 @@ part of 'relationship_type_put_request.dart';
 RelationshipTypePutRequest _$RelationshipTypePutRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('RelationshipTypePutRequest', json, ($checkedConvert) {
-  final val = RelationshipTypePutRequest._(
+  final val = RelationshipTypePutRequest(
     type: $checkedConvert(
       'type',
       (v) => v == null

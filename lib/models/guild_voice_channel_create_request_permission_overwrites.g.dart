@@ -13,7 +13,7 @@ _$GuildVoiceChannelCreateRequestPermissionOverwritesFromJson(
   'GuildVoiceChannelCreateRequestPermissionOverwrites',
   json,
   ($checkedConvert) {
-    final val = GuildVoiceChannelCreateRequestPermissionOverwrites._(
+    final val = GuildVoiceChannelCreateRequestPermissionOverwrites(
       id: $checkedConvert('id', (v) => v as String),
       type: $checkedConvert(
         'type',

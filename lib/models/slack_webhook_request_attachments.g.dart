@@ -12,7 +12,7 @@ SlackWebhookRequestAttachments _$SlackWebhookRequestAttachmentsFromJson(
   'SlackWebhookRequestAttachments',
   json,
   ($checkedConvert) {
-    final val = SlackWebhookRequestAttachments._(
+    final val = SlackWebhookRequestAttachments(
       fallback: $checkedConvert('fallback', (v) => v as String?),
       pretext: $checkedConvert('pretext', (v) => v as String?),
       text: $checkedConvert('text', (v) => v as String?),

@@ -8,33 +8,17 @@ import 'push_rotate_request_keys.dart';
 
 part 'push_rotate_request.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class PushRotateRequest {
   const PushRotateRequest({
     required this.oldEndpoint,
     required this.endpoint,
     required this.keys,
-    Object? userAgent = _omit,
-  }) : userAgent = identical(userAgent, _omit) ? null : userAgent as String?,
-       _userAgentPresent = !identical(userAgent, _omit);
-
-  const PushRotateRequest._({
-    required this.oldEndpoint,
-    required this.endpoint,
-    required this.keys,
     this.userAgent,
-  }) : _userAgentPresent = false;
-  factory PushRotateRequest.fromJson(Map<String, Object?> json) {
-    final value = _$PushRotateRequestFromJson(json);
-    return PushRotateRequest(
-      oldEndpoint: value.oldEndpoint,
-      endpoint: value.endpoint,
-      keys: value.keys,
-      userAgent: json.containsKey('user_agent') ? value.userAgent : _omit,
-    );
-  }
+  });
+
+  factory PushRotateRequest.fromJson(Map<String, Object?> json) =>
+      _$PushRotateRequestFromJson(json);
 
   /// The previous push subscription endpoint URL being rotated out
   @JsonKey(name: 'old_endpoint')
@@ -49,13 +33,6 @@ class PushRotateRequest {
   /// The user agent string identifying the client
   @JsonKey(includeIfNull: false, name: 'user_agent')
   final String? userAgent;
-  final bool _userAgentPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$PushRotateRequestToJson(this);
-    if (_userAgentPresent) {
-      json.putIfAbsent('user_agent', () => userAgent);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$PushRotateRequestToJson(this);
 }

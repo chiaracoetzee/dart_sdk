@@ -9,7 +9,7 @@ part of 'guild_role_create_request.dart';
 GuildRoleCreateRequest _$GuildRoleCreateRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('GuildRoleCreateRequest', json, ($checkedConvert) {
-  final val = GuildRoleCreateRequest._(
+  final val = GuildRoleCreateRequest(
     name: $checkedConvert('name', (v) => v as String),
     permissions: $checkedConvert('permissions', (v) => v as String?),
     color: $checkedConvert('color', (v) => (v as num?)?.toInt() ?? 0),

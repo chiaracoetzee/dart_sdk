@@ -16,36 +16,24 @@ class GuildCreateRequest {
   const GuildCreateRequest({
     required this.name,
     Object? icon = _omit,
-    Object? emptyFeatures = _omit,
-    Object? template = _omit,
+    this.emptyFeatures,
+    this.template,
   }) : icon = identical(icon, _omit) ? null : icon as Base64ImageType?,
-       _iconPresent = !identical(icon, _omit),
-       emptyFeatures = identical(emptyFeatures, _omit)
-           ? null
-           : emptyFeatures as bool?,
-       _emptyFeaturesPresent = !identical(emptyFeatures, _omit),
-       template = identical(template, _omit)
-           ? null
-           : template as TemplateSerializedGuild?,
-       _templatePresent = !identical(template, _omit);
+       _iconPresent = !identical(icon, _omit);
 
   const GuildCreateRequest._({
     required this.name,
     this.icon,
     this.emptyFeatures,
     this.template,
-  }) : _iconPresent = false,
-       _emptyFeaturesPresent = false,
-       _templatePresent = false;
+  }) : _iconPresent = false;
   factory GuildCreateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildCreateRequestFromJson(json);
     return GuildCreateRequest(
       name: value.name,
       icon: json.containsKey('icon') ? value.icon : _omit,
-      emptyFeatures: json.containsKey('empty_features')
-          ? value.emptyFeatures
-          : _omit,
-      template: json.containsKey('template') ? value.template : _omit,
+      emptyFeatures: value.emptyFeatures,
+      template: value.template,
     );
   }
 
@@ -64,19 +52,11 @@ class GuildCreateRequest {
   @JsonKey(includeIfNull: false)
   final TemplateSerializedGuild? template;
   final bool _iconPresent;
-  final bool _emptyFeaturesPresent;
-  final bool _templatePresent;
 
   Map<String, Object?> toJson() {
     final json = _$GuildCreateRequestToJson(this);
     if (_iconPresent) {
       json.putIfAbsent('icon', () => icon);
-    }
-    if (_emptyFeaturesPresent) {
-      json.putIfAbsent('empty_features', () => emptyFeatures);
-    }
-    if (_templatePresent) {
-      json.putIfAbsent('template', () => template);
     }
     return json;
   }

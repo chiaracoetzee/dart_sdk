@@ -18,28 +18,23 @@ class ChannelPartialResponse {
     required this.id,
     required this.type,
     Object? name = _omit,
-    Object? recipients = _omit,
+    this.recipients,
   }) : name = identical(name, _omit) ? null : name as String?,
-       _namePresent = !identical(name, _omit),
-       recipients = identical(recipients, _omit)
-           ? null
-           : recipients as List<ChannelPartialResponseRecipients>?,
-       _recipientsPresent = !identical(recipients, _omit);
+       _namePresent = !identical(name, _omit);
 
   const ChannelPartialResponse._({
     required this.id,
     required this.type,
     this.name,
     this.recipients,
-  }) : _namePresent = false,
-       _recipientsPresent = false;
+  }) : _namePresent = false;
   factory ChannelPartialResponse.fromJson(Map<String, Object?> json) {
     final value = _$ChannelPartialResponseFromJson(json);
     return ChannelPartialResponse(
       id: value.id,
       type: value.type,
       name: json.containsKey('name') ? value.name : _omit,
-      recipients: json.containsKey('recipients') ? value.recipients : _omit,
+      recipients: value.recipients,
     );
   }
 
@@ -55,15 +50,11 @@ class ChannelPartialResponse {
   @JsonKey(includeIfNull: false)
   final List<ChannelPartialResponseRecipients>? recipients;
   final bool _namePresent;
-  final bool _recipientsPresent;
 
   Map<String, Object?> toJson() {
     final json = _$ChannelPartialResponseToJson(this);
     if (_namePresent) {
       json.putIfAbsent('name', () => name);
-    }
-    if (_recipientsPresent) {
-      json.putIfAbsent('recipients', () => recipients);
     }
     return json;
   }

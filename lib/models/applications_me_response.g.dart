@@ -12,7 +12,7 @@ ApplicationsMeResponse _$ApplicationsMeResponseFromJson(
   'ApplicationsMeResponse',
   json,
   ($checkedConvert) {
-    final val = ApplicationsMeResponse._(
+    final val = ApplicationsMeResponse(
       id: $checkedConvert('id', (v) => v as String),
       name: $checkedConvert('name', (v) => v as String),
       icon: $checkedConvert('icon', (v) => v as String?),

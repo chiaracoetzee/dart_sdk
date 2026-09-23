@@ -22,13 +22,11 @@ class OAuth2UserInfoResponse {
     required this.avatar,
     Object? email = _omit,
     Object? verified = _omit,
-    Object? flags = _omit,
+    this.flags,
   }) : email = identical(email, _omit) ? null : email as String?,
        _emailPresent = !identical(email, _omit),
        verified = identical(verified, _omit) ? null : verified as bool?,
-       _verifiedPresent = !identical(verified, _omit),
-       flags = identical(flags, _omit) ? null : flags as PublicUserFlags?,
-       _flagsPresent = !identical(flags, _omit);
+       _verifiedPresent = !identical(verified, _omit);
 
   const OAuth2UserInfoResponse._({
     required this.sub,
@@ -41,8 +39,7 @@ class OAuth2UserInfoResponse {
     this.verified,
     this.flags,
   }) : _emailPresent = false,
-       _verifiedPresent = false,
-       _flagsPresent = false;
+       _verifiedPresent = false;
   factory OAuth2UserInfoResponse.fromJson(Map<String, Object?> json) {
     final value = _$OAuth2UserInfoResponseFromJson(json);
     return OAuth2UserInfoResponse(
@@ -54,7 +51,7 @@ class OAuth2UserInfoResponse {
       avatar: value.avatar,
       email: json.containsKey('email') ? value.email : _omit,
       verified: json.containsKey('verified') ? value.verified : _omit,
-      flags: json.containsKey('flags') ? value.flags : _omit,
+      flags: value.flags,
     );
   }
 
@@ -91,7 +88,6 @@ class OAuth2UserInfoResponse {
   final PublicUserFlags? flags;
   final bool _emailPresent;
   final bool _verifiedPresent;
-  final bool _flagsPresent;
 
   Map<String, Object?> toJson() {
     final json = _$OAuth2UserInfoResponseToJson(this);
@@ -100,9 +96,6 @@ class OAuth2UserInfoResponse {
     }
     if (_verifiedPresent) {
       json.putIfAbsent('verified', () => verified);
-    }
-    if (_flagsPresent) {
-      json.putIfAbsent('flags', () => flags);
     }
     return json;
   }

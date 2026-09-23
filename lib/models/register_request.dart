@@ -17,36 +17,20 @@ const Object _omit = Object();
 class RegisterRequest {
   const RegisterRequest({
     this.consent = false,
-    Object? email = _omit,
-    Object? username = _omit,
-    Object? globalName = _omit,
-    Object? password = _omit,
-    Object? dateOfBirth = _omit,
+    this.email,
+    this.username,
+    this.globalName,
+    this.password,
+    this.dateOfBirth,
     Object? inviteCode = _omit,
     Object? registrationUrlCode = _omit,
-    Object? theme = _omit,
-  }) : email = identical(email, _omit) ? null : email as EmailType?,
-       _emailPresent = !identical(email, _omit),
-       username = identical(username, _omit) ? null : username as UsernameType?,
-       _usernamePresent = !identical(username, _omit),
-       globalName = identical(globalName, _omit) ? null : globalName as String?,
-       _globalNamePresent = !identical(globalName, _omit),
-       password = identical(password, _omit) ? null : password as PasswordType?,
-       _passwordPresent = !identical(password, _omit),
-       dateOfBirth = identical(dateOfBirth, _omit)
-           ? null
-           : dateOfBirth as String?,
-       _dateOfBirthPresent = !identical(dateOfBirth, _omit),
-       inviteCode = identical(inviteCode, _omit) ? null : inviteCode as String?,
+    this.theme,
+  }) : inviteCode = identical(inviteCode, _omit) ? null : inviteCode as String?,
        _inviteCodePresent = !identical(inviteCode, _omit),
        registrationUrlCode = identical(registrationUrlCode, _omit)
            ? null
            : registrationUrlCode as String?,
-       _registrationUrlCodePresent = !identical(registrationUrlCode, _omit),
-       theme = identical(theme, _omit)
-           ? null
-           : theme as RegisterRequestThemeTheme?,
-       _themePresent = !identical(theme, _omit);
+       _registrationUrlCodePresent = !identical(registrationUrlCode, _omit);
 
   const RegisterRequest._({
     this.consent = false,
@@ -58,30 +42,22 @@ class RegisterRequest {
     this.inviteCode,
     this.registrationUrlCode,
     this.theme,
-  }) : _emailPresent = false,
-       _usernamePresent = false,
-       _globalNamePresent = false,
-       _passwordPresent = false,
-       _dateOfBirthPresent = false,
-       _inviteCodePresent = false,
-       _registrationUrlCodePresent = false,
-       _themePresent = false;
+  }) : _inviteCodePresent = false,
+       _registrationUrlCodePresent = false;
   factory RegisterRequest.fromJson(Map<String, Object?> json) {
     final value = _$RegisterRequestFromJson(json);
     return RegisterRequest(
       consent: value.consent,
-      email: json.containsKey('email') ? value.email : _omit,
-      username: json.containsKey('username') ? value.username : _omit,
-      globalName: json.containsKey('global_name') ? value.globalName : _omit,
-      password: json.containsKey('password') ? value.password : _omit,
-      dateOfBirth: json.containsKey('date_of_birth')
-          ? value.dateOfBirth
-          : _omit,
+      email: value.email,
+      username: value.username,
+      globalName: value.globalName,
+      password: value.password,
+      dateOfBirth: value.dateOfBirth,
       inviteCode: json.containsKey('invite_code') ? value.inviteCode : _omit,
       registrationUrlCode: json.containsKey('registration_url_code')
           ? value.registrationUrlCode
           : _omit,
-      theme: json.containsKey('theme') ? value.theme : _omit,
+      theme: value.theme,
     );
   }
 
@@ -119,40 +95,16 @@ class RegisterRequest {
   /// Initial UI theme preference for the new account
   @JsonKey(includeIfNull: false)
   final RegisterRequestThemeTheme? theme;
-  final bool _emailPresent;
-  final bool _usernamePresent;
-  final bool _globalNamePresent;
-  final bool _passwordPresent;
-  final bool _dateOfBirthPresent;
   final bool _inviteCodePresent;
   final bool _registrationUrlCodePresent;
-  final bool _themePresent;
 
   Map<String, Object?> toJson() {
     final json = _$RegisterRequestToJson(this);
-    if (_emailPresent) {
-      json.putIfAbsent('email', () => email);
-    }
-    if (_usernamePresent) {
-      json.putIfAbsent('username', () => username);
-    }
-    if (_globalNamePresent) {
-      json.putIfAbsent('global_name', () => globalName);
-    }
-    if (_passwordPresent) {
-      json.putIfAbsent('password', () => password);
-    }
-    if (_dateOfBirthPresent) {
-      json.putIfAbsent('date_of_birth', () => dateOfBirth);
-    }
     if (_inviteCodePresent) {
       json.putIfAbsent('invite_code', () => inviteCode);
     }
     if (_registrationUrlCodePresent) {
       json.putIfAbsent('registration_url_code', () => registrationUrlCode);
-    }
-    if (_themePresent) {
-      json.putIfAbsent('theme', () => theme);
     }
     return json;
   }

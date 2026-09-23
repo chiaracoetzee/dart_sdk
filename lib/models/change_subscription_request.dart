@@ -9,29 +9,15 @@ import 'change_subscription_request_effective_at_effective_at.dart';
 
 part 'change_subscription_request.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class ChangeSubscriptionRequest {
   const ChangeSubscriptionRequest({
     required this.billingCycle,
-    Object? effectiveAt = _omit,
-  }) : effectiveAt = identical(effectiveAt, _omit)
-           ? null
-           : effectiveAt as ChangeSubscriptionRequestEffectiveAtEffectiveAt?,
-       _effectiveAtPresent = !identical(effectiveAt, _omit);
-
-  const ChangeSubscriptionRequest._({
-    required this.billingCycle,
     this.effectiveAt,
-  }) : _effectiveAtPresent = false;
-  factory ChangeSubscriptionRequest.fromJson(Map<String, Object?> json) {
-    final value = _$ChangeSubscriptionRequestFromJson(json);
-    return ChangeSubscriptionRequest(
-      billingCycle: value.billingCycle,
-      effectiveAt: json.containsKey('effective_at') ? value.effectiveAt : _omit,
-    );
-  }
+  });
+
+  factory ChangeSubscriptionRequest.fromJson(Map<String, Object?> json) =>
+      _$ChangeSubscriptionRequestFromJson(json);
 
   /// The recurring billing cycle to switch the active subscription to
   @JsonKey(name: 'billing_cycle')
@@ -40,13 +26,6 @@ class ChangeSubscriptionRequest {
   /// When the billing cycle change should take effect
   @JsonKey(includeIfNull: false, name: 'effective_at')
   final ChangeSubscriptionRequestEffectiveAtEffectiveAt? effectiveAt;
-  final bool _effectiveAtPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$ChangeSubscriptionRequestToJson(this);
-    if (_effectiveAtPresent) {
-      json.putIfAbsent('effective_at', () => effectiveAt);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$ChangeSubscriptionRequestToJson(this);
 }

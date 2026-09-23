@@ -8,7 +8,7 @@ part of 'call_ring_body_schema.dart';
 
 CallRingBodySchema _$CallRingBodySchemaFromJson(Map<String, dynamic> json) =>
     $checkedCreate('CallRingBodySchema', json, ($checkedConvert) {
-      final val = CallRingBodySchema._(
+      final val = CallRingBodySchema(
         recipients: $checkedConvert(
           'recipients',
           (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),

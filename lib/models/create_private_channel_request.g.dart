@@ -9,7 +9,7 @@ part of 'create_private_channel_request.dart';
 CreatePrivateChannelRequest _$CreatePrivateChannelRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('CreatePrivateChannelRequest', json, ($checkedConvert) {
-  final val = CreatePrivateChannelRequest._(
+  final val = CreatePrivateChannelRequest(
     recipientId: $checkedConvert('recipient_id', (v) => v as String?),
     recipients: $checkedConvert(
       'recipients',

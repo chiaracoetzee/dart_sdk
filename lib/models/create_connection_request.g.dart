@@ -9,7 +9,7 @@ part of 'create_connection_request.dart';
 CreateConnectionRequest _$CreateConnectionRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('CreateConnectionRequest', json, ($checkedConvert) {
-  final val = CreateConnectionRequest._(
+  final val = CreateConnectionRequest(
     type: $checkedConvert('type', (v) => ConnectionType.fromJson(v as String)),
     identifier: $checkedConvert('identifier', (v) => v as String),
     visibilityFlags: $checkedConvert(

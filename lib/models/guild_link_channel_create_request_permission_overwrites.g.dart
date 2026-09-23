@@ -12,7 +12,7 @@ _$GuildLinkChannelCreateRequestPermissionOverwritesFromJson(
 ) => $checkedCreate('GuildLinkChannelCreateRequestPermissionOverwrites', json, (
   $checkedConvert,
 ) {
-  final val = GuildLinkChannelCreateRequestPermissionOverwrites._(
+  final val = GuildLinkChannelCreateRequestPermissionOverwrites(
     id: $checkedConvert('id', (v) => v as String),
     type: $checkedConvert(
       'type',

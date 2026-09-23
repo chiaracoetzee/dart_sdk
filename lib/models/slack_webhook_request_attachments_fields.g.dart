@@ -11,7 +11,7 @@ _$SlackWebhookRequestAttachmentsFieldsFromJson(Map<String, dynamic> json) =>
     $checkedCreate('SlackWebhookRequestAttachmentsFields', json, (
       $checkedConvert,
     ) {
-      final val = SlackWebhookRequestAttachmentsFields._(
+      final val = SlackWebhookRequestAttachmentsFields(
         title: $checkedConvert('title', (v) => v as String?),
         value: $checkedConvert('value', (v) => v as String?),
         short: $checkedConvert('short', (v) => v as bool?),

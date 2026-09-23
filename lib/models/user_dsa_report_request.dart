@@ -10,34 +10,9 @@ import 'user_report_category.dart';
 
 part 'user_dsa_report_request.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class UserDsaReportRequest {
   const UserDsaReportRequest({
-    required this.ticket,
-    required this.reporterFullLegalName,
-    required this.reporterCountryOfResidence,
-    required this.reportType,
-    required this.category,
-    Object? additionalInfo = _omit,
-    Object? reporterFluxerTag = _omit,
-    Object? userId = _omit,
-    Object? userTag = _omit,
-  }) : additionalInfo = identical(additionalInfo, _omit)
-           ? null
-           : additionalInfo as String?,
-       _additionalInfoPresent = !identical(additionalInfo, _omit),
-       reporterFluxerTag = identical(reporterFluxerTag, _omit)
-           ? null
-           : reporterFluxerTag as String?,
-       _reporterFluxerTagPresent = !identical(reporterFluxerTag, _omit),
-       userId = identical(userId, _omit) ? null : userId as SnowflakeType?,
-       _userIdPresent = !identical(userId, _omit),
-       userTag = identical(userTag, _omit) ? null : userTag as String?,
-       _userTagPresent = !identical(userTag, _omit);
-
-  const UserDsaReportRequest._({
     required this.ticket,
     required this.reporterFullLegalName,
     required this.reporterCountryOfResidence,
@@ -47,28 +22,10 @@ class UserDsaReportRequest {
     this.reporterFluxerTag,
     this.userId,
     this.userTag,
-  }) : _additionalInfoPresent = false,
-       _reporterFluxerTagPresent = false,
-       _userIdPresent = false,
-       _userTagPresent = false;
-  factory UserDsaReportRequest.fromJson(Map<String, Object?> json) {
-    final value = _$UserDsaReportRequestFromJson(json);
-    return UserDsaReportRequest(
-      ticket: value.ticket,
-      reporterFullLegalName: value.reporterFullLegalName,
-      reporterCountryOfResidence: value.reporterCountryOfResidence,
-      reportType: value.reportType,
-      category: value.category,
-      additionalInfo: json.containsKey('additional_info')
-          ? value.additionalInfo
-          : _omit,
-      reporterFluxerTag: json.containsKey('reporter_fluxer_tag')
-          ? value.reporterFluxerTag
-          : _omit,
-      userId: json.containsKey('user_id') ? value.userId : _omit,
-      userTag: json.containsKey('user_tag') ? value.userTag : _omit,
-    );
-  }
+  });
+
+  factory UserDsaReportRequest.fromJson(Map<String, Object?> json) =>
+      _$UserDsaReportRequestFromJson(json);
 
   /// Verification ticket obtained from email verification
   final String ticket;
@@ -102,25 +59,6 @@ class UserDsaReportRequest {
   /// Fluxer tag of the user being reported
   @JsonKey(includeIfNull: false, name: 'user_tag')
   final String? userTag;
-  final bool _additionalInfoPresent;
-  final bool _reporterFluxerTagPresent;
-  final bool _userIdPresent;
-  final bool _userTagPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$UserDsaReportRequestToJson(this);
-    if (_additionalInfoPresent) {
-      json.putIfAbsent('additional_info', () => additionalInfo);
-    }
-    if (_reporterFluxerTagPresent) {
-      json.putIfAbsent('reporter_fluxer_tag', () => reporterFluxerTag);
-    }
-    if (_userIdPresent) {
-      json.putIfAbsent('user_id', () => userId);
-    }
-    if (_userTagPresent) {
-      json.putIfAbsent('user_tag', () => userTag);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$UserDsaReportRequestToJson(this);
 }

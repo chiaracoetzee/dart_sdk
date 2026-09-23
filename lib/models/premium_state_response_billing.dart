@@ -33,10 +33,10 @@ class PremiumStateResponseBilling {
 
   @JsonKey(includeIfNull: true, name: 'stripe_customer_id')
   final String? stripeCustomerId;
-  @JsonKey(name: 'current_subscription_price')
-  final CurrentSubscriptionPriceResponse currentSubscriptionPrice;
-  @JsonKey(name: 'pending_subscription_change')
-  final PendingSubscriptionChangeResponse pendingSubscriptionChange;
+  @JsonKey(includeIfNull: true, name: 'current_subscription_price')
+  final CurrentSubscriptionPriceResponse? currentSubscriptionPrice;
+  @JsonKey(includeIfNull: true, name: 'pending_subscription_change')
+  final PendingSubscriptionChangeResponse? pendingSubscriptionChange;
   @JsonKey(name: 'list_price_switch')
   final ListPriceSwitchState listPriceSwitch;
   @JsonKey(includeIfNull: true)

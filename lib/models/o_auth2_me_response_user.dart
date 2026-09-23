@@ -22,15 +22,11 @@ class OAuth2MeResponseUser {
     required this.avatar,
     required this.avatarColor,
     required this.flags,
-    Object? bot = _omit,
-    Object? system = _omit,
+    this.bot,
+    this.system,
     Object? email = _omit,
     Object? verified = _omit,
-  }) : bot = identical(bot, _omit) ? null : bot as bool?,
-       _botPresent = !identical(bot, _omit),
-       system = identical(system, _omit) ? null : system as bool?,
-       _systemPresent = !identical(system, _omit),
-       email = identical(email, _omit) ? null : email as String?,
+  }) : email = identical(email, _omit) ? null : email as String?,
        _emailPresent = !identical(email, _omit),
        verified = identical(verified, _omit) ? null : verified as bool?,
        _verifiedPresent = !identical(verified, _omit);
@@ -47,9 +43,7 @@ class OAuth2MeResponseUser {
     this.system,
     this.email,
     this.verified,
-  }) : _botPresent = false,
-       _systemPresent = false,
-       _emailPresent = false,
+  }) : _emailPresent = false,
        _verifiedPresent = false;
   factory OAuth2MeResponseUser.fromJson(Map<String, Object?> json) {
     final value = _$OAuth2MeResponseUserFromJson(json);
@@ -61,8 +55,8 @@ class OAuth2MeResponseUser {
       avatar: value.avatar,
       avatarColor: value.avatarColor,
       flags: value.flags,
-      bot: json.containsKey('bot') ? value.bot : _omit,
-      system: json.containsKey('system') ? value.system : _omit,
+      bot: value.bot,
+      system: value.system,
       email: json.containsKey('email') ? value.email : _omit,
       verified: json.containsKey('verified') ? value.verified : _omit,
     );
@@ -107,19 +101,11 @@ class OAuth2MeResponseUser {
   /// Whether the user has verified their email
   @JsonKey(includeIfNull: false)
   final bool? verified;
-  final bool _botPresent;
-  final bool _systemPresent;
   final bool _emailPresent;
   final bool _verifiedPresent;
 
   Map<String, Object?> toJson() {
     final json = _$OAuth2MeResponseUserToJson(this);
-    if (_botPresent) {
-      json.putIfAbsent('bot', () => bot);
-    }
-    if (_systemPresent) {
-      json.putIfAbsent('system', () => system);
-    }
     if (_emailPresent) {
       json.putIfAbsent('email', () => email);
     }

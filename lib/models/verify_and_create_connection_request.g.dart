@@ -12,7 +12,7 @@ VerifyAndCreateConnectionRequest _$VerifyAndCreateConnectionRequestFromJson(
   'VerifyAndCreateConnectionRequest',
   json,
   ($checkedConvert) {
-    final val = VerifyAndCreateConnectionRequest._(
+    final val = VerifyAndCreateConnectionRequest(
       initiationToken: $checkedConvert('initiation_token', (v) => v as String),
       visibilityFlags: $checkedConvert(
         'visibility_flags',

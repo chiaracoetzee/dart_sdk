@@ -12,7 +12,7 @@ MessageReferenceRequest _$MessageReferenceRequestFromJson(
   'MessageReferenceRequest',
   json,
   ($checkedConvert) {
-    final val = MessageReferenceRequest._(
+    final val = MessageReferenceRequest(
       messageId: $checkedConvert('message_id', (v) => v as String),
       channelId: $checkedConvert('channel_id', (v) => v as String?),
       guildId: $checkedConvert('guild_id', (v) => v as String?),

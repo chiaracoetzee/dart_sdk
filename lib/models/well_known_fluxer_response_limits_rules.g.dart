@@ -11,7 +11,7 @@ WellKnownFluxerResponseLimitsRules _$WellKnownFluxerResponseLimitsRulesFromJson(
 ) => $checkedCreate('WellKnownFluxerResponseLimitsRules', json, (
   $checkedConvert,
 ) {
-  final val = WellKnownFluxerResponseLimitsRules._(
+  final val = WellKnownFluxerResponseLimitsRules(
     id: $checkedConvert('id', (v) => v as String),
     overrides: $checkedConvert(
       'overrides',

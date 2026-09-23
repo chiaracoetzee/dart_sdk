@@ -20,25 +20,15 @@ class GuildAuditLogEntryResponse {
     required this.actionType,
     Object? userId = _omit,
     Object? targetId = _omit,
-    Object? reason = _omit,
-    Object? options = _omit,
-    Object? changes = _omit,
+    this.reason,
+    this.options,
+    this.changes,
   }) : userId = identical(userId, _omit)
            ? null
            : userId as SnowflakeStringType?,
        _userIdPresent = !identical(userId, _omit),
        targetId = identical(targetId, _omit) ? null : targetId as String?,
-       _targetIdPresent = !identical(targetId, _omit),
-       reason = identical(reason, _omit) ? null : reason as String?,
-       _reasonPresent = !identical(reason, _omit),
-       options = identical(options, _omit)
-           ? null
-           : options as GuildAuditLogEntryResponseOptions?,
-       _optionsPresent = !identical(options, _omit),
-       changes = identical(changes, _omit)
-           ? null
-           : changes as List<AuditLogChangeSchema>?,
-       _changesPresent = !identical(changes, _omit);
+       _targetIdPresent = !identical(targetId, _omit);
 
   const GuildAuditLogEntryResponse._({
     required this.id,
@@ -49,10 +39,7 @@ class GuildAuditLogEntryResponse {
     this.options,
     this.changes,
   }) : _userIdPresent = false,
-       _targetIdPresent = false,
-       _reasonPresent = false,
-       _optionsPresent = false,
-       _changesPresent = false;
+       _targetIdPresent = false;
   factory GuildAuditLogEntryResponse.fromJson(Map<String, Object?> json) {
     final value = _$GuildAuditLogEntryResponseFromJson(json);
     return GuildAuditLogEntryResponse(
@@ -60,9 +47,9 @@ class GuildAuditLogEntryResponse {
       actionType: value.actionType,
       userId: json.containsKey('user_id') ? value.userId : _omit,
       targetId: json.containsKey('target_id') ? value.targetId : _omit,
-      reason: json.containsKey('reason') ? value.reason : _omit,
-      options: json.containsKey('options') ? value.options : _omit,
-      changes: json.containsKey('changes') ? value.changes : _omit,
+      reason: value.reason,
+      options: value.options,
+      changes: value.changes,
     );
   }
 
@@ -92,9 +79,6 @@ class GuildAuditLogEntryResponse {
   final List<AuditLogChangeSchema>? changes;
   final bool _userIdPresent;
   final bool _targetIdPresent;
-  final bool _reasonPresent;
-  final bool _optionsPresent;
-  final bool _changesPresent;
 
   Map<String, Object?> toJson() {
     final json = _$GuildAuditLogEntryResponseToJson(this);
@@ -103,15 +87,6 @@ class GuildAuditLogEntryResponse {
     }
     if (_targetIdPresent) {
       json.putIfAbsent('target_id', () => targetId);
-    }
-    if (_reasonPresent) {
-      json.putIfAbsent('reason', () => reason);
-    }
-    if (_optionsPresent) {
-      json.putIfAbsent('options', () => options);
-    }
-    if (_changesPresent) {
-      json.putIfAbsent('changes', () => changes);
     }
     return json;
   }

@@ -9,40 +9,17 @@ import 'int32_type.dart';
 
 part 'read_state_ack_request_read_states.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class ReadStateAckRequestReadStates {
   const ReadStateAckRequestReadStates({
     required this.channelId,
     required this.messageId,
-    Object? mentionCount = _omit,
-    Object? manual = _omit,
-  }) : mentionCount = identical(mentionCount, _omit)
-           ? null
-           : mentionCount as Int32Type?,
-       _mentionCountPresent = !identical(mentionCount, _omit),
-       manual = identical(manual, _omit) ? null : manual as bool?,
-       _manualPresent = !identical(manual, _omit);
-
-  const ReadStateAckRequestReadStates._({
-    required this.channelId,
-    required this.messageId,
     this.mentionCount,
     this.manual,
-  }) : _mentionCountPresent = false,
-       _manualPresent = false;
-  factory ReadStateAckRequestReadStates.fromJson(Map<String, Object?> json) {
-    final value = _$ReadStateAckRequestReadStatesFromJson(json);
-    return ReadStateAckRequestReadStates(
-      channelId: value.channelId,
-      messageId: value.messageId,
-      mentionCount: json.containsKey('mention_count')
-          ? value.mentionCount
-          : _omit,
-      manual: json.containsKey('manual') ? value.manual : _omit,
-    );
-  }
+  });
+
+  factory ReadStateAckRequestReadStates.fromJson(Map<String, Object?> json) =>
+      _$ReadStateAckRequestReadStatesFromJson(json);
 
   /// The ID of the channel
   @JsonKey(name: 'channel_id')
@@ -59,17 +36,6 @@ class ReadStateAckRequestReadStates {
   /// Whether this acknowledgement is an explicit manual read marker
   @JsonKey(includeIfNull: false)
   final bool? manual;
-  final bool _mentionCountPresent;
-  final bool _manualPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$ReadStateAckRequestReadStatesToJson(this);
-    if (_mentionCountPresent) {
-      json.putIfAbsent('mention_count', () => mentionCount);
-    }
-    if (_manualPresent) {
-      json.putIfAbsent('manual', () => manual);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$ReadStateAckRequestReadStatesToJson(this);
 }

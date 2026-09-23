@@ -10,7 +10,7 @@ Object3 _$Object3FromJson(Map<String, dynamic> json) => $checkedCreate(
   'Object3',
   json,
   ($checkedConvert) {
-    final val = Object3._(
+    final val = Object3(
       id: $checkedConvert('id', (v) => v as String?),
       filename: $checkedConvert('filename', (v) => v as String?),
       description: $checkedConvert('description', (v) => v as String?),

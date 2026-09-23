@@ -9,7 +9,7 @@ part of 'bulk_delete_messages_request.dart';
 BulkDeleteMessagesRequest _$BulkDeleteMessagesRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('BulkDeleteMessagesRequest', json, ($checkedConvert) {
-  final val = BulkDeleteMessagesRequest._(
+  final val = BulkDeleteMessagesRequest(
     messageIds: $checkedConvert(
       'message_ids',
       (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),

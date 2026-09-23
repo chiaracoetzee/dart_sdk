@@ -10,60 +10,9 @@ import 'join_source_type_input.dart';
 
 part 'guild_member_search_request.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class GuildMemberSearchRequest {
   const GuildMemberSearchRequest({
-    this.limit = 25,
-    this.offset = 0,
-    Object? query = _omit,
-    Object? roleIds = _omit,
-    Object? joinedAtGte = _omit,
-    Object? joinedAtLte = _omit,
-    Object? joinSourceType = _omit,
-    Object? sourceInviteCode = _omit,
-    Object? isBot = _omit,
-    Object? userCreatedAtGte = _omit,
-    Object? userCreatedAtLte = _omit,
-    Object? sortBy = _omit,
-    Object? sortOrder = _omit,
-  }) : query = identical(query, _omit) ? null : query as String?,
-       _queryPresent = !identical(query, _omit),
-       roleIds = identical(roleIds, _omit) ? null : roleIds as List<String>?,
-       _roleIdsPresent = !identical(roleIds, _omit),
-       joinedAtGte = identical(joinedAtGte, _omit) ? null : joinedAtGte as int?,
-       _joinedAtGtePresent = !identical(joinedAtGte, _omit),
-       joinedAtLte = identical(joinedAtLte, _omit) ? null : joinedAtLte as int?,
-       _joinedAtLtePresent = !identical(joinedAtLte, _omit),
-       joinSourceType = identical(joinSourceType, _omit)
-           ? null
-           : joinSourceType as List<JoinSourceTypeInput>?,
-       _joinSourceTypePresent = !identical(joinSourceType, _omit),
-       sourceInviteCode = identical(sourceInviteCode, _omit)
-           ? null
-           : sourceInviteCode as List<String>?,
-       _sourceInviteCodePresent = !identical(sourceInviteCode, _omit),
-       isBot = identical(isBot, _omit) ? null : isBot as bool?,
-       _isBotPresent = !identical(isBot, _omit),
-       userCreatedAtGte = identical(userCreatedAtGte, _omit)
-           ? null
-           : userCreatedAtGte as int?,
-       _userCreatedAtGtePresent = !identical(userCreatedAtGte, _omit),
-       userCreatedAtLte = identical(userCreatedAtLte, _omit)
-           ? null
-           : userCreatedAtLte as int?,
-       _userCreatedAtLtePresent = !identical(userCreatedAtLte, _omit),
-       sortBy = identical(sortBy, _omit)
-           ? null
-           : sortBy as GuildMemberSearchRequestSortBySortBy?,
-       _sortByPresent = !identical(sortBy, _omit),
-       sortOrder = identical(sortOrder, _omit)
-           ? null
-           : sortOrder as GuildMemberSearchRequestSortOrderSortOrder?,
-       _sortOrderPresent = !identical(sortOrder, _omit);
-
-  const GuildMemberSearchRequest._({
     this.limit = 25,
     this.offset = 0,
     this.query,
@@ -77,47 +26,10 @@ class GuildMemberSearchRequest {
     this.userCreatedAtLte,
     this.sortBy,
     this.sortOrder,
-  }) : _queryPresent = false,
-       _roleIdsPresent = false,
-       _joinedAtGtePresent = false,
-       _joinedAtLtePresent = false,
-       _joinSourceTypePresent = false,
-       _sourceInviteCodePresent = false,
-       _isBotPresent = false,
-       _userCreatedAtGtePresent = false,
-       _userCreatedAtLtePresent = false,
-       _sortByPresent = false,
-       _sortOrderPresent = false;
-  factory GuildMemberSearchRequest.fromJson(Map<String, Object?> json) {
-    final value = _$GuildMemberSearchRequestFromJson(json);
-    return GuildMemberSearchRequest(
-      limit: value.limit,
-      offset: value.offset,
-      query: json.containsKey('query') ? value.query : _omit,
-      roleIds: json.containsKey('role_ids') ? value.roleIds : _omit,
-      joinedAtGte: json.containsKey('joined_at_gte')
-          ? value.joinedAtGte
-          : _omit,
-      joinedAtLte: json.containsKey('joined_at_lte')
-          ? value.joinedAtLte
-          : _omit,
-      joinSourceType: json.containsKey('join_source_type')
-          ? value.joinSourceType
-          : _omit,
-      sourceInviteCode: json.containsKey('source_invite_code')
-          ? value.sourceInviteCode
-          : _omit,
-      isBot: json.containsKey('is_bot') ? value.isBot : _omit,
-      userCreatedAtGte: json.containsKey('user_created_at_gte')
-          ? value.userCreatedAtGte
-          : _omit,
-      userCreatedAtLte: json.containsKey('user_created_at_lte')
-          ? value.userCreatedAtLte
-          : _omit,
-      sortBy: json.containsKey('sort_by') ? value.sortBy : _omit,
-      sortOrder: json.containsKey('sort_order') ? value.sortOrder : _omit,
-    );
-  }
+  });
+
+  factory GuildMemberSearchRequest.fromJson(Map<String, Object?> json) =>
+      _$GuildMemberSearchRequestFromJson(json);
 
   /// Text to search for in usernames, global names, and nicknames
   @JsonKey(includeIfNull: false)
@@ -168,53 +80,6 @@ class GuildMemberSearchRequest {
   /// Sort order
   @JsonKey(includeIfNull: false, name: 'sort_order')
   final GuildMemberSearchRequestSortOrderSortOrder? sortOrder;
-  final bool _queryPresent;
-  final bool _roleIdsPresent;
-  final bool _joinedAtGtePresent;
-  final bool _joinedAtLtePresent;
-  final bool _joinSourceTypePresent;
-  final bool _sourceInviteCodePresent;
-  final bool _isBotPresent;
-  final bool _userCreatedAtGtePresent;
-  final bool _userCreatedAtLtePresent;
-  final bool _sortByPresent;
-  final bool _sortOrderPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$GuildMemberSearchRequestToJson(this);
-    if (_queryPresent) {
-      json.putIfAbsent('query', () => query);
-    }
-    if (_roleIdsPresent) {
-      json.putIfAbsent('role_ids', () => roleIds);
-    }
-    if (_joinedAtGtePresent) {
-      json.putIfAbsent('joined_at_gte', () => joinedAtGte);
-    }
-    if (_joinedAtLtePresent) {
-      json.putIfAbsent('joined_at_lte', () => joinedAtLte);
-    }
-    if (_joinSourceTypePresent) {
-      json.putIfAbsent('join_source_type', () => joinSourceType);
-    }
-    if (_sourceInviteCodePresent) {
-      json.putIfAbsent('source_invite_code', () => sourceInviteCode);
-    }
-    if (_isBotPresent) {
-      json.putIfAbsent('is_bot', () => isBot);
-    }
-    if (_userCreatedAtGtePresent) {
-      json.putIfAbsent('user_created_at_gte', () => userCreatedAtGte);
-    }
-    if (_userCreatedAtLtePresent) {
-      json.putIfAbsent('user_created_at_lte', () => userCreatedAtLte);
-    }
-    if (_sortByPresent) {
-      json.putIfAbsent('sort_by', () => sortBy);
-    }
-    if (_sortOrderPresent) {
-      json.putIfAbsent('sort_order', () => sortOrder);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$GuildMemberSearchRequestToJson(this);
 }

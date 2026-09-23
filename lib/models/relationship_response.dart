@@ -10,9 +10,7 @@ import 'user_partial_response.dart';
 
 part 'relationship_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class RelationshipResponse {
   const RelationshipResponse({
     required this.id,
@@ -21,31 +19,11 @@ class RelationshipResponse {
     required this.nickname,
     required this.shareVoiceActivity,
     required this.friendSharesVoiceActivity,
-    Object? since = _omit,
-  }) : since = identical(since, _omit) ? null : since as DateTime?,
-       _sincePresent = !identical(since, _omit);
-
-  const RelationshipResponse._({
-    required this.id,
-    required this.type,
-    required this.user,
-    required this.nickname,
-    required this.shareVoiceActivity,
-    required this.friendSharesVoiceActivity,
     this.since,
-  }) : _sincePresent = false;
-  factory RelationshipResponse.fromJson(Map<String, Object?> json) {
-    final value = _$RelationshipResponseFromJson(json);
-    return RelationshipResponse(
-      id: value.id,
-      type: value.type,
-      user: value.user,
-      nickname: value.nickname,
-      shareVoiceActivity: value.shareVoiceActivity,
-      friendSharesVoiceActivity: value.friendSharesVoiceActivity,
-      since: json.containsKey('since') ? value.since : _omit,
-    );
-  }
+  });
+
+  factory RelationshipResponse.fromJson(Map<String, Object?> json) =>
+      _$RelationshipResponseFromJson(json);
 
   /// The unique identifier for the relationship
   final SnowflakeStringType id;
@@ -71,13 +49,6 @@ class RelationshipResponse {
   /// Whether this friend has chosen to share their voice activity with the current user; for non-friend types this is always true
   @JsonKey(name: 'friend_shares_voice_activity')
   final bool friendSharesVoiceActivity;
-  final bool _sincePresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$RelationshipResponseToJson(this);
-    if (_sincePresent) {
-      json.putIfAbsent('since', () => since);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$RelationshipResponseToJson(this);
 }

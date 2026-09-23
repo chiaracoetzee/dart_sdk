@@ -13,7 +13,7 @@ _$LogoutAuthSessionsWithVerificationRequestFromJson(
   'LogoutAuthSessionsWithVerificationRequest',
   json,
   ($checkedConvert) {
-    final val = LogoutAuthSessionsWithVerificationRequest._(
+    final val = LogoutAuthSessionsWithVerificationRequest(
       sessionIdHashes: $checkedConvert(
         'session_id_hashes',
         (v) => (v as List<dynamic>).map((e) => e as String).toList(),

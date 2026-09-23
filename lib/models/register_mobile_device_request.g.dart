@@ -12,7 +12,7 @@ RegisterMobileDeviceRequest _$RegisterMobileDeviceRequestFromJson(
   'RegisterMobileDeviceRequest',
   json,
   ($checkedConvert) {
-    final val = RegisterMobileDeviceRequest._(
+    final val = RegisterMobileDeviceRequest(
       platform: $checkedConvert(
         'platform',
         (v) =>

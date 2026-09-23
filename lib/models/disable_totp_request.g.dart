@@ -11,7 +11,7 @@ DisableTotpRequest _$DisableTotpRequestFromJson(Map<String, dynamic> json) =>
       'DisableTotpRequest',
       json,
       ($checkedConvert) {
-        final val = DisableTotpRequest._(
+        final val = DisableTotpRequest(
           code: $checkedConvert('code', (v) => v as String),
           password: $checkedConvert('password', (v) => v as String?),
           mfaMethod: $checkedConvert(

@@ -11,19 +11,11 @@ const Object _omit = Object();
 @JsonSerializable(constructor: '_')
 class ApplicationUpdateRequest {
   const ApplicationUpdateRequest({
-    Object? name = _omit,
-    Object? botPublic = _omit,
-    Object? botRequireCodeGrant = _omit,
+    this.name,
+    this.botPublic,
+    this.botRequireCodeGrant,
     Object? redirectUris = _omit,
-  }) : name = identical(name, _omit) ? null : name as String?,
-       _namePresent = !identical(name, _omit),
-       botPublic = identical(botPublic, _omit) ? null : botPublic as bool?,
-       _botPublicPresent = !identical(botPublic, _omit),
-       botRequireCodeGrant = identical(botRequireCodeGrant, _omit)
-           ? null
-           : botRequireCodeGrant as bool?,
-       _botRequireCodeGrantPresent = !identical(botRequireCodeGrant, _omit),
-       redirectUris = identical(redirectUris, _omit)
+  }) : redirectUris = identical(redirectUris, _omit)
            ? null
            : redirectUris as List<String>?,
        _redirectUrisPresent = !identical(redirectUris, _omit);
@@ -33,18 +25,13 @@ class ApplicationUpdateRequest {
     this.botPublic,
     this.botRequireCodeGrant,
     this.redirectUris,
-  }) : _namePresent = false,
-       _botPublicPresent = false,
-       _botRequireCodeGrantPresent = false,
-       _redirectUrisPresent = false;
+  }) : _redirectUrisPresent = false;
   factory ApplicationUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$ApplicationUpdateRequestFromJson(json);
     return ApplicationUpdateRequest(
-      name: json.containsKey('name') ? value.name : _omit,
-      botPublic: json.containsKey('bot_public') ? value.botPublic : _omit,
-      botRequireCodeGrant: json.containsKey('bot_require_code_grant')
-          ? value.botRequireCodeGrant
-          : _omit,
+      name: value.name,
+      botPublic: value.botPublic,
+      botRequireCodeGrant: value.botRequireCodeGrant,
       redirectUris: json.containsKey('redirect_uris')
           ? value.redirectUris
           : _omit,
@@ -66,22 +53,10 @@ class ApplicationUpdateRequest {
   /// The redirect URIs for OAuth2 flows
   @JsonKey(includeIfNull: false, name: 'redirect_uris')
   final List<String>? redirectUris;
-  final bool _namePresent;
-  final bool _botPublicPresent;
-  final bool _botRequireCodeGrantPresent;
   final bool _redirectUrisPresent;
 
   Map<String, Object?> toJson() {
     final json = _$ApplicationUpdateRequestToJson(this);
-    if (_namePresent) {
-      json.putIfAbsent('name', () => name);
-    }
-    if (_botPublicPresent) {
-      json.putIfAbsent('bot_public', () => botPublic);
-    }
-    if (_botRequireCodeGrantPresent) {
-      json.putIfAbsent('bot_require_code_grant', () => botRequireCodeGrant);
-    }
     if (_redirectUrisPresent) {
       json.putIfAbsent('redirect_uris', () => redirectUris);
     }

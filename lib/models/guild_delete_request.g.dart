@@ -11,7 +11,7 @@ GuildDeleteRequest _$GuildDeleteRequestFromJson(Map<String, dynamic> json) =>
       'GuildDeleteRequest',
       json,
       ($checkedConvert) {
-        final val = GuildDeleteRequest._(
+        final val = GuildDeleteRequest(
           password: $checkedConvert('password', (v) => v as String?),
           mfaMethod: $checkedConvert(
             'mfa_method',

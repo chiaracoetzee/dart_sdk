@@ -9,7 +9,7 @@ part of 'o_auth2_introspect_response.dart';
 OAuth2IntrospectResponse _$OAuth2IntrospectResponseFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('OAuth2IntrospectResponse', json, ($checkedConvert) {
-  final val = OAuth2IntrospectResponse._(
+  final val = OAuth2IntrospectResponse(
     active: $checkedConvert('active', (v) => v as bool),
     scope: $checkedConvert('scope', (v) => v as String?),
     clientId: $checkedConvert('client_id', (v) => v as String?),

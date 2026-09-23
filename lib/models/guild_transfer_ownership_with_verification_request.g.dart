@@ -13,7 +13,7 @@ _$GuildTransferOwnershipWithVerificationRequestFromJson(
   'GuildTransferOwnershipWithVerificationRequest',
   json,
   ($checkedConvert) {
-    final val = GuildTransferOwnershipWithVerificationRequest._(
+    final val = GuildTransferOwnershipWithVerificationRequest(
       newOwnerId: $checkedConvert('new_owner_id', (v) => v as String),
       password: $checkedConvert('password', (v) => v as String?),
       mfaMethod: $checkedConvert(

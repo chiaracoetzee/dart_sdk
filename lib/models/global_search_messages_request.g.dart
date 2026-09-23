@@ -12,7 +12,7 @@ GlobalSearchMessagesRequest _$GlobalSearchMessagesRequestFromJson(
   'GlobalSearchMessagesRequest',
   json,
   ($checkedConvert) {
-    final val = GlobalSearchMessagesRequest._(
+    final val = GlobalSearchMessagesRequest(
       authorId: $checkedConvert(
         'author_id',
         (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),

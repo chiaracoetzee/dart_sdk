@@ -11,7 +11,7 @@ UserPartialResponse _$UserPartialResponseFromJson(Map<String, dynamic> json) =>
       'UserPartialResponse',
       json,
       ($checkedConvert) {
-        final val = UserPartialResponse._(
+        final val = UserPartialResponse(
           id: $checkedConvert('id', (v) => v as String),
           username: $checkedConvert('username', (v) => v as String),
           discriminator: $checkedConvert('discriminator', (v) => v as String),

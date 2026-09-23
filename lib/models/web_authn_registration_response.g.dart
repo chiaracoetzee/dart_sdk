@@ -9,7 +9,7 @@ part of 'web_authn_registration_response.dart';
 WebAuthnRegistrationResponse _$WebAuthnRegistrationResponseFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('WebAuthnRegistrationResponse', json, ($checkedConvert) {
-  final val = WebAuthnRegistrationResponse._(
+  final val = WebAuthnRegistrationResponse(
     id: $checkedConvert('id', (v) => v as String),
     rawId: $checkedConvert('rawId', (v) => v as String),
     type: $checkedConvert('type', (v) => v as String),

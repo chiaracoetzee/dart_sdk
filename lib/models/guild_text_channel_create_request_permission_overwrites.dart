@@ -10,40 +10,18 @@ import 'unsigned_int64_type.dart';
 
 part 'guild_text_channel_create_request_permission_overwrites.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class GuildTextChannelCreateRequestPermissionOverwrites {
   const GuildTextChannelCreateRequestPermissionOverwrites({
     required this.id,
     required this.type,
-    Object? allow = _omit,
-    Object? deny = _omit,
-  }) : allow = identical(allow, _omit) ? null : allow as UnsignedInt64Type?,
-       _allowPresent = !identical(allow, _omit),
-       deny = identical(deny, _omit) ? null : deny as UnsignedInt64Type?,
-       _denyPresent = !identical(deny, _omit);
-
-  const GuildTextChannelCreateRequestPermissionOverwrites._({
-    required this.id,
-    required this.type,
     this.allow,
     this.deny,
-  }) : _allowPresent = false,
-       _denyPresent = false;
+  });
+
   factory GuildTextChannelCreateRequestPermissionOverwrites.fromJson(
     Map<String, Object?> json,
-  ) {
-    final value = _$GuildTextChannelCreateRequestPermissionOverwritesFromJson(
-      json,
-    );
-    return GuildTextChannelCreateRequestPermissionOverwrites(
-      id: value.id,
-      type: value.type,
-      allow: json.containsKey('allow') ? value.allow : _omit,
-      deny: json.containsKey('deny') ? value.deny : _omit,
-    );
-  }
+  ) => _$GuildTextChannelCreateRequestPermissionOverwritesFromJson(json);
 
   /// The ID of the role or user to overwrite permissions for
   final SnowflakeType id;
@@ -58,19 +36,7 @@ class GuildTextChannelCreateRequestPermissionOverwrites {
   /// Bitwise value of denied permissions
   @JsonKey(includeIfNull: false)
   final UnsignedInt64Type? deny;
-  final bool _allowPresent;
-  final bool _denyPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$GuildTextChannelCreateRequestPermissionOverwritesToJson(
-      this,
-    );
-    if (_allowPresent) {
-      json.putIfAbsent('allow', () => allow);
-    }
-    if (_denyPresent) {
-      json.putIfAbsent('deny', () => deny);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() =>
+      _$GuildTextChannelCreateRequestPermissionOverwritesToJson(this);
 }

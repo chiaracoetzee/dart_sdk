@@ -14,28 +14,20 @@ const Object _omit = Object();
 @JsonSerializable(constructor: '_')
 class WebhookUpdateRequest {
   const WebhookUpdateRequest({
-    Object? name = _omit,
+    this.name,
     Object? avatar = _omit,
-    Object? channelId = _omit,
-  }) : name = identical(name, _omit) ? null : name as String?,
-       _namePresent = !identical(name, _omit),
-       avatar = identical(avatar, _omit) ? null : avatar as Base64ImageType?,
-       _avatarPresent = !identical(avatar, _omit),
-       channelId = identical(channelId, _omit)
-           ? null
-           : channelId as SnowflakeType?,
-       _channelIdPresent = !identical(channelId, _omit);
+    this.channelId,
+  }) : avatar = identical(avatar, _omit) ? null : avatar as Base64ImageType?,
+       _avatarPresent = !identical(avatar, _omit);
 
   const WebhookUpdateRequest._({this.name, this.avatar, this.channelId})
-    : _namePresent = false,
-      _avatarPresent = false,
-      _channelIdPresent = false;
+    : _avatarPresent = false;
   factory WebhookUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$WebhookUpdateRequestFromJson(json);
     return WebhookUpdateRequest(
-      name: json.containsKey('name') ? value.name : _omit,
+      name: value.name,
       avatar: json.containsKey('avatar') ? value.avatar : _omit,
-      channelId: json.containsKey('channel_id') ? value.channelId : _omit,
+      channelId: value.channelId,
     );
   }
 
@@ -50,20 +42,12 @@ class WebhookUpdateRequest {
   /// The ID of the channel to move the webhook to
   @JsonKey(includeIfNull: false, name: 'channel_id')
   final SnowflakeType? channelId;
-  final bool _namePresent;
   final bool _avatarPresent;
-  final bool _channelIdPresent;
 
   Map<String, Object?> toJson() {
     final json = _$WebhookUpdateRequestToJson(this);
-    if (_namePresent) {
-      json.putIfAbsent('name', () => name);
-    }
     if (_avatarPresent) {
       json.putIfAbsent('avatar', () => avatar);
-    }
-    if (_channelIdPresent) {
-      json.putIfAbsent('channel_id', () => channelId);
     }
     return json;
   }

@@ -12,7 +12,7 @@ AuthorizeConsentRequest _$AuthorizeConsentRequestFromJson(
   'AuthorizeConsentRequest',
   json,
   ($checkedConvert) {
-    final val = AuthorizeConsentRequest._(
+    final val = AuthorizeConsentRequest(
       clientId: $checkedConvert('client_id', (v) => v as String),
       scope: $checkedConvert('scope', (v) => v as String),
       responseType: $checkedConvert('response_type', (v) => v as String?),

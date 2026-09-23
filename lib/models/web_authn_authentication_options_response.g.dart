@@ -12,7 +12,7 @@ _$WebAuthnAuthenticationOptionsResponseFromJson(
 ) => $checkedCreate('WebAuthnAuthenticationOptionsResponse', json, (
   $checkedConvert,
 ) {
-  final val = WebAuthnAuthenticationOptionsResponse._(
+  final val = WebAuthnAuthenticationOptionsResponse(
     challenge: $checkedConvert('challenge', (v) => v as String),
     timeout: $checkedConvert('timeout', (v) => v as num?),
     rpId: $checkedConvert('rpId', (v) => v as String?),

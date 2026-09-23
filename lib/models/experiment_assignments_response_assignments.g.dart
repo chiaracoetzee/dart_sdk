@@ -12,7 +12,7 @@ _$ExperimentAssignmentsResponseAssignmentsFromJson(Map<String, dynamic> json) =>
       'ExperimentAssignmentsResponseAssignments',
       json,
       ($checkedConvert) {
-        final val = ExperimentAssignmentsResponseAssignments._(
+        final val = ExperimentAssignmentsResponseAssignments(
           voiceNoiseSuppression: $checkedConvert(
             'voice_noise_suppression',
             (v) => v == null

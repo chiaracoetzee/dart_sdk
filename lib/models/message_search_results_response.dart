@@ -10,9 +10,7 @@ import 'message_search_results_response_messages.dart';
 
 part 'message_search_results_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class MessageSearchResultsResponse {
   const MessageSearchResultsResponse({
     required this.messages,
@@ -20,29 +18,11 @@ class MessageSearchResultsResponse {
     required this.total,
     required this.hitsPerPage,
     required this.page,
-    Object? cursor = _omit,
-  }) : cursor = identical(cursor, _omit) ? null : cursor as List<String>?,
-       _cursorPresent = !identical(cursor, _omit);
-
-  const MessageSearchResultsResponse._({
-    required this.messages,
-    required this.channels,
-    required this.total,
-    required this.hitsPerPage,
-    required this.page,
     this.cursor,
-  }) : _cursorPresent = false;
-  factory MessageSearchResultsResponse.fromJson(Map<String, Object?> json) {
-    final value = _$MessageSearchResultsResponseFromJson(json);
-    return MessageSearchResultsResponse(
-      messages: value.messages,
-      channels: value.channels,
-      total: value.total,
-      hitsPerPage: value.hitsPerPage,
-      page: value.page,
-      cursor: json.containsKey('cursor') ? value.cursor : _omit,
-    );
-  }
+  });
+
+  factory MessageSearchResultsResponse.fromJson(Map<String, Object?> json) =>
+      _$MessageSearchResultsResponseFromJson(json);
 
   /// The messages matching the search query
   final List<MessageSearchResultsResponseMessages> messages;
@@ -63,13 +43,6 @@ class MessageSearchResultsResponse {
   /// Opaque cursor for fetching the next page of results
   @JsonKey(includeIfNull: false)
   final List<String>? cursor;
-  final bool _cursorPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$MessageSearchResultsResponseToJson(this);
-    if (_cursorPresent) {
-      json.putIfAbsent('cursor', () => cursor);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$MessageSearchResultsResponseToJson(this);
 }

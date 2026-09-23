@@ -18,7 +18,7 @@ const Object _omit = Object();
 class GuildMemberUpdateRequest {
   const GuildMemberUpdateRequest({
     Object? nick = _omit,
-    Object? roles = _omit,
+    this.roles,
     Object? avatar = _omit,
     Object? banner = _omit,
     Object? bio = _omit,
@@ -26,16 +26,14 @@ class GuildMemberUpdateRequest {
     Object? accentColor = _omit,
     Object? profileFlags = _omit,
     Object? mentionFlags = _omit,
-    Object? mute = _omit,
-    Object? deaf = _omit,
+    this.mute,
+    this.deaf,
     Object? communicationDisabledUntil = _omit,
     Object? timeoutReason = _omit,
     Object? channelId = _omit,
     Object? connectionId = _omit,
   }) : nick = identical(nick, _omit) ? null : nick as String?,
        _nickPresent = !identical(nick, _omit),
-       roles = identical(roles, _omit) ? null : roles as List<SnowflakeType>?,
-       _rolesPresent = !identical(roles, _omit),
        avatar = identical(avatar, _omit) ? null : avatar as Base64ImageType?,
        _avatarPresent = !identical(avatar, _omit),
        banner = identical(banner, _omit) ? null : banner as Base64ImageType?,
@@ -56,10 +54,6 @@ class GuildMemberUpdateRequest {
            ? null
            : mentionFlags as MentionReplyPreferencesInput?,
        _mentionFlagsPresent = !identical(mentionFlags, _omit),
-       mute = identical(mute, _omit) ? null : mute as bool?,
-       _mutePresent = !identical(mute, _omit),
-       deaf = identical(deaf, _omit) ? null : deaf as bool?,
-       _deafPresent = !identical(deaf, _omit),
        communicationDisabledUntil = identical(communicationDisabledUntil, _omit)
            ? null
            : communicationDisabledUntil as DateTime?,
@@ -97,7 +91,6 @@ class GuildMemberUpdateRequest {
     this.channelId,
     this.connectionId,
   }) : _nickPresent = false,
-       _rolesPresent = false,
        _avatarPresent = false,
        _bannerPresent = false,
        _bioPresent = false,
@@ -105,8 +98,6 @@ class GuildMemberUpdateRequest {
        _accentColorPresent = false,
        _profileFlagsPresent = false,
        _mentionFlagsPresent = false,
-       _mutePresent = false,
-       _deafPresent = false,
        _communicationDisabledUntilPresent = false,
        _timeoutReasonPresent = false,
        _channelIdPresent = false,
@@ -115,7 +106,7 @@ class GuildMemberUpdateRequest {
     final value = _$GuildMemberUpdateRequestFromJson(json);
     return GuildMemberUpdateRequest(
       nick: json.containsKey('nick') ? value.nick : _omit,
-      roles: json.containsKey('roles') ? value.roles : _omit,
+      roles: value.roles,
       avatar: json.containsKey('avatar') ? value.avatar : _omit,
       banner: json.containsKey('banner') ? value.banner : _omit,
       bio: json.containsKey('bio') ? value.bio : _omit,
@@ -127,8 +118,8 @@ class GuildMemberUpdateRequest {
       mentionFlags: json.containsKey('mention_flags')
           ? value.mentionFlags
           : _omit,
-      mute: json.containsKey('mute') ? value.mute : _omit,
-      deaf: json.containsKey('deaf') ? value.deaf : _omit,
+      mute: value.mute,
+      deaf: value.deaf,
       communicationDisabledUntil:
           json.containsKey('communication_disabled_until')
           ? value.communicationDisabledUntil
@@ -203,7 +194,6 @@ class GuildMemberUpdateRequest {
   @JsonKey(includeIfNull: false, name: 'connection_id')
   final String? connectionId;
   final bool _nickPresent;
-  final bool _rolesPresent;
   final bool _avatarPresent;
   final bool _bannerPresent;
   final bool _bioPresent;
@@ -211,8 +201,6 @@ class GuildMemberUpdateRequest {
   final bool _accentColorPresent;
   final bool _profileFlagsPresent;
   final bool _mentionFlagsPresent;
-  final bool _mutePresent;
-  final bool _deafPresent;
   final bool _communicationDisabledUntilPresent;
   final bool _timeoutReasonPresent;
   final bool _channelIdPresent;
@@ -222,9 +210,6 @@ class GuildMemberUpdateRequest {
     final json = _$GuildMemberUpdateRequestToJson(this);
     if (_nickPresent) {
       json.putIfAbsent('nick', () => nick);
-    }
-    if (_rolesPresent) {
-      json.putIfAbsent('roles', () => roles);
     }
     if (_avatarPresent) {
       json.putIfAbsent('avatar', () => avatar);
@@ -246,12 +231,6 @@ class GuildMemberUpdateRequest {
     }
     if (_mentionFlagsPresent) {
       json.putIfAbsent('mention_flags', () => mentionFlags);
-    }
-    if (_mutePresent) {
-      json.putIfAbsent('mute', () => mute);
-    }
-    if (_deafPresent) {
-      json.putIfAbsent('deaf', () => deaf);
     }
     if (_communicationDisabledUntilPresent) {
       json.putIfAbsent(

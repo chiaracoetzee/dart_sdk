@@ -9,7 +9,7 @@ part of 'handoff_initiate_response.dart';
 HandoffInitiateResponse _$HandoffInitiateResponseFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('HandoffInitiateResponse', json, ($checkedConvert) {
-  final val = HandoffInitiateResponse._(
+  final val = HandoffInitiateResponse(
     code: $checkedConvert('code', (v) => v as String),
     expiresAt: $checkedConvert(
       'expires_at',

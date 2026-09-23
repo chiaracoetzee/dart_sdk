@@ -9,7 +9,7 @@ part of 'message_search_results_response.dart';
 MessageSearchResultsResponse _$MessageSearchResultsResponseFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('MessageSearchResultsResponse', json, ($checkedConvert) {
-  final val = MessageSearchResultsResponse._(
+  final val = MessageSearchResultsResponse(
     messages: $checkedConvert(
       'messages',
       (v) => (v as List<dynamic>)

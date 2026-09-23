@@ -12,7 +12,7 @@ CreateCheckoutSessionRequest _$CreateCheckoutSessionRequestFromJson(
   'CreateCheckoutSessionRequest',
   json,
   ($checkedConvert) {
-    final val = CreateCheckoutSessionRequest._(
+    final val = CreateCheckoutSessionRequest(
       priceId: $checkedConvert('price_id', (v) => v as String),
       countryCode: $checkedConvert('country_code', (v) => v as String?),
       clientGeoipCountryCode: $checkedConvert(

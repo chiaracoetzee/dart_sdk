@@ -11,7 +11,7 @@ PushRotateRequest _$PushRotateRequestFromJson(Map<String, dynamic> json) =>
       'PushRotateRequest',
       json,
       ($checkedConvert) {
-        final val = PushRotateRequest._(
+        final val = PushRotateRequest(
           oldEndpoint: $checkedConvert('old_endpoint', (v) => v as String),
           endpoint: $checkedConvert('endpoint', (v) => v as String),
           keys: $checkedConvert(

@@ -401,7 +401,7 @@ abstract class UsersApi {
   ///
   /// Retrieves the status of the most recent data harvest request. Returns null if no harvest has been requested yet. Shows progress and estimated completion time.
   @GET('/users/@me/harvest/latest')
-  Future<HarvestStatusResponseSchemaNullable> getLatestDataHarvest();
+  Future<HarvestStatusResponseSchemaNullable?> getLatestDataHarvest();
 
   /// Get data harvest status.
   ///

@@ -10,32 +10,9 @@ import 'snowflake_type.dart';
 
 part 'guild_dsa_report_request.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class GuildDsaReportRequest {
   const GuildDsaReportRequest({
-    required this.ticket,
-    required this.reporterFullLegalName,
-    required this.reporterCountryOfResidence,
-    required this.reportType,
-    required this.category,
-    required this.guildId,
-    Object? additionalInfo = _omit,
-    Object? reporterFluxerTag = _omit,
-    Object? inviteCode = _omit,
-  }) : additionalInfo = identical(additionalInfo, _omit)
-           ? null
-           : additionalInfo as String?,
-       _additionalInfoPresent = !identical(additionalInfo, _omit),
-       reporterFluxerTag = identical(reporterFluxerTag, _omit)
-           ? null
-           : reporterFluxerTag as String?,
-       _reporterFluxerTagPresent = !identical(reporterFluxerTag, _omit),
-       inviteCode = identical(inviteCode, _omit) ? null : inviteCode as String?,
-       _inviteCodePresent = !identical(inviteCode, _omit);
-
-  const GuildDsaReportRequest._({
     required this.ticket,
     required this.reporterFullLegalName,
     required this.reporterCountryOfResidence,
@@ -45,27 +22,10 @@ class GuildDsaReportRequest {
     this.additionalInfo,
     this.reporterFluxerTag,
     this.inviteCode,
-  }) : _additionalInfoPresent = false,
-       _reporterFluxerTagPresent = false,
-       _inviteCodePresent = false;
-  factory GuildDsaReportRequest.fromJson(Map<String, Object?> json) {
-    final value = _$GuildDsaReportRequestFromJson(json);
-    return GuildDsaReportRequest(
-      ticket: value.ticket,
-      reporterFullLegalName: value.reporterFullLegalName,
-      reporterCountryOfResidence: value.reporterCountryOfResidence,
-      reportType: value.reportType,
-      category: value.category,
-      guildId: value.guildId,
-      additionalInfo: json.containsKey('additional_info')
-          ? value.additionalInfo
-          : _omit,
-      reporterFluxerTag: json.containsKey('reporter_fluxer_tag')
-          ? value.reporterFluxerTag
-          : _omit,
-      inviteCode: json.containsKey('invite_code') ? value.inviteCode : _omit,
-    );
-  }
+  });
+
+  factory GuildDsaReportRequest.fromJson(Map<String, Object?> json) =>
+      _$GuildDsaReportRequestFromJson(json);
 
   /// Verification ticket obtained from email verification
   final String ticket;
@@ -99,21 +59,6 @@ class GuildDsaReportRequest {
   /// Invite code used to access the guild
   @JsonKey(includeIfNull: false, name: 'invite_code')
   final String? inviteCode;
-  final bool _additionalInfoPresent;
-  final bool _reporterFluxerTagPresent;
-  final bool _inviteCodePresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$GuildDsaReportRequestToJson(this);
-    if (_additionalInfoPresent) {
-      json.putIfAbsent('additional_info', () => additionalInfo);
-    }
-    if (_reporterFluxerTagPresent) {
-      json.putIfAbsent('reporter_fluxer_tag', () => reporterFluxerTag);
-    }
-    if (_inviteCodePresent) {
-      json.putIfAbsent('invite_code', () => inviteCode);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$GuildDsaReportRequestToJson(this);
 }

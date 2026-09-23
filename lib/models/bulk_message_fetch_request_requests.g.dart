@@ -9,7 +9,7 @@ part of 'bulk_message_fetch_request_requests.dart';
 BulkMessageFetchRequestRequests _$BulkMessageFetchRequestRequestsFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('BulkMessageFetchRequestRequests', json, ($checkedConvert) {
-  final val = BulkMessageFetchRequestRequests._(
+  final val = BulkMessageFetchRequestRequests(
     channelId: $checkedConvert('channel_id', (v) => v as String),
     limit: $checkedConvert('limit', (v) => (v as num).toInt()),
     before: $checkedConvert('before', (v) => v as String?),

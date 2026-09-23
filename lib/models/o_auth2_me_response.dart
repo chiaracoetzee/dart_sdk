@@ -9,33 +9,17 @@ import 'o_auth2_me_response_user.dart';
 
 part 'o_auth2_me_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class OAuth2MeResponse {
   const OAuth2MeResponse({
     required this.application,
     required this.scopes,
     required this.expires,
-    Object? user = _omit,
-  }) : user = identical(user, _omit) ? null : user as OAuth2MeResponseUser?,
-       _userPresent = !identical(user, _omit);
-
-  const OAuth2MeResponse._({
-    required this.application,
-    required this.scopes,
-    required this.expires,
     this.user,
-  }) : _userPresent = false;
-  factory OAuth2MeResponse.fromJson(Map<String, Object?> json) {
-    final value = _$OAuth2MeResponseFromJson(json);
-    return OAuth2MeResponse(
-      application: value.application,
-      scopes: value.scopes,
-      expires: value.expires,
-      user: json.containsKey('user') ? value.user : _omit,
-    );
-  }
+  });
+
+  factory OAuth2MeResponse.fromJson(Map<String, Object?> json) =>
+      _$OAuth2MeResponseFromJson(json);
 
   /// The application associated with the token
   final OAuth2MeResponseApplication application;
@@ -49,13 +33,6 @@ class OAuth2MeResponse {
   /// The user associated with the token
   @JsonKey(includeIfNull: false)
   final OAuth2MeResponseUser? user;
-  final bool _userPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$OAuth2MeResponseToJson(this);
-    if (_userPresent) {
-      json.putIfAbsent('user', () => user);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$OAuth2MeResponseToJson(this);
 }

@@ -12,7 +12,7 @@ UpdateConnectionRequest _$UpdateConnectionRequestFromJson(
   'UpdateConnectionRequest',
   json,
   ($checkedConvert) {
-    final val = UpdateConnectionRequest._(
+    final val = UpdateConnectionRequest(
       visibilityFlags: $checkedConvert(
         'visibility_flags',
         (v) => (v as num?)?.toInt(),

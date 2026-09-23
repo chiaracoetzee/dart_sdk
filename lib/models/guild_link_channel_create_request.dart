@@ -26,10 +26,10 @@ class GuildLinkChannelCreateRequest {
     Object? bitrate = _omit,
     Object? userLimit = _omit,
     Object? voiceConnectionLimit = _omit,
-    Object? permissionOverwrites = _omit,
+    this.permissionOverwrites,
     Object? rateLimitPerUser = _omit,
     Object? nsfwOverride = _omit,
-    Object? contentWarningLevel = _omit,
+    this.contentWarningLevel,
     Object? contentWarningText = _omit,
   }) : topic = identical(topic, _omit) ? null : topic as String?,
        _topicPresent = !identical(topic, _omit),
@@ -47,11 +47,6 @@ class GuildLinkChannelCreateRequest {
            ? null
            : voiceConnectionLimit as int?,
        _voiceConnectionLimitPresent = !identical(voiceConnectionLimit, _omit),
-       permissionOverwrites = identical(permissionOverwrites, _omit)
-           ? null
-           : permissionOverwrites
-                 as List<GuildLinkChannelCreateRequestPermissionOverwrites>?,
-       _permissionOverwritesPresent = !identical(permissionOverwrites, _omit),
        rateLimitPerUser = identical(rateLimitPerUser, _omit)
            ? null
            : rateLimitPerUser as int?,
@@ -60,10 +55,6 @@ class GuildLinkChannelCreateRequest {
            ? null
            : nsfwOverride as bool?,
        _nsfwOverridePresent = !identical(nsfwOverride, _omit),
-       contentWarningLevel = identical(contentWarningLevel, _omit)
-           ? null
-           : contentWarningLevel as ContentWarningLevelInput?,
-       _contentWarningLevelPresent = !identical(contentWarningLevel, _omit),
        contentWarningText = identical(contentWarningText, _omit)
            ? null
            : contentWarningText as String?,
@@ -90,10 +81,8 @@ class GuildLinkChannelCreateRequest {
        _bitratePresent = false,
        _userLimitPresent = false,
        _voiceConnectionLimitPresent = false,
-       _permissionOverwritesPresent = false,
        _rateLimitPerUserPresent = false,
        _nsfwOverridePresent = false,
-       _contentWarningLevelPresent = false,
        _contentWarningTextPresent = false;
   factory GuildLinkChannelCreateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildLinkChannelCreateRequestFromJson(json);
@@ -109,18 +98,14 @@ class GuildLinkChannelCreateRequest {
       voiceConnectionLimit: json.containsKey('voice_connection_limit')
           ? value.voiceConnectionLimit
           : _omit,
-      permissionOverwrites: json.containsKey('permission_overwrites')
-          ? value.permissionOverwrites
-          : _omit,
+      permissionOverwrites: value.permissionOverwrites,
       rateLimitPerUser: json.containsKey('rate_limit_per_user')
           ? value.rateLimitPerUser
           : _omit,
       nsfwOverride: json.containsKey('nsfw_override')
           ? value.nsfwOverride
           : _omit,
-      contentWarningLevel: json.containsKey('content_warning_level')
-          ? value.contentWarningLevel
-          : _omit,
+      contentWarningLevel: value.contentWarningLevel,
       contentWarningText: json.containsKey('content_warning_text')
           ? value.contentWarningText
           : _omit,
@@ -184,10 +169,8 @@ class GuildLinkChannelCreateRequest {
   final bool _bitratePresent;
   final bool _userLimitPresent;
   final bool _voiceConnectionLimitPresent;
-  final bool _permissionOverwritesPresent;
   final bool _rateLimitPerUserPresent;
   final bool _nsfwOverridePresent;
-  final bool _contentWarningLevelPresent;
   final bool _contentWarningTextPresent;
 
   Map<String, Object?> toJson() {
@@ -210,17 +193,11 @@ class GuildLinkChannelCreateRequest {
     if (_voiceConnectionLimitPresent) {
       json.putIfAbsent('voice_connection_limit', () => voiceConnectionLimit);
     }
-    if (_permissionOverwritesPresent) {
-      json.putIfAbsent('permission_overwrites', () => permissionOverwrites);
-    }
     if (_rateLimitPerUserPresent) {
       json.putIfAbsent('rate_limit_per_user', () => rateLimitPerUser);
     }
     if (_nsfwOverridePresent) {
       json.putIfAbsent('nsfw_override', () => nsfwOverride);
-    }
-    if (_contentWarningLevelPresent) {
-      json.putIfAbsent('content_warning_level', () => contentWarningLevel);
     }
     if (_contentWarningTextPresent) {
       json.putIfAbsent('content_warning_text', () => contentWarningText);

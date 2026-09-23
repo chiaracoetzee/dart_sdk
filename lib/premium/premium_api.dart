@@ -47,7 +47,7 @@ abstract class PremiumApi {
   ///
   /// Returns the exact price the authenticated user is being billed for their active Stripe subscription, including whether they are on a grandfathered legacy rate.
   @GET('/premium/current-subscription-price')
-  Future<CurrentSubscriptionPriceResponse> getCurrentSubscriptionPrice();
+  Future<CurrentSubscriptionPriceResponse?> getCurrentSubscriptionPrice();
 
   /// Create customer portal.
   ///

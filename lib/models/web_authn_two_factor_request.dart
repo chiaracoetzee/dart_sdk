@@ -10,61 +10,19 @@ import 'web_authn_two_factor_request_mfa_method_mfa_method.dart';
 
 part 'web_authn_two_factor_request.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class WebAuthnTwoFactorRequest {
   const WebAuthnTwoFactorRequest({
-    required this.enabled,
-    Object? password = _omit,
-    Object? mfaMethod = _omit,
-    Object? mfaCode = _omit,
-    Object? webauthnResponse = _omit,
-    Object? webauthnChallenge = _omit,
-  }) : password = identical(password, _omit) ? null : password as PasswordType?,
-       _passwordPresent = !identical(password, _omit),
-       mfaMethod = identical(mfaMethod, _omit)
-           ? null
-           : mfaMethod as WebAuthnTwoFactorRequestMfaMethodMfaMethod?,
-       _mfaMethodPresent = !identical(mfaMethod, _omit),
-       mfaCode = identical(mfaCode, _omit) ? null : mfaCode as String?,
-       _mfaCodePresent = !identical(mfaCode, _omit),
-       webauthnResponse = identical(webauthnResponse, _omit)
-           ? null
-           : webauthnResponse as WebAuthnAuthenticationResponse?,
-       _webauthnResponsePresent = !identical(webauthnResponse, _omit),
-       webauthnChallenge = identical(webauthnChallenge, _omit)
-           ? null
-           : webauthnChallenge as String?,
-       _webauthnChallengePresent = !identical(webauthnChallenge, _omit);
-
-  const WebAuthnTwoFactorRequest._({
     required this.enabled,
     this.password,
     this.mfaMethod,
     this.mfaCode,
     this.webauthnResponse,
     this.webauthnChallenge,
-  }) : _passwordPresent = false,
-       _mfaMethodPresent = false,
-       _mfaCodePresent = false,
-       _webauthnResponsePresent = false,
-       _webauthnChallengePresent = false;
-  factory WebAuthnTwoFactorRequest.fromJson(Map<String, Object?> json) {
-    final value = _$WebAuthnTwoFactorRequestFromJson(json);
-    return WebAuthnTwoFactorRequest(
-      enabled: value.enabled,
-      password: json.containsKey('password') ? value.password : _omit,
-      mfaMethod: json.containsKey('mfa_method') ? value.mfaMethod : _omit,
-      mfaCode: json.containsKey('mfa_code') ? value.mfaCode : _omit,
-      webauthnResponse: json.containsKey('webauthn_response')
-          ? value.webauthnResponse
-          : _omit,
-      webauthnChallenge: json.containsKey('webauthn_challenge')
-          ? value.webauthnChallenge
-          : _omit,
-    );
-  }
+  });
+
+  factory WebAuthnTwoFactorRequest.fromJson(Map<String, Object?> json) =>
+      _$WebAuthnTwoFactorRequestFromJson(json);
 
   /// Whether registered passkeys count as a second factor when logging in
   final bool enabled;
@@ -88,29 +46,6 @@ class WebAuthnTwoFactorRequest {
   /// WebAuthn challenge string
   @JsonKey(includeIfNull: false, name: 'webauthn_challenge')
   final String? webauthnChallenge;
-  final bool _passwordPresent;
-  final bool _mfaMethodPresent;
-  final bool _mfaCodePresent;
-  final bool _webauthnResponsePresent;
-  final bool _webauthnChallengePresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$WebAuthnTwoFactorRequestToJson(this);
-    if (_passwordPresent) {
-      json.putIfAbsent('password', () => password);
-    }
-    if (_mfaMethodPresent) {
-      json.putIfAbsent('mfa_method', () => mfaMethod);
-    }
-    if (_mfaCodePresent) {
-      json.putIfAbsent('mfa_code', () => mfaCode);
-    }
-    if (_webauthnResponsePresent) {
-      json.putIfAbsent('webauthn_response', () => webauthnResponse);
-    }
-    if (_webauthnChallengePresent) {
-      json.putIfAbsent('webauthn_challenge', () => webauthnChallenge);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$WebAuthnTwoFactorRequestToJson(this);
 }

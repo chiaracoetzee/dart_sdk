@@ -12,7 +12,7 @@ GuildDsaReportRequest _$GuildDsaReportRequestFromJson(
   'GuildDsaReportRequest',
   json,
   ($checkedConvert) {
-    final val = GuildDsaReportRequest._(
+    final val = GuildDsaReportRequest(
       ticket: $checkedConvert('ticket', (v) => v as String),
       reporterFullLegalName: $checkedConvert(
         'reporter_full_legal_name',

@@ -8,7 +8,7 @@ part of 'o_auth2_me_response.dart';
 
 OAuth2MeResponse _$OAuth2MeResponseFromJson(Map<String, dynamic> json) =>
     $checkedCreate('OAuth2MeResponse', json, ($checkedConvert) {
-      final val = OAuth2MeResponse._(
+      final val = OAuth2MeResponse(
         application: $checkedConvert(
           'application',
           (v) =>

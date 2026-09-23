@@ -9,7 +9,7 @@ part of 'allowed_mentions_request.dart';
 AllowedMentionsRequest _$AllowedMentionsRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('AllowedMentionsRequest', json, ($checkedConvert) {
-  final val = AllowedMentionsRequest._(
+  final val = AllowedMentionsRequest(
     parse: $checkedConvert(
       'parse',
       (v) => (v as List<dynamic>?)

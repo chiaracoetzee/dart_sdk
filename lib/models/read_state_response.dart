@@ -10,38 +10,18 @@ import 'unsigned_int64_string_type.dart';
 
 part 'read_state_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class ReadStateResponse {
   const ReadStateResponse({
     required this.id,
     required this.mentionCount,
     required this.lastMessageId,
     required this.lastPinTimestamp,
-    Object? version = _omit,
-  }) : version = identical(version, _omit)
-           ? null
-           : version as UnsignedInt64StringType?,
-       _versionPresent = !identical(version, _omit);
-
-  const ReadStateResponse._({
-    required this.id,
-    required this.mentionCount,
-    required this.lastMessageId,
-    required this.lastPinTimestamp,
     this.version,
-  }) : _versionPresent = false;
-  factory ReadStateResponse.fromJson(Map<String, Object?> json) {
-    final value = _$ReadStateResponseFromJson(json);
-    return ReadStateResponse(
-      id: value.id,
-      mentionCount: value.mentionCount,
-      lastMessageId: value.lastMessageId,
-      lastPinTimestamp: value.lastPinTimestamp,
-      version: json.containsKey('version') ? value.version : _omit,
-    );
-  }
+  });
+
+  factory ReadStateResponse.fromJson(Map<String, Object?> json) =>
+      _$ReadStateResponseFromJson(json);
 
   /// The channel ID for this read state
   final SnowflakeStringType id;
@@ -61,13 +41,6 @@ class ReadStateResponse {
   /// Read-state version for ordering updates as a decimal uint64
   @JsonKey(includeIfNull: false)
   final UnsignedInt64StringType? version;
-  final bool _versionPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$ReadStateResponseToJson(this);
-    if (_versionPresent) {
-      json.putIfAbsent('version', () => version);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$ReadStateResponseToJson(this);
 }

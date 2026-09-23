@@ -25,8 +25,8 @@ class MyGuildMemberUpdateRequest {
     Object? accentColor = _omit,
     Object? profileFlags = _omit,
     Object? mentionFlags = _omit,
-    Object? mute = _omit,
-    Object? deaf = _omit,
+    this.mute,
+    this.deaf,
     Object? communicationDisabledUntil = _omit,
     Object? timeoutReason = _omit,
     Object? channelId = _omit,
@@ -53,10 +53,6 @@ class MyGuildMemberUpdateRequest {
            ? null
            : mentionFlags as MentionReplyPreferencesInput?,
        _mentionFlagsPresent = !identical(mentionFlags, _omit),
-       mute = identical(mute, _omit) ? null : mute as bool?,
-       _mutePresent = !identical(mute, _omit),
-       deaf = identical(deaf, _omit) ? null : deaf as bool?,
-       _deafPresent = !identical(deaf, _omit),
        communicationDisabledUntil = identical(communicationDisabledUntil, _omit)
            ? null
            : communicationDisabledUntil as DateTime?,
@@ -100,8 +96,6 @@ class MyGuildMemberUpdateRequest {
        _accentColorPresent = false,
        _profileFlagsPresent = false,
        _mentionFlagsPresent = false,
-       _mutePresent = false,
-       _deafPresent = false,
        _communicationDisabledUntilPresent = false,
        _timeoutReasonPresent = false,
        _channelIdPresent = false,
@@ -121,8 +115,8 @@ class MyGuildMemberUpdateRequest {
       mentionFlags: json.containsKey('mention_flags')
           ? value.mentionFlags
           : _omit,
-      mute: json.containsKey('mute') ? value.mute : _omit,
-      deaf: json.containsKey('deaf') ? value.deaf : _omit,
+      mute: value.mute,
+      deaf: value.deaf,
       communicationDisabledUntil:
           json.containsKey('communication_disabled_until')
           ? value.communicationDisabledUntil
@@ -200,8 +194,6 @@ class MyGuildMemberUpdateRequest {
   final bool _accentColorPresent;
   final bool _profileFlagsPresent;
   final bool _mentionFlagsPresent;
-  final bool _mutePresent;
-  final bool _deafPresent;
   final bool _communicationDisabledUntilPresent;
   final bool _timeoutReasonPresent;
   final bool _channelIdPresent;
@@ -232,12 +224,6 @@ class MyGuildMemberUpdateRequest {
     }
     if (_mentionFlagsPresent) {
       json.putIfAbsent('mention_flags', () => mentionFlags);
-    }
-    if (_mutePresent) {
-      json.putIfAbsent('mute', () => mute);
-    }
-    if (_deafPresent) {
-      json.putIfAbsent('deaf', () => deaf);
     }
     if (_communicationDisabledUntilPresent) {
       json.putIfAbsent(

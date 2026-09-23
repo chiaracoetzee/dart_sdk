@@ -12,7 +12,7 @@ DiscoveryApplicationRequest _$DiscoveryApplicationRequestFromJson(
   'DiscoveryApplicationRequest',
   json,
   ($checkedConvert) {
-    final val = DiscoveryApplicationRequest._(
+    final val = DiscoveryApplicationRequest(
       description: $checkedConvert('description', (v) => v as String),
       categoryType: $checkedConvert('category_type', (v) => (v as num).toInt()),
       primaryLanguage: $checkedConvert('primary_language', (v) => v as String?),

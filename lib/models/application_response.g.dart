@@ -11,7 +11,7 @@ ApplicationResponse _$ApplicationResponseFromJson(Map<String, dynamic> json) =>
       'ApplicationResponse',
       json,
       ($checkedConvert) {
-        final val = ApplicationResponse._(
+        final val = ApplicationResponse(
           id: $checkedConvert('id', (v) => v as String),
           name: $checkedConvert('name', (v) => v as String),
           redirectUris: $checkedConvert(
