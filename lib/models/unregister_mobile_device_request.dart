@@ -48,7 +48,7 @@ class UnregisterMobileDeviceRequest {
   /// The mobile push notification platform
   final UnregisterMobileDeviceRequestPlatformPlatform platform;
 
-  /// The platform-specific push notification token to unregister
+  /// The Web Push endpoint URL or raw platform push token used at registration
   final String token;
 
   /// Client app channel or bundle mapping identifier, such as stable, beta, or canary

@@ -70,7 +70,7 @@ class RegisterMobileDeviceRequest {
   /// The mobile push notification platform
   final RegisterMobileDeviceRequestPlatformPlatform platform;
 
-  /// The platform-specific push notification token or endpoint URL
+  /// The Web Push endpoint URL when encryption keys are supplied, otherwise the raw platform push token
   final String token;
 
   /// The user agent string identifying the device
@@ -86,11 +86,11 @@ class RegisterMobileDeviceRequest {
   final RegisterMobileDeviceRequestProviderEnvironmentProviderEnvironment?
   providerEnvironment;
 
-  /// The P-256 ECDH public key for UnifiedPush encryption (base64url)
+  /// The P-256 ECDH public key for Web Push encryption (base64url)
   @JsonKey(includeIfNull: false, name: 'encryption_key')
   final String? encryptionKey;
 
-  /// The authentication secret for UnifiedPush encryption (base64url)
+  /// The authentication secret for Web Push encryption (base64url)
   @JsonKey(includeIfNull: false, name: 'auth_secret')
   final String? authSecret;
   final bool _userAgentPresent;
