@@ -11,6 +11,8 @@ enum UnregisterMobileDeviceRequestPlatformPlatform {
   androidFcm('android_fcm'),
   @JsonValue('ios_apns')
   iosApns('ios_apns'),
+  @JsonValue('ios_apns_voip')
+  iosApnsVoip('ios_apns_voip'),
   @JsonValue('android_unified_push')
   androidUnifiedPush('android_unified_push'),
 
