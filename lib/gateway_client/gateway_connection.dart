@@ -6,6 +6,8 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
+import 'package:fluxer_dart/gateway_client/gateway_websocket_connect.dart';
+
 import 'package:fluxer_dart/gateway/gateway_api.dart';
 import 'package:fluxer_dart/gateway_client/event_parser.dart';
 import 'package:fluxer_dart/gateway_client/gateway_close_code.dart';
@@ -417,6 +419,24 @@ class GatewayConnection {
   // Internal: connection
   // ---------------------------------------------------------------------------
 
+  Map<String, String>? _webSocketHeaders() {
+    final String? userAgent =
+        _trimmedHeader(_dio.options.headers['User-Agent']) ??
+        _trimmedHeader(_properties.userAgent);
+    if (userAgent == null) {
+      return null;
+    }
+    return <String, String>{'User-Agent': userAgent};
+  }
+
+  String? _trimmedHeader(Object? value) {
+    if (value is! String) {
+      return null;
+    }
+    final String trimmed = value.trim();
+    return trimmed.isEmpty ? null : trimmed;
+  }
+
   /// Derives the gateway WebSocket URL from the Dio base URL.
   ///
   /// Replaces `api.` with `gateway.` and switches to `wss://`.
@@ -463,7 +483,10 @@ class GatewayConnection {
       '$url?v=1&encoding=json&compress=$_activeCompress$streamQuery',
     );
     try {
-      _channel = WebSocketChannel.connect(wsUrl);
+      _channel = openGatewayWebSocket(
+        wsUrl,
+        headers: _webSocketHeaders(),
+      );
       await _channel!.ready.timeout(
         webSocketReadyTimeout,
         onTimeout: () {
