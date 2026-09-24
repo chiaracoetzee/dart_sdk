@@ -19,6 +19,39 @@ import 'package:fluxer_dart/gateway_client/heartbeat_manager.dart';
 import 'package:fluxer_dart/gateway_client/session_manager.dart';
 import 'package:zstd_dart/zstd_dart.dart';
 
+const Duration kGatewayMinReconnect = Duration(milliseconds: 1000);
+const Duration kGatewayMaxReconnect = Duration(seconds: 60);
+const int kGatewayReconnectSpreadMs = 2000;
+const double kGatewayReconnectJitterFactor = 0.25;
+
+Duration gatewayReconnectDelay({
+  required int attempt,
+  required double jitterUnit,
+}) {
+  final int step = attempt < 0 ? 0 : attempt;
+  final int exponent = step > 16 ? 16 : step;
+  final int baseMs = min(
+    1000 * (1 << exponent),
+    kGatewayMaxReconnect.inMilliseconds,
+  );
+  final double unit = jitterUnit.clamp(0.0, 1.0);
+  final double jitter = (unit * 2 - 1) * baseMs * kGatewayReconnectJitterFactor;
+  final int millis = (baseMs + jitter).round().clamp(
+    kGatewayMinReconnect.inMilliseconds,
+    kGatewayMaxReconnect.inMilliseconds,
+  );
+  return Duration(milliseconds: millis);
+}
+
+Duration gatewayReconnectSpreadDelay({required double spreadUnit}) {
+  final int spread = (spreadUnit.clamp(0.0, 1.0) * kGatewayReconnectSpreadMs)
+      .floor();
+  return kGatewayMinReconnect + Duration(milliseconds: spread);
+}
+
+typedef GatewaySocketConnect =
+    WebSocketChannel Function(Uri uri, {Map<String, String>? headers});
+
 /// Snapshot of zstd traffic observed on the current socket.
 class GatewayCompressionStats {
   const GatewayCompressionStats({
@@ -63,6 +96,8 @@ class GatewayConnection {
     Future<void> Function(String name, Future<void> Function() body)?
     traceAsync,
     void Function(String name, void Function() body)? traceSync,
+    double Function()? nextJitter,
+    GatewaySocketConnect? openSocket,
   }) : _token = token,
        _dio = dio,
        _gatewayUrlOverride = gatewayUrl,
@@ -79,7 +114,9 @@ class GatewayConnection {
              browser: 'fluxeron',
              device: 'fluxer_dart',
            ),
-       _presence = presence;
+       _presence = presence,
+       _nextJitter = nextJitter ?? Random().nextDouble,
+       _openSocket = openSocket ?? openGatewayWebSocket;
 
   String _token;
   final Dio _dio;
@@ -93,6 +130,8 @@ class GatewayConnection {
   final int _maxDecompressedMessageSize;
   final GatewayIdentifyProperties _properties;
   GatewayPresence? _presence;
+  final double Function() _nextJitter;
+  final GatewaySocketConnect _openSocket;
 
   final EventParser _eventParser = const EventParser();
   final SessionManager _session = SessionManager();
@@ -115,6 +154,9 @@ class GatewayConnection {
   bool _reconnectSuspended = false;
   String? _gatewayUrl;
   Timer? _reconnectTimer;
+  Timer? _invalidSessionTimer;
+  Future<void>? _connectInFlight;
+  DateTime? _lastReconnectScheduledAt;
   int _connectGeneration = 0;
   Duration? _lastHeartbeatInterval;
   DateTime? _connectedAt;
@@ -181,9 +223,25 @@ class GatewayConnection {
   /// Connects to the gateway.
   ///
   /// Fetches the gateway URL via the REST API (unless overridden) and
-  /// opens a WebSocket connection.
-  Future<void> connect() async {
-    if (_disposed || _reconnectSuspended) return;
+  /// opens a WebSocket connection. A connect already in progress is reused.
+  Future<void> connect() {
+    if (_disposed || _reconnectSuspended) {
+      return Future<void>.value();
+    }
+    final Future<void>? inFlight = _connectInFlight;
+    if (inFlight != null) {
+      return inFlight;
+    }
+    final Future<void> attempt = _openConnection();
+    _connectInFlight = attempt;
+    return attempt.whenComplete(() {
+      if (identical(_connectInFlight, attempt)) {
+        _connectInFlight = null;
+      }
+    });
+  }
+
+  Future<void> _openConnection() async {
     final int generation = ++_connectGeneration;
     _cancelReconnectTimer();
     await _tearDownSocket();
@@ -213,11 +271,17 @@ class GatewayConnection {
   }
 
   /// Cancels pending backoff and reconnects immediately.
+  ///
+  /// Does not reset the attempt counter. READY and RESUMED do that.
+  /// An attempt that is already connecting is left in place.
   Future<void> reconnectNow() async {
     if (_disposed) return;
+    final Future<void>? inFlight = _connectInFlight;
+    if (inFlight != null) {
+      return inFlight;
+    }
     _connectGeneration++;
     _cancelReconnectTimer();
-    _reconnectAttempts = 0;
     await _tearDownSocket();
     if (_state == GatewayState.failed) {
       _setState(GatewayState.disconnected);
@@ -226,6 +290,26 @@ class GatewayConnection {
       return;
     }
     await connect();
+  }
+
+  Future<void> nudgeReconnect() {
+    if (_disposed) {
+      return Future<void>.value();
+    }
+    _reconnectSuspended = false;
+    final Future<void>? inFlight = _connectInFlight;
+    if (inFlight != null) {
+      return inFlight;
+    }
+    if (_reconnectTimer != null ||
+        _state == GatewayState.connecting ||
+        _state == GatewayState.reconnecting ||
+        _state == GatewayState.connected ||
+        _state == GatewayState.failed) {
+      return Future<void>.value();
+    }
+    _scheduleReconnect();
+    return Future<void>.value();
   }
 
   /// Disconnects from the gateway gracefully.
@@ -483,10 +567,7 @@ class GatewayConnection {
       '$url?v=1&encoding=json&compress=$_activeCompress$streamQuery',
     );
     try {
-      _channel = openGatewayWebSocket(
-        wsUrl,
-        headers: _webSocketHeaders(),
-      );
+      _channel = _openSocket(wsUrl, headers: _webSocketHeaders());
       await _channel!.ready.timeout(
         webSocketReadyTimeout,
         onTimeout: () {
@@ -614,9 +695,15 @@ class GatewayConnection {
     _scheduleReconnect();
   }
 
-  void _onDone() {
-    final closeCode = _channel?.closeCode;
+  void handleSocketClosedForTest(int? closeCode) {
+    _onSocketClosed(closeCode);
+  }
 
+  void _onDone() {
+    _onSocketClosed(_channel?.closeCode);
+  }
+
+  void _onSocketClosed(int? closeCode) {
     _heartbeat?.stop();
 
     if (closeCode != null) {
@@ -693,9 +780,16 @@ class GatewayConnection {
       _session.clear();
     }
     // Delay 2.5s + jitter before reconnecting, per protocol spec.
-    final jitterMs = (Random().nextDouble() * 1000).round();
-    final delay = Duration(milliseconds: 2500 + jitterMs);
-    Future<void>.delayed(delay, _closeAndReconnect);
+    _invalidSessionTimer?.cancel();
+    final int jitterMs = (_nextJitter() * 1000).round();
+    final Duration delay = Duration(milliseconds: 2500 + jitterMs);
+    _invalidSessionTimer = Timer(delay, () {
+      _invalidSessionTimer = null;
+      if (_disposed) {
+        return;
+      }
+      _closeAndReconnect();
+    });
   }
 
   void _handleGatewayError(Map<String, dynamic> data) {
@@ -815,17 +909,32 @@ class GatewayConnection {
   void _cancelReconnectTimer() {
     _reconnectTimer?.cancel();
     _reconnectTimer = null;
+    _invalidSessionTimer?.cancel();
+    _invalidSessionTimer = null;
   }
 
   void _scheduleReconnect() {
     if (_disposed || _reconnectSuspended) return;
-    _cancelReconnectTimer();
+    if (_reconnectTimer != null) return;
+    _invalidSessionTimer?.cancel();
+    _invalidSessionTimer = null;
     _setState(GatewayState.reconnecting);
-    final delaySec = min(1 << _reconnectAttempts, 32);
-    _reconnectAttempts++;
-    _reconnectTimer = Timer(Duration(seconds: delaySec), () {
+    final DateTime now = DateTime.now();
+    final DateTime? last = _lastReconnectScheduledAt;
+    final Duration delay;
+    if (last != null && now.difference(last) < kGatewayMinReconnect) {
+      delay = gatewayReconnectSpreadDelay(spreadUnit: _nextJitter());
+    } else {
+      _lastReconnectScheduledAt = now;
+      delay = gatewayReconnectDelay(
+        attempt: _reconnectAttempts,
+        jitterUnit: _nextJitter(),
+      );
+      _reconnectAttempts++;
+    }
+    _reconnectTimer = Timer(delay, () {
       _reconnectTimer = null;
-      if (!_disposed) {
+      if (!_disposed && !_reconnectSuspended) {
         unawaited(connect());
       }
     });
