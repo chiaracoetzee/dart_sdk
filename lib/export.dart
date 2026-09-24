@@ -413,7 +413,6 @@ export 'models/channel_overwrite_type.dart';
 export 'models/rtc_region_response.dart';
 export 'models/discovery_category_response.dart';
 export 'models/donation_currency.dart';
-export 'models/screen_share_delivery_assignment_response.dart';
 export 'models/voice_noise_suppression_assignment_response.dart';
 export 'models/voice_noise_suppression_backend_schema.dart';
 export 'models/gift_code_duration_type_schema.dart';

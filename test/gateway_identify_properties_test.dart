@@ -10,9 +10,6 @@ void main() {
       userAgent: 'Fluxer Android/2.0.0 (stable)',
     );
 
-    expect(
-      properties.toJson()['user_agent'],
-      'Fluxer Android/2.0.0 (stable)',
-    );
+    expect(properties.toJson()['user_agent'], 'Fluxer Android/2.0.0 (stable)');
   });
 }
