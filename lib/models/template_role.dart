@@ -4,76 +4,64 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-part 'template_role.g.dart';
+import 'json_nullable.dart';
 
-const Object _omit = Object();
+part 'template_role.g.dart';
 
 @JsonSerializable(constructor: '_')
 class TemplateRole {
-  const TemplateRole({
+  TemplateRole({
     required this.id,
     this.permissions,
     this.permissionsNew,
     this.color,
     this.hoist,
     this.mentionable,
-  }) : name = null,
-       _namePresent = false,
-       unicodeEmoji = null,
-       _unicodeEmojiPresent = false;
-
-  const TemplateRole._explicit({
-    required this.id,
-    Object? name = _omit,
-    this.permissions,
-    this.permissionsNew,
-    this.color,
-    this.hoist,
-    this.mentionable,
-    Object? unicodeEmoji = _omit,
-  }) : name = identical(name, _omit) ? null : name as String?,
-       _namePresent = !identical(name, _omit),
-       unicodeEmoji = identical(unicodeEmoji, _omit)
-           ? null
-           : unicodeEmoji as String?,
-       _unicodeEmojiPresent = !identical(unicodeEmoji, _omit);
+    JsonNullable<String> name = const JsonNullable<String>.undefined(),
+    JsonNullable<String> unicodeEmoji = const JsonNullable<String>.undefined(),
+  }) : name = name,
+       _nameValue = name.value,
+       _namePresent = name.isPresent,
+       unicodeEmoji = unicodeEmoji,
+       _unicodeEmojiValue = unicodeEmoji.value,
+       _unicodeEmojiPresent = unicodeEmoji.isPresent;
 
   const TemplateRole._({
     required this.id,
-    this.name,
     this.permissions,
     this.permissionsNew,
     this.color,
     this.hoist,
     this.mentionable,
-    this.unicodeEmoji,
-  }) : _namePresent = false,
+  }) : _nameValue = null,
+       _unicodeEmojiValue = null,
+       name = const JsonNullable<String>.undefined(),
+       _namePresent = false,
+       unicodeEmoji = const JsonNullable<String>.undefined(),
        _unicodeEmojiPresent = false;
   factory TemplateRole.patch(Map<String, Object?> json) =>
       TemplateRole.fromJson(json);
 
   factory TemplateRole.fromJson(Map<String, Object?> json) {
     final value = _$TemplateRoleFromJson(json);
-    return TemplateRole._explicit(
+    return TemplateRole(
       id: value.id,
-      name: json.containsKey('name') ? value.name : _omit,
+      name: json.containsKey('name')
+          ? JsonNullable<String>.of(value._nameValue)
+          : const JsonNullable<String>.undefined(),
       permissions: value.permissions,
       permissionsNew: value.permissionsNew,
       color: value.color,
       hoist: value.hoist,
       mentionable: value.mentionable,
       unicodeEmoji: json.containsKey('unicode_emoji')
-          ? value.unicodeEmoji
-          : _omit,
+          ? JsonNullable<String>.of(value._unicodeEmojiValue)
+          : const JsonNullable<String>.undefined(),
     );
   }
 
   /// The template-local role ID
   final String id;
-
-  /// The name of the role
-  @JsonKey(includeIfNull: false)
-  final String? name;
 
   /// The permissions bitfield as a string (legacy)
   @JsonKey(includeIfNull: false)
@@ -94,20 +82,24 @@ class TemplateRole {
   /// Whether the role is mentionable
   @JsonKey(includeIfNull: false)
   final bool? mentionable;
-
-  /// The unicode emoji for the role icon
-  @JsonKey(includeIfNull: false, name: 'unicode_emoji')
-  final String? unicodeEmoji;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> name;
+  @JsonKey(includeIfNull: false, name: 'name')
+  final String? _nameValue;
   final bool _namePresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> unicodeEmoji;
+  @JsonKey(includeIfNull: false, name: 'unicode_emoji')
+  final String? _unicodeEmojiValue;
   final bool _unicodeEmojiPresent;
 
   Map<String, Object?> toJson() {
     final json = _$TemplateRoleToJson(this);
     if (_namePresent) {
-      json.putIfAbsent('name', () => name);
+      json.putIfAbsent('name', () => _nameValue);
     }
     if (_unicodeEmojiPresent) {
-      json.putIfAbsent('unicode_emoji', () => unicodeEmoji);
+      json.putIfAbsent('unicode_emoji', () => _unicodeEmojiValue);
     }
     return json;
   }

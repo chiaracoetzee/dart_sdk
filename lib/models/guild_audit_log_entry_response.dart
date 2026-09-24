@@ -11,37 +11,9 @@ import 'snowflake_string_type.dart';
 
 part 'guild_audit_log_entry_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class GuildAuditLogEntryResponse {
   const GuildAuditLogEntryResponse({
-    required this.id,
-    required this.actionType,
-    this.reason,
-    this.options,
-    this.changes,
-  }) : userId = null,
-       _userIdPresent = false,
-       targetId = null,
-       _targetIdPresent = false;
-
-  const GuildAuditLogEntryResponse._explicit({
-    required this.id,
-    required this.actionType,
-    Object? userId = _omit,
-    Object? targetId = _omit,
-    this.reason,
-    this.options,
-    this.changes,
-  }) : userId = identical(userId, _omit)
-           ? null
-           : userId as SnowflakeStringType?,
-       _userIdPresent = !identical(userId, _omit),
-       targetId = identical(targetId, _omit) ? null : targetId as String?,
-       _targetIdPresent = !identical(targetId, _omit);
-
-  const GuildAuditLogEntryResponse._({
     required this.id,
     required this.actionType,
     this.userId,
@@ -49,23 +21,10 @@ class GuildAuditLogEntryResponse {
     this.reason,
     this.options,
     this.changes,
-  }) : _userIdPresent = false,
-       _targetIdPresent = false;
-  factory GuildAuditLogEntryResponse.patch(Map<String, Object?> json) =>
-      GuildAuditLogEntryResponse.fromJson(json);
+  });
 
-  factory GuildAuditLogEntryResponse.fromJson(Map<String, Object?> json) {
-    final value = _$GuildAuditLogEntryResponseFromJson(json);
-    return GuildAuditLogEntryResponse._explicit(
-      id: value.id,
-      actionType: value.actionType,
-      userId: json.containsKey('user_id') ? value.userId : _omit,
-      targetId: json.containsKey('target_id') ? value.targetId : _omit,
-      reason: value.reason,
-      options: value.options,
-      changes: value.changes,
-    );
-  }
+  factory GuildAuditLogEntryResponse.fromJson(Map<String, Object?> json) =>
+      _$GuildAuditLogEntryResponseFromJson(json);
 
   /// The unique identifier for this audit log entry
   final SnowflakeStringType id;
@@ -91,17 +50,6 @@ class GuildAuditLogEntryResponse {
   /// Changes made to the target
   @JsonKey(includeIfNull: false)
   final List<AuditLogChangeSchema>? changes;
-  final bool _userIdPresent;
-  final bool _targetIdPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$GuildAuditLogEntryResponseToJson(this);
-    if (_userIdPresent) {
-      json.putIfAbsent('user_id', () => userId);
-    }
-    if (_targetIdPresent) {
-      json.putIfAbsent('target_id', () => targetId);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$GuildAuditLogEntryResponseToJson(this);
 }

@@ -8,7 +8,7 @@ part of 'auth_session_location.dart';
 
 AuthSessionLocation _$AuthSessionLocationFromJson(Map<String, dynamic> json) =>
     $checkedCreate('AuthSessionLocation', json, ($checkedConvert) {
-      final val = AuthSessionLocation._(
+      final val = AuthSessionLocation(
         city: $checkedConvert('city', (v) => v as String?),
         region: $checkedConvert('region', (v) => v as String?),
         country: $checkedConvert('country', (v) => v as String?),

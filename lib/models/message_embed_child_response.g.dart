@@ -9,7 +9,7 @@ part of 'message_embed_child_response.dart';
 MessageEmbedChildResponse _$MessageEmbedChildResponseFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('MessageEmbedChildResponse', json, ($checkedConvert) {
-  final val = MessageEmbedChildResponse._(
+  final val = MessageEmbedChildResponse(
     type: $checkedConvert('type', (v) => v as String),
     url: $checkedConvert('url', (v) => v as String?),
     title: $checkedConvert('title', (v) => v as String?),

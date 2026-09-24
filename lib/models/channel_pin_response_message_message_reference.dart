@@ -9,48 +9,18 @@ import 'message_reference_type.dart';
 
 part 'channel_pin_response_message_message_reference.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class ChannelPinResponseMessageMessageReference {
   const ChannelPinResponseMessageMessageReference({
     required this.channelId,
     required this.messageId,
     required this.type,
-  }) : guildId = null,
-       _guildIdPresent = false;
-
-  const ChannelPinResponseMessageMessageReference._explicit({
-    required this.channelId,
-    required this.messageId,
-    required this.type,
-    Object? guildId = _omit,
-  }) : guildId = identical(guildId, _omit)
-           ? null
-           : guildId as SnowflakeStringType?,
-       _guildIdPresent = !identical(guildId, _omit);
-
-  const ChannelPinResponseMessageMessageReference._({
-    required this.channelId,
-    required this.messageId,
-    required this.type,
     this.guildId,
-  }) : _guildIdPresent = false;
-  factory ChannelPinResponseMessageMessageReference.patch(
-    Map<String, Object?> json,
-  ) => ChannelPinResponseMessageMessageReference.fromJson(json);
+  });
 
   factory ChannelPinResponseMessageMessageReference.fromJson(
     Map<String, Object?> json,
-  ) {
-    final value = _$ChannelPinResponseMessageMessageReferenceFromJson(json);
-    return ChannelPinResponseMessageMessageReference._explicit(
-      channelId: value.channelId,
-      messageId: value.messageId,
-      type: value.type,
-      guildId: json.containsKey('guild_id') ? value.guildId : _omit,
-    );
-  }
+  ) => _$ChannelPinResponseMessageMessageReferenceFromJson(json);
 
   /// The ID of the channel containing the referenced message
   @JsonKey(name: 'channel_id')
@@ -64,13 +34,7 @@ class ChannelPinResponseMessageMessageReference {
   @JsonKey(includeIfNull: false, name: 'guild_id')
   final SnowflakeStringType? guildId;
   final MessageReferenceType type;
-  final bool _guildIdPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$ChannelPinResponseMessageMessageReferenceToJson(this);
-    if (_guildIdPresent) {
-      json.putIfAbsent('guild_id', () => guildId);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() =>
+      _$ChannelPinResponseMessageMessageReferenceToJson(this);
 }

@@ -11,11 +11,10 @@ WebhookCreateRequest _$WebhookCreateRequestFromJson(
 ) => $checkedCreate('WebhookCreateRequest', json, ($checkedConvert) {
   final val = WebhookCreateRequest._(
     name: $checkedConvert('name', (v) => v as String),
-    avatar: $checkedConvert('avatar', (v) => v as String?),
   );
   return val;
 });
 
 Map<String, dynamic> _$WebhookCreateRequestToJson(
   WebhookCreateRequest instance,
-) => <String, dynamic>{'name': instance.name, 'avatar': ?instance.avatar};
+) => <String, dynamic>{'name': instance.name};

@@ -6,41 +6,16 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'message_response_schema_referenced_message_call.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class MessageResponseSchemaReferencedMessageCall {
-  const MessageResponseSchemaReferencedMessageCall({required this.participants})
-    : endedTimestamp = null,
-      _endedTimestampPresent = false;
-
-  const MessageResponseSchemaReferencedMessageCall._explicit({
-    required this.participants,
-    Object? endedTimestamp = _omit,
-  }) : endedTimestamp = identical(endedTimestamp, _omit)
-           ? null
-           : endedTimestamp as DateTime?,
-       _endedTimestampPresent = !identical(endedTimestamp, _omit);
-
-  const MessageResponseSchemaReferencedMessageCall._({
+  const MessageResponseSchemaReferencedMessageCall({
     required this.participants,
     this.endedTimestamp,
-  }) : _endedTimestampPresent = false;
-  factory MessageResponseSchemaReferencedMessageCall.patch(
-    Map<String, Object?> json,
-  ) => MessageResponseSchemaReferencedMessageCall.fromJson(json);
+  });
 
   factory MessageResponseSchemaReferencedMessageCall.fromJson(
     Map<String, Object?> json,
-  ) {
-    final value = _$MessageResponseSchemaReferencedMessageCallFromJson(json);
-    return MessageResponseSchemaReferencedMessageCall._explicit(
-      participants: value.participants,
-      endedTimestamp: json.containsKey('ended_timestamp')
-          ? value.endedTimestamp
-          : _omit,
-    );
-  }
+  ) => _$MessageResponseSchemaReferencedMessageCallFromJson(json);
 
   /// The user IDs of participants in the call
   final List<String> participants;
@@ -48,13 +23,7 @@ class MessageResponseSchemaReferencedMessageCall {
   /// The ISO 8601 timestamp of when the call ended
   @JsonKey(includeIfNull: false, name: 'ended_timestamp')
   final DateTime? endedTimestamp;
-  final bool _endedTimestampPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$MessageResponseSchemaReferencedMessageCallToJson(this);
-    if (_endedTimestampPresent) {
-      json.putIfAbsent('ended_timestamp', () => endedTimestamp);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() =>
+      _$MessageResponseSchemaReferencedMessageCallToJson(this);
 }

@@ -11,7 +11,7 @@ AuthSessionResponse _$AuthSessionResponseFromJson(Map<String, dynamic> json) =>
       'AuthSessionResponse',
       json,
       ($checkedConvert) {
-        final val = AuthSessionResponse._(
+        final val = AuthSessionResponse(
           idHash: $checkedConvert('id_hash', (v) => v as String),
           maskedIp: $checkedConvert('masked_ip', (v) => v as String?),
           current: $checkedConvert('current', (v) => v as bool),

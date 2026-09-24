@@ -12,7 +12,7 @@ _$GuildMemberSearchResultSupplementalFromJson(Map<String, dynamic> json) =>
       'GuildMemberSearchResultSupplemental',
       json,
       ($checkedConvert) {
-        final val = GuildMemberSearchResultSupplemental._(
+        final val = GuildMemberSearchResultSupplemental(
           sourceInviteCode: $checkedConvert(
             'source_invite_code',
             (v) => v as String?,

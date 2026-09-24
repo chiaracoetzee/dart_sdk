@@ -11,7 +11,7 @@ GuildMemberResponse _$GuildMemberResponseFromJson(Map<String, dynamic> json) =>
       'GuildMemberResponse',
       json,
       ($checkedConvert) {
-        final val = GuildMemberResponse._(
+        final val = GuildMemberResponse(
           user: $checkedConvert(
             'user',
             (v) => UserPartialResponse.fromJson(v as Map<String, dynamic>),

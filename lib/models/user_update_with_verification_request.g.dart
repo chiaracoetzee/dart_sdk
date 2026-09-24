@@ -15,16 +15,9 @@ UserUpdateWithVerificationRequest _$UserUpdateWithVerificationRequestFromJson(
     final val = UserUpdateWithVerificationRequest._(
       username: $checkedConvert('username', (v) => v as String?),
       discriminator: $checkedConvert('discriminator', (v) => v as String?),
-      globalName: $checkedConvert('global_name', (v) => v as String?),
       email: $checkedConvert('email', (v) => v as String?),
       newPassword: $checkedConvert('new_password', (v) => v as String?),
       password: $checkedConvert('password', (v) => v as String?),
-      avatar: $checkedConvert('avatar', (v) => v as String?),
-      banner: $checkedConvert('banner', (v) => v as String?),
-      bio: $checkedConvert('bio', (v) => v as String?),
-      pronouns: $checkedConvert('pronouns', (v) => v as String?),
-      accentColor: $checkedConvert('accent_color', (v) => (v as num?)?.toInt()),
-      timezone: $checkedConvert('timezone', (v) => v as String?),
       timezonePrivacyFlags: $checkedConvert(
         'timezone_privacy_flags',
         (v) => (v as num?)?.toInt(),
@@ -89,9 +82,7 @@ UserUpdateWithVerificationRequest _$UserUpdateWithVerificationRequestFromJson(
     return val;
   },
   fieldKeyMap: const {
-    'globalName': 'global_name',
     'newPassword': 'new_password',
-    'accentColor': 'accent_color',
     'timezonePrivacyFlags': 'timezone_privacy_flags',
     'premiumBadgeHidden': 'premium_badge_hidden',
     'premiumBadgeMasked': 'premium_badge_masked',
@@ -114,16 +105,9 @@ Map<String, dynamic> _$UserUpdateWithVerificationRequestToJson(
 ) => <String, dynamic>{
   'username': ?instance.username,
   'discriminator': ?instance.discriminator,
-  'global_name': ?instance.globalName,
   'email': ?instance.email,
   'new_password': ?instance.newPassword,
   'password': ?instance.password,
-  'avatar': ?instance.avatar,
-  'banner': ?instance.banner,
-  'bio': ?instance.bio,
-  'pronouns': ?instance.pronouns,
-  'accent_color': ?instance.accentColor,
-  'timezone': ?instance.timezone,
   'timezone_privacy_flags': ?instance.timezonePrivacyFlags,
   'premium_badge_hidden': ?instance.premiumBadgeHidden,
   'premium_badge_masked': ?instance.premiumBadgeMasked,

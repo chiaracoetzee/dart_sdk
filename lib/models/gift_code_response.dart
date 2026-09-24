@@ -9,49 +9,18 @@ import 'user_partial_response.dart';
 
 part 'gift_code_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class GiftCodeResponse {
   const GiftCodeResponse({
     required this.code,
     required this.durationType,
     required this.durationQuantity,
     required this.redeemed,
-  }) : createdBy = null,
-       _createdByPresent = false;
-
-  const GiftCodeResponse._explicit({
-    required this.code,
-    required this.durationType,
-    required this.durationQuantity,
-    required this.redeemed,
-    Object? createdBy = _omit,
-  }) : createdBy = identical(createdBy, _omit)
-           ? null
-           : createdBy as UserPartialResponse?,
-       _createdByPresent = !identical(createdBy, _omit);
-
-  const GiftCodeResponse._({
-    required this.code,
-    required this.durationType,
-    required this.durationQuantity,
-    required this.redeemed,
     this.createdBy,
-  }) : _createdByPresent = false;
-  factory GiftCodeResponse.patch(Map<String, Object?> json) =>
-      GiftCodeResponse.fromJson(json);
+  });
 
-  factory GiftCodeResponse.fromJson(Map<String, Object?> json) {
-    final value = _$GiftCodeResponseFromJson(json);
-    return GiftCodeResponse._explicit(
-      code: value.code,
-      durationType: value.durationType,
-      durationQuantity: value.durationQuantity,
-      redeemed: value.redeemed,
-      createdBy: json.containsKey('created_by') ? value.createdBy : _omit,
-    );
-  }
+  factory GiftCodeResponse.fromJson(Map<String, Object?> json) =>
+      _$GiftCodeResponseFromJson(json);
 
   /// The unique gift code string
   final String code;
@@ -70,13 +39,6 @@ class GiftCodeResponse {
   /// The user who created the gift code
   @JsonKey(includeIfNull: false, name: 'created_by')
   final UserPartialResponse? createdBy;
-  final bool _createdByPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$GiftCodeResponseToJson(this);
-    if (_createdByPresent) {
-      json.putIfAbsent('created_by', () => createdBy);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$GiftCodeResponseToJson(this);
 }

@@ -9,7 +9,7 @@ part of 'git_hub_webhook_check_run_output.dart';
 GitHubWebhookCheckRunOutput _$GitHubWebhookCheckRunOutputFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('GitHubWebhookCheckRunOutput', json, ($checkedConvert) {
-  final val = GitHubWebhookCheckRunOutput._(
+  final val = GitHubWebhookCheckRunOutput(
     title: $checkedConvert('title', (v) => v as String?),
     summary: $checkedConvert('summary', (v) => v as String?),
   );

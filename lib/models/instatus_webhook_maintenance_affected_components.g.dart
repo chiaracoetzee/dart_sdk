@@ -12,7 +12,7 @@ _$InstatusWebhookMaintenanceAffectedComponentsFromJson(
 ) => $checkedCreate('InstatusWebhookMaintenanceAffectedComponents', json, (
   $checkedConvert,
 ) {
-  final val = InstatusWebhookMaintenanceAffectedComponents._(
+  final val = InstatusWebhookMaintenanceAffectedComponents(
     id: $checkedConvert('id', (v) => v as String?),
     name: $checkedConvert('name', (v) => v as String?),
     status: $checkedConvert('status', (v) => v as String?),

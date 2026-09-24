@@ -9,7 +9,7 @@ part of 'discovery_status_response.dart';
 DiscoveryStatusResponse _$DiscoveryStatusResponseFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('DiscoveryStatusResponse', json, ($checkedConvert) {
-  final val = DiscoveryStatusResponse._(
+  final val = DiscoveryStatusResponse(
     eligible: $checkedConvert('eligible', (v) => v as bool),
     minMemberCount: $checkedConvert('min_member_count', (v) => v as num),
     application: $checkedConvert(

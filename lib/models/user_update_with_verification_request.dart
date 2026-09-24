@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'json_nullable.dart';
+
 import 'base64_image_type.dart';
 import 'color_type.dart';
 import 'discriminator_type.dart';
@@ -17,11 +19,9 @@ import 'web_authn_authentication_response.dart';
 
 part 'user_update_with_verification_request.g.dart';
 
-const Object _omit = Object();
-
 @JsonSerializable(constructor: '_')
 class UserUpdateWithVerificationRequest {
-  const UserUpdateWithVerificationRequest({
+  UserUpdateWithVerificationRequest({
     this.username,
     this.discriminator,
     this.email,
@@ -41,78 +41,44 @@ class UserUpdateWithVerificationRequest {
     this.mfaCode,
     this.webauthnResponse,
     this.webauthnChallenge,
-  }) : globalName = null,
-       _globalNamePresent = false,
-       avatar = null,
-       _avatarPresent = false,
-       banner = null,
-       _bannerPresent = false,
-       bio = null,
-       _bioPresent = false,
-       pronouns = null,
-       _pronounsPresent = false,
-       accentColor = null,
-       _accentColorPresent = false,
-       timezone = null,
-       _timezonePresent = false;
-
-  const UserUpdateWithVerificationRequest._explicit({
-    this.username,
-    this.discriminator,
-    Object? globalName = _omit,
-    this.email,
-    this.newPassword,
-    this.password,
-    Object? avatar = _omit,
-    Object? banner = _omit,
-    Object? bio = _omit,
-    Object? pronouns = _omit,
-    Object? accentColor = _omit,
-    Object? timezone = _omit,
-    this.timezonePrivacyFlags,
-    this.premiumBadgeHidden,
-    this.premiumBadgeMasked,
-    this.premiumBadgeTimestampHidden,
-    this.premiumBadgeSequenceHidden,
-    this.premiumEnabledOverride,
-    this.hasDismissedPremiumOnboarding,
-    this.hasUnreadGiftInventory,
-    this.mentionFlags,
-    this.emailToken,
-    this.mfaMethod,
-    this.mfaCode,
-    this.webauthnResponse,
-    this.webauthnChallenge,
-  }) : globalName = identical(globalName, _omit) ? null : globalName as String?,
-       _globalNamePresent = !identical(globalName, _omit),
-       avatar = identical(avatar, _omit) ? null : avatar as Base64ImageType?,
-       _avatarPresent = !identical(avatar, _omit),
-       banner = identical(banner, _omit) ? null : banner as Base64ImageType?,
-       _bannerPresent = !identical(banner, _omit),
-       bio = identical(bio, _omit) ? null : bio as String?,
-       _bioPresent = !identical(bio, _omit),
-       pronouns = identical(pronouns, _omit) ? null : pronouns as String?,
-       _pronounsPresent = !identical(pronouns, _omit),
-       accentColor = identical(accentColor, _omit)
-           ? null
-           : accentColor as ColorType?,
-       _accentColorPresent = !identical(accentColor, _omit),
-       timezone = identical(timezone, _omit) ? null : timezone as String?,
-       _timezonePresent = !identical(timezone, _omit);
+    JsonNullable<String> globalName = const JsonNullable<String>.undefined(),
+    JsonNullable<Base64ImageType> avatar =
+        const JsonNullable<Base64ImageType>.undefined(),
+    JsonNullable<Base64ImageType> banner =
+        const JsonNullable<Base64ImageType>.undefined(),
+    JsonNullable<String> bio = const JsonNullable<String>.undefined(),
+    JsonNullable<String> pronouns = const JsonNullable<String>.undefined(),
+    JsonNullable<ColorType> accentColor =
+        const JsonNullable<ColorType>.undefined(),
+    JsonNullable<String> timezone = const JsonNullable<String>.undefined(),
+  }) : globalName = globalName,
+       _globalNameValue = globalName.value,
+       _globalNamePresent = globalName.isPresent,
+       avatar = avatar,
+       _avatarValue = avatar.value,
+       _avatarPresent = avatar.isPresent,
+       banner = banner,
+       _bannerValue = banner.value,
+       _bannerPresent = banner.isPresent,
+       bio = bio,
+       _bioValue = bio.value,
+       _bioPresent = bio.isPresent,
+       pronouns = pronouns,
+       _pronounsValue = pronouns.value,
+       _pronounsPresent = pronouns.isPresent,
+       accentColor = accentColor,
+       _accentColorValue = accentColor.value,
+       _accentColorPresent = accentColor.isPresent,
+       timezone = timezone,
+       _timezoneValue = timezone.value,
+       _timezonePresent = timezone.isPresent;
 
   const UserUpdateWithVerificationRequest._({
     this.username,
     this.discriminator,
-    this.globalName,
     this.email,
     this.newPassword,
     this.password,
-    this.avatar,
-    this.banner,
-    this.bio,
-    this.pronouns,
-    this.accentColor,
-    this.timezone,
     this.timezonePrivacyFlags,
     this.premiumBadgeHidden,
     this.premiumBadgeMasked,
@@ -127,12 +93,26 @@ class UserUpdateWithVerificationRequest {
     this.mfaCode,
     this.webauthnResponse,
     this.webauthnChallenge,
-  }) : _globalNamePresent = false,
+  }) : _globalNameValue = null,
+       _avatarValue = null,
+       _bannerValue = null,
+       _bioValue = null,
+       _pronounsValue = null,
+       _accentColorValue = null,
+       _timezoneValue = null,
+       globalName = const JsonNullable<String>.undefined(),
+       _globalNamePresent = false,
+       avatar = const JsonNullable<Base64ImageType>.undefined(),
        _avatarPresent = false,
+       banner = const JsonNullable<Base64ImageType>.undefined(),
        _bannerPresent = false,
+       bio = const JsonNullable<String>.undefined(),
        _bioPresent = false,
+       pronouns = const JsonNullable<String>.undefined(),
        _pronounsPresent = false,
+       accentColor = const JsonNullable<ColorType>.undefined(),
        _accentColorPresent = false,
+       timezone = const JsonNullable<String>.undefined(),
        _timezonePresent = false;
   factory UserUpdateWithVerificationRequest.patch(Map<String, Object?> json) =>
       UserUpdateWithVerificationRequest.fromJson(json);
@@ -141,19 +121,33 @@ class UserUpdateWithVerificationRequest {
     Map<String, Object?> json,
   ) {
     final value = _$UserUpdateWithVerificationRequestFromJson(json);
-    return UserUpdateWithVerificationRequest._explicit(
+    return UserUpdateWithVerificationRequest(
       username: value.username,
       discriminator: value.discriminator,
-      globalName: json.containsKey('global_name') ? value.globalName : _omit,
+      globalName: json.containsKey('global_name')
+          ? JsonNullable<String>.of(value._globalNameValue)
+          : const JsonNullable<String>.undefined(),
       email: value.email,
       newPassword: value.newPassword,
       password: value.password,
-      avatar: json.containsKey('avatar') ? value.avatar : _omit,
-      banner: json.containsKey('banner') ? value.banner : _omit,
-      bio: json.containsKey('bio') ? value.bio : _omit,
-      pronouns: json.containsKey('pronouns') ? value.pronouns : _omit,
-      accentColor: json.containsKey('accent_color') ? value.accentColor : _omit,
-      timezone: json.containsKey('timezone') ? value.timezone : _omit,
+      avatar: json.containsKey('avatar')
+          ? JsonNullable<Base64ImageType>.of(value._avatarValue)
+          : const JsonNullable<Base64ImageType>.undefined(),
+      banner: json.containsKey('banner')
+          ? JsonNullable<Base64ImageType>.of(value._bannerValue)
+          : const JsonNullable<Base64ImageType>.undefined(),
+      bio: json.containsKey('bio')
+          ? JsonNullable<String>.of(value._bioValue)
+          : const JsonNullable<String>.undefined(),
+      pronouns: json.containsKey('pronouns')
+          ? JsonNullable<String>.of(value._pronounsValue)
+          : const JsonNullable<String>.undefined(),
+      accentColor: json.containsKey('accent_color')
+          ? JsonNullable<ColorType>.of(value._accentColorValue)
+          : const JsonNullable<ColorType>.undefined(),
+      timezone: json.containsKey('timezone')
+          ? JsonNullable<String>.of(value._timezoneValue)
+          : const JsonNullable<String>.undefined(),
       timezonePrivacyFlags: value.timezonePrivacyFlags,
       premiumBadgeHidden: value.premiumBadgeHidden,
       premiumBadgeMasked: value.premiumBadgeMasked,
@@ -179,10 +173,6 @@ class UserUpdateWithVerificationRequest {
   @JsonKey(includeIfNull: false)
   final DiscriminatorType? discriminator;
 
-  /// The display name shown to other users
-  @JsonKey(includeIfNull: false, name: 'global_name')
-  final String? globalName;
-
   /// The email address for the account
   @JsonKey(includeIfNull: false)
   final EmailType? email;
@@ -194,30 +184,6 @@ class UserUpdateWithVerificationRequest {
   /// Account password for sudo verification
   @JsonKey(includeIfNull: false)
   final PasswordType? password;
-
-  /// Base64-encoded avatar image
-  @JsonKey(includeIfNull: false)
-  final Base64ImageType? avatar;
-
-  /// Base64-encoded profile banner image
-  @JsonKey(includeIfNull: false)
-  final Base64ImageType? banner;
-
-  /// User biography text (max 320 characters)
-  @JsonKey(includeIfNull: false)
-  final String? bio;
-
-  /// User pronouns (max 40 characters)
-  @JsonKey(includeIfNull: false)
-  final String? pronouns;
-
-  /// Profile accent color as integer
-  @JsonKey(includeIfNull: false, name: 'accent_color')
-  final ColorType? accentColor;
-
-  /// Staff-only IANA timezone identifier saved for profile local time. Ignored for non-staff users.
-  @JsonKey(includeIfNull: false)
-  final String? timezone;
 
   /// Staff-only bitfield controlling who can see the profile timezone. Ignored for non-staff users.
   @JsonKey(includeIfNull: false, name: 'timezone_privacy_flags')
@@ -274,36 +240,64 @@ class UserUpdateWithVerificationRequest {
   /// WebAuthn challenge string
   @JsonKey(includeIfNull: false, name: 'webauthn_challenge')
   final String? webauthnChallenge;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> globalName;
+  @JsonKey(includeIfNull: false, name: 'global_name')
+  final String? _globalNameValue;
   final bool _globalNamePresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<Base64ImageType> avatar;
+  @JsonKey(includeIfNull: false, name: 'avatar')
+  final Base64ImageType? _avatarValue;
   final bool _avatarPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<Base64ImageType> banner;
+  @JsonKey(includeIfNull: false, name: 'banner')
+  final Base64ImageType? _bannerValue;
   final bool _bannerPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> bio;
+  @JsonKey(includeIfNull: false, name: 'bio')
+  final String? _bioValue;
   final bool _bioPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> pronouns;
+  @JsonKey(includeIfNull: false, name: 'pronouns')
+  final String? _pronounsValue;
   final bool _pronounsPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<ColorType> accentColor;
+  @JsonKey(includeIfNull: false, name: 'accent_color')
+  final ColorType? _accentColorValue;
   final bool _accentColorPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> timezone;
+  @JsonKey(includeIfNull: false, name: 'timezone')
+  final String? _timezoneValue;
   final bool _timezonePresent;
 
   Map<String, Object?> toJson() {
     final json = _$UserUpdateWithVerificationRequestToJson(this);
     if (_globalNamePresent) {
-      json.putIfAbsent('global_name', () => globalName);
+      json.putIfAbsent('global_name', () => _globalNameValue);
     }
     if (_avatarPresent) {
-      json.putIfAbsent('avatar', () => avatar);
+      json.putIfAbsent('avatar', () => _avatarValue);
     }
     if (_bannerPresent) {
-      json.putIfAbsent('banner', () => banner);
+      json.putIfAbsent('banner', () => _bannerValue);
     }
     if (_bioPresent) {
-      json.putIfAbsent('bio', () => bio);
+      json.putIfAbsent('bio', () => _bioValue);
     }
     if (_pronounsPresent) {
-      json.putIfAbsent('pronouns', () => pronouns);
+      json.putIfAbsent('pronouns', () => _pronounsValue);
     }
     if (_accentColorPresent) {
-      json.putIfAbsent('accent_color', () => accentColor);
+      json.putIfAbsent('accent_color', () => _accentColorValue);
     }
     if (_timezonePresent) {
-      json.putIfAbsent('timezone', () => timezone);
+      json.putIfAbsent('timezone', () => _timezoneValue);
     }
     return json;
   }

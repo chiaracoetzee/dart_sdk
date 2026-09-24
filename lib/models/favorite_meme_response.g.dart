@@ -12,7 +12,7 @@ FavoriteMemeResponse _$FavoriteMemeResponseFromJson(
   'FavoriteMemeResponse',
   json,
   ($checkedConvert) {
-    final val = FavoriteMemeResponse._(
+    final val = FavoriteMemeResponse(
       id: $checkedConvert('id', (v) => v as String),
       userId: $checkedConvert('user_id', (v) => v as String),
       name: $checkedConvert('name', (v) => v as String),

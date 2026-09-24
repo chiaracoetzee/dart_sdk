@@ -9,7 +9,7 @@ part of 'git_hub_webhook_pull_request.dart';
 GitHubWebhookPullRequest _$GitHubWebhookPullRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('GitHubWebhookPullRequest', json, ($checkedConvert) {
-  final val = GitHubWebhookPullRequest._(
+  final val = GitHubWebhookPullRequest(
     id: $checkedConvert('id', (v) => v as String),
     number: $checkedConvert('number', (v) => (v as num).toInt()),
     htmlUrl: $checkedConvert('html_url', (v) => v as String),

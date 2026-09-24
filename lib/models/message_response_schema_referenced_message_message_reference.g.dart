@@ -13,7 +13,7 @@ _$MessageResponseSchemaReferencedMessageMessageReferenceFromJson(
   'MessageResponseSchemaReferencedMessageMessageReference',
   json,
   ($checkedConvert) {
-    final val = MessageResponseSchemaReferencedMessageMessageReference._(
+    final val = MessageResponseSchemaReferencedMessageMessageReference(
       channelId: $checkedConvert('channel_id', (v) => v as String),
       messageId: $checkedConvert('message_id', (v) => v as String),
       type: $checkedConvert(

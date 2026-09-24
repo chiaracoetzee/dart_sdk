@@ -9,7 +9,7 @@ part of 'application_public_response_bot.dart';
 ApplicationPublicResponseBot _$ApplicationPublicResponseBotFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('ApplicationPublicResponseBot', json, ($checkedConvert) {
-  final val = ApplicationPublicResponseBot._(
+  final val = ApplicationPublicResponseBot(
     id: $checkedConvert('id', (v) => v as String),
     username: $checkedConvert('username', (v) => v as String),
     discriminator: $checkedConvert('discriminator', (v) => v as String),

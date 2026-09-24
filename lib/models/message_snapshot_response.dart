@@ -13,73 +13,9 @@ import 'message_type.dart';
 
 part 'message_snapshot_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class MessageSnapshotResponse {
   const MessageSnapshotResponse({
-    required this.timestamp,
-    required this.type,
-    required this.flags,
-  }) : content = null,
-       _contentPresent = false,
-       editedTimestamp = null,
-       _editedTimestampPresent = false,
-       mentions = null,
-       _mentionsPresent = false,
-       mentionRoles = null,
-       _mentionRolesPresent = false,
-       mentionChannels = null,
-       _mentionChannelsPresent = false,
-       embeds = null,
-       _embedsPresent = false,
-       attachments = null,
-       _attachmentsPresent = false,
-       stickers = null,
-       _stickersPresent = false;
-
-  const MessageSnapshotResponse._explicit({
-    required this.timestamp,
-    required this.type,
-    required this.flags,
-    Object? content = _omit,
-    Object? editedTimestamp = _omit,
-    Object? mentions = _omit,
-    Object? mentionRoles = _omit,
-    Object? mentionChannels = _omit,
-    Object? embeds = _omit,
-    Object? attachments = _omit,
-    Object? stickers = _omit,
-  }) : content = identical(content, _omit) ? null : content as String?,
-       _contentPresent = !identical(content, _omit),
-       editedTimestamp = identical(editedTimestamp, _omit)
-           ? null
-           : editedTimestamp as DateTime?,
-       _editedTimestampPresent = !identical(editedTimestamp, _omit),
-       mentions = identical(mentions, _omit) ? null : mentions as List<String>?,
-       _mentionsPresent = !identical(mentions, _omit),
-       mentionRoles = identical(mentionRoles, _omit)
-           ? null
-           : mentionRoles as List<String>?,
-       _mentionRolesPresent = !identical(mentionRoles, _omit),
-       mentionChannels = identical(mentionChannels, _omit)
-           ? null
-           : mentionChannels as List<MessageChannelMentionResponse>?,
-       _mentionChannelsPresent = !identical(mentionChannels, _omit),
-       embeds = identical(embeds, _omit)
-           ? null
-           : embeds as List<MessageEmbedResponse>?,
-       _embedsPresent = !identical(embeds, _omit),
-       attachments = identical(attachments, _omit)
-           ? null
-           : attachments as List<MessageAttachmentResponse>?,
-       _attachmentsPresent = !identical(attachments, _omit),
-       stickers = identical(stickers, _omit)
-           ? null
-           : stickers as List<MessageStickerResponse>?,
-       _stickersPresent = !identical(stickers, _omit);
-
-  const MessageSnapshotResponse._({
     required this.timestamp,
     required this.type,
     required this.flags,
@@ -91,39 +27,10 @@ class MessageSnapshotResponse {
     this.embeds,
     this.attachments,
     this.stickers,
-  }) : _contentPresent = false,
-       _editedTimestampPresent = false,
-       _mentionsPresent = false,
-       _mentionRolesPresent = false,
-       _mentionChannelsPresent = false,
-       _embedsPresent = false,
-       _attachmentsPresent = false,
-       _stickersPresent = false;
-  factory MessageSnapshotResponse.patch(Map<String, Object?> json) =>
-      MessageSnapshotResponse.fromJson(json);
+  });
 
-  factory MessageSnapshotResponse.fromJson(Map<String, Object?> json) {
-    final value = _$MessageSnapshotResponseFromJson(json);
-    return MessageSnapshotResponse._explicit(
-      timestamp: value.timestamp,
-      type: value.type,
-      flags: value.flags,
-      content: json.containsKey('content') ? value.content : _omit,
-      editedTimestamp: json.containsKey('edited_timestamp')
-          ? value.editedTimestamp
-          : _omit,
-      mentions: json.containsKey('mentions') ? value.mentions : _omit,
-      mentionRoles: json.containsKey('mention_roles')
-          ? value.mentionRoles
-          : _omit,
-      mentionChannels: json.containsKey('mention_channels')
-          ? value.mentionChannels
-          : _omit,
-      embeds: json.containsKey('embeds') ? value.embeds : _omit,
-      attachments: json.containsKey('attachments') ? value.attachments : _omit,
-      stickers: json.containsKey('stickers') ? value.stickers : _omit,
-    );
-  }
+  factory MessageSnapshotResponse.fromJson(Map<String, Object?> json) =>
+      _$MessageSnapshotResponseFromJson(json);
 
   /// The text content of the snapshot
   @JsonKey(includeIfNull: false)
@@ -161,41 +68,6 @@ class MessageSnapshotResponse {
   final List<MessageStickerResponse>? stickers;
   final MessageType type;
   final MessageFlags flags;
-  final bool _contentPresent;
-  final bool _editedTimestampPresent;
-  final bool _mentionsPresent;
-  final bool _mentionRolesPresent;
-  final bool _mentionChannelsPresent;
-  final bool _embedsPresent;
-  final bool _attachmentsPresent;
-  final bool _stickersPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$MessageSnapshotResponseToJson(this);
-    if (_contentPresent) {
-      json.putIfAbsent('content', () => content);
-    }
-    if (_editedTimestampPresent) {
-      json.putIfAbsent('edited_timestamp', () => editedTimestamp);
-    }
-    if (_mentionsPresent) {
-      json.putIfAbsent('mentions', () => mentions);
-    }
-    if (_mentionRolesPresent) {
-      json.putIfAbsent('mention_roles', () => mentionRoles);
-    }
-    if (_mentionChannelsPresent) {
-      json.putIfAbsent('mention_channels', () => mentionChannels);
-    }
-    if (_embedsPresent) {
-      json.putIfAbsent('embeds', () => embeds);
-    }
-    if (_attachmentsPresent) {
-      json.putIfAbsent('attachments', () => attachments);
-    }
-    if (_stickersPresent) {
-      json.putIfAbsent('stickers', () => stickers);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$MessageSnapshotResponseToJson(this);
 }

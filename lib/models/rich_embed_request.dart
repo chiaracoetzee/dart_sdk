@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'json_nullable.dart';
+
 import 'color_type.dart';
 import 'rich_embed_author_request.dart';
 import 'rich_embed_footer_request.dart';
@@ -12,195 +14,207 @@ import 'rich_embed_request_fields.dart';
 
 part 'rich_embed_request.g.dart';
 
-const Object _omit = Object();
-
 @JsonSerializable(constructor: '_')
 class RichEmbedRequest {
-  const RichEmbedRequest()
-    : url = null,
+  RichEmbedRequest({
+    JsonNullable<String> url = const JsonNullable<String>.undefined(),
+    JsonNullable<String> title = const JsonNullable<String>.undefined(),
+    JsonNullable<ColorType> color = const JsonNullable<ColorType>.undefined(),
+    JsonNullable<String> timestamp = const JsonNullable<String>.undefined(),
+    JsonNullable<String> description = const JsonNullable<String>.undefined(),
+    JsonNullable<RichEmbedAuthorRequest> author =
+        const JsonNullable<RichEmbedAuthorRequest>.undefined(),
+    JsonNullable<RichEmbedMediaRequest> image =
+        const JsonNullable<RichEmbedMediaRequest>.undefined(),
+    JsonNullable<RichEmbedMediaRequest> thumbnail =
+        const JsonNullable<RichEmbedMediaRequest>.undefined(),
+    JsonNullable<RichEmbedFooterRequest> footer =
+        const JsonNullable<RichEmbedFooterRequest>.undefined(),
+    JsonNullable<List<RichEmbedRequestFields>> fields =
+        const JsonNullable<List<RichEmbedRequestFields>>.undefined(),
+  }) : url = url,
+       _urlValue = url.value,
+       _urlPresent = url.isPresent,
+       title = title,
+       _titleValue = title.value,
+       _titlePresent = title.isPresent,
+       color = color,
+       _colorValue = color.value,
+       _colorPresent = color.isPresent,
+       timestamp = timestamp,
+       _timestampValue = timestamp.value,
+       _timestampPresent = timestamp.isPresent,
+       description = description,
+       _descriptionValue = description.value,
+       _descriptionPresent = description.isPresent,
+       author = author,
+       _authorValue = author.value,
+       _authorPresent = author.isPresent,
+       image = image,
+       _imageValue = image.value,
+       _imagePresent = image.isPresent,
+       thumbnail = thumbnail,
+       _thumbnailValue = thumbnail.value,
+       _thumbnailPresent = thumbnail.isPresent,
+       footer = footer,
+       _footerValue = footer.value,
+       _footerPresent = footer.isPresent,
+       fields = fields,
+       _fieldsValue = fields.value,
+       _fieldsPresent = fields.isPresent;
+
+  const RichEmbedRequest._()
+    : _titleValue = null,
+      _urlValue = null,
+      _colorValue = null,
+      _timestampValue = null,
+      _descriptionValue = null,
+      _authorValue = null,
+      _imageValue = null,
+      _thumbnailValue = null,
+      _footerValue = null,
+      _fieldsValue = null,
+      url = const JsonNullable<String>.undefined(),
       _urlPresent = false,
-      title = null,
+      title = const JsonNullable<String>.undefined(),
       _titlePresent = false,
-      color = null,
+      color = const JsonNullable<ColorType>.undefined(),
       _colorPresent = false,
-      timestamp = null,
+      timestamp = const JsonNullable<String>.undefined(),
       _timestampPresent = false,
-      description = null,
+      description = const JsonNullable<String>.undefined(),
       _descriptionPresent = false,
-      author = null,
+      author = const JsonNullable<RichEmbedAuthorRequest>.undefined(),
       _authorPresent = false,
-      image = null,
+      image = const JsonNullable<RichEmbedMediaRequest>.undefined(),
       _imagePresent = false,
-      thumbnail = null,
+      thumbnail = const JsonNullable<RichEmbedMediaRequest>.undefined(),
       _thumbnailPresent = false,
-      footer = null,
+      footer = const JsonNullable<RichEmbedFooterRequest>.undefined(),
       _footerPresent = false,
-      fields = null,
+      fields = const JsonNullable<List<RichEmbedRequestFields>>.undefined(),
       _fieldsPresent = false;
-
-  const RichEmbedRequest._explicit({
-    Object? url = _omit,
-    Object? title = _omit,
-    Object? color = _omit,
-    Object? timestamp = _omit,
-    Object? description = _omit,
-    Object? author = _omit,
-    Object? image = _omit,
-    Object? thumbnail = _omit,
-    Object? footer = _omit,
-    Object? fields = _omit,
-  }) : url = identical(url, _omit) ? null : url as String?,
-       _urlPresent = !identical(url, _omit),
-       title = identical(title, _omit) ? null : title as String?,
-       _titlePresent = !identical(title, _omit),
-       color = identical(color, _omit) ? null : color as ColorType?,
-       _colorPresent = !identical(color, _omit),
-       timestamp = identical(timestamp, _omit) ? null : timestamp as String?,
-       _timestampPresent = !identical(timestamp, _omit),
-       description = identical(description, _omit)
-           ? null
-           : description as String?,
-       _descriptionPresent = !identical(description, _omit),
-       author = identical(author, _omit)
-           ? null
-           : author as RichEmbedAuthorRequest?,
-       _authorPresent = !identical(author, _omit),
-       image = identical(image, _omit) ? null : image as RichEmbedMediaRequest?,
-       _imagePresent = !identical(image, _omit),
-       thumbnail = identical(thumbnail, _omit)
-           ? null
-           : thumbnail as RichEmbedMediaRequest?,
-       _thumbnailPresent = !identical(thumbnail, _omit),
-       footer = identical(footer, _omit)
-           ? null
-           : footer as RichEmbedFooterRequest?,
-       _footerPresent = !identical(footer, _omit),
-       fields = identical(fields, _omit)
-           ? null
-           : fields as List<RichEmbedRequestFields>?,
-       _fieldsPresent = !identical(fields, _omit);
-
-  const RichEmbedRequest._({
-    this.url,
-    this.title,
-    this.color,
-    this.timestamp,
-    this.description,
-    this.author,
-    this.image,
-    this.thumbnail,
-    this.footer,
-    this.fields,
-  }) : _urlPresent = false,
-       _titlePresent = false,
-       _colorPresent = false,
-       _timestampPresent = false,
-       _descriptionPresent = false,
-       _authorPresent = false,
-       _imagePresent = false,
-       _thumbnailPresent = false,
-       _footerPresent = false,
-       _fieldsPresent = false;
   factory RichEmbedRequest.patch(Map<String, Object?> json) =>
       RichEmbedRequest.fromJson(json);
 
   factory RichEmbedRequest.fromJson(Map<String, Object?> json) {
     final value = _$RichEmbedRequestFromJson(json);
-    return RichEmbedRequest._explicit(
-      url: json.containsKey('url') ? value.url : _omit,
-      title: json.containsKey('title') ? value.title : _omit,
-      color: json.containsKey('color') ? value.color : _omit,
-      timestamp: json.containsKey('timestamp') ? value.timestamp : _omit,
-      description: json.containsKey('description') ? value.description : _omit,
-      author: json.containsKey('author') ? value.author : _omit,
-      image: json.containsKey('image') ? value.image : _omit,
-      thumbnail: json.containsKey('thumbnail') ? value.thumbnail : _omit,
-      footer: json.containsKey('footer') ? value.footer : _omit,
-      fields: json.containsKey('fields') ? value.fields : _omit,
+    return RichEmbedRequest(
+      url: json.containsKey('url')
+          ? JsonNullable<String>.of(value._urlValue)
+          : const JsonNullable<String>.undefined(),
+      title: json.containsKey('title')
+          ? JsonNullable<String>.of(value._titleValue)
+          : const JsonNullable<String>.undefined(),
+      color: json.containsKey('color')
+          ? JsonNullable<ColorType>.of(value._colorValue)
+          : const JsonNullable<ColorType>.undefined(),
+      timestamp: json.containsKey('timestamp')
+          ? JsonNullable<String>.of(value._timestampValue)
+          : const JsonNullable<String>.undefined(),
+      description: json.containsKey('description')
+          ? JsonNullable<String>.of(value._descriptionValue)
+          : const JsonNullable<String>.undefined(),
+      author: json.containsKey('author')
+          ? JsonNullable<RichEmbedAuthorRequest>.of(value._authorValue)
+          : const JsonNullable<RichEmbedAuthorRequest>.undefined(),
+      image: json.containsKey('image')
+          ? JsonNullable<RichEmbedMediaRequest>.of(value._imageValue)
+          : const JsonNullable<RichEmbedMediaRequest>.undefined(),
+      thumbnail: json.containsKey('thumbnail')
+          ? JsonNullable<RichEmbedMediaRequest>.of(value._thumbnailValue)
+          : const JsonNullable<RichEmbedMediaRequest>.undefined(),
+      footer: json.containsKey('footer')
+          ? JsonNullable<RichEmbedFooterRequest>.of(value._footerValue)
+          : const JsonNullable<RichEmbedFooterRequest>.undefined(),
+      fields: json.containsKey('fields')
+          ? JsonNullable<List<RichEmbedRequestFields>>.of(value._fieldsValue)
+          : const JsonNullable<List<RichEmbedRequestFields>>.undefined(),
     );
   }
 
-  /// URL of the embed
-  @JsonKey(includeIfNull: false)
-  final String? url;
-
-  /// Title of the embed (0-256 characters)
-  @JsonKey(includeIfNull: false)
-  final String? title;
-
-  /// Color code of the embed (hex integer)
-  @JsonKey(includeIfNull: false)
-  final ColorType? color;
-
-  /// ISO8601 timestamp for the embed
-  @JsonKey(includeIfNull: false)
-  final String? timestamp;
-
-  /// Description of the embed (1-4096 characters)
-  @JsonKey(includeIfNull: false)
-  final String? description;
-
-  /// Author information
-  @JsonKey(includeIfNull: false)
-  final RichEmbedAuthorRequest? author;
-
-  /// Image to display in the embed
-  @JsonKey(includeIfNull: false)
-  final RichEmbedMediaRequest? image;
-
-  /// Thumbnail image for the embed
-  @JsonKey(includeIfNull: false)
-  final RichEmbedMediaRequest? thumbnail;
-
-  /// Footer information
-  @JsonKey(includeIfNull: false)
-  final RichEmbedFooterRequest? footer;
-
-  /// Array of field objects (max 25)
-  @JsonKey(includeIfNull: false)
-  final List<RichEmbedRequestFields>? fields;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> url;
+  @JsonKey(includeIfNull: false, name: 'url')
+  final String? _urlValue;
   final bool _urlPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> title;
+  @JsonKey(includeIfNull: false, name: 'title')
+  final String? _titleValue;
   final bool _titlePresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<ColorType> color;
+  @JsonKey(includeIfNull: false, name: 'color')
+  final ColorType? _colorValue;
   final bool _colorPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> timestamp;
+  @JsonKey(includeIfNull: false, name: 'timestamp')
+  final String? _timestampValue;
   final bool _timestampPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> description;
+  @JsonKey(includeIfNull: false, name: 'description')
+  final String? _descriptionValue;
   final bool _descriptionPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<RichEmbedAuthorRequest> author;
+  @JsonKey(includeIfNull: false, name: 'author')
+  final RichEmbedAuthorRequest? _authorValue;
   final bool _authorPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<RichEmbedMediaRequest> image;
+  @JsonKey(includeIfNull: false, name: 'image')
+  final RichEmbedMediaRequest? _imageValue;
   final bool _imagePresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<RichEmbedMediaRequest> thumbnail;
+  @JsonKey(includeIfNull: false, name: 'thumbnail')
+  final RichEmbedMediaRequest? _thumbnailValue;
   final bool _thumbnailPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<RichEmbedFooterRequest> footer;
+  @JsonKey(includeIfNull: false, name: 'footer')
+  final RichEmbedFooterRequest? _footerValue;
   final bool _footerPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<List<RichEmbedRequestFields>> fields;
+  @JsonKey(includeIfNull: false, name: 'fields')
+  final List<RichEmbedRequestFields>? _fieldsValue;
   final bool _fieldsPresent;
 
   Map<String, Object?> toJson() {
     final json = _$RichEmbedRequestToJson(this);
     if (_urlPresent) {
-      json.putIfAbsent('url', () => url);
+      json.putIfAbsent('url', () => _urlValue);
     }
     if (_titlePresent) {
-      json.putIfAbsent('title', () => title);
+      json.putIfAbsent('title', () => _titleValue);
     }
     if (_colorPresent) {
-      json.putIfAbsent('color', () => color);
+      json.putIfAbsent('color', () => _colorValue);
     }
     if (_timestampPresent) {
-      json.putIfAbsent('timestamp', () => timestamp);
+      json.putIfAbsent('timestamp', () => _timestampValue);
     }
     if (_descriptionPresent) {
-      json.putIfAbsent('description', () => description);
+      json.putIfAbsent('description', () => _descriptionValue);
     }
     if (_authorPresent) {
-      json.putIfAbsent('author', () => author);
+      json.putIfAbsent('author', () => _authorValue);
     }
     if (_imagePresent) {
-      json.putIfAbsent('image', () => image);
+      json.putIfAbsent('image', () => _imageValue);
     }
     if (_thumbnailPresent) {
-      json.putIfAbsent('thumbnail', () => thumbnail);
+      json.putIfAbsent('thumbnail', () => _thumbnailValue);
     }
     if (_footerPresent) {
-      json.putIfAbsent('footer', () => footer);
+      json.putIfAbsent('footer', () => _footerValue);
     }
     if (_fieldsPresent) {
-      json.putIfAbsent('fields', () => fields);
+      json.putIfAbsent('fields', () => _fieldsValue);
     }
     return json;
   }

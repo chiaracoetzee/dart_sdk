@@ -8,7 +8,7 @@ part of 'handoff_info_response.dart';
 
 HandoffInfoResponse _$HandoffInfoResponseFromJson(Map<String, dynamic> json) =>
     $checkedCreate('HandoffInfoResponse', json, ($checkedConvert) {
-      final val = HandoffInfoResponse._(
+      final val = HandoffInfoResponse(
         status: $checkedConvert('status', (v) => v as String),
         clientInfo: $checkedConvert(
           'client_info',

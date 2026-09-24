@@ -12,7 +12,7 @@ GuildPartialResponse _$GuildPartialResponseFromJson(
   'GuildPartialResponse',
   json,
   ($checkedConvert) {
-    final val = GuildPartialResponse._(
+    final val = GuildPartialResponse(
       id: $checkedConvert('id', (v) => v as String),
       name: $checkedConvert('name', (v) => v as String),
       splashCardAlignment: $checkedConvert(

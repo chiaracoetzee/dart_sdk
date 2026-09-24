@@ -12,7 +12,7 @@ UserSettingsResponse _$UserSettingsResponseFromJson(
   'UserSettingsResponse',
   json,
   ($checkedConvert) {
-    final val = UserSettingsResponse._(
+    final val = UserSettingsResponse(
       renderEmbeds: $checkedConvert('render_embeds', (v) => v as bool),
       profilePrivacy: $checkedConvert(
         'profile_privacy',

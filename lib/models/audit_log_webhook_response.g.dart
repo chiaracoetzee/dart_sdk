@@ -12,7 +12,7 @@ AuditLogWebhookResponse _$AuditLogWebhookResponseFromJson(
   'AuditLogWebhookResponse',
   json,
   ($checkedConvert) {
-    final val = AuditLogWebhookResponse._(
+    final val = AuditLogWebhookResponse(
       id: $checkedConvert('id', (v) => v as String),
       type: $checkedConvert(
         'type',

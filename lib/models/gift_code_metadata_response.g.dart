@@ -12,7 +12,7 @@ GiftCodeMetadataResponse _$GiftCodeMetadataResponseFromJson(
   'GiftCodeMetadataResponse',
   json,
   ($checkedConvert) {
-    final val = GiftCodeMetadataResponse._(
+    final val = GiftCodeMetadataResponse(
       code: $checkedConvert('code', (v) => v as String),
       durationType: $checkedConvert(
         'duration_type',

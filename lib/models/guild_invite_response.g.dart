@@ -11,7 +11,7 @@ GuildInviteResponse _$GuildInviteResponseFromJson(Map<String, dynamic> json) =>
       'GuildInviteResponse',
       json,
       ($checkedConvert) {
-        final val = GuildInviteResponse._(
+        final val = GuildInviteResponse(
           code: $checkedConvert('code', (v) => v as String),
           temporary: $checkedConvert('temporary', (v) => v as bool),
           type: $checkedConvert('type', (v) => v as num),

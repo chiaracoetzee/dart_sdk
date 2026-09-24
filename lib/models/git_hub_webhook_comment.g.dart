@@ -9,7 +9,7 @@ part of 'git_hub_webhook_comment.dart';
 GitHubWebhookComment _$GitHubWebhookCommentFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('GitHubWebhookComment', json, ($checkedConvert) {
-  final val = GitHubWebhookComment._(
+  final val = GitHubWebhookComment(
     id: $checkedConvert('id', (v) => v as String),
     htmlUrl: $checkedConvert('html_url', (v) => v as String),
     user: $checkedConvert(

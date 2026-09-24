@@ -11,7 +11,7 @@ _$MessageSearchResultsResponseMessagesCallFromJson(Map<String, dynamic> json) =>
     $checkedCreate('MessageSearchResultsResponseMessagesCall', json, (
       $checkedConvert,
     ) {
-      final val = MessageSearchResultsResponseMessagesCall._(
+      final val = MessageSearchResultsResponseMessagesCall(
         participants: $checkedConvert(
           'participants',
           (v) => (v as List<dynamic>).map((e) => e as String).toList(),

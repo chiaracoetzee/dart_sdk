@@ -10,43 +10,17 @@ import 'snowflake_string_type.dart';
 
 part 'channel_partial_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class ChannelPartialResponse {
   const ChannelPartialResponse({
     required this.id,
     required this.type,
-    this.recipients,
-  }) : name = null,
-       _namePresent = false;
-
-  const ChannelPartialResponse._explicit({
-    required this.id,
-    required this.type,
-    Object? name = _omit,
-    this.recipients,
-  }) : name = identical(name, _omit) ? null : name as String?,
-       _namePresent = !identical(name, _omit);
-
-  const ChannelPartialResponse._({
-    required this.id,
-    required this.type,
     this.name,
     this.recipients,
-  }) : _namePresent = false;
-  factory ChannelPartialResponse.patch(Map<String, Object?> json) =>
-      ChannelPartialResponse.fromJson(json);
+  });
 
-  factory ChannelPartialResponse.fromJson(Map<String, Object?> json) {
-    final value = _$ChannelPartialResponseFromJson(json);
-    return ChannelPartialResponse._explicit(
-      id: value.id,
-      type: value.type,
-      name: json.containsKey('name') ? value.name : _omit,
-      recipients: value.recipients,
-    );
-  }
+  factory ChannelPartialResponse.fromJson(Map<String, Object?> json) =>
+      _$ChannelPartialResponseFromJson(json);
 
   /// The unique identifier (snowflake) for this channel
   final SnowflakeStringType id;
@@ -59,13 +33,6 @@ class ChannelPartialResponse {
   /// The recipients of the DM channel
   @JsonKey(includeIfNull: false)
   final List<ChannelPartialResponseRecipients>? recipients;
-  final bool _namePresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$ChannelPartialResponseToJson(this);
-    if (_namePresent) {
-      json.putIfAbsent('name', () => name);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$ChannelPartialResponseToJson(this);
 }

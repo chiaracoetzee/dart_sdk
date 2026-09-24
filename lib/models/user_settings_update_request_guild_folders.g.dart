@@ -11,7 +11,7 @@ _$UserSettingsUpdateRequestGuildFoldersFromJson(Map<String, dynamic> json) =>
     $checkedCreate('UserSettingsUpdateRequestGuildFolders', json, (
       $checkedConvert,
     ) {
-      final val = UserSettingsUpdateRequestGuildFolders._(
+      final val = UserSettingsUpdateRequestGuildFolders(
         id: $checkedConvert('id', (v) => (v as num).toInt()),
         guildIds: $checkedConvert(
           'guild_ids',

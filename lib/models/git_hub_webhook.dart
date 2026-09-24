@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'json_nullable.dart';
+
 import 'git_hub_webhook_answer.dart';
 import 'git_hub_webhook_check_run.dart';
 import 'git_hub_webhook_check_suite.dart';
@@ -22,322 +24,381 @@ import 'git_hub_webhook_sender.dart';
 
 part 'git_hub_webhook.g.dart';
 
-const Object _omit = Object();
-
 @JsonSerializable(constructor: '_')
 class GitHubWebhook {
-  const GitHubWebhook({required this.sender})
-    : action = null,
+  GitHubWebhook({
+    required this.sender,
+    JsonNullable<String> action = const JsonNullable<String>.undefined(),
+    JsonNullable<GitHubWebhookAnswer> answer =
+        const JsonNullable<GitHubWebhookAnswer>.undefined(),
+    JsonNullable<GitHubWebhookCheckRun> checkRun =
+        const JsonNullable<GitHubWebhookCheckRun>.undefined(),
+    JsonNullable<GitHubWebhookCheckSuite> checkSuite =
+        const JsonNullable<GitHubWebhookCheckSuite>.undefined(),
+    JsonNullable<GitHubWebhookComment> comment =
+        const JsonNullable<GitHubWebhookComment>.undefined(),
+    JsonNullable<List<GitHubWebhookCommits>> commits =
+        const JsonNullable<List<GitHubWebhookCommits>>.undefined(),
+    JsonNullable<String> compare = const JsonNullable<String>.undefined(),
+    JsonNullable<GitHubWebhookDiscussion> discussion =
+        const JsonNullable<GitHubWebhookDiscussion>.undefined(),
+    JsonNullable<bool> forced = const JsonNullable<bool>.undefined(),
+    JsonNullable<GitHubWebhookForkee> forkee =
+        const JsonNullable<GitHubWebhookForkee>.undefined(),
+    JsonNullable<GitHubWebhookHeadCommit> headCommit =
+        const JsonNullable<GitHubWebhookHeadCommit>.undefined(),
+    JsonNullable<GitHubWebhookIssue> issue =
+        const JsonNullable<GitHubWebhookIssue>.undefined(),
+    JsonNullable<GitHubWebhookMember> member =
+        const JsonNullable<GitHubWebhookMember>.undefined(),
+    JsonNullable<GitHubWebhookPullRequest> pullRequest =
+        const JsonNullable<GitHubWebhookPullRequest>.undefined(),
+    JsonNullable<String> refType = const JsonNullable<String>.undefined(),
+    JsonNullable<String> ref = const JsonNullable<String>.undefined(),
+    JsonNullable<GitHubWebhookRelease> release =
+        const JsonNullable<GitHubWebhookRelease>.undefined(),
+    JsonNullable<GitHubWebhookRepository> repository =
+        const JsonNullable<GitHubWebhookRepository>.undefined(),
+    JsonNullable<GitHubWebhookReview> review =
+        const JsonNullable<GitHubWebhookReview>.undefined(),
+  }) : action = action,
+       _actionValue = action.value,
+       _actionPresent = action.isPresent,
+       answer = answer,
+       _answerValue = answer.value,
+       _answerPresent = answer.isPresent,
+       checkRun = checkRun,
+       _checkRunValue = checkRun.value,
+       _checkRunPresent = checkRun.isPresent,
+       checkSuite = checkSuite,
+       _checkSuiteValue = checkSuite.value,
+       _checkSuitePresent = checkSuite.isPresent,
+       comment = comment,
+       _commentValue = comment.value,
+       _commentPresent = comment.isPresent,
+       commits = commits,
+       _commitsValue = commits.value,
+       _commitsPresent = commits.isPresent,
+       compare = compare,
+       _compareValue = compare.value,
+       _comparePresent = compare.isPresent,
+       discussion = discussion,
+       _discussionValue = discussion.value,
+       _discussionPresent = discussion.isPresent,
+       forced = forced,
+       _forcedValue = forced.value,
+       _forcedPresent = forced.isPresent,
+       forkee = forkee,
+       _forkeeValue = forkee.value,
+       _forkeePresent = forkee.isPresent,
+       headCommit = headCommit,
+       _headCommitValue = headCommit.value,
+       _headCommitPresent = headCommit.isPresent,
+       issue = issue,
+       _issueValue = issue.value,
+       _issuePresent = issue.isPresent,
+       member = member,
+       _memberValue = member.value,
+       _memberPresent = member.isPresent,
+       pullRequest = pullRequest,
+       _pullRequestValue = pullRequest.value,
+       _pullRequestPresent = pullRequest.isPresent,
+       refType = refType,
+       _refTypeValue = refType.value,
+       _refTypePresent = refType.isPresent,
+       ref = ref,
+       _refValue = ref.value,
+       _refPresent = ref.isPresent,
+       release = release,
+       _releaseValue = release.value,
+       _releasePresent = release.isPresent,
+       repository = repository,
+       _repositoryValue = repository.value,
+       _repositoryPresent = repository.isPresent,
+       review = review,
+       _reviewValue = review.value,
+       _reviewPresent = review.isPresent;
+
+  const GitHubWebhook._({required this.sender})
+    : _actionValue = null,
+      _answerValue = null,
+      _checkRunValue = null,
+      _checkSuiteValue = null,
+      _commentValue = null,
+      _commitsValue = null,
+      _compareValue = null,
+      _discussionValue = null,
+      _forcedValue = null,
+      _forkeeValue = null,
+      _headCommitValue = null,
+      _issueValue = null,
+      _memberValue = null,
+      _pullRequestValue = null,
+      _refTypeValue = null,
+      _refValue = null,
+      _releaseValue = null,
+      _repositoryValue = null,
+      _reviewValue = null,
+      action = const JsonNullable<String>.undefined(),
       _actionPresent = false,
-      answer = null,
+      answer = const JsonNullable<GitHubWebhookAnswer>.undefined(),
       _answerPresent = false,
-      checkRun = null,
+      checkRun = const JsonNullable<GitHubWebhookCheckRun>.undefined(),
       _checkRunPresent = false,
-      checkSuite = null,
+      checkSuite = const JsonNullable<GitHubWebhookCheckSuite>.undefined(),
       _checkSuitePresent = false,
-      comment = null,
+      comment = const JsonNullable<GitHubWebhookComment>.undefined(),
       _commentPresent = false,
-      commits = null,
+      commits = const JsonNullable<List<GitHubWebhookCommits>>.undefined(),
       _commitsPresent = false,
-      compare = null,
+      compare = const JsonNullable<String>.undefined(),
       _comparePresent = false,
-      discussion = null,
+      discussion = const JsonNullable<GitHubWebhookDiscussion>.undefined(),
       _discussionPresent = false,
-      forced = null,
+      forced = const JsonNullable<bool>.undefined(),
       _forcedPresent = false,
-      forkee = null,
+      forkee = const JsonNullable<GitHubWebhookForkee>.undefined(),
       _forkeePresent = false,
-      headCommit = null,
+      headCommit = const JsonNullable<GitHubWebhookHeadCommit>.undefined(),
       _headCommitPresent = false,
-      issue = null,
+      issue = const JsonNullable<GitHubWebhookIssue>.undefined(),
       _issuePresent = false,
-      member = null,
+      member = const JsonNullable<GitHubWebhookMember>.undefined(),
       _memberPresent = false,
-      pullRequest = null,
+      pullRequest = const JsonNullable<GitHubWebhookPullRequest>.undefined(),
       _pullRequestPresent = false,
-      refType = null,
+      refType = const JsonNullable<String>.undefined(),
       _refTypePresent = false,
-      ref = null,
+      ref = const JsonNullable<String>.undefined(),
       _refPresent = false,
-      release = null,
+      release = const JsonNullable<GitHubWebhookRelease>.undefined(),
       _releasePresent = false,
-      repository = null,
+      repository = const JsonNullable<GitHubWebhookRepository>.undefined(),
       _repositoryPresent = false,
-      review = null,
+      review = const JsonNullable<GitHubWebhookReview>.undefined(),
       _reviewPresent = false;
-
-  const GitHubWebhook._explicit({
-    required this.sender,
-    Object? action = _omit,
-    Object? answer = _omit,
-    Object? checkRun = _omit,
-    Object? checkSuite = _omit,
-    Object? comment = _omit,
-    Object? commits = _omit,
-    Object? compare = _omit,
-    Object? discussion = _omit,
-    Object? forced = _omit,
-    Object? forkee = _omit,
-    Object? headCommit = _omit,
-    Object? issue = _omit,
-    Object? member = _omit,
-    Object? pullRequest = _omit,
-    Object? refType = _omit,
-    Object? ref = _omit,
-    Object? release = _omit,
-    Object? repository = _omit,
-    Object? review = _omit,
-  }) : action = identical(action, _omit) ? null : action as String?,
-       _actionPresent = !identical(action, _omit),
-       answer = identical(answer, _omit)
-           ? null
-           : answer as GitHubWebhookAnswer?,
-       _answerPresent = !identical(answer, _omit),
-       checkRun = identical(checkRun, _omit)
-           ? null
-           : checkRun as GitHubWebhookCheckRun?,
-       _checkRunPresent = !identical(checkRun, _omit),
-       checkSuite = identical(checkSuite, _omit)
-           ? null
-           : checkSuite as GitHubWebhookCheckSuite?,
-       _checkSuitePresent = !identical(checkSuite, _omit),
-       comment = identical(comment, _omit)
-           ? null
-           : comment as GitHubWebhookComment?,
-       _commentPresent = !identical(comment, _omit),
-       commits = identical(commits, _omit)
-           ? null
-           : commits as List<GitHubWebhookCommits>?,
-       _commitsPresent = !identical(commits, _omit),
-       compare = identical(compare, _omit) ? null : compare as String?,
-       _comparePresent = !identical(compare, _omit),
-       discussion = identical(discussion, _omit)
-           ? null
-           : discussion as GitHubWebhookDiscussion?,
-       _discussionPresent = !identical(discussion, _omit),
-       forced = identical(forced, _omit) ? null : forced as bool?,
-       _forcedPresent = !identical(forced, _omit),
-       forkee = identical(forkee, _omit)
-           ? null
-           : forkee as GitHubWebhookForkee?,
-       _forkeePresent = !identical(forkee, _omit),
-       headCommit = identical(headCommit, _omit)
-           ? null
-           : headCommit as GitHubWebhookHeadCommit?,
-       _headCommitPresent = !identical(headCommit, _omit),
-       issue = identical(issue, _omit) ? null : issue as GitHubWebhookIssue?,
-       _issuePresent = !identical(issue, _omit),
-       member = identical(member, _omit)
-           ? null
-           : member as GitHubWebhookMember?,
-       _memberPresent = !identical(member, _omit),
-       pullRequest = identical(pullRequest, _omit)
-           ? null
-           : pullRequest as GitHubWebhookPullRequest?,
-       _pullRequestPresent = !identical(pullRequest, _omit),
-       refType = identical(refType, _omit) ? null : refType as String?,
-       _refTypePresent = !identical(refType, _omit),
-       ref = identical(ref, _omit) ? null : ref as String?,
-       _refPresent = !identical(ref, _omit),
-       release = identical(release, _omit)
-           ? null
-           : release as GitHubWebhookRelease?,
-       _releasePresent = !identical(release, _omit),
-       repository = identical(repository, _omit)
-           ? null
-           : repository as GitHubWebhookRepository?,
-       _repositoryPresent = !identical(repository, _omit),
-       review = identical(review, _omit)
-           ? null
-           : review as GitHubWebhookReview?,
-       _reviewPresent = !identical(review, _omit);
-
-  const GitHubWebhook._({
-    required this.sender,
-    this.action,
-    this.answer,
-    this.checkRun,
-    this.checkSuite,
-    this.comment,
-    this.commits,
-    this.compare,
-    this.discussion,
-    this.forced,
-    this.forkee,
-    this.headCommit,
-    this.issue,
-    this.member,
-    this.pullRequest,
-    this.refType,
-    this.ref,
-    this.release,
-    this.repository,
-    this.review,
-  }) : _actionPresent = false,
-       _answerPresent = false,
-       _checkRunPresent = false,
-       _checkSuitePresent = false,
-       _commentPresent = false,
-       _commitsPresent = false,
-       _comparePresent = false,
-       _discussionPresent = false,
-       _forcedPresent = false,
-       _forkeePresent = false,
-       _headCommitPresent = false,
-       _issuePresent = false,
-       _memberPresent = false,
-       _pullRequestPresent = false,
-       _refTypePresent = false,
-       _refPresent = false,
-       _releasePresent = false,
-       _repositoryPresent = false,
-       _reviewPresent = false;
   factory GitHubWebhook.patch(Map<String, Object?> json) =>
       GitHubWebhook.fromJson(json);
 
   factory GitHubWebhook.fromJson(Map<String, Object?> json) {
     final value = _$GitHubWebhookFromJson(json);
-    return GitHubWebhook._explicit(
+    return GitHubWebhook(
       sender: value.sender,
-      action: json.containsKey('action') ? value.action : _omit,
-      answer: json.containsKey('answer') ? value.answer : _omit,
-      checkRun: json.containsKey('check_run') ? value.checkRun : _omit,
-      checkSuite: json.containsKey('check_suite') ? value.checkSuite : _omit,
-      comment: json.containsKey('comment') ? value.comment : _omit,
-      commits: json.containsKey('commits') ? value.commits : _omit,
-      compare: json.containsKey('compare') ? value.compare : _omit,
-      discussion: json.containsKey('discussion') ? value.discussion : _omit,
-      forced: json.containsKey('forced') ? value.forced : _omit,
-      forkee: json.containsKey('forkee') ? value.forkee : _omit,
-      headCommit: json.containsKey('head_commit') ? value.headCommit : _omit,
-      issue: json.containsKey('issue') ? value.issue : _omit,
-      member: json.containsKey('member') ? value.member : _omit,
-      pullRequest: json.containsKey('pull_request') ? value.pullRequest : _omit,
-      refType: json.containsKey('ref_type') ? value.refType : _omit,
-      ref: json.containsKey('ref') ? value.ref : _omit,
-      release: json.containsKey('release') ? value.release : _omit,
-      repository: json.containsKey('repository') ? value.repository : _omit,
-      review: json.containsKey('review') ? value.review : _omit,
+      action: json.containsKey('action')
+          ? JsonNullable<String>.of(value._actionValue)
+          : const JsonNullable<String>.undefined(),
+      answer: json.containsKey('answer')
+          ? JsonNullable<GitHubWebhookAnswer>.of(value._answerValue)
+          : const JsonNullable<GitHubWebhookAnswer>.undefined(),
+      checkRun: json.containsKey('check_run')
+          ? JsonNullable<GitHubWebhookCheckRun>.of(value._checkRunValue)
+          : const JsonNullable<GitHubWebhookCheckRun>.undefined(),
+      checkSuite: json.containsKey('check_suite')
+          ? JsonNullable<GitHubWebhookCheckSuite>.of(value._checkSuiteValue)
+          : const JsonNullable<GitHubWebhookCheckSuite>.undefined(),
+      comment: json.containsKey('comment')
+          ? JsonNullable<GitHubWebhookComment>.of(value._commentValue)
+          : const JsonNullable<GitHubWebhookComment>.undefined(),
+      commits: json.containsKey('commits')
+          ? JsonNullable<List<GitHubWebhookCommits>>.of(value._commitsValue)
+          : const JsonNullable<List<GitHubWebhookCommits>>.undefined(),
+      compare: json.containsKey('compare')
+          ? JsonNullable<String>.of(value._compareValue)
+          : const JsonNullable<String>.undefined(),
+      discussion: json.containsKey('discussion')
+          ? JsonNullable<GitHubWebhookDiscussion>.of(value._discussionValue)
+          : const JsonNullable<GitHubWebhookDiscussion>.undefined(),
+      forced: json.containsKey('forced')
+          ? JsonNullable<bool>.of(value._forcedValue)
+          : const JsonNullable<bool>.undefined(),
+      forkee: json.containsKey('forkee')
+          ? JsonNullable<GitHubWebhookForkee>.of(value._forkeeValue)
+          : const JsonNullable<GitHubWebhookForkee>.undefined(),
+      headCommit: json.containsKey('head_commit')
+          ? JsonNullable<GitHubWebhookHeadCommit>.of(value._headCommitValue)
+          : const JsonNullable<GitHubWebhookHeadCommit>.undefined(),
+      issue: json.containsKey('issue')
+          ? JsonNullable<GitHubWebhookIssue>.of(value._issueValue)
+          : const JsonNullable<GitHubWebhookIssue>.undefined(),
+      member: json.containsKey('member')
+          ? JsonNullable<GitHubWebhookMember>.of(value._memberValue)
+          : const JsonNullable<GitHubWebhookMember>.undefined(),
+      pullRequest: json.containsKey('pull_request')
+          ? JsonNullable<GitHubWebhookPullRequest>.of(value._pullRequestValue)
+          : const JsonNullable<GitHubWebhookPullRequest>.undefined(),
+      refType: json.containsKey('ref_type')
+          ? JsonNullable<String>.of(value._refTypeValue)
+          : const JsonNullable<String>.undefined(),
+      ref: json.containsKey('ref')
+          ? JsonNullable<String>.of(value._refValue)
+          : const JsonNullable<String>.undefined(),
+      release: json.containsKey('release')
+          ? JsonNullable<GitHubWebhookRelease>.of(value._releaseValue)
+          : const JsonNullable<GitHubWebhookRelease>.undefined(),
+      repository: json.containsKey('repository')
+          ? JsonNullable<GitHubWebhookRepository>.of(value._repositoryValue)
+          : const JsonNullable<GitHubWebhookRepository>.undefined(),
+      review: json.containsKey('review')
+          ? JsonNullable<GitHubWebhookReview>.of(value._reviewValue)
+          : const JsonNullable<GitHubWebhookReview>.undefined(),
     );
   }
 
-  @JsonKey(includeIfNull: false)
-  final String? action;
-  @JsonKey(includeIfNull: false)
-  final GitHubWebhookAnswer? answer;
-  @JsonKey(includeIfNull: false, name: 'check_run')
-  final GitHubWebhookCheckRun? checkRun;
-  @JsonKey(includeIfNull: false, name: 'check_suite')
-  final GitHubWebhookCheckSuite? checkSuite;
-  @JsonKey(includeIfNull: false)
-  final GitHubWebhookComment? comment;
-  @JsonKey(includeIfNull: false)
-  final List<GitHubWebhookCommits>? commits;
-  @JsonKey(includeIfNull: false)
-  final String? compare;
-  @JsonKey(includeIfNull: false)
-  final GitHubWebhookDiscussion? discussion;
-  @JsonKey(includeIfNull: false)
-  final bool? forced;
-  @JsonKey(includeIfNull: false)
-  final GitHubWebhookForkee? forkee;
-  @JsonKey(includeIfNull: false, name: 'head_commit')
-  final GitHubWebhookHeadCommit? headCommit;
-  @JsonKey(includeIfNull: false)
-  final GitHubWebhookIssue? issue;
-  @JsonKey(includeIfNull: false)
-  final GitHubWebhookMember? member;
-  @JsonKey(includeIfNull: false, name: 'pull_request')
-  final GitHubWebhookPullRequest? pullRequest;
-  @JsonKey(includeIfNull: false, name: 'ref_type')
-  final String? refType;
-  @JsonKey(includeIfNull: false)
-  final String? ref;
-  @JsonKey(includeIfNull: false)
-  final GitHubWebhookRelease? release;
-  @JsonKey(includeIfNull: false)
-  final GitHubWebhookRepository? repository;
-  @JsonKey(includeIfNull: false)
-  final GitHubWebhookReview? review;
   final GitHubWebhookSender sender;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> action;
+  @JsonKey(includeIfNull: false, name: 'action')
+  final String? _actionValue;
   final bool _actionPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<GitHubWebhookAnswer> answer;
+  @JsonKey(includeIfNull: false, name: 'answer')
+  final GitHubWebhookAnswer? _answerValue;
   final bool _answerPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<GitHubWebhookCheckRun> checkRun;
+  @JsonKey(includeIfNull: false, name: 'check_run')
+  final GitHubWebhookCheckRun? _checkRunValue;
   final bool _checkRunPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<GitHubWebhookCheckSuite> checkSuite;
+  @JsonKey(includeIfNull: false, name: 'check_suite')
+  final GitHubWebhookCheckSuite? _checkSuiteValue;
   final bool _checkSuitePresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<GitHubWebhookComment> comment;
+  @JsonKey(includeIfNull: false, name: 'comment')
+  final GitHubWebhookComment? _commentValue;
   final bool _commentPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<List<GitHubWebhookCommits>> commits;
+  @JsonKey(includeIfNull: false, name: 'commits')
+  final List<GitHubWebhookCommits>? _commitsValue;
   final bool _commitsPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> compare;
+  @JsonKey(includeIfNull: false, name: 'compare')
+  final String? _compareValue;
   final bool _comparePresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<GitHubWebhookDiscussion> discussion;
+  @JsonKey(includeIfNull: false, name: 'discussion')
+  final GitHubWebhookDiscussion? _discussionValue;
   final bool _discussionPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<bool> forced;
+  @JsonKey(includeIfNull: false, name: 'forced')
+  final bool? _forcedValue;
   final bool _forcedPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<GitHubWebhookForkee> forkee;
+  @JsonKey(includeIfNull: false, name: 'forkee')
+  final GitHubWebhookForkee? _forkeeValue;
   final bool _forkeePresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<GitHubWebhookHeadCommit> headCommit;
+  @JsonKey(includeIfNull: false, name: 'head_commit')
+  final GitHubWebhookHeadCommit? _headCommitValue;
   final bool _headCommitPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<GitHubWebhookIssue> issue;
+  @JsonKey(includeIfNull: false, name: 'issue')
+  final GitHubWebhookIssue? _issueValue;
   final bool _issuePresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<GitHubWebhookMember> member;
+  @JsonKey(includeIfNull: false, name: 'member')
+  final GitHubWebhookMember? _memberValue;
   final bool _memberPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<GitHubWebhookPullRequest> pullRequest;
+  @JsonKey(includeIfNull: false, name: 'pull_request')
+  final GitHubWebhookPullRequest? _pullRequestValue;
   final bool _pullRequestPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> refType;
+  @JsonKey(includeIfNull: false, name: 'ref_type')
+  final String? _refTypeValue;
   final bool _refTypePresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> ref;
+  @JsonKey(includeIfNull: false, name: 'ref')
+  final String? _refValue;
   final bool _refPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<GitHubWebhookRelease> release;
+  @JsonKey(includeIfNull: false, name: 'release')
+  final GitHubWebhookRelease? _releaseValue;
   final bool _releasePresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<GitHubWebhookRepository> repository;
+  @JsonKey(includeIfNull: false, name: 'repository')
+  final GitHubWebhookRepository? _repositoryValue;
   final bool _repositoryPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<GitHubWebhookReview> review;
+  @JsonKey(includeIfNull: false, name: 'review')
+  final GitHubWebhookReview? _reviewValue;
   final bool _reviewPresent;
 
   Map<String, Object?> toJson() {
     final json = _$GitHubWebhookToJson(this);
     if (_actionPresent) {
-      json.putIfAbsent('action', () => action);
+      json.putIfAbsent('action', () => _actionValue);
     }
     if (_answerPresent) {
-      json.putIfAbsent('answer', () => answer);
+      json.putIfAbsent('answer', () => _answerValue);
     }
     if (_checkRunPresent) {
-      json.putIfAbsent('check_run', () => checkRun);
+      json.putIfAbsent('check_run', () => _checkRunValue);
     }
     if (_checkSuitePresent) {
-      json.putIfAbsent('check_suite', () => checkSuite);
+      json.putIfAbsent('check_suite', () => _checkSuiteValue);
     }
     if (_commentPresent) {
-      json.putIfAbsent('comment', () => comment);
+      json.putIfAbsent('comment', () => _commentValue);
     }
     if (_commitsPresent) {
-      json.putIfAbsent('commits', () => commits);
+      json.putIfAbsent('commits', () => _commitsValue);
     }
     if (_comparePresent) {
-      json.putIfAbsent('compare', () => compare);
+      json.putIfAbsent('compare', () => _compareValue);
     }
     if (_discussionPresent) {
-      json.putIfAbsent('discussion', () => discussion);
+      json.putIfAbsent('discussion', () => _discussionValue);
     }
     if (_forcedPresent) {
-      json.putIfAbsent('forced', () => forced);
+      json.putIfAbsent('forced', () => _forcedValue);
     }
     if (_forkeePresent) {
-      json.putIfAbsent('forkee', () => forkee);
+      json.putIfAbsent('forkee', () => _forkeeValue);
     }
     if (_headCommitPresent) {
-      json.putIfAbsent('head_commit', () => headCommit);
+      json.putIfAbsent('head_commit', () => _headCommitValue);
     }
     if (_issuePresent) {
-      json.putIfAbsent('issue', () => issue);
+      json.putIfAbsent('issue', () => _issueValue);
     }
     if (_memberPresent) {
-      json.putIfAbsent('member', () => member);
+      json.putIfAbsent('member', () => _memberValue);
     }
     if (_pullRequestPresent) {
-      json.putIfAbsent('pull_request', () => pullRequest);
+      json.putIfAbsent('pull_request', () => _pullRequestValue);
     }
     if (_refTypePresent) {
-      json.putIfAbsent('ref_type', () => refType);
+      json.putIfAbsent('ref_type', () => _refTypeValue);
     }
     if (_refPresent) {
-      json.putIfAbsent('ref', () => ref);
+      json.putIfAbsent('ref', () => _refValue);
     }
     if (_releasePresent) {
-      json.putIfAbsent('release', () => release);
+      json.putIfAbsent('release', () => _releaseValue);
     }
     if (_repositoryPresent) {
-      json.putIfAbsent('repository', () => repository);
+      json.putIfAbsent('repository', () => _repositoryValue);
     }
     if (_reviewPresent) {
-      json.putIfAbsent('review', () => review);
+      json.putIfAbsent('review', () => _reviewValue);
     }
     return json;
   }

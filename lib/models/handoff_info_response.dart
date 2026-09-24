@@ -8,34 +8,12 @@ import 'handoff_info_response_client_info.dart';
 
 part 'handoff_info_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class HandoffInfoResponse {
-  const HandoffInfoResponse({required this.status})
-    : clientInfo = null,
-      _clientInfoPresent = false;
+  const HandoffInfoResponse({required this.status, this.clientInfo});
 
-  const HandoffInfoResponse._explicit({
-    required this.status,
-    Object? clientInfo = _omit,
-  }) : clientInfo = identical(clientInfo, _omit)
-           ? null
-           : clientInfo as HandoffInfoResponseClientInfo?,
-       _clientInfoPresent = !identical(clientInfo, _omit);
-
-  const HandoffInfoResponse._({required this.status, this.clientInfo})
-    : _clientInfoPresent = false;
-  factory HandoffInfoResponse.patch(Map<String, Object?> json) =>
-      HandoffInfoResponse.fromJson(json);
-
-  factory HandoffInfoResponse.fromJson(Map<String, Object?> json) {
-    final value = _$HandoffInfoResponseFromJson(json);
-    return HandoffInfoResponse._explicit(
-      status: value.status,
-      clientInfo: json.containsKey('client_info') ? value.clientInfo : _omit,
-    );
-  }
+  factory HandoffInfoResponse.fromJson(Map<String, Object?> json) =>
+      _$HandoffInfoResponseFromJson(json);
 
   /// Current status of the handoff (pending, expired)
   final String status;
@@ -43,13 +21,6 @@ class HandoffInfoResponse {
   /// Client information of the initiating device
   @JsonKey(includeIfNull: false, name: 'client_info')
   final HandoffInfoResponseClientInfo? clientInfo;
-  final bool _clientInfoPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$HandoffInfoResponseToJson(this);
-    if (_clientInfoPresent) {
-      json.putIfAbsent('client_info', () => clientInfo);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$HandoffInfoResponseToJson(this);
 }

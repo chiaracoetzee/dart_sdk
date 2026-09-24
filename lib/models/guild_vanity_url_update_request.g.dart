@@ -9,12 +9,10 @@ part of 'guild_vanity_url_update_request.dart';
 GuildVanityUrlUpdateRequest _$GuildVanityUrlUpdateRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('GuildVanityUrlUpdateRequest', json, ($checkedConvert) {
-  final val = GuildVanityUrlUpdateRequest._(
-    code: $checkedConvert('code', (v) => v as String?),
-  );
+  final val = GuildVanityUrlUpdateRequest._();
   return val;
 });
 
 Map<String, dynamic> _$GuildVanityUrlUpdateRequestToJson(
   GuildVanityUrlUpdateRequest instance,
-) => <String, dynamic>{'code': ?instance.code};
+) => <String, dynamic>{};

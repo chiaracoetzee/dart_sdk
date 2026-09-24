@@ -4,93 +4,101 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'json_nullable.dart';
+
 import 'snowflake_type.dart';
 
 part 'custom_status_payload.g.dart';
 
-const Object _omit = Object();
-
 @JsonSerializable(constructor: '_')
 class CustomStatusPayload {
-  const CustomStatusPayload()
-    : text = null,
+  CustomStatusPayload({
+    JsonNullable<String> text = const JsonNullable<String>.undefined(),
+    JsonNullable<String> expiresAt = const JsonNullable<String>.undefined(),
+    JsonNullable<SnowflakeType> emojiId =
+        const JsonNullable<SnowflakeType>.undefined(),
+    JsonNullable<String> emojiName = const JsonNullable<String>.undefined(),
+  }) : text = text,
+       _textValue = text.value,
+       _textPresent = text.isPresent,
+       expiresAt = expiresAt,
+       _expiresAtValue = expiresAt.value,
+       _expiresAtPresent = expiresAt.isPresent,
+       emojiId = emojiId,
+       _emojiIdValue = emojiId.value,
+       _emojiIdPresent = emojiId.isPresent,
+       emojiName = emojiName,
+       _emojiNameValue = emojiName.value,
+       _emojiNamePresent = emojiName.isPresent;
+
+  const CustomStatusPayload._()
+    : _expiresAtValue = null,
+      _textValue = null,
+      _emojiIdValue = null,
+      _emojiNameValue = null,
+      text = const JsonNullable<String>.undefined(),
       _textPresent = false,
-      expiresAt = null,
+      expiresAt = const JsonNullable<String>.undefined(),
       _expiresAtPresent = false,
-      emojiId = null,
+      emojiId = const JsonNullable<SnowflakeType>.undefined(),
       _emojiIdPresent = false,
-      emojiName = null,
+      emojiName = const JsonNullable<String>.undefined(),
       _emojiNamePresent = false;
-
-  const CustomStatusPayload._explicit({
-    Object? text = _omit,
-    Object? expiresAt = _omit,
-    Object? emojiId = _omit,
-    Object? emojiName = _omit,
-  }) : text = identical(text, _omit) ? null : text as String?,
-       _textPresent = !identical(text, _omit),
-       expiresAt = identical(expiresAt, _omit) ? null : expiresAt as String?,
-       _expiresAtPresent = !identical(expiresAt, _omit),
-       emojiId = identical(emojiId, _omit) ? null : emojiId as SnowflakeType?,
-       _emojiIdPresent = !identical(emojiId, _omit),
-       emojiName = identical(emojiName, _omit) ? null : emojiName as String?,
-       _emojiNamePresent = !identical(emojiName, _omit);
-
-  const CustomStatusPayload._({
-    this.text,
-    this.expiresAt,
-    this.emojiId,
-    this.emojiName,
-  }) : _textPresent = false,
-       _expiresAtPresent = false,
-       _emojiIdPresent = false,
-       _emojiNamePresent = false;
   factory CustomStatusPayload.patch(Map<String, Object?> json) =>
       CustomStatusPayload.fromJson(json);
 
   factory CustomStatusPayload.fromJson(Map<String, Object?> json) {
     final value = _$CustomStatusPayloadFromJson(json);
-    return CustomStatusPayload._explicit(
-      text: json.containsKey('text') ? value.text : _omit,
-      expiresAt: json.containsKey('expires_at') ? value.expiresAt : _omit,
-      emojiId: json.containsKey('emoji_id') ? value.emojiId : _omit,
-      emojiName: json.containsKey('emoji_name') ? value.emojiName : _omit,
+    return CustomStatusPayload(
+      text: json.containsKey('text')
+          ? JsonNullable<String>.of(value._textValue)
+          : const JsonNullable<String>.undefined(),
+      expiresAt: json.containsKey('expires_at')
+          ? JsonNullable<String>.of(value._expiresAtValue)
+          : const JsonNullable<String>.undefined(),
+      emojiId: json.containsKey('emoji_id')
+          ? JsonNullable<SnowflakeType>.of(value._emojiIdValue)
+          : const JsonNullable<SnowflakeType>.undefined(),
+      emojiName: json.containsKey('emoji_name')
+          ? JsonNullable<String>.of(value._emojiNameValue)
+          : const JsonNullable<String>.undefined(),
     );
   }
 
-  /// Custom status text (max 128 characters)
-  @JsonKey(includeIfNull: false)
-  final String? text;
-
-  /// When the custom status expires
-  @JsonKey(includeIfNull: false, name: 'expires_at')
-  final String? expiresAt;
-
-  /// ID of custom emoji to display
-  @JsonKey(includeIfNull: false, name: 'emoji_id')
-  final SnowflakeType? emojiId;
-
-  /// Unicode emoji to display (ignored when emoji_id is provided)
-  @JsonKey(includeIfNull: false, name: 'emoji_name')
-  final String? emojiName;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> text;
+  @JsonKey(includeIfNull: false, name: 'text')
+  final String? _textValue;
   final bool _textPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> expiresAt;
+  @JsonKey(includeIfNull: false, name: 'expires_at')
+  final String? _expiresAtValue;
   final bool _expiresAtPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<SnowflakeType> emojiId;
+  @JsonKey(includeIfNull: false, name: 'emoji_id')
+  final SnowflakeType? _emojiIdValue;
   final bool _emojiIdPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> emojiName;
+  @JsonKey(includeIfNull: false, name: 'emoji_name')
+  final String? _emojiNameValue;
   final bool _emojiNamePresent;
 
   Map<String, Object?> toJson() {
     final json = _$CustomStatusPayloadToJson(this);
     if (_textPresent) {
-      json.putIfAbsent('text', () => text);
+      json.putIfAbsent('text', () => _textValue);
     }
     if (_expiresAtPresent) {
-      json.putIfAbsent('expires_at', () => expiresAt);
+      json.putIfAbsent('expires_at', () => _expiresAtValue);
     }
     if (_emojiIdPresent) {
-      json.putIfAbsent('emoji_id', () => emojiId);
+      json.putIfAbsent('emoji_id', () => _emojiIdValue);
     }
     if (_emojiNamePresent) {
-      json.putIfAbsent('emoji_name', () => emojiName);
+      json.putIfAbsent('emoji_name', () => _emojiNameValue);
     }
     return json;
   }

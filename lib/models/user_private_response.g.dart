@@ -12,7 +12,7 @@ UserPrivateResponse _$UserPrivateResponseFromJson(
   'UserPrivateResponse',
   json,
   ($checkedConvert) {
-    final val = UserPrivateResponse._(
+    final val = UserPrivateResponse(
       premiumType: $checkedConvert(
         'premium_type',
         (v) => v == null ? null : UserPremiumTypes.fromJson((v as num).toInt()),

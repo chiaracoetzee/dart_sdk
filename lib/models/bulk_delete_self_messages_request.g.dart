@@ -21,14 +21,6 @@ BulkDeleteSelfMessagesRequest _$BulkDeleteSelfMessagesRequestFromJson(
         'included_guild_ids',
         (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
       ),
-      startDate: $checkedConvert(
-        'start_date',
-        (v) => v == null ? null : DateTime.parse(v as String),
-      ),
-      endDate: $checkedConvert(
-        'end_date',
-        (v) => v == null ? null : DateTime.parse(v as String),
-      ),
       password: $checkedConvert('password', (v) => v as String?),
       mfaMethod: $checkedConvert(
         'mfa_method',
@@ -82,8 +74,6 @@ BulkDeleteSelfMessagesRequest _$BulkDeleteSelfMessagesRequestFromJson(
   fieldKeyMap: const {
     'excludedGuildIds': 'excluded_guild_ids',
     'includedGuildIds': 'included_guild_ids',
-    'startDate': 'start_date',
-    'endDate': 'end_date',
     'mfaMethod': 'mfa_method',
     'mfaCode': 'mfa_code',
     'webauthnResponse': 'webauthn_response',
@@ -107,8 +97,6 @@ Map<String, dynamic> _$BulkDeleteSelfMessagesRequestToJson(
   'guild_filter_mode': instance.guildFilterMode,
   'excluded_guild_ids': ?instance.excludedGuildIds,
   'included_guild_ids': ?instance.includedGuildIds,
-  'start_date': ?instance.startDate?.toIso8601String(),
-  'end_date': ?instance.endDate?.toIso8601String(),
   'password': ?instance.password,
   'mfa_method': ?instance.mfaMethod,
   'mfa_code': ?instance.mfaCode,

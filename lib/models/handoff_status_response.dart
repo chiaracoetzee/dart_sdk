@@ -9,52 +9,17 @@ import 'user_partial_response.dart';
 
 part 'handoff_status_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class HandoffStatusResponse {
-  const HandoffStatusResponse({required this.status})
-    : token = null,
-      _tokenPresent = false,
-      userId = null,
-      _userIdPresent = false,
-      user = null,
-      _userPresent = false;
-
-  const HandoffStatusResponse._explicit({
-    required this.status,
-    Object? token = _omit,
-    Object? userId = _omit,
-    Object? user = _omit,
-  }) : token = identical(token, _omit) ? null : token as String?,
-       _tokenPresent = !identical(token, _omit),
-       userId = identical(userId, _omit)
-           ? null
-           : userId as SnowflakeStringType?,
-       _userIdPresent = !identical(userId, _omit),
-       user = identical(user, _omit) ? null : user as UserPartialResponse?,
-       _userPresent = !identical(user, _omit);
-
-  const HandoffStatusResponse._({
+  const HandoffStatusResponse({
     required this.status,
     this.token,
     this.userId,
     this.user,
-  }) : _tokenPresent = false,
-       _userIdPresent = false,
-       _userPresent = false;
-  factory HandoffStatusResponse.patch(Map<String, Object?> json) =>
-      HandoffStatusResponse.fromJson(json);
+  });
 
-  factory HandoffStatusResponse.fromJson(Map<String, Object?> json) {
-    final value = _$HandoffStatusResponseFromJson(json);
-    return HandoffStatusResponse._explicit(
-      status: value.status,
-      token: json.containsKey('token') ? value.token : _omit,
-      userId: json.containsKey('user_id') ? value.userId : _omit,
-      user: json.containsKey('user') ? value.user : _omit,
-    );
-  }
+  factory HandoffStatusResponse.fromJson(Map<String, Object?> json) =>
+      _$HandoffStatusResponseFromJson(json);
 
   /// Current status of the handoff (pending, completed, expired)
   final String status;
@@ -70,21 +35,6 @@ class HandoffStatusResponse {
   /// Partial user data if handoff is complete
   @JsonKey(includeIfNull: false)
   final UserPartialResponse? user;
-  final bool _tokenPresent;
-  final bool _userIdPresent;
-  final bool _userPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$HandoffStatusResponseToJson(this);
-    if (_tokenPresent) {
-      json.putIfAbsent('token', () => token);
-    }
-    if (_userIdPresent) {
-      json.putIfAbsent('user_id', () => userId);
-    }
-    if (_userPresent) {
-      json.putIfAbsent('user', () => user);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$HandoffStatusResponseToJson(this);
 }

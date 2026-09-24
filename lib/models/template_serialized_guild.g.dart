@@ -26,7 +26,6 @@ TemplateSerializedGuild _$TemplateSerializedGuildFromJson(
             .map((e) => TemplateChannel.fromJson(e as Map<String, dynamic>))
             .toList(),
       ),
-      description: $checkedConvert('description', (v) => v as String?),
       verificationLevel: $checkedConvert(
         'verification_level',
         (v) => v as num?,
@@ -38,10 +37,6 @@ TemplateSerializedGuild _$TemplateSerializedGuildFromJson(
       explicitContentFilter: $checkedConvert(
         'explicit_content_filter',
         (v) => v as num?,
-      ),
-      systemChannelId: $checkedConvert(
-        'system_channel_id',
-        (v) => v as String?,
       ),
       afkTimeout: $checkedConvert('afk_timeout', (v) => v as num?),
       systemChannelFlags: $checkedConvert(
@@ -55,7 +50,6 @@ TemplateSerializedGuild _$TemplateSerializedGuildFromJson(
     'verificationLevel': 'verification_level',
     'defaultMessageNotifications': 'default_message_notifications',
     'explicitContentFilter': 'explicit_content_filter',
-    'systemChannelId': 'system_channel_id',
     'afkTimeout': 'afk_timeout',
     'systemChannelFlags': 'system_channel_flags',
   },
@@ -65,11 +59,9 @@ Map<String, dynamic> _$TemplateSerializedGuildToJson(
   TemplateSerializedGuild instance,
 ) => <String, dynamic>{
   'name': instance.name,
-  'description': ?instance.description,
   'verification_level': ?instance.verificationLevel,
   'default_message_notifications': ?instance.defaultMessageNotifications,
   'explicit_content_filter': ?instance.explicitContentFilter,
-  'system_channel_id': ?instance.systemChannelId,
   'afk_timeout': ?instance.afkTimeout,
   'system_channel_flags': ?instance.systemChannelFlags,
   'roles': instance.roles,

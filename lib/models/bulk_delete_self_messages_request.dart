@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'json_nullable.dart';
+
 import 'bulk_delete_self_messages_guild_filter_mode.dart';
 import 'bulk_delete_self_messages_request_mfa_method_mfa_method.dart';
 import 'bulk_delete_self_messages_scope.dart';
@@ -13,11 +15,9 @@ import 'web_authn_authentication_response.dart';
 
 part 'bulk_delete_self_messages_request.g.dart';
 
-const Object _omit = Object();
-
 @JsonSerializable(constructor: '_')
 class BulkDeleteSelfMessagesRequest {
-  const BulkDeleteSelfMessagesRequest({
+  BulkDeleteSelfMessagesRequest({
     this.excludedGuildIds,
     this.includedGuildIds,
     this.password,
@@ -31,37 +31,18 @@ class BulkDeleteSelfMessagesRequest {
     this.includeGroupDms = true,
     this.includeGuilds = true,
     this.guildFilterMode = BulkDeleteSelfMessagesGuildFilterMode.exclude,
-  }) : startDate = null,
-       _startDatePresent = false,
-       endDate = null,
-       _endDatePresent = false;
-
-  const BulkDeleteSelfMessagesRequest._explicit({
-    this.excludedGuildIds,
-    this.includedGuildIds,
-    Object? startDate = _omit,
-    Object? endDate = _omit,
-    this.password,
-    this.mfaMethod,
-    this.mfaCode,
-    this.webauthnResponse,
-    this.webauthnChallenge,
-    this.scope = BulkDeleteSelfMessagesScope.selected,
-    this.includeDms = true,
-    this.includeDmsClosed = true,
-    this.includeGroupDms = true,
-    this.includeGuilds = true,
-    this.guildFilterMode = BulkDeleteSelfMessagesGuildFilterMode.exclude,
-  }) : startDate = identical(startDate, _omit) ? null : startDate as DateTime?,
-       _startDatePresent = !identical(startDate, _omit),
-       endDate = identical(endDate, _omit) ? null : endDate as DateTime?,
-       _endDatePresent = !identical(endDate, _omit);
+    JsonNullable<DateTime> startDate = const JsonNullable<DateTime>.undefined(),
+    JsonNullable<DateTime> endDate = const JsonNullable<DateTime>.undefined(),
+  }) : startDate = startDate,
+       _startDateValue = startDate.value,
+       _startDatePresent = startDate.isPresent,
+       endDate = endDate,
+       _endDateValue = endDate.value,
+       _endDatePresent = endDate.isPresent;
 
   const BulkDeleteSelfMessagesRequest._({
     this.excludedGuildIds,
     this.includedGuildIds,
-    this.startDate,
-    this.endDate,
     this.password,
     this.mfaMethod,
     this.mfaCode,
@@ -73,18 +54,26 @@ class BulkDeleteSelfMessagesRequest {
     this.includeGroupDms = true,
     this.includeGuilds = true,
     this.guildFilterMode = BulkDeleteSelfMessagesGuildFilterMode.exclude,
-  }) : _startDatePresent = false,
+  }) : _startDateValue = null,
+       _endDateValue = null,
+       startDate = const JsonNullable<DateTime>.undefined(),
+       _startDatePresent = false,
+       endDate = const JsonNullable<DateTime>.undefined(),
        _endDatePresent = false;
   factory BulkDeleteSelfMessagesRequest.patch(Map<String, Object?> json) =>
       BulkDeleteSelfMessagesRequest.fromJson(json);
 
   factory BulkDeleteSelfMessagesRequest.fromJson(Map<String, Object?> json) {
     final value = _$BulkDeleteSelfMessagesRequestFromJson(json);
-    return BulkDeleteSelfMessagesRequest._explicit(
+    return BulkDeleteSelfMessagesRequest(
       excludedGuildIds: value.excludedGuildIds,
       includedGuildIds: value.includedGuildIds,
-      startDate: json.containsKey('start_date') ? value.startDate : _omit,
-      endDate: json.containsKey('end_date') ? value.endDate : _omit,
+      startDate: json.containsKey('start_date')
+          ? JsonNullable<DateTime>.of(value._startDateValue)
+          : const JsonNullable<DateTime>.undefined(),
+      endDate: json.containsKey('end_date')
+          ? JsonNullable<DateTime>.of(value._endDateValue)
+          : const JsonNullable<DateTime>.undefined(),
       password: value.password,
       mfaMethod: value.mfaMethod,
       mfaCode: value.mfaCode,
@@ -127,14 +116,6 @@ class BulkDeleteSelfMessagesRequest {
   @JsonKey(includeIfNull: false, name: 'included_guild_ids')
   final List<SnowflakeType>? includedGuildIds;
 
-  /// Inclusive ISO8601 lower bound for message timestamps. Null/omitted means unbounded in the past.
-  @JsonKey(includeIfNull: false, name: 'start_date')
-  final DateTime? startDate;
-
-  /// Exclusive ISO8601 upper bound for message timestamps. Null/omitted means unbounded in the future.
-  @JsonKey(includeIfNull: false, name: 'end_date')
-  final DateTime? endDate;
-
   /// Account password for sudo verification
   @JsonKey(includeIfNull: false)
   final PasswordType? password;
@@ -154,16 +135,24 @@ class BulkDeleteSelfMessagesRequest {
   /// WebAuthn challenge string
   @JsonKey(includeIfNull: false, name: 'webauthn_challenge')
   final String? webauthnChallenge;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<DateTime> startDate;
+  @JsonKey(includeIfNull: false, name: 'start_date')
+  final DateTime? _startDateValue;
   final bool _startDatePresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<DateTime> endDate;
+  @JsonKey(includeIfNull: false, name: 'end_date')
+  final DateTime? _endDateValue;
   final bool _endDatePresent;
 
   Map<String, Object?> toJson() {
     final json = _$BulkDeleteSelfMessagesRequestToJson(this);
     if (_startDatePresent) {
-      json.putIfAbsent('start_date', () => startDate);
+      json.putIfAbsent('start_date', () => _startDateValue);
     }
     if (_endDatePresent) {
-      json.putIfAbsent('end_date', () => endDate);
+      json.putIfAbsent('end_date', () => _endDateValue);
     }
     return json;
   }

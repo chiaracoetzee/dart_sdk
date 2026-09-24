@@ -13,7 +13,7 @@ _$MessageSearchResultsResponseMessagesMessageReferenceFromJson(
   'MessageSearchResultsResponseMessagesMessageReference',
   json,
   ($checkedConvert) {
-    final val = MessageSearchResultsResponseMessagesMessageReference._(
+    final val = MessageSearchResultsResponseMessagesMessageReference(
       channelId: $checkedConvert('channel_id', (v) => v as String),
       messageId: $checkedConvert('message_id', (v) => v as String),
       type: $checkedConvert(

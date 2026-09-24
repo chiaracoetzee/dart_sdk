@@ -8,9 +8,7 @@ import 'gif_media_format.dart';
 
 part 'resolved_gif_entry_schema.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class ResolvedGifEntrySchema {
   const ResolvedGifEntrySchema({
     required this.url,
@@ -18,47 +16,12 @@ class ResolvedGifEntrySchema {
     required this.width,
     required this.height,
     required this.media,
-    this.contentType = '',
-  }) : placeholder = null,
-       _placeholderPresent = false;
-
-  const ResolvedGifEntrySchema._explicit({
-    required this.url,
-    required this.proxyUrl,
-    required this.width,
-    required this.height,
-    required this.media,
-    Object? placeholder = _omit,
-    this.contentType = '',
-  }) : placeholder = identical(placeholder, _omit)
-           ? null
-           : placeholder as String?,
-       _placeholderPresent = !identical(placeholder, _omit);
-
-  const ResolvedGifEntrySchema._({
-    required this.url,
-    required this.proxyUrl,
-    required this.width,
-    required this.height,
-    required this.media,
     this.placeholder,
     this.contentType = '',
-  }) : _placeholderPresent = false;
-  factory ResolvedGifEntrySchema.patch(Map<String, Object?> json) =>
-      ResolvedGifEntrySchema.fromJson(json);
+  });
 
-  factory ResolvedGifEntrySchema.fromJson(Map<String, Object?> json) {
-    final value = _$ResolvedGifEntrySchemaFromJson(json);
-    return ResolvedGifEntrySchema._explicit(
-      url: value.url,
-      proxyUrl: value.proxyUrl,
-      width: value.width,
-      height: value.height,
-      media: value.media,
-      placeholder: json.containsKey('placeholder') ? value.placeholder : _omit,
-      contentType: value.contentType,
-    );
-  }
+  factory ResolvedGifEntrySchema.fromJson(Map<String, Object?> json) =>
+      _$ResolvedGifEntrySchemaFromJson(json);
 
   /// Original GIF URL
   final String url;
@@ -83,13 +46,6 @@ class ResolvedGifEntrySchema {
   /// Compact thumbhash placeholder produced by the media proxy. Persisted with the favorite so the picker can show a low-res preview while the GIF loads, and a fallback if the source URL later disappears.
   @JsonKey(includeIfNull: false)
   final String? placeholder;
-  final bool _placeholderPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$ResolvedGifEntrySchemaToJson(this);
-    if (_placeholderPresent) {
-      json.putIfAbsent('placeholder', () => placeholder);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$ResolvedGifEntrySchemaToJson(this);
 }

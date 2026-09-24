@@ -11,11 +11,10 @@ WebhookTokenUpdateRequest _$WebhookTokenUpdateRequestFromJson(
 ) => $checkedCreate('WebhookTokenUpdateRequest', json, ($checkedConvert) {
   final val = WebhookTokenUpdateRequest._(
     name: $checkedConvert('name', (v) => v as String?),
-    avatar: $checkedConvert('avatar', (v) => v as String?),
   );
   return val;
 });
 
 Map<String, dynamic> _$WebhookTokenUpdateRequestToJson(
   WebhookTokenUpdateRequest instance,
-) => <String, dynamic>{'name': ?instance.name, 'avatar': ?instance.avatar};
+) => <String, dynamic>{'name': ?instance.name};

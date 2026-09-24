@@ -4,94 +4,95 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'json_nullable.dart';
+
 import 'snowflake_type.dart';
 
 part 'create_favorite_meme_body_schema.g.dart';
 
-const Object _omit = Object();
-
 @JsonSerializable(constructor: '_')
 class CreateFavoriteMemeBodySchema {
-  const CreateFavoriteMemeBodySchema({required this.name, this.tags = const []})
-    : altText = null,
-      _altTextPresent = false,
-      attachmentId = null,
-      _attachmentIdPresent = false,
-      embedIndex = null,
-      _embedIndexPresent = false;
-
-  const CreateFavoriteMemeBodySchema._explicit({
+  CreateFavoriteMemeBodySchema({
     required this.name,
     this.tags = const [],
-    Object? altText = _omit,
-    Object? attachmentId = _omit,
-    Object? embedIndex = _omit,
-  }) : altText = identical(altText, _omit) ? null : altText as String?,
-       _altTextPresent = !identical(altText, _omit),
-       attachmentId = identical(attachmentId, _omit)
-           ? null
-           : attachmentId as SnowflakeType?,
-       _attachmentIdPresent = !identical(attachmentId, _omit),
-       embedIndex = identical(embedIndex, _omit) ? null : embedIndex as int?,
-       _embedIndexPresent = !identical(embedIndex, _omit);
+    JsonNullable<String> altText = const JsonNullable<String>.undefined(),
+    JsonNullable<SnowflakeType> attachmentId =
+        const JsonNullable<SnowflakeType>.undefined(),
+    JsonNullable<int> embedIndex = const JsonNullable<int>.undefined(),
+  }) : altText = altText,
+       _altTextValue = altText.value,
+       _altTextPresent = altText.isPresent,
+       attachmentId = attachmentId,
+       _attachmentIdValue = attachmentId.value,
+       _attachmentIdPresent = attachmentId.isPresent,
+       embedIndex = embedIndex,
+       _embedIndexValue = embedIndex.value,
+       _embedIndexPresent = embedIndex.isPresent;
 
   const CreateFavoriteMemeBodySchema._({
     required this.name,
     this.tags = const [],
-    this.altText,
-    this.attachmentId,
-    this.embedIndex,
-  }) : _altTextPresent = false,
+  }) : _altTextValue = null,
+       _attachmentIdValue = null,
+       _embedIndexValue = null,
+       altText = const JsonNullable<String>.undefined(),
+       _altTextPresent = false,
+       attachmentId = const JsonNullable<SnowflakeType>.undefined(),
        _attachmentIdPresent = false,
+       embedIndex = const JsonNullable<int>.undefined(),
        _embedIndexPresent = false;
   factory CreateFavoriteMemeBodySchema.patch(Map<String, Object?> json) =>
       CreateFavoriteMemeBodySchema.fromJson(json);
 
   factory CreateFavoriteMemeBodySchema.fromJson(Map<String, Object?> json) {
     final value = _$CreateFavoriteMemeBodySchemaFromJson(json);
-    return CreateFavoriteMemeBodySchema._explicit(
+    return CreateFavoriteMemeBodySchema(
       name: value.name,
       tags: value.tags,
-      altText: json.containsKey('alt_text') ? value.altText : _omit,
+      altText: json.containsKey('alt_text')
+          ? JsonNullable<String>.of(value._altTextValue)
+          : const JsonNullable<String>.undefined(),
       attachmentId: json.containsKey('attachment_id')
-          ? value.attachmentId
-          : _omit,
-      embedIndex: json.containsKey('embed_index') ? value.embedIndex : _omit,
+          ? JsonNullable<SnowflakeType>.of(value._attachmentIdValue)
+          : const JsonNullable<SnowflakeType>.undefined(),
+      embedIndex: json.containsKey('embed_index')
+          ? JsonNullable<int>.of(value._embedIndexValue)
+          : const JsonNullable<int>.undefined(),
     );
   }
 
   /// Display name for the meme
   final String name;
 
-  /// Alternative text description for accessibility
-  @JsonKey(includeIfNull: false, name: 'alt_text')
-  final String? altText;
-
   /// Tags for categorizing and searching the meme
   @JsonKey(includeIfNull: true)
   final List<String>? tags;
-
-  /// ID of the message attachment to save as a meme
-  @JsonKey(includeIfNull: false, name: 'attachment_id')
-  final SnowflakeType? attachmentId;
-
-  /// Index of the message embed to save as a meme
-  @JsonKey(includeIfNull: false, name: 'embed_index')
-  final int? embedIndex;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> altText;
+  @JsonKey(includeIfNull: false, name: 'alt_text')
+  final String? _altTextValue;
   final bool _altTextPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<SnowflakeType> attachmentId;
+  @JsonKey(includeIfNull: false, name: 'attachment_id')
+  final SnowflakeType? _attachmentIdValue;
   final bool _attachmentIdPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<int> embedIndex;
+  @JsonKey(includeIfNull: false, name: 'embed_index')
+  final int? _embedIndexValue;
   final bool _embedIndexPresent;
 
   Map<String, Object?> toJson() {
     final json = _$CreateFavoriteMemeBodySchemaToJson(this);
     if (_altTextPresent) {
-      json.putIfAbsent('alt_text', () => altText);
+      json.putIfAbsent('alt_text', () => _altTextValue);
     }
     if (_attachmentIdPresent) {
-      json.putIfAbsent('attachment_id', () => attachmentId);
+      json.putIfAbsent('attachment_id', () => _attachmentIdValue);
     }
     if (_embedIndexPresent) {
-      json.putIfAbsent('embed_index', () => embedIndex);
+      json.putIfAbsent('embed_index', () => _embedIndexValue);
     }
     return json;
   }

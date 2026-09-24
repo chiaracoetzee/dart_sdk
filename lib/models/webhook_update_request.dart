@@ -4,36 +4,38 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'json_nullable.dart';
+
 import 'base64_image_type.dart';
 import 'snowflake_type.dart';
 
 part 'webhook_update_request.g.dart';
 
-const Object _omit = Object();
-
 @JsonSerializable(constructor: '_')
 class WebhookUpdateRequest {
-  const WebhookUpdateRequest({this.name, this.channelId})
-    : avatar = null,
-      _avatarPresent = false;
-
-  const WebhookUpdateRequest._explicit({
+  WebhookUpdateRequest({
     this.name,
-    Object? avatar = _omit,
     this.channelId,
-  }) : avatar = identical(avatar, _omit) ? null : avatar as Base64ImageType?,
-       _avatarPresent = !identical(avatar, _omit);
+    JsonNullable<Base64ImageType> avatar =
+        const JsonNullable<Base64ImageType>.undefined(),
+  }) : avatar = avatar,
+       _avatarValue = avatar.value,
+       _avatarPresent = avatar.isPresent;
 
-  const WebhookUpdateRequest._({this.name, this.avatar, this.channelId})
-    : _avatarPresent = false;
+  const WebhookUpdateRequest._({this.name, this.channelId})
+    : _avatarValue = null,
+      avatar = const JsonNullable<Base64ImageType>.undefined(),
+      _avatarPresent = false;
   factory WebhookUpdateRequest.patch(Map<String, Object?> json) =>
       WebhookUpdateRequest.fromJson(json);
 
   factory WebhookUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$WebhookUpdateRequestFromJson(json);
-    return WebhookUpdateRequest._explicit(
+    return WebhookUpdateRequest(
       name: value.name,
-      avatar: json.containsKey('avatar') ? value.avatar : _omit,
+      avatar: json.containsKey('avatar')
+          ? JsonNullable<Base64ImageType>.of(value._avatarValue)
+          : const JsonNullable<Base64ImageType>.undefined(),
       channelId: value.channelId,
     );
   }
@@ -42,19 +44,19 @@ class WebhookUpdateRequest {
   @JsonKey(includeIfNull: false)
   final String? name;
 
-  /// The new avatar image as a base64-encoded data URI
-  @JsonKey(includeIfNull: false)
-  final Base64ImageType? avatar;
-
   /// The ID of the channel to move the webhook to
   @JsonKey(includeIfNull: false, name: 'channel_id')
   final SnowflakeType? channelId;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<Base64ImageType> avatar;
+  @JsonKey(includeIfNull: false, name: 'avatar')
+  final Base64ImageType? _avatarValue;
   final bool _avatarPresent;
 
   Map<String, Object?> toJson() {
     final json = _$WebhookUpdateRequestToJson(this);
     if (_avatarPresent) {
-      json.putIfAbsent('avatar', () => avatar);
+      json.putIfAbsent('avatar', () => _avatarValue);
     }
     return json;
   }

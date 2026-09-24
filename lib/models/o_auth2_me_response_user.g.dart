@@ -12,7 +12,7 @@ OAuth2MeResponseUser _$OAuth2MeResponseUserFromJson(
   'OAuth2MeResponseUser',
   json,
   ($checkedConvert) {
-    final val = OAuth2MeResponseUser._(
+    final val = OAuth2MeResponseUser(
       id: $checkedConvert('id', (v) => v as String),
       username: $checkedConvert('username', (v) => v as String),
       discriminator: $checkedConvert('discriminator', (v) => v as String),

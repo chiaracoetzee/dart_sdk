@@ -12,7 +12,7 @@ ApplicationsMeResponseBot _$ApplicationsMeResponseBotFromJson(
   'ApplicationsMeResponseBot',
   json,
   ($checkedConvert) {
-    final val = ApplicationsMeResponseBot._(
+    final val = ApplicationsMeResponseBot(
       id: $checkedConvert('id', (v) => v as String),
       username: $checkedConvert('username', (v) => v as String),
       discriminator: $checkedConvert('discriminator', (v) => v as String),

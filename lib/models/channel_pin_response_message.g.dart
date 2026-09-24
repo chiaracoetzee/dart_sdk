@@ -12,7 +12,7 @@ ChannelPinResponseMessage _$ChannelPinResponseMessageFromJson(
   'ChannelPinResponseMessage',
   json,
   ($checkedConvert) {
-    final val = ChannelPinResponseMessage._(
+    final val = ChannelPinResponseMessage(
       id: $checkedConvert('id', (v) => v as String),
       channelId: $checkedConvert('channel_id', (v) => v as String),
       author: $checkedConvert(

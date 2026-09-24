@@ -12,7 +12,7 @@ UserProfileFullResponseUserProfile _$UserProfileFullResponseUserProfileFromJson(
   'UserProfileFullResponseUserProfile',
   json,
   ($checkedConvert) {
-    final val = UserProfileFullResponseUserProfile._(
+    final val = UserProfileFullResponseUserProfile(
       bio: $checkedConvert('bio', (v) => v as String?),
       pronouns: $checkedConvert('pronouns', (v) => v as String?),
       banner: $checkedConvert('banner', (v) => v as String?),

@@ -11,7 +11,7 @@ InstatusWebhookPage _$InstatusWebhookPageFromJson(Map<String, dynamic> json) =>
       'InstatusWebhookPage',
       json,
       ($checkedConvert) {
-        final val = InstatusWebhookPage._(
+        final val = InstatusWebhookPage(
           id: $checkedConvert('id', (v) => v as String?),
           statusIndicator: $checkedConvert(
             'status_indicator',

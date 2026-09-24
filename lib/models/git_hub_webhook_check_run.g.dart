@@ -12,7 +12,7 @@ GitHubWebhookCheckRun _$GitHubWebhookCheckRunFromJson(
   'GitHubWebhookCheckRun',
   json,
   ($checkedConvert) {
-    final val = GitHubWebhookCheckRun._(
+    final val = GitHubWebhookCheckRun(
       name: $checkedConvert('name', (v) => v as String),
       htmlUrl: $checkedConvert('html_url', (v) => v as String),
       checkSuite: $checkedConvert(

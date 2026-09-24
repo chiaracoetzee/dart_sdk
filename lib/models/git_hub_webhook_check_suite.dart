@@ -9,57 +9,18 @@ import 'git_hub_webhook_check_suite_app.dart';
 
 part 'git_hub_webhook_check_suite.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class GitHubWebhookCheckSuite {
-  const GitHubWebhookCheckSuite({required this.headSha, required this.app})
-    : conclusion = null,
-      _conclusionPresent = false,
-      headBranch = null,
-      _headBranchPresent = false,
-      pullRequests = null,
-      _pullRequestsPresent = false;
-
-  const GitHubWebhookCheckSuite._explicit({
-    required this.headSha,
-    required this.app,
-    Object? conclusion = _omit,
-    Object? headBranch = _omit,
-    Object? pullRequests = _omit,
-  }) : conclusion = identical(conclusion, _omit) ? null : conclusion as String?,
-       _conclusionPresent = !identical(conclusion, _omit),
-       headBranch = identical(headBranch, _omit) ? null : headBranch as String?,
-       _headBranchPresent = !identical(headBranch, _omit),
-       pullRequests = identical(pullRequests, _omit)
-           ? null
-           : pullRequests as List<GitHubWebhookCheckSuitePullRequests>?,
-       _pullRequestsPresent = !identical(pullRequests, _omit);
-
-  const GitHubWebhookCheckSuite._({
+  const GitHubWebhookCheckSuite({
     required this.headSha,
     required this.app,
     this.conclusion,
     this.headBranch,
     this.pullRequests,
-  }) : _conclusionPresent = false,
-       _headBranchPresent = false,
-       _pullRequestsPresent = false;
-  factory GitHubWebhookCheckSuite.patch(Map<String, Object?> json) =>
-      GitHubWebhookCheckSuite.fromJson(json);
+  });
 
-  factory GitHubWebhookCheckSuite.fromJson(Map<String, Object?> json) {
-    final value = _$GitHubWebhookCheckSuiteFromJson(json);
-    return GitHubWebhookCheckSuite._explicit(
-      headSha: value.headSha,
-      app: value.app,
-      conclusion: json.containsKey('conclusion') ? value.conclusion : _omit,
-      headBranch: json.containsKey('head_branch') ? value.headBranch : _omit,
-      pullRequests: json.containsKey('pull_requests')
-          ? value.pullRequests
-          : _omit,
-    );
-  }
+  factory GitHubWebhookCheckSuite.fromJson(Map<String, Object?> json) =>
+      _$GitHubWebhookCheckSuiteFromJson(json);
 
   @JsonKey(includeIfNull: false)
   final String? conclusion;
@@ -70,21 +31,6 @@ class GitHubWebhookCheckSuite {
   @JsonKey(includeIfNull: false, name: 'pull_requests')
   final List<GitHubWebhookCheckSuitePullRequests>? pullRequests;
   final GitHubWebhookCheckSuiteApp app;
-  final bool _conclusionPresent;
-  final bool _headBranchPresent;
-  final bool _pullRequestsPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$GitHubWebhookCheckSuiteToJson(this);
-    if (_conclusionPresent) {
-      json.putIfAbsent('conclusion', () => conclusion);
-    }
-    if (_headBranchPresent) {
-      json.putIfAbsent('head_branch', () => headBranch);
-    }
-    if (_pullRequestsPresent) {
-      json.putIfAbsent('pull_requests', () => pullRequests);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$GitHubWebhookCheckSuiteToJson(this);
 }

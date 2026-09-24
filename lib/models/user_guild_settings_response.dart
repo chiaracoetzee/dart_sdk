@@ -12,9 +12,7 @@ import 'user_notification_settings.dart';
 
 part 'user_guild_settings_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class UserGuildSettingsResponse {
   const UserGuildSettingsResponse({
     required this.guildId,
@@ -27,60 +25,11 @@ class UserGuildSettingsResponse {
     required this.hideMutedChannels,
     required this.channelOverrides,
     required this.version,
-  }) : unreadBadges = null,
-       _unreadBadgesPresent = false;
-
-  const UserGuildSettingsResponse._explicit({
-    required this.guildId,
-    required this.messageNotifications,
-    required this.muted,
-    required this.muteConfig,
-    required this.mobilePush,
-    required this.suppressEveryone,
-    required this.suppressRoles,
-    required this.hideMutedChannels,
-    required this.channelOverrides,
-    required this.version,
-    Object? unreadBadges = _omit,
-  }) : unreadBadges = identical(unreadBadges, _omit)
-           ? null
-           : unreadBadges as UserNotificationSettings?,
-       _unreadBadgesPresent = !identical(unreadBadges, _omit);
-
-  const UserGuildSettingsResponse._({
-    required this.guildId,
-    required this.messageNotifications,
-    required this.muted,
-    required this.muteConfig,
-    required this.mobilePush,
-    required this.suppressEveryone,
-    required this.suppressRoles,
-    required this.hideMutedChannels,
-    required this.channelOverrides,
-    required this.version,
     this.unreadBadges,
-  }) : _unreadBadgesPresent = false;
-  factory UserGuildSettingsResponse.patch(Map<String, Object?> json) =>
-      UserGuildSettingsResponse.fromJson(json);
+  });
 
-  factory UserGuildSettingsResponse.fromJson(Map<String, Object?> json) {
-    final value = _$UserGuildSettingsResponseFromJson(json);
-    return UserGuildSettingsResponse._explicit(
-      guildId: value.guildId,
-      messageNotifications: value.messageNotifications,
-      muted: value.muted,
-      muteConfig: value.muteConfig,
-      mobilePush: value.mobilePush,
-      suppressEveryone: value.suppressEveryone,
-      suppressRoles: value.suppressRoles,
-      hideMutedChannels: value.hideMutedChannels,
-      channelOverrides: value.channelOverrides,
-      version: value.version,
-      unreadBadges: json.containsKey('unread_badges')
-          ? value.unreadBadges
-          : _omit,
-    );
-  }
+  factory UserGuildSettingsResponse.fromJson(Map<String, Object?> json) =>
+      _$UserGuildSettingsResponseFromJson(json);
 
   /// The ID of the guild these settings apply to
   @JsonKey(includeIfNull: true, name: 'guild_id')
@@ -123,13 +72,6 @@ class UserGuildSettingsResponse {
 
   /// The version number of these settings for sync
   final Int32Type version;
-  final bool _unreadBadgesPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$UserGuildSettingsResponseToJson(this);
-    if (_unreadBadgesPresent) {
-      json.putIfAbsent('unread_badges', () => unreadBadges);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$UserGuildSettingsResponseToJson(this);
 }

@@ -9,37 +9,9 @@ import 'bot_flags.dart';
 
 part 'application_public_response_bot.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class ApplicationPublicResponseBot {
   const ApplicationPublicResponseBot({
-    required this.id,
-    required this.username,
-    required this.discriminator,
-    required this.bio,
-    required this.flags,
-    this.token,
-  }) : avatar = null,
-       _avatarPresent = false,
-       banner = null,
-       _bannerPresent = false;
-
-  const ApplicationPublicResponseBot._explicit({
-    required this.id,
-    required this.username,
-    required this.discriminator,
-    required this.bio,
-    required this.flags,
-    Object? avatar = _omit,
-    Object? banner = _omit,
-    this.token,
-  }) : avatar = identical(avatar, _omit) ? null : avatar as String?,
-       _avatarPresent = !identical(avatar, _omit),
-       banner = identical(banner, _omit) ? null : banner as String?,
-       _bannerPresent = !identical(banner, _omit);
-
-  const ApplicationPublicResponseBot._({
     required this.id,
     required this.username,
     required this.discriminator,
@@ -48,24 +20,10 @@ class ApplicationPublicResponseBot {
     this.avatar,
     this.banner,
     this.token,
-  }) : _avatarPresent = false,
-       _bannerPresent = false;
-  factory ApplicationPublicResponseBot.patch(Map<String, Object?> json) =>
-      ApplicationPublicResponseBot.fromJson(json);
+  });
 
-  factory ApplicationPublicResponseBot.fromJson(Map<String, Object?> json) {
-    final value = _$ApplicationPublicResponseBotFromJson(json);
-    return ApplicationPublicResponseBot._explicit(
-      id: value.id,
-      username: value.username,
-      discriminator: value.discriminator,
-      bio: value.bio,
-      flags: value.flags,
-      avatar: json.containsKey('avatar') ? value.avatar : _omit,
-      banner: json.containsKey('banner') ? value.banner : _omit,
-      token: value.token,
-    );
-  }
+  factory ApplicationPublicResponseBot.fromJson(Map<String, Object?> json) =>
+      _$ApplicationPublicResponseBotFromJson(json);
 
   /// The unique identifier of the bot user
   final SnowflakeStringType id;
@@ -92,17 +50,6 @@ class ApplicationPublicResponseBot {
   @JsonKey(includeIfNull: false)
   final String? token;
   final BotFlags flags;
-  final bool _avatarPresent;
-  final bool _bannerPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$ApplicationPublicResponseBotToJson(this);
-    if (_avatarPresent) {
-      json.putIfAbsent('avatar', () => avatar);
-    }
-    if (_bannerPresent) {
-      json.putIfAbsent('banner', () => banner);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$ApplicationPublicResponseBotToJson(this);
 }

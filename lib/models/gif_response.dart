@@ -9,9 +9,7 @@ import 'int32_type.dart';
 
 part 'gif_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class GifResponse {
   const GifResponse({
     required this.id,
@@ -24,58 +22,11 @@ class GifResponse {
     required this.width,
     required this.height,
     required this.media,
-  }) : placeholder = null,
-       _placeholderPresent = false;
-
-  const GifResponse._explicit({
-    required this.id,
-    required this.slug,
-    required this.provider,
-    required this.title,
-    required this.url,
-    required this.src,
-    required this.proxySrc,
-    required this.width,
-    required this.height,
-    required this.media,
-    Object? placeholder = _omit,
-  }) : placeholder = identical(placeholder, _omit)
-           ? null
-           : placeholder as String?,
-       _placeholderPresent = !identical(placeholder, _omit);
-
-  const GifResponse._({
-    required this.id,
-    required this.slug,
-    required this.provider,
-    required this.title,
-    required this.url,
-    required this.src,
-    required this.proxySrc,
-    required this.width,
-    required this.height,
-    required this.media,
     this.placeholder,
-  }) : _placeholderPresent = false;
-  factory GifResponse.patch(Map<String, Object?> json) =>
-      GifResponse.fromJson(json);
+  });
 
-  factory GifResponse.fromJson(Map<String, Object?> json) {
-    final value = _$GifResponseFromJson(json);
-    return GifResponse._explicit(
-      id: value.id,
-      slug: value.slug,
-      provider: value.provider,
-      title: value.title,
-      url: value.url,
-      src: value.src,
-      proxySrc: value.proxySrc,
-      width: value.width,
-      height: value.height,
-      media: value.media,
-      placeholder: json.containsKey('placeholder') ? value.placeholder : _omit,
-    );
-  }
+  factory GifResponse.fromJson(Map<String, Object?> json) =>
+      _$GifResponseFromJson(json);
 
   /// Provider-stable identifier for this GIF.
   final String id;
@@ -111,13 +62,6 @@ class GifResponse {
   /// Compact thumbhash placeholder produced by the media proxy. Clients render it as a low-res preview while the GIF loads, and persist it on favourites so the picker has a fallback if the source URL later disappears.
   @JsonKey(includeIfNull: false)
   final String? placeholder;
-  final bool _placeholderPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$GifResponseToJson(this);
-    if (_placeholderPresent) {
-      json.putIfAbsent('placeholder', () => placeholder);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$GifResponseToJson(this);
 }

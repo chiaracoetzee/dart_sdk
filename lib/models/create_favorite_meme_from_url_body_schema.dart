@@ -4,63 +4,56 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'json_nullable.dart';
+
 import 'gif_media_format_input.dart';
 
 part 'create_favorite_meme_from_url_body_schema.g.dart';
 
-const Object _omit = Object();
-
 @JsonSerializable(constructor: '_')
 class CreateFavoriteMemeFromUrlBodySchema {
-  const CreateFavoriteMemeFromUrlBodySchema({
+  CreateFavoriteMemeFromUrlBodySchema({
     required this.url,
     this.tags = const [],
-  }) : altText = null,
-       _altTextPresent = false,
-       gifSlug = null,
-       _gifSlugPresent = false,
-       gifProvider = null,
-       _gifProviderPresent = false,
-       media = null,
-       _mediaPresent = false,
-       name = null,
-       _namePresent = false;
-
-  const CreateFavoriteMemeFromUrlBodySchema._explicit({
-    required this.url,
-    this.tags = const [],
-    Object? altText = _omit,
-    Object? gifSlug = _omit,
-    Object? gifProvider = _omit,
-    Object? media = _omit,
-    Object? name = _omit,
-  }) : altText = identical(altText, _omit) ? null : altText as String?,
-       _altTextPresent = !identical(altText, _omit),
-       gifSlug = identical(gifSlug, _omit) ? null : gifSlug as String?,
-       _gifSlugPresent = !identical(gifSlug, _omit),
-       gifProvider = identical(gifProvider, _omit)
-           ? null
-           : gifProvider as String?,
-       _gifProviderPresent = !identical(gifProvider, _omit),
-       media = identical(media, _omit)
-           ? null
-           : media as Map<String, GifMediaFormatInput>?,
-       _mediaPresent = !identical(media, _omit),
-       name = identical(name, _omit) ? null : name as String?,
-       _namePresent = !identical(name, _omit);
+    JsonNullable<String> altText = const JsonNullable<String>.undefined(),
+    JsonNullable<String> gifSlug = const JsonNullable<String>.undefined(),
+    JsonNullable<String> gifProvider = const JsonNullable<String>.undefined(),
+    JsonNullable<Map<String, GifMediaFormatInput>> media =
+        const JsonNullable<Map<String, GifMediaFormatInput>>.undefined(),
+    JsonNullable<String> name = const JsonNullable<String>.undefined(),
+  }) : altText = altText,
+       _altTextValue = altText.value,
+       _altTextPresent = altText.isPresent,
+       gifSlug = gifSlug,
+       _gifSlugValue = gifSlug.value,
+       _gifSlugPresent = gifSlug.isPresent,
+       gifProvider = gifProvider,
+       _gifProviderValue = gifProvider.value,
+       _gifProviderPresent = gifProvider.isPresent,
+       media = media,
+       _mediaValue = media.value,
+       _mediaPresent = media.isPresent,
+       name = name,
+       _nameValue = name.value,
+       _namePresent = name.isPresent;
 
   const CreateFavoriteMemeFromUrlBodySchema._({
     required this.url,
     this.tags = const [],
-    this.altText,
-    this.gifSlug,
-    this.gifProvider,
-    this.media,
-    this.name,
-  }) : _altTextPresent = false,
+  }) : _altTextValue = null,
+       _gifSlugValue = null,
+       _gifProviderValue = null,
+       _mediaValue = null,
+       _nameValue = null,
+       altText = const JsonNullable<String>.undefined(),
+       _altTextPresent = false,
+       gifSlug = const JsonNullable<String>.undefined(),
        _gifSlugPresent = false,
+       gifProvider = const JsonNullable<String>.undefined(),
        _gifProviderPresent = false,
+       media = const JsonNullable<Map<String, GifMediaFormatInput>>.undefined(),
        _mediaPresent = false,
+       name = const JsonNullable<String>.undefined(),
        _namePresent = false;
   factory CreateFavoriteMemeFromUrlBodySchema.patch(
     Map<String, Object?> json,
@@ -70,20 +63,26 @@ class CreateFavoriteMemeFromUrlBodySchema {
     Map<String, Object?> json,
   ) {
     final value = _$CreateFavoriteMemeFromUrlBodySchemaFromJson(json);
-    return CreateFavoriteMemeFromUrlBodySchema._explicit(
+    return CreateFavoriteMemeFromUrlBodySchema(
       url: value.url,
       tags: value.tags,
-      altText: json.containsKey('alt_text') ? value.altText : _omit,
-      gifSlug: json.containsKey('gif_slug') ? value.gifSlug : _omit,
-      gifProvider: json.containsKey('gif_provider') ? value.gifProvider : _omit,
-      media: json.containsKey('media') ? value.media : _omit,
-      name: json.containsKey('name') ? value.name : _omit,
+      altText: json.containsKey('alt_text')
+          ? JsonNullable<String>.of(value._altTextValue)
+          : const JsonNullable<String>.undefined(),
+      gifSlug: json.containsKey('gif_slug')
+          ? JsonNullable<String>.of(value._gifSlugValue)
+          : const JsonNullable<String>.undefined(),
+      gifProvider: json.containsKey('gif_provider')
+          ? JsonNullable<String>.of(value._gifProviderValue)
+          : const JsonNullable<String>.undefined(),
+      media: json.containsKey('media')
+          ? JsonNullable<Map<String, GifMediaFormatInput>>.of(value._mediaValue)
+          : const JsonNullable<Map<String, GifMediaFormatInput>>.undefined(),
+      name: json.containsKey('name')
+          ? JsonNullable<String>.of(value._nameValue)
+          : const JsonNullable<String>.undefined(),
     );
   }
-
-  /// Alternative text description for accessibility
-  @JsonKey(includeIfNull: false, name: 'alt_text')
-  final String? altText;
 
   /// Tags for categorizing and searching the meme
   @JsonKey(includeIfNull: true)
@@ -91,44 +90,48 @@ class CreateFavoriteMemeFromUrlBodySchema {
 
   /// URL of the image or video to save as a favorite meme
   final String url;
-
-  /// Provider-issued slug or slug-id token for the GIF, when sourced from a provider
-  @JsonKey(includeIfNull: false, name: 'gif_slug')
-  final String? gifSlug;
-
-  /// Stable name of the GIF provider that issued gif_slug. New provider GIFs are sourced from KLIPY.
-  @JsonKey(includeIfNull: false, name: 'gif_provider')
-  final String? gifProvider;
-
-  /// Optional provider-issued format-name → media descriptor map captured by the client at favorite-time (mirrors GifResponse.media). Only persisted for gif-sourced memes; ignored otherwise.
-  @JsonKey(includeIfNull: false)
-  final Map<String, GifMediaFormatInput>? media;
-
-  /// Display name for the meme
-  @JsonKey(includeIfNull: false)
-  final String? name;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> altText;
+  @JsonKey(includeIfNull: false, name: 'alt_text')
+  final String? _altTextValue;
   final bool _altTextPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> gifSlug;
+  @JsonKey(includeIfNull: false, name: 'gif_slug')
+  final String? _gifSlugValue;
   final bool _gifSlugPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> gifProvider;
+  @JsonKey(includeIfNull: false, name: 'gif_provider')
+  final String? _gifProviderValue;
   final bool _gifProviderPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<Map<String, GifMediaFormatInput>> media;
+  @JsonKey(includeIfNull: false, name: 'media')
+  final Map<String, GifMediaFormatInput>? _mediaValue;
   final bool _mediaPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> name;
+  @JsonKey(includeIfNull: false, name: 'name')
+  final String? _nameValue;
   final bool _namePresent;
 
   Map<String, Object?> toJson() {
     final json = _$CreateFavoriteMemeFromUrlBodySchemaToJson(this);
     if (_altTextPresent) {
-      json.putIfAbsent('alt_text', () => altText);
+      json.putIfAbsent('alt_text', () => _altTextValue);
     }
     if (_gifSlugPresent) {
-      json.putIfAbsent('gif_slug', () => gifSlug);
+      json.putIfAbsent('gif_slug', () => _gifSlugValue);
     }
     if (_gifProviderPresent) {
-      json.putIfAbsent('gif_provider', () => gifProvider);
+      json.putIfAbsent('gif_provider', () => _gifProviderValue);
     }
     if (_mediaPresent) {
-      json.putIfAbsent('media', () => media);
+      json.putIfAbsent('media', () => _mediaValue);
     }
     if (_namePresent) {
-      json.putIfAbsent('name', () => name);
+      json.putIfAbsent('name', () => _nameValue);
     }
     return json;
   }

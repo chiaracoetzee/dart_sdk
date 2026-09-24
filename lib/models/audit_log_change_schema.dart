@@ -6,42 +6,12 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'audit_log_change_schema.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class AuditLogChangeSchema {
-  const AuditLogChangeSchema({required this.key})
-    : oldValue = null,
-      _oldValuePresent = false,
-      newValue = null,
-      _newValuePresent = false;
+  const AuditLogChangeSchema({required this.key, this.oldValue, this.newValue});
 
-  const AuditLogChangeSchema._explicit({
-    required this.key,
-    Object? oldValue = _omit,
-    Object? newValue = _omit,
-  }) : oldValue = identical(oldValue, _omit) ? null : oldValue,
-       _oldValuePresent = !identical(oldValue, _omit),
-       newValue = identical(newValue, _omit) ? null : newValue,
-       _newValuePresent = !identical(newValue, _omit);
-
-  const AuditLogChangeSchema._({
-    required this.key,
-    this.oldValue,
-    this.newValue,
-  }) : _oldValuePresent = false,
-       _newValuePresent = false;
-  factory AuditLogChangeSchema.patch(Map<String, Object?> json) =>
-      AuditLogChangeSchema.fromJson(json);
-
-  factory AuditLogChangeSchema.fromJson(Map<String, Object?> json) {
-    final value = _$AuditLogChangeSchemaFromJson(json);
-    return AuditLogChangeSchema._explicit(
-      key: value.key,
-      oldValue: json.containsKey('old_value') ? value.oldValue : _omit,
-      newValue: json.containsKey('new_value') ? value.newValue : _omit,
-    );
-  }
+  factory AuditLogChangeSchema.fromJson(Map<String, Object?> json) =>
+      _$AuditLogChangeSchemaFromJson(json);
 
   /// The field that changed
   final String key;
@@ -53,17 +23,6 @@ class AuditLogChangeSchema {
   /// Value after the change
   @JsonKey(includeIfNull: false, name: 'new_value')
   final dynamic newValue;
-  final bool _oldValuePresent;
-  final bool _newValuePresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$AuditLogChangeSchemaToJson(this);
-    if (_oldValuePresent) {
-      json.putIfAbsent('old_value', () => oldValue);
-    }
-    if (_newValuePresent) {
-      json.putIfAbsent('new_value', () => newValue);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$AuditLogChangeSchemaToJson(this);
 }

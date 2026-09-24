@@ -9,47 +9,18 @@ import 'git_hub_webhook_answer_user.dart';
 
 part 'git_hub_webhook_answer.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class GitHubWebhookAnswer {
   const GitHubWebhookAnswer({
     required this.id,
     required this.htmlUrl,
     required this.user,
     required this.body,
-  }) : commitId = null,
-       _commitIdPresent = false;
-
-  const GitHubWebhookAnswer._explicit({
-    required this.id,
-    required this.htmlUrl,
-    required this.user,
-    required this.body,
-    Object? commitId = _omit,
-  }) : commitId = identical(commitId, _omit) ? null : commitId as String?,
-       _commitIdPresent = !identical(commitId, _omit);
-
-  const GitHubWebhookAnswer._({
-    required this.id,
-    required this.htmlUrl,
-    required this.user,
-    required this.body,
     this.commitId,
-  }) : _commitIdPresent = false;
-  factory GitHubWebhookAnswer.patch(Map<String, Object?> json) =>
-      GitHubWebhookAnswer.fromJson(json);
+  });
 
-  factory GitHubWebhookAnswer.fromJson(Map<String, Object?> json) {
-    final value = _$GitHubWebhookAnswerFromJson(json);
-    return GitHubWebhookAnswer._explicit(
-      id: value.id,
-      htmlUrl: value.htmlUrl,
-      user: value.user,
-      body: value.body,
-      commitId: json.containsKey('commit_id') ? value.commitId : _omit,
-    );
-  }
+  factory GitHubWebhookAnswer.fromJson(Map<String, Object?> json) =>
+      _$GitHubWebhookAnswerFromJson(json);
 
   final Int64Type id;
   @JsonKey(name: 'html_url')
@@ -58,13 +29,6 @@ class GitHubWebhookAnswer {
   @JsonKey(includeIfNull: false, name: 'commit_id')
   final String? commitId;
   final String body;
-  final bool _commitIdPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$GitHubWebhookAnswerToJson(this);
-    if (_commitIdPresent) {
-      json.putIfAbsent('commit_id', () => commitId);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$GitHubWebhookAnswerToJson(this);
 }

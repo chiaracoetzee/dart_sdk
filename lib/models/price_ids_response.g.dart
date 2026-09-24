@@ -11,7 +11,7 @@ PriceIdsResponse _$PriceIdsResponseFromJson(Map<String, dynamic> json) =>
       'PriceIdsResponse',
       json,
       ($checkedConvert) {
-        final val = PriceIdsResponse._(
+        final val = PriceIdsResponse(
           currency: $checkedConvert(
             'currency',
             (v) => PremiumCurrency.fromJson(v as String),

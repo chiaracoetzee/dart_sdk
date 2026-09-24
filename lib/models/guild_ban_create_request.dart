@@ -4,41 +4,38 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-part 'guild_ban_create_request.g.dart';
+import 'json_nullable.dart';
 
-const Object _omit = Object();
+part 'guild_ban_create_request.g.dart';
 
 @JsonSerializable(constructor: '_')
 class GuildBanCreateRequest {
-  const GuildBanCreateRequest({
+  GuildBanCreateRequest({
     this.deleteMessageSeconds,
     this.banDurationSeconds,
     this.deleteMessageDays = 0,
-  }) : reason = null,
-       _reasonPresent = false;
-
-  const GuildBanCreateRequest._explicit({
-    this.deleteMessageSeconds,
-    Object? reason = _omit,
-    this.banDurationSeconds,
-    this.deleteMessageDays = 0,
-  }) : reason = identical(reason, _omit) ? null : reason as String?,
-       _reasonPresent = !identical(reason, _omit);
+    JsonNullable<String> reason = const JsonNullable<String>.undefined(),
+  }) : reason = reason,
+       _reasonValue = reason.value,
+       _reasonPresent = reason.isPresent;
 
   const GuildBanCreateRequest._({
     this.deleteMessageSeconds,
-    this.reason,
     this.banDurationSeconds,
     this.deleteMessageDays = 0,
-  }) : _reasonPresent = false;
+  }) : _reasonValue = null,
+       reason = const JsonNullable<String>.undefined(),
+       _reasonPresent = false;
   factory GuildBanCreateRequest.patch(Map<String, Object?> json) =>
       GuildBanCreateRequest.fromJson(json);
 
   factory GuildBanCreateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildBanCreateRequestFromJson(json);
-    return GuildBanCreateRequest._explicit(
+    return GuildBanCreateRequest(
       deleteMessageSeconds: value.deleteMessageSeconds,
-      reason: json.containsKey('reason') ? value.reason : _omit,
+      reason: json.containsKey('reason')
+          ? JsonNullable<String>.of(value._reasonValue)
+          : const JsonNullable<String>.undefined(),
       banDurationSeconds: value.banDurationSeconds,
       deleteMessageDays: value.deleteMessageDays,
     );
@@ -52,19 +49,19 @@ class GuildBanCreateRequest {
   @JsonKey(includeIfNull: false, name: 'delete_message_seconds')
   final int? deleteMessageSeconds;
 
-  /// The reason for the ban (max 512 characters)
-  @JsonKey(includeIfNull: false)
-  final String? reason;
-
   /// Duration of the ban in seconds (0 for permanent, or between 60 and 63072000 seconds for a temporary ban)
   @JsonKey(includeIfNull: false, name: 'ban_duration_seconds')
   final int? banDurationSeconds;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> reason;
+  @JsonKey(includeIfNull: false, name: 'reason')
+  final String? _reasonValue;
   final bool _reasonPresent;
 
   Map<String, Object?> toJson() {
     final json = _$GuildBanCreateRequestToJson(this);
     if (_reasonPresent) {
-      json.putIfAbsent('reason', () => reason);
+      json.putIfAbsent('reason', () => _reasonValue);
     }
     return json;
   }

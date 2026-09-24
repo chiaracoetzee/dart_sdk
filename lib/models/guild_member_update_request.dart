@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'json_nullable.dart';
+
 import 'base64_image_type.dart';
 import 'color_type.dart';
 import 'guild_member_profile_flags.dart';
@@ -12,192 +14,161 @@ import 'snowflake_type.dart';
 
 part 'guild_member_update_request.g.dart';
 
-const Object _omit = Object();
-
 @JsonSerializable(constructor: '_')
 class GuildMemberUpdateRequest {
-  const GuildMemberUpdateRequest({this.roles, this.mute, this.deaf})
-    : nick = null,
+  GuildMemberUpdateRequest({
+    this.roles,
+    this.mute,
+    this.deaf,
+    JsonNullable<String> nick = const JsonNullable<String>.undefined(),
+    JsonNullable<Base64ImageType> avatar =
+        const JsonNullable<Base64ImageType>.undefined(),
+    JsonNullable<Base64ImageType> banner =
+        const JsonNullable<Base64ImageType>.undefined(),
+    JsonNullable<String> bio = const JsonNullable<String>.undefined(),
+    JsonNullable<String> pronouns = const JsonNullable<String>.undefined(),
+    JsonNullable<ColorType> accentColor =
+        const JsonNullable<ColorType>.undefined(),
+    JsonNullable<GuildMemberProfileFlags> profileFlags =
+        const JsonNullable<GuildMemberProfileFlags>.undefined(),
+    JsonNullable<MentionReplyPreferencesInput> mentionFlags =
+        const JsonNullable<MentionReplyPreferencesInput>.undefined(),
+    JsonNullable<DateTime> communicationDisabledUntil =
+        const JsonNullable<DateTime>.undefined(),
+    JsonNullable<String> timeoutReason = const JsonNullable<String>.undefined(),
+    JsonNullable<SnowflakeType> channelId =
+        const JsonNullable<SnowflakeType>.undefined(),
+    JsonNullable<String> connectionId = const JsonNullable<String>.undefined(),
+  }) : nick = nick,
+       _nickValue = nick.value,
+       _nickPresent = nick.isPresent,
+       avatar = avatar,
+       _avatarValue = avatar.value,
+       _avatarPresent = avatar.isPresent,
+       banner = banner,
+       _bannerValue = banner.value,
+       _bannerPresent = banner.isPresent,
+       bio = bio,
+       _bioValue = bio.value,
+       _bioPresent = bio.isPresent,
+       pronouns = pronouns,
+       _pronounsValue = pronouns.value,
+       _pronounsPresent = pronouns.isPresent,
+       accentColor = accentColor,
+       _accentColorValue = accentColor.value,
+       _accentColorPresent = accentColor.isPresent,
+       profileFlags = profileFlags,
+       _profileFlagsValue = profileFlags.value,
+       _profileFlagsPresent = profileFlags.isPresent,
+       mentionFlags = mentionFlags,
+       _mentionFlagsValue = mentionFlags.value,
+       _mentionFlagsPresent = mentionFlags.isPresent,
+       communicationDisabledUntil = communicationDisabledUntil,
+       _communicationDisabledUntilValue = communicationDisabledUntil.value,
+       _communicationDisabledUntilPresent =
+           communicationDisabledUntil.isPresent,
+       timeoutReason = timeoutReason,
+       _timeoutReasonValue = timeoutReason.value,
+       _timeoutReasonPresent = timeoutReason.isPresent,
+       channelId = channelId,
+       _channelIdValue = channelId.value,
+       _channelIdPresent = channelId.isPresent,
+       connectionId = connectionId,
+       _connectionIdValue = connectionId.value,
+       _connectionIdPresent = connectionId.isPresent;
+
+  const GuildMemberUpdateRequest._({this.roles, this.mute, this.deaf})
+    : _nickValue = null,
+      _avatarValue = null,
+      _bannerValue = null,
+      _bioValue = null,
+      _pronounsValue = null,
+      _accentColorValue = null,
+      _profileFlagsValue = null,
+      _mentionFlagsValue = null,
+      _communicationDisabledUntilValue = null,
+      _timeoutReasonValue = null,
+      _channelIdValue = null,
+      _connectionIdValue = null,
+      nick = const JsonNullable<String>.undefined(),
       _nickPresent = false,
-      avatar = null,
+      avatar = const JsonNullable<Base64ImageType>.undefined(),
       _avatarPresent = false,
-      banner = null,
+      banner = const JsonNullable<Base64ImageType>.undefined(),
       _bannerPresent = false,
-      bio = null,
+      bio = const JsonNullable<String>.undefined(),
       _bioPresent = false,
-      pronouns = null,
+      pronouns = const JsonNullable<String>.undefined(),
       _pronounsPresent = false,
-      accentColor = null,
+      accentColor = const JsonNullable<ColorType>.undefined(),
       _accentColorPresent = false,
-      profileFlags = null,
+      profileFlags = const JsonNullable<GuildMemberProfileFlags>.undefined(),
       _profileFlagsPresent = false,
-      mentionFlags = null,
+      mentionFlags =
+          const JsonNullable<MentionReplyPreferencesInput>.undefined(),
       _mentionFlagsPresent = false,
-      communicationDisabledUntil = null,
+      communicationDisabledUntil = const JsonNullable<DateTime>.undefined(),
       _communicationDisabledUntilPresent = false,
-      timeoutReason = null,
+      timeoutReason = const JsonNullable<String>.undefined(),
       _timeoutReasonPresent = false,
-      channelId = null,
+      channelId = const JsonNullable<SnowflakeType>.undefined(),
       _channelIdPresent = false,
-      connectionId = null,
+      connectionId = const JsonNullable<String>.undefined(),
       _connectionIdPresent = false;
-
-  const GuildMemberUpdateRequest._explicit({
-    Object? nick = _omit,
-    this.roles,
-    Object? avatar = _omit,
-    Object? banner = _omit,
-    Object? bio = _omit,
-    Object? pronouns = _omit,
-    Object? accentColor = _omit,
-    Object? profileFlags = _omit,
-    Object? mentionFlags = _omit,
-    this.mute,
-    this.deaf,
-    Object? communicationDisabledUntil = _omit,
-    Object? timeoutReason = _omit,
-    Object? channelId = _omit,
-    Object? connectionId = _omit,
-  }) : nick = identical(nick, _omit) ? null : nick as String?,
-       _nickPresent = !identical(nick, _omit),
-       avatar = identical(avatar, _omit) ? null : avatar as Base64ImageType?,
-       _avatarPresent = !identical(avatar, _omit),
-       banner = identical(banner, _omit) ? null : banner as Base64ImageType?,
-       _bannerPresent = !identical(banner, _omit),
-       bio = identical(bio, _omit) ? null : bio as String?,
-       _bioPresent = !identical(bio, _omit),
-       pronouns = identical(pronouns, _omit) ? null : pronouns as String?,
-       _pronounsPresent = !identical(pronouns, _omit),
-       accentColor = identical(accentColor, _omit)
-           ? null
-           : accentColor as ColorType?,
-       _accentColorPresent = !identical(accentColor, _omit),
-       profileFlags = identical(profileFlags, _omit)
-           ? null
-           : profileFlags as GuildMemberProfileFlags?,
-       _profileFlagsPresent = !identical(profileFlags, _omit),
-       mentionFlags = identical(mentionFlags, _omit)
-           ? null
-           : mentionFlags as MentionReplyPreferencesInput?,
-       _mentionFlagsPresent = !identical(mentionFlags, _omit),
-       communicationDisabledUntil = identical(communicationDisabledUntil, _omit)
-           ? null
-           : communicationDisabledUntil as DateTime?,
-       _communicationDisabledUntilPresent = !identical(
-         communicationDisabledUntil,
-         _omit,
-       ),
-       timeoutReason = identical(timeoutReason, _omit)
-           ? null
-           : timeoutReason as String?,
-       _timeoutReasonPresent = !identical(timeoutReason, _omit),
-       channelId = identical(channelId, _omit)
-           ? null
-           : channelId as SnowflakeType?,
-       _channelIdPresent = !identical(channelId, _omit),
-       connectionId = identical(connectionId, _omit)
-           ? null
-           : connectionId as String?,
-       _connectionIdPresent = !identical(connectionId, _omit);
-
-  const GuildMemberUpdateRequest._({
-    this.nick,
-    this.roles,
-    this.avatar,
-    this.banner,
-    this.bio,
-    this.pronouns,
-    this.accentColor,
-    this.profileFlags,
-    this.mentionFlags,
-    this.mute,
-    this.deaf,
-    this.communicationDisabledUntil,
-    this.timeoutReason,
-    this.channelId,
-    this.connectionId,
-  }) : _nickPresent = false,
-       _avatarPresent = false,
-       _bannerPresent = false,
-       _bioPresent = false,
-       _pronounsPresent = false,
-       _accentColorPresent = false,
-       _profileFlagsPresent = false,
-       _mentionFlagsPresent = false,
-       _communicationDisabledUntilPresent = false,
-       _timeoutReasonPresent = false,
-       _channelIdPresent = false,
-       _connectionIdPresent = false;
   factory GuildMemberUpdateRequest.patch(Map<String, Object?> json) =>
       GuildMemberUpdateRequest.fromJson(json);
 
   factory GuildMemberUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildMemberUpdateRequestFromJson(json);
-    return GuildMemberUpdateRequest._explicit(
-      nick: json.containsKey('nick') ? value.nick : _omit,
+    return GuildMemberUpdateRequest(
+      nick: json.containsKey('nick')
+          ? JsonNullable<String>.of(value._nickValue)
+          : const JsonNullable<String>.undefined(),
       roles: value.roles,
-      avatar: json.containsKey('avatar') ? value.avatar : _omit,
-      banner: json.containsKey('banner') ? value.banner : _omit,
-      bio: json.containsKey('bio') ? value.bio : _omit,
-      pronouns: json.containsKey('pronouns') ? value.pronouns : _omit,
-      accentColor: json.containsKey('accent_color') ? value.accentColor : _omit,
+      avatar: json.containsKey('avatar')
+          ? JsonNullable<Base64ImageType>.of(value._avatarValue)
+          : const JsonNullable<Base64ImageType>.undefined(),
+      banner: json.containsKey('banner')
+          ? JsonNullable<Base64ImageType>.of(value._bannerValue)
+          : const JsonNullable<Base64ImageType>.undefined(),
+      bio: json.containsKey('bio')
+          ? JsonNullable<String>.of(value._bioValue)
+          : const JsonNullable<String>.undefined(),
+      pronouns: json.containsKey('pronouns')
+          ? JsonNullable<String>.of(value._pronounsValue)
+          : const JsonNullable<String>.undefined(),
+      accentColor: json.containsKey('accent_color')
+          ? JsonNullable<ColorType>.of(value._accentColorValue)
+          : const JsonNullable<ColorType>.undefined(),
       profileFlags: json.containsKey('profile_flags')
-          ? value.profileFlags
-          : _omit,
+          ? JsonNullable<GuildMemberProfileFlags>.of(value._profileFlagsValue)
+          : const JsonNullable<GuildMemberProfileFlags>.undefined(),
       mentionFlags: json.containsKey('mention_flags')
-          ? value.mentionFlags
-          : _omit,
+          ? JsonNullable<MentionReplyPreferencesInput>.of(
+              value._mentionFlagsValue,
+            )
+          : const JsonNullable<MentionReplyPreferencesInput>.undefined(),
       mute: value.mute,
       deaf: value.deaf,
       communicationDisabledUntil:
           json.containsKey('communication_disabled_until')
-          ? value.communicationDisabledUntil
-          : _omit,
+          ? JsonNullable<DateTime>.of(value._communicationDisabledUntilValue)
+          : const JsonNullable<DateTime>.undefined(),
       timeoutReason: json.containsKey('timeout_reason')
-          ? value.timeoutReason
-          : _omit,
-      channelId: json.containsKey('channel_id') ? value.channelId : _omit,
+          ? JsonNullable<String>.of(value._timeoutReasonValue)
+          : const JsonNullable<String>.undefined(),
+      channelId: json.containsKey('channel_id')
+          ? JsonNullable<SnowflakeType>.of(value._channelIdValue)
+          : const JsonNullable<SnowflakeType>.undefined(),
       connectionId: json.containsKey('connection_id')
-          ? value.connectionId
-          : _omit,
+          ? JsonNullable<String>.of(value._connectionIdValue)
+          : const JsonNullable<String>.undefined(),
     );
   }
-
-  /// The nickname to set for the member (1-32 characters)
-  @JsonKey(includeIfNull: false)
-  final String? nick;
 
   /// Array of role IDs to assign to the member (max 250)
   @JsonKey(includeIfNull: false)
   final List<SnowflakeType>? roles;
-
-  /// Base64-encoded image data for the member guild avatar
-  @JsonKey(includeIfNull: false)
-  final Base64ImageType? avatar;
-
-  /// Base64-encoded image data for the member guild banner
-  @JsonKey(includeIfNull: false)
-  final Base64ImageType? banner;
-
-  /// The member guild profile bio (1-320 characters)
-  @JsonKey(includeIfNull: false)
-  final String? bio;
-
-  /// The member guild profile pronouns (1-40 characters)
-  @JsonKey(includeIfNull: false)
-  final String? pronouns;
-
-  /// The accent color for the member guild profile as an integer
-  @JsonKey(includeIfNull: false, name: 'accent_color')
-  final ColorType? accentColor;
-
-  /// Bitfield of profile flags for the member
-  @JsonKey(includeIfNull: false, name: 'profile_flags')
-  final GuildMemberProfileFlags? profileFlags;
-
-  /// Per-guild reply mention preference override for this member; NO_PREFERENCE inherits the user's account-wide setting
-  @JsonKey(includeIfNull: false, name: 'mention_flags')
-  final MentionReplyPreferencesInput? mentionFlags;
 
   /// Whether the member is muted in voice channels
   @JsonKey(includeIfNull: false)
@@ -206,75 +177,107 @@ class GuildMemberUpdateRequest {
   /// Whether the member is deafened in voice channels
   @JsonKey(includeIfNull: false)
   final bool? deaf;
-
-  /// ISO8601 timestamp until which the member is timed out
-  @JsonKey(includeIfNull: false, name: 'communication_disabled_until')
-  final DateTime? communicationDisabledUntil;
-
-  /// The reason for timing out the member (1-512 characters)
-  @JsonKey(includeIfNull: false, name: 'timeout_reason')
-  final String? timeoutReason;
-
-  /// The voice channel ID to move the member to
-  @JsonKey(includeIfNull: false, name: 'channel_id')
-  final SnowflakeType? channelId;
-
-  /// The voice connection ID for the member
-  @JsonKey(includeIfNull: false, name: 'connection_id')
-  final String? connectionId;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> nick;
+  @JsonKey(includeIfNull: false, name: 'nick')
+  final String? _nickValue;
   final bool _nickPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<Base64ImageType> avatar;
+  @JsonKey(includeIfNull: false, name: 'avatar')
+  final Base64ImageType? _avatarValue;
   final bool _avatarPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<Base64ImageType> banner;
+  @JsonKey(includeIfNull: false, name: 'banner')
+  final Base64ImageType? _bannerValue;
   final bool _bannerPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> bio;
+  @JsonKey(includeIfNull: false, name: 'bio')
+  final String? _bioValue;
   final bool _bioPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> pronouns;
+  @JsonKey(includeIfNull: false, name: 'pronouns')
+  final String? _pronounsValue;
   final bool _pronounsPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<ColorType> accentColor;
+  @JsonKey(includeIfNull: false, name: 'accent_color')
+  final ColorType? _accentColorValue;
   final bool _accentColorPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<GuildMemberProfileFlags> profileFlags;
+  @JsonKey(includeIfNull: false, name: 'profile_flags')
+  final GuildMemberProfileFlags? _profileFlagsValue;
   final bool _profileFlagsPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<MentionReplyPreferencesInput> mentionFlags;
+  @JsonKey(includeIfNull: false, name: 'mention_flags')
+  final MentionReplyPreferencesInput? _mentionFlagsValue;
   final bool _mentionFlagsPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<DateTime> communicationDisabledUntil;
+  @JsonKey(includeIfNull: false, name: 'communication_disabled_until')
+  final DateTime? _communicationDisabledUntilValue;
   final bool _communicationDisabledUntilPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> timeoutReason;
+  @JsonKey(includeIfNull: false, name: 'timeout_reason')
+  final String? _timeoutReasonValue;
   final bool _timeoutReasonPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<SnowflakeType> channelId;
+  @JsonKey(includeIfNull: false, name: 'channel_id')
+  final SnowflakeType? _channelIdValue;
   final bool _channelIdPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> connectionId;
+  @JsonKey(includeIfNull: false, name: 'connection_id')
+  final String? _connectionIdValue;
   final bool _connectionIdPresent;
 
   Map<String, Object?> toJson() {
     final json = _$GuildMemberUpdateRequestToJson(this);
     if (_nickPresent) {
-      json.putIfAbsent('nick', () => nick);
+      json.putIfAbsent('nick', () => _nickValue);
     }
     if (_avatarPresent) {
-      json.putIfAbsent('avatar', () => avatar);
+      json.putIfAbsent('avatar', () => _avatarValue);
     }
     if (_bannerPresent) {
-      json.putIfAbsent('banner', () => banner);
+      json.putIfAbsent('banner', () => _bannerValue);
     }
     if (_bioPresent) {
-      json.putIfAbsent('bio', () => bio);
+      json.putIfAbsent('bio', () => _bioValue);
     }
     if (_pronounsPresent) {
-      json.putIfAbsent('pronouns', () => pronouns);
+      json.putIfAbsent('pronouns', () => _pronounsValue);
     }
     if (_accentColorPresent) {
-      json.putIfAbsent('accent_color', () => accentColor);
+      json.putIfAbsent('accent_color', () => _accentColorValue);
     }
     if (_profileFlagsPresent) {
-      json.putIfAbsent('profile_flags', () => profileFlags);
+      json.putIfAbsent('profile_flags', () => _profileFlagsValue);
     }
     if (_mentionFlagsPresent) {
-      json.putIfAbsent('mention_flags', () => mentionFlags);
+      json.putIfAbsent('mention_flags', () => _mentionFlagsValue);
     }
     if (_communicationDisabledUntilPresent) {
       json.putIfAbsent(
         'communication_disabled_until',
-        () => communicationDisabledUntil,
+        () => _communicationDisabledUntilValue,
       );
     }
     if (_timeoutReasonPresent) {
-      json.putIfAbsent('timeout_reason', () => timeoutReason);
+      json.putIfAbsent('timeout_reason', () => _timeoutReasonValue);
     }
     if (_channelIdPresent) {
-      json.putIfAbsent('channel_id', () => channelId);
+      json.putIfAbsent('channel_id', () => _channelIdValue);
     }
     if (_connectionIdPresent) {
-      json.putIfAbsent('connection_id', () => connectionId);
+      json.putIfAbsent('connection_id', () => _connectionIdValue);
     }
     return json;
   }

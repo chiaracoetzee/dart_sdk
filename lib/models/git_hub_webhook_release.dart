@@ -8,43 +8,17 @@ import 'int32_type.dart';
 
 part 'git_hub_webhook_release.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class GitHubWebhookRelease {
   const GitHubWebhookRelease({
     required this.id,
     required this.tagName,
     required this.htmlUrl,
-  }) : body = null,
-       _bodyPresent = false;
-
-  const GitHubWebhookRelease._explicit({
-    required this.id,
-    required this.tagName,
-    required this.htmlUrl,
-    Object? body = _omit,
-  }) : body = identical(body, _omit) ? null : body as String?,
-       _bodyPresent = !identical(body, _omit);
-
-  const GitHubWebhookRelease._({
-    required this.id,
-    required this.tagName,
-    required this.htmlUrl,
     this.body,
-  }) : _bodyPresent = false;
-  factory GitHubWebhookRelease.patch(Map<String, Object?> json) =>
-      GitHubWebhookRelease.fromJson(json);
+  });
 
-  factory GitHubWebhookRelease.fromJson(Map<String, Object?> json) {
-    final value = _$GitHubWebhookReleaseFromJson(json);
-    return GitHubWebhookRelease._explicit(
-      id: value.id,
-      tagName: value.tagName,
-      htmlUrl: value.htmlUrl,
-      body: json.containsKey('body') ? value.body : _omit,
-    );
-  }
+  factory GitHubWebhookRelease.fromJson(Map<String, Object?> json) =>
+      _$GitHubWebhookReleaseFromJson(json);
 
   final Int32Type id;
   @JsonKey(name: 'tag_name')
@@ -53,13 +27,6 @@ class GitHubWebhookRelease {
   final String htmlUrl;
   @JsonKey(includeIfNull: false)
   final String? body;
-  final bool _bodyPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$GitHubWebhookReleaseToJson(this);
-    if (_bodyPresent) {
-      json.putIfAbsent('body', () => body);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$GitHubWebhookReleaseToJson(this);
 }

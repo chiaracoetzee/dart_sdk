@@ -12,59 +12,20 @@ import 'snowflake_string_type.dart';
 
 part 'user_settings_response_guild_folders.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class UserSettingsResponseGuildFolders {
   const UserSettingsResponseGuildFolders({
-    required this.guildIds,
-    this.flags = 0,
-    this.icon = GuildFolderIconType.folder,
-  }) : id = null,
-       _idPresent = false,
-       name = null,
-       _namePresent = false,
-       color = null,
-       _colorPresent = false;
-
-  const UserSettingsResponseGuildFolders._explicit({
-    required this.guildIds,
-    this.flags = 0,
-    this.icon = GuildFolderIconType.folder,
-    Object? id = _omit,
-    Object? name = _omit,
-    Object? color = _omit,
-  }) : id = identical(id, _omit) ? null : id as SignedInt32Type?,
-       _idPresent = !identical(id, _omit),
-       name = identical(name, _omit) ? null : name as String?,
-       _namePresent = !identical(name, _omit),
-       color = identical(color, _omit) ? null : color as Int32Type?,
-       _colorPresent = !identical(color, _omit);
-
-  const UserSettingsResponseGuildFolders._({
     required this.guildIds,
     this.flags = 0,
     this.icon = GuildFolderIconType.folder,
     this.id,
     this.name,
     this.color,
-  }) : _idPresent = false,
-       _namePresent = false,
-       _colorPresent = false;
-  factory UserSettingsResponseGuildFolders.patch(Map<String, Object?> json) =>
-      UserSettingsResponseGuildFolders.fromJson(json);
+  });
 
-  factory UserSettingsResponseGuildFolders.fromJson(Map<String, Object?> json) {
-    final value = _$UserSettingsResponseGuildFoldersFromJson(json);
-    return UserSettingsResponseGuildFolders._explicit(
-      guildIds: value.guildIds,
-      flags: value.flags,
-      icon: value.icon,
-      id: json.containsKey('id') ? value.id : _omit,
-      name: json.containsKey('name') ? value.name : _omit,
-      color: json.containsKey('color') ? value.color : _omit,
-    );
-  }
+  factory UserSettingsResponseGuildFolders.fromJson(
+    Map<String, Object?> json,
+  ) => _$UserSettingsResponseGuildFoldersFromJson(json);
 
   /// The unique identifier for the folder (-1 for uncategorized)
   @JsonKey(includeIfNull: false)
@@ -85,21 +46,7 @@ class UserSettingsResponseGuildFolders {
   /// The IDs of guilds contained in this folder
   @JsonKey(name: 'guild_ids')
   final List<SnowflakeStringType> guildIds;
-  final bool _idPresent;
-  final bool _namePresent;
-  final bool _colorPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$UserSettingsResponseGuildFoldersToJson(this);
-    if (_idPresent) {
-      json.putIfAbsent('id', () => id);
-    }
-    if (_namePresent) {
-      json.putIfAbsent('name', () => name);
-    }
-    if (_colorPresent) {
-      json.putIfAbsent('color', () => color);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() =>
+      _$UserSettingsResponseGuildFoldersToJson(this);
 }

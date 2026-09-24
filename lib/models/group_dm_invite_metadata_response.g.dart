@@ -12,7 +12,7 @@ GroupDmInviteMetadataResponse _$GroupDmInviteMetadataResponseFromJson(
   'GroupDmInviteMetadataResponse',
   json,
   ($checkedConvert) {
-    final val = GroupDmInviteMetadataResponse._(
+    final val = GroupDmInviteMetadataResponse(
       code: $checkedConvert('code', (v) => v as String),
       temporary: $checkedConvert('temporary', (v) => v as bool),
       type: $checkedConvert('type', (v) => v as num),

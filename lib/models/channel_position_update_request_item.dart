@@ -8,57 +8,19 @@ import 'snowflake_type.dart';
 
 part 'channel_position_update_request_item.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class ChannelPositionUpdateRequestItem {
   const ChannelPositionUpdateRequestItem({
-    required this.id,
-    this.position,
-    this.lockPermissions,
-  }) : parentId = null,
-       _parentIdPresent = false,
-       precedingSiblingId = null,
-       _precedingSiblingIdPresent = false;
-
-  const ChannelPositionUpdateRequestItem._explicit({
-    required this.id,
-    this.position,
-    Object? parentId = _omit,
-    Object? precedingSiblingId = _omit,
-    this.lockPermissions,
-  }) : parentId = identical(parentId, _omit)
-           ? null
-           : parentId as SnowflakeType?,
-       _parentIdPresent = !identical(parentId, _omit),
-       precedingSiblingId = identical(precedingSiblingId, _omit)
-           ? null
-           : precedingSiblingId as SnowflakeType?,
-       _precedingSiblingIdPresent = !identical(precedingSiblingId, _omit);
-
-  const ChannelPositionUpdateRequestItem._({
     required this.id,
     this.position,
     this.parentId,
     this.precedingSiblingId,
     this.lockPermissions,
-  }) : _parentIdPresent = false,
-       _precedingSiblingIdPresent = false;
-  factory ChannelPositionUpdateRequestItem.patch(Map<String, Object?> json) =>
-      ChannelPositionUpdateRequestItem.fromJson(json);
+  });
 
-  factory ChannelPositionUpdateRequestItem.fromJson(Map<String, Object?> json) {
-    final value = _$ChannelPositionUpdateRequestItemFromJson(json);
-    return ChannelPositionUpdateRequestItem._explicit(
-      id: value.id,
-      position: value.position,
-      parentId: json.containsKey('parent_id') ? value.parentId : _omit,
-      precedingSiblingId: json.containsKey('preceding_sibling_id')
-          ? value.precedingSiblingId
-          : _omit,
-      lockPermissions: value.lockPermissions,
-    );
-  }
+  factory ChannelPositionUpdateRequestItem.fromJson(
+    Map<String, Object?> json,
+  ) => _$ChannelPositionUpdateRequestItemFromJson(json);
 
   /// The ID of the channel to reposition
   final SnowflakeType id;
@@ -78,17 +40,7 @@ class ChannelPositionUpdateRequestItem {
   /// Whether to sync permissions with the new parent
   @JsonKey(includeIfNull: false, name: 'lock_permissions')
   final bool? lockPermissions;
-  final bool _parentIdPresent;
-  final bool _precedingSiblingIdPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$ChannelPositionUpdateRequestItemToJson(this);
-    if (_parentIdPresent) {
-      json.putIfAbsent('parent_id', () => parentId);
-    }
-    if (_precedingSiblingIdPresent) {
-      json.putIfAbsent('preceding_sibling_id', () => precedingSiblingId);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() =>
+      _$ChannelPositionUpdateRequestItemToJson(this);
 }

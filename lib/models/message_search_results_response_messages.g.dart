@@ -13,7 +13,7 @@ _$MessageSearchResultsResponseMessagesFromJson(
   'MessageSearchResultsResponseMessages',
   json,
   ($checkedConvert) {
-    final val = MessageSearchResultsResponseMessages._(
+    final val = MessageSearchResultsResponseMessages(
       id: $checkedConvert('id', (v) => v as String),
       channelId: $checkedConvert('channel_id', (v) => v as String),
       author: $checkedConvert(

@@ -737,5 +737,6 @@ export 'models/pending_subscription_change_response_variant1_current_billing_cyc
 export 'models/pending_subscription_change_response_variant1_target_billing_cycle_target_billing_cycle.dart';
 export 'models/web_authn_registration_response_authenticator_attachment_authenticator_attachment.dart';
 export 'models/web_authn_registration_response_response_transports_transports.dart';
+export 'models/json_nullable.dart';
 // Root client
 export 'fluxer_client.dart';

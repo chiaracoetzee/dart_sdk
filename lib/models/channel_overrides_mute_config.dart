@@ -6,34 +6,15 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'channel_overrides_mute_config.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class ChannelOverridesMuteConfig {
-  const ChannelOverridesMuteConfig({required this.selectedTimeWindow})
-    : endTime = null,
-      _endTimePresent = false;
-
-  const ChannelOverridesMuteConfig._explicit({
-    required this.selectedTimeWindow,
-    Object? endTime = _omit,
-  }) : endTime = identical(endTime, _omit) ? null : endTime as String?,
-       _endTimePresent = !identical(endTime, _omit);
-
-  const ChannelOverridesMuteConfig._({
+  const ChannelOverridesMuteConfig({
     required this.selectedTimeWindow,
     this.endTime,
-  }) : _endTimePresent = false;
-  factory ChannelOverridesMuteConfig.patch(Map<String, Object?> json) =>
-      ChannelOverridesMuteConfig.fromJson(json);
+  });
 
-  factory ChannelOverridesMuteConfig.fromJson(Map<String, Object?> json) {
-    final value = _$ChannelOverridesMuteConfigFromJson(json);
-    return ChannelOverridesMuteConfig._explicit(
-      selectedTimeWindow: value.selectedTimeWindow,
-      endTime: json.containsKey('end_time') ? value.endTime : _omit,
-    );
-  }
+  factory ChannelOverridesMuteConfig.fromJson(Map<String, Object?> json) =>
+      _$ChannelOverridesMuteConfigFromJson(json);
 
   /// When the mute expires
   @JsonKey(includeIfNull: false, name: 'end_time')
@@ -42,13 +23,6 @@ class ChannelOverridesMuteConfig {
   /// Selected mute duration
   @JsonKey(name: 'selected_time_window')
   final int selectedTimeWindow;
-  final bool _endTimePresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$ChannelOverridesMuteConfigToJson(this);
-    if (_endTimePresent) {
-      json.putIfAbsent('end_time', () => endTime);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$ChannelOverridesMuteConfigToJson(this);
 }

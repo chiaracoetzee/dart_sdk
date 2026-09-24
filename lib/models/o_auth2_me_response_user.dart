@@ -10,9 +10,7 @@ import 'public_user_flags.dart';
 
 part 'o_auth2_me_response_user.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class OAuth2MeResponseUser {
   const OAuth2MeResponseUser({
     required this.id,
@@ -24,61 +22,12 @@ class OAuth2MeResponseUser {
     required this.flags,
     this.bot,
     this.system,
-  }) : email = null,
-       _emailPresent = false,
-       verified = null,
-       _verifiedPresent = false;
-
-  const OAuth2MeResponseUser._explicit({
-    required this.id,
-    required this.username,
-    required this.discriminator,
-    required this.globalName,
-    required this.avatar,
-    required this.avatarColor,
-    required this.flags,
-    this.bot,
-    this.system,
-    Object? email = _omit,
-    Object? verified = _omit,
-  }) : email = identical(email, _omit) ? null : email as String?,
-       _emailPresent = !identical(email, _omit),
-       verified = identical(verified, _omit) ? null : verified as bool?,
-       _verifiedPresent = !identical(verified, _omit);
-
-  const OAuth2MeResponseUser._({
-    required this.id,
-    required this.username,
-    required this.discriminator,
-    required this.globalName,
-    required this.avatar,
-    required this.avatarColor,
-    required this.flags,
-    this.bot,
-    this.system,
     this.email,
     this.verified,
-  }) : _emailPresent = false,
-       _verifiedPresent = false;
-  factory OAuth2MeResponseUser.patch(Map<String, Object?> json) =>
-      OAuth2MeResponseUser.fromJson(json);
+  });
 
-  factory OAuth2MeResponseUser.fromJson(Map<String, Object?> json) {
-    final value = _$OAuth2MeResponseUserFromJson(json);
-    return OAuth2MeResponseUser._explicit(
-      id: value.id,
-      username: value.username,
-      discriminator: value.discriminator,
-      globalName: value.globalName,
-      avatar: value.avatar,
-      avatarColor: value.avatarColor,
-      flags: value.flags,
-      bot: value.bot,
-      system: value.system,
-      email: json.containsKey('email') ? value.email : _omit,
-      verified: json.containsKey('verified') ? value.verified : _omit,
-    );
-  }
+  factory OAuth2MeResponseUser.fromJson(Map<String, Object?> json) =>
+      _$OAuth2MeResponseUserFromJson(json);
 
   /// The unique identifier of the user
   final SnowflakeStringType id;
@@ -119,17 +68,6 @@ class OAuth2MeResponseUser {
   /// Whether the user has verified their email
   @JsonKey(includeIfNull: false)
   final bool? verified;
-  final bool _emailPresent;
-  final bool _verifiedPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$OAuth2MeResponseUserToJson(this);
-    if (_emailPresent) {
-      json.putIfAbsent('email', () => email);
-    }
-    if (_verifiedPresent) {
-      json.putIfAbsent('verified', () => verified);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$OAuth2MeResponseUserToJson(this);
 }

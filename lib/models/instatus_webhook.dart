@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'json_nullable.dart';
+
 import 'instatus_webhook_component.dart';
 import 'instatus_webhook_component_update.dart';
 import 'instatus_webhook_incident.dart';
@@ -13,120 +15,139 @@ import 'instatus_webhook_page.dart';
 
 part 'instatus_webhook.g.dart';
 
-const Object _omit = Object();
-
 @JsonSerializable(constructor: '_')
 class InstatusWebhook {
-  const InstatusWebhook()
-    : meta = null,
+  InstatusWebhook({
+    JsonNullable<InstatusWebhookMeta> meta =
+        const JsonNullable<InstatusWebhookMeta>.undefined(),
+    JsonNullable<InstatusWebhookPage> page =
+        const JsonNullable<InstatusWebhookPage>.undefined(),
+    JsonNullable<InstatusWebhookIncident> incident =
+        const JsonNullable<InstatusWebhookIncident>.undefined(),
+    JsonNullable<InstatusWebhookMaintenance> maintenance =
+        const JsonNullable<InstatusWebhookMaintenance>.undefined(),
+    JsonNullable<InstatusWebhookComponentUpdate> componentUpdate =
+        const JsonNullable<InstatusWebhookComponentUpdate>.undefined(),
+    JsonNullable<InstatusWebhookComponent> component =
+        const JsonNullable<InstatusWebhookComponent>.undefined(),
+  }) : meta = meta,
+       _metaValue = meta.value,
+       _metaPresent = meta.isPresent,
+       page = page,
+       _pageValue = page.value,
+       _pagePresent = page.isPresent,
+       incident = incident,
+       _incidentValue = incident.value,
+       _incidentPresent = incident.isPresent,
+       maintenance = maintenance,
+       _maintenanceValue = maintenance.value,
+       _maintenancePresent = maintenance.isPresent,
+       componentUpdate = componentUpdate,
+       _componentUpdateValue = componentUpdate.value,
+       _componentUpdatePresent = componentUpdate.isPresent,
+       component = component,
+       _componentValue = component.value,
+       _componentPresent = component.isPresent;
+
+  const InstatusWebhook._()
+    : _pageValue = null,
+      _metaValue = null,
+      _incidentValue = null,
+      _maintenanceValue = null,
+      _componentUpdateValue = null,
+      _componentValue = null,
+      meta = const JsonNullable<InstatusWebhookMeta>.undefined(),
       _metaPresent = false,
-      page = null,
+      page = const JsonNullable<InstatusWebhookPage>.undefined(),
       _pagePresent = false,
-      incident = null,
+      incident = const JsonNullable<InstatusWebhookIncident>.undefined(),
       _incidentPresent = false,
-      maintenance = null,
+      maintenance = const JsonNullable<InstatusWebhookMaintenance>.undefined(),
       _maintenancePresent = false,
-      componentUpdate = null,
+      componentUpdate =
+          const JsonNullable<InstatusWebhookComponentUpdate>.undefined(),
       _componentUpdatePresent = false,
-      component = null,
+      component = const JsonNullable<InstatusWebhookComponent>.undefined(),
       _componentPresent = false;
-
-  const InstatusWebhook._explicit({
-    Object? meta = _omit,
-    Object? page = _omit,
-    Object? incident = _omit,
-    Object? maintenance = _omit,
-    Object? componentUpdate = _omit,
-    Object? component = _omit,
-  }) : meta = identical(meta, _omit) ? null : meta as InstatusWebhookMeta?,
-       _metaPresent = !identical(meta, _omit),
-       page = identical(page, _omit) ? null : page as InstatusWebhookPage?,
-       _pagePresent = !identical(page, _omit),
-       incident = identical(incident, _omit)
-           ? null
-           : incident as InstatusWebhookIncident?,
-       _incidentPresent = !identical(incident, _omit),
-       maintenance = identical(maintenance, _omit)
-           ? null
-           : maintenance as InstatusWebhookMaintenance?,
-       _maintenancePresent = !identical(maintenance, _omit),
-       componentUpdate = identical(componentUpdate, _omit)
-           ? null
-           : componentUpdate as InstatusWebhookComponentUpdate?,
-       _componentUpdatePresent = !identical(componentUpdate, _omit),
-       component = identical(component, _omit)
-           ? null
-           : component as InstatusWebhookComponent?,
-       _componentPresent = !identical(component, _omit);
-
-  const InstatusWebhook._({
-    this.meta,
-    this.page,
-    this.incident,
-    this.maintenance,
-    this.componentUpdate,
-    this.component,
-  }) : _metaPresent = false,
-       _pagePresent = false,
-       _incidentPresent = false,
-       _maintenancePresent = false,
-       _componentUpdatePresent = false,
-       _componentPresent = false;
   factory InstatusWebhook.patch(Map<String, Object?> json) =>
       InstatusWebhook.fromJson(json);
 
   factory InstatusWebhook.fromJson(Map<String, Object?> json) {
     final value = _$InstatusWebhookFromJson(json);
-    return InstatusWebhook._explicit(
-      meta: json.containsKey('meta') ? value.meta : _omit,
-      page: json.containsKey('page') ? value.page : _omit,
-      incident: json.containsKey('incident') ? value.incident : _omit,
-      maintenance: json.containsKey('maintenance') ? value.maintenance : _omit,
+    return InstatusWebhook(
+      meta: json.containsKey('meta')
+          ? JsonNullable<InstatusWebhookMeta>.of(value._metaValue)
+          : const JsonNullable<InstatusWebhookMeta>.undefined(),
+      page: json.containsKey('page')
+          ? JsonNullable<InstatusWebhookPage>.of(value._pageValue)
+          : const JsonNullable<InstatusWebhookPage>.undefined(),
+      incident: json.containsKey('incident')
+          ? JsonNullable<InstatusWebhookIncident>.of(value._incidentValue)
+          : const JsonNullable<InstatusWebhookIncident>.undefined(),
+      maintenance: json.containsKey('maintenance')
+          ? JsonNullable<InstatusWebhookMaintenance>.of(value._maintenanceValue)
+          : const JsonNullable<InstatusWebhookMaintenance>.undefined(),
       componentUpdate: json.containsKey('component_update')
-          ? value.componentUpdate
-          : _omit,
-      component: json.containsKey('component') ? value.component : _omit,
+          ? JsonNullable<InstatusWebhookComponentUpdate>.of(
+              value._componentUpdateValue,
+            )
+          : const JsonNullable<InstatusWebhookComponentUpdate>.undefined(),
+      component: json.containsKey('component')
+          ? JsonNullable<InstatusWebhookComponent>.of(value._componentValue)
+          : const JsonNullable<InstatusWebhookComponent>.undefined(),
     );
   }
 
-  @JsonKey(includeIfNull: false)
-  final InstatusWebhookMeta? meta;
-  @JsonKey(includeIfNull: false)
-  final InstatusWebhookPage? page;
-  @JsonKey(includeIfNull: false)
-  final InstatusWebhookIncident? incident;
-  @JsonKey(includeIfNull: false)
-  final InstatusWebhookMaintenance? maintenance;
-  @JsonKey(includeIfNull: false, name: 'component_update')
-  final InstatusWebhookComponentUpdate? componentUpdate;
-  @JsonKey(includeIfNull: false)
-  final InstatusWebhookComponent? component;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<InstatusWebhookMeta> meta;
+  @JsonKey(includeIfNull: false, name: 'meta')
+  final InstatusWebhookMeta? _metaValue;
   final bool _metaPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<InstatusWebhookPage> page;
+  @JsonKey(includeIfNull: false, name: 'page')
+  final InstatusWebhookPage? _pageValue;
   final bool _pagePresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<InstatusWebhookIncident> incident;
+  @JsonKey(includeIfNull: false, name: 'incident')
+  final InstatusWebhookIncident? _incidentValue;
   final bool _incidentPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<InstatusWebhookMaintenance> maintenance;
+  @JsonKey(includeIfNull: false, name: 'maintenance')
+  final InstatusWebhookMaintenance? _maintenanceValue;
   final bool _maintenancePresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<InstatusWebhookComponentUpdate> componentUpdate;
+  @JsonKey(includeIfNull: false, name: 'component_update')
+  final InstatusWebhookComponentUpdate? _componentUpdateValue;
   final bool _componentUpdatePresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<InstatusWebhookComponent> component;
+  @JsonKey(includeIfNull: false, name: 'component')
+  final InstatusWebhookComponent? _componentValue;
   final bool _componentPresent;
 
   Map<String, Object?> toJson() {
     final json = _$InstatusWebhookToJson(this);
     if (_metaPresent) {
-      json.putIfAbsent('meta', () => meta);
+      json.putIfAbsent('meta', () => _metaValue);
     }
     if (_pagePresent) {
-      json.putIfAbsent('page', () => page);
+      json.putIfAbsent('page', () => _pageValue);
     }
     if (_incidentPresent) {
-      json.putIfAbsent('incident', () => incident);
+      json.putIfAbsent('incident', () => _incidentValue);
     }
     if (_maintenancePresent) {
-      json.putIfAbsent('maintenance', () => maintenance);
+      json.putIfAbsent('maintenance', () => _maintenanceValue);
     }
     if (_componentUpdatePresent) {
-      json.putIfAbsent('component_update', () => componentUpdate);
+      json.putIfAbsent('component_update', () => _componentUpdateValue);
     }
     if (_componentPresent) {
-      json.putIfAbsent('component', () => component);
+      json.putIfAbsent('component', () => _componentValue);
     }
     return json;
   }

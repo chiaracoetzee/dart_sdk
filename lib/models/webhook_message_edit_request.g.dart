@@ -10,7 +10,6 @@ WebhookMessageEditRequest _$WebhookMessageEditRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('WebhookMessageEditRequest', json, ($checkedConvert) {
   final val = WebhookMessageEditRequest._(
-    content: $checkedConvert('content', (v) => v as String?),
     embeds: $checkedConvert(
       'embeds',
       (v) => (v as List<dynamic>?)
@@ -18,21 +17,10 @@ WebhookMessageEditRequest _$WebhookMessageEditRequestFromJson(
           .toList(),
     ),
     flags: $checkedConvert('flags', (v) => (v as num?)?.toInt()),
-    allowedMentions: $checkedConvert(
-      'allowed_mentions',
-      (v) => v == null
-          ? null
-          : AllowedMentionsRequest.fromJson(v as Map<String, dynamic>),
-    ),
   );
   return val;
-}, fieldKeyMap: const {'allowedMentions': 'allowed_mentions'});
+});
 
 Map<String, dynamic> _$WebhookMessageEditRequestToJson(
   WebhookMessageEditRequest instance,
-) => <String, dynamic>{
-  'content': ?instance.content,
-  'embeds': ?instance.embeds,
-  'flags': ?instance.flags,
-  'allowed_mentions': ?instance.allowedMentions,
-};
+) => <String, dynamic>{'embeds': ?instance.embeds, 'flags': ?instance.flags};

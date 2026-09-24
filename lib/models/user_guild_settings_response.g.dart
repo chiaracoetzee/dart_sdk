@@ -12,7 +12,7 @@ UserGuildSettingsResponse _$UserGuildSettingsResponseFromJson(
   'UserGuildSettingsResponse',
   json,
   ($checkedConvert) {
-    final val = UserGuildSettingsResponse._(
+    final val = UserGuildSettingsResponse(
       guildId: $checkedConvert('guild_id', (v) => v as String?),
       messageNotifications: $checkedConvert(
         'message_notifications',

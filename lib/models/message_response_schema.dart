@@ -20,128 +20,9 @@ import 'user_partial_response.dart';
 
 part 'message_response_schema.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class MessageResponseSchema {
   const MessageResponseSchema({
-    required this.id,
-    required this.channelId,
-    required this.author,
-    required this.type,
-    required this.flags,
-    required this.content,
-    required this.timestamp,
-    required this.pinned,
-    required this.mentionEveryone,
-    required this.tts,
-    required this.mentions,
-    required this.mentionRoles,
-  }) : webhookId = null,
-       _webhookIdPresent = false,
-       editedTimestamp = null,
-       _editedTimestampPresent = false,
-       mentionChannels = null,
-       _mentionChannelsPresent = false,
-       users = null,
-       _usersPresent = false,
-       embeds = null,
-       _embedsPresent = false,
-       attachments = null,
-       _attachmentsPresent = false,
-       stickers = null,
-       _stickersPresent = false,
-       reactions = null,
-       _reactionsPresent = false,
-       messageReference = null,
-       _messageReferencePresent = false,
-       messageSnapshots = null,
-       _messageSnapshotsPresent = false,
-       nonce = null,
-       _noncePresent = false,
-       call = null,
-       _callPresent = false,
-       referencedMessage = null,
-       _referencedMessagePresent = false;
-
-  const MessageResponseSchema._explicit({
-    required this.id,
-    required this.channelId,
-    required this.author,
-    required this.type,
-    required this.flags,
-    required this.content,
-    required this.timestamp,
-    required this.pinned,
-    required this.mentionEveryone,
-    required this.tts,
-    required this.mentions,
-    required this.mentionRoles,
-    Object? webhookId = _omit,
-    Object? editedTimestamp = _omit,
-    Object? mentionChannels = _omit,
-    Object? users = _omit,
-    Object? embeds = _omit,
-    Object? attachments = _omit,
-    Object? stickers = _omit,
-    Object? reactions = _omit,
-    Object? messageReference = _omit,
-    Object? messageSnapshots = _omit,
-    Object? nonce = _omit,
-    Object? call = _omit,
-    Object? referencedMessage = _omit,
-  }) : webhookId = identical(webhookId, _omit)
-           ? null
-           : webhookId as SnowflakeStringType?,
-       _webhookIdPresent = !identical(webhookId, _omit),
-       editedTimestamp = identical(editedTimestamp, _omit)
-           ? null
-           : editedTimestamp as DateTime?,
-       _editedTimestampPresent = !identical(editedTimestamp, _omit),
-       mentionChannels = identical(mentionChannels, _omit)
-           ? null
-           : mentionChannels as List<MessageChannelMentionResponse>?,
-       _mentionChannelsPresent = !identical(mentionChannels, _omit),
-       users = identical(users, _omit)
-           ? null
-           : users as List<UserPartialResponse>?,
-       _usersPresent = !identical(users, _omit),
-       embeds = identical(embeds, _omit)
-           ? null
-           : embeds as List<MessageEmbedResponse>?,
-       _embedsPresent = !identical(embeds, _omit),
-       attachments = identical(attachments, _omit)
-           ? null
-           : attachments as List<MessageAttachmentResponse>?,
-       _attachmentsPresent = !identical(attachments, _omit),
-       stickers = identical(stickers, _omit)
-           ? null
-           : stickers as List<MessageStickerResponse>?,
-       _stickersPresent = !identical(stickers, _omit),
-       reactions = identical(reactions, _omit)
-           ? null
-           : reactions as List<MessageReactionResponse>?,
-       _reactionsPresent = !identical(reactions, _omit),
-       messageReference = identical(messageReference, _omit)
-           ? null
-           : messageReference as MessageResponseSchemaMessageReference?,
-       _messageReferencePresent = !identical(messageReference, _omit),
-       messageSnapshots = identical(messageSnapshots, _omit)
-           ? null
-           : messageSnapshots as List<MessageSnapshotResponse>?,
-       _messageSnapshotsPresent = !identical(messageSnapshots, _omit),
-       nonce = identical(nonce, _omit) ? null : nonce as String?,
-       _noncePresent = !identical(nonce, _omit),
-       call = identical(call, _omit)
-           ? null
-           : call as MessageResponseSchemaCall?,
-       _callPresent = !identical(call, _omit),
-       referencedMessage = identical(referencedMessage, _omit)
-           ? null
-           : referencedMessage as MessageResponseSchemaReferencedMessage?,
-       _referencedMessagePresent = !identical(referencedMessage, _omit);
-
-  const MessageResponseSchema._({
     required this.id,
     required this.channelId,
     required this.author,
@@ -167,62 +48,10 @@ class MessageResponseSchema {
     this.nonce,
     this.call,
     this.referencedMessage,
-  }) : _webhookIdPresent = false,
-       _editedTimestampPresent = false,
-       _mentionChannelsPresent = false,
-       _usersPresent = false,
-       _embedsPresent = false,
-       _attachmentsPresent = false,
-       _stickersPresent = false,
-       _reactionsPresent = false,
-       _messageReferencePresent = false,
-       _messageSnapshotsPresent = false,
-       _noncePresent = false,
-       _callPresent = false,
-       _referencedMessagePresent = false;
-  factory MessageResponseSchema.patch(Map<String, Object?> json) =>
-      MessageResponseSchema.fromJson(json);
+  });
 
-  factory MessageResponseSchema.fromJson(Map<String, Object?> json) {
-    final value = _$MessageResponseSchemaFromJson(json);
-    return MessageResponseSchema._explicit(
-      id: value.id,
-      channelId: value.channelId,
-      author: value.author,
-      type: value.type,
-      flags: value.flags,
-      content: value.content,
-      timestamp: value.timestamp,
-      pinned: value.pinned,
-      mentionEveryone: value.mentionEveryone,
-      tts: value.tts,
-      mentions: value.mentions,
-      mentionRoles: value.mentionRoles,
-      webhookId: json.containsKey('webhook_id') ? value.webhookId : _omit,
-      editedTimestamp: json.containsKey('edited_timestamp')
-          ? value.editedTimestamp
-          : _omit,
-      mentionChannels: json.containsKey('mention_channels')
-          ? value.mentionChannels
-          : _omit,
-      users: json.containsKey('users') ? value.users : _omit,
-      embeds: json.containsKey('embeds') ? value.embeds : _omit,
-      attachments: json.containsKey('attachments') ? value.attachments : _omit,
-      stickers: json.containsKey('stickers') ? value.stickers : _omit,
-      reactions: json.containsKey('reactions') ? value.reactions : _omit,
-      messageReference: json.containsKey('message_reference')
-          ? value.messageReference
-          : _omit,
-      messageSnapshots: json.containsKey('message_snapshots')
-          ? value.messageSnapshots
-          : _omit,
-      nonce: json.containsKey('nonce') ? value.nonce : _omit,
-      call: json.containsKey('call') ? value.call : _omit,
-      referencedMessage: json.containsKey('referenced_message')
-          ? value.referencedMessage
-          : _omit,
-    );
-  }
+  factory MessageResponseSchema.fromJson(Map<String, Object?> json) =>
+      _$MessageResponseSchemaFromJson(json);
 
   /// The unique identifier (snowflake) for this message
   final SnowflakeStringType id;
@@ -312,61 +141,6 @@ class MessageResponseSchema {
   /// The reply target. Present and populated when the target resolved, present and null when the target is gone, absent when this message carries no default reference. Clients must tell null apart from absent by key presence.
   @JsonKey(includeIfNull: false, name: 'referenced_message')
   final MessageResponseSchemaReferencedMessage? referencedMessage;
-  final bool _webhookIdPresent;
-  final bool _editedTimestampPresent;
-  final bool _mentionChannelsPresent;
-  final bool _usersPresent;
-  final bool _embedsPresent;
-  final bool _attachmentsPresent;
-  final bool _stickersPresent;
-  final bool _reactionsPresent;
-  final bool _messageReferencePresent;
-  final bool _messageSnapshotsPresent;
-  final bool _noncePresent;
-  final bool _callPresent;
-  final bool _referencedMessagePresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$MessageResponseSchemaToJson(this);
-    if (_webhookIdPresent) {
-      json.putIfAbsent('webhook_id', () => webhookId);
-    }
-    if (_editedTimestampPresent) {
-      json.putIfAbsent('edited_timestamp', () => editedTimestamp);
-    }
-    if (_mentionChannelsPresent) {
-      json.putIfAbsent('mention_channels', () => mentionChannels);
-    }
-    if (_usersPresent) {
-      json.putIfAbsent('users', () => users);
-    }
-    if (_embedsPresent) {
-      json.putIfAbsent('embeds', () => embeds);
-    }
-    if (_attachmentsPresent) {
-      json.putIfAbsent('attachments', () => attachments);
-    }
-    if (_stickersPresent) {
-      json.putIfAbsent('stickers', () => stickers);
-    }
-    if (_reactionsPresent) {
-      json.putIfAbsent('reactions', () => reactions);
-    }
-    if (_messageReferencePresent) {
-      json.putIfAbsent('message_reference', () => messageReference);
-    }
-    if (_messageSnapshotsPresent) {
-      json.putIfAbsent('message_snapshots', () => messageSnapshots);
-    }
-    if (_noncePresent) {
-      json.putIfAbsent('nonce', () => nonce);
-    }
-    if (_callPresent) {
-      json.putIfAbsent('call', () => call);
-    }
-    if (_referencedMessagePresent) {
-      json.putIfAbsent('referenced_message', () => referencedMessage);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$MessageResponseSchemaToJson(this);
 }

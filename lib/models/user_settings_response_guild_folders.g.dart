@@ -10,7 +10,7 @@ UserSettingsResponseGuildFolders _$UserSettingsResponseGuildFoldersFromJson(
   Map<String, dynamic> json,
 ) =>
     $checkedCreate('UserSettingsResponseGuildFolders', json, ($checkedConvert) {
-      final val = UserSettingsResponseGuildFolders._(
+      final val = UserSettingsResponseGuildFolders(
         guildIds: $checkedConvert(
           'guild_ids',
           (v) => (v as List<dynamic>).map((e) => e as String).toList(),

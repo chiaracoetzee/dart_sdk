@@ -11,7 +11,7 @@ ChannelOverrides _$ChannelOverridesFromJson(Map<String, dynamic> json) =>
       'ChannelOverrides',
       json,
       ($checkedConvert) {
-        final val = ChannelOverrides._(
+        final val = ChannelOverrides(
           collapsed: $checkedConvert('collapsed', (v) => v as bool),
           messageNotifications: $checkedConvert(
             'message_notifications',

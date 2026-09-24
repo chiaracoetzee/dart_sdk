@@ -15,16 +15,10 @@ PermissionOverwriteCreateRequest _$PermissionOverwriteCreateRequestFromJson(
           'type',
           (v) => ChannelOverwriteType.fromJson((v as num).toInt()),
         ),
-        allow: $checkedConvert('allow', (v) => v as String?),
-        deny: $checkedConvert('deny', (v) => v as String?),
       );
       return val;
     });
 
 Map<String, dynamic> _$PermissionOverwriteCreateRequestToJson(
   PermissionOverwriteCreateRequest instance,
-) => <String, dynamic>{
-  'type': instance.type,
-  'allow': ?instance.allow,
-  'deny': ?instance.deny,
-};
+) => <String, dynamic>{'type': instance.type};

@@ -11,7 +11,7 @@ EmbedMediaResponse _$EmbedMediaResponseFromJson(Map<String, dynamic> json) =>
       'EmbedMediaResponse',
       json,
       ($checkedConvert) {
-        final val = EmbedMediaResponse._(
+        final val = EmbedMediaResponse(
           url: $checkedConvert('url', (v) => v as String),
           flags: $checkedConvert('flags', (v) => (v as num).toInt()),
           proxyUrl: $checkedConvert('proxy_url', (v) => v as String?),

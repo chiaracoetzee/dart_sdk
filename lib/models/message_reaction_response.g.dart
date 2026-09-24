@@ -9,7 +9,7 @@ part of 'message_reaction_response.dart';
 MessageReactionResponse _$MessageReactionResponseFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('MessageReactionResponse', json, ($checkedConvert) {
-  final val = MessageReactionResponse._(
+  final val = MessageReactionResponse(
     emoji: $checkedConvert(
       'emoji',
       (v) => MessageReactionResponseEmoji.fromJson(v as Map<String, dynamic>),

@@ -4,68 +4,71 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'json_nullable.dart';
+
 import 'channel_overwrite_type.dart';
 import 'unsigned_int64_type.dart';
 
 part 'permission_overwrite_create_request.g.dart';
 
-const Object _omit = Object();
-
 @JsonSerializable(constructor: '_')
 class PermissionOverwriteCreateRequest {
-  const PermissionOverwriteCreateRequest({required this.type})
-    : allow = null,
+  PermissionOverwriteCreateRequest({
+    required this.type,
+    JsonNullable<UnsignedInt64Type> allow =
+        const JsonNullable<UnsignedInt64Type>.undefined(),
+    JsonNullable<UnsignedInt64Type> deny =
+        const JsonNullable<UnsignedInt64Type>.undefined(),
+  }) : allow = allow,
+       _allowValue = allow.value,
+       _allowPresent = allow.isPresent,
+       deny = deny,
+       _denyValue = deny.value,
+       _denyPresent = deny.isPresent;
+
+  const PermissionOverwriteCreateRequest._({required this.type})
+    : _allowValue = null,
+      _denyValue = null,
+      allow = const JsonNullable<UnsignedInt64Type>.undefined(),
       _allowPresent = false,
-      deny = null,
+      deny = const JsonNullable<UnsignedInt64Type>.undefined(),
       _denyPresent = false;
-
-  const PermissionOverwriteCreateRequest._explicit({
-    required this.type,
-    Object? allow = _omit,
-    Object? deny = _omit,
-  }) : allow = identical(allow, _omit) ? null : allow as UnsignedInt64Type?,
-       _allowPresent = !identical(allow, _omit),
-       deny = identical(deny, _omit) ? null : deny as UnsignedInt64Type?,
-       _denyPresent = !identical(deny, _omit);
-
-  const PermissionOverwriteCreateRequest._({
-    required this.type,
-    this.allow,
-    this.deny,
-  }) : _allowPresent = false,
-       _denyPresent = false;
   factory PermissionOverwriteCreateRequest.patch(Map<String, Object?> json) =>
       PermissionOverwriteCreateRequest.fromJson(json);
 
   factory PermissionOverwriteCreateRequest.fromJson(Map<String, Object?> json) {
     final value = _$PermissionOverwriteCreateRequestFromJson(json);
-    return PermissionOverwriteCreateRequest._explicit(
+    return PermissionOverwriteCreateRequest(
       type: value.type,
-      allow: json.containsKey('allow') ? value.allow : _omit,
-      deny: json.containsKey('deny') ? value.deny : _omit,
+      allow: json.containsKey('allow')
+          ? JsonNullable<UnsignedInt64Type>.of(value._allowValue)
+          : const JsonNullable<UnsignedInt64Type>.undefined(),
+      deny: json.containsKey('deny')
+          ? JsonNullable<UnsignedInt64Type>.of(value._denyValue)
+          : const JsonNullable<UnsignedInt64Type>.undefined(),
     );
   }
 
   /// The type of overwrite (0 = role, 1 = member)
   final ChannelOverwriteType type;
-
-  /// Bitwise value of allowed permissions
-  @JsonKey(includeIfNull: false)
-  final UnsignedInt64Type? allow;
-
-  /// Bitwise value of denied permissions
-  @JsonKey(includeIfNull: false)
-  final UnsignedInt64Type? deny;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<UnsignedInt64Type> allow;
+  @JsonKey(includeIfNull: false, name: 'allow')
+  final UnsignedInt64Type? _allowValue;
   final bool _allowPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<UnsignedInt64Type> deny;
+  @JsonKey(includeIfNull: false, name: 'deny')
+  final UnsignedInt64Type? _denyValue;
   final bool _denyPresent;
 
   Map<String, Object?> toJson() {
     final json = _$PermissionOverwriteCreateRequestToJson(this);
     if (_allowPresent) {
-      json.putIfAbsent('allow', () => allow);
+      json.putIfAbsent('allow', () => _allowValue);
     }
     if (_denyPresent) {
-      json.putIfAbsent('deny', () => deny);
+      json.putIfAbsent('deny', () => _denyValue);
     }
     return json;
   }

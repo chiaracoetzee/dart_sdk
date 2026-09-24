@@ -12,7 +12,7 @@ ChannelResponse _$ChannelResponseFromJson(
   'ChannelResponse',
   json,
   ($checkedConvert) {
-    final val = ChannelResponse._(
+    final val = ChannelResponse(
       id: $checkedConvert('id', (v) => v as String),
       type: $checkedConvert(
         'type',

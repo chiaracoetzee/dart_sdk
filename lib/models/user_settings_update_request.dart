@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'json_nullable.dart';
+
 import 'custom_status_payload.dart';
 import 'friend_source_flags.dart';
 import 'group_dm_add_permission_flags.dart';
@@ -22,11 +24,9 @@ import 'user_theme_type.dart';
 
 part 'user_settings_update_request.g.dart';
 
-const Object _omit = Object();
-
 @JsonSerializable(constructor: '_')
 class UserSettingsUpdateRequest {
-  const UserSettingsUpdateRequest({
+  UserSettingsUpdateRequest({
     this.flags,
     this.status,
     this.theme,
@@ -60,94 +60,44 @@ class UserSettingsUpdateRequest {
     this.suppressUnprivilegedSelfMentions,
     this.profilePrivacy,
     this.defaultShareVoiceActivity,
-  }) : statusResetsAt = null,
-       _statusResetsAtPresent = false,
-       statusResetsTo = null,
-       _statusResetsToPresent = false,
-       customStatus = null,
-       _customStatusPresent = false,
-       suppressUnprivilegedSelfMentionsBypassUserIds = null,
-       _suppressUnprivilegedSelfMentionsBypassUserIdsPresent = false,
-       staffDmAccessUserIds = null,
-       _staffDmAccessUserIdsPresent = false,
-       syncedPreferences = null,
-       _syncedPreferencesPresent = false;
-
-  const UserSettingsUpdateRequest._explicit({
-    this.gifAutoPlay,
-    this.status,
-    Object? statusResetsAt = _omit,
-    Object? statusResetsTo = _omit,
-    this.theme,
-    this.guildPositions,
-    this.locale,
-    this.restrictedGuilds,
-    this.botRestrictedGuilds,
-    this.defaultGuildsRestricted,
-    this.botDefaultGuildsRestricted,
-    this.inlineAttachmentMedia,
-    this.inlineEmbedMedia,
-    this.flags,
-    this.renderEmbeds,
-    this.renderReactions,
-    this.animateEmoji,
-    this.animateStickers,
-    this.renderSpoilers,
-    this.messageDisplayCompact,
-    this.friendSourceFlags,
-    this.incomingCallFlags,
-    this.groupDmAddPermissionFlags,
-    this.guildFolders,
-    Object? customStatus = _omit,
-    Object? syncedPreferences = _omit,
-    this.timeFormat,
-    this.developerMode,
-    this.trustedDomains,
-    this.defaultHideMutedChannels,
-    this.sensitiveContentFriendDmFilter,
-    this.sensitiveContentNonFriendDmFilter,
-    this.sensitiveContentGuildFilter,
-    this.suppressUnprivilegedSelfMentions,
-    Object? suppressUnprivilegedSelfMentionsBypassUserIds = _omit,
-    Object? staffDmAccessUserIds = _omit,
-    this.profilePrivacy,
-    this.defaultShareVoiceActivity,
-    this.afkTimeout,
-  }) : statusResetsAt = identical(statusResetsAt, _omit)
-           ? null
-           : statusResetsAt as String?,
-       _statusResetsAtPresent = !identical(statusResetsAt, _omit),
-       statusResetsTo = identical(statusResetsTo, _omit)
-           ? null
-           : statusResetsTo as UserStatusType?,
-       _statusResetsToPresent = !identical(statusResetsTo, _omit),
-       customStatus = identical(customStatus, _omit)
-           ? null
-           : customStatus as CustomStatusPayload?,
-       _customStatusPresent = !identical(customStatus, _omit),
+    JsonNullable<String> statusResetsAt =
+        const JsonNullable<String>.undefined(),
+    JsonNullable<UserStatusType> statusResetsTo =
+        const JsonNullable<UserStatusType>.undefined(),
+    JsonNullable<CustomStatusPayload> customStatus =
+        const JsonNullable<CustomStatusPayload>.undefined(),
+    JsonNullable<List<SnowflakeType>>
+        suppressUnprivilegedSelfMentionsBypassUserIds =
+        const JsonNullable<List<SnowflakeType>>.undefined(),
+    JsonNullable<List<SnowflakeType>> staffDmAccessUserIds =
+        const JsonNullable<List<SnowflakeType>>.undefined(),
+    JsonNullable<String> syncedPreferences =
+        const JsonNullable<String>.undefined(),
+  }) : statusResetsAt = statusResetsAt,
+       _statusResetsAtValue = statusResetsAt.value,
+       _statusResetsAtPresent = statusResetsAt.isPresent,
+       statusResetsTo = statusResetsTo,
+       _statusResetsToValue = statusResetsTo.value,
+       _statusResetsToPresent = statusResetsTo.isPresent,
+       customStatus = customStatus,
+       _customStatusValue = customStatus.value,
+       _customStatusPresent = customStatus.isPresent,
        suppressUnprivilegedSelfMentionsBypassUserIds =
-           identical(suppressUnprivilegedSelfMentionsBypassUserIds, _omit)
-           ? null
-           : suppressUnprivilegedSelfMentionsBypassUserIds
-                 as List<SnowflakeType>?,
-       _suppressUnprivilegedSelfMentionsBypassUserIdsPresent = !identical(
-         suppressUnprivilegedSelfMentionsBypassUserIds,
-         _omit,
-       ),
-       staffDmAccessUserIds = identical(staffDmAccessUserIds, _omit)
-           ? null
-           : staffDmAccessUserIds as List<SnowflakeType>?,
-       _staffDmAccessUserIdsPresent = !identical(staffDmAccessUserIds, _omit),
-       syncedPreferences = identical(syncedPreferences, _omit)
-           ? null
-           : syncedPreferences as String?,
-       _syncedPreferencesPresent = !identical(syncedPreferences, _omit);
+           suppressUnprivilegedSelfMentionsBypassUserIds,
+       _suppressUnprivilegedSelfMentionsBypassUserIdsValue =
+           suppressUnprivilegedSelfMentionsBypassUserIds.value,
+       _suppressUnprivilegedSelfMentionsBypassUserIdsPresent =
+           suppressUnprivilegedSelfMentionsBypassUserIds.isPresent,
+       staffDmAccessUserIds = staffDmAccessUserIds,
+       _staffDmAccessUserIdsValue = staffDmAccessUserIds.value,
+       _staffDmAccessUserIdsPresent = staffDmAccessUserIds.isPresent,
+       syncedPreferences = syncedPreferences,
+       _syncedPreferencesValue = syncedPreferences.value,
+       _syncedPreferencesPresent = syncedPreferences.isPresent;
 
   const UserSettingsUpdateRequest._({
     this.gifAutoPlay,
     this.status,
-    this.statusResetsAt,
-    this.statusResetsTo,
     this.theme,
     this.guildPositions,
     this.locale,
@@ -168,8 +118,6 @@ class UserSettingsUpdateRequest {
     this.incomingCallFlags,
     this.groupDmAddPermissionFlags,
     this.guildFolders,
-    this.customStatus,
-    this.syncedPreferences,
     this.timeFormat,
     this.developerMode,
     this.trustedDomains,
@@ -178,31 +126,43 @@ class UserSettingsUpdateRequest {
     this.sensitiveContentNonFriendDmFilter,
     this.sensitiveContentGuildFilter,
     this.suppressUnprivilegedSelfMentions,
-    this.suppressUnprivilegedSelfMentionsBypassUserIds,
-    this.staffDmAccessUserIds,
     this.profilePrivacy,
     this.defaultShareVoiceActivity,
     this.afkTimeout,
-  }) : _statusResetsAtPresent = false,
+  }) : _statusResetsAtValue = null,
+       _statusResetsToValue = null,
+       _customStatusValue = null,
+       _syncedPreferencesValue = null,
+       _suppressUnprivilegedSelfMentionsBypassUserIdsValue = null,
+       _staffDmAccessUserIdsValue = null,
+       statusResetsAt = const JsonNullable<String>.undefined(),
+       _statusResetsAtPresent = false,
+       statusResetsTo = const JsonNullable<UserStatusType>.undefined(),
        _statusResetsToPresent = false,
+       customStatus = const JsonNullable<CustomStatusPayload>.undefined(),
        _customStatusPresent = false,
+       suppressUnprivilegedSelfMentionsBypassUserIds =
+           const JsonNullable<List<SnowflakeType>>.undefined(),
        _suppressUnprivilegedSelfMentionsBypassUserIdsPresent = false,
+       staffDmAccessUserIds =
+           const JsonNullable<List<SnowflakeType>>.undefined(),
        _staffDmAccessUserIdsPresent = false,
+       syncedPreferences = const JsonNullable<String>.undefined(),
        _syncedPreferencesPresent = false;
   factory UserSettingsUpdateRequest.patch(Map<String, Object?> json) =>
       UserSettingsUpdateRequest.fromJson(json);
 
   factory UserSettingsUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$UserSettingsUpdateRequestFromJson(json);
-    return UserSettingsUpdateRequest._explicit(
+    return UserSettingsUpdateRequest(
       gifAutoPlay: value.gifAutoPlay,
       status: value.status,
       statusResetsAt: json.containsKey('status_resets_at')
-          ? value.statusResetsAt
-          : _omit,
+          ? JsonNullable<String>.of(value._statusResetsAtValue)
+          : const JsonNullable<String>.undefined(),
       statusResetsTo: json.containsKey('status_resets_to')
-          ? value.statusResetsTo
-          : _omit,
+          ? JsonNullable<UserStatusType>.of(value._statusResetsToValue)
+          : const JsonNullable<UserStatusType>.undefined(),
       theme: value.theme,
       guildPositions: value.guildPositions,
       locale: value.locale,
@@ -224,11 +184,11 @@ class UserSettingsUpdateRequest {
       groupDmAddPermissionFlags: value.groupDmAddPermissionFlags,
       guildFolders: value.guildFolders,
       customStatus: json.containsKey('custom_status')
-          ? value.customStatus
-          : _omit,
+          ? JsonNullable<CustomStatusPayload>.of(value._customStatusValue)
+          : const JsonNullable<CustomStatusPayload>.undefined(),
       syncedPreferences: json.containsKey('synced_preferences')
-          ? value.syncedPreferences
-          : _omit,
+          ? JsonNullable<String>.of(value._syncedPreferencesValue)
+          : const JsonNullable<String>.undefined(),
       timeFormat: value.timeFormat,
       developerMode: value.developerMode,
       trustedDomains: value.trustedDomains,
@@ -242,11 +202,15 @@ class UserSettingsUpdateRequest {
           json.containsKey(
             'suppress_unprivileged_self_mentions_bypass_user_ids',
           )
-          ? value.suppressUnprivilegedSelfMentionsBypassUserIds
-          : _omit,
+          ? JsonNullable<List<SnowflakeType>>.of(
+              value._suppressUnprivilegedSelfMentionsBypassUserIdsValue,
+            )
+          : const JsonNullable<List<SnowflakeType>>.undefined(),
       staffDmAccessUserIds: json.containsKey('staff_dm_access_user_ids')
-          ? value.staffDmAccessUserIds
-          : _omit,
+          ? JsonNullable<List<SnowflakeType>>.of(
+              value._staffDmAccessUserIdsValue,
+            )
+          : const JsonNullable<List<SnowflakeType>>.undefined(),
       profilePrivacy: value.profilePrivacy,
       defaultShareVoiceActivity: value.defaultShareVoiceActivity,
       afkTimeout: value.afkTimeout,
@@ -258,12 +222,6 @@ class UserSettingsUpdateRequest {
   final int? flags;
   @JsonKey(includeIfNull: false)
   final UserStatusType? status;
-
-  /// When status resets
-  @JsonKey(includeIfNull: false, name: 'status_resets_at')
-  final String? statusResetsAt;
-  @JsonKey(includeIfNull: false, name: 'status_resets_to')
-  final UserStatusType? statusResetsTo;
   @JsonKey(includeIfNull: false)
   final UserThemeType? theme;
 
@@ -337,10 +295,6 @@ class UserSettingsUpdateRequest {
   @JsonKey(includeIfNull: false, name: 'guild_folders')
   final List<UserSettingsUpdateRequestGuildFolders>? guildFolders;
 
-  /// Custom status
-  @JsonKey(includeIfNull: false, name: 'custom_status')
-  final CustomStatusPayload? customStatus;
-
   /// AFK timeout in seconds (60-600)
   @JsonKey(includeIfNull: false, name: 'afk_timeout')
   final int? afkTimeout;
@@ -373,17 +327,6 @@ class UserSettingsUpdateRequest {
   @JsonKey(includeIfNull: false, name: 'suppress_unprivileged_self_mentions')
   final bool? suppressUnprivilegedSelfMentions;
 
-  /// User IDs that bypass self-mention suppression
-  @JsonKey(
-    includeIfNull: false,
-    name: 'suppress_unprivileged_self_mentions_bypass_user_ids',
-  )
-  final List<SnowflakeType>? suppressUnprivilegedSelfMentionsBypassUserIds;
-
-  /// User IDs with Staff DM Access enabled
-  @JsonKey(includeIfNull: false, name: 'staff_dm_access_user_ids')
-  final List<SnowflakeType>? staffDmAccessUserIds;
-
   /// Controls who sees the full profile: all guild members, only small-guild members, or only friends
   @JsonKey(includeIfNull: false, name: 'profile_privacy')
   final ProfilePrivacyLevelInput? profilePrivacy;
@@ -391,39 +334,67 @@ class UserSettingsUpdateRequest {
   /// Default share_voice_activity applied to new friend relationships
   @JsonKey(includeIfNull: false, name: 'default_share_voice_activity')
   final bool? defaultShareVoiceActivity;
-
-  /// Account-wide client preferences as a base64-encoded protobuf snapshot. Replaces the entire stored snapshot; pass null to clear it.
-  @JsonKey(includeIfNull: false, name: 'synced_preferences')
-  final String? syncedPreferences;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> statusResetsAt;
+  @JsonKey(includeIfNull: false, name: 'status_resets_at')
+  final String? _statusResetsAtValue;
   final bool _statusResetsAtPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<UserStatusType> statusResetsTo;
+  @JsonKey(includeIfNull: false, name: 'status_resets_to')
+  final UserStatusType? _statusResetsToValue;
   final bool _statusResetsToPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<CustomStatusPayload> customStatus;
+  @JsonKey(includeIfNull: false, name: 'custom_status')
+  final CustomStatusPayload? _customStatusValue;
   final bool _customStatusPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<List<SnowflakeType>>
+  suppressUnprivilegedSelfMentionsBypassUserIds;
+  @JsonKey(
+    includeIfNull: false,
+    name: 'suppress_unprivileged_self_mentions_bypass_user_ids',
+  )
+  final List<SnowflakeType>?
+  _suppressUnprivilegedSelfMentionsBypassUserIdsValue;
   final bool _suppressUnprivilegedSelfMentionsBypassUserIdsPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<List<SnowflakeType>> staffDmAccessUserIds;
+  @JsonKey(includeIfNull: false, name: 'staff_dm_access_user_ids')
+  final List<SnowflakeType>? _staffDmAccessUserIdsValue;
   final bool _staffDmAccessUserIdsPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> syncedPreferences;
+  @JsonKey(includeIfNull: false, name: 'synced_preferences')
+  final String? _syncedPreferencesValue;
   final bool _syncedPreferencesPresent;
 
   Map<String, Object?> toJson() {
     final json = _$UserSettingsUpdateRequestToJson(this);
     if (_statusResetsAtPresent) {
-      json.putIfAbsent('status_resets_at', () => statusResetsAt);
+      json.putIfAbsent('status_resets_at', () => _statusResetsAtValue);
     }
     if (_statusResetsToPresent) {
-      json.putIfAbsent('status_resets_to', () => statusResetsTo);
+      json.putIfAbsent('status_resets_to', () => _statusResetsToValue);
     }
     if (_customStatusPresent) {
-      json.putIfAbsent('custom_status', () => customStatus);
+      json.putIfAbsent('custom_status', () => _customStatusValue);
     }
     if (_suppressUnprivilegedSelfMentionsBypassUserIdsPresent) {
       json.putIfAbsent(
         'suppress_unprivileged_self_mentions_bypass_user_ids',
-        () => suppressUnprivilegedSelfMentionsBypassUserIds,
+        () => _suppressUnprivilegedSelfMentionsBypassUserIdsValue,
       );
     }
     if (_staffDmAccessUserIdsPresent) {
-      json.putIfAbsent('staff_dm_access_user_ids', () => staffDmAccessUserIds);
+      json.putIfAbsent(
+        'staff_dm_access_user_ids',
+        () => _staffDmAccessUserIdsValue,
+      );
     }
     if (_syncedPreferencesPresent) {
-      json.putIfAbsent('synced_preferences', () => syncedPreferences);
+      json.putIfAbsent('synced_preferences', () => _syncedPreferencesValue);
     }
     return json;
   }

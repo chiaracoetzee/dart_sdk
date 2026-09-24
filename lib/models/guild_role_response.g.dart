@@ -11,7 +11,7 @@ GuildRoleResponse _$GuildRoleResponseFromJson(Map<String, dynamic> json) =>
       'GuildRoleResponse',
       json,
       ($checkedConvert) {
-        final val = GuildRoleResponse._(
+        final val = GuildRoleResponse(
           id: $checkedConvert('id', (v) => v as String),
           name: $checkedConvert('name', (v) => v as String),
           color: $checkedConvert('color', (v) => (v as num).toInt()),

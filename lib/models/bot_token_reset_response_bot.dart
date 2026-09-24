@@ -10,41 +10,9 @@ import 'bot_flags.dart';
 
 part 'bot_token_reset_response_bot.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class BotTokenResetResponseBot {
   const BotTokenResetResponseBot({
-    required this.id,
-    required this.username,
-    required this.discriminator,
-    required this.bio,
-    required this.flags,
-    this.token,
-    this.mfaEnabled,
-    this.authenticatorTypes,
-  }) : avatar = null,
-       _avatarPresent = false,
-       banner = null,
-       _bannerPresent = false;
-
-  const BotTokenResetResponseBot._explicit({
-    required this.id,
-    required this.username,
-    required this.discriminator,
-    required this.bio,
-    required this.flags,
-    Object? avatar = _omit,
-    Object? banner = _omit,
-    this.token,
-    this.mfaEnabled,
-    this.authenticatorTypes,
-  }) : avatar = identical(avatar, _omit) ? null : avatar as String?,
-       _avatarPresent = !identical(avatar, _omit),
-       banner = identical(banner, _omit) ? null : banner as String?,
-       _bannerPresent = !identical(banner, _omit);
-
-  const BotTokenResetResponseBot._({
     required this.id,
     required this.username,
     required this.discriminator,
@@ -55,26 +23,10 @@ class BotTokenResetResponseBot {
     this.token,
     this.mfaEnabled,
     this.authenticatorTypes,
-  }) : _avatarPresent = false,
-       _bannerPresent = false;
-  factory BotTokenResetResponseBot.patch(Map<String, Object?> json) =>
-      BotTokenResetResponseBot.fromJson(json);
+  });
 
-  factory BotTokenResetResponseBot.fromJson(Map<String, Object?> json) {
-    final value = _$BotTokenResetResponseBotFromJson(json);
-    return BotTokenResetResponseBot._explicit(
-      id: value.id,
-      username: value.username,
-      discriminator: value.discriminator,
-      bio: value.bio,
-      flags: value.flags,
-      avatar: json.containsKey('avatar') ? value.avatar : _omit,
-      banner: json.containsKey('banner') ? value.banner : _omit,
-      token: value.token,
-      mfaEnabled: value.mfaEnabled,
-      authenticatorTypes: value.authenticatorTypes,
-    );
-  }
+  factory BotTokenResetResponseBot.fromJson(Map<String, Object?> json) =>
+      _$BotTokenResetResponseBotFromJson(json);
 
   /// The unique identifier of the bot user
   final SnowflakeStringType id;
@@ -109,17 +61,6 @@ class BotTokenResetResponseBot {
   @JsonKey(includeIfNull: false, name: 'authenticator_types')
   final List<AuthenticatorType>? authenticatorTypes;
   final BotFlags flags;
-  final bool _avatarPresent;
-  final bool _bannerPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$BotTokenResetResponseBotToJson(this);
-    if (_avatarPresent) {
-      json.putIfAbsent('avatar', () => avatar);
-    }
-    if (_bannerPresent) {
-      json.putIfAbsent('banner', () => banner);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$BotTokenResetResponseBotToJson(this);
 }

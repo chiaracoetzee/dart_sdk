@@ -11,9 +11,7 @@ import 'user_partial_response.dart';
 
 part 'guild_invite_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class GuildInviteResponse {
   const GuildInviteResponse({
     required this.code,
@@ -23,57 +21,12 @@ class GuildInviteResponse {
     required this.channel,
     required this.memberCount,
     required this.presenceCount,
-  }) : inviter = null,
-       _inviterPresent = false,
-       expiresAt = null,
-       _expiresAtPresent = false;
-
-  const GuildInviteResponse._explicit({
-    required this.code,
-    required this.temporary,
-    required this.type,
-    required this.guild,
-    required this.channel,
-    required this.memberCount,
-    required this.presenceCount,
-    Object? inviter = _omit,
-    Object? expiresAt = _omit,
-  }) : inviter = identical(inviter, _omit)
-           ? null
-           : inviter as UserPartialResponse?,
-       _inviterPresent = !identical(inviter, _omit),
-       expiresAt = identical(expiresAt, _omit) ? null : expiresAt as DateTime?,
-       _expiresAtPresent = !identical(expiresAt, _omit);
-
-  const GuildInviteResponse._({
-    required this.code,
-    required this.temporary,
-    required this.type,
-    required this.guild,
-    required this.channel,
-    required this.memberCount,
-    required this.presenceCount,
     this.inviter,
     this.expiresAt,
-  }) : _inviterPresent = false,
-       _expiresAtPresent = false;
-  factory GuildInviteResponse.patch(Map<String, Object?> json) =>
-      GuildInviteResponse.fromJson(json);
+  });
 
-  factory GuildInviteResponse.fromJson(Map<String, Object?> json) {
-    final value = _$GuildInviteResponseFromJson(json);
-    return GuildInviteResponse._explicit(
-      code: value.code,
-      temporary: value.temporary,
-      type: value.type,
-      guild: value.guild,
-      channel: value.channel,
-      memberCount: value.memberCount,
-      presenceCount: value.presenceCount,
-      inviter: json.containsKey('inviter') ? value.inviter : _omit,
-      expiresAt: json.containsKey('expires_at') ? value.expiresAt : _omit,
-    );
-  }
+  factory GuildInviteResponse.fromJson(Map<String, Object?> json) =>
+      _$GuildInviteResponseFromJson(json);
 
   /// The unique invite code
   final String code;
@@ -105,17 +58,6 @@ class GuildInviteResponse {
   /// The approximate online member count of the guild
   @JsonKey(name: 'presence_count')
   final Int32Type presenceCount;
-  final bool _inviterPresent;
-  final bool _expiresAtPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$GuildInviteResponseToJson(this);
-    if (_inviterPresent) {
-      json.putIfAbsent('inviter', () => inviter);
-    }
-    if (_expiresAtPresent) {
-      json.putIfAbsent('expires_at', () => expiresAt);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$GuildInviteResponseToJson(this);
 }

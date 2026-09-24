@@ -12,7 +12,7 @@ MessageSnapshotResponse _$MessageSnapshotResponseFromJson(
   'MessageSnapshotResponse',
   json,
   ($checkedConvert) {
-    final val = MessageSnapshotResponse._(
+    final val = MessageSnapshotResponse(
       timestamp: $checkedConvert(
         'timestamp',
         (v) => DateTime.parse(v as String),

@@ -10,7 +10,6 @@ GuildCreateRequest _$GuildCreateRequestFromJson(Map<String, dynamic> json) =>
     $checkedCreate('GuildCreateRequest', json, ($checkedConvert) {
       final val = GuildCreateRequest._(
         name: $checkedConvert('name', (v) => v as String),
-        icon: $checkedConvert('icon', (v) => v as String?),
         emptyFeatures: $checkedConvert('empty_features', (v) => v as bool?),
         template: $checkedConvert(
           'template',
@@ -25,7 +24,6 @@ GuildCreateRequest _$GuildCreateRequestFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$GuildCreateRequestToJson(GuildCreateRequest instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'icon': ?instance.icon,
       'empty_features': ?instance.emptyFeatures,
       'template': ?instance.template,
     };

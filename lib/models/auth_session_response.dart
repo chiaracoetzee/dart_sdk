@@ -8,57 +8,18 @@ import 'auth_session_response_client_info.dart';
 
 part 'auth_session_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class AuthSessionResponse {
   const AuthSessionResponse({
     required this.idHash,
     required this.maskedIp,
     required this.current,
-  }) : clientInfo = null,
-       _clientInfoPresent = false,
-       approxLastUsedAt = null,
-       _approxLastUsedAtPresent = false;
-
-  const AuthSessionResponse._explicit({
-    required this.idHash,
-    required this.maskedIp,
-    required this.current,
-    Object? clientInfo = _omit,
-    Object? approxLastUsedAt = _omit,
-  }) : clientInfo = identical(clientInfo, _omit)
-           ? null
-           : clientInfo as AuthSessionResponseClientInfo?,
-       _clientInfoPresent = !identical(clientInfo, _omit),
-       approxLastUsedAt = identical(approxLastUsedAt, _omit)
-           ? null
-           : approxLastUsedAt as DateTime?,
-       _approxLastUsedAtPresent = !identical(approxLastUsedAt, _omit);
-
-  const AuthSessionResponse._({
-    required this.idHash,
-    required this.maskedIp,
-    required this.current,
     this.clientInfo,
     this.approxLastUsedAt,
-  }) : _clientInfoPresent = false,
-       _approxLastUsedAtPresent = false;
-  factory AuthSessionResponse.patch(Map<String, Object?> json) =>
-      AuthSessionResponse.fromJson(json);
+  });
 
-  factory AuthSessionResponse.fromJson(Map<String, Object?> json) {
-    final value = _$AuthSessionResponseFromJson(json);
-    return AuthSessionResponse._explicit(
-      idHash: value.idHash,
-      maskedIp: value.maskedIp,
-      current: value.current,
-      clientInfo: json.containsKey('client_info') ? value.clientInfo : _omit,
-      approxLastUsedAt: json.containsKey('approx_last_used_at')
-          ? value.approxLastUsedAt
-          : _omit,
-    );
-  }
+  factory AuthSessionResponse.fromJson(Map<String, Object?> json) =>
+      _$AuthSessionResponseFromJson(json);
 
   /// The base64url-encoded session id hash
   @JsonKey(name: 'id_hash')
@@ -78,17 +39,6 @@ class AuthSessionResponse {
 
   /// Whether this is the current session making the request
   final bool current;
-  final bool _clientInfoPresent;
-  final bool _approxLastUsedAtPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$AuthSessionResponseToJson(this);
-    if (_clientInfoPresent) {
-      json.putIfAbsent('client_info', () => clientInfo);
-    }
-    if (_approxLastUsedAtPresent) {
-      json.putIfAbsent('approx_last_used_at', () => approxLastUsedAt);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$AuthSessionResponseToJson(this);
 }

@@ -9,7 +9,7 @@ part of 'o_auth2_user_info_response.dart';
 OAuth2UserInfoResponse _$OAuth2UserInfoResponseFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('OAuth2UserInfoResponse', json, ($checkedConvert) {
-  final val = OAuth2UserInfoResponse._(
+  final val = OAuth2UserInfoResponse(
     sub: $checkedConvert('sub', (v) => v as String),
     id: $checkedConvert('id', (v) => v as String),
     username: $checkedConvert('username', (v) => v as String),

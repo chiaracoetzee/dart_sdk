@@ -15,70 +15,9 @@ import 'snowflake_type.dart';
 
 part 'webhook_message_request.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class WebhookMessageRequest {
   const WebhookMessageRequest({
-    this.flags = 0,
-    this.embeds,
-    this.nonce,
-    this.tts,
-    this.attachments,
-  }) : content = null,
-       _contentPresent = false,
-       messageReference = null,
-       _messageReferencePresent = false,
-       allowedMentions = null,
-       _allowedMentionsPresent = false,
-       favoriteMemeId = null,
-       _favoriteMemeIdPresent = false,
-       stickerIds = null,
-       _stickerIdsPresent = false,
-       username = null,
-       _usernamePresent = false,
-       avatarUrl = null,
-       _avatarUrlPresent = false;
-
-  const WebhookMessageRequest._explicit({
-    this.flags = 0,
-    Object? content = _omit,
-    this.embeds,
-    Object? messageReference = _omit,
-    Object? allowedMentions = _omit,
-    this.nonce,
-    Object? favoriteMemeId = _omit,
-    Object? stickerIds = _omit,
-    this.tts,
-    Object? username = _omit,
-    Object? avatarUrl = _omit,
-    this.attachments,
-  }) : content = identical(content, _omit)
-           ? null
-           : content as MessageContentRequest?,
-       _contentPresent = !identical(content, _omit),
-       messageReference = identical(messageReference, _omit)
-           ? null
-           : messageReference as MessageReferenceRequest?,
-       _messageReferencePresent = !identical(messageReference, _omit),
-       allowedMentions = identical(allowedMentions, _omit)
-           ? null
-           : allowedMentions as AllowedMentionsRequest?,
-       _allowedMentionsPresent = !identical(allowedMentions, _omit),
-       favoriteMemeId = identical(favoriteMemeId, _omit)
-           ? null
-           : favoriteMemeId as SnowflakeType?,
-       _favoriteMemeIdPresent = !identical(favoriteMemeId, _omit),
-       stickerIds = identical(stickerIds, _omit)
-           ? null
-           : stickerIds as List<SnowflakeType>?,
-       _stickerIdsPresent = !identical(stickerIds, _omit),
-       username = identical(username, _omit) ? null : username as String?,
-       _usernamePresent = !identical(username, _omit),
-       avatarUrl = identical(avatarUrl, _omit) ? null : avatarUrl as String?,
-       _avatarUrlPresent = !identical(avatarUrl, _omit);
-
-  const WebhookMessageRequest._({
     this.flags = 0,
     this.content,
     this.embeds,
@@ -91,39 +30,10 @@ class WebhookMessageRequest {
     this.username,
     this.avatarUrl,
     this.attachments,
-  }) : _contentPresent = false,
-       _messageReferencePresent = false,
-       _allowedMentionsPresent = false,
-       _favoriteMemeIdPresent = false,
-       _stickerIdsPresent = false,
-       _usernamePresent = false,
-       _avatarUrlPresent = false;
-  factory WebhookMessageRequest.patch(Map<String, Object?> json) =>
-      WebhookMessageRequest.fromJson(json);
+  });
 
-  factory WebhookMessageRequest.fromJson(Map<String, Object?> json) {
-    final value = _$WebhookMessageRequestFromJson(json);
-    return WebhookMessageRequest._explicit(
-      flags: value.flags,
-      content: json.containsKey('content') ? value.content : _omit,
-      embeds: value.embeds,
-      messageReference: json.containsKey('message_reference')
-          ? value.messageReference
-          : _omit,
-      allowedMentions: json.containsKey('allowed_mentions')
-          ? value.allowedMentions
-          : _omit,
-      nonce: value.nonce,
-      favoriteMemeId: json.containsKey('favorite_meme_id')
-          ? value.favoriteMemeId
-          : _omit,
-      stickerIds: json.containsKey('sticker_ids') ? value.stickerIds : _omit,
-      tts: value.tts,
-      username: json.containsKey('username') ? value.username : _omit,
-      avatarUrl: json.containsKey('avatar_url') ? value.avatarUrl : _omit,
-      attachments: value.attachments,
-    );
-  }
+  factory WebhookMessageRequest.fromJson(Map<String, Object?> json) =>
+      _$WebhookMessageRequestFromJson(json);
 
   @JsonKey(includeIfNull: false)
   final MessageContentRequest? content;
@@ -168,37 +78,6 @@ class WebhookMessageRequest {
   /// Array of attachments uploaded through the presigned upload endpoint
   @JsonKey(includeIfNull: false)
   final List<ClientUploadedAttachmentRequest>? attachments;
-  final bool _contentPresent;
-  final bool _messageReferencePresent;
-  final bool _allowedMentionsPresent;
-  final bool _favoriteMemeIdPresent;
-  final bool _stickerIdsPresent;
-  final bool _usernamePresent;
-  final bool _avatarUrlPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$WebhookMessageRequestToJson(this);
-    if (_contentPresent) {
-      json.putIfAbsent('content', () => content);
-    }
-    if (_messageReferencePresent) {
-      json.putIfAbsent('message_reference', () => messageReference);
-    }
-    if (_allowedMentionsPresent) {
-      json.putIfAbsent('allowed_mentions', () => allowedMentions);
-    }
-    if (_favoriteMemeIdPresent) {
-      json.putIfAbsent('favorite_meme_id', () => favoriteMemeId);
-    }
-    if (_stickerIdsPresent) {
-      json.putIfAbsent('sticker_ids', () => stickerIds);
-    }
-    if (_usernamePresent) {
-      json.putIfAbsent('username', () => username);
-    }
-    if (_avatarUrlPresent) {
-      json.putIfAbsent('avatar_url', () => avatarUrl);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$WebhookMessageRequestToJson(this);
 }

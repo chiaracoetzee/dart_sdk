@@ -12,7 +12,7 @@ UserProfileFullResponse _$UserProfileFullResponseFromJson(
   'UserProfileFullResponse',
   json,
   ($checkedConvert) {
-    final val = UserProfileFullResponse._(
+    final val = UserProfileFullResponse(
       user: $checkedConvert(
         'user',
         (v) => UserPartialResponse.fromJson(v as Map<String, dynamic>),

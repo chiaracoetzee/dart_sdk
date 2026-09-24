@@ -10,9 +10,7 @@ import 'git_hub_webhook_issue_user.dart';
 
 part 'git_hub_webhook_issue.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class GitHubWebhookIssue {
   const GitHubWebhookIssue({
     required this.id,
@@ -20,41 +18,11 @@ class GitHubWebhookIssue {
     required this.htmlUrl,
     required this.user,
     required this.title,
-  }) : body = null,
-       _bodyPresent = false;
-
-  const GitHubWebhookIssue._explicit({
-    required this.id,
-    required this.number,
-    required this.htmlUrl,
-    required this.user,
-    required this.title,
-    Object? body = _omit,
-  }) : body = identical(body, _omit) ? null : body as String?,
-       _bodyPresent = !identical(body, _omit);
-
-  const GitHubWebhookIssue._({
-    required this.id,
-    required this.number,
-    required this.htmlUrl,
-    required this.user,
-    required this.title,
     this.body,
-  }) : _bodyPresent = false;
-  factory GitHubWebhookIssue.patch(Map<String, Object?> json) =>
-      GitHubWebhookIssue.fromJson(json);
+  });
 
-  factory GitHubWebhookIssue.fromJson(Map<String, Object?> json) {
-    final value = _$GitHubWebhookIssueFromJson(json);
-    return GitHubWebhookIssue._explicit(
-      id: value.id,
-      number: value.number,
-      htmlUrl: value.htmlUrl,
-      user: value.user,
-      title: value.title,
-      body: json.containsKey('body') ? value.body : _omit,
-    );
-  }
+  factory GitHubWebhookIssue.fromJson(Map<String, Object?> json) =>
+      _$GitHubWebhookIssueFromJson(json);
 
   final Int64Type id;
   final Int32Type number;
@@ -64,13 +32,6 @@ class GitHubWebhookIssue {
   final String title;
   @JsonKey(includeIfNull: false)
   final String? body;
-  final bool _bodyPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$GitHubWebhookIssueToJson(this);
-    if (_bodyPresent) {
-      json.putIfAbsent('body', () => body);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$GitHubWebhookIssueToJson(this);
 }

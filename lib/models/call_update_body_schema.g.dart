@@ -10,7 +10,6 @@ CallUpdateBodySchema _$CallUpdateBodySchemaFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('CallUpdateBodySchema', json, ($checkedConvert) {
   final val = CallUpdateBodySchema._(
-    region: $checkedConvert('region', (v) => v as String?),
     latitude: $checkedConvert('latitude', (v) => v as String?),
     longitude: $checkedConvert('longitude', (v) => v as String?),
   );
@@ -20,7 +19,6 @@ CallUpdateBodySchema _$CallUpdateBodySchemaFromJson(
 Map<String, dynamic> _$CallUpdateBodySchemaToJson(
   CallUpdateBodySchema instance,
 ) => <String, dynamic>{
-  'region': ?instance.region,
   'latitude': ?instance.latitude,
   'longitude': ?instance.longitude,
 };

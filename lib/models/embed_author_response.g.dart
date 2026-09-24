@@ -11,7 +11,7 @@ EmbedAuthorResponse _$EmbedAuthorResponseFromJson(Map<String, dynamic> json) =>
       'EmbedAuthorResponse',
       json,
       ($checkedConvert) {
-        final val = EmbedAuthorResponse._(
+        final val = EmbedAuthorResponse(
           name: $checkedConvert('name', (v) => v as String),
           url: $checkedConvert('url', (v) => v as String?),
           iconUrl: $checkedConvert('icon_url', (v) => v as String?),

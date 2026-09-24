@@ -9,7 +9,7 @@ part of 'handoff_info_response_client_info.dart';
 HandoffInfoResponseClientInfo _$HandoffInfoResponseClientInfoFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('HandoffInfoResponseClientInfo', json, ($checkedConvert) {
-  final val = HandoffInfoResponseClientInfo._(
+  final val = HandoffInfoResponseClientInfo(
     device: $checkedConvert(
       'device',
       (v) => HandoffInfoResponseClientInfoDeviceDevice.fromJson(v as String),

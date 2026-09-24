@@ -12,9 +12,6 @@ BotProfileUpdateRequest _$BotProfileUpdateRequestFromJson(
   final val = BotProfileUpdateRequest._(
     username: $checkedConvert('username', (v) => v as String?),
     discriminator: $checkedConvert('discriminator', (v) => v as String?),
-    avatar: $checkedConvert('avatar', (v) => v as String?),
-    banner: $checkedConvert('banner', (v) => v as String?),
-    bio: $checkedConvert('bio', (v) => v as String?),
     botFlags: $checkedConvert('bot_flags', (v) => (v as num?)?.toInt()),
   );
   return val;
@@ -25,8 +22,5 @@ Map<String, dynamic> _$BotProfileUpdateRequestToJson(
 ) => <String, dynamic>{
   'username': ?instance.username,
   'discriminator': ?instance.discriminator,
-  'avatar': ?instance.avatar,
-  'banner': ?instance.banner,
-  'bio': ?instance.bio,
   'bot_flags': ?instance.botFlags,
 };

@@ -4,38 +4,44 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-part 'user_note_update_request.g.dart';
+import 'json_nullable.dart';
 
-const Object _omit = Object();
+part 'user_note_update_request.g.dart';
 
 @JsonSerializable(constructor: '_')
 class UserNoteUpdateRequest {
-  const UserNoteUpdateRequest() : note = null, _notePresent = false;
+  UserNoteUpdateRequest({
+    JsonNullable<String> note = const JsonNullable<String>.undefined(),
+  }) : note = note,
+       _noteValue = note.value,
+       _notePresent = note.isPresent;
 
-  const UserNoteUpdateRequest._explicit({Object? note = _omit})
-    : note = identical(note, _omit) ? null : note as String?,
-      _notePresent = !identical(note, _omit);
-
-  const UserNoteUpdateRequest._({this.note}) : _notePresent = false;
+  const UserNoteUpdateRequest._()
+    : _noteValue = null,
+      note = const JsonNullable<String>.undefined(),
+      _notePresent = false;
   factory UserNoteUpdateRequest.patch(Map<String, Object?> json) =>
       UserNoteUpdateRequest.fromJson(json);
 
   factory UserNoteUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$UserNoteUpdateRequestFromJson(json);
-    return UserNoteUpdateRequest._explicit(
-      note: json.containsKey('note') ? value.note : _omit,
+    return UserNoteUpdateRequest(
+      note: json.containsKey('note')
+          ? JsonNullable<String>.of(value._noteValue)
+          : const JsonNullable<String>.undefined(),
     );
   }
 
-  /// The note text (max 256 characters)
-  @JsonKey(includeIfNull: false)
-  final String? note;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> note;
+  @JsonKey(includeIfNull: false, name: 'note')
+  final String? _noteValue;
   final bool _notePresent;
 
   Map<String, Object?> toJson() {
     final json = _$UserNoteUpdateRequestToJson(this);
     if (_notePresent) {
-      json.putIfAbsent('note', () => note);
+      json.putIfAbsent('note', () => _noteValue);
     }
     return json;
   }

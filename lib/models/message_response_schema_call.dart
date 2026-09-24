@@ -6,38 +6,15 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'message_response_schema_call.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class MessageResponseSchemaCall {
-  const MessageResponseSchemaCall({required this.participants})
-    : endedTimestamp = null,
-      _endedTimestampPresent = false;
-
-  const MessageResponseSchemaCall._explicit({
-    required this.participants,
-    Object? endedTimestamp = _omit,
-  }) : endedTimestamp = identical(endedTimestamp, _omit)
-           ? null
-           : endedTimestamp as DateTime?,
-       _endedTimestampPresent = !identical(endedTimestamp, _omit);
-
-  const MessageResponseSchemaCall._({
+  const MessageResponseSchemaCall({
     required this.participants,
     this.endedTimestamp,
-  }) : _endedTimestampPresent = false;
-  factory MessageResponseSchemaCall.patch(Map<String, Object?> json) =>
-      MessageResponseSchemaCall.fromJson(json);
+  });
 
-  factory MessageResponseSchemaCall.fromJson(Map<String, Object?> json) {
-    final value = _$MessageResponseSchemaCallFromJson(json);
-    return MessageResponseSchemaCall._explicit(
-      participants: value.participants,
-      endedTimestamp: json.containsKey('ended_timestamp')
-          ? value.endedTimestamp
-          : _omit,
-    );
-  }
+  factory MessageResponseSchemaCall.fromJson(Map<String, Object?> json) =>
+      _$MessageResponseSchemaCallFromJson(json);
 
   /// The user IDs of participants in the call
   final List<String> participants;
@@ -45,13 +22,6 @@ class MessageResponseSchemaCall {
   /// The ISO 8601 timestamp of when the call ended
   @JsonKey(includeIfNull: false, name: 'ended_timestamp')
   final DateTime? endedTimestamp;
-  final bool _endedTimestampPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$MessageResponseSchemaCallToJson(this);
-    if (_endedTimestampPresent) {
-      json.putIfAbsent('ended_timestamp', () => endedTimestamp);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$MessageResponseSchemaCallToJson(this);
 }

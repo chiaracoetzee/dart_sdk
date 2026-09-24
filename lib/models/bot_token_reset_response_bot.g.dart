@@ -12,7 +12,7 @@ BotTokenResetResponseBot _$BotTokenResetResponseBotFromJson(
   'BotTokenResetResponseBot',
   json,
   ($checkedConvert) {
-    final val = BotTokenResetResponseBot._(
+    final val = BotTokenResetResponseBot(
       id: $checkedConvert('id', (v) => v as String),
       username: $checkedConvert('username', (v) => v as String),
       discriminator: $checkedConvert('discriminator', (v) => v as String),

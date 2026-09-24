@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'json_nullable.dart';
+
 import 'base64_image_type.dart';
 import 'bot_flags.dart';
 import 'discriminator_type.dart';
@@ -11,56 +13,57 @@ import 'username_type.dart';
 
 part 'bot_profile_update_request.g.dart';
 
-const Object _omit = Object();
-
 @JsonSerializable(constructor: '_')
 class BotProfileUpdateRequest {
-  const BotProfileUpdateRequest({
+  BotProfileUpdateRequest({
     this.username,
     this.discriminator,
     this.botFlags,
-  }) : avatar = null,
-       _avatarPresent = false,
-       banner = null,
-       _bannerPresent = false,
-       bio = null,
-       _bioPresent = false;
-
-  const BotProfileUpdateRequest._explicit({
-    this.username,
-    this.discriminator,
-    Object? avatar = _omit,
-    Object? banner = _omit,
-    Object? bio = _omit,
-    this.botFlags,
-  }) : avatar = identical(avatar, _omit) ? null : avatar as Base64ImageType?,
-       _avatarPresent = !identical(avatar, _omit),
-       banner = identical(banner, _omit) ? null : banner as Base64ImageType?,
-       _bannerPresent = !identical(banner, _omit),
-       bio = identical(bio, _omit) ? null : bio as String?,
-       _bioPresent = !identical(bio, _omit);
+    JsonNullable<Base64ImageType> avatar =
+        const JsonNullable<Base64ImageType>.undefined(),
+    JsonNullable<Base64ImageType> banner =
+        const JsonNullable<Base64ImageType>.undefined(),
+    JsonNullable<String> bio = const JsonNullable<String>.undefined(),
+  }) : avatar = avatar,
+       _avatarValue = avatar.value,
+       _avatarPresent = avatar.isPresent,
+       banner = banner,
+       _bannerValue = banner.value,
+       _bannerPresent = banner.isPresent,
+       bio = bio,
+       _bioValue = bio.value,
+       _bioPresent = bio.isPresent;
 
   const BotProfileUpdateRequest._({
     this.username,
     this.discriminator,
-    this.avatar,
-    this.banner,
-    this.bio,
     this.botFlags,
-  }) : _avatarPresent = false,
+  }) : _avatarValue = null,
+       _bannerValue = null,
+       _bioValue = null,
+       avatar = const JsonNullable<Base64ImageType>.undefined(),
+       _avatarPresent = false,
+       banner = const JsonNullable<Base64ImageType>.undefined(),
        _bannerPresent = false,
+       bio = const JsonNullable<String>.undefined(),
        _bioPresent = false;
   factory BotProfileUpdateRequest.patch(Map<String, Object?> json) =>
       BotProfileUpdateRequest.fromJson(json);
 
   factory BotProfileUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$BotProfileUpdateRequestFromJson(json);
-    return BotProfileUpdateRequest._explicit(
+    return BotProfileUpdateRequest(
       username: value.username,
       discriminator: value.discriminator,
-      avatar: json.containsKey('avatar') ? value.avatar : _omit,
-      banner: json.containsKey('banner') ? value.banner : _omit,
-      bio: json.containsKey('bio') ? value.bio : _omit,
+      avatar: json.containsKey('avatar')
+          ? JsonNullable<Base64ImageType>.of(value._avatarValue)
+          : const JsonNullable<Base64ImageType>.undefined(),
+      banner: json.containsKey('banner')
+          ? JsonNullable<Base64ImageType>.of(value._bannerValue)
+          : const JsonNullable<Base64ImageType>.undefined(),
+      bio: json.containsKey('bio')
+          ? JsonNullable<String>.of(value._bioValue)
+          : const JsonNullable<String>.undefined(),
       botFlags: value.botFlags,
     );
   }
@@ -72,34 +75,34 @@ class BotProfileUpdateRequest {
   /// The discriminator of the bot
   @JsonKey(includeIfNull: false)
   final DiscriminatorType? discriminator;
-
-  /// The avatar image as base64
-  @JsonKey(includeIfNull: false)
-  final Base64ImageType? avatar;
-
-  /// The banner image as base64
-  @JsonKey(includeIfNull: false)
-  final Base64ImageType? banner;
-
-  /// The bio or description of the bot
-  @JsonKey(includeIfNull: false)
-  final String? bio;
   @JsonKey(includeIfNull: false, name: 'bot_flags')
   final BotFlags? botFlags;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<Base64ImageType> avatar;
+  @JsonKey(includeIfNull: false, name: 'avatar')
+  final Base64ImageType? _avatarValue;
   final bool _avatarPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<Base64ImageType> banner;
+  @JsonKey(includeIfNull: false, name: 'banner')
+  final Base64ImageType? _bannerValue;
   final bool _bannerPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> bio;
+  @JsonKey(includeIfNull: false, name: 'bio')
+  final String? _bioValue;
   final bool _bioPresent;
 
   Map<String, Object?> toJson() {
     final json = _$BotProfileUpdateRequestToJson(this);
     if (_avatarPresent) {
-      json.putIfAbsent('avatar', () => avatar);
+      json.putIfAbsent('avatar', () => _avatarValue);
     }
     if (_bannerPresent) {
-      json.putIfAbsent('banner', () => banner);
+      json.putIfAbsent('banner', () => _bannerValue);
     }
     if (_bioPresent) {
-      json.putIfAbsent('bio', () => bio);
+      json.putIfAbsent('bio', () => _bioValue);
     }
     return json;
   }

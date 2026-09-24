@@ -10,9 +10,7 @@ import 'snowflake_string_type.dart';
 
 part 'guild_role_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class GuildRoleResponse {
   const GuildRoleResponse({
     required this.id,
@@ -22,63 +20,12 @@ class GuildRoleResponse {
     required this.permissions,
     required this.hoist,
     required this.mentionable,
-  }) : hoistPosition = null,
-       _hoistPositionPresent = false,
-       unicodeEmoji = null,
-       _unicodeEmojiPresent = false;
-
-  const GuildRoleResponse._explicit({
-    required this.id,
-    required this.name,
-    required this.color,
-    required this.position,
-    required this.permissions,
-    required this.hoist,
-    required this.mentionable,
-    Object? hoistPosition = _omit,
-    Object? unicodeEmoji = _omit,
-  }) : hoistPosition = identical(hoistPosition, _omit)
-           ? null
-           : hoistPosition as Int32Type?,
-       _hoistPositionPresent = !identical(hoistPosition, _omit),
-       unicodeEmoji = identical(unicodeEmoji, _omit)
-           ? null
-           : unicodeEmoji as String?,
-       _unicodeEmojiPresent = !identical(unicodeEmoji, _omit);
-
-  const GuildRoleResponse._({
-    required this.id,
-    required this.name,
-    required this.color,
-    required this.position,
-    required this.permissions,
-    required this.hoist,
-    required this.mentionable,
     this.hoistPosition,
     this.unicodeEmoji,
-  }) : _hoistPositionPresent = false,
-       _unicodeEmojiPresent = false;
-  factory GuildRoleResponse.patch(Map<String, Object?> json) =>
-      GuildRoleResponse.fromJson(json);
+  });
 
-  factory GuildRoleResponse.fromJson(Map<String, Object?> json) {
-    final value = _$GuildRoleResponseFromJson(json);
-    return GuildRoleResponse._explicit(
-      id: value.id,
-      name: value.name,
-      color: value.color,
-      position: value.position,
-      permissions: value.permissions,
-      hoist: value.hoist,
-      mentionable: value.mentionable,
-      hoistPosition: json.containsKey('hoist_position')
-          ? value.hoistPosition
-          : _omit,
-      unicodeEmoji: json.containsKey('unicode_emoji')
-          ? value.unicodeEmoji
-          : _omit,
-    );
-  }
+  factory GuildRoleResponse.fromJson(Map<String, Object?> json) =>
+      _$GuildRoleResponseFromJson(json);
 
   /// The unique identifier for this role
   final SnowflakeStringType id;
@@ -108,17 +55,6 @@ class GuildRoleResponse {
   /// The unicode emoji for this role
   @JsonKey(includeIfNull: false, name: 'unicode_emoji')
   final String? unicodeEmoji;
-  final bool _hoistPositionPresent;
-  final bool _unicodeEmojiPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$GuildRoleResponseToJson(this);
-    if (_hoistPositionPresent) {
-      json.putIfAbsent('hoist_position', () => hoistPosition);
-    }
-    if (_unicodeEmojiPresent) {
-      json.putIfAbsent('unicode_emoji', () => unicodeEmoji);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$GuildRoleResponseToJson(this);
 }

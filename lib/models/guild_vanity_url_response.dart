@@ -8,32 +8,12 @@ import 'int32_type.dart';
 
 part 'guild_vanity_url_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class GuildVanityUrlResponse {
-  const GuildVanityUrlResponse({required this.uses})
-    : code = null,
-      _codePresent = false;
+  const GuildVanityUrlResponse({required this.uses, this.code});
 
-  const GuildVanityUrlResponse._explicit({
-    required this.uses,
-    Object? code = _omit,
-  }) : code = identical(code, _omit) ? null : code as String?,
-       _codePresent = !identical(code, _omit);
-
-  const GuildVanityUrlResponse._({required this.uses, this.code})
-    : _codePresent = false;
-  factory GuildVanityUrlResponse.patch(Map<String, Object?> json) =>
-      GuildVanityUrlResponse.fromJson(json);
-
-  factory GuildVanityUrlResponse.fromJson(Map<String, Object?> json) {
-    final value = _$GuildVanityUrlResponseFromJson(json);
-    return GuildVanityUrlResponse._explicit(
-      uses: value.uses,
-      code: json.containsKey('code') ? value.code : _omit,
-    );
-  }
+  factory GuildVanityUrlResponse.fromJson(Map<String, Object?> json) =>
+      _$GuildVanityUrlResponseFromJson(json);
 
   /// The vanity URL code for the guild
   @JsonKey(includeIfNull: false)
@@ -41,13 +21,6 @@ class GuildVanityUrlResponse {
 
   /// The number of times this vanity URL has been used
   final Int32Type uses;
-  final bool _codePresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$GuildVanityUrlResponseToJson(this);
-    if (_codePresent) {
-      json.putIfAbsent('code', () => code);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$GuildVanityUrlResponseToJson(this);
 }

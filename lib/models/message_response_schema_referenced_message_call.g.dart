@@ -12,7 +12,7 @@ _$MessageResponseSchemaReferencedMessageCallFromJson(
 ) => $checkedCreate('MessageResponseSchemaReferencedMessageCall', json, (
   $checkedConvert,
 ) {
-  final val = MessageResponseSchemaReferencedMessageCall._(
+  final val = MessageResponseSchemaReferencedMessageCall(
     participants: $checkedConvert(
       'participants',
       (v) => (v as List<dynamic>).map((e) => e as String).toList(),

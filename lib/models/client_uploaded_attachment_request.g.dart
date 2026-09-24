@@ -12,7 +12,7 @@ ClientUploadedAttachmentRequest _$ClientUploadedAttachmentRequestFromJson(
   'ClientUploadedAttachmentRequest',
   json,
   ($checkedConvert) {
-    final val = ClientUploadedAttachmentRequest._(
+    final val = ClientUploadedAttachmentRequest(
       id: $checkedConvert('id', (v) => (v as num).toInt()),
       filename: $checkedConvert('filename', (v) => v as String),
       contentType: $checkedConvert('content_type', (v) => v as String),

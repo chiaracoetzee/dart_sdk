@@ -12,7 +12,7 @@ GitHubWebhookDiscussion _$GitHubWebhookDiscussionFromJson(
   'GitHubWebhookDiscussion',
   json,
   ($checkedConvert) {
-    final val = GitHubWebhookDiscussion._(
+    final val = GitHubWebhookDiscussion(
       title: $checkedConvert('title', (v) => v as String),
       number: $checkedConvert('number', (v) => (v as num).toInt()),
       htmlUrl: $checkedConvert('html_url', (v) => v as String),

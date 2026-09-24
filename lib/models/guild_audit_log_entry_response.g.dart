@@ -12,7 +12,7 @@ GuildAuditLogEntryResponse _$GuildAuditLogEntryResponseFromJson(
   'GuildAuditLogEntryResponse',
   json,
   ($checkedConvert) {
-    final val = GuildAuditLogEntryResponse._(
+    final val = GuildAuditLogEntryResponse(
       id: $checkedConvert('id', (v) => v as String),
       actionType: $checkedConvert(
         'action_type',

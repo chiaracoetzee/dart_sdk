@@ -8,51 +8,19 @@ import 'int32_type.dart';
 
 part 'user_profile_full_response_user_profile.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class UserProfileFullResponseUserProfile {
   const UserProfileFullResponseUserProfile({
     required this.bio,
     required this.pronouns,
     required this.banner,
     required this.accentColor,
-  }) : bannerColor = null,
-       _bannerColorPresent = false;
-
-  const UserProfileFullResponseUserProfile._explicit({
-    required this.bio,
-    required this.pronouns,
-    required this.banner,
-    required this.accentColor,
-    Object? bannerColor = _omit,
-  }) : bannerColor = identical(bannerColor, _omit)
-           ? null
-           : bannerColor as Int32Type?,
-       _bannerColorPresent = !identical(bannerColor, _omit);
-
-  const UserProfileFullResponseUserProfile._({
-    required this.bio,
-    required this.pronouns,
-    required this.banner,
-    required this.accentColor,
     this.bannerColor,
-  }) : _bannerColorPresent = false;
-  factory UserProfileFullResponseUserProfile.patch(Map<String, Object?> json) =>
-      UserProfileFullResponseUserProfile.fromJson(json);
+  });
 
   factory UserProfileFullResponseUserProfile.fromJson(
     Map<String, Object?> json,
-  ) {
-    final value = _$UserProfileFullResponseUserProfileFromJson(json);
-    return UserProfileFullResponseUserProfile._explicit(
-      bio: value.bio,
-      pronouns: value.pronouns,
-      banner: value.banner,
-      accentColor: value.accentColor,
-      bannerColor: json.containsKey('banner_color') ? value.bannerColor : _omit,
-    );
-  }
+  ) => _$UserProfileFullResponseUserProfileFromJson(json);
 
   /// User biography text
   @JsonKey(includeIfNull: true)
@@ -73,13 +41,7 @@ class UserProfileFullResponseUserProfile {
   /// User-selected accent color
   @JsonKey(includeIfNull: true, name: 'accent_color')
   final Int32Type? accentColor;
-  final bool _bannerColorPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$UserProfileFullResponseUserProfileToJson(this);
-    if (_bannerColorPresent) {
-      json.putIfAbsent('banner_color', () => bannerColor);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() =>
+      _$UserProfileFullResponseUserProfileToJson(this);
 }

@@ -4,57 +4,53 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-part 'guild_sticker_update_request.g.dart';
+import 'json_nullable.dart';
 
-const Object _omit = Object();
+part 'guild_sticker_update_request.g.dart';
 
 @JsonSerializable(constructor: '_')
 class GuildStickerUpdateRequest {
-  const GuildStickerUpdateRequest({required this.name, this.tags = const []})
-    : description = null,
+  GuildStickerUpdateRequest({
+    required this.name,
+    this.tags = const [],
+    JsonNullable<String> description = const JsonNullable<String>.undefined(),
+  }) : description = description,
+       _descriptionValue = description.value,
+       _descriptionPresent = description.isPresent;
+
+  const GuildStickerUpdateRequest._({required this.name, this.tags = const []})
+    : _descriptionValue = null,
+      description = const JsonNullable<String>.undefined(),
       _descriptionPresent = false;
-
-  const GuildStickerUpdateRequest._explicit({
-    required this.name,
-    this.tags = const [],
-    Object? description = _omit,
-  }) : description = identical(description, _omit)
-           ? null
-           : description as String?,
-       _descriptionPresent = !identical(description, _omit);
-
-  const GuildStickerUpdateRequest._({
-    required this.name,
-    this.tags = const [],
-    this.description,
-  }) : _descriptionPresent = false;
   factory GuildStickerUpdateRequest.patch(Map<String, Object?> json) =>
       GuildStickerUpdateRequest.fromJson(json);
 
   factory GuildStickerUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildStickerUpdateRequestFromJson(json);
-    return GuildStickerUpdateRequest._explicit(
+    return GuildStickerUpdateRequest(
       name: value.name,
       tags: value.tags,
-      description: json.containsKey('description') ? value.description : _omit,
+      description: json.containsKey('description')
+          ? JsonNullable<String>.of(value._descriptionValue)
+          : const JsonNullable<String>.undefined(),
     );
   }
 
   /// The name of the sticker (2-30 characters)
   final String name;
 
-  /// Description of the sticker (1-500 characters)
-  @JsonKey(includeIfNull: false)
-  final String? description;
-
   /// Array of autocomplete/suggestion tags (max 10 tags, each 1-30 characters)
   final List<String> tags;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> description;
+  @JsonKey(includeIfNull: false, name: 'description')
+  final String? _descriptionValue;
   final bool _descriptionPresent;
 
   Map<String, Object?> toJson() {
     final json = _$GuildStickerUpdateRequestToJson(this);
     if (_descriptionPresent) {
-      json.putIfAbsent('description', () => description);
+      json.putIfAbsent('description', () => _descriptionValue);
     }
     return json;
   }

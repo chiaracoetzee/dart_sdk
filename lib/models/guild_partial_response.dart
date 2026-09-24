@@ -11,87 +11,9 @@ import 'snowflake_string_type.dart';
 
 part 'guild_partial_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class GuildPartialResponse {
   const GuildPartialResponse({
-    required this.id,
-    required this.name,
-    required this.splashCardAlignment,
-    required this.features,
-  }) : icon = null,
-       _iconPresent = false,
-       banner = null,
-       _bannerPresent = false,
-       bannerWidth = null,
-       _bannerWidthPresent = false,
-       bannerHeight = null,
-       _bannerHeightPresent = false,
-       splash = null,
-       _splashPresent = false,
-       splashWidth = null,
-       _splashWidthPresent = false,
-       splashHeight = null,
-       _splashHeightPresent = false,
-       embedSplash = null,
-       _embedSplashPresent = false,
-       embedSplashWidth = null,
-       _embedSplashWidthPresent = false,
-       embedSplashHeight = null,
-       _embedSplashHeightPresent = false;
-
-  const GuildPartialResponse._explicit({
-    required this.id,
-    required this.name,
-    required this.splashCardAlignment,
-    required this.features,
-    Object? icon = _omit,
-    Object? banner = _omit,
-    Object? bannerWidth = _omit,
-    Object? bannerHeight = _omit,
-    Object? splash = _omit,
-    Object? splashWidth = _omit,
-    Object? splashHeight = _omit,
-    Object? embedSplash = _omit,
-    Object? embedSplashWidth = _omit,
-    Object? embedSplashHeight = _omit,
-  }) : icon = identical(icon, _omit) ? null : icon as String?,
-       _iconPresent = !identical(icon, _omit),
-       banner = identical(banner, _omit) ? null : banner as String?,
-       _bannerPresent = !identical(banner, _omit),
-       bannerWidth = identical(bannerWidth, _omit)
-           ? null
-           : bannerWidth as Int32Type?,
-       _bannerWidthPresent = !identical(bannerWidth, _omit),
-       bannerHeight = identical(bannerHeight, _omit)
-           ? null
-           : bannerHeight as Int32Type?,
-       _bannerHeightPresent = !identical(bannerHeight, _omit),
-       splash = identical(splash, _omit) ? null : splash as String?,
-       _splashPresent = !identical(splash, _omit),
-       splashWidth = identical(splashWidth, _omit)
-           ? null
-           : splashWidth as Int32Type?,
-       _splashWidthPresent = !identical(splashWidth, _omit),
-       splashHeight = identical(splashHeight, _omit)
-           ? null
-           : splashHeight as Int32Type?,
-       _splashHeightPresent = !identical(splashHeight, _omit),
-       embedSplash = identical(embedSplash, _omit)
-           ? null
-           : embedSplash as String?,
-       _embedSplashPresent = !identical(embedSplash, _omit),
-       embedSplashWidth = identical(embedSplashWidth, _omit)
-           ? null
-           : embedSplashWidth as Int32Type?,
-       _embedSplashWidthPresent = !identical(embedSplashWidth, _omit),
-       embedSplashHeight = identical(embedSplashHeight, _omit)
-           ? null
-           : embedSplashHeight as Int32Type?,
-       _embedSplashHeightPresent = !identical(embedSplashHeight, _omit);
-
-  const GuildPartialResponse._({
     required this.id,
     required this.name,
     required this.splashCardAlignment,
@@ -106,46 +28,10 @@ class GuildPartialResponse {
     this.embedSplash,
     this.embedSplashWidth,
     this.embedSplashHeight,
-  }) : _iconPresent = false,
-       _bannerPresent = false,
-       _bannerWidthPresent = false,
-       _bannerHeightPresent = false,
-       _splashPresent = false,
-       _splashWidthPresent = false,
-       _splashHeightPresent = false,
-       _embedSplashPresent = false,
-       _embedSplashWidthPresent = false,
-       _embedSplashHeightPresent = false;
-  factory GuildPartialResponse.patch(Map<String, Object?> json) =>
-      GuildPartialResponse.fromJson(json);
+  });
 
-  factory GuildPartialResponse.fromJson(Map<String, Object?> json) {
-    final value = _$GuildPartialResponseFromJson(json);
-    return GuildPartialResponse._explicit(
-      id: value.id,
-      name: value.name,
-      splashCardAlignment: value.splashCardAlignment,
-      features: value.features,
-      icon: json.containsKey('icon') ? value.icon : _omit,
-      banner: json.containsKey('banner') ? value.banner : _omit,
-      bannerWidth: json.containsKey('banner_width') ? value.bannerWidth : _omit,
-      bannerHeight: json.containsKey('banner_height')
-          ? value.bannerHeight
-          : _omit,
-      splash: json.containsKey('splash') ? value.splash : _omit,
-      splashWidth: json.containsKey('splash_width') ? value.splashWidth : _omit,
-      splashHeight: json.containsKey('splash_height')
-          ? value.splashHeight
-          : _omit,
-      embedSplash: json.containsKey('embed_splash') ? value.embedSplash : _omit,
-      embedSplashWidth: json.containsKey('embed_splash_width')
-          ? value.embedSplashWidth
-          : _omit,
-      embedSplashHeight: json.containsKey('embed_splash_height')
-          ? value.embedSplashHeight
-          : _omit,
-    );
-  }
+  factory GuildPartialResponse.fromJson(Map<String, Object?> json) =>
+      _$GuildPartialResponseFromJson(json);
 
   /// The unique identifier for this guild
   final SnowflakeStringType id;
@@ -200,49 +86,6 @@ class GuildPartialResponse {
 
   /// Array of guild feature flags
   final List<GuildFeatureSchema> features;
-  final bool _iconPresent;
-  final bool _bannerPresent;
-  final bool _bannerWidthPresent;
-  final bool _bannerHeightPresent;
-  final bool _splashPresent;
-  final bool _splashWidthPresent;
-  final bool _splashHeightPresent;
-  final bool _embedSplashPresent;
-  final bool _embedSplashWidthPresent;
-  final bool _embedSplashHeightPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$GuildPartialResponseToJson(this);
-    if (_iconPresent) {
-      json.putIfAbsent('icon', () => icon);
-    }
-    if (_bannerPresent) {
-      json.putIfAbsent('banner', () => banner);
-    }
-    if (_bannerWidthPresent) {
-      json.putIfAbsent('banner_width', () => bannerWidth);
-    }
-    if (_bannerHeightPresent) {
-      json.putIfAbsent('banner_height', () => bannerHeight);
-    }
-    if (_splashPresent) {
-      json.putIfAbsent('splash', () => splash);
-    }
-    if (_splashWidthPresent) {
-      json.putIfAbsent('splash_width', () => splashWidth);
-    }
-    if (_splashHeightPresent) {
-      json.putIfAbsent('splash_height', () => splashHeight);
-    }
-    if (_embedSplashPresent) {
-      json.putIfAbsent('embed_splash', () => embedSplash);
-    }
-    if (_embedSplashWidthPresent) {
-      json.putIfAbsent('embed_splash_width', () => embedSplashWidth);
-    }
-    if (_embedSplashHeightPresent) {
-      json.putIfAbsent('embed_splash_height', () => embedSplashHeight);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$GuildPartialResponseToJson(this);
 }

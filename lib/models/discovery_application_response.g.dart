@@ -12,7 +12,7 @@ DiscoveryApplicationResponse _$DiscoveryApplicationResponseFromJson(
   'DiscoveryApplicationResponse',
   json,
   ($checkedConvert) {
-    final val = DiscoveryApplicationResponse._(
+    final val = DiscoveryApplicationResponse(
       guildId: $checkedConvert('guild_id', (v) => v as String),
       status: $checkedConvert('status', (v) => v as String),
       description: $checkedConvert('description', (v) => v as String),

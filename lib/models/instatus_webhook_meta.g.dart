@@ -8,7 +8,7 @@ part of 'instatus_webhook_meta.dart';
 
 InstatusWebhookMeta _$InstatusWebhookMetaFromJson(Map<String, dynamic> json) =>
     $checkedCreate('InstatusWebhookMeta', json, ($checkedConvert) {
-      final val = InstatusWebhookMeta._(
+      final val = InstatusWebhookMeta(
         unsubscribe: $checkedConvert('unsubscribe', (v) => v as String?),
         documentation: $checkedConvert('documentation', (v) => v as String?),
       );

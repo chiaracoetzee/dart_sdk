@@ -9,52 +9,17 @@ import 'user_partial_response.dart';
 
 part 'ip_authorization_poll_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class IpAuthorizationPollResponse {
-  const IpAuthorizationPollResponse({required this.completed})
-    : token = null,
-      _tokenPresent = false,
-      userId = null,
-      _userIdPresent = false,
-      user = null,
-      _userPresent = false;
-
-  const IpAuthorizationPollResponse._explicit({
-    required this.completed,
-    Object? token = _omit,
-    Object? userId = _omit,
-    Object? user = _omit,
-  }) : token = identical(token, _omit) ? null : token as String?,
-       _tokenPresent = !identical(token, _omit),
-       userId = identical(userId, _omit)
-           ? null
-           : userId as SnowflakeStringType?,
-       _userIdPresent = !identical(userId, _omit),
-       user = identical(user, _omit) ? null : user as UserPartialResponse?,
-       _userPresent = !identical(user, _omit);
-
-  const IpAuthorizationPollResponse._({
+  const IpAuthorizationPollResponse({
     required this.completed,
     this.token,
     this.userId,
     this.user,
-  }) : _tokenPresent = false,
-       _userIdPresent = false,
-       _userPresent = false;
-  factory IpAuthorizationPollResponse.patch(Map<String, Object?> json) =>
-      IpAuthorizationPollResponse.fromJson(json);
+  });
 
-  factory IpAuthorizationPollResponse.fromJson(Map<String, Object?> json) {
-    final value = _$IpAuthorizationPollResponseFromJson(json);
-    return IpAuthorizationPollResponse._explicit(
-      completed: value.completed,
-      token: json.containsKey('token') ? value.token : _omit,
-      userId: json.containsKey('user_id') ? value.userId : _omit,
-      user: json.containsKey('user') ? value.user : _omit,
-    );
-  }
+  factory IpAuthorizationPollResponse.fromJson(Map<String, Object?> json) =>
+      _$IpAuthorizationPollResponseFromJson(json);
 
   /// Whether the IP authorization has been completed
   final bool completed;
@@ -70,21 +35,6 @@ class IpAuthorizationPollResponse {
   /// Partial user data if authorization is complete
   @JsonKey(includeIfNull: false)
   final UserPartialResponse? user;
-  final bool _tokenPresent;
-  final bool _userIdPresent;
-  final bool _userPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$IpAuthorizationPollResponseToJson(this);
-    if (_tokenPresent) {
-      json.putIfAbsent('token', () => token);
-    }
-    if (_userIdPresent) {
-      json.putIfAbsent('user_id', () => userId);
-    }
-    if (_userPresent) {
-      json.putIfAbsent('user', () => user);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$IpAuthorizationPollResponseToJson(this);
 }

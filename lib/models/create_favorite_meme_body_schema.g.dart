@@ -8,36 +8,18 @@ part of 'create_favorite_meme_body_schema.dart';
 
 CreateFavoriteMemeBodySchema _$CreateFavoriteMemeBodySchemaFromJson(
   Map<String, dynamic> json,
-) => $checkedCreate(
-  'CreateFavoriteMemeBodySchema',
-  json,
-  ($checkedConvert) {
-    final val = CreateFavoriteMemeBodySchema._(
-      name: $checkedConvert('name', (v) => v as String),
-      tags: $checkedConvert(
-        'tags',
-        (v) =>
-            (v as List<dynamic>?)?.map((e) => e as String).toList() ?? const [],
-      ),
-      altText: $checkedConvert('alt_text', (v) => v as String?),
-      attachmentId: $checkedConvert('attachment_id', (v) => v as String?),
-      embedIndex: $checkedConvert('embed_index', (v) => (v as num?)?.toInt()),
-    );
-    return val;
-  },
-  fieldKeyMap: const {
-    'altText': 'alt_text',
-    'attachmentId': 'attachment_id',
-    'embedIndex': 'embed_index',
-  },
-);
+) => $checkedCreate('CreateFavoriteMemeBodySchema', json, ($checkedConvert) {
+  final val = CreateFavoriteMemeBodySchema._(
+    name: $checkedConvert('name', (v) => v as String),
+    tags: $checkedConvert(
+      'tags',
+      (v) =>
+          (v as List<dynamic>?)?.map((e) => e as String).toList() ?? const [],
+    ),
+  );
+  return val;
+});
 
 Map<String, dynamic> _$CreateFavoriteMemeBodySchemaToJson(
   CreateFavoriteMemeBodySchema instance,
-) => <String, dynamic>{
-  'name': instance.name,
-  'alt_text': ?instance.altText,
-  'tags': instance.tags,
-  'attachment_id': ?instance.attachmentId,
-  'embed_index': ?instance.embedIndex,
-};
+) => <String, dynamic>{'name': instance.name, 'tags': instance.tags};

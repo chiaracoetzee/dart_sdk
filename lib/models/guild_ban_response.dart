@@ -9,51 +9,18 @@ import 'user_partial_response.dart';
 
 part 'guild_ban_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class GuildBanResponse {
   const GuildBanResponse({
     required this.user,
     required this.moderatorId,
     required this.bannedAt,
-  }) : reason = null,
-       _reasonPresent = false,
-       expiresAt = null,
-       _expiresAtPresent = false;
-
-  const GuildBanResponse._explicit({
-    required this.user,
-    required this.moderatorId,
-    required this.bannedAt,
-    Object? reason = _omit,
-    Object? expiresAt = _omit,
-  }) : reason = identical(reason, _omit) ? null : reason as String?,
-       _reasonPresent = !identical(reason, _omit),
-       expiresAt = identical(expiresAt, _omit) ? null : expiresAt as DateTime?,
-       _expiresAtPresent = !identical(expiresAt, _omit);
-
-  const GuildBanResponse._({
-    required this.user,
-    required this.moderatorId,
-    required this.bannedAt,
     this.reason,
     this.expiresAt,
-  }) : _reasonPresent = false,
-       _expiresAtPresent = false;
-  factory GuildBanResponse.patch(Map<String, Object?> json) =>
-      GuildBanResponse.fromJson(json);
+  });
 
-  factory GuildBanResponse.fromJson(Map<String, Object?> json) {
-    final value = _$GuildBanResponseFromJson(json);
-    return GuildBanResponse._explicit(
-      user: value.user,
-      moderatorId: value.moderatorId,
-      bannedAt: value.bannedAt,
-      reason: json.containsKey('reason') ? value.reason : _omit,
-      expiresAt: json.containsKey('expires_at') ? value.expiresAt : _omit,
-    );
-  }
+  factory GuildBanResponse.fromJson(Map<String, Object?> json) =>
+      _$GuildBanResponseFromJson(json);
 
   /// The banned user
   final UserPartialResponse user;
@@ -73,17 +40,6 @@ class GuildBanResponse {
   /// ISO8601 timestamp of when the ban expires (null if permanent)
   @JsonKey(includeIfNull: false, name: 'expires_at')
   final DateTime? expiresAt;
-  final bool _reasonPresent;
-  final bool _expiresAtPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$GuildBanResponseToJson(this);
-    if (_reasonPresent) {
-      json.putIfAbsent('reason', () => reason);
-    }
-    if (_expiresAtPresent) {
-      json.putIfAbsent('expires_at', () => expiresAt);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$GuildBanResponseToJson(this);
 }

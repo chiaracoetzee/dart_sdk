@@ -10,9 +10,7 @@ import 'git_hub_webhook_pull_request_user.dart';
 
 part 'git_hub_webhook_pull_request.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class GitHubWebhookPullRequest {
   const GitHubWebhookPullRequest({
     required this.id,
@@ -20,41 +18,11 @@ class GitHubWebhookPullRequest {
     required this.htmlUrl,
     required this.user,
     required this.title,
-  }) : body = null,
-       _bodyPresent = false;
-
-  const GitHubWebhookPullRequest._explicit({
-    required this.id,
-    required this.number,
-    required this.htmlUrl,
-    required this.user,
-    required this.title,
-    Object? body = _omit,
-  }) : body = identical(body, _omit) ? null : body as String?,
-       _bodyPresent = !identical(body, _omit);
-
-  const GitHubWebhookPullRequest._({
-    required this.id,
-    required this.number,
-    required this.htmlUrl,
-    required this.user,
-    required this.title,
     this.body,
-  }) : _bodyPresent = false;
-  factory GitHubWebhookPullRequest.patch(Map<String, Object?> json) =>
-      GitHubWebhookPullRequest.fromJson(json);
+  });
 
-  factory GitHubWebhookPullRequest.fromJson(Map<String, Object?> json) {
-    final value = _$GitHubWebhookPullRequestFromJson(json);
-    return GitHubWebhookPullRequest._explicit(
-      id: value.id,
-      number: value.number,
-      htmlUrl: value.htmlUrl,
-      user: value.user,
-      title: value.title,
-      body: json.containsKey('body') ? value.body : _omit,
-    );
-  }
+  factory GitHubWebhookPullRequest.fromJson(Map<String, Object?> json) =>
+      _$GitHubWebhookPullRequestFromJson(json);
 
   final Int64Type id;
   final Int32Type number;
@@ -64,13 +32,6 @@ class GitHubWebhookPullRequest {
   final String title;
   @JsonKey(includeIfNull: false)
   final String? body;
-  final bool _bodyPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$GitHubWebhookPullRequestToJson(this);
-    if (_bodyPresent) {
-      json.putIfAbsent('body', () => body);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$GitHubWebhookPullRequestToJson(this);
 }

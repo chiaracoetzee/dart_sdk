@@ -9,9 +9,7 @@ import 'user_partial_response.dart';
 
 part 'gift_code_metadata_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class GiftCodeMetadataResponse {
   const GiftCodeMetadataResponse({
     required this.code,
@@ -19,53 +17,12 @@ class GiftCodeMetadataResponse {
     required this.durationQuantity,
     required this.createdBy,
     required this.createdAt,
-  }) : redeemedAt = null,
-       _redeemedAtPresent = false,
-       redeemedBy = null,
-       _redeemedByPresent = false;
-
-  const GiftCodeMetadataResponse._explicit({
-    required this.code,
-    required this.durationType,
-    required this.durationQuantity,
-    required this.createdBy,
-    required this.createdAt,
-    Object? redeemedAt = _omit,
-    Object? redeemedBy = _omit,
-  }) : redeemedAt = identical(redeemedAt, _omit)
-           ? null
-           : redeemedAt as DateTime?,
-       _redeemedAtPresent = !identical(redeemedAt, _omit),
-       redeemedBy = identical(redeemedBy, _omit)
-           ? null
-           : redeemedBy as UserPartialResponse?,
-       _redeemedByPresent = !identical(redeemedBy, _omit);
-
-  const GiftCodeMetadataResponse._({
-    required this.code,
-    required this.durationType,
-    required this.durationQuantity,
-    required this.createdBy,
-    required this.createdAt,
     this.redeemedAt,
     this.redeemedBy,
-  }) : _redeemedAtPresent = false,
-       _redeemedByPresent = false;
-  factory GiftCodeMetadataResponse.patch(Map<String, Object?> json) =>
-      GiftCodeMetadataResponse.fromJson(json);
+  });
 
-  factory GiftCodeMetadataResponse.fromJson(Map<String, Object?> json) {
-    final value = _$GiftCodeMetadataResponseFromJson(json);
-    return GiftCodeMetadataResponse._explicit(
-      code: value.code,
-      durationType: value.durationType,
-      durationQuantity: value.durationQuantity,
-      createdBy: value.createdBy,
-      createdAt: value.createdAt,
-      redeemedAt: json.containsKey('redeemed_at') ? value.redeemedAt : _omit,
-      redeemedBy: json.containsKey('redeemed_by') ? value.redeemedBy : _omit,
-    );
-  }
+  factory GiftCodeMetadataResponse.fromJson(Map<String, Object?> json) =>
+      _$GiftCodeMetadataResponseFromJson(json);
 
   /// The unique gift code string
   final String code;
@@ -93,17 +50,6 @@ class GiftCodeMetadataResponse {
   /// The user who redeemed the gift code
   @JsonKey(includeIfNull: false, name: 'redeemed_by')
   final UserPartialResponse? redeemedBy;
-  final bool _redeemedAtPresent;
-  final bool _redeemedByPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$GiftCodeMetadataResponseToJson(this);
-    if (_redeemedAtPresent) {
-      json.putIfAbsent('redeemed_at', () => redeemedAt);
-    }
-    if (_redeemedByPresent) {
-      json.putIfAbsent('redeemed_by', () => redeemedBy);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$GiftCodeMetadataResponseToJson(this);
 }

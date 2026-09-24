@@ -12,7 +12,7 @@ GuildResponse _$GuildResponseFromJson(
   'GuildResponse',
   json,
   ($checkedConvert) {
-    final val = GuildResponse._(
+    final val = GuildResponse(
       contentWarningLevel: $checkedConvert(
         'content_warning_level',
         (v) => ContentWarningLevel.fromJson((v as num).toInt()),

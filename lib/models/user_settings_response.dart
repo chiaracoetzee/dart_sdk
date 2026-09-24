@@ -21,99 +21,9 @@ import 'user_settings_response_guild_folders.dart';
 
 part 'user_settings_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class UserSettingsResponse {
   const UserSettingsResponse({
-    required this.animateEmoji,
-    required this.theme,
-    required this.locale,
-    required this.restrictedGuilds,
-    required this.botRestrictedGuilds,
-    required this.defaultGuildsRestricted,
-    required this.botDefaultGuildsRestricted,
-    required this.inlineAttachmentMedia,
-    required this.inlineEmbedMedia,
-    required this.gifAutoPlay,
-    required this.renderEmbeds,
-    required this.renderReactions,
-    required this.status,
-    required this.animateStickers,
-    required this.renderSpoilers,
-    required this.messageDisplayCompact,
-    required this.friendSourceFlags,
-    required this.incomingCallFlags,
-    required this.groupDmAddPermissionFlags,
-    required this.guildFolders,
-    required this.customStatus,
-    required this.afkTimeout,
-    required this.defaultShareVoiceActivity,
-    required this.developerMode,
-    required this.trustedDomains,
-    required this.defaultHideMutedChannels,
-    required this.sensitiveContentFriendDmFilter,
-    required this.sensitiveContentNonFriendDmFilter,
-    required this.sensitiveContentGuildFilter,
-    required this.suppressUnprivilegedSelfMentions,
-    required this.suppressUnprivilegedSelfMentionsBypassUserIds,
-    required this.staffDmAccessUserIds,
-    required this.syncedPreferences,
-    required this.profilePrivacy,
-    required this.timeFormat,
-  }) : statusResetsAt = null,
-       _statusResetsAtPresent = false,
-       statusResetsTo = null,
-       _statusResetsToPresent = false;
-
-  const UserSettingsResponse._explicit({
-    required this.renderEmbeds,
-    required this.profilePrivacy,
-    required this.syncedPreferences,
-    required this.theme,
-    required this.locale,
-    required this.restrictedGuilds,
-    required this.botRestrictedGuilds,
-    required this.defaultGuildsRestricted,
-    required this.botDefaultGuildsRestricted,
-    required this.inlineAttachmentMedia,
-    required this.inlineEmbedMedia,
-    required this.gifAutoPlay,
-    required this.status,
-    required this.renderReactions,
-    required this.animateEmoji,
-    required this.animateStickers,
-    required this.renderSpoilers,
-    required this.messageDisplayCompact,
-    required this.friendSourceFlags,
-    required this.incomingCallFlags,
-    required this.groupDmAddPermissionFlags,
-    required this.guildFolders,
-    required this.customStatus,
-    required this.afkTimeout,
-    required this.defaultShareVoiceActivity,
-    required this.developerMode,
-    required this.trustedDomains,
-    required this.defaultHideMutedChannels,
-    required this.sensitiveContentFriendDmFilter,
-    required this.sensitiveContentNonFriendDmFilter,
-    required this.sensitiveContentGuildFilter,
-    required this.suppressUnprivilegedSelfMentions,
-    required this.suppressUnprivilegedSelfMentionsBypassUserIds,
-    required this.staffDmAccessUserIds,
-    required this.timeFormat,
-    Object? statusResetsAt = _omit,
-    Object? statusResetsTo = _omit,
-  }) : statusResetsAt = identical(statusResetsAt, _omit)
-           ? null
-           : statusResetsAt as DateTime?,
-       _statusResetsAtPresent = !identical(statusResetsAt, _omit),
-       statusResetsTo = identical(statusResetsTo, _omit)
-           ? null
-           : statusResetsTo as String?,
-       _statusResetsToPresent = !identical(statusResetsTo, _omit);
-
-  const UserSettingsResponse._({
     required this.renderEmbeds,
     required this.profilePrivacy,
     required this.syncedPreferences,
@@ -151,59 +61,10 @@ class UserSettingsResponse {
     required this.timeFormat,
     this.statusResetsAt,
     this.statusResetsTo,
-  }) : _statusResetsAtPresent = false,
-       _statusResetsToPresent = false;
-  factory UserSettingsResponse.patch(Map<String, Object?> json) =>
-      UserSettingsResponse.fromJson(json);
+  });
 
-  factory UserSettingsResponse.fromJson(Map<String, Object?> json) {
-    final value = _$UserSettingsResponseFromJson(json);
-    return UserSettingsResponse._explicit(
-      renderEmbeds: value.renderEmbeds,
-      profilePrivacy: value.profilePrivacy,
-      syncedPreferences: value.syncedPreferences,
-      theme: value.theme,
-      locale: value.locale,
-      restrictedGuilds: value.restrictedGuilds,
-      botRestrictedGuilds: value.botRestrictedGuilds,
-      defaultGuildsRestricted: value.defaultGuildsRestricted,
-      botDefaultGuildsRestricted: value.botDefaultGuildsRestricted,
-      inlineAttachmentMedia: value.inlineAttachmentMedia,
-      inlineEmbedMedia: value.inlineEmbedMedia,
-      gifAutoPlay: value.gifAutoPlay,
-      status: value.status,
-      renderReactions: value.renderReactions,
-      animateEmoji: value.animateEmoji,
-      animateStickers: value.animateStickers,
-      renderSpoilers: value.renderSpoilers,
-      messageDisplayCompact: value.messageDisplayCompact,
-      friendSourceFlags: value.friendSourceFlags,
-      incomingCallFlags: value.incomingCallFlags,
-      groupDmAddPermissionFlags: value.groupDmAddPermissionFlags,
-      guildFolders: value.guildFolders,
-      customStatus: value.customStatus,
-      afkTimeout: value.afkTimeout,
-      defaultShareVoiceActivity: value.defaultShareVoiceActivity,
-      developerMode: value.developerMode,
-      trustedDomains: value.trustedDomains,
-      defaultHideMutedChannels: value.defaultHideMutedChannels,
-      sensitiveContentFriendDmFilter: value.sensitiveContentFriendDmFilter,
-      sensitiveContentNonFriendDmFilter:
-          value.sensitiveContentNonFriendDmFilter,
-      sensitiveContentGuildFilter: value.sensitiveContentGuildFilter,
-      suppressUnprivilegedSelfMentions: value.suppressUnprivilegedSelfMentions,
-      suppressUnprivilegedSelfMentionsBypassUserIds:
-          value.suppressUnprivilegedSelfMentionsBypassUserIds,
-      staffDmAccessUserIds: value.staffDmAccessUserIds,
-      timeFormat: value.timeFormat,
-      statusResetsAt: json.containsKey('status_resets_at')
-          ? value.statusResetsAt
-          : _omit,
-      statusResetsTo: json.containsKey('status_resets_to')
-          ? value.statusResetsTo
-          : _omit,
-    );
-  }
+  factory UserSettingsResponse.fromJson(Map<String, Object?> json) =>
+      _$UserSettingsResponseFromJson(json);
 
   /// The current online status of the user
   final String status;
@@ -339,17 +200,6 @@ class UserSettingsResponse {
   /// Default value of share_voice_activity applied to newly accepted friend relationships. Read-only here; mutated via PUT /users/@me/settings/voice-activity-sharing.
   @JsonKey(name: 'default_share_voice_activity')
   final bool defaultShareVoiceActivity;
-  final bool _statusResetsAtPresent;
-  final bool _statusResetsToPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$UserSettingsResponseToJson(this);
-    if (_statusResetsAtPresent) {
-      json.putIfAbsent('status_resets_at', () => statusResetsAt);
-    }
-    if (_statusResetsToPresent) {
-      json.putIfAbsent('status_resets_to', () => statusResetsTo);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$UserSettingsResponseToJson(this);
 }

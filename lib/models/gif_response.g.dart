@@ -8,7 +8,7 @@ part of 'gif_response.dart';
 
 GifResponse _$GifResponseFromJson(Map<String, dynamic> json) =>
     $checkedCreate('GifResponse', json, ($checkedConvert) {
-      final val = GifResponse._(
+      final val = GifResponse(
         id: $checkedConvert('id', (v) => v as String),
         slug: $checkedConvert('slug', (v) => v as String),
         provider: $checkedConvert('provider', (v) => v as String),

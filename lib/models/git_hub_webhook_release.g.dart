@@ -9,7 +9,7 @@ part of 'git_hub_webhook_release.dart';
 GitHubWebhookRelease _$GitHubWebhookReleaseFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('GitHubWebhookRelease', json, ($checkedConvert) {
-  final val = GitHubWebhookRelease._(
+  final val = GitHubWebhookRelease(
     id: $checkedConvert('id', (v) => (v as num).toInt()),
     tagName: $checkedConvert('tag_name', (v) => v as String),
     htmlUrl: $checkedConvert('html_url', (v) => v as String),

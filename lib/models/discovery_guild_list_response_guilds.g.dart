@@ -12,7 +12,7 @@ DiscoveryGuildListResponseGuilds _$DiscoveryGuildListResponseGuildsFromJson(
   'DiscoveryGuildListResponseGuilds',
   json,
   ($checkedConvert) {
-    final val = DiscoveryGuildListResponseGuilds._(
+    final val = DiscoveryGuildListResponseGuilds(
       id: $checkedConvert('id', (v) => v as String),
       name: $checkedConvert('name', (v) => v as String),
       categoryType: $checkedConvert('category_type', (v) => v as num),

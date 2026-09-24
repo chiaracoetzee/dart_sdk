@@ -18,11 +18,6 @@ RegisterRequest _$RegisterRequestFromJson(Map<String, dynamic> json) =>
           globalName: $checkedConvert('global_name', (v) => v as String?),
           password: $checkedConvert('password', (v) => v as String?),
           dateOfBirth: $checkedConvert('date_of_birth', (v) => v as String?),
-          inviteCode: $checkedConvert('invite_code', (v) => v as String?),
-          registrationUrlCode: $checkedConvert(
-            'registration_url_code',
-            (v) => v as String?,
-          ),
           theme: $checkedConvert(
             'theme',
             (v) => v == null
@@ -35,8 +30,6 @@ RegisterRequest _$RegisterRequestFromJson(Map<String, dynamic> json) =>
       fieldKeyMap: const {
         'globalName': 'global_name',
         'dateOfBirth': 'date_of_birth',
-        'inviteCode': 'invite_code',
-        'registrationUrlCode': 'registration_url_code',
       },
     );
 
@@ -48,7 +41,5 @@ Map<String, dynamic> _$RegisterRequestToJson(RegisterRequest instance) =>
       'password': ?instance.password,
       'date_of_birth': ?instance.dateOfBirth,
       'consent': instance.consent,
-      'invite_code': ?instance.inviteCode,
-      'registration_url_code': ?instance.registrationUrlCode,
       'theme': ?instance.theme,
     };

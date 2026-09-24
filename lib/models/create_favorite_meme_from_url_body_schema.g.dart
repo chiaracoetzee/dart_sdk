@@ -8,49 +8,21 @@ part of 'create_favorite_meme_from_url_body_schema.dart';
 
 CreateFavoriteMemeFromUrlBodySchema
 _$CreateFavoriteMemeFromUrlBodySchemaFromJson(Map<String, dynamic> json) =>
-    $checkedCreate(
-      'CreateFavoriteMemeFromUrlBodySchema',
-      json,
-      ($checkedConvert) {
-        final val = CreateFavoriteMemeFromUrlBodySchema._(
-          url: $checkedConvert('url', (v) => v as String),
-          tags: $checkedConvert(
-            'tags',
-            (v) =>
-                (v as List<dynamic>?)?.map((e) => e as String).toList() ??
-                const [],
-          ),
-          altText: $checkedConvert('alt_text', (v) => v as String?),
-          gifSlug: $checkedConvert('gif_slug', (v) => v as String?),
-          gifProvider: $checkedConvert('gif_provider', (v) => v as String?),
-          media: $checkedConvert(
-            'media',
-            (v) => (v as Map<String, dynamic>?)?.map(
-              (k, e) => MapEntry(
-                k,
-                GifMediaFormatInput.fromJson(e as Map<String, dynamic>),
-              ),
-            ),
-          ),
-          name: $checkedConvert('name', (v) => v as String?),
-        );
-        return val;
-      },
-      fieldKeyMap: const {
-        'altText': 'alt_text',
-        'gifSlug': 'gif_slug',
-        'gifProvider': 'gif_provider',
-      },
-    );
+    $checkedCreate('CreateFavoriteMemeFromUrlBodySchema', json, (
+      $checkedConvert,
+    ) {
+      final val = CreateFavoriteMemeFromUrlBodySchema._(
+        url: $checkedConvert('url', (v) => v as String),
+        tags: $checkedConvert(
+          'tags',
+          (v) =>
+              (v as List<dynamic>?)?.map((e) => e as String).toList() ??
+              const [],
+        ),
+      );
+      return val;
+    });
 
 Map<String, dynamic> _$CreateFavoriteMemeFromUrlBodySchemaToJson(
   CreateFavoriteMemeFromUrlBodySchema instance,
-) => <String, dynamic>{
-  'alt_text': ?instance.altText,
-  'tags': instance.tags,
-  'url': instance.url,
-  'gif_slug': ?instance.gifSlug,
-  'gif_provider': ?instance.gifProvider,
-  'media': ?instance.media,
-  'name': ?instance.name,
-};
+) => <String, dynamic>{'tags': instance.tags, 'url': instance.url};

@@ -6,41 +6,12 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'object2_attachments.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class Object2Attachments {
-  const Object2Attachments({required this.id})
-    : title = null,
-      _titlePresent = false,
-      description = null,
-      _descriptionPresent = false;
+  const Object2Attachments({required this.id, this.title, this.description});
 
-  const Object2Attachments._explicit({
-    required this.id,
-    Object? title = _omit,
-    Object? description = _omit,
-  }) : title = identical(title, _omit) ? null : title as String?,
-       _titlePresent = !identical(title, _omit),
-       description = identical(description, _omit)
-           ? null
-           : description as String?,
-       _descriptionPresent = !identical(description, _omit);
-
-  const Object2Attachments._({required this.id, this.title, this.description})
-    : _titlePresent = false,
-      _descriptionPresent = false;
-  factory Object2Attachments.patch(Map<String, Object?> json) =>
-      Object2Attachments.fromJson(json);
-
-  factory Object2Attachments.fromJson(Map<String, Object?> json) {
-    final value = _$Object2AttachmentsFromJson(json);
-    return Object2Attachments._explicit(
-      id: value.id,
-      title: json.containsKey('title') ? value.title : _omit,
-      description: json.containsKey('description') ? value.description : _omit,
-    );
-  }
+  factory Object2Attachments.fromJson(Map<String, Object?> json) =>
+      _$Object2AttachmentsFromJson(json);
 
   /// The identifier of the snapshot attachment
   final String id;
@@ -52,17 +23,6 @@ class Object2Attachments {
   /// Alt text description for the attachment (1-4096 characters)
   @JsonKey(includeIfNull: false)
   final String? description;
-  final bool _titlePresent;
-  final bool _descriptionPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$Object2AttachmentsToJson(this);
-    if (_titlePresent) {
-      json.putIfAbsent('title', () => title);
-    }
-    if (_descriptionPresent) {
-      json.putIfAbsent('description', () => description);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$Object2AttachmentsToJson(this);
 }

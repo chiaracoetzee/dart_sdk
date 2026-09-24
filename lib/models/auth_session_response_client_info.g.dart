@@ -9,7 +9,7 @@ part of 'auth_session_response_client_info.dart';
 AuthSessionResponseClientInfo _$AuthSessionResponseClientInfoFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('AuthSessionResponseClientInfo', json, ($checkedConvert) {
-  final val = AuthSessionResponseClientInfo._(
+  final val = AuthSessionResponseClientInfo(
     device: $checkedConvert(
       'device',
       (v) => AuthSessionResponseClientInfoDeviceDevice.fromJson(v as String),

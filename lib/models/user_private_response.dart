@@ -15,131 +15,9 @@ import 'user_private_response_pending_bulk_message_deletion.dart';
 
 part 'user_private_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class UserPrivateResponse {
   const UserPrivateResponse({
-    required this.accentColor,
-    required this.username,
-    required this.discriminator,
-    required this.globalName,
-    required this.avatar,
-    required this.avatarColor,
-    required this.termsAgreedAt,
-    required this.pendingBulkMessageDeletion,
-    required this.flags,
-    required this.unreadGiftInventoryCount,
-    required this.isStaff,
-    required this.acls,
-    required this.traits,
-    required this.email,
-    required this.hasUnreadGiftInventory,
-    required this.hasVerifiedPhone,
-    required this.bio,
-    required this.pronouns,
-    required this.id,
-    required this.hasEverPurchased,
-    required this.banner,
-    required this.bannerColor,
-    required this.mfaEnabled,
-    required this.hasDismissedPremiumOnboarding,
-    required this.verified,
-    required this.premiumType,
-    required this.premiumSince,
-    required this.premiumUntil,
-    required this.premiumWillCancel,
-    required this.premiumBillingCycle,
-    required this.premiumLifetimeSequence,
-    required this.premiumGraceEndsAt,
-    required this.premiumDiscriminator,
-    required this.premiumBadgeHidden,
-    required this.privacyAgreedAt,
-    required this.premiumBadgeTimestampHidden,
-    required this.premiumBadgeSequenceHidden,
-    required this.premiumPurchaseDisabled,
-    required this.premiumEnabledOverride,
-    required this.premiumPerksDisabled,
-    required this.nsfwAllowed,
-    required this.passwordLastChangedAt,
-    required this.lastVoiceActivitySharingChangeAt,
-    required this.requiredActions,
-    required this.premiumBadgeMasked,
-    this.authenticatorTypes,
-    this.timezonePrivacyFlags,
-    this.emailBounced,
-    this.mentionFlags,
-    this.system,
-    this.ageVerifiedAdult,
-    this.bot,
-    this.forceInboundPhoneVerification,
-  }) : phone = null,
-       _phonePresent = false,
-       timezone = null,
-       _timezonePresent = false;
-
-  const UserPrivateResponse._explicit({
-    required this.premiumType,
-    required this.username,
-    required this.discriminator,
-    required this.globalName,
-    required this.avatar,
-    required this.avatarColor,
-    required this.termsAgreedAt,
-    required this.pendingBulkMessageDeletion,
-    required this.flags,
-    required this.pronouns,
-    required this.isStaff,
-    required this.acls,
-    required this.traits,
-    required this.email,
-    required this.unreadGiftInventoryCount,
-    required this.hasUnreadGiftInventory,
-    required this.hasVerifiedPhone,
-    required this.bio,
-    required this.id,
-    required this.accentColor,
-    required this.hasEverPurchased,
-    required this.hasDismissedPremiumOnboarding,
-    required this.banner,
-    required this.bannerColor,
-    required this.mfaEnabled,
-    required this.nsfwAllowed,
-    required this.verified,
-    required this.premiumBadgeMasked,
-    required this.premiumSince,
-    required this.premiumUntil,
-    required this.premiumWillCancel,
-    required this.premiumBillingCycle,
-    required this.premiumLifetimeSequence,
-    required this.premiumGraceEndsAt,
-    required this.premiumDiscriminator,
-    required this.premiumBadgeHidden,
-    required this.privacyAgreedAt,
-    required this.premiumBadgeTimestampHidden,
-    required this.premiumBadgeSequenceHidden,
-    required this.premiumPurchaseDisabled,
-    required this.premiumEnabledOverride,
-    required this.premiumPerksDisabled,
-    required this.lastVoiceActivitySharingChangeAt,
-    required this.passwordLastChangedAt,
-    required this.requiredActions,
-    this.mentionFlags,
-    this.authenticatorTypes,
-    this.timezonePrivacyFlags,
-    Object? timezone = _omit,
-    Object? phone = _omit,
-    this.emailBounced,
-    this.system,
-    this.ageVerifiedAdult,
-    this.bot,
-    this.forceInboundPhoneVerification,
-  }) : phone = identical(phone, _omit) ? null : phone as String?,
-       _phonePresent = !identical(phone, _omit),
-       timezone = identical(timezone, _omit) ? null : timezone as String?,
-       _timezonePresent = !identical(timezone, _omit);
-
-  const UserPrivateResponse._({
     required this.premiumType,
     required this.username,
     required this.discriminator,
@@ -195,71 +73,10 @@ class UserPrivateResponse {
     this.ageVerifiedAdult,
     this.bot,
     this.forceInboundPhoneVerification,
-  }) : _phonePresent = false,
-       _timezonePresent = false;
-  factory UserPrivateResponse.patch(Map<String, Object?> json) =>
-      UserPrivateResponse.fromJson(json);
+  });
 
-  factory UserPrivateResponse.fromJson(Map<String, Object?> json) {
-    final value = _$UserPrivateResponseFromJson(json);
-    return UserPrivateResponse._explicit(
-      premiumType: value.premiumType,
-      username: value.username,
-      discriminator: value.discriminator,
-      globalName: value.globalName,
-      avatar: value.avatar,
-      avatarColor: value.avatarColor,
-      termsAgreedAt: value.termsAgreedAt,
-      pendingBulkMessageDeletion: value.pendingBulkMessageDeletion,
-      flags: value.flags,
-      pronouns: value.pronouns,
-      isStaff: value.isStaff,
-      acls: value.acls,
-      traits: value.traits,
-      email: value.email,
-      unreadGiftInventoryCount: value.unreadGiftInventoryCount,
-      hasUnreadGiftInventory: value.hasUnreadGiftInventory,
-      hasVerifiedPhone: value.hasVerifiedPhone,
-      bio: value.bio,
-      id: value.id,
-      accentColor: value.accentColor,
-      hasEverPurchased: value.hasEverPurchased,
-      hasDismissedPremiumOnboarding: value.hasDismissedPremiumOnboarding,
-      banner: value.banner,
-      bannerColor: value.bannerColor,
-      mfaEnabled: value.mfaEnabled,
-      nsfwAllowed: value.nsfwAllowed,
-      verified: value.verified,
-      premiumBadgeMasked: value.premiumBadgeMasked,
-      premiumSince: value.premiumSince,
-      premiumUntil: value.premiumUntil,
-      premiumWillCancel: value.premiumWillCancel,
-      premiumBillingCycle: value.premiumBillingCycle,
-      premiumLifetimeSequence: value.premiumLifetimeSequence,
-      premiumGraceEndsAt: value.premiumGraceEndsAt,
-      premiumDiscriminator: value.premiumDiscriminator,
-      premiumBadgeHidden: value.premiumBadgeHidden,
-      privacyAgreedAt: value.privacyAgreedAt,
-      premiumBadgeTimestampHidden: value.premiumBadgeTimestampHidden,
-      premiumBadgeSequenceHidden: value.premiumBadgeSequenceHidden,
-      premiumPurchaseDisabled: value.premiumPurchaseDisabled,
-      premiumEnabledOverride: value.premiumEnabledOverride,
-      premiumPerksDisabled: value.premiumPerksDisabled,
-      lastVoiceActivitySharingChangeAt: value.lastVoiceActivitySharingChangeAt,
-      passwordLastChangedAt: value.passwordLastChangedAt,
-      requiredActions: value.requiredActions,
-      mentionFlags: value.mentionFlags,
-      authenticatorTypes: value.authenticatorTypes,
-      timezonePrivacyFlags: value.timezonePrivacyFlags,
-      timezone: json.containsKey('timezone') ? value.timezone : _omit,
-      phone: json.containsKey('phone') ? value.phone : _omit,
-      emailBounced: value.emailBounced,
-      system: value.system,
-      ageVerifiedAdult: value.ageVerifiedAdult,
-      bot: value.bot,
-      forceInboundPhoneVerification: value.forceInboundPhoneVerification,
-    );
-  }
+  factory UserPrivateResponse.fromJson(Map<String, Object?> json) =>
+      _$UserPrivateResponseFromJson(json);
 
   /// The unique identifier (snowflake) for this user
   final SnowflakeStringType id;
@@ -472,17 +289,6 @@ class UserPrivateResponse {
   /// ISO8601 timestamp of when the user last agreed to the privacy policy
   @JsonKey(includeIfNull: true, name: 'privacy_agreed_at')
   final String? privacyAgreedAt;
-  final bool _phonePresent;
-  final bool _timezonePresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$UserPrivateResponseToJson(this);
-    if (_phonePresent) {
-      json.putIfAbsent('phone', () => phone);
-    }
-    if (_timezonePresent) {
-      json.putIfAbsent('timezone', () => timezone);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$UserPrivateResponseToJson(this);
 }

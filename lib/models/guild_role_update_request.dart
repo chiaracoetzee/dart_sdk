@@ -4,57 +4,48 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'json_nullable.dart';
+
 import 'color_type.dart';
 import 'unsigned_int64_type.dart';
 
 part 'guild_role_update_request.g.dart';
 
-const Object _omit = Object();
-
 @JsonSerializable(constructor: '_')
 class GuildRoleUpdateRequest {
-  const GuildRoleUpdateRequest({
+  GuildRoleUpdateRequest({
     this.name,
     this.color,
     this.permissions,
     this.hoist,
     this.mentionable,
-  }) : hoistPosition = null,
-       _hoistPositionPresent = false;
-
-  const GuildRoleUpdateRequest._explicit({
-    this.name,
-    this.color,
-    this.permissions,
-    this.hoist,
-    Object? hoistPosition = _omit,
-    this.mentionable,
-  }) : hoistPosition = identical(hoistPosition, _omit)
-           ? null
-           : hoistPosition as int?,
-       _hoistPositionPresent = !identical(hoistPosition, _omit);
+    JsonNullable<int> hoistPosition = const JsonNullable<int>.undefined(),
+  }) : hoistPosition = hoistPosition,
+       _hoistPositionValue = hoistPosition.value,
+       _hoistPositionPresent = hoistPosition.isPresent;
 
   const GuildRoleUpdateRequest._({
     this.name,
     this.color,
     this.permissions,
     this.hoist,
-    this.hoistPosition,
     this.mentionable,
-  }) : _hoistPositionPresent = false;
+  }) : _hoistPositionValue = null,
+       hoistPosition = const JsonNullable<int>.undefined(),
+       _hoistPositionPresent = false;
   factory GuildRoleUpdateRequest.patch(Map<String, Object?> json) =>
       GuildRoleUpdateRequest.fromJson(json);
 
   factory GuildRoleUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildRoleUpdateRequestFromJson(json);
-    return GuildRoleUpdateRequest._explicit(
+    return GuildRoleUpdateRequest(
       name: value.name,
       color: value.color,
       permissions: value.permissions,
       hoist: value.hoist,
       hoistPosition: json.containsKey('hoist_position')
-          ? value.hoistPosition
-          : _omit,
+          ? JsonNullable<int>.of(value._hoistPositionValue)
+          : const JsonNullable<int>.undefined(),
       mentionable: value.mentionable,
     );
   }
@@ -75,19 +66,19 @@ class GuildRoleUpdateRequest {
   @JsonKey(includeIfNull: false)
   final bool? hoist;
 
-  /// The position of the role in the hoisted member list
-  @JsonKey(includeIfNull: false, name: 'hoist_position')
-  final int? hoistPosition;
-
   /// Whether the role can be mentioned by anyone
   @JsonKey(includeIfNull: false)
   final bool? mentionable;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<int> hoistPosition;
+  @JsonKey(includeIfNull: false, name: 'hoist_position')
+  final int? _hoistPositionValue;
   final bool _hoistPositionPresent;
 
   Map<String, Object?> toJson() {
     final json = _$GuildRoleUpdateRequestToJson(this);
     if (_hoistPositionPresent) {
-      json.putIfAbsent('hoist_position', () => hoistPosition);
+      json.putIfAbsent('hoist_position', () => _hoistPositionValue);
     }
     return json;
   }

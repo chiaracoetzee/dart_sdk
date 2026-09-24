@@ -12,7 +12,7 @@ _$RejectedLocalizedCardPreapprovalContinueResponseFromJson(
 ) => $checkedCreate('RejectedLocalizedCardPreapprovalContinueResponse', json, (
   $checkedConvert,
 ) {
-  final val = RejectedLocalizedCardPreapprovalContinueResponse._(
+  final val = RejectedLocalizedCardPreapprovalContinueResponse(
     status: $checkedConvert('status', (v) => v as String),
     reason: $checkedConvert(
       'reason',

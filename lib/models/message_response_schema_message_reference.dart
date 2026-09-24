@@ -9,48 +9,18 @@ import 'message_reference_type.dart';
 
 part 'message_response_schema_message_reference.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class MessageResponseSchemaMessageReference {
   const MessageResponseSchemaMessageReference({
     required this.channelId,
     required this.messageId,
     required this.type,
-  }) : guildId = null,
-       _guildIdPresent = false;
-
-  const MessageResponseSchemaMessageReference._explicit({
-    required this.channelId,
-    required this.messageId,
-    required this.type,
-    Object? guildId = _omit,
-  }) : guildId = identical(guildId, _omit)
-           ? null
-           : guildId as SnowflakeStringType?,
-       _guildIdPresent = !identical(guildId, _omit);
-
-  const MessageResponseSchemaMessageReference._({
-    required this.channelId,
-    required this.messageId,
-    required this.type,
     this.guildId,
-  }) : _guildIdPresent = false;
-  factory MessageResponseSchemaMessageReference.patch(
-    Map<String, Object?> json,
-  ) => MessageResponseSchemaMessageReference.fromJson(json);
+  });
 
   factory MessageResponseSchemaMessageReference.fromJson(
     Map<String, Object?> json,
-  ) {
-    final value = _$MessageResponseSchemaMessageReferenceFromJson(json);
-    return MessageResponseSchemaMessageReference._explicit(
-      channelId: value.channelId,
-      messageId: value.messageId,
-      type: value.type,
-      guildId: json.containsKey('guild_id') ? value.guildId : _omit,
-    );
-  }
+  ) => _$MessageResponseSchemaMessageReferenceFromJson(json);
 
   /// The ID of the channel containing the referenced message
   @JsonKey(name: 'channel_id')
@@ -64,13 +34,7 @@ class MessageResponseSchemaMessageReference {
   @JsonKey(includeIfNull: false, name: 'guild_id')
   final SnowflakeStringType? guildId;
   final MessageReferenceType type;
-  final bool _guildIdPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$MessageResponseSchemaMessageReferenceToJson(this);
-    if (_guildIdPresent) {
-      json.putIfAbsent('guild_id', () => guildId);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() =>
+      _$MessageResponseSchemaMessageReferenceToJson(this);
 }

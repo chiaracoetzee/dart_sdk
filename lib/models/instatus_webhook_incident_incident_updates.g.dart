@@ -12,7 +12,7 @@ _$InstatusWebhookIncidentIncidentUpdatesFromJson(Map<String, dynamic> json) =>
       'InstatusWebhookIncidentIncidentUpdates',
       json,
       ($checkedConvert) {
-        final val = InstatusWebhookIncidentIncidentUpdates._(
+        final val = InstatusWebhookIncidentIncidentUpdates(
           id: $checkedConvert('id', (v) => v as String?),
           incidentId: $checkedConvert('incident_id', (v) => v as String?),
           markdown: $checkedConvert('markdown', (v) => v as String?),

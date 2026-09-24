@@ -9,63 +9,19 @@ import 'webhook_type.dart';
 
 part 'audit_log_webhook_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class AuditLogWebhookResponse {
   const AuditLogWebhookResponse({
-    required this.id,
-    required this.type,
-    required this.name,
-  }) : guildId = null,
-       _guildIdPresent = false,
-       channelId = null,
-       _channelIdPresent = false,
-       avatarHash = null,
-       _avatarHashPresent = false;
-
-  const AuditLogWebhookResponse._explicit({
-    required this.id,
-    required this.type,
-    required this.name,
-    Object? guildId = _omit,
-    Object? channelId = _omit,
-    Object? avatarHash = _omit,
-  }) : guildId = identical(guildId, _omit)
-           ? null
-           : guildId as SnowflakeStringType?,
-       _guildIdPresent = !identical(guildId, _omit),
-       channelId = identical(channelId, _omit)
-           ? null
-           : channelId as SnowflakeStringType?,
-       _channelIdPresent = !identical(channelId, _omit),
-       avatarHash = identical(avatarHash, _omit) ? null : avatarHash as String?,
-       _avatarHashPresent = !identical(avatarHash, _omit);
-
-  const AuditLogWebhookResponse._({
     required this.id,
     required this.type,
     required this.name,
     this.guildId,
     this.channelId,
     this.avatarHash,
-  }) : _guildIdPresent = false,
-       _channelIdPresent = false,
-       _avatarHashPresent = false;
-  factory AuditLogWebhookResponse.patch(Map<String, Object?> json) =>
-      AuditLogWebhookResponse.fromJson(json);
+  });
 
-  factory AuditLogWebhookResponse.fromJson(Map<String, Object?> json) {
-    final value = _$AuditLogWebhookResponseFromJson(json);
-    return AuditLogWebhookResponse._explicit(
-      id: value.id,
-      type: value.type,
-      name: value.name,
-      guildId: json.containsKey('guild_id') ? value.guildId : _omit,
-      channelId: json.containsKey('channel_id') ? value.channelId : _omit,
-      avatarHash: json.containsKey('avatar_hash') ? value.avatarHash : _omit,
-    );
-  }
+  factory AuditLogWebhookResponse.fromJson(Map<String, Object?> json) =>
+      _$AuditLogWebhookResponseFromJson(json);
 
   /// The unique identifier for this webhook
   final SnowflakeStringType id;
@@ -85,21 +41,6 @@ class AuditLogWebhookResponse {
   /// The hash of the webhook avatar
   @JsonKey(includeIfNull: false, name: 'avatar_hash')
   final String? avatarHash;
-  final bool _guildIdPresent;
-  final bool _channelIdPresent;
-  final bool _avatarHashPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$AuditLogWebhookResponseToJson(this);
-    if (_guildIdPresent) {
-      json.putIfAbsent('guild_id', () => guildId);
-    }
-    if (_channelIdPresent) {
-      json.putIfAbsent('channel_id', () => channelId);
-    }
-    if (_avatarHashPresent) {
-      json.putIfAbsent('avatar_hash', () => avatarHash);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$AuditLogWebhookResponseToJson(this);
 }

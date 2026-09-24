@@ -12,7 +12,7 @@ GroupDmInviteResponse _$GroupDmInviteResponseFromJson(
   'GroupDmInviteResponse',
   json,
   ($checkedConvert) {
-    final val = GroupDmInviteResponse._(
+    final val = GroupDmInviteResponse(
       code: $checkedConvert('code', (v) => v as String),
       temporary: $checkedConvert('temporary', (v) => v as bool),
       type: $checkedConvert('type', (v) => v as num),

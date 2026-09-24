@@ -9,39 +9,9 @@ import 'snowflake_string_type.dart';
 
 part 'o_auth2_user_info_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class OAuth2UserInfoResponse {
   const OAuth2UserInfoResponse({
-    required this.sub,
-    required this.id,
-    required this.username,
-    required this.discriminator,
-    required this.globalName,
-    required this.avatar,
-    this.flags,
-  }) : email = null,
-       _emailPresent = false,
-       verified = null,
-       _verifiedPresent = false;
-
-  const OAuth2UserInfoResponse._explicit({
-    required this.sub,
-    required this.id,
-    required this.username,
-    required this.discriminator,
-    required this.globalName,
-    required this.avatar,
-    Object? email = _omit,
-    Object? verified = _omit,
-    this.flags,
-  }) : email = identical(email, _omit) ? null : email as String?,
-       _emailPresent = !identical(email, _omit),
-       verified = identical(verified, _omit) ? null : verified as bool?,
-       _verifiedPresent = !identical(verified, _omit);
-
-  const OAuth2UserInfoResponse._({
     required this.sub,
     required this.id,
     required this.username,
@@ -51,25 +21,10 @@ class OAuth2UserInfoResponse {
     this.email,
     this.verified,
     this.flags,
-  }) : _emailPresent = false,
-       _verifiedPresent = false;
-  factory OAuth2UserInfoResponse.patch(Map<String, Object?> json) =>
-      OAuth2UserInfoResponse.fromJson(json);
+  });
 
-  factory OAuth2UserInfoResponse.fromJson(Map<String, Object?> json) {
-    final value = _$OAuth2UserInfoResponseFromJson(json);
-    return OAuth2UserInfoResponse._explicit(
-      sub: value.sub,
-      id: value.id,
-      username: value.username,
-      discriminator: value.discriminator,
-      globalName: value.globalName,
-      avatar: value.avatar,
-      email: json.containsKey('email') ? value.email : _omit,
-      verified: json.containsKey('verified') ? value.verified : _omit,
-      flags: value.flags,
-    );
-  }
+  factory OAuth2UserInfoResponse.fromJson(Map<String, Object?> json) =>
+      _$OAuth2UserInfoResponseFromJson(json);
 
   /// The subject identifier of the user
   final SnowflakeStringType sub;
@@ -102,17 +57,6 @@ class OAuth2UserInfoResponse {
   /// The user flags
   @JsonKey(includeIfNull: false)
   final PublicUserFlags? flags;
-  final bool _emailPresent;
-  final bool _verifiedPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$OAuth2UserInfoResponseToJson(this);
-    if (_emailPresent) {
-      json.putIfAbsent('email', () => email);
-    }
-    if (_verifiedPresent) {
-      json.putIfAbsent('verified', () => verified);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$OAuth2UserInfoResponseToJson(this);
 }

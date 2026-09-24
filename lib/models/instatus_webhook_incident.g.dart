@@ -12,7 +12,7 @@ InstatusWebhookIncident _$InstatusWebhookIncidentFromJson(
   'InstatusWebhookIncident',
   json,
   ($checkedConvert) {
-    final val = InstatusWebhookIncident._(
+    final val = InstatusWebhookIncident(
       id: $checkedConvert('id', (v) => v as String?),
       name: $checkedConvert('name', (v) => v as String?),
       url: $checkedConvert('url', (v) => v as String?),

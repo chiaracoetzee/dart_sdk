@@ -9,7 +9,7 @@ part of 'channel_partial_response.dart';
 ChannelPartialResponse _$ChannelPartialResponseFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('ChannelPartialResponse', json, ($checkedConvert) {
-  final val = ChannelPartialResponse._(
+  final val = ChannelPartialResponse(
     id: $checkedConvert('id', (v) => v as String),
     type: $checkedConvert(
       'type',

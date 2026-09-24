@@ -9,9 +9,7 @@ import 'user_partial_response.dart';
 
 part 'webhook_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class WebhookResponse {
   const WebhookResponse({
     required this.id,
@@ -20,44 +18,11 @@ class WebhookResponse {
     required this.name,
     required this.token,
     required this.user,
-  }) : avatar = null,
-       _avatarPresent = false;
-
-  const WebhookResponse._explicit({
-    required this.id,
-    required this.guildId,
-    required this.channelId,
-    required this.name,
-    required this.token,
-    required this.user,
-    Object? avatar = _omit,
-  }) : avatar = identical(avatar, _omit) ? null : avatar as String?,
-       _avatarPresent = !identical(avatar, _omit);
-
-  const WebhookResponse._({
-    required this.id,
-    required this.guildId,
-    required this.channelId,
-    required this.name,
-    required this.token,
-    required this.user,
     this.avatar,
-  }) : _avatarPresent = false;
-  factory WebhookResponse.patch(Map<String, Object?> json) =>
-      WebhookResponse.fromJson(json);
+  });
 
-  factory WebhookResponse.fromJson(Map<String, Object?> json) {
-    final value = _$WebhookResponseFromJson(json);
-    return WebhookResponse._explicit(
-      id: value.id,
-      guildId: value.guildId,
-      channelId: value.channelId,
-      name: value.name,
-      token: value.token,
-      user: value.user,
-      avatar: json.containsKey('avatar') ? value.avatar : _omit,
-    );
-  }
+  factory WebhookResponse.fromJson(Map<String, Object?> json) =>
+      _$WebhookResponseFromJson(json);
 
   /// The unique identifier (snowflake) for the webhook
   final SnowflakeStringType id;
@@ -82,13 +47,6 @@ class WebhookResponse {
 
   /// The user who created the webhook
   final UserPartialResponse user;
-  final bool _avatarPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$WebhookResponseToJson(this);
-    if (_avatarPresent) {
-      json.putIfAbsent('avatar', () => avatar);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$WebhookResponseToJson(this);
 }

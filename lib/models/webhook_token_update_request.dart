@@ -4,48 +4,52 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'json_nullable.dart';
+
 import 'base64_image_type.dart';
 
 part 'webhook_token_update_request.g.dart';
 
-const Object _omit = Object();
-
 @JsonSerializable(constructor: '_')
 class WebhookTokenUpdateRequest {
-  const WebhookTokenUpdateRequest({this.name})
-    : avatar = null,
+  WebhookTokenUpdateRequest({
+    this.name,
+    JsonNullable<Base64ImageType> avatar =
+        const JsonNullable<Base64ImageType>.undefined(),
+  }) : avatar = avatar,
+       _avatarValue = avatar.value,
+       _avatarPresent = avatar.isPresent;
+
+  const WebhookTokenUpdateRequest._({this.name})
+    : _avatarValue = null,
+      avatar = const JsonNullable<Base64ImageType>.undefined(),
       _avatarPresent = false;
-
-  const WebhookTokenUpdateRequest._explicit({this.name, Object? avatar = _omit})
-    : avatar = identical(avatar, _omit) ? null : avatar as Base64ImageType?,
-      _avatarPresent = !identical(avatar, _omit);
-
-  const WebhookTokenUpdateRequest._({this.name, this.avatar})
-    : _avatarPresent = false;
   factory WebhookTokenUpdateRequest.patch(Map<String, Object?> json) =>
       WebhookTokenUpdateRequest.fromJson(json);
 
   factory WebhookTokenUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$WebhookTokenUpdateRequestFromJson(json);
-    return WebhookTokenUpdateRequest._explicit(
+    return WebhookTokenUpdateRequest(
       name: value.name,
-      avatar: json.containsKey('avatar') ? value.avatar : _omit,
+      avatar: json.containsKey('avatar')
+          ? JsonNullable<Base64ImageType>.of(value._avatarValue)
+          : const JsonNullable<Base64ImageType>.undefined(),
     );
   }
 
   /// The new name of the webhook
   @JsonKey(includeIfNull: false)
   final String? name;
-
-  /// The new avatar image as a base64-encoded data URI
-  @JsonKey(includeIfNull: false)
-  final Base64ImageType? avatar;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<Base64ImageType> avatar;
+  @JsonKey(includeIfNull: false, name: 'avatar')
+  final Base64ImageType? _avatarValue;
   final bool _avatarPresent;
 
   Map<String, Object?> toJson() {
     final json = _$WebhookTokenUpdateRequestToJson(this);
     if (_avatarPresent) {
-      json.putIfAbsent('avatar', () => avatar);
+      json.putIfAbsent('avatar', () => _avatarValue);
     }
     return json;
   }

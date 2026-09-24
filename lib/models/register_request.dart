@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'json_nullable.dart';
+
 import 'email_type.dart';
 import 'password_type.dart';
 import 'register_request_theme_theme.dart';
@@ -11,11 +13,9 @@ import 'username_type.dart';
 
 part 'register_request.g.dart';
 
-const Object _omit = Object();
-
 @JsonSerializable(constructor: '_')
 class RegisterRequest {
-  const RegisterRequest({
+  RegisterRequest({
     this.consent = false,
     this.email,
     this.username,
@@ -23,27 +23,15 @@ class RegisterRequest {
     this.password,
     this.dateOfBirth,
     this.theme,
-  }) : inviteCode = null,
-       _inviteCodePresent = false,
-       registrationUrlCode = null,
-       _registrationUrlCodePresent = false;
-
-  const RegisterRequest._explicit({
-    this.consent = false,
-    this.email,
-    this.username,
-    this.globalName,
-    this.password,
-    this.dateOfBirth,
-    Object? inviteCode = _omit,
-    Object? registrationUrlCode = _omit,
-    this.theme,
-  }) : inviteCode = identical(inviteCode, _omit) ? null : inviteCode as String?,
-       _inviteCodePresent = !identical(inviteCode, _omit),
-       registrationUrlCode = identical(registrationUrlCode, _omit)
-           ? null
-           : registrationUrlCode as String?,
-       _registrationUrlCodePresent = !identical(registrationUrlCode, _omit);
+    JsonNullable<String> inviteCode = const JsonNullable<String>.undefined(),
+    JsonNullable<String> registrationUrlCode =
+        const JsonNullable<String>.undefined(),
+  }) : inviteCode = inviteCode,
+       _inviteCodeValue = inviteCode.value,
+       _inviteCodePresent = inviteCode.isPresent,
+       registrationUrlCode = registrationUrlCode,
+       _registrationUrlCodeValue = registrationUrlCode.value,
+       _registrationUrlCodePresent = registrationUrlCode.isPresent;
 
   const RegisterRequest._({
     this.consent = false,
@@ -52,27 +40,31 @@ class RegisterRequest {
     this.globalName,
     this.password,
     this.dateOfBirth,
-    this.inviteCode,
-    this.registrationUrlCode,
     this.theme,
-  }) : _inviteCodePresent = false,
+  }) : _inviteCodeValue = null,
+       _registrationUrlCodeValue = null,
+       inviteCode = const JsonNullable<String>.undefined(),
+       _inviteCodePresent = false,
+       registrationUrlCode = const JsonNullable<String>.undefined(),
        _registrationUrlCodePresent = false;
   factory RegisterRequest.patch(Map<String, Object?> json) =>
       RegisterRequest.fromJson(json);
 
   factory RegisterRequest.fromJson(Map<String, Object?> json) {
     final value = _$RegisterRequestFromJson(json);
-    return RegisterRequest._explicit(
+    return RegisterRequest(
       consent: value.consent,
       email: value.email,
       username: value.username,
       globalName: value.globalName,
       password: value.password,
       dateOfBirth: value.dateOfBirth,
-      inviteCode: json.containsKey('invite_code') ? value.inviteCode : _omit,
+      inviteCode: json.containsKey('invite_code')
+          ? JsonNullable<String>.of(value._inviteCodeValue)
+          : const JsonNullable<String>.undefined(),
       registrationUrlCode: json.containsKey('registration_url_code')
-          ? value.registrationUrlCode
-          : _omit,
+          ? JsonNullable<String>.of(value._registrationUrlCodeValue)
+          : const JsonNullable<String>.undefined(),
       theme: value.theme,
     );
   }
@@ -100,27 +92,30 @@ class RegisterRequest {
   /// Whether user consents to terms of service
   final bool consent;
 
-  /// Guild invite code to join after registration
-  @JsonKey(includeIfNull: false, name: 'invite_code')
-  final String? inviteCode;
-
-  /// Admin-issued registration URL code to use for this registration
-  @JsonKey(includeIfNull: false, name: 'registration_url_code')
-  final String? registrationUrlCode;
-
   /// Initial UI theme preference for the new account
   @JsonKey(includeIfNull: false)
   final RegisterRequestThemeTheme? theme;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> inviteCode;
+  @JsonKey(includeIfNull: false, name: 'invite_code')
+  final String? _inviteCodeValue;
   final bool _inviteCodePresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> registrationUrlCode;
+  @JsonKey(includeIfNull: false, name: 'registration_url_code')
+  final String? _registrationUrlCodeValue;
   final bool _registrationUrlCodePresent;
 
   Map<String, Object?> toJson() {
     final json = _$RegisterRequestToJson(this);
     if (_inviteCodePresent) {
-      json.putIfAbsent('invite_code', () => inviteCode);
+      json.putIfAbsent('invite_code', () => _inviteCodeValue);
     }
     if (_registrationUrlCodePresent) {
-      json.putIfAbsent('registration_url_code', () => registrationUrlCode);
+      json.putIfAbsent(
+        'registration_url_code',
+        () => _registrationUrlCodeValue,
+      );
     }
     return json;
   }

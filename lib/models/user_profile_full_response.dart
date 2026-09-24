@@ -16,44 +16,9 @@ import 'user_profile_full_response_user_profile.dart';
 
 part 'user_profile_full_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class UserProfileFullResponse {
   const UserProfileFullResponse({
-    required this.user,
-    required this.userProfile,
-    required this.timezoneOffset,
-    this.guildMember,
-    this.premiumType,
-    this.premiumSince,
-    this.premiumLifetimeSequence,
-    this.mutualFriends,
-    this.mutualGuilds,
-    this.connectedAccounts,
-    this.profileLimited,
-  }) : guildMemberProfile = null,
-       _guildMemberProfilePresent = false;
-
-  const UserProfileFullResponse._explicit({
-    required this.user,
-    required this.userProfile,
-    required this.timezoneOffset,
-    this.guildMember,
-    Object? guildMemberProfile = _omit,
-    this.premiumType,
-    this.premiumSince,
-    this.premiumLifetimeSequence,
-    this.mutualFriends,
-    this.mutualGuilds,
-    this.connectedAccounts,
-    this.profileLimited,
-  }) : guildMemberProfile = identical(guildMemberProfile, _omit)
-           ? null
-           : guildMemberProfile as UserProfileFullResponseGuildMemberProfile?,
-       _guildMemberProfilePresent = !identical(guildMemberProfile, _omit);
-
-  const UserProfileFullResponse._({
     required this.user,
     required this.userProfile,
     required this.timezoneOffset,
@@ -66,29 +31,10 @@ class UserProfileFullResponse {
     this.mutualGuilds,
     this.connectedAccounts,
     this.profileLimited,
-  }) : _guildMemberProfilePresent = false;
-  factory UserProfileFullResponse.patch(Map<String, Object?> json) =>
-      UserProfileFullResponse.fromJson(json);
+  });
 
-  factory UserProfileFullResponse.fromJson(Map<String, Object?> json) {
-    final value = _$UserProfileFullResponseFromJson(json);
-    return UserProfileFullResponse._explicit(
-      user: value.user,
-      userProfile: value.userProfile,
-      timezoneOffset: value.timezoneOffset,
-      guildMember: value.guildMember,
-      guildMemberProfile: json.containsKey('guild_member_profile')
-          ? value.guildMemberProfile
-          : _omit,
-      premiumType: value.premiumType,
-      premiumSince: value.premiumSince,
-      premiumLifetimeSequence: value.premiumLifetimeSequence,
-      mutualFriends: value.mutualFriends,
-      mutualGuilds: value.mutualGuilds,
-      connectedAccounts: value.connectedAccounts,
-      profileLimited: value.profileLimited,
-    );
-  }
+  factory UserProfileFullResponse.fromJson(Map<String, Object?> json) =>
+      _$UserProfileFullResponseFromJson(json);
 
   /// The user object
   final UserPartialResponse user;
@@ -136,13 +82,6 @@ class UserProfileFullResponse {
   /// True when the target user has restricted their profile and the viewer does not meet the visibility tier; bio, pronouns, badges, and connected accounts have been stripped.
   @JsonKey(includeIfNull: false, name: 'profile_limited')
   final bool? profileLimited;
-  final bool _guildMemberProfilePresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$UserProfileFullResponseToJson(this);
-    if (_guildMemberProfilePresent) {
-      json.putIfAbsent('guild_member_profile', () => guildMemberProfile);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$UserProfileFullResponseToJson(this);
 }

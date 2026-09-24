@@ -16,15 +16,10 @@ GuildStickerUpdateRequest _$GuildStickerUpdateRequestFromJson(
       (v) =>
           (v as List<dynamic>?)?.map((e) => e as String).toList() ?? const [],
     ),
-    description: $checkedConvert('description', (v) => v as String?),
   );
   return val;
 });
 
 Map<String, dynamic> _$GuildStickerUpdateRequestToJson(
   GuildStickerUpdateRequest instance,
-) => <String, dynamic>{
-  'name': instance.name,
-  'description': ?instance.description,
-  'tags': instance.tags,
-};
+) => <String, dynamic>{'name': instance.name, 'tags': instance.tags};

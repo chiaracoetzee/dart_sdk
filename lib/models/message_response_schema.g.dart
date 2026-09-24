@@ -12,7 +12,7 @@ MessageResponseSchema _$MessageResponseSchemaFromJson(
   'MessageResponseSchema',
   json,
   ($checkedConvert) {
-    final val = MessageResponseSchema._(
+    final val = MessageResponseSchema(
       id: $checkedConvert('id', (v) => v as String),
       channelId: $checkedConvert('channel_id', (v) => v as String),
       author: $checkedConvert(

@@ -9,7 +9,7 @@ part of 'webhook_token_response.dart';
 WebhookTokenResponse _$WebhookTokenResponseFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('WebhookTokenResponse', json, ($checkedConvert) {
-  final val = WebhookTokenResponse._(
+  final val = WebhookTokenResponse(
     id: $checkedConvert('id', (v) => v as String),
     guildId: $checkedConvert('guild_id', (v) => v as String),
     channelId: $checkedConvert('channel_id', (v) => v as String),

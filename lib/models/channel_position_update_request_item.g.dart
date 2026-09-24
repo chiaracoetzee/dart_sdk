@@ -12,7 +12,7 @@ ChannelPositionUpdateRequestItem _$ChannelPositionUpdateRequestItemFromJson(
   'ChannelPositionUpdateRequestItem',
   json,
   ($checkedConvert) {
-    final val = ChannelPositionUpdateRequestItem._(
+    final val = ChannelPositionUpdateRequestItem(
       id: $checkedConvert('id', (v) => v as String),
       position: $checkedConvert('position', (v) => (v as num?)?.toInt()),
       parentId: $checkedConvert('parent_id', (v) => v as String?),

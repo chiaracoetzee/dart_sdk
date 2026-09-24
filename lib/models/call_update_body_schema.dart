@@ -4,40 +4,37 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-part 'call_update_body_schema.g.dart';
+import 'json_nullable.dart';
 
-const Object _omit = Object();
+part 'call_update_body_schema.g.dart';
 
 @JsonSerializable(constructor: '_')
 class CallUpdateBodySchema {
-  const CallUpdateBodySchema({this.latitude, this.longitude})
-    : region = null,
-      _regionPresent = false;
-
-  const CallUpdateBodySchema._explicit({
-    Object? region = _omit,
+  CallUpdateBodySchema({
     this.latitude,
     this.longitude,
-  }) : region = identical(region, _omit) ? null : region as String?,
-       _regionPresent = !identical(region, _omit);
+    JsonNullable<String> region = const JsonNullable<String>.undefined(),
+  }) : region = region,
+       _regionValue = region.value,
+       _regionPresent = region.isPresent;
 
-  const CallUpdateBodySchema._({this.region, this.latitude, this.longitude})
-    : _regionPresent = false;
+  const CallUpdateBodySchema._({this.latitude, this.longitude})
+    : _regionValue = null,
+      region = const JsonNullable<String>.undefined(),
+      _regionPresent = false;
   factory CallUpdateBodySchema.patch(Map<String, Object?> json) =>
       CallUpdateBodySchema.fromJson(json);
 
   factory CallUpdateBodySchema.fromJson(Map<String, Object?> json) {
     final value = _$CallUpdateBodySchemaFromJson(json);
-    return CallUpdateBodySchema._explicit(
-      region: json.containsKey('region') ? value.region : _omit,
+    return CallUpdateBodySchema(
+      region: json.containsKey('region')
+          ? JsonNullable<String>.of(value._regionValue)
+          : const JsonNullable<String>.undefined(),
       latitude: value.latitude,
       longitude: value.longitude,
     );
   }
-
-  /// The preferred voice region for the call (1-64 characters). Omit or set to null for automatic region selection.
-  @JsonKey(includeIfNull: false)
-  final String? region;
 
   /// Client latitude used for automatic region selection
   @JsonKey(includeIfNull: false)
@@ -46,12 +43,16 @@ class CallUpdateBodySchema {
   /// Client longitude used for automatic region selection
   @JsonKey(includeIfNull: false)
   final String? longitude;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> region;
+  @JsonKey(includeIfNull: false, name: 'region')
+  final String? _regionValue;
   final bool _regionPresent;
 
   Map<String, Object?> toJson() {
     final json = _$CallUpdateBodySchemaToJson(this);
     if (_regionPresent) {
-      json.putIfAbsent('region', () => region);
+      json.putIfAbsent('region', () => _regionValue);
     }
     return json;
   }

@@ -4,85 +4,91 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'json_nullable.dart';
+
 import 'channel_overrides.dart';
 import 'user_guild_settings_update_request_mute_config.dart';
 import 'user_notification_settings_input.dart';
 
 part 'user_guild_settings_update_request.g.dart';
 
-const Object _omit = Object();
-
 @JsonSerializable(constructor: '_')
 class UserGuildSettingsUpdateRequest {
-  const UserGuildSettingsUpdateRequest({
+  UserGuildSettingsUpdateRequest({
     this.messageNotifications,
     this.muted,
     this.mobilePush,
     this.suppressEveryone,
     this.suppressRoles,
     this.hideMutedChannels,
-  }) : muteConfig = null,
-       _muteConfigPresent = false,
-       channelOverrides = null,
-       _channelOverridesPresent = false,
-       unreadBadges = null,
-       _unreadBadgesPresent = false;
-
-  const UserGuildSettingsUpdateRequest._explicit({
-    this.messageNotifications,
-    this.muted,
-    Object? muteConfig = _omit,
-    this.mobilePush,
-    this.suppressEveryone,
-    this.suppressRoles,
-    this.hideMutedChannels,
-    Object? channelOverrides = _omit,
-    Object? unreadBadges = _omit,
-  }) : muteConfig = identical(muteConfig, _omit)
-           ? null
-           : muteConfig as UserGuildSettingsUpdateRequestMuteConfig?,
-       _muteConfigPresent = !identical(muteConfig, _omit),
-       channelOverrides = identical(channelOverrides, _omit)
-           ? null
-           : channelOverrides as Map<String, ChannelOverrides>?,
-       _channelOverridesPresent = !identical(channelOverrides, _omit),
-       unreadBadges = identical(unreadBadges, _omit)
-           ? null
-           : unreadBadges as UserNotificationSettingsInput?,
-       _unreadBadgesPresent = !identical(unreadBadges, _omit);
+    JsonNullable<UserGuildSettingsUpdateRequestMuteConfig> muteConfig =
+        const JsonNullable<
+          UserGuildSettingsUpdateRequestMuteConfig
+        >.undefined(),
+    JsonNullable<Map<String, ChannelOverrides>> channelOverrides =
+        const JsonNullable<Map<String, ChannelOverrides>>.undefined(),
+    JsonNullable<UserNotificationSettingsInput> unreadBadges =
+        const JsonNullable<UserNotificationSettingsInput>.undefined(),
+  }) : muteConfig = muteConfig,
+       _muteConfigValue = muteConfig.value,
+       _muteConfigPresent = muteConfig.isPresent,
+       channelOverrides = channelOverrides,
+       _channelOverridesValue = channelOverrides.value,
+       _channelOverridesPresent = channelOverrides.isPresent,
+       unreadBadges = unreadBadges,
+       _unreadBadgesValue = unreadBadges.value,
+       _unreadBadgesPresent = unreadBadges.isPresent;
 
   const UserGuildSettingsUpdateRequest._({
     this.messageNotifications,
     this.muted,
-    this.muteConfig,
     this.mobilePush,
     this.suppressEveryone,
     this.suppressRoles,
     this.hideMutedChannels,
-    this.channelOverrides,
-    this.unreadBadges,
-  }) : _muteConfigPresent = false,
+  }) : _muteConfigValue = null,
+       _channelOverridesValue = null,
+       _unreadBadgesValue = null,
+       muteConfig =
+           const JsonNullable<
+             UserGuildSettingsUpdateRequestMuteConfig
+           >.undefined(),
+       _muteConfigPresent = false,
+       channelOverrides =
+           const JsonNullable<Map<String, ChannelOverrides>>.undefined(),
        _channelOverridesPresent = false,
+       unreadBadges =
+           const JsonNullable<UserNotificationSettingsInput>.undefined(),
        _unreadBadgesPresent = false;
   factory UserGuildSettingsUpdateRequest.patch(Map<String, Object?> json) =>
       UserGuildSettingsUpdateRequest.fromJson(json);
 
   factory UserGuildSettingsUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$UserGuildSettingsUpdateRequestFromJson(json);
-    return UserGuildSettingsUpdateRequest._explicit(
+    return UserGuildSettingsUpdateRequest(
       messageNotifications: value.messageNotifications,
       muted: value.muted,
-      muteConfig: json.containsKey('mute_config') ? value.muteConfig : _omit,
+      muteConfig: json.containsKey('mute_config')
+          ? JsonNullable<UserGuildSettingsUpdateRequestMuteConfig>.of(
+              value._muteConfigValue,
+            )
+          : const JsonNullable<
+              UserGuildSettingsUpdateRequestMuteConfig
+            >.undefined(),
       mobilePush: value.mobilePush,
       suppressEveryone: value.suppressEveryone,
       suppressRoles: value.suppressRoles,
       hideMutedChannels: value.hideMutedChannels,
       channelOverrides: json.containsKey('channel_overrides')
-          ? value.channelOverrides
-          : _omit,
+          ? JsonNullable<Map<String, ChannelOverrides>>.of(
+              value._channelOverridesValue,
+            )
+          : const JsonNullable<Map<String, ChannelOverrides>>.undefined(),
       unreadBadges: json.containsKey('unread_badges')
-          ? value.unreadBadges
-          : _omit,
+          ? JsonNullable<UserNotificationSettingsInput>.of(
+              value._unreadBadgesValue,
+            )
+          : const JsonNullable<UserNotificationSettingsInput>.undefined(),
     );
   }
 
@@ -93,10 +99,6 @@ class UserGuildSettingsUpdateRequest {
   /// Guild muted
   @JsonKey(includeIfNull: false)
   final bool? muted;
-
-  /// Guild mute configuration
-  @JsonKey(includeIfNull: false, name: 'mute_config')
-  final UserGuildSettingsUpdateRequestMuteConfig? muteConfig;
 
   /// Mobile push notifications enabled
   @JsonKey(includeIfNull: false, name: 'mobile_push')
@@ -113,28 +115,32 @@ class UserGuildSettingsUpdateRequest {
   /// Hide muted channels
   @JsonKey(includeIfNull: false, name: 'hide_muted_channels')
   final bool? hideMutedChannels;
-
-  /// Per-channel overrides
-  @JsonKey(includeIfNull: false, name: 'channel_overrides')
-  final Map<String, ChannelOverrides>? channelOverrides;
-
-  /// Default unread badges level for the guild
-  @JsonKey(includeIfNull: false, name: 'unread_badges')
-  final UserNotificationSettingsInput? unreadBadges;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<UserGuildSettingsUpdateRequestMuteConfig> muteConfig;
+  @JsonKey(includeIfNull: false, name: 'mute_config')
+  final UserGuildSettingsUpdateRequestMuteConfig? _muteConfigValue;
   final bool _muteConfigPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<Map<String, ChannelOverrides>> channelOverrides;
+  @JsonKey(includeIfNull: false, name: 'channel_overrides')
+  final Map<String, ChannelOverrides>? _channelOverridesValue;
   final bool _channelOverridesPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<UserNotificationSettingsInput> unreadBadges;
+  @JsonKey(includeIfNull: false, name: 'unread_badges')
+  final UserNotificationSettingsInput? _unreadBadgesValue;
   final bool _unreadBadgesPresent;
 
   Map<String, Object?> toJson() {
     final json = _$UserGuildSettingsUpdateRequestToJson(this);
     if (_muteConfigPresent) {
-      json.putIfAbsent('mute_config', () => muteConfig);
+      json.putIfAbsent('mute_config', () => _muteConfigValue);
     }
     if (_channelOverridesPresent) {
-      json.putIfAbsent('channel_overrides', () => channelOverrides);
+      json.putIfAbsent('channel_overrides', () => _channelOverridesValue);
     }
     if (_unreadBadgesPresent) {
-      json.putIfAbsent('unread_badges', () => unreadBadges);
+      json.putIfAbsent('unread_badges', () => _unreadBadgesValue);
     }
     return json;
   }

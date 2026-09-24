@@ -12,7 +12,7 @@ _$MessageResponseSchemaMessageReferenceFromJson(Map<String, dynamic> json) =>
       'MessageResponseSchemaMessageReference',
       json,
       ($checkedConvert) {
-        final val = MessageResponseSchemaMessageReference._(
+        final val = MessageResponseSchemaMessageReference(
           channelId: $checkedConvert('channel_id', (v) => v as String),
           messageId: $checkedConvert('message_id', (v) => v as String),
           type: $checkedConvert(

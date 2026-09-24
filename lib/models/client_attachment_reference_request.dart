@@ -9,40 +9,9 @@ import 'message_attachment_flags.dart';
 
 part 'client_attachment_reference_request.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class ClientAttachmentReferenceRequest {
-  const ClientAttachmentReferenceRequest({this.flags, this.id, this.filename})
-    : title = null,
-      _titlePresent = false,
-      description = null,
-      _descriptionPresent = false,
-      duration = null,
-      _durationPresent = false,
-      waveform = null,
-      _waveformPresent = false;
-
-  const ClientAttachmentReferenceRequest._explicit({
-    Object? title = _omit,
-    Object? description = _omit,
-    this.flags,
-    Object? duration = _omit,
-    Object? waveform = _omit,
-    this.id,
-    this.filename,
-  }) : title = identical(title, _omit) ? null : title as String?,
-       _titlePresent = !identical(title, _omit),
-       description = identical(description, _omit)
-           ? null
-           : description as String?,
-       _descriptionPresent = !identical(description, _omit),
-       duration = identical(duration, _omit) ? null : duration as Int32Type?,
-       _durationPresent = !identical(duration, _omit),
-       waveform = identical(waveform, _omit) ? null : waveform as String?,
-       _waveformPresent = !identical(waveform, _omit);
-
-  const ClientAttachmentReferenceRequest._({
+  const ClientAttachmentReferenceRequest({
     this.title,
     this.description,
     this.flags,
@@ -50,25 +19,11 @@ class ClientAttachmentReferenceRequest {
     this.waveform,
     this.id,
     this.filename,
-  }) : _titlePresent = false,
-       _descriptionPresent = false,
-       _durationPresent = false,
-       _waveformPresent = false;
-  factory ClientAttachmentReferenceRequest.patch(Map<String, Object?> json) =>
-      ClientAttachmentReferenceRequest.fromJson(json);
+  });
 
-  factory ClientAttachmentReferenceRequest.fromJson(Map<String, Object?> json) {
-    final value = _$ClientAttachmentReferenceRequestFromJson(json);
-    return ClientAttachmentReferenceRequest._explicit(
-      title: json.containsKey('title') ? value.title : _omit,
-      description: json.containsKey('description') ? value.description : _omit,
-      flags: value.flags,
-      duration: json.containsKey('duration') ? value.duration : _omit,
-      waveform: json.containsKey('waveform') ? value.waveform : _omit,
-      id: value.id,
-      filename: value.filename,
-    );
-  }
+  factory ClientAttachmentReferenceRequest.fromJson(
+    Map<String, Object?> json,
+  ) => _$ClientAttachmentReferenceRequestFromJson(json);
 
   /// A title for the attachment (1-1024 characters)
   @JsonKey(includeIfNull: false)
@@ -97,25 +52,7 @@ class ClientAttachmentReferenceRequest {
   /// A new filename for the attachment
   @JsonKey(includeIfNull: false)
   final String? filename;
-  final bool _titlePresent;
-  final bool _descriptionPresent;
-  final bool _durationPresent;
-  final bool _waveformPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$ClientAttachmentReferenceRequestToJson(this);
-    if (_titlePresent) {
-      json.putIfAbsent('title', () => title);
-    }
-    if (_descriptionPresent) {
-      json.putIfAbsent('description', () => description);
-    }
-    if (_durationPresent) {
-      json.putIfAbsent('duration', () => duration);
-    }
-    if (_waveformPresent) {
-      json.putIfAbsent('waveform', () => waveform);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() =>
+      _$ClientAttachmentReferenceRequestToJson(this);
 }

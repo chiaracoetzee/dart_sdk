@@ -4,68 +4,63 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'json_nullable.dart';
+
 import 'base64_image_type.dart';
 
 part 'guild_sticker_create_request.g.dart';
 
-const Object _omit = Object();
-
 @JsonSerializable(constructor: '_')
 class GuildStickerCreateRequest {
-  const GuildStickerCreateRequest({
+  GuildStickerCreateRequest({
     required this.name,
     required this.image,
     this.tags = const [],
-  }) : description = null,
-       _descriptionPresent = false;
-
-  const GuildStickerCreateRequest._explicit({
-    required this.name,
-    required this.image,
-    this.tags = const [],
-    Object? description = _omit,
-  }) : description = identical(description, _omit)
-           ? null
-           : description as String?,
-       _descriptionPresent = !identical(description, _omit);
+    JsonNullable<String> description = const JsonNullable<String>.undefined(),
+  }) : description = description,
+       _descriptionValue = description.value,
+       _descriptionPresent = description.isPresent;
 
   const GuildStickerCreateRequest._({
     required this.name,
     required this.image,
     this.tags = const [],
-    this.description,
-  }) : _descriptionPresent = false;
+  }) : _descriptionValue = null,
+       description = const JsonNullable<String>.undefined(),
+       _descriptionPresent = false;
   factory GuildStickerCreateRequest.patch(Map<String, Object?> json) =>
       GuildStickerCreateRequest.fromJson(json);
 
   factory GuildStickerCreateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildStickerCreateRequestFromJson(json);
-    return GuildStickerCreateRequest._explicit(
+    return GuildStickerCreateRequest(
       name: value.name,
       image: value.image,
       tags: value.tags,
-      description: json.containsKey('description') ? value.description : _omit,
+      description: json.containsKey('description')
+          ? JsonNullable<String>.of(value._descriptionValue)
+          : const JsonNullable<String>.undefined(),
     );
   }
 
   /// The name of the sticker (2-30 characters)
   final String name;
 
-  /// Description of the sticker (1-500 characters)
-  @JsonKey(includeIfNull: false)
-  final String? description;
-
   /// Array of autocomplete/suggestion tags (max 10 tags, each 1-30 characters)
   final List<String> tags;
 
   /// Base64-encoded image data for the sticker
   final Base64ImageType image;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> description;
+  @JsonKey(includeIfNull: false, name: 'description')
+  final String? _descriptionValue;
   final bool _descriptionPresent;
 
   Map<String, Object?> toJson() {
     final json = _$GuildStickerCreateRequestToJson(this);
     if (_descriptionPresent) {
-      json.putIfAbsent('description', () => description);
+      json.putIfAbsent('description', () => _descriptionValue);
     }
     return json;
   }

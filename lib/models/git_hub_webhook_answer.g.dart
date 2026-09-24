@@ -8,7 +8,7 @@ part of 'git_hub_webhook_answer.dart';
 
 GitHubWebhookAnswer _$GitHubWebhookAnswerFromJson(Map<String, dynamic> json) =>
     $checkedCreate('GitHubWebhookAnswer', json, ($checkedConvert) {
-      final val = GitHubWebhookAnswer._(
+      final val = GitHubWebhookAnswer(
         id: $checkedConvert('id', (v) => v as String),
         htmlUrl: $checkedConvert('html_url', (v) => v as String),
         user: $checkedConvert(

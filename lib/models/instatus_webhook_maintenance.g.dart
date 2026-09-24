@@ -12,7 +12,7 @@ InstatusWebhookMaintenance _$InstatusWebhookMaintenanceFromJson(
   'InstatusWebhookMaintenance',
   json,
   ($checkedConvert) {
-    final val = InstatusWebhookMaintenance._(
+    final val = InstatusWebhookMaintenance(
       id: $checkedConvert('id', (v) => v as String?),
       name: $checkedConvert('name', (v) => v as String?),
       url: $checkedConvert('url', (v) => v as String?),

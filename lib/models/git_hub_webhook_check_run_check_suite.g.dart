@@ -12,7 +12,7 @@ GitHubWebhookCheckRunCheckSuite _$GitHubWebhookCheckRunCheckSuiteFromJson(
   'GitHubWebhookCheckRunCheckSuite',
   json,
   ($checkedConvert) {
-    final val = GitHubWebhookCheckRunCheckSuite._(
+    final val = GitHubWebhookCheckRunCheckSuite(
       headSha: $checkedConvert('head_sha', (v) => v as String),
       app: $checkedConvert(
         'app',

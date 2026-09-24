@@ -12,7 +12,7 @@ ChannelOverridesMuteConfig _$ChannelOverridesMuteConfigFromJson(
   'ChannelOverridesMuteConfig',
   json,
   ($checkedConvert) {
-    final val = ChannelOverridesMuteConfig._(
+    final val = ChannelOverridesMuteConfig(
       selectedTimeWindow: $checkedConvert(
         'selected_time_window',
         (v) => (v as num).toInt(),

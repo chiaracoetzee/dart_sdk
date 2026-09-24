@@ -8,41 +8,16 @@ import 'discovery_application_response.dart';
 
 part 'discovery_status_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class DiscoveryStatusResponse {
   const DiscoveryStatusResponse({
     required this.eligible,
     required this.minMemberCount,
-  }) : application = null,
-       _applicationPresent = false;
-
-  const DiscoveryStatusResponse._explicit({
-    required this.eligible,
-    required this.minMemberCount,
-    Object? application = _omit,
-  }) : application = identical(application, _omit)
-           ? null
-           : application as DiscoveryApplicationResponse?,
-       _applicationPresent = !identical(application, _omit);
-
-  const DiscoveryStatusResponse._({
-    required this.eligible,
-    required this.minMemberCount,
     this.application,
-  }) : _applicationPresent = false;
-  factory DiscoveryStatusResponse.patch(Map<String, Object?> json) =>
-      DiscoveryStatusResponse.fromJson(json);
+  });
 
-  factory DiscoveryStatusResponse.fromJson(Map<String, Object?> json) {
-    final value = _$DiscoveryStatusResponseFromJson(json);
-    return DiscoveryStatusResponse._explicit(
-      eligible: value.eligible,
-      minMemberCount: value.minMemberCount,
-      application: json.containsKey('application') ? value.application : _omit,
-    );
-  }
+  factory DiscoveryStatusResponse.fromJson(Map<String, Object?> json) =>
+      _$DiscoveryStatusResponseFromJson(json);
 
   /// Current discovery application, if any
   @JsonKey(includeIfNull: false)
@@ -54,13 +29,6 @@ class DiscoveryStatusResponse {
   /// Minimum member count required for discovery eligibility
   @JsonKey(name: 'min_member_count')
   final num minMemberCount;
-  final bool _applicationPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$DiscoveryStatusResponseToJson(this);
-    if (_applicationPresent) {
-      json.putIfAbsent('application', () => application);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$DiscoveryStatusResponseToJson(this);
 }

@@ -8,60 +8,18 @@ import 'snowflake_string_type.dart';
 
 part 'custom_status_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class CustomStatusResponse {
-  const CustomStatusResponse({required this.emojiAnimated})
-    : text = null,
-      _textPresent = false,
-      expiresAt = null,
-      _expiresAtPresent = false,
-      emojiId = null,
-      _emojiIdPresent = false,
-      emojiName = null,
-      _emojiNamePresent = false;
-
-  const CustomStatusResponse._explicit({
-    required this.emojiAnimated,
-    Object? text = _omit,
-    Object? expiresAt = _omit,
-    Object? emojiId = _omit,
-    Object? emojiName = _omit,
-  }) : text = identical(text, _omit) ? null : text as String?,
-       _textPresent = !identical(text, _omit),
-       expiresAt = identical(expiresAt, _omit) ? null : expiresAt as DateTime?,
-       _expiresAtPresent = !identical(expiresAt, _omit),
-       emojiId = identical(emojiId, _omit)
-           ? null
-           : emojiId as SnowflakeStringType?,
-       _emojiIdPresent = !identical(emojiId, _omit),
-       emojiName = identical(emojiName, _omit) ? null : emojiName as String?,
-       _emojiNamePresent = !identical(emojiName, _omit);
-
-  const CustomStatusResponse._({
+  const CustomStatusResponse({
     required this.emojiAnimated,
     this.text,
     this.expiresAt,
     this.emojiId,
     this.emojiName,
-  }) : _textPresent = false,
-       _expiresAtPresent = false,
-       _emojiIdPresent = false,
-       _emojiNamePresent = false;
-  factory CustomStatusResponse.patch(Map<String, Object?> json) =>
-      CustomStatusResponse.fromJson(json);
+  });
 
-  factory CustomStatusResponse.fromJson(Map<String, Object?> json) {
-    final value = _$CustomStatusResponseFromJson(json);
-    return CustomStatusResponse._explicit(
-      emojiAnimated: value.emojiAnimated,
-      text: json.containsKey('text') ? value.text : _omit,
-      expiresAt: json.containsKey('expires_at') ? value.expiresAt : _omit,
-      emojiId: json.containsKey('emoji_id') ? value.emojiId : _omit,
-      emojiName: json.containsKey('emoji_name') ? value.emojiName : _omit,
-    );
-  }
+  factory CustomStatusResponse.fromJson(Map<String, Object?> json) =>
+      _$CustomStatusResponseFromJson(json);
 
   /// The custom status message text
   @JsonKey(includeIfNull: false)
@@ -82,25 +40,6 @@ class CustomStatusResponse {
   /// Whether the status emoji is animated
   @JsonKey(name: 'emoji_animated')
   final bool emojiAnimated;
-  final bool _textPresent;
-  final bool _expiresAtPresent;
-  final bool _emojiIdPresent;
-  final bool _emojiNamePresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$CustomStatusResponseToJson(this);
-    if (_textPresent) {
-      json.putIfAbsent('text', () => text);
-    }
-    if (_expiresAtPresent) {
-      json.putIfAbsent('expires_at', () => expiresAt);
-    }
-    if (_emojiIdPresent) {
-      json.putIfAbsent('emoji_id', () => emojiId);
-    }
-    if (_emojiNamePresent) {
-      json.putIfAbsent('emoji_name', () => emojiName);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$CustomStatusResponseToJson(this);
 }

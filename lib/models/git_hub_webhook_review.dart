@@ -8,43 +8,17 @@ import 'git_hub_webhook_review_user.dart';
 
 part 'git_hub_webhook_review.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class GitHubWebhookReview {
   const GitHubWebhookReview({
     required this.user,
     required this.htmlUrl,
     required this.state,
-  }) : body = null,
-       _bodyPresent = false;
-
-  const GitHubWebhookReview._explicit({
-    required this.user,
-    required this.htmlUrl,
-    required this.state,
-    Object? body = _omit,
-  }) : body = identical(body, _omit) ? null : body as String?,
-       _bodyPresent = !identical(body, _omit);
-
-  const GitHubWebhookReview._({
-    required this.user,
-    required this.htmlUrl,
-    required this.state,
     this.body,
-  }) : _bodyPresent = false;
-  factory GitHubWebhookReview.patch(Map<String, Object?> json) =>
-      GitHubWebhookReview.fromJson(json);
+  });
 
-  factory GitHubWebhookReview.fromJson(Map<String, Object?> json) {
-    final value = _$GitHubWebhookReviewFromJson(json);
-    return GitHubWebhookReview._explicit(
-      user: value.user,
-      htmlUrl: value.htmlUrl,
-      state: value.state,
-      body: json.containsKey('body') ? value.body : _omit,
-    );
-  }
+  factory GitHubWebhookReview.fromJson(Map<String, Object?> json) =>
+      _$GitHubWebhookReviewFromJson(json);
 
   final GitHubWebhookReviewUser user;
   @JsonKey(includeIfNull: false)
@@ -52,13 +26,6 @@ class GitHubWebhookReview {
   @JsonKey(name: 'html_url')
   final String htmlUrl;
   final String state;
-  final bool _bodyPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$GitHubWebhookReviewToJson(this);
-    if (_bodyPresent) {
-      json.putIfAbsent('body', () => body);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$GitHubWebhookReviewToJson(this);
 }

@@ -10,9 +10,7 @@ import 'user_partial_response.dart';
 
 part 'group_dm_invite_response.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class GroupDmInviteResponse {
   const GroupDmInviteResponse({
     required this.code,
@@ -20,51 +18,12 @@ class GroupDmInviteResponse {
     required this.type,
     required this.channel,
     required this.memberCount,
-  }) : inviter = null,
-       _inviterPresent = false,
-       expiresAt = null,
-       _expiresAtPresent = false;
-
-  const GroupDmInviteResponse._explicit({
-    required this.code,
-    required this.temporary,
-    required this.type,
-    required this.channel,
-    required this.memberCount,
-    Object? inviter = _omit,
-    Object? expiresAt = _omit,
-  }) : inviter = identical(inviter, _omit)
-           ? null
-           : inviter as UserPartialResponse?,
-       _inviterPresent = !identical(inviter, _omit),
-       expiresAt = identical(expiresAt, _omit) ? null : expiresAt as DateTime?,
-       _expiresAtPresent = !identical(expiresAt, _omit);
-
-  const GroupDmInviteResponse._({
-    required this.code,
-    required this.temporary,
-    required this.type,
-    required this.channel,
-    required this.memberCount,
     this.inviter,
     this.expiresAt,
-  }) : _inviterPresent = false,
-       _expiresAtPresent = false;
-  factory GroupDmInviteResponse.patch(Map<String, Object?> json) =>
-      GroupDmInviteResponse.fromJson(json);
+  });
 
-  factory GroupDmInviteResponse.fromJson(Map<String, Object?> json) {
-    final value = _$GroupDmInviteResponseFromJson(json);
-    return GroupDmInviteResponse._explicit(
-      code: value.code,
-      temporary: value.temporary,
-      type: value.type,
-      channel: value.channel,
-      memberCount: value.memberCount,
-      inviter: json.containsKey('inviter') ? value.inviter : _omit,
-      expiresAt: json.containsKey('expires_at') ? value.expiresAt : _omit,
-    );
-  }
+  factory GroupDmInviteResponse.fromJson(Map<String, Object?> json) =>
+      _$GroupDmInviteResponseFromJson(json);
 
   /// The unique invite code
   final String code;
@@ -89,17 +48,6 @@ class GroupDmInviteResponse {
   /// The current member count of the group DM
   @JsonKey(name: 'member_count')
   final Int32Type memberCount;
-  final bool _inviterPresent;
-  final bool _expiresAtPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$GroupDmInviteResponseToJson(this);
-    if (_inviterPresent) {
-      json.putIfAbsent('inviter', () => inviter);
-    }
-    if (_expiresAtPresent) {
-      json.putIfAbsent('expires_at', () => expiresAt);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() => _$GroupDmInviteResponseToJson(this);
 }

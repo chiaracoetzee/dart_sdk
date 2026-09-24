@@ -9,7 +9,7 @@ part of 'message_response_schema_call.dart';
 MessageResponseSchemaCall _$MessageResponseSchemaCallFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('MessageResponseSchemaCall', json, ($checkedConvert) {
-  final val = MessageResponseSchemaCall._(
+  final val = MessageResponseSchemaCall(
     participants: $checkedConvert(
       'participants',
       (v) => (v as List<dynamic>).map((e) => e as String).toList(),

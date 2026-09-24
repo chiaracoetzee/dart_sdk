@@ -12,7 +12,7 @@ WebhookMessageRequest _$WebhookMessageRequestFromJson(
   'WebhookMessageRequest',
   json,
   ($checkedConvert) {
-    final val = WebhookMessageRequest._(
+    final val = WebhookMessageRequest(
       flags: $checkedConvert('flags', (v) => (v as num?)?.toInt() ?? 0),
       content: $checkedConvert('content', (v) => v as String?),
       embeds: $checkedConvert(

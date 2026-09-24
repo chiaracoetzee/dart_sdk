@@ -12,7 +12,7 @@ ApplicationPublicResponse _$ApplicationPublicResponseFromJson(
   'ApplicationPublicResponse',
   json,
   ($checkedConvert) {
-    final val = ApplicationPublicResponse._(
+    final val = ApplicationPublicResponse(
       id: $checkedConvert('id', (v) => v as String),
       name: $checkedConvert('name', (v) => v as String),
       icon: $checkedConvert('icon', (v) => v as String?),

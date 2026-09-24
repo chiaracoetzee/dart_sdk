@@ -9,7 +9,7 @@ part of 'channel_pin_response_message_call.dart';
 ChannelPinResponseMessageCall _$ChannelPinResponseMessageCallFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('ChannelPinResponseMessageCall', json, ($checkedConvert) {
-  final val = ChannelPinResponseMessageCall._(
+  final val = ChannelPinResponseMessageCall(
     participants: $checkedConvert(
       'participants',
       (v) => (v as List<dynamic>).map((e) => e as String).toList(),

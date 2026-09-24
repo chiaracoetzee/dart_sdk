@@ -4,45 +4,39 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-part 'application_create_request.g.dart';
+import 'json_nullable.dart';
 
-const Object _omit = Object();
+part 'application_create_request.g.dart';
 
 @JsonSerializable(constructor: '_')
 class ApplicationCreateRequest {
-  const ApplicationCreateRequest({
+  ApplicationCreateRequest({
     required this.name,
     this.botPublic,
     this.botRequireCodeGrant,
-  }) : redirectUris = null,
-       _redirectUrisPresent = false;
-
-  const ApplicationCreateRequest._explicit({
-    required this.name,
-    Object? redirectUris = _omit,
-    this.botPublic,
-    this.botRequireCodeGrant,
-  }) : redirectUris = identical(redirectUris, _omit)
-           ? null
-           : redirectUris as List<String>?,
-       _redirectUrisPresent = !identical(redirectUris, _omit);
+    JsonNullable<List<String>> redirectUris =
+        const JsonNullable<List<String>>.undefined(),
+  }) : redirectUris = redirectUris,
+       _redirectUrisValue = redirectUris.value,
+       _redirectUrisPresent = redirectUris.isPresent;
 
   const ApplicationCreateRequest._({
     required this.name,
-    this.redirectUris,
     this.botPublic,
     this.botRequireCodeGrant,
-  }) : _redirectUrisPresent = false;
+  }) : _redirectUrisValue = null,
+       redirectUris = const JsonNullable<List<String>>.undefined(),
+       _redirectUrisPresent = false;
   factory ApplicationCreateRequest.patch(Map<String, Object?> json) =>
       ApplicationCreateRequest.fromJson(json);
 
   factory ApplicationCreateRequest.fromJson(Map<String, Object?> json) {
     final value = _$ApplicationCreateRequestFromJson(json);
-    return ApplicationCreateRequest._explicit(
+    return ApplicationCreateRequest(
       name: value.name,
       redirectUris: json.containsKey('redirect_uris')
-          ? value.redirectUris
-          : _omit,
+          ? JsonNullable<List<String>>.of(value._redirectUrisValue)
+          : const JsonNullable<List<String>>.undefined(),
       botPublic: value.botPublic,
       botRequireCodeGrant: value.botRequireCodeGrant,
     );
@@ -51,10 +45,6 @@ class ApplicationCreateRequest {
   /// The name of the application
   final String name;
 
-  /// The redirect URIs for OAuth2 flows
-  @JsonKey(includeIfNull: false, name: 'redirect_uris')
-  final List<String>? redirectUris;
-
   /// Whether the bot can be invited by anyone
   @JsonKey(includeIfNull: false, name: 'bot_public')
   final bool? botPublic;
@@ -62,12 +52,16 @@ class ApplicationCreateRequest {
   /// Whether the bot requires OAuth2 code grant
   @JsonKey(includeIfNull: false, name: 'bot_require_code_grant')
   final bool? botRequireCodeGrant;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<List<String>> redirectUris;
+  @JsonKey(includeIfNull: false, name: 'redirect_uris')
+  final List<String>? _redirectUrisValue;
   final bool _redirectUrisPresent;
 
   Map<String, Object?> toJson() {
     final json = _$ApplicationCreateRequestToJson(this);
     if (_redirectUrisPresent) {
-      json.putIfAbsent('redirect_uris', () => redirectUris);
+      json.putIfAbsent('redirect_uris', () => _redirectUrisValue);
     }
     return json;
   }

@@ -12,7 +12,7 @@ GuildInviteMetadataResponse _$GuildInviteMetadataResponseFromJson(
   'GuildInviteMetadataResponse',
   json,
   ($checkedConvert) {
-    final val = GuildInviteMetadataResponse._(
+    final val = GuildInviteMetadataResponse(
       code: $checkedConvert('code', (v) => v as String),
       temporary: $checkedConvert('temporary', (v) => v as bool),
       type: $checkedConvert('type', (v) => v as num),

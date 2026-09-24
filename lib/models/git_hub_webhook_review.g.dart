@@ -8,7 +8,7 @@ part of 'git_hub_webhook_review.dart';
 
 GitHubWebhookReview _$GitHubWebhookReviewFromJson(Map<String, dynamic> json) =>
     $checkedCreate('GitHubWebhookReview', json, ($checkedConvert) {
-      final val = GitHubWebhookReview._(
+      final val = GitHubWebhookReview(
         user: $checkedConvert(
           'user',
           (v) => GitHubWebhookReviewUser.fromJson(v as Map<String, dynamic>),

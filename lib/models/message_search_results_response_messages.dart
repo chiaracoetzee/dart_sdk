@@ -19,122 +19,9 @@ import 'message_search_results_response_messages_call.dart';
 
 part 'message_search_results_response_messages.g.dart';
 
-const Object _omit = Object();
-
-@JsonSerializable(constructor: '_')
+@JsonSerializable()
 class MessageSearchResultsResponseMessages {
   const MessageSearchResultsResponseMessages({
-    required this.id,
-    required this.channelId,
-    required this.author,
-    required this.type,
-    required this.flags,
-    required this.content,
-    required this.timestamp,
-    required this.pinned,
-    required this.mentionEveryone,
-    required this.tts,
-    required this.mentions,
-    required this.mentionRoles,
-  }) : webhookId = null,
-       _webhookIdPresent = false,
-       editedTimestamp = null,
-       _editedTimestampPresent = false,
-       mentionChannels = null,
-       _mentionChannelsPresent = false,
-       users = null,
-       _usersPresent = false,
-       embeds = null,
-       _embedsPresent = false,
-       attachments = null,
-       _attachmentsPresent = false,
-       stickers = null,
-       _stickersPresent = false,
-       reactions = null,
-       _reactionsPresent = false,
-       messageReference = null,
-       _messageReferencePresent = false,
-       messageSnapshots = null,
-       _messageSnapshotsPresent = false,
-       nonce = null,
-       _noncePresent = false,
-       call = null,
-       _callPresent = false;
-
-  const MessageSearchResultsResponseMessages._explicit({
-    required this.id,
-    required this.channelId,
-    required this.author,
-    required this.type,
-    required this.flags,
-    required this.content,
-    required this.timestamp,
-    required this.pinned,
-    required this.mentionEveryone,
-    required this.tts,
-    required this.mentions,
-    required this.mentionRoles,
-    Object? webhookId = _omit,
-    Object? editedTimestamp = _omit,
-    Object? mentionChannels = _omit,
-    Object? users = _omit,
-    Object? embeds = _omit,
-    Object? attachments = _omit,
-    Object? stickers = _omit,
-    Object? reactions = _omit,
-    Object? messageReference = _omit,
-    Object? messageSnapshots = _omit,
-    Object? nonce = _omit,
-    Object? call = _omit,
-  }) : webhookId = identical(webhookId, _omit)
-           ? null
-           : webhookId as SnowflakeStringType?,
-       _webhookIdPresent = !identical(webhookId, _omit),
-       editedTimestamp = identical(editedTimestamp, _omit)
-           ? null
-           : editedTimestamp as DateTime?,
-       _editedTimestampPresent = !identical(editedTimestamp, _omit),
-       mentionChannels = identical(mentionChannels, _omit)
-           ? null
-           : mentionChannels as List<MessageChannelMentionResponse>?,
-       _mentionChannelsPresent = !identical(mentionChannels, _omit),
-       users = identical(users, _omit)
-           ? null
-           : users as List<UserPartialResponse>?,
-       _usersPresent = !identical(users, _omit),
-       embeds = identical(embeds, _omit)
-           ? null
-           : embeds as List<MessageEmbedResponse>?,
-       _embedsPresent = !identical(embeds, _omit),
-       attachments = identical(attachments, _omit)
-           ? null
-           : attachments as List<MessageAttachmentResponse>?,
-       _attachmentsPresent = !identical(attachments, _omit),
-       stickers = identical(stickers, _omit)
-           ? null
-           : stickers as List<MessageStickerResponse>?,
-       _stickersPresent = !identical(stickers, _omit),
-       reactions = identical(reactions, _omit)
-           ? null
-           : reactions as List<MessageReactionResponse>?,
-       _reactionsPresent = !identical(reactions, _omit),
-       messageReference = identical(messageReference, _omit)
-           ? null
-           : messageReference
-                 as MessageSearchResultsResponseMessagesMessageReference?,
-       _messageReferencePresent = !identical(messageReference, _omit),
-       messageSnapshots = identical(messageSnapshots, _omit)
-           ? null
-           : messageSnapshots as List<MessageSnapshotResponse>?,
-       _messageSnapshotsPresent = !identical(messageSnapshots, _omit),
-       nonce = identical(nonce, _omit) ? null : nonce as String?,
-       _noncePresent = !identical(nonce, _omit),
-       call = identical(call, _omit)
-           ? null
-           : call as MessageSearchResultsResponseMessagesCall?,
-       _callPresent = !identical(call, _omit);
-
-  const MessageSearchResultsResponseMessages._({
     required this.id,
     required this.channelId,
     required this.author,
@@ -159,61 +46,11 @@ class MessageSearchResultsResponseMessages {
     this.messageSnapshots,
     this.nonce,
     this.call,
-  }) : _webhookIdPresent = false,
-       _editedTimestampPresent = false,
-       _mentionChannelsPresent = false,
-       _usersPresent = false,
-       _embedsPresent = false,
-       _attachmentsPresent = false,
-       _stickersPresent = false,
-       _reactionsPresent = false,
-       _messageReferencePresent = false,
-       _messageSnapshotsPresent = false,
-       _noncePresent = false,
-       _callPresent = false;
-  factory MessageSearchResultsResponseMessages.patch(
-    Map<String, Object?> json,
-  ) => MessageSearchResultsResponseMessages.fromJson(json);
+  });
 
   factory MessageSearchResultsResponseMessages.fromJson(
     Map<String, Object?> json,
-  ) {
-    final value = _$MessageSearchResultsResponseMessagesFromJson(json);
-    return MessageSearchResultsResponseMessages._explicit(
-      id: value.id,
-      channelId: value.channelId,
-      author: value.author,
-      type: value.type,
-      flags: value.flags,
-      content: value.content,
-      timestamp: value.timestamp,
-      pinned: value.pinned,
-      mentionEveryone: value.mentionEveryone,
-      tts: value.tts,
-      mentions: value.mentions,
-      mentionRoles: value.mentionRoles,
-      webhookId: json.containsKey('webhook_id') ? value.webhookId : _omit,
-      editedTimestamp: json.containsKey('edited_timestamp')
-          ? value.editedTimestamp
-          : _omit,
-      mentionChannels: json.containsKey('mention_channels')
-          ? value.mentionChannels
-          : _omit,
-      users: json.containsKey('users') ? value.users : _omit,
-      embeds: json.containsKey('embeds') ? value.embeds : _omit,
-      attachments: json.containsKey('attachments') ? value.attachments : _omit,
-      stickers: json.containsKey('stickers') ? value.stickers : _omit,
-      reactions: json.containsKey('reactions') ? value.reactions : _omit,
-      messageReference: json.containsKey('message_reference')
-          ? value.messageReference
-          : _omit,
-      messageSnapshots: json.containsKey('message_snapshots')
-          ? value.messageSnapshots
-          : _omit,
-      nonce: json.containsKey('nonce') ? value.nonce : _omit,
-      call: json.containsKey('call') ? value.call : _omit,
-    );
-  }
+  ) => _$MessageSearchResultsResponseMessagesFromJson(json);
 
   /// The unique identifier (snowflake) for this message
   final SnowflakeStringType id;
@@ -299,57 +136,7 @@ class MessageSearchResultsResponseMessages {
   /// Call information if this message represents a call
   @JsonKey(includeIfNull: false)
   final MessageSearchResultsResponseMessagesCall? call;
-  final bool _webhookIdPresent;
-  final bool _editedTimestampPresent;
-  final bool _mentionChannelsPresent;
-  final bool _usersPresent;
-  final bool _embedsPresent;
-  final bool _attachmentsPresent;
-  final bool _stickersPresent;
-  final bool _reactionsPresent;
-  final bool _messageReferencePresent;
-  final bool _messageSnapshotsPresent;
-  final bool _noncePresent;
-  final bool _callPresent;
 
-  Map<String, Object?> toJson() {
-    final json = _$MessageSearchResultsResponseMessagesToJson(this);
-    if (_webhookIdPresent) {
-      json.putIfAbsent('webhook_id', () => webhookId);
-    }
-    if (_editedTimestampPresent) {
-      json.putIfAbsent('edited_timestamp', () => editedTimestamp);
-    }
-    if (_mentionChannelsPresent) {
-      json.putIfAbsent('mention_channels', () => mentionChannels);
-    }
-    if (_usersPresent) {
-      json.putIfAbsent('users', () => users);
-    }
-    if (_embedsPresent) {
-      json.putIfAbsent('embeds', () => embeds);
-    }
-    if (_attachmentsPresent) {
-      json.putIfAbsent('attachments', () => attachments);
-    }
-    if (_stickersPresent) {
-      json.putIfAbsent('stickers', () => stickers);
-    }
-    if (_reactionsPresent) {
-      json.putIfAbsent('reactions', () => reactions);
-    }
-    if (_messageReferencePresent) {
-      json.putIfAbsent('message_reference', () => messageReference);
-    }
-    if (_messageSnapshotsPresent) {
-      json.putIfAbsent('message_snapshots', () => messageSnapshots);
-    }
-    if (_noncePresent) {
-      json.putIfAbsent('nonce', () => nonce);
-    }
-    if (_callPresent) {
-      json.putIfAbsent('call', () => call);
-    }
-    return json;
-  }
+  Map<String, Object?> toJson() =>
+      _$MessageSearchResultsResponseMessagesToJson(this);
 }

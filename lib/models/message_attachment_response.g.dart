@@ -12,7 +12,7 @@ MessageAttachmentResponse _$MessageAttachmentResponseFromJson(
   'MessageAttachmentResponse',
   json,
   ($checkedConvert) {
-    final val = MessageAttachmentResponse._(
+    final val = MessageAttachmentResponse(
       id: $checkedConvert('id', (v) => v as String),
       filename: $checkedConvert('filename', (v) => v as String),
       size: $checkedConvert('size', (v) => (v as num).toInt()),

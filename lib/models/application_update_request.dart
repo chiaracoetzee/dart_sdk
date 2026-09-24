@@ -4,47 +4,41 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-part 'application_update_request.g.dart';
+import 'json_nullable.dart';
 
-const Object _omit = Object();
+part 'application_update_request.g.dart';
 
 @JsonSerializable(constructor: '_')
 class ApplicationUpdateRequest {
-  const ApplicationUpdateRequest({
+  ApplicationUpdateRequest({
     this.name,
     this.botPublic,
     this.botRequireCodeGrant,
-  }) : redirectUris = null,
-       _redirectUrisPresent = false;
-
-  const ApplicationUpdateRequest._explicit({
-    this.name,
-    this.botPublic,
-    this.botRequireCodeGrant,
-    Object? redirectUris = _omit,
-  }) : redirectUris = identical(redirectUris, _omit)
-           ? null
-           : redirectUris as List<String>?,
-       _redirectUrisPresent = !identical(redirectUris, _omit);
+    JsonNullable<List<String>> redirectUris =
+        const JsonNullable<List<String>>.undefined(),
+  }) : redirectUris = redirectUris,
+       _redirectUrisValue = redirectUris.value,
+       _redirectUrisPresent = redirectUris.isPresent;
 
   const ApplicationUpdateRequest._({
     this.name,
     this.botPublic,
     this.botRequireCodeGrant,
-    this.redirectUris,
-  }) : _redirectUrisPresent = false;
+  }) : _redirectUrisValue = null,
+       redirectUris = const JsonNullable<List<String>>.undefined(),
+       _redirectUrisPresent = false;
   factory ApplicationUpdateRequest.patch(Map<String, Object?> json) =>
       ApplicationUpdateRequest.fromJson(json);
 
   factory ApplicationUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$ApplicationUpdateRequestFromJson(json);
-    return ApplicationUpdateRequest._explicit(
+    return ApplicationUpdateRequest(
       name: value.name,
       botPublic: value.botPublic,
       botRequireCodeGrant: value.botRequireCodeGrant,
       redirectUris: json.containsKey('redirect_uris')
-          ? value.redirectUris
-          : _omit,
+          ? JsonNullable<List<String>>.of(value._redirectUrisValue)
+          : const JsonNullable<List<String>>.undefined(),
     );
   }
 
@@ -59,16 +53,16 @@ class ApplicationUpdateRequest {
   /// Whether the bot requires OAuth2 code grant
   @JsonKey(includeIfNull: false, name: 'bot_require_code_grant')
   final bool? botRequireCodeGrant;
-
-  /// The redirect URIs for OAuth2 flows
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<List<String>> redirectUris;
   @JsonKey(includeIfNull: false, name: 'redirect_uris')
-  final List<String>? redirectUris;
+  final List<String>? _redirectUrisValue;
   final bool _redirectUrisPresent;
 
   Map<String, Object?> toJson() {
     final json = _$ApplicationUpdateRequestToJson(this);
     if (_redirectUrisPresent) {
-      json.putIfAbsent('redirect_uris', () => redirectUris);
+      json.putIfAbsent('redirect_uris', () => _redirectUrisValue);
     }
     return json;
   }

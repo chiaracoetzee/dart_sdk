@@ -11,7 +11,7 @@ GuildBanResponse _$GuildBanResponseFromJson(Map<String, dynamic> json) =>
       'GuildBanResponse',
       json,
       ($checkedConvert) {
-        final val = GuildBanResponse._(
+        final val = GuildBanResponse(
           user: $checkedConvert(
             'user',
             (v) => UserPartialResponse.fromJson(v as Map<String, dynamic>),

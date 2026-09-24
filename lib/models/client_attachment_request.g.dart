@@ -9,7 +9,7 @@ part of 'client_attachment_request.dart';
 ClientAttachmentRequest _$ClientAttachmentRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('ClientAttachmentRequest', json, ($checkedConvert) {
-  final val = ClientAttachmentRequest._(
+  final val = ClientAttachmentRequest(
     id: $checkedConvert('id', (v) => (v as num).toInt()),
     filename: $checkedConvert('filename', (v) => v as String),
     title: $checkedConvert('title', (v) => v as String?),
