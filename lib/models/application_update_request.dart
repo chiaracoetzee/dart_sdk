@@ -14,6 +14,13 @@ class ApplicationUpdateRequest {
     this.name,
     this.botPublic,
     this.botRequireCodeGrant,
+  }) : redirectUris = null,
+       _redirectUrisPresent = false;
+
+  const ApplicationUpdateRequest._explicit({
+    this.name,
+    this.botPublic,
+    this.botRequireCodeGrant,
     Object? redirectUris = _omit,
   }) : redirectUris = identical(redirectUris, _omit)
            ? null
@@ -26,9 +33,12 @@ class ApplicationUpdateRequest {
     this.botRequireCodeGrant,
     this.redirectUris,
   }) : _redirectUrisPresent = false;
+  factory ApplicationUpdateRequest.patch(Map<String, Object?> json) =>
+      ApplicationUpdateRequest.fromJson(json);
+
   factory ApplicationUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$ApplicationUpdateRequestFromJson(json);
-    return ApplicationUpdateRequest(
+    return ApplicationUpdateRequest._explicit(
       name: value.name,
       botPublic: value.botPublic,
       botRequireCodeGrant: value.botRequireCodeGrant,

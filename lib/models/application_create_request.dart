@@ -12,6 +12,13 @@ const Object _omit = Object();
 class ApplicationCreateRequest {
   const ApplicationCreateRequest({
     required this.name,
+    this.botPublic,
+    this.botRequireCodeGrant,
+  }) : redirectUris = null,
+       _redirectUrisPresent = false;
+
+  const ApplicationCreateRequest._explicit({
+    required this.name,
     Object? redirectUris = _omit,
     this.botPublic,
     this.botRequireCodeGrant,
@@ -26,9 +33,12 @@ class ApplicationCreateRequest {
     this.botPublic,
     this.botRequireCodeGrant,
   }) : _redirectUrisPresent = false;
+  factory ApplicationCreateRequest.patch(Map<String, Object?> json) =>
+      ApplicationCreateRequest.fromJson(json);
+
   factory ApplicationCreateRequest.fromJson(Map<String, Object?> json) {
     final value = _$ApplicationCreateRequestFromJson(json);
-    return ApplicationCreateRequest(
+    return ApplicationCreateRequest._explicit(
       name: value.name,
       redirectUris: json.containsKey('redirect_uris')
           ? value.redirectUris

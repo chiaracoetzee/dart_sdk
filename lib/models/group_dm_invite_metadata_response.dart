@@ -23,6 +23,20 @@ class GroupDmInviteMetadataResponse {
     required this.createdAt,
     required this.uses,
     required this.maxUses,
+  }) : inviter = null,
+       _inviterPresent = false,
+       expiresAt = null,
+       _expiresAtPresent = false;
+
+  const GroupDmInviteMetadataResponse._explicit({
+    required this.code,
+    required this.temporary,
+    required this.type,
+    required this.channel,
+    required this.memberCount,
+    required this.createdAt,
+    required this.uses,
+    required this.maxUses,
     Object? inviter = _omit,
     Object? expiresAt = _omit,
   }) : inviter = identical(inviter, _omit)
@@ -45,9 +59,12 @@ class GroupDmInviteMetadataResponse {
     this.expiresAt,
   }) : _inviterPresent = false,
        _expiresAtPresent = false;
+  factory GroupDmInviteMetadataResponse.patch(Map<String, Object?> json) =>
+      GroupDmInviteMetadataResponse.fromJson(json);
+
   factory GroupDmInviteMetadataResponse.fromJson(Map<String, Object?> json) {
     final value = _$GroupDmInviteMetadataResponseFromJson(json);
-    return GroupDmInviteMetadataResponse(
+    return GroupDmInviteMetadataResponse._explicit(
       code: value.code,
       temporary: value.temporary,
       type: value.type,

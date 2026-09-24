@@ -10,7 +10,11 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class CallUpdateBodySchema {
-  const CallUpdateBodySchema({
+  const CallUpdateBodySchema({this.latitude, this.longitude})
+    : region = null,
+      _regionPresent = false;
+
+  const CallUpdateBodySchema._explicit({
     Object? region = _omit,
     this.latitude,
     this.longitude,
@@ -19,9 +23,12 @@ class CallUpdateBodySchema {
 
   const CallUpdateBodySchema._({this.region, this.latitude, this.longitude})
     : _regionPresent = false;
+  factory CallUpdateBodySchema.patch(Map<String, Object?> json) =>
+      CallUpdateBodySchema.fromJson(json);
+
   factory CallUpdateBodySchema.fromJson(Map<String, Object?> json) {
     final value = _$CallUpdateBodySchemaFromJson(json);
-    return CallUpdateBodySchema(
+    return CallUpdateBodySchema._explicit(
       region: json.containsKey('region') ? value.region : _omit,
       latitude: value.latitude,
       longitude: value.longitude,

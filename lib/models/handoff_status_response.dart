@@ -13,7 +13,15 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class HandoffStatusResponse {
-  const HandoffStatusResponse({
+  const HandoffStatusResponse({required this.status})
+    : token = null,
+      _tokenPresent = false,
+      userId = null,
+      _userIdPresent = false,
+      user = null,
+      _userPresent = false;
+
+  const HandoffStatusResponse._explicit({
     required this.status,
     Object? token = _omit,
     Object? userId = _omit,
@@ -35,9 +43,12 @@ class HandoffStatusResponse {
   }) : _tokenPresent = false,
        _userIdPresent = false,
        _userPresent = false;
+  factory HandoffStatusResponse.patch(Map<String, Object?> json) =>
+      HandoffStatusResponse.fromJson(json);
+
   factory HandoffStatusResponse.fromJson(Map<String, Object?> json) {
     final value = _$HandoffStatusResponseFromJson(json);
-    return HandoffStatusResponse(
+    return HandoffStatusResponse._explicit(
       status: value.status,
       token: json.containsKey('token') ? value.token : _omit,
       userId: json.containsKey('user_id') ? value.userId : _omit,

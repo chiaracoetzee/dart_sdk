@@ -21,6 +21,27 @@ const Object _omit = Object();
 class WebhookMessageRequest {
   const WebhookMessageRequest({
     this.flags = 0,
+    this.embeds,
+    this.nonce,
+    this.tts,
+    this.attachments,
+  }) : content = null,
+       _contentPresent = false,
+       messageReference = null,
+       _messageReferencePresent = false,
+       allowedMentions = null,
+       _allowedMentionsPresent = false,
+       favoriteMemeId = null,
+       _favoriteMemeIdPresent = false,
+       stickerIds = null,
+       _stickerIdsPresent = false,
+       username = null,
+       _usernamePresent = false,
+       avatarUrl = null,
+       _avatarUrlPresent = false;
+
+  const WebhookMessageRequest._explicit({
+    this.flags = 0,
     Object? content = _omit,
     this.embeds,
     Object? messageReference = _omit,
@@ -77,9 +98,12 @@ class WebhookMessageRequest {
        _stickerIdsPresent = false,
        _usernamePresent = false,
        _avatarUrlPresent = false;
+  factory WebhookMessageRequest.patch(Map<String, Object?> json) =>
+      WebhookMessageRequest.fromJson(json);
+
   factory WebhookMessageRequest.fromJson(Map<String, Object?> json) {
     final value = _$WebhookMessageRequestFromJson(json);
-    return WebhookMessageRequest(
+    return WebhookMessageRequest._explicit(
       flags: value.flags,
       content: json.containsKey('content') ? value.content : _omit,
       embeds: value.embeds,

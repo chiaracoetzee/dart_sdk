@@ -20,6 +20,15 @@ class GitHubWebhookIssue {
     required this.htmlUrl,
     required this.user,
     required this.title,
+  }) : body = null,
+       _bodyPresent = false;
+
+  const GitHubWebhookIssue._explicit({
+    required this.id,
+    required this.number,
+    required this.htmlUrl,
+    required this.user,
+    required this.title,
     Object? body = _omit,
   }) : body = identical(body, _omit) ? null : body as String?,
        _bodyPresent = !identical(body, _omit);
@@ -32,9 +41,12 @@ class GitHubWebhookIssue {
     required this.title,
     this.body,
   }) : _bodyPresent = false;
+  factory GitHubWebhookIssue.patch(Map<String, Object?> json) =>
+      GitHubWebhookIssue.fromJson(json);
+
   factory GitHubWebhookIssue.fromJson(Map<String, Object?> json) {
     final value = _$GitHubWebhookIssueFromJson(json);
-    return GitHubWebhookIssue(
+    return GitHubWebhookIssue._explicit(
       id: value.id,
       number: value.number,
       htmlUrl: value.htmlUrl,

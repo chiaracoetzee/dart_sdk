@@ -20,6 +20,26 @@ class DiscoveryApplicationResponse {
     required this.categoryType,
     required this.customTags,
     required this.appliedAt,
+  }) : guildNsfwLevel = null,
+       _guildNsfwLevelPresent = false,
+       primaryLanguage = null,
+       _primaryLanguagePresent = false,
+       reviewedAt = null,
+       _reviewedAtPresent = false,
+       reviewReason = null,
+       _reviewReasonPresent = false,
+       removedAt = null,
+       _removedAtPresent = false,
+       removalReason = null,
+       _removalReasonPresent = false;
+
+  const DiscoveryApplicationResponse._explicit({
+    required this.guildId,
+    required this.status,
+    required this.description,
+    required this.categoryType,
+    required this.customTags,
+    required this.appliedAt,
     Object? guildNsfwLevel = _omit,
     Object? primaryLanguage = _omit,
     Object? reviewedAt = _omit,
@@ -66,9 +86,12 @@ class DiscoveryApplicationResponse {
        _reviewReasonPresent = false,
        _removedAtPresent = false,
        _removalReasonPresent = false;
+  factory DiscoveryApplicationResponse.patch(Map<String, Object?> json) =>
+      DiscoveryApplicationResponse.fromJson(json);
+
   factory DiscoveryApplicationResponse.fromJson(Map<String, Object?> json) {
     final value = _$DiscoveryApplicationResponseFromJson(json);
-    return DiscoveryApplicationResponse(
+    return DiscoveryApplicationResponse._explicit(
       guildId: value.guildId,
       status: value.status,
       description: value.description,

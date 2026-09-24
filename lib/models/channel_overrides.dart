@@ -17,6 +17,15 @@ class ChannelOverrides {
     required this.collapsed,
     required this.messageNotifications,
     required this.muted,
+  }) : muteConfig = null,
+       _muteConfigPresent = false,
+       unreadBadges = null,
+       _unreadBadgesPresent = false;
+
+  const ChannelOverrides._explicit({
+    required this.collapsed,
+    required this.messageNotifications,
+    required this.muted,
     Object? muteConfig = _omit,
     Object? unreadBadges = _omit,
   }) : muteConfig = identical(muteConfig, _omit)
@@ -36,9 +45,12 @@ class ChannelOverrides {
     this.unreadBadges,
   }) : _muteConfigPresent = false,
        _unreadBadgesPresent = false;
+  factory ChannelOverrides.patch(Map<String, Object?> json) =>
+      ChannelOverrides.fromJson(json);
+
   factory ChannelOverrides.fromJson(Map<String, Object?> json) {
     final value = _$ChannelOverridesFromJson(json);
-    return ChannelOverrides(
+    return ChannelOverrides._explicit(
       collapsed: value.collapsed,
       messageNotifications: value.messageNotifications,
       muted: value.muted,

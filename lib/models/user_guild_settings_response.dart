@@ -27,6 +27,20 @@ class UserGuildSettingsResponse {
     required this.hideMutedChannels,
     required this.channelOverrides,
     required this.version,
+  }) : unreadBadges = null,
+       _unreadBadgesPresent = false;
+
+  const UserGuildSettingsResponse._explicit({
+    required this.guildId,
+    required this.messageNotifications,
+    required this.muted,
+    required this.muteConfig,
+    required this.mobilePush,
+    required this.suppressEveryone,
+    required this.suppressRoles,
+    required this.hideMutedChannels,
+    required this.channelOverrides,
+    required this.version,
     Object? unreadBadges = _omit,
   }) : unreadBadges = identical(unreadBadges, _omit)
            ? null
@@ -46,9 +60,12 @@ class UserGuildSettingsResponse {
     required this.version,
     this.unreadBadges,
   }) : _unreadBadgesPresent = false;
+  factory UserGuildSettingsResponse.patch(Map<String, Object?> json) =>
+      UserGuildSettingsResponse.fromJson(json);
+
   factory UserGuildSettingsResponse.fromJson(Map<String, Object?> json) {
     final value = _$UserGuildSettingsResponseFromJson(json);
-    return UserGuildSettingsResponse(
+    return UserGuildSettingsResponse._explicit(
       guildId: value.guildId,
       messageNotifications: value.messageNotifications,
       muted: value.muted,

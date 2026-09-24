@@ -12,7 +12,17 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class CustomStatusPayload {
-  const CustomStatusPayload({
+  const CustomStatusPayload()
+    : text = null,
+      _textPresent = false,
+      expiresAt = null,
+      _expiresAtPresent = false,
+      emojiId = null,
+      _emojiIdPresent = false,
+      emojiName = null,
+      _emojiNamePresent = false;
+
+  const CustomStatusPayload._explicit({
     Object? text = _omit,
     Object? expiresAt = _omit,
     Object? emojiId = _omit,
@@ -35,9 +45,12 @@ class CustomStatusPayload {
        _expiresAtPresent = false,
        _emojiIdPresent = false,
        _emojiNamePresent = false;
+  factory CustomStatusPayload.patch(Map<String, Object?> json) =>
+      CustomStatusPayload.fromJson(json);
+
   factory CustomStatusPayload.fromJson(Map<String, Object?> json) {
     final value = _$CustomStatusPayloadFromJson(json);
-    return CustomStatusPayload(
+    return CustomStatusPayload._explicit(
       text: json.containsKey('text') ? value.text : _omit,
       expiresAt: json.containsKey('expires_at') ? value.expiresAt : _omit,
       emojiId: json.containsKey('emoji_id') ? value.emojiId : _omit,

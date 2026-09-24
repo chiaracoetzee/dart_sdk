@@ -12,15 +12,24 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class WebhookCreateRequest {
-  const WebhookCreateRequest({required this.name, Object? avatar = _omit})
-    : avatar = identical(avatar, _omit) ? null : avatar as Base64ImageType?,
-      _avatarPresent = !identical(avatar, _omit);
+  const WebhookCreateRequest({required this.name})
+    : avatar = null,
+      _avatarPresent = false;
+
+  const WebhookCreateRequest._explicit({
+    required this.name,
+    Object? avatar = _omit,
+  }) : avatar = identical(avatar, _omit) ? null : avatar as Base64ImageType?,
+       _avatarPresent = !identical(avatar, _omit);
 
   const WebhookCreateRequest._({required this.name, this.avatar})
     : _avatarPresent = false;
+  factory WebhookCreateRequest.patch(Map<String, Object?> json) =>
+      WebhookCreateRequest.fromJson(json);
+
   factory WebhookCreateRequest.fromJson(Map<String, Object?> json) {
     final value = _$WebhookCreateRequestFromJson(json);
-    return WebhookCreateRequest(
+    return WebhookCreateRequest._explicit(
       name: value.name,
       avatar: json.containsKey('avatar') ? value.avatar : _omit,
     );

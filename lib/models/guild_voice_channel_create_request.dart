@@ -20,6 +20,31 @@ class GuildVoiceChannelCreateRequest {
     required this.type,
     required this.name,
     this.nsfw = false,
+    this.permissionOverwrites,
+    this.contentWarningLevel,
+  }) : topic = null,
+       _topicPresent = false,
+       url = null,
+       _urlPresent = false,
+       parentId = null,
+       _parentIdPresent = false,
+       bitrate = null,
+       _bitratePresent = false,
+       userLimit = null,
+       _userLimitPresent = false,
+       voiceConnectionLimit = null,
+       _voiceConnectionLimitPresent = false,
+       rateLimitPerUser = null,
+       _rateLimitPerUserPresent = false,
+       nsfwOverride = null,
+       _nsfwOverridePresent = false,
+       contentWarningText = null,
+       _contentWarningTextPresent = false;
+
+  const GuildVoiceChannelCreateRequest._explicit({
+    required this.type,
+    required this.name,
+    this.nsfw = false,
     Object? topic = _omit,
     Object? url = _omit,
     Object? parentId = _omit,
@@ -84,9 +109,12 @@ class GuildVoiceChannelCreateRequest {
        _rateLimitPerUserPresent = false,
        _nsfwOverridePresent = false,
        _contentWarningTextPresent = false;
+  factory GuildVoiceChannelCreateRequest.patch(Map<String, Object?> json) =>
+      GuildVoiceChannelCreateRequest.fromJson(json);
+
   factory GuildVoiceChannelCreateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildVoiceChannelCreateRequestFromJson(json);
-    return GuildVoiceChannelCreateRequest(
+    return GuildVoiceChannelCreateRequest._explicit(
       type: value.type,
       name: value.name,
       nsfw: value.nsfw,

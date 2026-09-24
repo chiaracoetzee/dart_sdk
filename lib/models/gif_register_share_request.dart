@@ -12,7 +12,11 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class GifRegisterShareRequest {
-  const GifRegisterShareRequest({
+  const GifRegisterShareRequest({required this.id, this.locale = Locale.enUs})
+    : q = null,
+      _qPresent = false;
+
+  const GifRegisterShareRequest._explicit({
     required this.id,
     this.locale = Locale.enUs,
     Object? q = _omit,
@@ -24,9 +28,12 @@ class GifRegisterShareRequest {
     this.locale = Locale.enUs,
     this.q,
   }) : _qPresent = false;
+  factory GifRegisterShareRequest.patch(Map<String, Object?> json) =>
+      GifRegisterShareRequest.fromJson(json);
+
   factory GifRegisterShareRequest.fromJson(Map<String, Object?> json) {
     final value = _$GifRegisterShareRequestFromJson(json);
-    return GifRegisterShareRequest(
+    return GifRegisterShareRequest._explicit(
       id: value.id,
       locale: value.locale,
       q: json.containsKey('q') ? value.q : _omit,

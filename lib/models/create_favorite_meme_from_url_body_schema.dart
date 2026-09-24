@@ -15,6 +15,20 @@ class CreateFavoriteMemeFromUrlBodySchema {
   const CreateFavoriteMemeFromUrlBodySchema({
     required this.url,
     this.tags = const [],
+  }) : altText = null,
+       _altTextPresent = false,
+       gifSlug = null,
+       _gifSlugPresent = false,
+       gifProvider = null,
+       _gifProviderPresent = false,
+       media = null,
+       _mediaPresent = false,
+       name = null,
+       _namePresent = false;
+
+  const CreateFavoriteMemeFromUrlBodySchema._explicit({
+    required this.url,
+    this.tags = const [],
     Object? altText = _omit,
     Object? gifSlug = _omit,
     Object? gifProvider = _omit,
@@ -48,11 +62,15 @@ class CreateFavoriteMemeFromUrlBodySchema {
        _gifProviderPresent = false,
        _mediaPresent = false,
        _namePresent = false;
+  factory CreateFavoriteMemeFromUrlBodySchema.patch(
+    Map<String, Object?> json,
+  ) => CreateFavoriteMemeFromUrlBodySchema.fromJson(json);
+
   factory CreateFavoriteMemeFromUrlBodySchema.fromJson(
     Map<String, Object?> json,
   ) {
     final value = _$CreateFavoriteMemeFromUrlBodySchemaFromJson(json);
-    return CreateFavoriteMemeFromUrlBodySchema(
+    return CreateFavoriteMemeFromUrlBodySchema._explicit(
       url: value.url,
       tags: value.tags,
       altText: json.containsKey('alt_text') ? value.altText : _omit,

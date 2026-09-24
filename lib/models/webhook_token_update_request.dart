@@ -12,15 +12,22 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class WebhookTokenUpdateRequest {
-  const WebhookTokenUpdateRequest({this.name, Object? avatar = _omit})
+  const WebhookTokenUpdateRequest({this.name})
+    : avatar = null,
+      _avatarPresent = false;
+
+  const WebhookTokenUpdateRequest._explicit({this.name, Object? avatar = _omit})
     : avatar = identical(avatar, _omit) ? null : avatar as Base64ImageType?,
       _avatarPresent = !identical(avatar, _omit);
 
   const WebhookTokenUpdateRequest._({this.name, this.avatar})
     : _avatarPresent = false;
+  factory WebhookTokenUpdateRequest.patch(Map<String, Object?> json) =>
+      WebhookTokenUpdateRequest.fromJson(json);
+
   factory WebhookTokenUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$WebhookTokenUpdateRequestFromJson(json);
-    return WebhookTokenUpdateRequest(
+    return WebhookTokenUpdateRequest._explicit(
       name: value.name,
       avatar: json.containsKey('avatar') ? value.avatar : _omit,
     );

@@ -10,7 +10,15 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class EmbedAuthorResponse {
-  const EmbedAuthorResponse({
+  const EmbedAuthorResponse({required this.name})
+    : url = null,
+      _urlPresent = false,
+      iconUrl = null,
+      _iconUrlPresent = false,
+      proxyIconUrl = null,
+      _proxyIconUrlPresent = false;
+
+  const EmbedAuthorResponse._explicit({
     required this.name,
     Object? url = _omit,
     Object? iconUrl = _omit,
@@ -32,9 +40,12 @@ class EmbedAuthorResponse {
   }) : _urlPresent = false,
        _iconUrlPresent = false,
        _proxyIconUrlPresent = false;
+  factory EmbedAuthorResponse.patch(Map<String, Object?> json) =>
+      EmbedAuthorResponse.fromJson(json);
+
   factory EmbedAuthorResponse.fromJson(Map<String, Object?> json) {
     final value = _$EmbedAuthorResponseFromJson(json);
-    return EmbedAuthorResponse(
+    return EmbedAuthorResponse._explicit(
       name: value.name,
       url: json.containsKey('url') ? value.url : _omit,
       iconUrl: json.containsKey('icon_url') ? value.iconUrl : _omit,

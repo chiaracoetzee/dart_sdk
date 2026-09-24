@@ -10,7 +10,13 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class InstatusWebhookMeta {
-  const InstatusWebhookMeta({
+  const InstatusWebhookMeta()
+    : unsubscribe = null,
+      _unsubscribePresent = false,
+      documentation = null,
+      _documentationPresent = false;
+
+  const InstatusWebhookMeta._explicit({
     Object? unsubscribe = _omit,
     Object? documentation = _omit,
   }) : unsubscribe = identical(unsubscribe, _omit)
@@ -25,9 +31,12 @@ class InstatusWebhookMeta {
   const InstatusWebhookMeta._({this.unsubscribe, this.documentation})
     : _unsubscribePresent = false,
       _documentationPresent = false;
+  factory InstatusWebhookMeta.patch(Map<String, Object?> json) =>
+      InstatusWebhookMeta.fromJson(json);
+
   factory InstatusWebhookMeta.fromJson(Map<String, Object?> json) {
     final value = _$InstatusWebhookMetaFromJson(json);
-    return InstatusWebhookMeta(
+    return InstatusWebhookMeta._explicit(
       unsubscribe: json.containsKey('unsubscribe') ? value.unsubscribe : _omit,
       documentation: json.containsKey('documentation')
           ? value.documentation

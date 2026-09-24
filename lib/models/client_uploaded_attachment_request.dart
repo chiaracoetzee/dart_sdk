@@ -20,6 +20,22 @@ class ClientUploadedAttachmentRequest {
     required this.contentType,
     required this.uploadFilename,
     required this.fileSize,
+    this.flags,
+  }) : title = null,
+       _titlePresent = false,
+       description = null,
+       _descriptionPresent = false,
+       duration = null,
+       _durationPresent = false,
+       waveform = null,
+       _waveformPresent = false;
+
+  const ClientUploadedAttachmentRequest._explicit({
+    required this.id,
+    required this.filename,
+    required this.contentType,
+    required this.uploadFilename,
+    required this.fileSize,
     Object? title = _omit,
     Object? description = _omit,
     this.flags,
@@ -51,9 +67,12 @@ class ClientUploadedAttachmentRequest {
        _descriptionPresent = false,
        _durationPresent = false,
        _waveformPresent = false;
+  factory ClientUploadedAttachmentRequest.patch(Map<String, Object?> json) =>
+      ClientUploadedAttachmentRequest.fromJson(json);
+
   factory ClientUploadedAttachmentRequest.fromJson(Map<String, Object?> json) {
     final value = _$ClientUploadedAttachmentRequestFromJson(json);
-    return ClientUploadedAttachmentRequest(
+    return ClientUploadedAttachmentRequest._explicit(
       id: value.id,
       filename: value.filename,
       contentType: value.contentType,

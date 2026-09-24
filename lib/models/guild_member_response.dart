@@ -21,6 +21,27 @@ class GuildMemberResponse {
     required this.joinedAt,
     required this.mute,
     required this.deaf,
+  }) : nick = null,
+       _nickPresent = false,
+       avatar = null,
+       _avatarPresent = false,
+       banner = null,
+       _bannerPresent = false,
+       accentColor = null,
+       _accentColorPresent = false,
+       communicationDisabledUntil = null,
+       _communicationDisabledUntilPresent = false,
+       profileFlags = null,
+       _profileFlagsPresent = false,
+       mentionFlags = null,
+       _mentionFlagsPresent = false;
+
+  const GuildMemberResponse._explicit({
+    required this.user,
+    required this.roles,
+    required this.joinedAt,
+    required this.mute,
+    required this.deaf,
     Object? nick = _omit,
     Object? avatar = _omit,
     Object? banner = _omit,
@@ -74,9 +95,12 @@ class GuildMemberResponse {
        _communicationDisabledUntilPresent = false,
        _profileFlagsPresent = false,
        _mentionFlagsPresent = false;
+  factory GuildMemberResponse.patch(Map<String, Object?> json) =>
+      GuildMemberResponse.fromJson(json);
+
   factory GuildMemberResponse.fromJson(Map<String, Object?> json) {
     final value = _$GuildMemberResponseFromJson(json);
-    return GuildMemberResponse(
+    return GuildMemberResponse._explicit(
       user: value.user,
       roles: value.roles,
       joinedAt: value.joinedAt,

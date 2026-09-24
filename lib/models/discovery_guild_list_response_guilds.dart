@@ -21,6 +21,24 @@ class DiscoveryGuildListResponseGuilds {
     required this.onlineCount,
     required this.features,
     required this.verificationLevel,
+  }) : icon = null,
+       _iconPresent = false,
+       banner = null,
+       _bannerPresent = false,
+       description = null,
+       _descriptionPresent = false,
+       primaryLanguage = null,
+       _primaryLanguagePresent = false;
+
+  const DiscoveryGuildListResponseGuilds._explicit({
+    required this.id,
+    required this.name,
+    required this.categoryType,
+    required this.customTags,
+    required this.memberCount,
+    required this.onlineCount,
+    required this.features,
+    required this.verificationLevel,
     Object? icon = _omit,
     Object? banner = _omit,
     Object? description = _omit,
@@ -55,9 +73,12 @@ class DiscoveryGuildListResponseGuilds {
        _bannerPresent = false,
        _descriptionPresent = false,
        _primaryLanguagePresent = false;
+  factory DiscoveryGuildListResponseGuilds.patch(Map<String, Object?> json) =>
+      DiscoveryGuildListResponseGuilds.fromJson(json);
+
   factory DiscoveryGuildListResponseGuilds.fromJson(Map<String, Object?> json) {
     final value = _$DiscoveryGuildListResponseGuildsFromJson(json);
-    return DiscoveryGuildListResponseGuilds(
+    return DiscoveryGuildListResponseGuilds._explicit(
       id: value.id,
       name: value.name,
       categoryType: value.categoryType,

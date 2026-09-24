@@ -18,6 +18,16 @@ class GitHubWebhookDiscussion {
     required this.number,
     required this.htmlUrl,
     required this.user,
+  }) : answerHtmlUrl = null,
+       _answerHtmlUrlPresent = false,
+       body = null,
+       _bodyPresent = false;
+
+  const GitHubWebhookDiscussion._explicit({
+    required this.title,
+    required this.number,
+    required this.htmlUrl,
+    required this.user,
     Object? answerHtmlUrl = _omit,
     Object? body = _omit,
   }) : answerHtmlUrl = identical(answerHtmlUrl, _omit)
@@ -36,9 +46,12 @@ class GitHubWebhookDiscussion {
     this.body,
   }) : _answerHtmlUrlPresent = false,
        _bodyPresent = false;
+  factory GitHubWebhookDiscussion.patch(Map<String, Object?> json) =>
+      GitHubWebhookDiscussion.fromJson(json);
+
   factory GitHubWebhookDiscussion.fromJson(Map<String, Object?> json) {
     final value = _$GitHubWebhookDiscussionFromJson(json);
-    return GitHubWebhookDiscussion(
+    return GitHubWebhookDiscussion._explicit(
       title: value.title,
       number: value.number,
       htmlUrl: value.htmlUrl,

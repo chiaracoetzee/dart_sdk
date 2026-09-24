@@ -15,6 +15,12 @@ class GuildMemberSearchResultSupplemental {
   const GuildMemberSearchResultSupplemental({
     required this.sourceInviteCode,
     required this.inviterId,
+  }) : joinSourceType = null,
+       _joinSourceTypePresent = false;
+
+  const GuildMemberSearchResultSupplemental._explicit({
+    required this.sourceInviteCode,
+    required this.inviterId,
     Object? joinSourceType = _omit,
   }) : joinSourceType = identical(joinSourceType, _omit)
            ? null
@@ -26,11 +32,15 @@ class GuildMemberSearchResultSupplemental {
     required this.inviterId,
     this.joinSourceType,
   }) : _joinSourceTypePresent = false;
+  factory GuildMemberSearchResultSupplemental.patch(
+    Map<String, Object?> json,
+  ) => GuildMemberSearchResultSupplemental.fromJson(json);
+
   factory GuildMemberSearchResultSupplemental.fromJson(
     Map<String, Object?> json,
   ) {
     final value = _$GuildMemberSearchResultSupplementalFromJson(json);
-    return GuildMemberSearchResultSupplemental(
+    return GuildMemberSearchResultSupplemental._explicit(
       sourceInviteCode: value.sourceInviteCode,
       inviterId: value.inviterId,
       joinSourceType: json.containsKey('join_source_type')

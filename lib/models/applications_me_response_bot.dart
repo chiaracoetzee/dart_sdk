@@ -20,6 +20,20 @@ class ApplicationsMeResponseBot {
     required this.discriminator,
     required this.bio,
     required this.flags,
+    this.token,
+    this.mfaEnabled,
+    this.authenticatorTypes,
+  }) : avatar = null,
+       _avatarPresent = false,
+       banner = null,
+       _bannerPresent = false;
+
+  const ApplicationsMeResponseBot._explicit({
+    required this.id,
+    required this.username,
+    required this.discriminator,
+    required this.bio,
+    required this.flags,
     Object? avatar = _omit,
     Object? banner = _omit,
     this.token,
@@ -43,9 +57,12 @@ class ApplicationsMeResponseBot {
     this.authenticatorTypes,
   }) : _avatarPresent = false,
        _bannerPresent = false;
+  factory ApplicationsMeResponseBot.patch(Map<String, Object?> json) =>
+      ApplicationsMeResponseBot.fromJson(json);
+
   factory ApplicationsMeResponseBot.fromJson(Map<String, Object?> json) {
     final value = _$ApplicationsMeResponseBotFromJson(json);
-    return ApplicationsMeResponseBot(
+    return ApplicationsMeResponseBot._explicit(
       id: value.id,
       username: value.username,
       discriminator: value.discriminator,

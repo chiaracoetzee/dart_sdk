@@ -17,6 +17,13 @@ class ChannelPinResponseMessageMessageReference {
     required this.channelId,
     required this.messageId,
     required this.type,
+  }) : guildId = null,
+       _guildIdPresent = false;
+
+  const ChannelPinResponseMessageMessageReference._explicit({
+    required this.channelId,
+    required this.messageId,
+    required this.type,
     Object? guildId = _omit,
   }) : guildId = identical(guildId, _omit)
            ? null
@@ -29,11 +36,15 @@ class ChannelPinResponseMessageMessageReference {
     required this.type,
     this.guildId,
   }) : _guildIdPresent = false;
+  factory ChannelPinResponseMessageMessageReference.patch(
+    Map<String, Object?> json,
+  ) => ChannelPinResponseMessageMessageReference.fromJson(json);
+
   factory ChannelPinResponseMessageMessageReference.fromJson(
     Map<String, Object?> json,
   ) {
     final value = _$ChannelPinResponseMessageMessageReferenceFromJson(json);
-    return ChannelPinResponseMessageMessageReference(
+    return ChannelPinResponseMessageMessageReference._explicit(
       channelId: value.channelId,
       messageId: value.messageId,
       type: value.type,

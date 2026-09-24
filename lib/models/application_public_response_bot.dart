@@ -19,6 +19,18 @@ class ApplicationPublicResponseBot {
     required this.discriminator,
     required this.bio,
     required this.flags,
+    this.token,
+  }) : avatar = null,
+       _avatarPresent = false,
+       banner = null,
+       _bannerPresent = false;
+
+  const ApplicationPublicResponseBot._explicit({
+    required this.id,
+    required this.username,
+    required this.discriminator,
+    required this.bio,
+    required this.flags,
     Object? avatar = _omit,
     Object? banner = _omit,
     this.token,
@@ -38,9 +50,12 @@ class ApplicationPublicResponseBot {
     this.token,
   }) : _avatarPresent = false,
        _bannerPresent = false;
+  factory ApplicationPublicResponseBot.patch(Map<String, Object?> json) =>
+      ApplicationPublicResponseBot.fromJson(json);
+
   factory ApplicationPublicResponseBot.fromJson(Map<String, Object?> json) {
     final value = _$ApplicationPublicResponseBotFromJson(json);
-    return ApplicationPublicResponseBot(
+    return ApplicationPublicResponseBot._explicit(
       id: value.id,
       username: value.username,
       discriminator: value.discriminator,

@@ -10,14 +10,19 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class UserNoteUpdateRequest {
-  const UserNoteUpdateRequest({Object? note = _omit})
+  const UserNoteUpdateRequest() : note = null, _notePresent = false;
+
+  const UserNoteUpdateRequest._explicit({Object? note = _omit})
     : note = identical(note, _omit) ? null : note as String?,
       _notePresent = !identical(note, _omit);
 
   const UserNoteUpdateRequest._({this.note}) : _notePresent = false;
+  factory UserNoteUpdateRequest.patch(Map<String, Object?> json) =>
+      UserNoteUpdateRequest.fromJson(json);
+
   factory UserNoteUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$UserNoteUpdateRequestFromJson(json);
-    return UserNoteUpdateRequest(
+    return UserNoteUpdateRequest._explicit(
       note: json.containsKey('note') ? value.note : _omit,
     );
   }

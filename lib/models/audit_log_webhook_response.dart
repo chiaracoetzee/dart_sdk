@@ -17,6 +17,17 @@ class AuditLogWebhookResponse {
     required this.id,
     required this.type,
     required this.name,
+  }) : guildId = null,
+       _guildIdPresent = false,
+       channelId = null,
+       _channelIdPresent = false,
+       avatarHash = null,
+       _avatarHashPresent = false;
+
+  const AuditLogWebhookResponse._explicit({
+    required this.id,
+    required this.type,
+    required this.name,
     Object? guildId = _omit,
     Object? channelId = _omit,
     Object? avatarHash = _omit,
@@ -41,9 +52,12 @@ class AuditLogWebhookResponse {
   }) : _guildIdPresent = false,
        _channelIdPresent = false,
        _avatarHashPresent = false;
+  factory AuditLogWebhookResponse.patch(Map<String, Object?> json) =>
+      AuditLogWebhookResponse.fromJson(json);
+
   factory AuditLogWebhookResponse.fromJson(Map<String, Object?> json) {
     final value = _$AuditLogWebhookResponseFromJson(json);
-    return AuditLogWebhookResponse(
+    return AuditLogWebhookResponse._explicit(
       id: value.id,
       type: value.type,
       name: value.name,

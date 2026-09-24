@@ -24,6 +24,21 @@ class OAuth2MeResponseUser {
     required this.flags,
     this.bot,
     this.system,
+  }) : email = null,
+       _emailPresent = false,
+       verified = null,
+       _verifiedPresent = false;
+
+  const OAuth2MeResponseUser._explicit({
+    required this.id,
+    required this.username,
+    required this.discriminator,
+    required this.globalName,
+    required this.avatar,
+    required this.avatarColor,
+    required this.flags,
+    this.bot,
+    this.system,
     Object? email = _omit,
     Object? verified = _omit,
   }) : email = identical(email, _omit) ? null : email as String?,
@@ -45,9 +60,12 @@ class OAuth2MeResponseUser {
     this.verified,
   }) : _emailPresent = false,
        _verifiedPresent = false;
+  factory OAuth2MeResponseUser.patch(Map<String, Object?> json) =>
+      OAuth2MeResponseUser.fromJson(json);
+
   factory OAuth2MeResponseUser.fromJson(Map<String, Object?> json) {
     final value = _$OAuth2MeResponseUserFromJson(json);
-    return OAuth2MeResponseUser(
+    return OAuth2MeResponseUser._explicit(
       id: value.id,
       username: value.username,
       discriminator: value.discriminator,

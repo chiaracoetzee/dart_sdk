@@ -22,6 +22,19 @@ class GuildRoleResponse {
     required this.permissions,
     required this.hoist,
     required this.mentionable,
+  }) : hoistPosition = null,
+       _hoistPositionPresent = false,
+       unicodeEmoji = null,
+       _unicodeEmojiPresent = false;
+
+  const GuildRoleResponse._explicit({
+    required this.id,
+    required this.name,
+    required this.color,
+    required this.position,
+    required this.permissions,
+    required this.hoist,
+    required this.mentionable,
     Object? hoistPosition = _omit,
     Object? unicodeEmoji = _omit,
   }) : hoistPosition = identical(hoistPosition, _omit)
@@ -45,9 +58,12 @@ class GuildRoleResponse {
     this.unicodeEmoji,
   }) : _hoistPositionPresent = false,
        _unicodeEmojiPresent = false;
+  factory GuildRoleResponse.patch(Map<String, Object?> json) =>
+      GuildRoleResponse.fromJson(json);
+
   factory GuildRoleResponse.fromJson(Map<String, Object?> json) {
     final value = _$GuildRoleResponseFromJson(json);
-    return GuildRoleResponse(
+    return GuildRoleResponse._explicit(
       id: value.id,
       name: value.name,
       color: value.color,

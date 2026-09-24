@@ -12,6 +12,11 @@ const Object _omit = Object();
 class UserGuildSettingsUpdateRequestMuteConfig {
   const UserGuildSettingsUpdateRequestMuteConfig({
     required this.selectedTimeWindow,
+  }) : endTime = null,
+       _endTimePresent = false;
+
+  const UserGuildSettingsUpdateRequestMuteConfig._explicit({
+    required this.selectedTimeWindow,
     Object? endTime = _omit,
   }) : endTime = identical(endTime, _omit) ? null : endTime as String?,
        _endTimePresent = !identical(endTime, _omit);
@@ -20,11 +25,15 @@ class UserGuildSettingsUpdateRequestMuteConfig {
     required this.selectedTimeWindow,
     this.endTime,
   }) : _endTimePresent = false;
+  factory UserGuildSettingsUpdateRequestMuteConfig.patch(
+    Map<String, Object?> json,
+  ) => UserGuildSettingsUpdateRequestMuteConfig.fromJson(json);
+
   factory UserGuildSettingsUpdateRequestMuteConfig.fromJson(
     Map<String, Object?> json,
   ) {
     final value = _$UserGuildSettingsUpdateRequestMuteConfigFromJson(json);
-    return UserGuildSettingsUpdateRequestMuteConfig(
+    return UserGuildSettingsUpdateRequestMuteConfig._explicit(
       selectedTimeWindow: value.selectedTimeWindow,
       endTime: json.containsKey('end_time') ? value.endTime : _omit,
     );

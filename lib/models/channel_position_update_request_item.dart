@@ -15,6 +15,15 @@ class ChannelPositionUpdateRequestItem {
   const ChannelPositionUpdateRequestItem({
     required this.id,
     this.position,
+    this.lockPermissions,
+  }) : parentId = null,
+       _parentIdPresent = false,
+       precedingSiblingId = null,
+       _precedingSiblingIdPresent = false;
+
+  const ChannelPositionUpdateRequestItem._explicit({
+    required this.id,
+    this.position,
     Object? parentId = _omit,
     Object? precedingSiblingId = _omit,
     this.lockPermissions,
@@ -35,9 +44,12 @@ class ChannelPositionUpdateRequestItem {
     this.lockPermissions,
   }) : _parentIdPresent = false,
        _precedingSiblingIdPresent = false;
+  factory ChannelPositionUpdateRequestItem.patch(Map<String, Object?> json) =>
+      ChannelPositionUpdateRequestItem.fromJson(json);
+
   factory ChannelPositionUpdateRequestItem.fromJson(Map<String, Object?> json) {
     final value = _$ChannelPositionUpdateRequestItemFromJson(json);
-    return ChannelPositionUpdateRequestItem(
+    return ChannelPositionUpdateRequestItem._explicit(
       id: value.id,
       position: value.position,
       parentId: json.containsKey('parent_id') ? value.parentId : _omit,

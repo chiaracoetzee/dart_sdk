@@ -12,7 +12,15 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class CreateFavoriteMemeBodySchema {
-  const CreateFavoriteMemeBodySchema({
+  const CreateFavoriteMemeBodySchema({required this.name, this.tags = const []})
+    : altText = null,
+      _altTextPresent = false,
+      attachmentId = null,
+      _attachmentIdPresent = false,
+      embedIndex = null,
+      _embedIndexPresent = false;
+
+  const CreateFavoriteMemeBodySchema._explicit({
     required this.name,
     this.tags = const [],
     Object? altText = _omit,
@@ -36,9 +44,12 @@ class CreateFavoriteMemeBodySchema {
   }) : _altTextPresent = false,
        _attachmentIdPresent = false,
        _embedIndexPresent = false;
+  factory CreateFavoriteMemeBodySchema.patch(Map<String, Object?> json) =>
+      CreateFavoriteMemeBodySchema.fromJson(json);
+
   factory CreateFavoriteMemeBodySchema.fromJson(Map<String, Object?> json) {
     final value = _$CreateFavoriteMemeBodySchemaFromJson(json);
-    return CreateFavoriteMemeBodySchema(
+    return CreateFavoriteMemeBodySchema._explicit(
       name: value.name,
       tags: value.tags,
       altText: json.containsKey('alt_text') ? value.altText : _omit,

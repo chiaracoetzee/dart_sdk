@@ -13,7 +13,25 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class EmbedMediaResponse {
-  const EmbedMediaResponse({
+  const EmbedMediaResponse({required this.url, required this.flags})
+    : proxyUrl = null,
+      _proxyUrlPresent = false,
+      contentType = null,
+      _contentTypePresent = false,
+      contentHash = null,
+      _contentHashPresent = false,
+      width = null,
+      _widthPresent = false,
+      height = null,
+      _heightPresent = false,
+      description = null,
+      _descriptionPresent = false,
+      placeholder = null,
+      _placeholderPresent = false,
+      duration = null,
+      _durationPresent = false;
+
+  const EmbedMediaResponse._explicit({
     required this.url,
     required this.flags,
     Object? proxyUrl = _omit,
@@ -68,9 +86,12 @@ class EmbedMediaResponse {
        _descriptionPresent = false,
        _placeholderPresent = false,
        _durationPresent = false;
+  factory EmbedMediaResponse.patch(Map<String, Object?> json) =>
+      EmbedMediaResponse.fromJson(json);
+
   factory EmbedMediaResponse.fromJson(Map<String, Object?> json) {
     final value = _$EmbedMediaResponseFromJson(json);
-    return EmbedMediaResponse(
+    return EmbedMediaResponse._explicit(
       url: value.url,
       flags: value.flags,
       proxyUrl: json.containsKey('proxy_url') ? value.proxyUrl : _omit,

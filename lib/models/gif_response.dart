@@ -24,6 +24,20 @@ class GifResponse {
     required this.width,
     required this.height,
     required this.media,
+  }) : placeholder = null,
+       _placeholderPresent = false;
+
+  const GifResponse._explicit({
+    required this.id,
+    required this.slug,
+    required this.provider,
+    required this.title,
+    required this.url,
+    required this.src,
+    required this.proxySrc,
+    required this.width,
+    required this.height,
+    required this.media,
     Object? placeholder = _omit,
   }) : placeholder = identical(placeholder, _omit)
            ? null
@@ -43,9 +57,12 @@ class GifResponse {
     required this.media,
     this.placeholder,
   }) : _placeholderPresent = false;
+  factory GifResponse.patch(Map<String, Object?> json) =>
+      GifResponse.fromJson(json);
+
   factory GifResponse.fromJson(Map<String, Object?> json) {
     final value = _$GifResponseFromJson(json);
-    return GifResponse(
+    return GifResponse._explicit(
       id: value.id,
       slug: value.slug,
       provider: value.provider,

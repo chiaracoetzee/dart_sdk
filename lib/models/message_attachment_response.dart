@@ -20,6 +20,40 @@ class MessageAttachmentResponse {
     required this.filename,
     required this.size,
     required this.flags,
+  }) : title = null,
+       _titlePresent = false,
+       description = null,
+       _descriptionPresent = false,
+       contentType = null,
+       _contentTypePresent = false,
+       contentHash = null,
+       _contentHashPresent = false,
+       url = null,
+       _urlPresent = false,
+       proxyUrl = null,
+       _proxyUrlPresent = false,
+       width = null,
+       _widthPresent = false,
+       height = null,
+       _heightPresent = false,
+       placeholder = null,
+       _placeholderPresent = false,
+       nsfw = null,
+       _nsfwPresent = false,
+       duration = null,
+       _durationPresent = false,
+       waveform = null,
+       _waveformPresent = false,
+       expiresAt = null,
+       _expiresAtPresent = false,
+       expired = null,
+       _expiredPresent = false;
+
+  const MessageAttachmentResponse._explicit({
+    required this.id,
+    required this.filename,
+    required this.size,
+    required this.flags,
     Object? title = _omit,
     Object? description = _omit,
     Object? contentType = _omit,
@@ -104,9 +138,12 @@ class MessageAttachmentResponse {
        _waveformPresent = false,
        _expiresAtPresent = false,
        _expiredPresent = false;
+  factory MessageAttachmentResponse.patch(Map<String, Object?> json) =>
+      MessageAttachmentResponse.fromJson(json);
+
   factory MessageAttachmentResponse.fromJson(Map<String, Object?> json) {
     final value = _$MessageAttachmentResponseFromJson(json);
-    return MessageAttachmentResponse(
+    return MessageAttachmentResponse._explicit(
       id: value.id,
       filename: value.filename,
       size: value.size,

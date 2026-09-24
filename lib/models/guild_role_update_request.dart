@@ -18,6 +18,15 @@ class GuildRoleUpdateRequest {
     this.color,
     this.permissions,
     this.hoist,
+    this.mentionable,
+  }) : hoistPosition = null,
+       _hoistPositionPresent = false;
+
+  const GuildRoleUpdateRequest._explicit({
+    this.name,
+    this.color,
+    this.permissions,
+    this.hoist,
     Object? hoistPosition = _omit,
     this.mentionable,
   }) : hoistPosition = identical(hoistPosition, _omit)
@@ -33,9 +42,12 @@ class GuildRoleUpdateRequest {
     this.hoistPosition,
     this.mentionable,
   }) : _hoistPositionPresent = false;
+  factory GuildRoleUpdateRequest.patch(Map<String, Object?> json) =>
+      GuildRoleUpdateRequest.fromJson(json);
+
   factory GuildRoleUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildRoleUpdateRequestFromJson(json);
-    return GuildRoleUpdateRequest(
+    return GuildRoleUpdateRequest._explicit(
       name: value.name,
       color: value.color,
       permissions: value.permissions,

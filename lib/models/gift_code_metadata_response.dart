@@ -19,6 +19,17 @@ class GiftCodeMetadataResponse {
     required this.durationQuantity,
     required this.createdBy,
     required this.createdAt,
+  }) : redeemedAt = null,
+       _redeemedAtPresent = false,
+       redeemedBy = null,
+       _redeemedByPresent = false;
+
+  const GiftCodeMetadataResponse._explicit({
+    required this.code,
+    required this.durationType,
+    required this.durationQuantity,
+    required this.createdBy,
+    required this.createdAt,
     Object? redeemedAt = _omit,
     Object? redeemedBy = _omit,
   }) : redeemedAt = identical(redeemedAt, _omit)
@@ -40,9 +51,12 @@ class GiftCodeMetadataResponse {
     this.redeemedBy,
   }) : _redeemedAtPresent = false,
        _redeemedByPresent = false;
+  factory GiftCodeMetadataResponse.patch(Map<String, Object?> json) =>
+      GiftCodeMetadataResponse.fromJson(json);
+
   factory GiftCodeMetadataResponse.fromJson(Map<String, Object?> json) {
     final value = _$GiftCodeMetadataResponseFromJson(json);
-    return GiftCodeMetadataResponse(
+    return GiftCodeMetadataResponse._explicit(
       code: value.code,
       durationType: value.durationType,
       durationQuantity: value.durationQuantity,

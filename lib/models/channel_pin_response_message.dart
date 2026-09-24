@@ -35,6 +35,42 @@ class ChannelPinResponseMessage {
     required this.tts,
     required this.mentions,
     required this.mentionRoles,
+  }) : webhookId = null,
+       _webhookIdPresent = false,
+       editedTimestamp = null,
+       _editedTimestampPresent = false,
+       mentionChannels = null,
+       _mentionChannelsPresent = false,
+       users = null,
+       _usersPresent = false,
+       embeds = null,
+       _embedsPresent = false,
+       attachments = null,
+       _attachmentsPresent = false,
+       stickers = null,
+       _stickersPresent = false,
+       messageReference = null,
+       _messageReferencePresent = false,
+       messageSnapshots = null,
+       _messageSnapshotsPresent = false,
+       nonce = null,
+       _noncePresent = false,
+       call = null,
+       _callPresent = false;
+
+  const ChannelPinResponseMessage._explicit({
+    required this.id,
+    required this.channelId,
+    required this.author,
+    required this.type,
+    required this.flags,
+    required this.content,
+    required this.timestamp,
+    required this.pinned,
+    required this.mentionEveryone,
+    required this.tts,
+    required this.mentions,
+    required this.mentionRoles,
     Object? webhookId = _omit,
     Object? editedTimestamp = _omit,
     Object? mentionChannels = _omit,
@@ -124,9 +160,12 @@ class ChannelPinResponseMessage {
        _messageSnapshotsPresent = false,
        _noncePresent = false,
        _callPresent = false;
+  factory ChannelPinResponseMessage.patch(Map<String, Object?> json) =>
+      ChannelPinResponseMessage.fromJson(json);
+
   factory ChannelPinResponseMessage.fromJson(Map<String, Object?> json) {
     final value = _$ChannelPinResponseMessageFromJson(json);
-    return ChannelPinResponseMessage(
+    return ChannelPinResponseMessage._explicit(
       id: value.id,
       channelId: value.channelId,
       author: value.author,

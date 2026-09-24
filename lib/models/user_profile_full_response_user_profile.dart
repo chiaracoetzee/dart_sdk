@@ -17,6 +17,14 @@ class UserProfileFullResponseUserProfile {
     required this.pronouns,
     required this.banner,
     required this.accentColor,
+  }) : bannerColor = null,
+       _bannerColorPresent = false;
+
+  const UserProfileFullResponseUserProfile._explicit({
+    required this.bio,
+    required this.pronouns,
+    required this.banner,
+    required this.accentColor,
     Object? bannerColor = _omit,
   }) : bannerColor = identical(bannerColor, _omit)
            ? null
@@ -30,11 +38,14 @@ class UserProfileFullResponseUserProfile {
     required this.accentColor,
     this.bannerColor,
   }) : _bannerColorPresent = false;
+  factory UserProfileFullResponseUserProfile.patch(Map<String, Object?> json) =>
+      UserProfileFullResponseUserProfile.fromJson(json);
+
   factory UserProfileFullResponseUserProfile.fromJson(
     Map<String, Object?> json,
   ) {
     final value = _$UserProfileFullResponseUserProfileFromJson(json);
-    return UserProfileFullResponseUserProfile(
+    return UserProfileFullResponseUserProfile._explicit(
       bio: value.bio,
       pronouns: value.pronouns,
       banner: value.banner,

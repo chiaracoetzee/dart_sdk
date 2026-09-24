@@ -10,7 +10,17 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class InstatusWebhookPage {
-  const InstatusWebhookPage({
+  const InstatusWebhookPage()
+    : id = null,
+      _idPresent = false,
+      statusIndicator = null,
+      _statusIndicatorPresent = false,
+      statusDescription = null,
+      _statusDescriptionPresent = false,
+      url = null,
+      _urlPresent = false;
+
+  const InstatusWebhookPage._explicit({
     Object? id = _omit,
     Object? statusIndicator = _omit,
     Object? statusDescription = _omit,
@@ -37,9 +47,12 @@ class InstatusWebhookPage {
        _statusIndicatorPresent = false,
        _statusDescriptionPresent = false,
        _urlPresent = false;
+  factory InstatusWebhookPage.patch(Map<String, Object?> json) =>
+      InstatusWebhookPage.fromJson(json);
+
   factory InstatusWebhookPage.fromJson(Map<String, Object?> json) {
     final value = _$InstatusWebhookPageFromJson(json);
-    return InstatusWebhookPage(
+    return InstatusWebhookPage._explicit(
       id: json.containsKey('id') ? value.id : _omit,
       statusIndicator: json.containsKey('status_indicator')
           ? value.statusIndicator

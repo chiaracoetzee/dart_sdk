@@ -16,6 +16,13 @@ class GitHubWebhookReview {
     required this.user,
     required this.htmlUrl,
     required this.state,
+  }) : body = null,
+       _bodyPresent = false;
+
+  const GitHubWebhookReview._explicit({
+    required this.user,
+    required this.htmlUrl,
+    required this.state,
     Object? body = _omit,
   }) : body = identical(body, _omit) ? null : body as String?,
        _bodyPresent = !identical(body, _omit);
@@ -26,9 +33,12 @@ class GitHubWebhookReview {
     required this.state,
     this.body,
   }) : _bodyPresent = false;
+  factory GitHubWebhookReview.patch(Map<String, Object?> json) =>
+      GitHubWebhookReview.fromJson(json);
+
   factory GitHubWebhookReview.fromJson(Map<String, Object?> json) {
     final value = _$GitHubWebhookReviewFromJson(json);
-    return GitHubWebhookReview(
+    return GitHubWebhookReview._explicit(
       user: value.user,
       htmlUrl: value.htmlUrl,
       state: value.state,

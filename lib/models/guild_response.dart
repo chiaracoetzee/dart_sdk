@@ -29,6 +29,64 @@ const Object _omit = Object();
 @JsonSerializable(constructor: '_')
 class GuildResponse {
   const GuildResponse({
+    required this.id,
+    required this.name,
+    required this.splashCardAlignment,
+    required this.ownerId,
+    required this.systemChannelFlags,
+    required this.afkTimeout,
+    required this.features,
+    required this.verificationLevel,
+    required this.mfaLevel,
+    required this.nsfwLevel,
+    required this.nsfw,
+    required this.contentWarningLevel,
+    required this.explicitContentFilter,
+    required this.defaultMessageNotifications,
+    required this.disabledOperations,
+    this.permissions,
+    this.roles,
+    this.emojis,
+    this.stickers,
+    this.channels,
+    this.memberCount,
+    this.onlineCount,
+    this.approximateMemberCount,
+    this.approximatePresenceCount,
+  }) : icon = null,
+       _iconPresent = false,
+       banner = null,
+       _bannerPresent = false,
+       bannerWidth = null,
+       _bannerWidthPresent = false,
+       bannerHeight = null,
+       _bannerHeightPresent = false,
+       splash = null,
+       _splashPresent = false,
+       splashWidth = null,
+       _splashWidthPresent = false,
+       splashHeight = null,
+       _splashHeightPresent = false,
+       embedSplash = null,
+       _embedSplashPresent = false,
+       embedSplashWidth = null,
+       _embedSplashWidthPresent = false,
+       embedSplashHeight = null,
+       _embedSplashHeightPresent = false,
+       vanityUrlCode = null,
+       _vanityUrlCodePresent = false,
+       systemChannelId = null,
+       _systemChannelIdPresent = false,
+       rulesChannelId = null,
+       _rulesChannelIdPresent = false,
+       afkChannelId = null,
+       _afkChannelIdPresent = false,
+       contentWarningText = null,
+       _contentWarningTextPresent = false,
+       messageHistoryCutoff = null,
+       _messageHistoryCutoffPresent = false;
+
+  const GuildResponse._explicit({
     required this.contentWarningLevel,
     required this.name,
     required this.afkTimeout,
@@ -185,9 +243,12 @@ class GuildResponse {
        _afkChannelIdPresent = false,
        _contentWarningTextPresent = false,
        _messageHistoryCutoffPresent = false;
+  factory GuildResponse.patch(Map<String, Object?> json) =>
+      GuildResponse.fromJson(json);
+
   factory GuildResponse.fromJson(Map<String, Object?> json) {
     final value = _$GuildResponseFromJson(json);
-    return GuildResponse(
+    return GuildResponse._explicit(
       contentWarningLevel: value.contentWarningLevel,
       name: value.name,
       afkTimeout: value.afkTimeout,

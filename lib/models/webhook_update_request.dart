@@ -13,7 +13,11 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class WebhookUpdateRequest {
-  const WebhookUpdateRequest({
+  const WebhookUpdateRequest({this.name, this.channelId})
+    : avatar = null,
+      _avatarPresent = false;
+
+  const WebhookUpdateRequest._explicit({
     this.name,
     Object? avatar = _omit,
     this.channelId,
@@ -22,9 +26,12 @@ class WebhookUpdateRequest {
 
   const WebhookUpdateRequest._({this.name, this.avatar, this.channelId})
     : _avatarPresent = false;
+  factory WebhookUpdateRequest.patch(Map<String, Object?> json) =>
+      WebhookUpdateRequest.fromJson(json);
+
   factory WebhookUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$WebhookUpdateRequestFromJson(json);
-    return WebhookUpdateRequest(
+    return WebhookUpdateRequest._explicit(
       name: value.name,
       avatar: json.containsKey('avatar') ? value.avatar : _omit,
       channelId: value.channelId,

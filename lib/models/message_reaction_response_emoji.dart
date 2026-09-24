@@ -12,7 +12,13 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class MessageReactionResponseEmoji {
-  const MessageReactionResponseEmoji({
+  const MessageReactionResponseEmoji({required this.name})
+    : id = null,
+      _idPresent = false,
+      animated = null,
+      _animatedPresent = false;
+
+  const MessageReactionResponseEmoji._explicit({
     required this.name,
     Object? id = _omit,
     Object? animated = _omit,
@@ -27,9 +33,12 @@ class MessageReactionResponseEmoji {
     this.animated,
   }) : _idPresent = false,
        _animatedPresent = false;
+  factory MessageReactionResponseEmoji.patch(Map<String, Object?> json) =>
+      MessageReactionResponseEmoji.fromJson(json);
+
   factory MessageReactionResponseEmoji.fromJson(Map<String, Object?> json) {
     final value = _$MessageReactionResponseEmojiFromJson(json);
-    return MessageReactionResponseEmoji(
+    return MessageReactionResponseEmoji._explicit(
       name: value.name,
       id: json.containsKey('id') ? value.id : _omit,
       animated: json.containsKey('animated') ? value.animated : _omit,

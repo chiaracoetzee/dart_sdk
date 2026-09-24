@@ -16,7 +16,43 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class MessageEmbedChildResponse {
-  const MessageEmbedChildResponse({
+  const MessageEmbedChildResponse({required this.type})
+    : url = null,
+      _urlPresent = false,
+      title = null,
+      _titlePresent = false,
+      color = null,
+      _colorPresent = false,
+      timestamp = null,
+      _timestampPresent = false,
+      description = null,
+      _descriptionPresent = false,
+      author = null,
+      _authorPresent = false,
+      image = null,
+      _imagePresent = false,
+      thumbnail = null,
+      _thumbnailPresent = false,
+      footer = null,
+      _footerPresent = false,
+      fields = null,
+      _fieldsPresent = false,
+      provider = null,
+      _providerPresent = false,
+      video = null,
+      _videoPresent = false,
+      audio = null,
+      _audioPresent = false,
+      html = null,
+      _htmlPresent = false,
+      htmlWidth = null,
+      _htmlWidthPresent = false,
+      htmlHeight = null,
+      _htmlHeightPresent = false,
+      nsfw = null,
+      _nsfwPresent = false;
+
+  const MessageEmbedChildResponse._explicit({
     required this.type,
     Object? url = _omit,
     Object? title = _omit,
@@ -120,9 +156,12 @@ class MessageEmbedChildResponse {
        _htmlWidthPresent = false,
        _htmlHeightPresent = false,
        _nsfwPresent = false;
+  factory MessageEmbedChildResponse.patch(Map<String, Object?> json) =>
+      MessageEmbedChildResponse.fromJson(json);
+
   factory MessageEmbedChildResponse.fromJson(Map<String, Object?> json) {
     final value = _$MessageEmbedChildResponseFromJson(json);
-    return MessageEmbedChildResponse(
+    return MessageEmbedChildResponse._explicit(
       type: value.type,
       url: json.containsKey('url') ? value.url : _omit,
       title: json.containsKey('title') ? value.title : _omit,

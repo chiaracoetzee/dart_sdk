@@ -13,7 +13,11 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class LoginRequest {
-  const LoginRequest({
+  const LoginRequest({required this.email, required this.password})
+    : inviteCode = null,
+      _inviteCodePresent = false;
+
+  const LoginRequest._explicit({
     required this.email,
     required this.password,
     Object? inviteCode = _omit,
@@ -25,9 +29,12 @@ class LoginRequest {
     required this.password,
     this.inviteCode,
   }) : _inviteCodePresent = false;
+  factory LoginRequest.patch(Map<String, Object?> json) =>
+      LoginRequest.fromJson(json);
+
   factory LoginRequest.fromJson(Map<String, Object?> json) {
     final value = _$LoginRequestFromJson(json);
-    return LoginRequest(
+    return LoginRequest._explicit(
       email: value.email,
       password: value.password,
       inviteCode: json.containsKey('invite_code') ? value.inviteCode : _omit,

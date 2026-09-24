@@ -17,6 +17,20 @@ class TemplateSerializedGuild {
     required this.name,
     required this.roles,
     required this.channels,
+    this.verificationLevel,
+    this.defaultMessageNotifications,
+    this.explicitContentFilter,
+    this.afkTimeout,
+    this.systemChannelFlags,
+  }) : description = null,
+       _descriptionPresent = false,
+       systemChannelId = null,
+       _systemChannelIdPresent = false;
+
+  const TemplateSerializedGuild._explicit({
+    required this.name,
+    required this.roles,
+    required this.channels,
     Object? description = _omit,
     this.verificationLevel,
     this.defaultMessageNotifications,
@@ -46,9 +60,12 @@ class TemplateSerializedGuild {
     this.systemChannelFlags,
   }) : _descriptionPresent = false,
        _systemChannelIdPresent = false;
+  factory TemplateSerializedGuild.patch(Map<String, Object?> json) =>
+      TemplateSerializedGuild.fromJson(json);
+
   factory TemplateSerializedGuild.fromJson(Map<String, Object?> json) {
     final value = _$TemplateSerializedGuildFromJson(json);
-    return TemplateSerializedGuild(
+    return TemplateSerializedGuild._explicit(
       name: value.name,
       roles: value.roles,
       channels: value.channels,

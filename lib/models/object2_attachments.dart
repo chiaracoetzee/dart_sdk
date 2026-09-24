@@ -10,7 +10,13 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class Object2Attachments {
-  const Object2Attachments({
+  const Object2Attachments({required this.id})
+    : title = null,
+      _titlePresent = false,
+      description = null,
+      _descriptionPresent = false;
+
+  const Object2Attachments._explicit({
     required this.id,
     Object? title = _omit,
     Object? description = _omit,
@@ -24,9 +30,12 @@ class Object2Attachments {
   const Object2Attachments._({required this.id, this.title, this.description})
     : _titlePresent = false,
       _descriptionPresent = false;
+  factory Object2Attachments.patch(Map<String, Object?> json) =>
+      Object2Attachments.fromJson(json);
+
   factory Object2Attachments.fromJson(Map<String, Object?> json) {
     final value = _$Object2AttachmentsFromJson(json);
-    return Object2Attachments(
+    return Object2Attachments._explicit(
       id: value.id,
       title: json.containsKey('title') ? value.title : _omit,
       description: json.containsKey('description') ? value.description : _omit,

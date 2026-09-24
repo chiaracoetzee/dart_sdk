@@ -15,6 +15,12 @@ class DiscoveryStatusResponse {
   const DiscoveryStatusResponse({
     required this.eligible,
     required this.minMemberCount,
+  }) : application = null,
+       _applicationPresent = false;
+
+  const DiscoveryStatusResponse._explicit({
+    required this.eligible,
+    required this.minMemberCount,
     Object? application = _omit,
   }) : application = identical(application, _omit)
            ? null
@@ -26,9 +32,12 @@ class DiscoveryStatusResponse {
     required this.minMemberCount,
     this.application,
   }) : _applicationPresent = false;
+  factory DiscoveryStatusResponse.patch(Map<String, Object?> json) =>
+      DiscoveryStatusResponse.fromJson(json);
+
   factory DiscoveryStatusResponse.fromJson(Map<String, Object?> json) {
     final value = _$DiscoveryStatusResponseFromJson(json);
-    return DiscoveryStatusResponse(
+    return DiscoveryStatusResponse._explicit(
       eligible: value.eligible,
       minMemberCount: value.minMemberCount,
       application: json.containsKey('application') ? value.application : _omit,

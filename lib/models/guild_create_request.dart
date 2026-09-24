@@ -15,6 +15,13 @@ const Object _omit = Object();
 class GuildCreateRequest {
   const GuildCreateRequest({
     required this.name,
+    this.emptyFeatures,
+    this.template,
+  }) : icon = null,
+       _iconPresent = false;
+
+  const GuildCreateRequest._explicit({
+    required this.name,
     Object? icon = _omit,
     this.emptyFeatures,
     this.template,
@@ -27,9 +34,12 @@ class GuildCreateRequest {
     this.emptyFeatures,
     this.template,
   }) : _iconPresent = false;
+  factory GuildCreateRequest.patch(Map<String, Object?> json) =>
+      GuildCreateRequest.fromJson(json);
+
   factory GuildCreateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildCreateRequestFromJson(json);
-    return GuildCreateRequest(
+    return GuildCreateRequest._explicit(
       name: value.name,
       icon: json.containsKey('icon') ? value.icon : _omit,
       emptyFeatures: value.emptyFeatures,

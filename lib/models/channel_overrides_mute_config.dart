@@ -10,7 +10,11 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class ChannelOverridesMuteConfig {
-  const ChannelOverridesMuteConfig({
+  const ChannelOverridesMuteConfig({required this.selectedTimeWindow})
+    : endTime = null,
+      _endTimePresent = false;
+
+  const ChannelOverridesMuteConfig._explicit({
     required this.selectedTimeWindow,
     Object? endTime = _omit,
   }) : endTime = identical(endTime, _omit) ? null : endTime as String?,
@@ -20,9 +24,12 @@ class ChannelOverridesMuteConfig {
     required this.selectedTimeWindow,
     this.endTime,
   }) : _endTimePresent = false;
+  factory ChannelOverridesMuteConfig.patch(Map<String, Object?> json) =>
+      ChannelOverridesMuteConfig.fromJson(json);
+
   factory ChannelOverridesMuteConfig.fromJson(Map<String, Object?> json) {
     final value = _$ChannelOverridesMuteConfigFromJson(json);
-    return ChannelOverridesMuteConfig(
+    return ChannelOverridesMuteConfig._explicit(
       selectedTimeWindow: value.selectedTimeWindow,
       endTime: json.containsKey('end_time') ? value.endTime : _omit,
     );

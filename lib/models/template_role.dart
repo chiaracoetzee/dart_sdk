@@ -12,6 +12,18 @@ const Object _omit = Object();
 class TemplateRole {
   const TemplateRole({
     required this.id,
+    this.permissions,
+    this.permissionsNew,
+    this.color,
+    this.hoist,
+    this.mentionable,
+  }) : name = null,
+       _namePresent = false,
+       unicodeEmoji = null,
+       _unicodeEmojiPresent = false;
+
+  const TemplateRole._explicit({
+    required this.id,
     Object? name = _omit,
     this.permissions,
     this.permissionsNew,
@@ -37,9 +49,12 @@ class TemplateRole {
     this.unicodeEmoji,
   }) : _namePresent = false,
        _unicodeEmojiPresent = false;
+  factory TemplateRole.patch(Map<String, Object?> json) =>
+      TemplateRole.fromJson(json);
+
   factory TemplateRole.fromJson(Map<String, Object?> json) {
     final value = _$TemplateRoleFromJson(json);
-    return TemplateRole(
+    return TemplateRole._explicit(
       id: value.id,
       name: json.containsKey('name') ? value.name : _omit,
       permissions: value.permissions,

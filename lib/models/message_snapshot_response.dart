@@ -21,6 +21,27 @@ class MessageSnapshotResponse {
     required this.timestamp,
     required this.type,
     required this.flags,
+  }) : content = null,
+       _contentPresent = false,
+       editedTimestamp = null,
+       _editedTimestampPresent = false,
+       mentions = null,
+       _mentionsPresent = false,
+       mentionRoles = null,
+       _mentionRolesPresent = false,
+       mentionChannels = null,
+       _mentionChannelsPresent = false,
+       embeds = null,
+       _embedsPresent = false,
+       attachments = null,
+       _attachmentsPresent = false,
+       stickers = null,
+       _stickersPresent = false;
+
+  const MessageSnapshotResponse._explicit({
+    required this.timestamp,
+    required this.type,
+    required this.flags,
     Object? content = _omit,
     Object? editedTimestamp = _omit,
     Object? mentions = _omit,
@@ -78,9 +99,12 @@ class MessageSnapshotResponse {
        _embedsPresent = false,
        _attachmentsPresent = false,
        _stickersPresent = false;
+  factory MessageSnapshotResponse.patch(Map<String, Object?> json) =>
+      MessageSnapshotResponse.fromJson(json);
+
   factory MessageSnapshotResponse.fromJson(Map<String, Object?> json) {
     final value = _$MessageSnapshotResponseFromJson(json);
-    return MessageSnapshotResponse(
+    return MessageSnapshotResponse._explicit(
       timestamp: value.timestamp,
       type: value.type,
       flags: value.flags,

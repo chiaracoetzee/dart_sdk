@@ -12,6 +12,13 @@ const Object _omit = Object();
 class GuildBanCreateRequest {
   const GuildBanCreateRequest({
     this.deleteMessageSeconds,
+    this.banDurationSeconds,
+    this.deleteMessageDays = 0,
+  }) : reason = null,
+       _reasonPresent = false;
+
+  const GuildBanCreateRequest._explicit({
+    this.deleteMessageSeconds,
     Object? reason = _omit,
     this.banDurationSeconds,
     this.deleteMessageDays = 0,
@@ -24,9 +31,12 @@ class GuildBanCreateRequest {
     this.banDurationSeconds,
     this.deleteMessageDays = 0,
   }) : _reasonPresent = false;
+  factory GuildBanCreateRequest.patch(Map<String, Object?> json) =>
+      GuildBanCreateRequest.fromJson(json);
+
   factory GuildBanCreateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildBanCreateRequestFromJson(json);
-    return GuildBanCreateRequest(
+    return GuildBanCreateRequest._explicit(
       deleteMessageSeconds: value.deleteMessageSeconds,
       reason: json.containsKey('reason') ? value.reason : _omit,
       banDurationSeconds: value.banDurationSeconds,

@@ -20,6 +20,17 @@ class GroupDmInviteResponse {
     required this.type,
     required this.channel,
     required this.memberCount,
+  }) : inviter = null,
+       _inviterPresent = false,
+       expiresAt = null,
+       _expiresAtPresent = false;
+
+  const GroupDmInviteResponse._explicit({
+    required this.code,
+    required this.temporary,
+    required this.type,
+    required this.channel,
+    required this.memberCount,
     Object? inviter = _omit,
     Object? expiresAt = _omit,
   }) : inviter = identical(inviter, _omit)
@@ -39,9 +50,12 @@ class GroupDmInviteResponse {
     this.expiresAt,
   }) : _inviterPresent = false,
        _expiresAtPresent = false;
+  factory GroupDmInviteResponse.patch(Map<String, Object?> json) =>
+      GroupDmInviteResponse.fromJson(json);
+
   factory GroupDmInviteResponse.fromJson(Map<String, Object?> json) {
     final value = _$GroupDmInviteResponseFromJson(json);
-    return GroupDmInviteResponse(
+    return GroupDmInviteResponse._explicit(
       code: value.code,
       temporary: value.temporary,
       type: value.type,

@@ -20,6 +20,25 @@ class BulkDeleteSelfMessagesRequest {
   const BulkDeleteSelfMessagesRequest({
     this.excludedGuildIds,
     this.includedGuildIds,
+    this.password,
+    this.mfaMethod,
+    this.mfaCode,
+    this.webauthnResponse,
+    this.webauthnChallenge,
+    this.scope = BulkDeleteSelfMessagesScope.selected,
+    this.includeDms = true,
+    this.includeDmsClosed = true,
+    this.includeGroupDms = true,
+    this.includeGuilds = true,
+    this.guildFilterMode = BulkDeleteSelfMessagesGuildFilterMode.exclude,
+  }) : startDate = null,
+       _startDatePresent = false,
+       endDate = null,
+       _endDatePresent = false;
+
+  const BulkDeleteSelfMessagesRequest._explicit({
+    this.excludedGuildIds,
+    this.includedGuildIds,
     Object? startDate = _omit,
     Object? endDate = _omit,
     this.password,
@@ -56,9 +75,12 @@ class BulkDeleteSelfMessagesRequest {
     this.guildFilterMode = BulkDeleteSelfMessagesGuildFilterMode.exclude,
   }) : _startDatePresent = false,
        _endDatePresent = false;
+  factory BulkDeleteSelfMessagesRequest.patch(Map<String, Object?> json) =>
+      BulkDeleteSelfMessagesRequest.fromJson(json);
+
   factory BulkDeleteSelfMessagesRequest.fromJson(Map<String, Object?> json) {
     final value = _$BulkDeleteSelfMessagesRequestFromJson(json);
-    return BulkDeleteSelfMessagesRequest(
+    return BulkDeleteSelfMessagesRequest._explicit(
       excludedGuildIds: value.excludedGuildIds,
       includedGuildIds: value.includedGuildIds,
       startDate: json.containsKey('start_date') ? value.startDate : _omit,

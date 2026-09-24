@@ -10,7 +10,11 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class ChannelPinResponseMessageCall {
-  const ChannelPinResponseMessageCall({
+  const ChannelPinResponseMessageCall({required this.participants})
+    : endedTimestamp = null,
+      _endedTimestampPresent = false;
+
+  const ChannelPinResponseMessageCall._explicit({
     required this.participants,
     Object? endedTimestamp = _omit,
   }) : endedTimestamp = identical(endedTimestamp, _omit)
@@ -22,9 +26,12 @@ class ChannelPinResponseMessageCall {
     required this.participants,
     this.endedTimestamp,
   }) : _endedTimestampPresent = false;
+  factory ChannelPinResponseMessageCall.patch(Map<String, Object?> json) =>
+      ChannelPinResponseMessageCall.fromJson(json);
+
   factory ChannelPinResponseMessageCall.fromJson(Map<String, Object?> json) {
     final value = _$ChannelPinResponseMessageCallFromJson(json);
-    return ChannelPinResponseMessageCall(
+    return ChannelPinResponseMessageCall._explicit(
       participants: value.participants,
       endedTimestamp: json.containsKey('ended_timestamp')
           ? value.endedTimestamp

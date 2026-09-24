@@ -17,6 +17,20 @@ class HarvestSelfDataRequest {
   const HarvestSelfDataRequest({
     this.excludedGuildIds,
     this.includedGuildIds,
+    this.scope = BulkDeleteSelfMessagesScope.selected,
+    this.includeDms = true,
+    this.includeDmsClosed = true,
+    this.includeGroupDms = true,
+    this.includeGuilds = true,
+    this.guildFilterMode = BulkDeleteSelfMessagesGuildFilterMode.exclude,
+  }) : startDate = null,
+       _startDatePresent = false,
+       endDate = null,
+       _endDatePresent = false;
+
+  const HarvestSelfDataRequest._explicit({
+    this.excludedGuildIds,
+    this.includedGuildIds,
     Object? startDate = _omit,
     Object? endDate = _omit,
     this.scope = BulkDeleteSelfMessagesScope.selected,
@@ -43,9 +57,12 @@ class HarvestSelfDataRequest {
     this.guildFilterMode = BulkDeleteSelfMessagesGuildFilterMode.exclude,
   }) : _startDatePresent = false,
        _endDatePresent = false;
+  factory HarvestSelfDataRequest.patch(Map<String, Object?> json) =>
+      HarvestSelfDataRequest.fromJson(json);
+
   factory HarvestSelfDataRequest.fromJson(Map<String, Object?> json) {
     final value = _$HarvestSelfDataRequestFromJson(json);
-    return HarvestSelfDataRequest(
+    return HarvestSelfDataRequest._explicit(
       excludedGuildIds: value.excludedGuildIds,
       includedGuildIds: value.includedGuildIds,
       startDate: json.containsKey('start_date') ? value.startDate : _omit,

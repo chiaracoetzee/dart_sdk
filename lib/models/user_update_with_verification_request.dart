@@ -24,6 +24,41 @@ class UserUpdateWithVerificationRequest {
   const UserUpdateWithVerificationRequest({
     this.username,
     this.discriminator,
+    this.email,
+    this.newPassword,
+    this.password,
+    this.timezonePrivacyFlags,
+    this.premiumBadgeHidden,
+    this.premiumBadgeMasked,
+    this.premiumBadgeTimestampHidden,
+    this.premiumBadgeSequenceHidden,
+    this.premiumEnabledOverride,
+    this.hasDismissedPremiumOnboarding,
+    this.hasUnreadGiftInventory,
+    this.mentionFlags,
+    this.emailToken,
+    this.mfaMethod,
+    this.mfaCode,
+    this.webauthnResponse,
+    this.webauthnChallenge,
+  }) : globalName = null,
+       _globalNamePresent = false,
+       avatar = null,
+       _avatarPresent = false,
+       banner = null,
+       _bannerPresent = false,
+       bio = null,
+       _bioPresent = false,
+       pronouns = null,
+       _pronounsPresent = false,
+       accentColor = null,
+       _accentColorPresent = false,
+       timezone = null,
+       _timezonePresent = false;
+
+  const UserUpdateWithVerificationRequest._explicit({
+    this.username,
+    this.discriminator,
     Object? globalName = _omit,
     this.email,
     this.newPassword,
@@ -99,11 +134,14 @@ class UserUpdateWithVerificationRequest {
        _pronounsPresent = false,
        _accentColorPresent = false,
        _timezonePresent = false;
+  factory UserUpdateWithVerificationRequest.patch(Map<String, Object?> json) =>
+      UserUpdateWithVerificationRequest.fromJson(json);
+
   factory UserUpdateWithVerificationRequest.fromJson(
     Map<String, Object?> json,
   ) {
     final value = _$UserUpdateWithVerificationRequestFromJson(json);
-    return UserUpdateWithVerificationRequest(
+    return UserUpdateWithVerificationRequest._explicit(
       username: value.username,
       discriminator: value.discriminator,
       globalName: json.containsKey('global_name') ? value.globalName : _omit,

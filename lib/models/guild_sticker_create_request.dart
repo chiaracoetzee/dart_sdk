@@ -16,6 +16,13 @@ class GuildStickerCreateRequest {
     required this.name,
     required this.image,
     this.tags = const [],
+  }) : description = null,
+       _descriptionPresent = false;
+
+  const GuildStickerCreateRequest._explicit({
+    required this.name,
+    required this.image,
+    this.tags = const [],
     Object? description = _omit,
   }) : description = identical(description, _omit)
            ? null
@@ -28,9 +35,12 @@ class GuildStickerCreateRequest {
     this.tags = const [],
     this.description,
   }) : _descriptionPresent = false;
+  factory GuildStickerCreateRequest.patch(Map<String, Object?> json) =>
+      GuildStickerCreateRequest.fromJson(json);
+
   factory GuildStickerCreateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildStickerCreateRequestFromJson(json);
-    return GuildStickerCreateRequest(
+    return GuildStickerCreateRequest._explicit(
       name: value.name,
       image: value.image,
       tags: value.tags,

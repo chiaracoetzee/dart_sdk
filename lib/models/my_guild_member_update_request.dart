@@ -16,7 +16,33 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class MyGuildMemberUpdateRequest {
-  const MyGuildMemberUpdateRequest({
+  const MyGuildMemberUpdateRequest({this.mute, this.deaf})
+    : nick = null,
+      _nickPresent = false,
+      avatar = null,
+      _avatarPresent = false,
+      banner = null,
+      _bannerPresent = false,
+      bio = null,
+      _bioPresent = false,
+      pronouns = null,
+      _pronounsPresent = false,
+      accentColor = null,
+      _accentColorPresent = false,
+      profileFlags = null,
+      _profileFlagsPresent = false,
+      mentionFlags = null,
+      _mentionFlagsPresent = false,
+      communicationDisabledUntil = null,
+      _communicationDisabledUntilPresent = false,
+      timeoutReason = null,
+      _timeoutReasonPresent = false,
+      channelId = null,
+      _channelIdPresent = false,
+      connectionId = null,
+      _connectionIdPresent = false;
+
+  const MyGuildMemberUpdateRequest._explicit({
     Object? nick = _omit,
     Object? avatar = _omit,
     Object? banner = _omit,
@@ -100,9 +126,12 @@ class MyGuildMemberUpdateRequest {
        _timeoutReasonPresent = false,
        _channelIdPresent = false,
        _connectionIdPresent = false;
+  factory MyGuildMemberUpdateRequest.patch(Map<String, Object?> json) =>
+      MyGuildMemberUpdateRequest.fromJson(json);
+
   factory MyGuildMemberUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$MyGuildMemberUpdateRequestFromJson(json);
-    return MyGuildMemberUpdateRequest(
+    return MyGuildMemberUpdateRequest._explicit(
       nick: json.containsKey('nick') ? value.nick : _omit,
       avatar: json.containsKey('avatar') ? value.avatar : _omit,
       banner: json.containsKey('banner') ? value.banner : _omit,

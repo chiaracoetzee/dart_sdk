@@ -17,6 +17,20 @@ class UserGuildSettingsUpdateRequest {
   const UserGuildSettingsUpdateRequest({
     this.messageNotifications,
     this.muted,
+    this.mobilePush,
+    this.suppressEveryone,
+    this.suppressRoles,
+    this.hideMutedChannels,
+  }) : muteConfig = null,
+       _muteConfigPresent = false,
+       channelOverrides = null,
+       _channelOverridesPresent = false,
+       unreadBadges = null,
+       _unreadBadgesPresent = false;
+
+  const UserGuildSettingsUpdateRequest._explicit({
+    this.messageNotifications,
+    this.muted,
     Object? muteConfig = _omit,
     this.mobilePush,
     this.suppressEveryone,
@@ -50,9 +64,12 @@ class UserGuildSettingsUpdateRequest {
   }) : _muteConfigPresent = false,
        _channelOverridesPresent = false,
        _unreadBadgesPresent = false;
+  factory UserGuildSettingsUpdateRequest.patch(Map<String, Object?> json) =>
+      UserGuildSettingsUpdateRequest.fromJson(json);
+
   factory UserGuildSettingsUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$UserGuildSettingsUpdateRequestFromJson(json);
-    return UserGuildSettingsUpdateRequest(
+    return UserGuildSettingsUpdateRequest._explicit(
       messageNotifications: value.messageNotifications,
       muted: value.muted,
       muteConfig: json.containsKey('mute_config') ? value.muteConfig : _omit,

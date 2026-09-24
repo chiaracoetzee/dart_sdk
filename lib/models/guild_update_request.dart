@@ -27,6 +27,41 @@ const Object _omit = Object();
 class GuildUpdateRequest {
   const GuildUpdateRequest({
     this.name,
+    this.systemChannelFlags,
+    this.afkTimeout,
+    this.defaultMessageNotifications,
+    this.verificationLevel,
+    this.mfaLevel,
+    this.nsfwLevel,
+    this.nsfw,
+    this.contentWarningLevel,
+    this.explicitContentFilter,
+    this.splashCardAlignment,
+    this.features,
+    this.password,
+    this.mfaMethod,
+    this.mfaCode,
+    this.webauthnResponse,
+    this.webauthnChallenge,
+  }) : icon = null,
+       _iconPresent = false,
+       systemChannelId = null,
+       _systemChannelIdPresent = false,
+       afkChannelId = null,
+       _afkChannelIdPresent = false,
+       contentWarningText = null,
+       _contentWarningTextPresent = false,
+       banner = null,
+       _bannerPresent = false,
+       splash = null,
+       _splashPresent = false,
+       embedSplash = null,
+       _embedSplashPresent = false,
+       messageHistoryCutoff = null,
+       _messageHistoryCutoffPresent = false;
+
+  const GuildUpdateRequest._explicit({
+    this.name,
     Object? icon = _omit,
     Object? systemChannelId = _omit,
     this.systemChannelFlags,
@@ -112,9 +147,12 @@ class GuildUpdateRequest {
        _splashPresent = false,
        _embedSplashPresent = false,
        _messageHistoryCutoffPresent = false;
+  factory GuildUpdateRequest.patch(Map<String, Object?> json) =>
+      GuildUpdateRequest.fromJson(json);
+
   factory GuildUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildUpdateRequestFromJson(json);
-    return GuildUpdateRequest(
+    return GuildUpdateRequest._explicit(
       name: value.name,
       icon: json.containsKey('icon') ? value.icon : _omit,
       systemChannelId: json.containsKey('system_channel_id')

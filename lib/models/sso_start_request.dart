@@ -10,7 +10,13 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class SsoStartRequest {
-  const SsoStartRequest({
+  const SsoStartRequest()
+    : redirectTo = null,
+      _redirectToPresent = false,
+      redirectUri = null,
+      _redirectUriPresent = false;
+
+  const SsoStartRequest._explicit({
     Object? redirectTo = _omit,
     Object? redirectUri = _omit,
   }) : redirectTo = identical(redirectTo, _omit) ? null : redirectTo as String?,
@@ -23,9 +29,12 @@ class SsoStartRequest {
   const SsoStartRequest._({this.redirectTo, this.redirectUri})
     : _redirectToPresent = false,
       _redirectUriPresent = false;
+  factory SsoStartRequest.patch(Map<String, Object?> json) =>
+      SsoStartRequest.fromJson(json);
+
   factory SsoStartRequest.fromJson(Map<String, Object?> json) {
     final value = _$SsoStartRequestFromJson(json);
-    return SsoStartRequest(
+    return SsoStartRequest._explicit(
       redirectTo: json.containsKey('redirect_to') ? value.redirectTo : _omit,
       redirectUri: json.containsKey('redirect_uri') ? value.redirectUri : _omit,
     );

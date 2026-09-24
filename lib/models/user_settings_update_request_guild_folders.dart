@@ -21,6 +21,15 @@ class UserSettingsUpdateRequestGuildFolders {
     this.color = 0,
     this.flags = 0,
     this.icon = GuildFolderIconType.folder,
+  }) : name = null,
+       _namePresent = false;
+
+  const UserSettingsUpdateRequestGuildFolders._explicit({
+    required this.id,
+    required this.guildIds,
+    this.color = 0,
+    this.flags = 0,
+    this.icon = GuildFolderIconType.folder,
     Object? name = _omit,
   }) : name = identical(name, _omit) ? null : name as String?,
        _namePresent = !identical(name, _omit);
@@ -33,11 +42,15 @@ class UserSettingsUpdateRequestGuildFolders {
     this.icon = GuildFolderIconType.folder,
     this.name,
   }) : _namePresent = false;
+  factory UserSettingsUpdateRequestGuildFolders.patch(
+    Map<String, Object?> json,
+  ) => UserSettingsUpdateRequestGuildFolders.fromJson(json);
+
   factory UserSettingsUpdateRequestGuildFolders.fromJson(
     Map<String, Object?> json,
   ) {
     final value = _$UserSettingsUpdateRequestGuildFoldersFromJson(json);
-    return UserSettingsUpdateRequestGuildFolders(
+    return UserSettingsUpdateRequestGuildFolders._explicit(
       id: value.id,
       guildIds: value.guildIds,
       color: value.color,

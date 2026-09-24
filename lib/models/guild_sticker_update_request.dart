@@ -10,7 +10,11 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class GuildStickerUpdateRequest {
-  const GuildStickerUpdateRequest({
+  const GuildStickerUpdateRequest({required this.name, this.tags = const []})
+    : description = null,
+      _descriptionPresent = false;
+
+  const GuildStickerUpdateRequest._explicit({
     required this.name,
     this.tags = const [],
     Object? description = _omit,
@@ -24,9 +28,12 @@ class GuildStickerUpdateRequest {
     this.tags = const [],
     this.description,
   }) : _descriptionPresent = false;
+  factory GuildStickerUpdateRequest.patch(Map<String, Object?> json) =>
+      GuildStickerUpdateRequest.fromJson(json);
+
   factory GuildStickerUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$GuildStickerUpdateRequestFromJson(json);
-    return GuildStickerUpdateRequest(
+    return GuildStickerUpdateRequest._explicit(
       name: value.name,
       tags: value.tags,
       description: json.containsKey('description') ? value.description : _omit,

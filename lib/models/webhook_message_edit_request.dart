@@ -15,7 +15,13 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class WebhookMessageEditRequest {
-  const WebhookMessageEditRequest({
+  const WebhookMessageEditRequest({this.embeds, this.flags})
+    : content = null,
+      _contentPresent = false,
+      allowedMentions = null,
+      _allowedMentionsPresent = false;
+
+  const WebhookMessageEditRequest._explicit({
     Object? content = _omit,
     this.embeds,
     this.flags,
@@ -36,9 +42,12 @@ class WebhookMessageEditRequest {
     this.allowedMentions,
   }) : _contentPresent = false,
        _allowedMentionsPresent = false;
+  factory WebhookMessageEditRequest.patch(Map<String, Object?> json) =>
+      WebhookMessageEditRequest.fromJson(json);
+
   factory WebhookMessageEditRequest.fromJson(Map<String, Object?> json) {
     final value = _$WebhookMessageEditRequestFromJson(json);
-    return WebhookMessageEditRequest(
+    return WebhookMessageEditRequest._explicit(
       content: json.containsKey('content') ? value.content : _omit,
       embeds: value.embeds,
       flags: value.flags,

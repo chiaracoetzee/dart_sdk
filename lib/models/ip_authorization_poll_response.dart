@@ -13,7 +13,15 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class IpAuthorizationPollResponse {
-  const IpAuthorizationPollResponse({
+  const IpAuthorizationPollResponse({required this.completed})
+    : token = null,
+      _tokenPresent = false,
+      userId = null,
+      _userIdPresent = false,
+      user = null,
+      _userPresent = false;
+
+  const IpAuthorizationPollResponse._explicit({
     required this.completed,
     Object? token = _omit,
     Object? userId = _omit,
@@ -35,9 +43,12 @@ class IpAuthorizationPollResponse {
   }) : _tokenPresent = false,
        _userIdPresent = false,
        _userPresent = false;
+  factory IpAuthorizationPollResponse.patch(Map<String, Object?> json) =>
+      IpAuthorizationPollResponse.fromJson(json);
+
   factory IpAuthorizationPollResponse.fromJson(Map<String, Object?> json) {
     final value = _$IpAuthorizationPollResponseFromJson(json);
-    return IpAuthorizationPollResponse(
+    return IpAuthorizationPollResponse._explicit(
       completed: value.completed,
       token: json.containsKey('token') ? value.token : _omit,
       userId: json.containsKey('user_id') ? value.userId : _omit,

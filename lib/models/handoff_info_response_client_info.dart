@@ -13,7 +13,15 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class HandoffInfoResponseClientInfo {
-  const HandoffInfoResponseClientInfo({
+  const HandoffInfoResponseClientInfo({required this.device})
+    : platform = null,
+      _platformPresent = false,
+      os = null,
+      _osPresent = false,
+      location = null,
+      _locationPresent = false;
+
+  const HandoffInfoResponseClientInfo._explicit({
     required this.device,
     Object? platform = _omit,
     Object? os = _omit,
@@ -35,9 +43,12 @@ class HandoffInfoResponseClientInfo {
   }) : _platformPresent = false,
        _osPresent = false,
        _locationPresent = false;
+  factory HandoffInfoResponseClientInfo.patch(Map<String, Object?> json) =>
+      HandoffInfoResponseClientInfo.fromJson(json);
+
   factory HandoffInfoResponseClientInfo.fromJson(Map<String, Object?> json) {
     final value = _$HandoffInfoResponseClientInfoFromJson(json);
-    return HandoffInfoResponseClientInfo(
+    return HandoffInfoResponseClientInfo._explicit(
       device: value.device,
       platform: json.containsKey('platform') ? value.platform : _omit,
       os: json.containsKey('os') ? value.os : _omit,

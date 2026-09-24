@@ -18,6 +18,17 @@ class GuildAuditLogEntryResponse {
   const GuildAuditLogEntryResponse({
     required this.id,
     required this.actionType,
+    this.reason,
+    this.options,
+    this.changes,
+  }) : userId = null,
+       _userIdPresent = false,
+       targetId = null,
+       _targetIdPresent = false;
+
+  const GuildAuditLogEntryResponse._explicit({
+    required this.id,
+    required this.actionType,
     Object? userId = _omit,
     Object? targetId = _omit,
     this.reason,
@@ -40,9 +51,12 @@ class GuildAuditLogEntryResponse {
     this.changes,
   }) : _userIdPresent = false,
        _targetIdPresent = false;
+  factory GuildAuditLogEntryResponse.patch(Map<String, Object?> json) =>
+      GuildAuditLogEntryResponse.fromJson(json);
+
   factory GuildAuditLogEntryResponse.fromJson(Map<String, Object?> json) {
     final value = _$GuildAuditLogEntryResponseFromJson(json);
-    return GuildAuditLogEntryResponse(
+    return GuildAuditLogEntryResponse._explicit(
       id: value.id,
       actionType: value.actionType,
       userId: json.containsKey('user_id') ? value.userId : _omit,

@@ -10,7 +10,13 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class UpdateFavoriteMemeBodySchema {
-  const UpdateFavoriteMemeBodySchema({
+  const UpdateFavoriteMemeBodySchema({this.name})
+    : altText = null,
+      _altTextPresent = false,
+      tags = null,
+      _tagsPresent = false;
+
+  const UpdateFavoriteMemeBodySchema._explicit({
     this.name,
     Object? altText = _omit,
     Object? tags = _omit,
@@ -22,9 +28,12 @@ class UpdateFavoriteMemeBodySchema {
   const UpdateFavoriteMemeBodySchema._({this.name, this.altText, this.tags})
     : _altTextPresent = false,
       _tagsPresent = false;
+  factory UpdateFavoriteMemeBodySchema.patch(Map<String, Object?> json) =>
+      UpdateFavoriteMemeBodySchema.fromJson(json);
+
   factory UpdateFavoriteMemeBodySchema.fromJson(Map<String, Object?> json) {
     final value = _$UpdateFavoriteMemeBodySchemaFromJson(json);
-    return UpdateFavoriteMemeBodySchema(
+    return UpdateFavoriteMemeBodySchema._explicit(
       name: value.name,
       altText: json.containsKey('alt_text') ? value.altText : _omit,
       tags: json.containsKey('tags') ? value.tags : _omit,

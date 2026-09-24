@@ -17,6 +17,13 @@ class ChannelPartialResponse {
   const ChannelPartialResponse({
     required this.id,
     required this.type,
+    this.recipients,
+  }) : name = null,
+       _namePresent = false;
+
+  const ChannelPartialResponse._explicit({
+    required this.id,
+    required this.type,
     Object? name = _omit,
     this.recipients,
   }) : name = identical(name, _omit) ? null : name as String?,
@@ -28,9 +35,12 @@ class ChannelPartialResponse {
     this.name,
     this.recipients,
   }) : _namePresent = false;
+  factory ChannelPartialResponse.patch(Map<String, Object?> json) =>
+      ChannelPartialResponse.fromJson(json);
+
   factory ChannelPartialResponse.fromJson(Map<String, Object?> json) {
     final value = _$ChannelPartialResponseFromJson(json);
-    return ChannelPartialResponse(
+    return ChannelPartialResponse._explicit(
       id: value.id,
       type: value.type,
       name: json.containsKey('name') ? value.name : _omit,

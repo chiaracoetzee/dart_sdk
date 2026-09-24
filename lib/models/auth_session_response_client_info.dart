@@ -13,7 +13,17 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class AuthSessionResponseClientInfo {
-  const AuthSessionResponseClientInfo({
+  const AuthSessionResponseClientInfo({required this.device})
+    : platform = null,
+      _platformPresent = false,
+      os = null,
+      _osPresent = false,
+      browser = null,
+      _browserPresent = false,
+      location = null,
+      _locationPresent = false;
+
+  const AuthSessionResponseClientInfo._explicit({
     required this.device,
     Object? platform = _omit,
     Object? os = _omit,
@@ -40,9 +50,12 @@ class AuthSessionResponseClientInfo {
        _osPresent = false,
        _browserPresent = false,
        _locationPresent = false;
+  factory AuthSessionResponseClientInfo.patch(Map<String, Object?> json) =>
+      AuthSessionResponseClientInfo.fromJson(json);
+
   factory AuthSessionResponseClientInfo.fromJson(Map<String, Object?> json) {
     final value = _$AuthSessionResponseClientInfoFromJson(json);
-    return AuthSessionResponseClientInfo(
+    return AuthSessionResponseClientInfo._explicit(
       device: value.device,
       platform: json.containsKey('platform') ? value.platform : _omit,
       os: json.containsKey('os') ? value.os : _omit,

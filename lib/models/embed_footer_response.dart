@@ -10,7 +10,13 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class EmbedFooterResponse {
-  const EmbedFooterResponse({
+  const EmbedFooterResponse({required this.text})
+    : iconUrl = null,
+      _iconUrlPresent = false,
+      proxyIconUrl = null,
+      _proxyIconUrlPresent = false;
+
+  const EmbedFooterResponse._explicit({
     required this.text,
     Object? iconUrl = _omit,
     Object? proxyIconUrl = _omit,
@@ -27,9 +33,12 @@ class EmbedFooterResponse {
     this.proxyIconUrl,
   }) : _iconUrlPresent = false,
        _proxyIconUrlPresent = false;
+  factory EmbedFooterResponse.patch(Map<String, Object?> json) =>
+      EmbedFooterResponse.fromJson(json);
+
   factory EmbedFooterResponse.fromJson(Map<String, Object?> json) {
     final value = _$EmbedFooterResponseFromJson(json);
-    return EmbedFooterResponse(
+    return EmbedFooterResponse._explicit(
       text: value.text,
       iconUrl: json.containsKey('icon_url') ? value.iconUrl : _omit,
       proxyIconUrl: json.containsKey('proxy_icon_url')

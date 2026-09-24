@@ -23,6 +23,18 @@ class ApplicationPublicResponse {
     required this.scopes,
     required this.botPublic,
     required this.bot,
+  }) : currentUser = null,
+       _currentUserPresent = false;
+
+  const ApplicationPublicResponse._explicit({
+    required this.id,
+    required this.name,
+    required this.icon,
+    required this.description,
+    required this.redirectUris,
+    required this.scopes,
+    required this.botPublic,
+    required this.bot,
     Object? currentUser = _omit,
   }) : currentUser = identical(currentUser, _omit)
            ? null
@@ -40,9 +52,12 @@ class ApplicationPublicResponse {
     required this.bot,
     this.currentUser,
   }) : _currentUserPresent = false;
+  factory ApplicationPublicResponse.patch(Map<String, Object?> json) =>
+      ApplicationPublicResponse.fromJson(json);
+
   factory ApplicationPublicResponse.fromJson(Map<String, Object?> json) {
     final value = _$ApplicationPublicResponseFromJson(json);
-    return ApplicationPublicResponse(
+    return ApplicationPublicResponse._explicit(
       id: value.id,
       name: value.name,
       icon: value.icon,

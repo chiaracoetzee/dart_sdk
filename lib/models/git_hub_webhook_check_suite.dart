@@ -13,7 +13,15 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class GitHubWebhookCheckSuite {
-  const GitHubWebhookCheckSuite({
+  const GitHubWebhookCheckSuite({required this.headSha, required this.app})
+    : conclusion = null,
+      _conclusionPresent = false,
+      headBranch = null,
+      _headBranchPresent = false,
+      pullRequests = null,
+      _pullRequestsPresent = false;
+
+  const GitHubWebhookCheckSuite._explicit({
     required this.headSha,
     required this.app,
     Object? conclusion = _omit,
@@ -37,9 +45,12 @@ class GitHubWebhookCheckSuite {
   }) : _conclusionPresent = false,
        _headBranchPresent = false,
        _pullRequestsPresent = false;
+  factory GitHubWebhookCheckSuite.patch(Map<String, Object?> json) =>
+      GitHubWebhookCheckSuite.fromJson(json);
+
   factory GitHubWebhookCheckSuite.fromJson(Map<String, Object?> json) {
     final value = _$GitHubWebhookCheckSuiteFromJson(json);
-    return GitHubWebhookCheckSuite(
+    return GitHubWebhookCheckSuite._explicit(
       headSha: value.headSha,
       app: value.app,
       conclusion: json.containsKey('conclusion') ? value.conclusion : _omit,

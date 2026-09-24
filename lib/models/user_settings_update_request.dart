@@ -27,6 +27,53 @@ const Object _omit = Object();
 @JsonSerializable(constructor: '_')
 class UserSettingsUpdateRequest {
   const UserSettingsUpdateRequest({
+    this.flags,
+    this.status,
+    this.theme,
+    this.guildPositions,
+    this.locale,
+    this.restrictedGuilds,
+    this.botRestrictedGuilds,
+    this.defaultGuildsRestricted,
+    this.botDefaultGuildsRestricted,
+    this.inlineAttachmentMedia,
+    this.inlineEmbedMedia,
+    this.gifAutoPlay,
+    this.renderEmbeds,
+    this.renderReactions,
+    this.animateEmoji,
+    this.animateStickers,
+    this.renderSpoilers,
+    this.messageDisplayCompact,
+    this.friendSourceFlags,
+    this.incomingCallFlags,
+    this.groupDmAddPermissionFlags,
+    this.guildFolders,
+    this.afkTimeout,
+    this.timeFormat,
+    this.developerMode,
+    this.trustedDomains,
+    this.defaultHideMutedChannels,
+    this.sensitiveContentFriendDmFilter,
+    this.sensitiveContentNonFriendDmFilter,
+    this.sensitiveContentGuildFilter,
+    this.suppressUnprivilegedSelfMentions,
+    this.profilePrivacy,
+    this.defaultShareVoiceActivity,
+  }) : statusResetsAt = null,
+       _statusResetsAtPresent = false,
+       statusResetsTo = null,
+       _statusResetsToPresent = false,
+       customStatus = null,
+       _customStatusPresent = false,
+       suppressUnprivilegedSelfMentionsBypassUserIds = null,
+       _suppressUnprivilegedSelfMentionsBypassUserIdsPresent = false,
+       staffDmAccessUserIds = null,
+       _staffDmAccessUserIdsPresent = false,
+       syncedPreferences = null,
+       _syncedPreferencesPresent = false;
+
+  const UserSettingsUpdateRequest._explicit({
     this.gifAutoPlay,
     this.status,
     Object? statusResetsAt = _omit,
@@ -142,9 +189,12 @@ class UserSettingsUpdateRequest {
        _suppressUnprivilegedSelfMentionsBypassUserIdsPresent = false,
        _staffDmAccessUserIdsPresent = false,
        _syncedPreferencesPresent = false;
+  factory UserSettingsUpdateRequest.patch(Map<String, Object?> json) =>
+      UserSettingsUpdateRequest.fromJson(json);
+
   factory UserSettingsUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$UserSettingsUpdateRequestFromJson(json);
-    return UserSettingsUpdateRequest(
+    return UserSettingsUpdateRequest._explicit(
       gifAutoPlay: value.gifAutoPlay,
       status: value.status,
       statusResetsAt: json.containsKey('status_resets_at')

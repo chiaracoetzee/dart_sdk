@@ -16,6 +16,16 @@ class GitHubWebhookCheckRunCheckSuite {
   const GitHubWebhookCheckRunCheckSuite({
     required this.headSha,
     required this.app,
+  }) : conclusion = null,
+       _conclusionPresent = false,
+       headBranch = null,
+       _headBranchPresent = false,
+       pullRequests = null,
+       _pullRequestsPresent = false;
+
+  const GitHubWebhookCheckRunCheckSuite._explicit({
+    required this.headSha,
+    required this.app,
     Object? conclusion = _omit,
     Object? headBranch = _omit,
     Object? pullRequests = _omit,
@@ -37,9 +47,12 @@ class GitHubWebhookCheckRunCheckSuite {
   }) : _conclusionPresent = false,
        _headBranchPresent = false,
        _pullRequestsPresent = false;
+  factory GitHubWebhookCheckRunCheckSuite.patch(Map<String, Object?> json) =>
+      GitHubWebhookCheckRunCheckSuite.fromJson(json);
+
   factory GitHubWebhookCheckRunCheckSuite.fromJson(Map<String, Object?> json) {
     final value = _$GitHubWebhookCheckRunCheckSuiteFromJson(json);
-    return GitHubWebhookCheckRunCheckSuite(
+    return GitHubWebhookCheckRunCheckSuite._explicit(
       headSha: value.headSha,
       app: value.app,
       conclusion: json.containsKey('conclusion') ? value.conclusion : _omit,

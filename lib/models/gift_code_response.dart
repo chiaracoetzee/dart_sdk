@@ -18,6 +18,14 @@ class GiftCodeResponse {
     required this.durationType,
     required this.durationQuantity,
     required this.redeemed,
+  }) : createdBy = null,
+       _createdByPresent = false;
+
+  const GiftCodeResponse._explicit({
+    required this.code,
+    required this.durationType,
+    required this.durationQuantity,
+    required this.redeemed,
     Object? createdBy = _omit,
   }) : createdBy = identical(createdBy, _omit)
            ? null
@@ -31,9 +39,12 @@ class GiftCodeResponse {
     required this.redeemed,
     this.createdBy,
   }) : _createdByPresent = false;
+  factory GiftCodeResponse.patch(Map<String, Object?> json) =>
+      GiftCodeResponse.fromJson(json);
+
   factory GiftCodeResponse.fromJson(Map<String, Object?> json) {
     final value = _$GiftCodeResponseFromJson(json);
-    return GiftCodeResponse(
+    return GiftCodeResponse._explicit(
       code: value.code,
       durationType: value.durationType,
       durationQuantity: value.durationQuantity,

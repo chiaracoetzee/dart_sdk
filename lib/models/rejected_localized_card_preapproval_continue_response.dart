@@ -15,6 +15,12 @@ class RejectedLocalizedCardPreapprovalContinueResponse {
   const RejectedLocalizedCardPreapprovalContinueResponse({
     required this.status,
     required this.reason,
+  }) : actualCountry = null,
+       _actualCountryPresent = false;
+
+  const RejectedLocalizedCardPreapprovalContinueResponse._explicit({
+    required this.status,
+    required this.reason,
     Object? actualCountry = _omit,
   }) : actualCountry = identical(actualCountry, _omit)
            ? null
@@ -26,13 +32,17 @@ class RejectedLocalizedCardPreapprovalContinueResponse {
     required this.reason,
     this.actualCountry,
   }) : _actualCountryPresent = false;
+  factory RejectedLocalizedCardPreapprovalContinueResponse.patch(
+    Map<String, Object?> json,
+  ) => RejectedLocalizedCardPreapprovalContinueResponse.fromJson(json);
+
   factory RejectedLocalizedCardPreapprovalContinueResponse.fromJson(
     Map<String, Object?> json,
   ) {
     final value = _$RejectedLocalizedCardPreapprovalContinueResponseFromJson(
       json,
     );
-    return RejectedLocalizedCardPreapprovalContinueResponse(
+    return RejectedLocalizedCardPreapprovalContinueResponse._explicit(
       status: value.status,
       reason: value.reason,
       actualCountry: json.containsKey('actual_country')

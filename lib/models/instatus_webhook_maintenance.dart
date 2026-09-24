@@ -13,7 +13,33 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class InstatusWebhookMaintenance {
-  const InstatusWebhookMaintenance({
+  const InstatusWebhookMaintenance()
+    : id = null,
+      _idPresent = false,
+      name = null,
+      _namePresent = false,
+      url = null,
+      _urlPresent = false,
+      status = null,
+      _statusPresent = false,
+      maintenanceStartDate = null,
+      _maintenanceStartDatePresent = false,
+      maintenanceEndDate = null,
+      _maintenanceEndDatePresent = false,
+      backfilled = null,
+      _backfilledPresent = false,
+      createdAt = null,
+      _createdAtPresent = false,
+      updatedAt = null,
+      _updatedAtPresent = false,
+      resolvedAt = null,
+      _resolvedAtPresent = false,
+      maintenanceUpdates = null,
+      _maintenanceUpdatesPresent = false,
+      affectedComponents = null,
+      _affectedComponentsPresent = false;
+
+  const InstatusWebhookMaintenance._explicit({
     Object? id = _omit,
     Object? name = _omit,
     Object? url = _omit,
@@ -86,9 +112,12 @@ class InstatusWebhookMaintenance {
        _resolvedAtPresent = false,
        _maintenanceUpdatesPresent = false,
        _affectedComponentsPresent = false;
+  factory InstatusWebhookMaintenance.patch(Map<String, Object?> json) =>
+      InstatusWebhookMaintenance.fromJson(json);
+
   factory InstatusWebhookMaintenance.fromJson(Map<String, Object?> json) {
     final value = _$InstatusWebhookMaintenanceFromJson(json);
-    return InstatusWebhookMaintenance(
+    return InstatusWebhookMaintenance._explicit(
       id: json.containsKey('id') ? value.id : _omit,
       name: json.containsKey('name') ? value.name : _omit,
       url: json.containsKey('url') ? value.url : _omit,

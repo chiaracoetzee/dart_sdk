@@ -25,6 +25,21 @@ class UserProfileFullResponse {
     required this.userProfile,
     required this.timezoneOffset,
     this.guildMember,
+    this.premiumType,
+    this.premiumSince,
+    this.premiumLifetimeSequence,
+    this.mutualFriends,
+    this.mutualGuilds,
+    this.connectedAccounts,
+    this.profileLimited,
+  }) : guildMemberProfile = null,
+       _guildMemberProfilePresent = false;
+
+  const UserProfileFullResponse._explicit({
+    required this.user,
+    required this.userProfile,
+    required this.timezoneOffset,
+    this.guildMember,
     Object? guildMemberProfile = _omit,
     this.premiumType,
     this.premiumSince,
@@ -52,9 +67,12 @@ class UserProfileFullResponse {
     this.connectedAccounts,
     this.profileLimited,
   }) : _guildMemberProfilePresent = false;
+  factory UserProfileFullResponse.patch(Map<String, Object?> json) =>
+      UserProfileFullResponse.fromJson(json);
+
   factory UserProfileFullResponse.fromJson(Map<String, Object?> json) {
     final value = _$UserProfileFullResponseFromJson(json);
-    return UserProfileFullResponse(
+    return UserProfileFullResponse._explicit(
       user: value.user,
       userProfile: value.userProfile,
       timezoneOffset: value.timezoneOffset,

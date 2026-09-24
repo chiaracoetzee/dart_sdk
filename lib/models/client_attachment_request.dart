@@ -16,6 +16,20 @@ class ClientAttachmentRequest {
   const ClientAttachmentRequest({
     required this.id,
     required this.filename,
+    this.flags,
+    this.contentType,
+  }) : title = null,
+       _titlePresent = false,
+       description = null,
+       _descriptionPresent = false,
+       duration = null,
+       _durationPresent = false,
+       waveform = null,
+       _waveformPresent = false;
+
+  const ClientAttachmentRequest._explicit({
+    required this.id,
+    required this.filename,
     Object? title = _omit,
     Object? description = _omit,
     this.flags,
@@ -46,9 +60,12 @@ class ClientAttachmentRequest {
        _descriptionPresent = false,
        _durationPresent = false,
        _waveformPresent = false;
+  factory ClientAttachmentRequest.patch(Map<String, Object?> json) =>
+      ClientAttachmentRequest.fromJson(json);
+
   factory ClientAttachmentRequest.fromJson(Map<String, Object?> json) {
     final value = _$ClientAttachmentRequestFromJson(json);
-    return ClientAttachmentRequest(
+    return ClientAttachmentRequest._explicit(
       id: value.id,
       filename: value.filename,
       title: json.containsKey('title') ? value.title : _omit,

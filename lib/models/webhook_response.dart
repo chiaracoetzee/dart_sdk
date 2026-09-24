@@ -20,6 +20,16 @@ class WebhookResponse {
     required this.name,
     required this.token,
     required this.user,
+  }) : avatar = null,
+       _avatarPresent = false;
+
+  const WebhookResponse._explicit({
+    required this.id,
+    required this.guildId,
+    required this.channelId,
+    required this.name,
+    required this.token,
+    required this.user,
     Object? avatar = _omit,
   }) : avatar = identical(avatar, _omit) ? null : avatar as String?,
        _avatarPresent = !identical(avatar, _omit);
@@ -33,9 +43,12 @@ class WebhookResponse {
     required this.user,
     this.avatar,
   }) : _avatarPresent = false;
+  factory WebhookResponse.patch(Map<String, Object?> json) =>
+      WebhookResponse.fromJson(json);
+
   factory WebhookResponse.fromJson(Map<String, Object?> json) {
     final value = _$WebhookResponseFromJson(json);
-    return WebhookResponse(
+    return WebhookResponse._explicit(
       id: value.id,
       guildId: value.guildId,
       channelId: value.channelId,

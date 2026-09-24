@@ -27,6 +27,23 @@ class GuildInviteMetadataResponse {
     required this.uses,
     required this.maxUses,
     required this.maxAge,
+  }) : inviter = null,
+       _inviterPresent = false,
+       expiresAt = null,
+       _expiresAtPresent = false;
+
+  const GuildInviteMetadataResponse._explicit({
+    required this.code,
+    required this.temporary,
+    required this.type,
+    required this.guild,
+    required this.channel,
+    required this.memberCount,
+    required this.presenceCount,
+    required this.createdAt,
+    required this.uses,
+    required this.maxUses,
+    required this.maxAge,
     Object? inviter = _omit,
     Object? expiresAt = _omit,
   }) : inviter = identical(inviter, _omit)
@@ -52,9 +69,12 @@ class GuildInviteMetadataResponse {
     this.expiresAt,
   }) : _inviterPresent = false,
        _expiresAtPresent = false;
+  factory GuildInviteMetadataResponse.patch(Map<String, Object?> json) =>
+      GuildInviteMetadataResponse.fromJson(json);
+
   factory GuildInviteMetadataResponse.fromJson(Map<String, Object?> json) {
     final value = _$GuildInviteMetadataResponseFromJson(json);
-    return GuildInviteMetadataResponse(
+    return GuildInviteMetadataResponse._explicit(
       code: value.code,
       temporary: value.temporary,
       type: value.type,

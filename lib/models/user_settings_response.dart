@@ -26,6 +26,47 @@ const Object _omit = Object();
 @JsonSerializable(constructor: '_')
 class UserSettingsResponse {
   const UserSettingsResponse({
+    required this.animateEmoji,
+    required this.theme,
+    required this.locale,
+    required this.restrictedGuilds,
+    required this.botRestrictedGuilds,
+    required this.defaultGuildsRestricted,
+    required this.botDefaultGuildsRestricted,
+    required this.inlineAttachmentMedia,
+    required this.inlineEmbedMedia,
+    required this.gifAutoPlay,
+    required this.renderEmbeds,
+    required this.renderReactions,
+    required this.status,
+    required this.animateStickers,
+    required this.renderSpoilers,
+    required this.messageDisplayCompact,
+    required this.friendSourceFlags,
+    required this.incomingCallFlags,
+    required this.groupDmAddPermissionFlags,
+    required this.guildFolders,
+    required this.customStatus,
+    required this.afkTimeout,
+    required this.defaultShareVoiceActivity,
+    required this.developerMode,
+    required this.trustedDomains,
+    required this.defaultHideMutedChannels,
+    required this.sensitiveContentFriendDmFilter,
+    required this.sensitiveContentNonFriendDmFilter,
+    required this.sensitiveContentGuildFilter,
+    required this.suppressUnprivilegedSelfMentions,
+    required this.suppressUnprivilegedSelfMentionsBypassUserIds,
+    required this.staffDmAccessUserIds,
+    required this.syncedPreferences,
+    required this.profilePrivacy,
+    required this.timeFormat,
+  }) : statusResetsAt = null,
+       _statusResetsAtPresent = false,
+       statusResetsTo = null,
+       _statusResetsToPresent = false;
+
+  const UserSettingsResponse._explicit({
     required this.renderEmbeds,
     required this.profilePrivacy,
     required this.syncedPreferences,
@@ -112,9 +153,12 @@ class UserSettingsResponse {
     this.statusResetsTo,
   }) : _statusResetsAtPresent = false,
        _statusResetsToPresent = false;
+  factory UserSettingsResponse.patch(Map<String, Object?> json) =>
+      UserSettingsResponse.fromJson(json);
+
   factory UserSettingsResponse.fromJson(Map<String, Object?> json) {
     final value = _$UserSettingsResponseFromJson(json);
-    return UserSettingsResponse(
+    return UserSettingsResponse._explicit(
       renderEmbeds: value.renderEmbeds,
       profilePrivacy: value.profilePrivacy,
       syncedPreferences: value.syncedPreferences,

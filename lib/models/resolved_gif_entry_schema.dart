@@ -18,6 +18,16 @@ class ResolvedGifEntrySchema {
     required this.width,
     required this.height,
     required this.media,
+    this.contentType = '',
+  }) : placeholder = null,
+       _placeholderPresent = false;
+
+  const ResolvedGifEntrySchema._explicit({
+    required this.url,
+    required this.proxyUrl,
+    required this.width,
+    required this.height,
+    required this.media,
     Object? placeholder = _omit,
     this.contentType = '',
   }) : placeholder = identical(placeholder, _omit)
@@ -34,9 +44,12 @@ class ResolvedGifEntrySchema {
     this.placeholder,
     this.contentType = '',
   }) : _placeholderPresent = false;
+  factory ResolvedGifEntrySchema.patch(Map<String, Object?> json) =>
+      ResolvedGifEntrySchema.fromJson(json);
+
   factory ResolvedGifEntrySchema.fromJson(Map<String, Object?> json) {
     final value = _$ResolvedGifEntrySchemaFromJson(json);
-    return ResolvedGifEntrySchema(
+    return ResolvedGifEntrySchema._explicit(
       url: value.url,
       proxyUrl: value.proxyUrl,
       width: value.width,

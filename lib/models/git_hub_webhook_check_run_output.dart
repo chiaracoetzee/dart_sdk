@@ -10,7 +10,13 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class GitHubWebhookCheckRunOutput {
-  const GitHubWebhookCheckRunOutput({
+  const GitHubWebhookCheckRunOutput()
+    : title = null,
+      _titlePresent = false,
+      summary = null,
+      _summaryPresent = false;
+
+  const GitHubWebhookCheckRunOutput._explicit({
     Object? title = _omit,
     Object? summary = _omit,
   }) : title = identical(title, _omit) ? null : title as String?,
@@ -21,9 +27,12 @@ class GitHubWebhookCheckRunOutput {
   const GitHubWebhookCheckRunOutput._({this.title, this.summary})
     : _titlePresent = false,
       _summaryPresent = false;
+  factory GitHubWebhookCheckRunOutput.patch(Map<String, Object?> json) =>
+      GitHubWebhookCheckRunOutput.fromJson(json);
+
   factory GitHubWebhookCheckRunOutput.fromJson(Map<String, Object?> json) {
     final value = _$GitHubWebhookCheckRunOutputFromJson(json);
-    return GitHubWebhookCheckRunOutput(
+    return GitHubWebhookCheckRunOutput._explicit(
       title: json.containsKey('title') ? value.title : _omit,
       summary: json.containsKey('summary') ? value.summary : _omit,
     );

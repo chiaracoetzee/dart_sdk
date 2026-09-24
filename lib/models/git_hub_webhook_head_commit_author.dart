@@ -10,7 +10,11 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class GitHubWebhookHeadCommitAuthor {
-  const GitHubWebhookHeadCommitAuthor({
+  const GitHubWebhookHeadCommitAuthor({required this.name})
+    : username = null,
+      _usernamePresent = false;
+
+  const GitHubWebhookHeadCommitAuthor._explicit({
     required this.name,
     Object? username = _omit,
   }) : username = identical(username, _omit) ? null : username as String?,
@@ -18,9 +22,12 @@ class GitHubWebhookHeadCommitAuthor {
 
   const GitHubWebhookHeadCommitAuthor._({required this.name, this.username})
     : _usernamePresent = false;
+  factory GitHubWebhookHeadCommitAuthor.patch(Map<String, Object?> json) =>
+      GitHubWebhookHeadCommitAuthor.fromJson(json);
+
   factory GitHubWebhookHeadCommitAuthor.fromJson(Map<String, Object?> json) {
     final value = _$GitHubWebhookHeadCommitAuthorFromJson(json);
-    return GitHubWebhookHeadCommitAuthor(
+    return GitHubWebhookHeadCommitAuthor._explicit(
       name: value.name,
       username: json.containsKey('username') ? value.username : _omit,
     );

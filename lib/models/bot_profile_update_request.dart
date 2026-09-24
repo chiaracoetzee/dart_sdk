@@ -18,6 +18,17 @@ class BotProfileUpdateRequest {
   const BotProfileUpdateRequest({
     this.username,
     this.discriminator,
+    this.botFlags,
+  }) : avatar = null,
+       _avatarPresent = false,
+       banner = null,
+       _bannerPresent = false,
+       bio = null,
+       _bioPresent = false;
+
+  const BotProfileUpdateRequest._explicit({
+    this.username,
+    this.discriminator,
     Object? avatar = _omit,
     Object? banner = _omit,
     Object? bio = _omit,
@@ -39,9 +50,12 @@ class BotProfileUpdateRequest {
   }) : _avatarPresent = false,
        _bannerPresent = false,
        _bioPresent = false;
+  factory BotProfileUpdateRequest.patch(Map<String, Object?> json) =>
+      BotProfileUpdateRequest.fromJson(json);
+
   factory BotProfileUpdateRequest.fromJson(Map<String, Object?> json) {
     final value = _$BotProfileUpdateRequestFromJson(json);
-    return BotProfileUpdateRequest(
+    return BotProfileUpdateRequest._explicit(
       username: value.username,
       discriminator: value.discriminator,
       avatar: json.containsKey('avatar') ? value.avatar : _omit,

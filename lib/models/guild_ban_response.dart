@@ -17,6 +17,15 @@ class GuildBanResponse {
     required this.user,
     required this.moderatorId,
     required this.bannedAt,
+  }) : reason = null,
+       _reasonPresent = false,
+       expiresAt = null,
+       _expiresAtPresent = false;
+
+  const GuildBanResponse._explicit({
+    required this.user,
+    required this.moderatorId,
+    required this.bannedAt,
     Object? reason = _omit,
     Object? expiresAt = _omit,
   }) : reason = identical(reason, _omit) ? null : reason as String?,
@@ -32,9 +41,12 @@ class GuildBanResponse {
     this.expiresAt,
   }) : _reasonPresent = false,
        _expiresAtPresent = false;
+  factory GuildBanResponse.patch(Map<String, Object?> json) =>
+      GuildBanResponse.fromJson(json);
+
   factory GuildBanResponse.fromJson(Map<String, Object?> json) {
     final value = _$GuildBanResponseFromJson(json);
-    return GuildBanResponse(
+    return GuildBanResponse._explicit(
       user: value.user,
       moderatorId: value.moderatorId,
       bannedAt: value.bannedAt,

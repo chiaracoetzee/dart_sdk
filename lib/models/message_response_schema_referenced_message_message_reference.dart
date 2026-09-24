@@ -17,6 +17,13 @@ class MessageResponseSchemaReferencedMessageMessageReference {
     required this.channelId,
     required this.messageId,
     required this.type,
+  }) : guildId = null,
+       _guildIdPresent = false;
+
+  const MessageResponseSchemaReferencedMessageMessageReference._explicit({
+    required this.channelId,
+    required this.messageId,
+    required this.type,
     Object? guildId = _omit,
   }) : guildId = identical(guildId, _omit)
            ? null
@@ -29,12 +36,16 @@ class MessageResponseSchemaReferencedMessageMessageReference {
     required this.type,
     this.guildId,
   }) : _guildIdPresent = false;
+  factory MessageResponseSchemaReferencedMessageMessageReference.patch(
+    Map<String, Object?> json,
+  ) => MessageResponseSchemaReferencedMessageMessageReference.fromJson(json);
+
   factory MessageResponseSchemaReferencedMessageMessageReference.fromJson(
     Map<String, Object?> json,
   ) {
     final value =
         _$MessageResponseSchemaReferencedMessageMessageReferenceFromJson(json);
-    return MessageResponseSchemaReferencedMessageMessageReference(
+    return MessageResponseSchemaReferencedMessageMessageReference._explicit(
       channelId: value.channelId,
       messageId: value.messageId,
       type: value.type,

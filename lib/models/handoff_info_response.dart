@@ -12,17 +12,26 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class HandoffInfoResponse {
-  const HandoffInfoResponse({required this.status, Object? clientInfo = _omit})
-    : clientInfo = identical(clientInfo, _omit)
-          ? null
-          : clientInfo as HandoffInfoResponseClientInfo?,
-      _clientInfoPresent = !identical(clientInfo, _omit);
+  const HandoffInfoResponse({required this.status})
+    : clientInfo = null,
+      _clientInfoPresent = false;
+
+  const HandoffInfoResponse._explicit({
+    required this.status,
+    Object? clientInfo = _omit,
+  }) : clientInfo = identical(clientInfo, _omit)
+           ? null
+           : clientInfo as HandoffInfoResponseClientInfo?,
+       _clientInfoPresent = !identical(clientInfo, _omit);
 
   const HandoffInfoResponse._({required this.status, this.clientInfo})
     : _clientInfoPresent = false;
+  factory HandoffInfoResponse.patch(Map<String, Object?> json) =>
+      HandoffInfoResponse.fromJson(json);
+
   factory HandoffInfoResponse.fromJson(Map<String, Object?> json) {
     final value = _$HandoffInfoResponseFromJson(json);
-    return HandoffInfoResponse(
+    return HandoffInfoResponse._explicit(
       status: value.status,
       clientInfo: json.containsKey('client_info') ? value.clientInfo : _omit,
     );

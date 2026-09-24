@@ -10,7 +10,11 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class MessageResponseSchemaReferencedMessageCall {
-  const MessageResponseSchemaReferencedMessageCall({
+  const MessageResponseSchemaReferencedMessageCall({required this.participants})
+    : endedTimestamp = null,
+      _endedTimestampPresent = false;
+
+  const MessageResponseSchemaReferencedMessageCall._explicit({
     required this.participants,
     Object? endedTimestamp = _omit,
   }) : endedTimestamp = identical(endedTimestamp, _omit)
@@ -22,11 +26,15 @@ class MessageResponseSchemaReferencedMessageCall {
     required this.participants,
     this.endedTimestamp,
   }) : _endedTimestampPresent = false;
+  factory MessageResponseSchemaReferencedMessageCall.patch(
+    Map<String, Object?> json,
+  ) => MessageResponseSchemaReferencedMessageCall.fromJson(json);
+
   factory MessageResponseSchemaReferencedMessageCall.fromJson(
     Map<String, Object?> json,
   ) {
     final value = _$MessageResponseSchemaReferencedMessageCallFromJson(json);
-    return MessageResponseSchemaReferencedMessageCall(
+    return MessageResponseSchemaReferencedMessageCall._explicit(
       participants: value.participants,
       endedTimestamp: json.containsKey('ended_timestamp')
           ? value.endedTimestamp

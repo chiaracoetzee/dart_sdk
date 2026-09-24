@@ -25,6 +25,36 @@ class FavoriteMemeResponse {
     required this.size,
     required this.url,
     this.isGifv = false,
+  }) : altText = null,
+       _altTextPresent = false,
+       contentHash = null,
+       _contentHashPresent = false,
+       width = null,
+       _widthPresent = false,
+       height = null,
+       _heightPresent = false,
+       duration = null,
+       _durationPresent = false,
+       gifSlug = null,
+       _gifSlugPresent = false,
+       gifProvider = null,
+       _gifProviderPresent = false,
+       media = null,
+       _mediaPresent = false,
+       placeholder = null,
+       _placeholderPresent = false;
+
+  const FavoriteMemeResponse._explicit({
+    required this.id,
+    required this.userId,
+    required this.name,
+    required this.tags,
+    required this.attachmentId,
+    required this.filename,
+    required this.contentType,
+    required this.size,
+    required this.url,
+    this.isGifv = false,
     Object? altText = _omit,
     Object? contentHash = _omit,
     Object? width = _omit,
@@ -90,9 +120,12 @@ class FavoriteMemeResponse {
        _gifProviderPresent = false,
        _mediaPresent = false,
        _placeholderPresent = false;
+  factory FavoriteMemeResponse.patch(Map<String, Object?> json) =>
+      FavoriteMemeResponse.fromJson(json);
+
   factory FavoriteMemeResponse.fromJson(Map<String, Object?> json) {
     final value = _$FavoriteMemeResponseFromJson(json);
-    return FavoriteMemeResponse(
+    return FavoriteMemeResponse._explicit(
       id: value.id,
       userId: value.userId,
       name: value.name,

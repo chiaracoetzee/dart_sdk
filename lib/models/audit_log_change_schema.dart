@@ -10,7 +10,13 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class AuditLogChangeSchema {
-  const AuditLogChangeSchema({
+  const AuditLogChangeSchema({required this.key})
+    : oldValue = null,
+      _oldValuePresent = false,
+      newValue = null,
+      _newValuePresent = false;
+
+  const AuditLogChangeSchema._explicit({
     required this.key,
     Object? oldValue = _omit,
     Object? newValue = _omit,
@@ -25,9 +31,12 @@ class AuditLogChangeSchema {
     this.newValue,
   }) : _oldValuePresent = false,
        _newValuePresent = false;
+  factory AuditLogChangeSchema.patch(Map<String, Object?> json) =>
+      AuditLogChangeSchema.fromJson(json);
+
   factory AuditLogChangeSchema.fromJson(Map<String, Object?> json) {
     final value = _$AuditLogChangeSchemaFromJson(json);
-    return AuditLogChangeSchema(
+    return AuditLogChangeSchema._explicit(
       key: value.key,
       oldValue: json.containsKey('old_value') ? value.oldValue : _omit,
       newValue: json.containsKey('new_value') ? value.newValue : _omit,

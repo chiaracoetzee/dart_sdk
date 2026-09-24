@@ -16,6 +16,26 @@ class TemplateChannel {
     required this.id,
     required this.type,
     required this.position,
+    this.nsfw,
+    this.rateLimitPerUser,
+    this.permissionOverwrites,
+  }) : name = null,
+       _namePresent = false,
+       topic = null,
+       _topicPresent = false,
+       parentId = null,
+       _parentIdPresent = false,
+       bitrate = null,
+       _bitratePresent = false,
+       userLimit = null,
+       _userLimitPresent = false,
+       voiceConnectionLimit = null,
+       _voiceConnectionLimitPresent = false;
+
+  const TemplateChannel._explicit({
+    required this.id,
+    required this.type,
+    required this.position,
     Object? name = _omit,
     Object? topic = _omit,
     Object? parentId = _omit,
@@ -59,9 +79,12 @@ class TemplateChannel {
        _bitratePresent = false,
        _userLimitPresent = false,
        _voiceConnectionLimitPresent = false;
+  factory TemplateChannel.patch(Map<String, Object?> json) =>
+      TemplateChannel.fromJson(json);
+
   factory TemplateChannel.fromJson(Map<String, Object?> json) {
     final value = _$TemplateChannelFromJson(json);
-    return TemplateChannel(
+    return TemplateChannel._explicit(
       id: value.id,
       type: value.type,
       position: value.position,

@@ -21,6 +21,46 @@ class ChannelResponse {
     required this.id,
     required this.type,
     this.guildId,
+    this.position,
+    this.permissionOverwrites,
+    this.recipients,
+    this.nsfw,
+    this.contentWarningLevel,
+    this.rateLimitPerUser,
+    this.nicks,
+  }) : name = null,
+       _namePresent = false,
+       topic = null,
+       _topicPresent = false,
+       url = null,
+       _urlPresent = false,
+       icon = null,
+       _iconPresent = false,
+       ownerId = null,
+       _ownerIdPresent = false,
+       parentId = null,
+       _parentIdPresent = false,
+       bitrate = null,
+       _bitratePresent = false,
+       userLimit = null,
+       _userLimitPresent = false,
+       voiceConnectionLimit = null,
+       _voiceConnectionLimitPresent = false,
+       rtcRegion = null,
+       _rtcRegionPresent = false,
+       lastMessageId = null,
+       _lastMessageIdPresent = false,
+       lastPinTimestamp = null,
+       _lastPinTimestampPresent = false,
+       nsfwOverride = null,
+       _nsfwOverridePresent = false,
+       contentWarningText = null,
+       _contentWarningTextPresent = false;
+
+  const ChannelResponse._explicit({
+    required this.id,
+    required this.type,
+    this.guildId,
     Object? name = _omit,
     Object? topic = _omit,
     Object? url = _omit,
@@ -124,9 +164,12 @@ class ChannelResponse {
        _lastPinTimestampPresent = false,
        _nsfwOverridePresent = false,
        _contentWarningTextPresent = false;
+  factory ChannelResponse.patch(Map<String, Object?> json) =>
+      ChannelResponse.fromJson(json);
+
   factory ChannelResponse.fromJson(Map<String, Object?> json) {
     final value = _$ChannelResponseFromJson(json);
-    return ChannelResponse(
+    return ChannelResponse._explicit(
       id: value.id,
       type: value.type,
       guildId: value.guildId,

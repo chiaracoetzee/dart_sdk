@@ -12,7 +12,17 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class CustomStatusResponse {
-  const CustomStatusResponse({
+  const CustomStatusResponse({required this.emojiAnimated})
+    : text = null,
+      _textPresent = false,
+      expiresAt = null,
+      _expiresAtPresent = false,
+      emojiId = null,
+      _emojiIdPresent = false,
+      emojiName = null,
+      _emojiNamePresent = false;
+
+  const CustomStatusResponse._explicit({
     required this.emojiAnimated,
     Object? text = _omit,
     Object? expiresAt = _omit,
@@ -39,9 +49,12 @@ class CustomStatusResponse {
        _expiresAtPresent = false,
        _emojiIdPresent = false,
        _emojiNamePresent = false;
+  factory CustomStatusResponse.patch(Map<String, Object?> json) =>
+      CustomStatusResponse.fromJson(json);
+
   factory CustomStatusResponse.fromJson(Map<String, Object?> json) {
     final value = _$CustomStatusResponseFromJson(json);
-    return CustomStatusResponse(
+    return CustomStatusResponse._explicit(
       emojiAnimated: value.emojiAnimated,
       text: json.containsKey('text') ? value.text : _omit,
       expiresAt: json.containsKey('expires_at') ? value.expiresAt : _omit,

@@ -23,6 +23,19 @@ class GuildInviteResponse {
     required this.channel,
     required this.memberCount,
     required this.presenceCount,
+  }) : inviter = null,
+       _inviterPresent = false,
+       expiresAt = null,
+       _expiresAtPresent = false;
+
+  const GuildInviteResponse._explicit({
+    required this.code,
+    required this.temporary,
+    required this.type,
+    required this.guild,
+    required this.channel,
+    required this.memberCount,
+    required this.presenceCount,
     Object? inviter = _omit,
     Object? expiresAt = _omit,
   }) : inviter = identical(inviter, _omit)
@@ -44,9 +57,12 @@ class GuildInviteResponse {
     this.expiresAt,
   }) : _inviterPresent = false,
        _expiresAtPresent = false;
+  factory GuildInviteResponse.patch(Map<String, Object?> json) =>
+      GuildInviteResponse.fromJson(json);
+
   factory GuildInviteResponse.fromJson(Map<String, Object?> json) {
     final value = _$GuildInviteResponseFromJson(json);
-    return GuildInviteResponse(
+    return GuildInviteResponse._explicit(
       code: value.code,
       temporary: value.temporary,
       type: value.type,

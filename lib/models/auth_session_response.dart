@@ -16,6 +16,15 @@ class AuthSessionResponse {
     required this.idHash,
     required this.maskedIp,
     required this.current,
+  }) : clientInfo = null,
+       _clientInfoPresent = false,
+       approxLastUsedAt = null,
+       _approxLastUsedAtPresent = false;
+
+  const AuthSessionResponse._explicit({
+    required this.idHash,
+    required this.maskedIp,
+    required this.current,
     Object? clientInfo = _omit,
     Object? approxLastUsedAt = _omit,
   }) : clientInfo = identical(clientInfo, _omit)
@@ -35,9 +44,12 @@ class AuthSessionResponse {
     this.approxLastUsedAt,
   }) : _clientInfoPresent = false,
        _approxLastUsedAtPresent = false;
+  factory AuthSessionResponse.patch(Map<String, Object?> json) =>
+      AuthSessionResponse.fromJson(json);
+
   factory AuthSessionResponse.fromJson(Map<String, Object?> json) {
     final value = _$AuthSessionResponseFromJson(json);
-    return AuthSessionResponse(
+    return AuthSessionResponse._explicit(
       idHash: value.idHash,
       maskedIp: value.maskedIp,
       current: value.current,

@@ -26,7 +26,47 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class GitHubWebhook {
-  const GitHubWebhook({
+  const GitHubWebhook({required this.sender})
+    : action = null,
+      _actionPresent = false,
+      answer = null,
+      _answerPresent = false,
+      checkRun = null,
+      _checkRunPresent = false,
+      checkSuite = null,
+      _checkSuitePresent = false,
+      comment = null,
+      _commentPresent = false,
+      commits = null,
+      _commitsPresent = false,
+      compare = null,
+      _comparePresent = false,
+      discussion = null,
+      _discussionPresent = false,
+      forced = null,
+      _forcedPresent = false,
+      forkee = null,
+      _forkeePresent = false,
+      headCommit = null,
+      _headCommitPresent = false,
+      issue = null,
+      _issuePresent = false,
+      member = null,
+      _memberPresent = false,
+      pullRequest = null,
+      _pullRequestPresent = false,
+      refType = null,
+      _refTypePresent = false,
+      ref = null,
+      _refPresent = false,
+      release = null,
+      _releasePresent = false,
+      repository = null,
+      _repositoryPresent = false,
+      review = null,
+      _reviewPresent = false;
+
+  const GitHubWebhook._explicit({
     required this.sender,
     Object? action = _omit,
     Object? answer = _omit,
@@ -152,9 +192,12 @@ class GitHubWebhook {
        _releasePresent = false,
        _repositoryPresent = false,
        _reviewPresent = false;
+  factory GitHubWebhook.patch(Map<String, Object?> json) =>
+      GitHubWebhook.fromJson(json);
+
   factory GitHubWebhook.fromJson(Map<String, Object?> json) {
     final value = _$GitHubWebhookFromJson(json);
-    return GitHubWebhook(
+    return GitHubWebhook._explicit(
       sender: value.sender,
       action: json.containsKey('action') ? value.action : _omit,
       answer: json.containsKey('answer') ? value.answer : _omit,

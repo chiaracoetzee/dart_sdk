@@ -10,7 +10,15 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class AuthSessionLocation {
-  const AuthSessionLocation({
+  const AuthSessionLocation()
+    : city = null,
+      _cityPresent = false,
+      region = null,
+      _regionPresent = false,
+      country = null,
+      _countryPresent = false;
+
+  const AuthSessionLocation._explicit({
     Object? city = _omit,
     Object? region = _omit,
     Object? country = _omit,
@@ -25,9 +33,12 @@ class AuthSessionLocation {
     : _cityPresent = false,
       _regionPresent = false,
       _countryPresent = false;
+  factory AuthSessionLocation.patch(Map<String, Object?> json) =>
+      AuthSessionLocation.fromJson(json);
+
   factory AuthSessionLocation.fromJson(Map<String, Object?> json) {
     final value = _$AuthSessionLocationFromJson(json);
-    return AuthSessionLocation(
+    return AuthSessionLocation._explicit(
       city: json.containsKey('city') ? value.city : _omit,
       region: json.containsKey('region') ? value.region : _omit,
       country: json.containsKey('country') ? value.country : _omit,

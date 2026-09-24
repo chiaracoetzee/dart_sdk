@@ -20,6 +20,32 @@ class GuildPartialResponse {
     required this.name,
     required this.splashCardAlignment,
     required this.features,
+  }) : icon = null,
+       _iconPresent = false,
+       banner = null,
+       _bannerPresent = false,
+       bannerWidth = null,
+       _bannerWidthPresent = false,
+       bannerHeight = null,
+       _bannerHeightPresent = false,
+       splash = null,
+       _splashPresent = false,
+       splashWidth = null,
+       _splashWidthPresent = false,
+       splashHeight = null,
+       _splashHeightPresent = false,
+       embedSplash = null,
+       _embedSplashPresent = false,
+       embedSplashWidth = null,
+       _embedSplashWidthPresent = false,
+       embedSplashHeight = null,
+       _embedSplashHeightPresent = false;
+
+  const GuildPartialResponse._explicit({
+    required this.id,
+    required this.name,
+    required this.splashCardAlignment,
+    required this.features,
     Object? icon = _omit,
     Object? banner = _omit,
     Object? bannerWidth = _omit,
@@ -90,9 +116,12 @@ class GuildPartialResponse {
        _embedSplashPresent = false,
        _embedSplashWidthPresent = false,
        _embedSplashHeightPresent = false;
+  factory GuildPartialResponse.patch(Map<String, Object?> json) =>
+      GuildPartialResponse.fromJson(json);
+
   factory GuildPartialResponse.fromJson(Map<String, Object?> json) {
     final value = _$GuildPartialResponseFromJson(json);
-    return GuildPartialResponse(
+    return GuildPartialResponse._explicit(
       id: value.id,
       name: value.name,
       splashCardAlignment: value.splashCardAlignment,

@@ -20,6 +20,17 @@ class UserSettingsResponseGuildFolders {
     required this.guildIds,
     this.flags = 0,
     this.icon = GuildFolderIconType.folder,
+  }) : id = null,
+       _idPresent = false,
+       name = null,
+       _namePresent = false,
+       color = null,
+       _colorPresent = false;
+
+  const UserSettingsResponseGuildFolders._explicit({
+    required this.guildIds,
+    this.flags = 0,
+    this.icon = GuildFolderIconType.folder,
     Object? id = _omit,
     Object? name = _omit,
     Object? color = _omit,
@@ -40,9 +51,12 @@ class UserSettingsResponseGuildFolders {
   }) : _idPresent = false,
        _namePresent = false,
        _colorPresent = false;
+  factory UserSettingsResponseGuildFolders.patch(Map<String, Object?> json) =>
+      UserSettingsResponseGuildFolders.fromJson(json);
+
   factory UserSettingsResponseGuildFolders.fromJson(Map<String, Object?> json) {
     final value = _$UserSettingsResponseGuildFoldersFromJson(json);
-    return UserSettingsResponseGuildFolders(
+    return UserSettingsResponseGuildFolders._explicit(
       guildIds: value.guildIds,
       flags: value.flags,
       icon: value.icon,

@@ -37,6 +37,46 @@ class MessageResponseSchema {
     required this.tts,
     required this.mentions,
     required this.mentionRoles,
+  }) : webhookId = null,
+       _webhookIdPresent = false,
+       editedTimestamp = null,
+       _editedTimestampPresent = false,
+       mentionChannels = null,
+       _mentionChannelsPresent = false,
+       users = null,
+       _usersPresent = false,
+       embeds = null,
+       _embedsPresent = false,
+       attachments = null,
+       _attachmentsPresent = false,
+       stickers = null,
+       _stickersPresent = false,
+       reactions = null,
+       _reactionsPresent = false,
+       messageReference = null,
+       _messageReferencePresent = false,
+       messageSnapshots = null,
+       _messageSnapshotsPresent = false,
+       nonce = null,
+       _noncePresent = false,
+       call = null,
+       _callPresent = false,
+       referencedMessage = null,
+       _referencedMessagePresent = false;
+
+  const MessageResponseSchema._explicit({
+    required this.id,
+    required this.channelId,
+    required this.author,
+    required this.type,
+    required this.flags,
+    required this.content,
+    required this.timestamp,
+    required this.pinned,
+    required this.mentionEveryone,
+    required this.tts,
+    required this.mentions,
+    required this.mentionRoles,
     Object? webhookId = _omit,
     Object? editedTimestamp = _omit,
     Object? mentionChannels = _omit,
@@ -140,9 +180,12 @@ class MessageResponseSchema {
        _noncePresent = false,
        _callPresent = false,
        _referencedMessagePresent = false;
+  factory MessageResponseSchema.patch(Map<String, Object?> json) =>
+      MessageResponseSchema.fromJson(json);
+
   factory MessageResponseSchema.fromJson(Map<String, Object?> json) {
     final value = _$MessageResponseSchemaFromJson(json);
-    return MessageResponseSchema(
+    return MessageResponseSchema._explicit(
       id: value.id,
       channelId: value.channelId,
       author: value.author,

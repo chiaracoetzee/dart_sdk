@@ -10,7 +10,19 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class InstatusWebhookMaintenanceMaintenanceUpdates {
-  const InstatusWebhookMaintenanceMaintenanceUpdates({
+  const InstatusWebhookMaintenanceMaintenanceUpdates()
+    : id = null,
+      _idPresent = false,
+      maintenanceId = null,
+      _maintenanceIdPresent = false,
+      markdown = null,
+      _markdownPresent = false,
+      createdAt = null,
+      _createdAtPresent = false,
+      updatedAt = null,
+      _updatedAtPresent = false;
+
+  const InstatusWebhookMaintenanceMaintenanceUpdates._explicit({
     Object? id = _omit,
     Object? maintenanceId = _omit,
     Object? markdown = _omit,
@@ -40,11 +52,15 @@ class InstatusWebhookMaintenanceMaintenanceUpdates {
        _markdownPresent = false,
        _createdAtPresent = false,
        _updatedAtPresent = false;
+  factory InstatusWebhookMaintenanceMaintenanceUpdates.patch(
+    Map<String, Object?> json,
+  ) => InstatusWebhookMaintenanceMaintenanceUpdates.fromJson(json);
+
   factory InstatusWebhookMaintenanceMaintenanceUpdates.fromJson(
     Map<String, Object?> json,
   ) {
     final value = _$InstatusWebhookMaintenanceMaintenanceUpdatesFromJson(json);
-    return InstatusWebhookMaintenanceMaintenanceUpdates(
+    return InstatusWebhookMaintenanceMaintenanceUpdates._explicit(
       id: json.containsKey('id') ? value.id : _omit,
       maintenanceId: json.containsKey('maintenance_id')
           ? value.maintenanceId

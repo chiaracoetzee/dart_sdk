@@ -18,6 +18,19 @@ class GitHubWebhookCheckRun {
     required this.name,
     required this.htmlUrl,
     required this.checkSuite,
+  }) : conclusion = null,
+       _conclusionPresent = false,
+       detailsUrl = null,
+       _detailsUrlPresent = false,
+       output = null,
+       _outputPresent = false,
+       pullRequests = null,
+       _pullRequestsPresent = false;
+
+  const GitHubWebhookCheckRun._explicit({
+    required this.name,
+    required this.htmlUrl,
+    required this.checkSuite,
     Object? conclusion = _omit,
     Object? detailsUrl = _omit,
     Object? output = _omit,
@@ -47,9 +60,12 @@ class GitHubWebhookCheckRun {
        _detailsUrlPresent = false,
        _outputPresent = false,
        _pullRequestsPresent = false;
+  factory GitHubWebhookCheckRun.patch(Map<String, Object?> json) =>
+      GitHubWebhookCheckRun.fromJson(json);
+
   factory GitHubWebhookCheckRun.fromJson(Map<String, Object?> json) {
     final value = _$GitHubWebhookCheckRunFromJson(json);
-    return GitHubWebhookCheckRun(
+    return GitHubWebhookCheckRun._explicit(
       name: value.name,
       htmlUrl: value.htmlUrl,
       checkSuite: value.checkSuite,

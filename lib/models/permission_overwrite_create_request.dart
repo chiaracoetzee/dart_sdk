@@ -13,7 +13,13 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class PermissionOverwriteCreateRequest {
-  const PermissionOverwriteCreateRequest({
+  const PermissionOverwriteCreateRequest({required this.type})
+    : allow = null,
+      _allowPresent = false,
+      deny = null,
+      _denyPresent = false;
+
+  const PermissionOverwriteCreateRequest._explicit({
     required this.type,
     Object? allow = _omit,
     Object? deny = _omit,
@@ -28,9 +34,12 @@ class PermissionOverwriteCreateRequest {
     this.deny,
   }) : _allowPresent = false,
        _denyPresent = false;
+  factory PermissionOverwriteCreateRequest.patch(Map<String, Object?> json) =>
+      PermissionOverwriteCreateRequest.fromJson(json);
+
   factory PermissionOverwriteCreateRequest.fromJson(Map<String, Object?> json) {
     final value = _$PermissionOverwriteCreateRequestFromJson(json);
-    return PermissionOverwriteCreateRequest(
+    return PermissionOverwriteCreateRequest._explicit(
       type: value.type,
       allow: json.containsKey('allow') ? value.allow : _omit,
       deny: json.containsKey('deny') ? value.deny : _omit,

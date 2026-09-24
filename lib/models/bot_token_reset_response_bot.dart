@@ -20,6 +20,20 @@ class BotTokenResetResponseBot {
     required this.discriminator,
     required this.bio,
     required this.flags,
+    this.token,
+    this.mfaEnabled,
+    this.authenticatorTypes,
+  }) : avatar = null,
+       _avatarPresent = false,
+       banner = null,
+       _bannerPresent = false;
+
+  const BotTokenResetResponseBot._explicit({
+    required this.id,
+    required this.username,
+    required this.discriminator,
+    required this.bio,
+    required this.flags,
     Object? avatar = _omit,
     Object? banner = _omit,
     this.token,
@@ -43,9 +57,12 @@ class BotTokenResetResponseBot {
     this.authenticatorTypes,
   }) : _avatarPresent = false,
        _bannerPresent = false;
+  factory BotTokenResetResponseBot.patch(Map<String, Object?> json) =>
+      BotTokenResetResponseBot.fromJson(json);
+
   factory BotTokenResetResponseBot.fromJson(Map<String, Object?> json) {
     final value = _$BotTokenResetResponseBotFromJson(json);
-    return BotTokenResetResponseBot(
+    return BotTokenResetResponseBot._explicit(
       id: value.id,
       username: value.username,
       discriminator: value.discriminator,

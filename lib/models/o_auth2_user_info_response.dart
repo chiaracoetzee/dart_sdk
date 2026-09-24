@@ -20,6 +20,19 @@ class OAuth2UserInfoResponse {
     required this.discriminator,
     required this.globalName,
     required this.avatar,
+    this.flags,
+  }) : email = null,
+       _emailPresent = false,
+       verified = null,
+       _verifiedPresent = false;
+
+  const OAuth2UserInfoResponse._explicit({
+    required this.sub,
+    required this.id,
+    required this.username,
+    required this.discriminator,
+    required this.globalName,
+    required this.avatar,
     Object? email = _omit,
     Object? verified = _omit,
     this.flags,
@@ -40,9 +53,12 @@ class OAuth2UserInfoResponse {
     this.flags,
   }) : _emailPresent = false,
        _verifiedPresent = false;
+  factory OAuth2UserInfoResponse.patch(Map<String, Object?> json) =>
+      OAuth2UserInfoResponse.fromJson(json);
+
   factory OAuth2UserInfoResponse.fromJson(Map<String, Object?> json) {
     final value = _$OAuth2UserInfoResponseFromJson(json);
-    return OAuth2UserInfoResponse(
+    return OAuth2UserInfoResponse._explicit(
       sub: value.sub,
       id: value.id,
       username: value.username,

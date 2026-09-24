@@ -16,7 +16,29 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class RichEmbedRequest {
-  const RichEmbedRequest({
+  const RichEmbedRequest()
+    : url = null,
+      _urlPresent = false,
+      title = null,
+      _titlePresent = false,
+      color = null,
+      _colorPresent = false,
+      timestamp = null,
+      _timestampPresent = false,
+      description = null,
+      _descriptionPresent = false,
+      author = null,
+      _authorPresent = false,
+      image = null,
+      _imagePresent = false,
+      thumbnail = null,
+      _thumbnailPresent = false,
+      footer = null,
+      _footerPresent = false,
+      fields = null,
+      _fieldsPresent = false;
+
+  const RichEmbedRequest._explicit({
     Object? url = _omit,
     Object? title = _omit,
     Object? color = _omit,
@@ -79,9 +101,12 @@ class RichEmbedRequest {
        _thumbnailPresent = false,
        _footerPresent = false,
        _fieldsPresent = false;
+  factory RichEmbedRequest.patch(Map<String, Object?> json) =>
+      RichEmbedRequest.fromJson(json);
+
   factory RichEmbedRequest.fromJson(Map<String, Object?> json) {
     final value = _$RichEmbedRequestFromJson(json);
-    return RichEmbedRequest(
+    return RichEmbedRequest._explicit(
       url: json.containsKey('url') ? value.url : _omit,
       title: json.containsKey('title') ? value.title : _omit,
       color: json.containsKey('color') ? value.color : _omit,

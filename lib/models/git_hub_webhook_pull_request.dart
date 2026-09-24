@@ -20,6 +20,15 @@ class GitHubWebhookPullRequest {
     required this.htmlUrl,
     required this.user,
     required this.title,
+  }) : body = null,
+       _bodyPresent = false;
+
+  const GitHubWebhookPullRequest._explicit({
+    required this.id,
+    required this.number,
+    required this.htmlUrl,
+    required this.user,
+    required this.title,
     Object? body = _omit,
   }) : body = identical(body, _omit) ? null : body as String?,
        _bodyPresent = !identical(body, _omit);
@@ -32,9 +41,12 @@ class GitHubWebhookPullRequest {
     required this.title,
     this.body,
   }) : _bodyPresent = false;
+  factory GitHubWebhookPullRequest.patch(Map<String, Object?> json) =>
+      GitHubWebhookPullRequest.fromJson(json);
+
   factory GitHubWebhookPullRequest.fromJson(Map<String, Object?> json) {
     final value = _$GitHubWebhookPullRequestFromJson(json);
-    return GitHubWebhookPullRequest(
+    return GitHubWebhookPullRequest._explicit(
       id: value.id,
       number: value.number,
       htmlUrl: value.htmlUrl,

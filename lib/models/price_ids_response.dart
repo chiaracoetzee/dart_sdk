@@ -12,7 +12,25 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class PriceIdsResponse {
-  const PriceIdsResponse({
+  const PriceIdsResponse({required this.currency, required this.giftCurrency})
+    : monthly = null,
+      _monthlyPresent = false,
+      yearly = null,
+      _yearlyPresent = false,
+      gift1Month = null,
+      _gift1MonthPresent = false,
+      gift1Year = null,
+      _gift1YearPresent = false,
+      monthlyAmountMinor = null,
+      _monthlyAmountMinorPresent = false,
+      yearlyAmountMinor = null,
+      _yearlyAmountMinorPresent = false,
+      gift1MonthAmountMinor = null,
+      _gift1MonthAmountMinorPresent = false,
+      gift1YearAmountMinor = null,
+      _gift1YearAmountMinorPresent = false;
+
+  const PriceIdsResponse._explicit({
     required this.currency,
     required this.giftCurrency,
     Object? monthly = _omit,
@@ -67,9 +85,12 @@ class PriceIdsResponse {
        _yearlyAmountMinorPresent = false,
        _gift1MonthAmountMinorPresent = false,
        _gift1YearAmountMinorPresent = false;
+  factory PriceIdsResponse.patch(Map<String, Object?> json) =>
+      PriceIdsResponse.fromJson(json);
+
   factory PriceIdsResponse.fromJson(Map<String, Object?> json) {
     final value = _$PriceIdsResponseFromJson(json);
-    return PriceIdsResponse(
+    return PriceIdsResponse._explicit(
       currency: value.currency,
       giftCurrency: value.giftCurrency,
       monthly: json.containsKey('monthly') ? value.monthly : _omit,

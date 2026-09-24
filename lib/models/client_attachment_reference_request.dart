@@ -13,7 +13,17 @@ const Object _omit = Object();
 
 @JsonSerializable(constructor: '_')
 class ClientAttachmentReferenceRequest {
-  const ClientAttachmentReferenceRequest({
+  const ClientAttachmentReferenceRequest({this.flags, this.id, this.filename})
+    : title = null,
+      _titlePresent = false,
+      description = null,
+      _descriptionPresent = false,
+      duration = null,
+      _durationPresent = false,
+      waveform = null,
+      _waveformPresent = false;
+
+  const ClientAttachmentReferenceRequest._explicit({
     Object? title = _omit,
     Object? description = _omit,
     this.flags,
@@ -44,9 +54,12 @@ class ClientAttachmentReferenceRequest {
        _descriptionPresent = false,
        _durationPresent = false,
        _waveformPresent = false;
+  factory ClientAttachmentReferenceRequest.patch(Map<String, Object?> json) =>
+      ClientAttachmentReferenceRequest.fromJson(json);
+
   factory ClientAttachmentReferenceRequest.fromJson(Map<String, Object?> json) {
     final value = _$ClientAttachmentReferenceRequestFromJson(json);
-    return ClientAttachmentReferenceRequest(
+    return ClientAttachmentReferenceRequest._explicit(
       title: json.containsKey('title') ? value.title : _omit,
       description: json.containsKey('description') ? value.description : _omit,
       flags: value.flags,

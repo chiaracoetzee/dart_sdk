@@ -22,6 +22,19 @@ class RegisterRequest {
     this.globalName,
     this.password,
     this.dateOfBirth,
+    this.theme,
+  }) : inviteCode = null,
+       _inviteCodePresent = false,
+       registrationUrlCode = null,
+       _registrationUrlCodePresent = false;
+
+  const RegisterRequest._explicit({
+    this.consent = false,
+    this.email,
+    this.username,
+    this.globalName,
+    this.password,
+    this.dateOfBirth,
     Object? inviteCode = _omit,
     Object? registrationUrlCode = _omit,
     this.theme,
@@ -44,9 +57,12 @@ class RegisterRequest {
     this.theme,
   }) : _inviteCodePresent = false,
        _registrationUrlCodePresent = false;
+  factory RegisterRequest.patch(Map<String, Object?> json) =>
+      RegisterRequest.fromJson(json);
+
   factory RegisterRequest.fromJson(Map<String, Object?> json) {
     final value = _$RegisterRequestFromJson(json);
-    return RegisterRequest(
+    return RegisterRequest._explicit(
       consent: value.consent,
       email: value.email,
       username: value.username,
