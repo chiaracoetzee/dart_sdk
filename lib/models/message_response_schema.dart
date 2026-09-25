@@ -148,5 +148,25 @@ class MessageResponseSchema {
   @JsonKey(includeIfNull: false, name: 'referenced_message')
   final MessageResponseSchemaReferencedMessage? referencedMessage;
 
+  /// Optional subprofile persona information
+  @JsonKey(includeIfNull: false)
+  final MessageSubprofileResponse? subprofile;
+
+  /// The ID of the persona that sent this message
+  @JsonKey(includeIfNull: false, name: 'persona_id')
+  final SnowflakeStringType? personaId;
+
+  /// The display name of the persona that sent this message
+  @JsonKey(includeIfNull: false, name: 'persona_name')
+  final String? personaName;
+
+  /// The avatar URL of the persona that sent this message
+  @JsonKey(includeIfNull: false, name: 'persona_avatar')
+  final String? personaAvatar;
+
+  /// The tag/pronouns/badge text of the persona that sent this message
+  @JsonKey(includeIfNull: false, name: 'persona_tag')
+  final String? personaTag;
+
   Map<String, Object?> toJson() => _$MessageResponseSchemaToJson(this);
 }
