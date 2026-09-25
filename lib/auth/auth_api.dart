@@ -28,6 +28,13 @@ import '../models/origin_handoff_create_request.dart';
 import '../models/origin_handoff_create_response.dart';
 import '../models/origin_handoff_redeem_request.dart';
 import '../models/origin_handoff_redeem_response.dart';
+import '../models/passkey_bridge_complete_request.dart';
+import '../models/passkey_bridge_finish_response.dart';
+import '../models/passkey_bridge_login_redeem_response.dart';
+import '../models/passkey_bridge_login_start_request.dart';
+import '../models/passkey_bridge_options_response.dart';
+import '../models/passkey_bridge_redeem_request.dart';
+import '../models/passkey_bridge_start_response.dart';
 import '../models/register_request.dart';
 import '../models/reset_password_request.dart';
 import '../models/sso_complete_request.dart';
@@ -215,6 +222,62 @@ abstract class AuthApi {
   @POST('/auth/origin-handoff/redeem')
   Future<OriginHandoffRedeemResponse> redeemOriginHandoff({
     @Body() required OriginHandoffRedeemRequest body,
+  });
+
+  /// Start passkey bridge sign in.
+  ///
+  /// Start a sign in or two-factor ceremony for a passkey that belongs to the paired first-party origin. Only available on the official instance from the new origin.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/auth/passkey-bridge')
+  Future<PasskeyBridgeStartResponse> startPasskeyBridgeLogin({
+    @Body() required PasskeyBridgeLoginStartRequest body,
+  });
+
+  /// Cancel passkey bridge.
+  ///
+  /// Cancel a passkey bridge ceremony that has not completed.
+  ///
+  /// [ceremonyId] - Identifier of the passkey ceremony.
+  @POST('/auth/passkey-bridge/{ceremony_id}/cancel')
+  Future<PasskeyBridgeFinishResponse> cancelPasskeyBridge({
+    @Path('ceremony_id') required String ceremonyId,
+  });
+
+  /// Complete passkey bridge.
+  ///
+  /// Verify the WebAuthn response for a pending passkey bridge ceremony. A failed verification leaves the ceremony pending so it can be retried.
+  ///
+  /// [ceremonyId] - Identifier of the passkey ceremony.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/auth/passkey-bridge/{ceremony_id}/complete')
+  Future<PasskeyBridgeFinishResponse> completePasskeyBridge({
+    @Path('ceremony_id') required String ceremonyId,
+    @Body() required PasskeyBridgeCompleteRequest body,
+  });
+
+  /// Get passkey bridge options.
+  ///
+  /// Issue WebAuthn authentication options for a pending passkey bridge ceremony. The request must come from the origin that runs the ceremony.
+  ///
+  /// [ceremonyId] - Identifier of the passkey ceremony.
+  @POST('/auth/passkey-bridge/{ceremony_id}/options')
+  Future<PasskeyBridgeOptionsResponse> getPasskeyBridgeOptions({
+    @Path('ceremony_id') required String ceremonyId,
+  });
+
+  /// Redeem passkey bridge sign in.
+  ///
+  /// Redeem a finished sign in or two-factor passkey bridge ceremony once. Requires the nonce kept by the starting page and the completion code handed back when the ceremony finished.
+  ///
+  /// [ceremonyId] - Identifier of the passkey ceremony.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/auth/passkey-bridge/{ceremony_id}/redeem')
+  Future<PasskeyBridgeLoginRedeemResponse> redeemPasskeyBridgeLogin({
+    @Path('ceremony_id') required String ceremonyId,
+    @Body() required PasskeyBridgeRedeemRequest body,
   });
 
   /// Register account.

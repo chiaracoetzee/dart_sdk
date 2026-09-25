@@ -13,6 +13,7 @@ class WebAuthnCredentialResponse {
     required this.name,
     required this.createdAt,
     required this.lastUsedAt,
+    required this.rpId,
   });
 
   factory WebAuthnCredentialResponse.fromJson(Map<String, Object?> json) =>
@@ -31,6 +32,10 @@ class WebAuthnCredentialResponse {
   /// When the credential was last used
   @JsonKey(includeIfNull: true, name: 'last_used_at')
   final String? lastUsedAt;
+
+  /// Relying party ID the passkey belongs to
+  @JsonKey(name: 'rp_id')
+  final String rpId;
 
   Map<String, Object?> toJson() => _$WebAuthnCredentialResponseToJson(this);
 }

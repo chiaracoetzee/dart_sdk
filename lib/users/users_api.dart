@@ -52,6 +52,12 @@ import '../models/mfa_backup_codes_challenge_verify_response.dart';
 import '../models/mfa_backup_codes_request.dart';
 import '../models/mfa_backup_codes_response.dart';
 import '../models/mobile_devices_list_response.dart';
+import '../models/passkey_bridge_redeem_request.dart';
+import '../models/passkey_bridge_start_response.dart';
+import '../models/passkey_bridge_sudo_redeem_response.dart';
+import '../models/passkey_bridge_sudo_start_request.dart';
+import '../models/passkey_migration_complete_request.dart';
+import '../models/passkey_migration_response.dart';
 import '../models/password_change_complete_request.dart';
 import '../models/password_change_complete_response.dart';
 import '../models/password_change_start_response.dart';
@@ -611,6 +617,28 @@ abstract class UsersApi {
     @Body() SudoVerificationSchema? body,
   });
 
+  /// Get pending passkey update.
+  ///
+  /// Return the passkey this session can update to the new domain after using it within the last five minutes, or null.
+  @GET('/users/@me/mfa/webauthn/migration')
+  Future<PasskeyMigrationResponse> getWebauthnMigration();
+
+  /// Complete passkey update.
+  ///
+  /// Register the replacement passkey under the name of the pending one. The old passkey stops appearing in lists and is removed together with its replacement.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/users/@me/mfa/webauthn/migration')
+  Future<void> completeWebauthnMigration({
+    @Body() required PasskeyMigrationCompleteRequest body,
+  });
+
+  /// Get passkey update registration options.
+  ///
+  /// Generate registration options for the passkey that replaces the pending one. Requires a pending passkey update for this session.
+  @POST('/users/@me/mfa/webauthn/migration/registration-options')
+  Future<WebAuthnChallengeResponse> getWebauthnMigrationRegistrationOptions();
+
   /// Set WebAuthn two-factor authentication.
   ///
   /// Choose whether registered passkeys are required as a second factor when signing in with email and password. Enabling requires at least one registered credential and mints backup codes when the account has none. Requires sudo mode verification.
@@ -684,6 +712,29 @@ abstract class UsersApi {
   Future<void> setNoteOnUser({
     @Path('target_id') required SnowflakeType targetId,
     @Body() UserNoteUpdateRequest? body,
+  });
+
+  /// Start passkey bridge sudo verification.
+  ///
+  /// Start a sudo verification ceremony for a passkey that belongs to the paired first-party origin. Only available on the official instance from the new origin.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/users/@me/passkey-bridge')
+  Future<PasskeyBridgeStartResponse> startPasskeyBridgeSudo({
+    @Body() required PasskeyBridgeSudoStartRequest body,
+  });
+
+  /// Redeem passkey bridge sudo verification.
+  ///
+  /// Redeem a finished sudo passkey bridge ceremony once for a sudo mode token. Requires the nonce kept by the starting page and the completion code handed back when the ceremony finished.
+  ///
+  /// [ceremonyId] - Identifier of the passkey ceremony.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/users/@me/passkey-bridge/{ceremony_id}/redeem')
+  Future<PasskeyBridgeSudoRedeemResponse> redeemPasskeyBridgeSudo({
+    @Path('ceremony_id') required String ceremonyId,
+    @Body() required PasskeyBridgeRedeemRequest body,
   });
 
   /// Complete password change.

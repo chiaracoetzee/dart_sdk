@@ -1,0 +1,22 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, unused_import, invalid_annotation_target, unnecessary_import
+
+import 'package:json_annotation/json_annotation.dart';
+
+part 'cancelled_passkey_bridge_login_redeem_response.g.dart';
+
+@JsonSerializable()
+class CancelledPasskeyBridgeLoginRedeemResponse {
+  const CancelledPasskeyBridgeLoginRedeemResponse({required this.status});
+
+  factory CancelledPasskeyBridgeLoginRedeemResponse.fromJson(
+    Map<String, Object?> json,
+  ) => _$CancelledPasskeyBridgeLoginRedeemResponseFromJson(json);
+
+  /// The ceremony was cancelled
+  final String status;
+
+  Map<String, Object?> toJson() =>
+      _$CancelledPasskeyBridgeLoginRedeemResponseToJson(this);
+}
