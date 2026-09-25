@@ -19,12 +19,14 @@ PushRotateRequest _$PushRotateRequestFromJson(Map<String, dynamic> json) =>
             (v) => PushRotateRequestKeys.fromJson(v as Map<String, dynamic>),
           ),
           userAgent: $checkedConvert('user_agent', (v) => v as String?),
+          installedApp: $checkedConvert('installed_app', (v) => v as bool?),
         );
         return val;
       },
       fieldKeyMap: const {
         'oldEndpoint': 'old_endpoint',
         'userAgent': 'user_agent',
+        'installedApp': 'installed_app',
       },
     );
 
@@ -34,4 +36,5 @@ Map<String, dynamic> _$PushRotateRequestToJson(PushRotateRequest instance) =>
       'endpoint': instance.endpoint,
       'keys': instance.keys,
       'user_agent': ?instance.userAgent,
+      'installed_app': ?instance.installedApp,
     };

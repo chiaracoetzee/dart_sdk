@@ -62,12 +62,21 @@ WellKnownFluxerResponse _$WellKnownFluxerResponseFromJson(
         'app_public',
         (v) => InstanceAppPublicSchema.fromJson(v as Map<String, dynamic>),
       ),
+      domainMigration: $checkedConvert(
+        'domain_migration',
+        (v) => v == null
+            ? null
+            : DomainMigrationDiscoveryResponse.fromJson(
+                v as Map<String, dynamic>,
+              ),
+      ),
     );
     return val;
   },
   fieldKeyMap: const {
     'apiCodeVersion': 'api_code_version',
     'appPublic': 'app_public',
+    'domainMigration': 'domain_migration',
   },
 );
 
@@ -86,4 +95,5 @@ Map<String, dynamic> _$WellKnownFluxerResponseToJson(
   'limits': instance.limits,
   'push': instance.push,
   'app_public': instance.appPublic,
+  'domain_migration': ?instance.domainMigration,
 };

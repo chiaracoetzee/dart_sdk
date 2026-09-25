@@ -4,6 +4,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'domain_migration_discovery_response.dart';
 import 'instance_app_public_schema.dart';
 import 'instance_captcha_schema.dart';
 import 'instance_community_schema.dart';
@@ -33,6 +34,7 @@ class WellKnownFluxerResponse {
     required this.limits,
     required this.push,
     required this.appPublic,
+    this.domainMigration,
   });
 
   factory WellKnownFluxerResponse.fromJson(Map<String, Object?> json) =>
@@ -57,6 +59,10 @@ class WellKnownFluxerResponse {
   /// Public application configuration for client-side features
   @JsonKey(name: 'app_public')
   final InstanceAppPublicSchema appPublic;
+
+  /// Web domain migration switch and anonymous rollout, only acted on by official instance clients
+  @JsonKey(includeIfNull: false, name: 'domain_migration')
+  final DomainMigrationDiscoveryResponse? domainMigration;
 
   Map<String, Object?> toJson() => _$WellKnownFluxerResponseToJson(this);
 }

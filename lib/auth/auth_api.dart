@@ -24,6 +24,10 @@ import '../models/login_request.dart';
 import '../models/logout_auth_sessions_with_verification_request.dart';
 import '../models/mfa_ticket_request.dart';
 import '../models/mfa_totp_request.dart';
+import '../models/origin_handoff_create_request.dart';
+import '../models/origin_handoff_create_response.dart';
+import '../models/origin_handoff_redeem_request.dart';
+import '../models/origin_handoff_redeem_response.dart';
 import '../models/register_request.dart';
 import '../models/reset_password_request.dart';
 import '../models/sso_complete_request.dart';
@@ -192,6 +196,26 @@ abstract class AuthApi {
   /// Invalidate the current authentication token and end the session. The auth token in the Authorization header will no longer be valid. A bot token has no session to end, so the call answers 204 and the token stays valid.
   @POST('/auth/logout')
   Future<void> logoutUser();
+
+  /// Create origin handoff.
+  ///
+  /// Store encrypted client state for up to two minutes so another first-party web origin can redeem it once. The receiving origin must present the nonce whose SHA-256 digest is sent here.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/auth/origin-handoff')
+  Future<OriginHandoffCreateResponse> createOriginHandoff({
+    @Body() required OriginHandoffCreateRequest body,
+  });
+
+  /// Redeem origin handoff.
+  ///
+  /// Return the encrypted client state stored by create origin handoff and delete it in the same step. A wrong nonce also consumes the handoff. On the official instance the request must come from a first-party web origin.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/auth/origin-handoff/redeem')
+  Future<OriginHandoffRedeemResponse> redeemOriginHandoff({
+    @Body() required OriginHandoffRedeemRequest body,
+  });
 
   /// Register account.
   ///

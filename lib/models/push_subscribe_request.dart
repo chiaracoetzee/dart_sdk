@@ -14,6 +14,7 @@ class PushSubscribeRequest {
     required this.endpoint,
     required this.keys,
     this.userAgent,
+    this.installedApp,
   });
 
   factory PushSubscribeRequest.fromJson(Map<String, Object?> json) =>
@@ -28,6 +29,10 @@ class PushSubscribeRequest {
   /// The user agent string identifying the client
   @JsonKey(includeIfNull: false, name: 'user_agent')
   final String? userAgent;
+
+  /// Whether the client runs in an installed web app window
+  @JsonKey(includeIfNull: false, name: 'installed_app')
+  final bool? installedApp;
 
   Map<String, Object?> toJson() => _$PushSubscribeRequestToJson(this);
 }
