@@ -3,6 +3,7 @@ class SessionManager {
   String? _sessionId;
   int? _lastSequence;
   DateTime? _lastAckAt;
+  DateTime? _resumeEligibleUntil;
 
   /// The current session ID, or `null` if no session is active.
   String? get sessionId => _sessionId;
@@ -15,10 +16,17 @@ class SessionManager {
 
   /// Whether the session can be resumed.
   ///
-  /// A session is resumable if a session ID and sequence exist and the last
-  /// ACK was received within the past 180 seconds.
+  /// Requires session id and sequence. Uses [noteSuspendedForResume]'s grace
+  /// window when set; otherwise requires a heartbeat ACK within 180 seconds.
   bool get canResume {
-    if (_sessionId == null || _lastSequence == null || _lastAckAt == null) {
+    if (_sessionId == null || _lastSequence == null) {
+      return false;
+    }
+    final DateTime? deadline = _resumeEligibleUntil;
+    if (deadline != null) {
+      return DateTime.now().isBefore(deadline);
+    }
+    if (_lastAckAt == null) {
       return false;
     }
     final elapsed = DateTime.now().difference(_lastAckAt!);
@@ -42,10 +50,23 @@ class SessionManager {
     _lastAckAt = DateTime.now();
   }
 
+  /// Extends the resume window after a background suspend closes the socket.
+  void noteSuspendedForResume() {
+    if (_sessionId == null || _lastSequence == null) {
+      return;
+    }
+    _resumeEligibleUntil = DateTime.now().add(const Duration(seconds: 180));
+  }
+
+  void clearResumeGrace() {
+    _resumeEligibleUntil = null;
+  }
+
   /// Clears all session state.
   void clear() {
     _sessionId = null;
     _lastSequence = null;
     _lastAckAt = null;
+    _resumeEligibleUntil = null;
   }
 }

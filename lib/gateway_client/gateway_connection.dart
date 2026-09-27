@@ -312,10 +312,7 @@ class GatewayConnection {
     return Future<void>.value();
   }
 
-  /// Disconnects from the gateway gracefully.
-  Future<void> disconnect() async {
-    _cancelReconnectTimer();
-    _reconnectAttempts = 0;
+  Future<void> _closeTransport({required bool clearSession}) async {
     _heartbeat?.stop();
     await _subscription?.cancel();
     _subscription = null;
@@ -325,8 +322,19 @@ class GatewayConnection {
     _zstdDecoder = null;
     _zstdEncoder?.dispose();
     _zstdEncoder = null;
-    _session.clear();
+    if (clearSession) {
+      _session.clear();
+    } else {
+      _session.noteSuspendedForResume();
+    }
     _connectedAt = null;
+  }
+
+  /// Disconnects from the gateway gracefully.
+  Future<void> disconnect() async {
+    _cancelReconnectTimer();
+    _reconnectAttempts = 0;
+    await _closeTransport(clearSession: true);
     _setState(GatewayState.disconnected);
   }
 
@@ -335,7 +343,9 @@ class GatewayConnection {
     if (_disposed) return;
     _reconnectSuspended = true;
     _cancelReconnectTimer();
-    await disconnect();
+    _reconnectAttempts = 0;
+    await _closeTransport(clearSession: false);
+    _setState(GatewayState.disconnected);
   }
 
   /// Clears the suspend flag and reconnects immediately.
@@ -745,10 +755,12 @@ class GatewayConnection {
     if (eventType == 'READY') {
       final sessionId = data['session_id'] as String;
       _session.setSession(sessionId);
+      _session.clearResumeGrace();
       _reconnectAttempts = 0;
       _connectedAt = DateTime.now();
       _setState(GatewayState.connected);
     } else if (eventType == 'RESUMED') {
+      _session.clearResumeGrace();
       _reconnectAttempts = 0;
       _connectedAt = DateTime.now();
       _setState(GatewayState.connected);
