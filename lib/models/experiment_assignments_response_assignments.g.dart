@@ -29,12 +29,21 @@ _$ExperimentAssignmentsResponseAssignmentsFromJson(Map<String, dynamic> json) =>
                     v as Map<String, dynamic>,
                   ),
           ),
+          altchaCaptcha: $checkedConvert(
+            'altcha_captcha',
+            (v) => v == null
+                ? null
+                : AltchaCaptchaAssignmentResponse.fromJson(
+                    v as Map<String, dynamic>,
+                  ),
+          ),
         );
         return val;
       },
       fieldKeyMap: const {
         'voiceNoiseSuppression': 'voice_noise_suppression',
         'domainMigration': 'domain_migration',
+        'altchaCaptcha': 'altcha_captcha',
       },
     );
 
@@ -43,4 +52,5 @@ Map<String, dynamic> _$ExperimentAssignmentsResponseAssignmentsToJson(
 ) => <String, dynamic>{
   'voice_noise_suppression': ?instance.voiceNoiseSuppression,
   'domain_migration': ?instance.domainMigration,
+  'altcha_captcha': ?instance.altchaCaptcha,
 };

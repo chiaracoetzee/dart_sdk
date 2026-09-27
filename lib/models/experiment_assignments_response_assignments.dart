@@ -6,6 +6,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'voice_noise_suppression_assignment_response.dart';
 import 'domain_migration_assignment_response.dart';
+import 'altcha_captcha_assignment_response.dart';
 
 part 'experiment_assignments_response_assignments.g.dart';
 
@@ -14,6 +15,7 @@ class ExperimentAssignmentsResponseAssignments {
   const ExperimentAssignmentsResponseAssignments({
     this.voiceNoiseSuppression,
     this.domainMigration,
+    this.altchaCaptcha,
   });
 
   factory ExperimentAssignmentsResponseAssignments.fromJson(
@@ -24,6 +26,8 @@ class ExperimentAssignmentsResponseAssignments {
   final VoiceNoiseSuppressionAssignmentResponse? voiceNoiseSuppression;
   @JsonKey(includeIfNull: false, name: 'domain_migration')
   final DomainMigrationAssignmentResponse? domainMigration;
+  @JsonKey(includeIfNull: false, name: 'altcha_captcha')
+  final AltchaCaptchaAssignmentResponse? altchaCaptcha;
 
   Map<String, Object?> toJson() =>
       _$ExperimentAssignmentsResponseAssignmentsToJson(this);
