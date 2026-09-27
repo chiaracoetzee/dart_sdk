@@ -530,4 +530,63 @@ void main() {
       expect(response.toJson(), json);
     });
   });
+
+  group('InstanceCommunitySchema roundtrip', () {
+    test('roundtrips with server_list_buttons', () {
+      final json = <String, Object?>{
+        'single_community': true,
+        'single_community_guild_id': 'guild-123',
+        'direct_messages_disabled': false,
+        'server_list_buttons': <String, dynamic>{
+          'website': 'https://example.com',
+          'docs': 'https://docs.example.com',
+        },
+      };
+
+      final model = InstanceCommunitySchema.fromJson(json);
+      expect(model.singleCommunity, isTrue);
+      expect(model.singleCommunityGuildId, 'guild-123');
+      expect(model.directMessagesDisabled, isFalse);
+      expect(model.serverListButtons, isNotNull);
+      expect(model.serverListButtons!['website'], 'https://example.com');
+      expect(model.serverListButtons!['docs'], 'https://docs.example.com');
+
+      final serialized =
+          jsonDecode(jsonEncode(model.toJson())) as Map<String, Object?>;
+      final roundtripped = InstanceCommunitySchema.fromJson(serialized);
+
+      expect(roundtripped.singleCommunity, isTrue);
+      expect(roundtripped.singleCommunityGuildId, 'guild-123');
+      expect(roundtripped.directMessagesDisabled, isFalse);
+      expect(roundtripped.serverListButtons, isNotNull);
+      expect(roundtripped.serverListButtons!['website'], 'https://example.com');
+      expect(
+        roundtripped.serverListButtons!['docs'],
+        'https://docs.example.com',
+      );
+    });
+
+    test('roundtrips without server_list_buttons and with nulls', () {
+      final json = <String, Object?>{
+        'single_community': false,
+        'single_community_guild_id': null,
+        'direct_messages_disabled': true,
+      };
+
+      final model = InstanceCommunitySchema.fromJson(json);
+      expect(model.singleCommunity, isFalse);
+      expect(model.singleCommunityGuildId, isNull);
+      expect(model.directMessagesDisabled, isTrue);
+      expect(model.serverListButtons, isNull);
+
+      final serialized =
+          jsonDecode(jsonEncode(model.toJson())) as Map<String, Object?>;
+      final roundtripped = InstanceCommunitySchema.fromJson(serialized);
+
+      expect(roundtripped.singleCommunity, isFalse);
+      expect(roundtripped.singleCommunityGuildId, isNull);
+      expect(roundtripped.directMessagesDisabled, isTrue);
+      expect(roundtripped.serverListButtons, isNull);
+    });
+  });
 }
