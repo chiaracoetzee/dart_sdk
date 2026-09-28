@@ -503,6 +503,7 @@ export 'models/user_report_category.dart';
 export 'models/guild_report_category.dart';
 export 'models/message_search_results_response.dart';
 export 'models/message_reaction_response.dart';
+export 'models/message_reaction_persona_entry.dart';
 export 'models/message_search_scope.dart';
 export 'models/message_sort_order.dart';
 export 'models/message_sort_field.dart';
