@@ -12,6 +12,8 @@ class InstanceFeaturesSchema {
   const InstanceFeaturesSchema({
     required this.voiceEnabled,
     required this.stripeEnabled,
+    required this.premiumEnabled,
+    required this.stripeServiceable,
     required this.selfHosted,
     required this.presignedAttachmentUploads,
     required this.emailsEnabled,
@@ -24,9 +26,17 @@ class InstanceFeaturesSchema {
   @JsonKey(name: 'voice_enabled')
   final bool voiceEnabled;
 
-  /// Whether Stripe payments are enabled
+  /// Whether premium purchases through Stripe are available
   @JsonKey(name: 'stripe_enabled')
   final bool stripeEnabled;
+
+  /// Whether this instance has a premium tier, so premium status, gifts and perks apply
+  @JsonKey(name: 'premium_enabled')
+  final bool premiumEnabled;
+
+  /// Whether existing Stripe subscriptions can be managed, cancelled and billed on this instance
+  @JsonKey(name: 'stripe_serviceable')
+  final bool stripeServiceable;
 
   /// Whether this is a self-hosted instance
   @JsonKey(name: 'self_hosted')

@@ -19,6 +19,8 @@ class InstanceBrandingSchema {
     required this.themeColor,
     required this.statusPageUrl,
     required this.statusPageIncidentHistoryUrl,
+    required this.premiumProductName,
+    required this.premiumInfoUrl,
   });
 
   factory InstanceBrandingSchema.fromJson(Map<String, Object?> json) =>
@@ -59,6 +61,14 @@ class InstanceBrandingSchema {
   /// Optional public status page incident history URL
   @JsonKey(includeIfNull: true, name: 'status_page_incident_history_url')
   final String? statusPageIncidentHistoryUrl;
+
+  /// Name of the premium tier shown by client applications
+  @JsonKey(name: 'premium_product_name')
+  final String premiumProductName;
+
+  /// Optional absolute URL of a page describing the premium tier
+  @JsonKey(includeIfNull: true, name: 'premium_info_url')
+  final String? premiumInfoUrl;
 
   Map<String, Object?> toJson() => _$InstanceBrandingSchemaToJson(this);
 }

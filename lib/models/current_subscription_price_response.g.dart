@@ -16,10 +16,7 @@ _$CurrentSubscriptionPriceResponseVariant1FromJson(
     final val = CurrentSubscriptionPriceResponseVariant1(
       priceId: $checkedConvert('price_id', (v) => v as String),
       amountMinor: $checkedConvert('amount_minor', (v) => (v as num).toInt()),
-      currency: $checkedConvert(
-        'currency',
-        (v) => PremiumCurrency.fromJson(v as String),
-      ),
+      currency: $checkedConvert('currency', (v) => v as String),
       billingCycle: $checkedConvert(
         'billing_cycle',
         (v) =>

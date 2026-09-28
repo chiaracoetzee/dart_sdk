@@ -25,6 +25,11 @@ InstanceBrandingSchema _$InstanceBrandingSchemaFromJson(
         'status_page_incident_history_url',
         (v) => v as String?,
       ),
+      premiumProductName: $checkedConvert(
+        'premium_product_name',
+        (v) => v as String,
+      ),
+      premiumInfoUrl: $checkedConvert('premium_info_url', (v) => v as String?),
     );
     return val;
   },
@@ -38,6 +43,8 @@ InstanceBrandingSchema _$InstanceBrandingSchemaFromJson(
     'themeColor': 'theme_color',
     'statusPageUrl': 'status_page_url',
     'statusPageIncidentHistoryUrl': 'status_page_incident_history_url',
+    'premiumProductName': 'premium_product_name',
+    'premiumInfoUrl': 'premium_info_url',
   },
 );
 
@@ -53,4 +60,6 @@ Map<String, dynamic> _$InstanceBrandingSchemaToJson(
   'theme_color': instance.themeColor,
   'status_page_url': instance.statusPageUrl,
   'status_page_incident_history_url': instance.statusPageIncidentHistoryUrl,
+  'premium_product_name': instance.premiumProductName,
+  'premium_info_url': instance.premiumInfoUrl,
 };

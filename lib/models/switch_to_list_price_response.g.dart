@@ -24,10 +24,7 @@ _$SwitchToListPriceResponseScheduledSwitchToListPriceResponseFromJson(
         'current_amount_minor',
         (v) => (v as num).toInt(),
       ),
-      currency: $checkedConvert(
-        'currency',
-        (v) => PremiumCurrency.fromJson(v as String),
-      ),
+      currency: $checkedConvert('currency', (v) => v as String),
       status: $checkedConvert('status', (v) => v as String),
     );
     return val;
@@ -71,10 +68,7 @@ _$SwitchToListPriceResponseAlreadyScheduledSwitchToListPriceResponseFromJson(
             'current_amount_minor',
             (v) => (v as num).toInt(),
           ),
-          currency: $checkedConvert(
-            'currency',
-            (v) => PremiumCurrency.fromJson(v as String),
-          ),
+          currency: $checkedConvert('currency', (v) => v as String),
           status: $checkedConvert('status', (v) => v as String),
         );
     return val;

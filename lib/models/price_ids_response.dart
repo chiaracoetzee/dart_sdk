@@ -61,9 +61,9 @@ class PriceIdsResponse {
   /// Currency for the prices
   final PremiumCurrency currency;
 
-  /// Currency for gift prices
-  @JsonKey(name: 'gift_currency')
-  final PremiumCurrency giftCurrency;
+  /// Currency for gift prices, null when no gift prices are configured
+  @JsonKey(includeIfNull: true, name: 'gift_currency')
+  final PremiumCurrency? giftCurrency;
 
   Map<String, Object?> toJson() => _$PriceIdsResponseToJson(this);
 }

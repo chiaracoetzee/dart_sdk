@@ -31,10 +31,7 @@ ListPriceSwitchState _$ListPriceSwitchStateFromJson(
         'list_amount_minor',
         (v) => (v as num?)?.toInt(),
       ),
-      currency: $checkedConvert(
-        'currency',
-        (v) => v == null ? null : PremiumCurrency.fromJson(v as String),
-      ),
+      currency: $checkedConvert('currency', (v) => v as String?),
       billingCycle: $checkedConvert(
         'billing_cycle',
         (v) => v == null

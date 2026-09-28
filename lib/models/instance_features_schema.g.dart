@@ -15,6 +15,11 @@ InstanceFeaturesSchema _$InstanceFeaturesSchemaFromJson(
     final val = InstanceFeaturesSchema(
       voiceEnabled: $checkedConvert('voice_enabled', (v) => v as bool),
       stripeEnabled: $checkedConvert('stripe_enabled', (v) => v as bool),
+      premiumEnabled: $checkedConvert('premium_enabled', (v) => v as bool),
+      stripeServiceable: $checkedConvert(
+        'stripe_serviceable',
+        (v) => v as bool,
+      ),
       selfHosted: $checkedConvert('self_hosted', (v) => v as bool),
       presignedAttachmentUploads: $checkedConvert(
         'presigned_attachment_uploads',
@@ -27,6 +32,8 @@ InstanceFeaturesSchema _$InstanceFeaturesSchemaFromJson(
   fieldKeyMap: const {
     'voiceEnabled': 'voice_enabled',
     'stripeEnabled': 'stripe_enabled',
+    'premiumEnabled': 'premium_enabled',
+    'stripeServiceable': 'stripe_serviceable',
     'selfHosted': 'self_hosted',
     'presignedAttachmentUploads': 'presigned_attachment_uploads',
     'emailsEnabled': 'emails_enabled',
@@ -38,6 +45,8 @@ Map<String, dynamic> _$InstanceFeaturesSchemaToJson(
 ) => <String, dynamic>{
   'voice_enabled': instance.voiceEnabled,
   'stripe_enabled': instance.stripeEnabled,
+  'premium_enabled': instance.premiumEnabled,
+  'stripe_serviceable': instance.stripeServiceable,
   'self_hosted': instance.selfHosted,
   'presigned_attachment_uploads': instance.presignedAttachmentUploads,
   'emails_enabled': instance.emailsEnabled,
