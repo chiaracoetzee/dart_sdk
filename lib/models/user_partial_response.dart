@@ -6,6 +6,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'int32_type.dart';
 import 'mention_reply_preferences.dart';
+import 'message_subprofile_response.dart';
 import 'public_user_flags.dart';
 import 'snowflake_string_type.dart';
 
@@ -24,6 +25,8 @@ class UserPartialResponse {
     this.bot,
     this.system,
     this.mentionFlags,
+    this.subprofile,
+    this.personaId,
   });
 
   factory UserPartialResponse.fromJson(Map<String, Object?> json) =>
@@ -62,6 +65,12 @@ class UserPartialResponse {
   /// The user's account-wide reply mention preference. Omitted when the user has no preference set (treated as NO_PREFERENCE).
   @JsonKey(includeIfNull: false, name: 'mention_flags')
   final MentionReplyPreferences? mentionFlags;
+
+  @JsonKey(includeIfNull: false)
+  final MessageSubprofileResponse? subprofile;
+
+  @JsonKey(includeIfNull: false, name: 'persona_id')
+  final SnowflakeStringType? personaId;
 
   Map<String, Object?> toJson() => _$UserPartialResponseToJson(this);
 }
