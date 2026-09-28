@@ -484,12 +484,15 @@ abstract class ChannelsApi {
   /// [emoji] - The emoji identifier.
   ///
   /// [sessionId] - The session ID for synchronization.
+  ///
+  /// [body] - Optional request body containing persona_id.
   @PUT('/channels/{channel_id}/messages/{message_id}/reactions/{emoji}/@me')
   Future<void> addReaction({
     @Path('channel_id') required SnowflakeType channelId,
     @Path('message_id') required SnowflakeType messageId,
     @Path('emoji') required String emoji,
     @Query('session_id') String? sessionId,
+    @Body() Map<String, dynamic>? body,
   });
 
   /// Remove own reaction from message.
@@ -503,12 +506,15 @@ abstract class ChannelsApi {
   /// [emoji] - The emoji identifier.
   ///
   /// [sessionId] - The session ID for synchronization.
+  ///
+  /// [personaId] - Optional persona ID to remove reaction for.
   @DELETE('/channels/{channel_id}/messages/{message_id}/reactions/{emoji}/@me')
   Future<void> removeOwnReaction({
     @Path('channel_id') required SnowflakeType channelId,
     @Path('message_id') required SnowflakeType messageId,
     @Path('emoji') required String emoji,
     @Query('session_id') String? sessionId,
+    @Query('persona_id') String? personaId,
   });
 
   /// List users who reacted with emoji.
