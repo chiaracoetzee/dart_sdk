@@ -824,19 +824,23 @@ class _ChannelsApi implements ChannelsApi {
     required String messageId,
     required String emoji,
     String? sessionId,
+    Map<String, dynamic>? body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'session_id': sessionId};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    if (body != null) {
+      _data.addAll(body);
+    }
     final _options = _setStreamType<void>(
       Options(method: 'PUT', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
             '/channels/${channelId}/messages/${messageId}/reactions/${emoji}/@me',
             queryParameters: queryParameters,
-            data: _data,
+            data: _data.isEmpty ? null : _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
@@ -849,9 +853,13 @@ class _ChannelsApi implements ChannelsApi {
     required String messageId,
     required String emoji,
     String? sessionId,
+    String? personaId,
   }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'session_id': sessionId};
+    final queryParameters = <String, dynamic>{
+      r'session_id': sessionId,
+      r'persona_id': personaId,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;

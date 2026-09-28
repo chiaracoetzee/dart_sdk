@@ -47,6 +47,7 @@ class EventParser {
           userId: data['user_id'] as String,
           emoji: ReactionEmoji.fromJson(data['emoji'] as Map<String, dynamic>),
           guildId: data['guild_id'] as String?,
+          personaId: data['persona_id'] as String?,
         ),
         'MESSAGE_REACTION_REMOVE' => MessageReactionRemoveEvent(
           channelId: data['channel_id'] as String,
@@ -54,6 +55,7 @@ class EventParser {
           userId: data['user_id'] as String,
           emoji: ReactionEmoji.fromJson(data['emoji'] as Map<String, dynamic>),
           guildId: data['guild_id'] as String?,
+          personaId: data['persona_id'] as String?,
         ),
         'MESSAGE_REACTION_REMOVE_ALL' => MessageReactionRemoveAllEvent(
           channelId: data['channel_id'] as String,

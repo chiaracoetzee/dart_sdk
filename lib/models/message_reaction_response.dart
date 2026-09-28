@@ -5,6 +5,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'int32_type.dart';
+import 'message_reaction_persona_entry.dart';
 import 'message_reaction_response_emoji.dart';
 
 part 'message_reaction_response.g.dart';
@@ -15,6 +16,8 @@ class MessageReactionResponse {
     required this.emoji,
     required this.count,
     this.me,
+    this.meRoot,
+    this.personaReactions,
   });
 
   factory MessageReactionResponse.fromJson(Map<String, Object?> json) =>
@@ -29,6 +32,14 @@ class MessageReactionResponse {
   /// Whether the current user has reacted with this emoji
   @JsonKey(includeIfNull: false)
   final bool? me;
+
+  /// Whether the root account reacted with this emoji
+  @JsonKey(name: 'me_root', includeIfNull: false)
+  final bool? meRoot;
+
+  /// Breakdown of persona reactions
+  @JsonKey(name: 'persona_reactions', includeIfNull: false)
+  final List<MessageReactionPersonaEntry>? personaReactions;
 
   Map<String, Object?> toJson() => _$MessageReactionResponseToJson(this);
 }
