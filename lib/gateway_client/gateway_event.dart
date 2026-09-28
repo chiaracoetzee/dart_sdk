@@ -212,6 +212,7 @@ class MessageReactionAddEvent extends GatewayEvent {
     required this.userId,
     required this.emoji,
     this.guildId,
+    this.personaId,
   });
 
   final String channelId;
@@ -219,6 +220,7 @@ class MessageReactionAddEvent extends GatewayEvent {
   final String userId;
   final ReactionEmoji emoji;
   final String? guildId;
+  final String? personaId;
 }
 
 class MessageReactionRemoveEvent extends GatewayEvent {
@@ -228,6 +230,7 @@ class MessageReactionRemoveEvent extends GatewayEvent {
     required this.userId,
     required this.emoji,
     this.guildId,
+    this.personaId,
   });
 
   final String channelId;
@@ -235,6 +238,7 @@ class MessageReactionRemoveEvent extends GatewayEvent {
   final String userId;
   final ReactionEmoji emoji;
   final String? guildId;
+  final String? personaId;
 }
 
 class MessageReactionRemoveAllEvent extends GatewayEvent {
