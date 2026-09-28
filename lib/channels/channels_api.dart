@@ -264,9 +264,10 @@ abstract class ChannelsApi {
 
   /// Clear channel read state.
   ///
-  /// Clears all read state and acknowledgement records for a channel, marking all messages as unread. Returns 204 No Content on success.
+  /// Deprecated. Has no effect on the read state. Returns 204 No Content.
   ///
   /// [channelId] - The ID of the channel.
+  @Deprecated('This method is marked as deprecated')
   @DELETE('/channels/{channel_id}/messages/ack')
   Future<void> clearChannelReadState({
     @Path('channel_id') required SnowflakeType channelId,
