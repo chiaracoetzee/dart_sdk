@@ -37,6 +37,14 @@ _$ExperimentAssignmentsResponseAssignmentsFromJson(Map<String, dynamic> json) =>
                     v as Map<String, dynamic>,
                   ),
           ),
+          profileTimezone: $checkedConvert(
+            'profile_timezone',
+            (v) => v == null
+                ? null
+                : ProfileTimezoneAssignmentResponse.fromJson(
+                    v as Map<String, dynamic>,
+                  ),
+          ),
         );
         return val;
       },
@@ -44,6 +52,7 @@ _$ExperimentAssignmentsResponseAssignmentsFromJson(Map<String, dynamic> json) =>
         'voiceNoiseSuppression': 'voice_noise_suppression',
         'domainMigration': 'domain_migration',
         'altchaCaptcha': 'altcha_captcha',
+        'profileTimezone': 'profile_timezone',
       },
     );
 
@@ -53,4 +62,5 @@ Map<String, dynamic> _$ExperimentAssignmentsResponseAssignmentsToJson(
   'voice_noise_suppression': ?instance.voiceNoiseSuppression,
   'domain_migration': ?instance.domainMigration,
   'altcha_captcha': ?instance.altchaCaptcha,
+  'profile_timezone': ?instance.profileTimezone,
 };

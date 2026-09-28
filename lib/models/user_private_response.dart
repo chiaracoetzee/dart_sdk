@@ -150,11 +150,9 @@ class UserPrivateResponse {
   @JsonKey(includeIfNull: true, name: 'accent_color')
   final Int32Type? accentColor;
 
-  /// The IANA timezone identifier saved by the user. Omitted unless the user has staff access.
+  /// The IANA timezone identifier saved by the user
   @JsonKey(includeIfNull: false)
   final String? timezone;
-
-  /// Bitfield controlling who can see the profile timezone. Omitted unless the user has staff access.
   @JsonKey(includeIfNull: false, name: 'timezone_privacy_flags')
   final ProfileFieldPrivacyFlags? timezonePrivacyFlags;
 

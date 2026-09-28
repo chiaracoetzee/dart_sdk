@@ -185,7 +185,7 @@ class UserUpdateWithVerificationRequest {
   @JsonKey(includeIfNull: false)
   final PasswordType? password;
 
-  /// Staff-only bitfield controlling who can see the profile timezone. Ignored for non-staff users.
+  /// Bitfield controlling who can see the profile timezone. Ignored unless the profile_timezone experiment serves the user.
   @JsonKey(includeIfNull: false, name: 'timezone_privacy_flags')
   final ProfileFieldPrivacyFlags? timezonePrivacyFlags;
 
