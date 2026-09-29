@@ -13,14 +13,6 @@ _$ExperimentAssignmentsResponseAssignmentsFromJson(Map<String, dynamic> json) =>
       json,
       ($checkedConvert) {
         final val = ExperimentAssignmentsResponseAssignments(
-          voiceNoiseSuppression: $checkedConvert(
-            'voice_noise_suppression',
-            (v) => v == null
-                ? null
-                : VoiceNoiseSuppressionAssignmentResponse.fromJson(
-                    v as Map<String, dynamic>,
-                  ),
-          ),
           domainMigration: $checkedConvert(
             'domain_migration',
             (v) => v == null
@@ -49,7 +41,6 @@ _$ExperimentAssignmentsResponseAssignmentsFromJson(Map<String, dynamic> json) =>
         return val;
       },
       fieldKeyMap: const {
-        'voiceNoiseSuppression': 'voice_noise_suppression',
         'domainMigration': 'domain_migration',
         'altchaCaptcha': 'altcha_captcha',
         'profileTimezone': 'profile_timezone',
@@ -59,7 +50,6 @@ _$ExperimentAssignmentsResponseAssignmentsFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$ExperimentAssignmentsResponseAssignmentsToJson(
   ExperimentAssignmentsResponseAssignments instance,
 ) => <String, dynamic>{
-  'voice_noise_suppression': ?instance.voiceNoiseSuppression,
   'domain_migration': ?instance.domainMigration,
   'altcha_captcha': ?instance.altchaCaptcha,
   'profile_timezone': ?instance.profileTimezone,
