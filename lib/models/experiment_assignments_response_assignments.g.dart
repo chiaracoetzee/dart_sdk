@@ -29,21 +29,12 @@ _$ExperimentAssignmentsResponseAssignmentsFromJson(Map<String, dynamic> json) =>
                     v as Map<String, dynamic>,
                   ),
           ),
-          profileTimezone: $checkedConvert(
-            'profile_timezone',
-            (v) => v == null
-                ? null
-                : ProfileTimezoneAssignmentResponse.fromJson(
-                    v as Map<String, dynamic>,
-                  ),
-          ),
         );
         return val;
       },
       fieldKeyMap: const {
         'domainMigration': 'domain_migration',
         'altchaCaptcha': 'altcha_captcha',
-        'profileTimezone': 'profile_timezone',
       },
     );
 
@@ -52,5 +43,4 @@ Map<String, dynamic> _$ExperimentAssignmentsResponseAssignmentsToJson(
 ) => <String, dynamic>{
   'domain_migration': ?instance.domainMigration,
   'altcha_captcha': ?instance.altchaCaptcha,
-  'profile_timezone': ?instance.profileTimezone,
 };

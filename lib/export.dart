@@ -432,7 +432,6 @@ export 'models/channel_overwrite_type.dart';
 export 'models/rtc_region_response.dart';
 export 'models/discovery_category_response.dart';
 export 'models/donation_currency.dart';
-export 'models/profile_timezone_assignment_response.dart';
 export 'models/altcha_captcha_assignment_response.dart';
 export 'models/domain_migration_assignment_response.dart';
 export 'models/gift_code_duration_type_schema.dart';

@@ -6,7 +6,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'domain_migration_assignment_response.dart';
 import 'altcha_captcha_assignment_response.dart';
-import 'profile_timezone_assignment_response.dart';
 
 part 'experiment_assignments_response_assignments.g.dart';
 
@@ -15,7 +14,6 @@ class ExperimentAssignmentsResponseAssignments {
   const ExperimentAssignmentsResponseAssignments({
     this.domainMigration,
     this.altchaCaptcha,
-    this.profileTimezone,
   });
 
   factory ExperimentAssignmentsResponseAssignments.fromJson(
@@ -26,8 +24,6 @@ class ExperimentAssignmentsResponseAssignments {
   final DomainMigrationAssignmentResponse? domainMigration;
   @JsonKey(includeIfNull: false, name: 'altcha_captcha')
   final AltchaCaptchaAssignmentResponse? altchaCaptcha;
-  @JsonKey(includeIfNull: false, name: 'profile_timezone')
-  final ProfileTimezoneAssignmentResponse? profileTimezone;
 
   Map<String, Object?> toJson() =>
       _$ExperimentAssignmentsResponseAssignmentsToJson(this);
