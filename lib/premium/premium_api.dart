@@ -7,10 +7,17 @@ import 'package:retrofit/retrofit.dart';
 import 'package:retrofit/error_logger.dart';
 
 import '../models/change_subscription_request.dart';
+import '../models/claim_app_store_transaction_request.dart';
+import '../models/claim_google_play_purchase_request.dart';
 import '../models/current_subscription_price_response.dart';
 import '../models/premium_state_response.dart';
 import '../models/price_ids_response.dart';
+import '../models/snowflake_type.dart';
+import '../models/store_billing_context_response.dart';
+import '../models/store_purchase_claim_response.dart';
+import '../models/store_purchase_list_response.dart';
 import '../models/success_response.dart';
+import '../models/sudo_verification_schema.dart';
 import '../models/switch_to_list_price_response.dart';
 import '../models/update_premium_perks_disabled_request.dart';
 import '../models/url_response.dart';
@@ -95,6 +102,51 @@ abstract class PremiumApi {
   @GET('/premium/state')
   Future<PremiumStateResponse> getPremiumState({
     @Query('country_code') String? countryCode,
+  });
+
+  /// Get in-app purchase context.
+  ///
+  /// Returns the account token and the App Store and Google Play products the mobile apps may sell, plus the reason a new subscription is blocked, if any.
+  @GET('/premium/store')
+  Future<StoreBillingContextResponse> getStoreBillingContext();
+
+  /// Claim App Store transaction.
+  ///
+  /// Verifies a StoreKit 2 signed transaction, links the purchase to the authenticated account and applies it. Calling it again for the same purchase returns the same result. Finish the transaction after a 200 or a 400 or 403 error. Leave it unfinished after a 429, a 5xx or a network failure.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/premium/store/app-store/transactions')
+  Future<StorePurchaseClaimResponse> claimAppStoreTransaction({
+    @Body() required ClaimAppStoreTransactionRequest body,
+  });
+
+  /// Claim Google Play purchase.
+  ///
+  /// Verifies a Google Play purchase token, links the purchase to the authenticated account, acknowledges it and applies it. Calling it again for the same purchase returns the same result.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/premium/store/google-play/purchases')
+  Future<StorePurchaseClaimResponse> claimGooglePlayPurchase({
+    @Body() required ClaimGooglePlayPurchaseRequest body,
+  });
+
+  /// List in-app purchases.
+  ///
+  /// Returns the App Store and Google Play purchases linked to the authenticated account.
+  @GET('/premium/store/purchases')
+  Future<StorePurchaseListResponse> listStorePurchases();
+
+  /// Release in-app subscription.
+  ///
+  /// Unlinks an App Store or Google Play subscription from the authenticated account so another account can claim it. Requires sudo mode.
+  ///
+  /// [purchaseId] - The ID of the store purchase.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @DELETE('/premium/store/purchases/{purchase_id}')
+  Future<void> releaseStorePurchase({
+    @Path('purchase_id') required SnowflakeType purchaseId,
+    @Body() SudoVerificationSchema? body,
   });
 
   /// Switch subscription to the current list price.

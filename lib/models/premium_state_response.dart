@@ -8,6 +8,8 @@ import 'premium_pricing_state.dart';
 import 'premium_state_response_actual.dart';
 import 'premium_state_response_billing.dart';
 import 'premium_state_response_effective.dart';
+import 'premium_store_subscription_state.dart';
+import 'premium_subscription_provider.dart';
 
 part 'premium_state_response.g.dart';
 
@@ -18,6 +20,8 @@ class PremiumStateResponse {
     required this.effective,
     required this.billing,
     required this.pricing,
+    required this.subscriptionProvider,
+    this.store,
   });
 
   factory PremiumStateResponse.fromJson(Map<String, Object?> json) =>
@@ -27,6 +31,14 @@ class PremiumStateResponse {
   final PremiumStateResponseEffective effective;
   final PremiumStateResponseBilling billing;
   final PremiumPricingState pricing;
+
+  /// Active App Store or Google Play subscription, null when no store subscription is active
+  @JsonKey(includeIfNull: false)
+  final PremiumStoreSubscriptionState? store;
+
+  /// Billing platform that owns the current recurring subscription, null for gift, lifetime or no subscription. When a Stripe and a store subscription are both active, the one paid through later
+  @JsonKey(includeIfNull: true, name: 'subscription_provider')
+  final PremiumSubscriptionProvider? subscriptionProvider;
 
   Map<String, Object?> toJson() => _$PremiumStateResponseToJson(this);
 }

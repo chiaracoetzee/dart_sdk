@@ -26,9 +26,20 @@ PremiumStateResponse _$PremiumStateResponseFromJson(
       'pricing',
       (v) => PremiumPricingState.fromJson(v as Map<String, dynamic>),
     ),
+    subscriptionProvider: $checkedConvert(
+      'subscription_provider',
+      (v) =>
+          v == null ? null : PremiumSubscriptionProvider.fromJson(v as String),
+    ),
+    store: $checkedConvert(
+      'store',
+      (v) => v == null
+          ? null
+          : PremiumStoreSubscriptionState.fromJson(v as Map<String, dynamic>),
+    ),
   );
   return val;
-});
+}, fieldKeyMap: const {'subscriptionProvider': 'subscription_provider'});
 
 Map<String, dynamic> _$PremiumStateResponseToJson(
   PremiumStateResponse instance,
@@ -37,4 +48,6 @@ Map<String, dynamic> _$PremiumStateResponseToJson(
   'effective': instance.effective,
   'billing': instance.billing,
   'pricing': instance.pricing,
+  'store': ?instance.store,
+  'subscription_provider': instance.subscriptionProvider,
 };
