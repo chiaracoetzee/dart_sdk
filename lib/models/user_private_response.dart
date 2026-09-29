@@ -235,7 +235,7 @@ class UserPrivateResponse {
   @JsonKey(name: 'premium_perks_disabled')
   final bool premiumPerksDisabled;
 
-  /// Whether this account is forced through the inbound (expensive-destination) phone verification flow regardless of prefix, for debugging
+  /// Whether this account is forced through the inbound phone verification flow, for debugging
   @JsonKey(includeIfNull: false, name: 'force_inbound_phone_verification')
   final bool? forceInboundPhoneVerification;
 

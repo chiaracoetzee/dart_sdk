@@ -779,7 +779,7 @@ abstract class UsersApi {
 
   /// Start an inbound SMS challenge.
   ///
-  /// For very-high-risk registrations the platform requires the user to text a one-time code to the platform's number, instead of receiving a code from the platform. This endpoint generates the code and the destination number to display.
+  /// When an account must verify its phone number inbound, the user texts a one-time code to the platform's number instead of receiving one. This endpoint generates the code and the destination number to display.
   @POST('/users/@me/phone/inbound-challenge')
   Future<InboundSmsChallengeStartResponse> startInboundPhoneChallenge();
 
@@ -932,13 +932,13 @@ abstract class UsersApi {
 
   /// Preview setting the deferred phone check aside.
   ///
-  /// Reports whether this account can set a deferred phone verification requirement aside, and which communities would be left if it did. Returns available false with empty lists for any account outside that state.
+  /// Reports whether this account can set a due phone verification requirement aside. The community lists are always empty.
   @GET('/users/@me/required-actions/phone-gate-escape')
   Future<PhoneGateEscapePreviewResponse> getPhoneGateEscape();
 
   /// Set the deferred phone check aside.
   ///
-  /// Leaves the communities that trigger the deferred phone verification check and restores the deferral, so the account works normally again. Communities the user owns are kept, and a run that hits the per-call community limit leaves what it can and can be repeated. Returns the updated private user object.
+  /// Defers a due phone verification requirement again, so the account works normally without leaving any community. Returns the updated private user object.
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/users/@me/required-actions/phone-gate-escape')

@@ -4,21 +4,11 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-/// Why inbound verification is required
+/// Always verification_required
 @JsonEnum()
 enum PhoneSendVerificationResponseVariant2ReasonReason {
-  @JsonValue('voip')
-  voip('voip'),
-  @JsonValue('canadian')
-  canadian('canadian'),
-  @JsonValue('unknown_line_type')
-  unknownLineType('unknown_line_type'),
-  @JsonValue('expensive_destination')
-  expensiveDestination('expensive_destination'),
-  @JsonValue('account_forced')
-  accountForced('account_forced'),
-  @JsonValue('behavioural_risk')
-  behaviouralRisk('behavioural_risk'),
+  @JsonValue('verification_required')
+  verificationRequired('verification_required'),
 
   /// Default value for all unparsed values, allows backward compatibility when adding new values on the backend.
   $unknown(null);

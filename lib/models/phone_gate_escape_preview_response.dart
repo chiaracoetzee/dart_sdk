@@ -20,13 +20,13 @@ class PhoneGateEscapePreviewResponse {
   factory PhoneGateEscapePreviewResponse.fromJson(Map<String, Object?> json) =>
       _$PhoneGateEscapePreviewResponseFromJson(json);
 
-  /// Whether this account can set the deferred phone verification check aside right now
+  /// Whether this account can set a due phone verification requirement aside right now
   final bool available;
 
-  /// Communities that trigger the phone check and will be left when the escape runs
+  /// Always empty, the escape leaves no community
   final List<PhoneGateEscapePreviewResponseGuilds> guilds;
 
-  /// Communities that trigger the phone check but are owned by this user, so they are kept
+  /// Always empty, the escape leaves no community
   @JsonKey(name: 'owned_guilds')
   final List<PhoneGateEscapePreviewResponseOwnedGuilds> ownedGuilds;
 
