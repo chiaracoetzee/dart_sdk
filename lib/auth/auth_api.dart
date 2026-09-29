@@ -76,7 +76,7 @@ abstract class AuthApi {
 
   /// Forgot password.
   ///
-  /// Initiate password reset process by email. A password reset link will be sent to the user's email address. Requires CAPTCHA verification.
+  /// Initiate password reset process by email. A password reset link will be sent to the user's email address. Requires a solved captcha challenge (X-Captcha-Token).
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/auth/forgot')
@@ -162,7 +162,7 @@ abstract class AuthApi {
 
   /// Login account.
   ///
-  /// Authenticate with email and password. Returns authentication token if credentials are valid and MFA is not required. If MFA is enabled, returns a ticket for MFA verification.
+  /// Authenticate with email and password. Returns authentication token if credentials are valid and MFA is not required. If MFA is enabled, returns a ticket for MFA verification. Requires a solved captcha challenge (X-Captcha-Token).
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/auth/login')
@@ -282,7 +282,7 @@ abstract class AuthApi {
 
   /// Register account.
   ///
-  /// Create a new user account with email and password. Requires CAPTCHA verification. User account is created but must verify email before logging in.
+  /// Create a new user account with email and password. Requires a solved captcha challenge (X-Captcha-Token). User account is created but must verify email before logging in.
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/auth/register')

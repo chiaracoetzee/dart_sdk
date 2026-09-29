@@ -6,10 +6,8 @@ import 'package:json_annotation/json_annotation.dart';
 
 @JsonEnum()
 enum InstanceCaptchaProviderSchema {
-  @JsonValue('hcaptcha')
-  hcaptcha('hcaptcha'),
-  @JsonValue('turnstile')
-  turnstile('turnstile'),
+  @JsonValue('altcha')
+  altcha('altcha'),
   @JsonValue('none')
   none('none'),
 

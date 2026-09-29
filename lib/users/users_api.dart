@@ -157,7 +157,7 @@ abstract class UsersApi {
 
   /// Create private channel.
   ///
-  /// Creates a new private channel (direct message) between the current user and one or more recipients. Group DM creation requires CAPTCHA verification. Returns the newly created channel object.
+  /// Creates a new private channel (direct message) between the current user and one or more recipients. Group DM creation requires a solved captcha challenge (X-Captcha-Token). Returns the newly created channel object.
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/users/@me/channels')
@@ -785,7 +785,7 @@ abstract class UsersApi {
 
   /// Send phone verification code.
   ///
-  /// Send a one-time code on the requested channel. Defaults to the first available channel from server policy. Pass channel="sms" to request SMS (only honoured for SMS-allowlisted destinations) or channel="inbound_challenge" to receive challenge details to text in. Expensive outbound destinations always downgrade to an inbound challenge.
+  /// Send a one-time code on the requested channel. Defaults to the first available channel from server policy. Pass channel="sms" to request SMS (only honoured for SMS-allowlisted destinations) or channel="inbound_challenge" to receive challenge details to text in. Expensive outbound destinations always downgrade to an inbound challenge. Requires a solved captcha challenge (X-Captcha-Token) when the phone verification service asks for one.
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/users/@me/phone/send-verification')

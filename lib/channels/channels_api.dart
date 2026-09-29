@@ -625,7 +625,7 @@ abstract class ChannelsApi {
 
   /// Add recipient to group DM.
   ///
-  /// Adds a user to a group direct message channel. The requesting user must be a member of the group DM. Requires CAPTCHA verification.
+  /// Adds a user to a group direct message channel. The requesting user must be a member of the group DM. Requires a solved captcha challenge (X-Captcha-Token).
   ///
   /// [channelId] - The ID of the channel.
   ///

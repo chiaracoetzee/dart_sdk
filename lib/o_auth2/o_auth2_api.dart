@@ -76,7 +76,7 @@ abstract class OAuth2Api {
 
   /// Create OAuth2 application.
   ///
-  /// Creates a new bot-backed OAuth2 application (client). Requires CAPTCHA verification. Returns client credentials including ID and secret. Application can be used for authorization flows and API access.
+  /// Creates a new bot-backed OAuth2 application (client). Requires a solved captcha challenge (X-Captcha-Token). Returns client credentials including ID and secret. Application can be used for authorization flows and API access.
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/oauth2/applications')

@@ -8,39 +8,22 @@ part of 'experiment_assignments_response_assignments.dart';
 
 ExperimentAssignmentsResponseAssignments
 _$ExperimentAssignmentsResponseAssignmentsFromJson(Map<String, dynamic> json) =>
-    $checkedCreate(
-      'ExperimentAssignmentsResponseAssignments',
-      json,
-      ($checkedConvert) {
-        final val = ExperimentAssignmentsResponseAssignments(
-          domainMigration: $checkedConvert(
-            'domain_migration',
-            (v) => v == null
-                ? null
-                : DomainMigrationAssignmentResponse.fromJson(
-                    v as Map<String, dynamic>,
-                  ),
-          ),
-          altchaCaptcha: $checkedConvert(
-            'altcha_captcha',
-            (v) => v == null
-                ? null
-                : AltchaCaptchaAssignmentResponse.fromJson(
-                    v as Map<String, dynamic>,
-                  ),
-          ),
-        );
-        return val;
-      },
-      fieldKeyMap: const {
-        'domainMigration': 'domain_migration',
-        'altchaCaptcha': 'altcha_captcha',
-      },
-    );
+    $checkedCreate('ExperimentAssignmentsResponseAssignments', json, (
+      $checkedConvert,
+    ) {
+      final val = ExperimentAssignmentsResponseAssignments(
+        domainMigration: $checkedConvert(
+          'domain_migration',
+          (v) => v == null
+              ? null
+              : DomainMigrationAssignmentResponse.fromJson(
+                  v as Map<String, dynamic>,
+                ),
+        ),
+      );
+      return val;
+    }, fieldKeyMap: const {'domainMigration': 'domain_migration'});
 
 Map<String, dynamic> _$ExperimentAssignmentsResponseAssignmentsToJson(
   ExperimentAssignmentsResponseAssignments instance,
-) => <String, dynamic>{
-  'domain_migration': ?instance.domainMigration,
-  'altcha_captcha': ?instance.altchaCaptcha,
-};
+) => <String, dynamic>{'domain_migration': ?instance.domainMigration};

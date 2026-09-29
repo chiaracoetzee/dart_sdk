@@ -5,16 +5,12 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'domain_migration_assignment_response.dart';
-import 'altcha_captcha_assignment_response.dart';
 
 part 'experiment_assignments_response_assignments.g.dart';
 
 @JsonSerializable()
 class ExperimentAssignmentsResponseAssignments {
-  const ExperimentAssignmentsResponseAssignments({
-    this.domainMigration,
-    this.altchaCaptcha,
-  });
+  const ExperimentAssignmentsResponseAssignments({this.domainMigration});
 
   factory ExperimentAssignmentsResponseAssignments.fromJson(
     Map<String, Object?> json,
@@ -22,8 +18,6 @@ class ExperimentAssignmentsResponseAssignments {
 
   @JsonKey(includeIfNull: false, name: 'domain_migration')
   final DomainMigrationAssignmentResponse? domainMigration;
-  @JsonKey(includeIfNull: false, name: 'altcha_captcha')
-  final AltchaCaptchaAssignmentResponse? altchaCaptcha;
 
   Map<String, Object?> toJson() =>
       _$ExperimentAssignmentsResponseAssignmentsToJson(this);
