@@ -22,6 +22,10 @@ InstanceCommunitySchema _$InstanceCommunitySchemaFromJson(
         'direct_messages_disabled',
         (v) => v as bool,
       ),
+      guildCreateAccess: $checkedConvert(
+        'guild_create_access',
+        (v) => v as bool,
+      ),
     );
     return val;
   },
@@ -29,6 +33,7 @@ InstanceCommunitySchema _$InstanceCommunitySchemaFromJson(
     'singleCommunity': 'single_community',
     'singleCommunityGuildId': 'single_community_guild_id',
     'directMessagesDisabled': 'direct_messages_disabled',
+    'guildCreateAccess': 'guild_create_access',
   },
 );
 
@@ -38,4 +43,5 @@ Map<String, dynamic> _$InstanceCommunitySchemaToJson(
   'single_community': instance.singleCommunity,
   'single_community_guild_id': instance.singleCommunityGuildId,
   'direct_messages_disabled': instance.directMessagesDisabled,
+  'guild_create_access': instance.guildCreateAccess,
 };

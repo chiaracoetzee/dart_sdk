@@ -61,7 +61,7 @@ abstract class GuildsApi {
 
   /// Create guild.
   ///
-  /// Only claimed, email-verified non-bot users can create guilds.
+  /// Only claimed, email-verified non-bot users can create guilds. A self-hosted instance can restrict creation to admins and users granted the feature_guild_create limit.
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/guilds')
