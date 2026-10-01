@@ -17,6 +17,7 @@ class InstanceFeaturesSchema {
     required this.selfHosted,
     required this.presignedAttachmentUploads,
     required this.emailsEnabled,
+    required this.phoneVerificationEnabled,
   });
 
   factory InstanceFeaturesSchema.fromJson(Map<String, Object?> json) =>
@@ -49,6 +50,10 @@ class InstanceFeaturesSchema {
   /// Whether the instance sends emails (verification, password reset, etc.)
   @JsonKey(name: 'emails_enabled')
   final bool emailsEnabled;
+
+  /// Whether users can verify a phone number, so the very high guild verification level applies
+  @JsonKey(name: 'phone_verification_enabled')
+  final bool phoneVerificationEnabled;
 
   Map<String, Object?> toJson() => _$InstanceFeaturesSchemaToJson(this);
 }

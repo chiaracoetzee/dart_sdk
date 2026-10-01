@@ -26,6 +26,10 @@ InstanceFeaturesSchema _$InstanceFeaturesSchemaFromJson(
         (v) => v as bool,
       ),
       emailsEnabled: $checkedConvert('emails_enabled', (v) => v as bool),
+      phoneVerificationEnabled: $checkedConvert(
+        'phone_verification_enabled',
+        (v) => v as bool,
+      ),
     );
     return val;
   },
@@ -37,6 +41,7 @@ InstanceFeaturesSchema _$InstanceFeaturesSchemaFromJson(
     'selfHosted': 'self_hosted',
     'presignedAttachmentUploads': 'presigned_attachment_uploads',
     'emailsEnabled': 'emails_enabled',
+    'phoneVerificationEnabled': 'phone_verification_enabled',
   },
 );
 
@@ -50,4 +55,5 @@ Map<String, dynamic> _$InstanceFeaturesSchemaToJson(
   'self_hosted': instance.selfHosted,
   'presigned_attachment_uploads': instance.presignedAttachmentUploads,
   'emails_enabled': instance.emailsEnabled,
+  'phone_verification_enabled': instance.phoneVerificationEnabled,
 };
