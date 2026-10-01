@@ -537,6 +537,7 @@ void main() {
         'single_community': true,
         'single_community_guild_id': 'guild-123',
         'direct_messages_disabled': false,
+        'guild_create_access': true,
         'server_list_buttons': <String, dynamic>{
           'website': 'https://example.com',
           'docs': 'https://docs.example.com',
@@ -547,6 +548,7 @@ void main() {
       expect(model.singleCommunity, isTrue);
       expect(model.singleCommunityGuildId, 'guild-123');
       expect(model.directMessagesDisabled, isFalse);
+      expect(model.guildCreateAccess, isTrue);
       expect(model.serverListButtons, isNotNull);
       expect(model.serverListButtons!['website'], 'https://example.com');
       expect(model.serverListButtons!['docs'], 'https://docs.example.com');
@@ -558,6 +560,7 @@ void main() {
       expect(roundtripped.singleCommunity, isTrue);
       expect(roundtripped.singleCommunityGuildId, 'guild-123');
       expect(roundtripped.directMessagesDisabled, isFalse);
+      expect(roundtripped.guildCreateAccess, isTrue);
       expect(roundtripped.serverListButtons, isNotNull);
       expect(roundtripped.serverListButtons!['website'], 'https://example.com');
       expect(
@@ -571,12 +574,14 @@ void main() {
         'single_community': false,
         'single_community_guild_id': null,
         'direct_messages_disabled': true,
+        'guild_create_access': false,
       };
 
       final model = InstanceCommunitySchema.fromJson(json);
       expect(model.singleCommunity, isFalse);
       expect(model.singleCommunityGuildId, isNull);
       expect(model.directMessagesDisabled, isTrue);
+      expect(model.guildCreateAccess, isFalse);
       expect(model.serverListButtons, isNull);
 
       final serialized =
@@ -586,6 +591,7 @@ void main() {
       expect(roundtripped.singleCommunity, isFalse);
       expect(roundtripped.singleCommunityGuildId, isNull);
       expect(roundtripped.directMessagesDisabled, isTrue);
+      expect(roundtripped.guildCreateAccess, isFalse);
       expect(roundtripped.serverListButtons, isNull);
     });
   });
