@@ -444,6 +444,7 @@ export 'models/rtc_region_response.dart';
 export 'models/webhook_type.dart';
 export 'models/discovery_category_response.dart';
 export 'models/donation_currency.dart';
+export 'models/plutonium_page_assignment_response.dart';
 export 'models/domain_migration_assignment_response.dart';
 export 'models/gift_code_duration_type_schema.dart';
 export 'models/template_serialized_guild.dart';

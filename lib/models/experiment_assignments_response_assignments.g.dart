@@ -8,22 +8,39 @@ part of 'experiment_assignments_response_assignments.dart';
 
 ExperimentAssignmentsResponseAssignments
 _$ExperimentAssignmentsResponseAssignmentsFromJson(Map<String, dynamic> json) =>
-    $checkedCreate('ExperimentAssignmentsResponseAssignments', json, (
-      $checkedConvert,
-    ) {
-      final val = ExperimentAssignmentsResponseAssignments(
-        domainMigration: $checkedConvert(
-          'domain_migration',
-          (v) => v == null
-              ? null
-              : DomainMigrationAssignmentResponse.fromJson(
-                  v as Map<String, dynamic>,
-                ),
-        ),
-      );
-      return val;
-    }, fieldKeyMap: const {'domainMigration': 'domain_migration'});
+    $checkedCreate(
+      'ExperimentAssignmentsResponseAssignments',
+      json,
+      ($checkedConvert) {
+        final val = ExperimentAssignmentsResponseAssignments(
+          domainMigration: $checkedConvert(
+            'domain_migration',
+            (v) => v == null
+                ? null
+                : DomainMigrationAssignmentResponse.fromJson(
+                    v as Map<String, dynamic>,
+                  ),
+          ),
+          plutoniumPage: $checkedConvert(
+            'plutonium_page',
+            (v) => v == null
+                ? null
+                : PlutoniumPageAssignmentResponse.fromJson(
+                    v as Map<String, dynamic>,
+                  ),
+          ),
+        );
+        return val;
+      },
+      fieldKeyMap: const {
+        'domainMigration': 'domain_migration',
+        'plutoniumPage': 'plutonium_page',
+      },
+    );
 
 Map<String, dynamic> _$ExperimentAssignmentsResponseAssignmentsToJson(
   ExperimentAssignmentsResponseAssignments instance,
-) => <String, dynamic>{'domain_migration': ?instance.domainMigration};
+) => <String, dynamic>{
+  'domain_migration': ?instance.domainMigration,
+  'plutonium_page': ?instance.plutoniumPage,
+};
