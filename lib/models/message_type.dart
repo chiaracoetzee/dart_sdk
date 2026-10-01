@@ -24,6 +24,8 @@ enum MessageType {
   channelPinnedMessage(6),
   @JsonValue(7)
   userJoin(7),
+  @JsonValue(12)
+  channelFollowAdd(12),
   @JsonValue(19)
   reply(19),
 

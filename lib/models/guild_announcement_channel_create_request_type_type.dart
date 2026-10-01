@@ -4,32 +4,17 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-/// The type of the channel
 @JsonEnum()
-enum ChannelType {
-  @JsonValue(0)
-  guildText(0),
-  @JsonValue(1)
-  dm(1),
-  @JsonValue(2)
-  guildVoice(2),
-  @JsonValue(3)
-  groupDm(3),
-  @JsonValue(4)
-  guildCategory(4),
+enum GuildAnnouncementChannelCreateRequestTypeType {
   @JsonValue(5)
   guildAnnouncement(5),
-  @JsonValue(998)
-  guildLink(998),
-  @JsonValue(999)
-  dmPersonalNotes(999),
 
   /// Default value for all unparsed values, allows backward compatibility when adding new values on the backend.
   $unknown(null);
 
-  const ChannelType(this.json);
+  const GuildAnnouncementChannelCreateRequestTypeType(this.json);
 
-  factory ChannelType.fromJson(int json) =>
+  factory GuildAnnouncementChannelCreateRequestTypeType.fromJson(int json) =>
       values.firstWhere((e) => e.json == json, orElse: () => $unknown);
 
   final int? json;
@@ -40,6 +25,6 @@ enum ChannelType {
   String toString() => json?.toString() ?? super.toString();
 
   /// Returns all defined enum values excluding the $unknown value.
-  static List<ChannelType> get $valuesDefined =>
-      values.where((value) => value != $unknown).toList();
+  static List<GuildAnnouncementChannelCreateRequestTypeType>
+  get $valuesDefined => values.where((value) => value != $unknown).toList();
 }

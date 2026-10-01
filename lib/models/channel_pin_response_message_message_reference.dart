@@ -13,8 +13,8 @@ part 'channel_pin_response_message_message_reference.g.dart';
 class ChannelPinResponseMessageMessageReference {
   const ChannelPinResponseMessageMessageReference({
     required this.channelId,
-    required this.messageId,
     required this.type,
+    this.messageId,
     this.guildId,
   });
 
@@ -26,9 +26,9 @@ class ChannelPinResponseMessageMessageReference {
   @JsonKey(name: 'channel_id')
   final SnowflakeStringType channelId;
 
-  /// The ID of the referenced message
-  @JsonKey(name: 'message_id')
-  final SnowflakeStringType messageId;
+  /// The ID of the referenced message, absent on a channel follow system message
+  @JsonKey(includeIfNull: false, name: 'message_id')
+  final SnowflakeStringType? messageId;
 
   /// The ID of the guild containing the referenced message
   @JsonKey(includeIfNull: false, name: 'guild_id')

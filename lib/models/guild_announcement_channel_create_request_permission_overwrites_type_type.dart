@@ -4,33 +4,24 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-/// The type of the channel
+/// The type of overwrite (0 = role, 1 = member)
 @JsonEnum()
-enum ChannelType {
+enum GuildAnnouncementChannelCreateRequestPermissionOverwritesTypeType {
   @JsonValue(0)
-  guildText(0),
+  role(0),
   @JsonValue(1)
-  dm(1),
-  @JsonValue(2)
-  guildVoice(2),
-  @JsonValue(3)
-  groupDm(3),
-  @JsonValue(4)
-  guildCategory(4),
-  @JsonValue(5)
-  guildAnnouncement(5),
-  @JsonValue(998)
-  guildLink(998),
-  @JsonValue(999)
-  dmPersonalNotes(999),
+  member(1),
 
   /// Default value for all unparsed values, allows backward compatibility when adding new values on the backend.
   $unknown(null);
 
-  const ChannelType(this.json);
+  const GuildAnnouncementChannelCreateRequestPermissionOverwritesTypeType(
+    this.json,
+  );
 
-  factory ChannelType.fromJson(int json) =>
-      values.firstWhere((e) => e.json == json, orElse: () => $unknown);
+  factory GuildAnnouncementChannelCreateRequestPermissionOverwritesTypeType.fromJson(
+    int json,
+  ) => values.firstWhere((e) => e.json == json, orElse: () => $unknown);
 
   final int? json;
 
@@ -40,6 +31,6 @@ enum ChannelType {
   String toString() => json?.toString() ?? super.toString();
 
   /// Returns all defined enum values excluding the $unknown value.
-  static List<ChannelType> get $valuesDefined =>
-      values.where((value) => value != $unknown).toList();
+  static List<GuildAnnouncementChannelCreateRequestPermissionOverwritesTypeType>
+  get $valuesDefined => values.where((value) => value != $unknown).toList();
 }

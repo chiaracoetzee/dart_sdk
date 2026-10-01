@@ -1,0 +1,43 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, unused_import, invalid_annotation_target, unnecessary_import
+
+import 'package:json_annotation/json_annotation.dart';
+
+import 'snowflake_type.dart';
+import 'guild_announcement_channel_create_request_permission_overwrites_type_type.dart';
+import 'unsigned_int64_type.dart';
+
+part 'guild_announcement_channel_create_request_permission_overwrites.g.dart';
+
+@JsonSerializable()
+class GuildAnnouncementChannelCreateRequestPermissionOverwrites {
+  const GuildAnnouncementChannelCreateRequestPermissionOverwrites({
+    required this.id,
+    required this.type,
+    this.allow,
+    this.deny,
+  });
+
+  factory GuildAnnouncementChannelCreateRequestPermissionOverwrites.fromJson(
+    Map<String, Object?> json,
+  ) =>
+      _$GuildAnnouncementChannelCreateRequestPermissionOverwritesFromJson(json);
+
+  /// The ID of the role or user to overwrite permissions for
+  final SnowflakeType id;
+
+  /// The type of overwrite (0 = role, 1 = member)
+  final GuildAnnouncementChannelCreateRequestPermissionOverwritesTypeType type;
+
+  /// Bitwise value of allowed permissions
+  @JsonKey(includeIfNull: false)
+  final UnsignedInt64Type? allow;
+
+  /// Bitwise value of denied permissions
+  @JsonKey(includeIfNull: false)
+  final UnsignedInt64Type? deny;
+
+  Map<String, Object?> toJson() =>
+      _$GuildAnnouncementChannelCreateRequestPermissionOverwritesToJson(this);
+}

@@ -5,24 +5,26 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'snowflake_string_type.dart';
+import 'user_partial_response.dart';
 import 'webhook_type.dart';
 
-part 'webhook_token_response.g.dart';
+part 'webhook_create_response.g.dart';
 
 @JsonSerializable()
-class WebhookTokenResponse {
-  const WebhookTokenResponse({
+class WebhookCreateResponse {
+  const WebhookCreateResponse({
     required this.id,
     required this.guildId,
     required this.channelId,
     required this.name,
     required this.type,
     required this.token,
+    required this.user,
     this.avatar,
   });
 
-  factory WebhookTokenResponse.fromJson(Map<String, Object?> json) =>
-      _$WebhookTokenResponseFromJson(json);
+  factory WebhookCreateResponse.fromJson(Map<String, Object?> json) =>
+      _$WebhookCreateResponseFromJson(json);
 
   /// The unique identifier (snowflake) for the webhook
   final SnowflakeStringType id;
@@ -46,5 +48,8 @@ class WebhookTokenResponse {
   /// The secure token used to execute the webhook
   final String token;
 
-  Map<String, Object?> toJson() => _$WebhookTokenResponseToJson(this);
+  /// The user who created the webhook
+  final UserPartialResponse user;
+
+  Map<String, Object?> toJson() => _$WebhookCreateResponseToJson(this);
 }

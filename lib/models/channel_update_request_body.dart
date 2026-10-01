@@ -12,6 +12,7 @@ import 'channel_nickname_overrides.dart';
 import 'channel_update_request_body_variant2_permission_overwrites.dart';
 import 'channel_update_request_body_variant3_permission_overwrites.dart';
 import 'channel_update_request_body_variant4_permission_overwrites.dart';
+import 'channel_update_request_body_variant5_permission_overwrites.dart';
 
 part 'channel_update_request_body.g.dart';
 
@@ -35,6 +36,8 @@ class ChannelUpdateRequestBody {
       ChannelUpdateRequestBodyVariant4.fromJson(_json);
   ChannelUpdateRequestBodyVariant5 toVariant5() =>
       ChannelUpdateRequestBodyVariant5.fromJson(_json);
+  ChannelUpdateRequestBodyVariant6 toVariant6() =>
+      ChannelUpdateRequestBodyVariant6.fromJson(_json);
 }
 
 @JsonSerializable()
@@ -74,6 +77,8 @@ class ChannelUpdateRequestBodyVariant1 {
   final String? rtcRegion;
   @JsonKey(includeIfNull: false)
   final String? name;
+  @JsonKey(includeIfNull: false)
+  final num? type;
 
   const ChannelUpdateRequestBodyVariant1({
     this.topic,
@@ -93,6 +98,7 @@ class ChannelUpdateRequestBodyVariant1 {
     this.nicks,
     this.rtcRegion,
     this.name,
+    this.type,
   });
 
   factory ChannelUpdateRequestBodyVariant1.fromJson(
@@ -140,6 +146,8 @@ class ChannelUpdateRequestBodyVariant2 {
   final String? rtcRegion;
   @JsonKey(includeIfNull: false)
   final String? name;
+  @JsonKey(includeIfNull: false)
+  final num? type;
 
   const ChannelUpdateRequestBodyVariant2({
     this.topic,
@@ -159,6 +167,7 @@ class ChannelUpdateRequestBodyVariant2 {
     this.nicks,
     this.rtcRegion,
     this.name,
+    this.type,
   });
 
   factory ChannelUpdateRequestBodyVariant2.fromJson(
@@ -304,19 +313,59 @@ class ChannelUpdateRequestBodyVariant4 {
 @JsonSerializable()
 class ChannelUpdateRequestBodyVariant5 {
   @JsonKey(includeIfNull: false)
-  final String? name;
+  final String? topic;
+  @JsonKey(includeIfNull: false)
+  final String? url;
+  @JsonKey(includeIfNull: false, name: 'parent_id')
+  final SnowflakeType? parentId;
+  @JsonKey(includeIfNull: false)
+  final int? bitrate;
+  @JsonKey(includeIfNull: false, name: 'user_limit')
+  final int? userLimit;
+  @JsonKey(includeIfNull: false, name: 'voice_connection_limit')
+  final int? voiceConnectionLimit;
+  @JsonKey(includeIfNull: false, name: 'permission_overwrites')
+  final List<ChannelUpdateRequestBodyVariant5PermissionOverwrites>?
+  permissionOverwrites;
+  @JsonKey(includeIfNull: false, name: 'rate_limit_per_user')
+  final int? rateLimitPerUser;
+  @JsonKey(includeIfNull: false)
+  final bool? nsfw;
+  @JsonKey(includeIfNull: false, name: 'nsfw_override')
+  final bool? nsfwOverride;
+  @JsonKey(includeIfNull: false, name: 'content_warning_level')
+  final ContentWarningLevelInput? contentWarningLevel;
+  @JsonKey(includeIfNull: false, name: 'content_warning_text')
+  final String? contentWarningText;
   @JsonKey(includeIfNull: false)
   final Base64ImageType? icon;
   @JsonKey(includeIfNull: false, name: 'owner_id')
   final SnowflakeType? ownerId;
   @JsonKey(includeIfNull: false)
   final ChannelNicknameOverrides? nicks;
+  @JsonKey(includeIfNull: false, name: 'rtc_region')
+  final String? rtcRegion;
+  @JsonKey(includeIfNull: false)
+  final String? name;
 
   const ChannelUpdateRequestBodyVariant5({
-    this.name,
+    this.topic,
+    this.url,
+    this.parentId,
+    this.bitrate,
+    this.userLimit,
+    this.voiceConnectionLimit,
+    this.permissionOverwrites,
+    this.rateLimitPerUser,
+    this.nsfw,
+    this.nsfwOverride,
+    this.contentWarningLevel,
+    this.contentWarningText,
     this.icon,
     this.ownerId,
     this.nicks,
+    this.rtcRegion,
+    this.name,
   });
 
   factory ChannelUpdateRequestBodyVariant5.fromJson(
@@ -325,4 +374,30 @@ class ChannelUpdateRequestBodyVariant5 {
 
   Map<String, dynamic> toJson() =>
       _$ChannelUpdateRequestBodyVariant5ToJson(this);
+}
+
+@JsonSerializable()
+class ChannelUpdateRequestBodyVariant6 {
+  @JsonKey(includeIfNull: false)
+  final String? name;
+  @JsonKey(includeIfNull: false)
+  final Base64ImageType? icon;
+  @JsonKey(includeIfNull: false, name: 'owner_id')
+  final SnowflakeType? ownerId;
+  @JsonKey(includeIfNull: false)
+  final ChannelNicknameOverrides? nicks;
+
+  const ChannelUpdateRequestBodyVariant6({
+    this.name,
+    this.icon,
+    this.ownerId,
+    this.nicks,
+  });
+
+  factory ChannelUpdateRequestBodyVariant6.fromJson(
+    Map<String, dynamic> json,
+  ) => _$ChannelUpdateRequestBodyVariant6FromJson(json);
+
+  Map<String, dynamic> toJson() =>
+      _$ChannelUpdateRequestBodyVariant6ToJson(this);
 }

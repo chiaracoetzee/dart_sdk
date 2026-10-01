@@ -15,11 +15,11 @@ _$ChannelPinResponseMessageMessageReferenceFromJson(
   ($checkedConvert) {
     final val = ChannelPinResponseMessageMessageReference(
       channelId: $checkedConvert('channel_id', (v) => v as String),
-      messageId: $checkedConvert('message_id', (v) => v as String),
       type: $checkedConvert(
         'type',
         (v) => MessageReferenceType.fromJson((v as num).toInt()),
       ),
+      messageId: $checkedConvert('message_id', (v) => v as String?),
       guildId: $checkedConvert('guild_id', (v) => v as String?),
     );
     return val;
@@ -35,7 +35,7 @@ Map<String, dynamic> _$ChannelPinResponseMessageMessageReferenceToJson(
   ChannelPinResponseMessageMessageReference instance,
 ) => <String, dynamic>{
   'channel_id': instance.channelId,
-  'message_id': instance.messageId,
+  'message_id': ?instance.messageId,
   'guild_id': ?instance.guildId,
   'type': instance.type,
 };

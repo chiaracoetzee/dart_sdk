@@ -54,7 +54,7 @@ class _WebhooksApi implements WebhooksApi {
   }
 
   @override
-  Future<WebhookResponse> createWebhook({
+  Future<WebhookCreateResponse> createWebhook({
     required String channelId,
     required WebhookCreateRequest body,
   }) async {
@@ -63,7 +63,7 @@ class _WebhooksApi implements WebhooksApi {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _options = _setStreamType<WebhookResponse>(
+    final _options = _setStreamType<WebhookCreateResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -74,9 +74,9 @@ class _WebhooksApi implements WebhooksApi {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, Object?>>(_options);
-    late WebhookResponse _value;
+    late WebhookCreateResponse _value;
     try {
-      _value = WebhookResponse.fromJson(_result.data!);
+      _value = WebhookCreateResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;

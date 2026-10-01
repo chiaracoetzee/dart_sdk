@@ -15,12 +15,16 @@ import '../models/bulk_message_fetch_response.dart';
 import '../models/call_eligibility_response.dart';
 import '../models/call_ring_body_schema.dart';
 import '../models/call_update_body_schema.dart';
+import '../models/channel_follow_request.dart';
+import '../models/channel_follower_stats_response.dart';
 import '../models/channel_pins_response.dart';
 import '../models/channel_response.dart';
 import '../models/channel_slowmode_state_response.dart';
 import '../models/channel_update_request_body.dart';
 import '../models/complete_multipart_attachment_upload_request.dart';
 import '../models/complete_multipart_attachment_upload_response.dart';
+import '../models/crosspost_source_response.dart';
+import '../models/followed_channel_response.dart';
 import '../models/message_ack_request.dart';
 import '../models/message_content_request.dart';
 import '../models/message_flags.dart';
@@ -188,6 +192,29 @@ abstract class ChannelsApi {
   Future<void> stopRingingCallRecipients({
     @Path('channel_id') required SnowflakeType channelId,
     @Body() CallRingBodySchema? body,
+  });
+
+  /// Get announcement channel follower stats.
+  ///
+  /// Returns how many channels and distinct guilds follow an announcement channel. Requires View Channel on the announcement channel.
+  ///
+  /// [channelId] - The ID of the channel.
+  @GET('/channels/{channel_id}/follower-stats')
+  Future<ChannelFollowerStatsResponse> getChannelFollowerStats({
+    @Path('channel_id') required SnowflakeType channelId,
+  });
+
+  /// Follow an announcement channel.
+  ///
+  /// Follows an announcement channel into a text channel. Creates a channel follower webhook in the target channel that receives every message published in the announcement channel. Requires Manage Webhooks in the target channel and View Channel on the announcement channel.
+  ///
+  /// [channelId] - The ID of the channel.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/channels/{channel_id}/followers')
+  Future<FollowedChannelResponse> followChannel({
+    @Path('channel_id') required SnowflakeType channelId,
+    @Body() required ChannelFollowRequest body,
   });
 
   /// List messages in a channel.
@@ -421,6 +448,32 @@ abstract class ChannelsApi {
     @Path('channel_id') required SnowflakeType channelId,
     @Path('message_id') required SnowflakeType messageId,
     @Path('attachment_id') required SnowflakeType attachmentId,
+  });
+
+  /// Publish a message to following channels.
+  ///
+  /// Publishes a message in an announcement channel to every channel that follows it. The author needs Send Messages. Anyone else needs Send Messages and Manage Messages. Only default messages that are not replies, forwards or copies can be published, and each message can be published once. Copies are delivered asynchronously. Publishing is limited per channel (10 in a row, then one every 6 minutes) and per community (30 in a row, then one every 2 minutes). Returns the updated message with the CROSSPOSTED flag set.
+  ///
+  /// [channelId] - The ID of the channel.
+  ///
+  /// [messageId] - The ID of the message.
+  @POST('/channels/{channel_id}/messages/{message_id}/crosspost')
+  Future<MessageResponseSchema> crosspostMessage({
+    @Path('channel_id') required SnowflakeType channelId,
+    @Path('message_id') required SnowflakeType messageId,
+  });
+
+  /// Get the source community of a published message copy.
+  ///
+  /// Returns the public profile of the community a message copy was published from. Works on copies delivered to a following channel and on the system message posted when a channel starts following. Needs the same access as fetching the message. The response holds the community name, icon, banner, badge features, approximate counts and whether it can be joined through discovery.
+  ///
+  /// [channelId] - The ID of the channel.
+  ///
+  /// [messageId] - The ID of the message.
+  @GET('/channels/{channel_id}/messages/{message_id}/crosspost-source')
+  Future<CrosspostSourceResponse> getMessageCrosspostSource({
+    @Path('channel_id') required SnowflakeType channelId,
+    @Path('message_id') required SnowflakeType messageId,
   });
 
   /// Remove all reactions from message.

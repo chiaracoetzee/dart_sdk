@@ -1,0 +1,237 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, unused_import, invalid_annotation_target, unnecessary_import
+
+import 'package:json_annotation/json_annotation.dart';
+
+import 'json_nullable.dart';
+
+import 'channel_create_request.dart';
+import 'content_warning_level_input.dart';
+import 'guild_announcement_channel_create_request_permission_overwrites.dart';
+import 'guild_announcement_channel_create_request_type_type.dart';
+import 'snowflake_type.dart';
+
+part 'guild_announcement_channel_create_request.g.dart';
+
+@JsonSerializable(constructor: '_')
+class GuildAnnouncementChannelCreateRequest {
+  GuildAnnouncementChannelCreateRequest({
+    required this.type,
+    required this.name,
+    this.nsfw = false,
+    this.permissionOverwrites,
+    this.contentWarningLevel,
+    JsonNullable<String> topic = const JsonNullable<String>.undefined(),
+    JsonNullable<String> url = const JsonNullable<String>.undefined(),
+    JsonNullable<SnowflakeType> parentId =
+        const JsonNullable<SnowflakeType>.undefined(),
+    JsonNullable<int> bitrate = const JsonNullable<int>.undefined(),
+    JsonNullable<int> userLimit = const JsonNullable<int>.undefined(),
+    JsonNullable<int> voiceConnectionLimit =
+        const JsonNullable<int>.undefined(),
+    JsonNullable<int> rateLimitPerUser = const JsonNullable<int>.undefined(),
+    JsonNullable<bool> nsfwOverride = const JsonNullable<bool>.undefined(),
+    JsonNullable<String> contentWarningText =
+        const JsonNullable<String>.undefined(),
+  }) : topic = topic,
+       _topicValue = topic.value,
+       _topicPresent = topic.isPresent,
+       url = url,
+       _urlValue = url.value,
+       _urlPresent = url.isPresent,
+       parentId = parentId,
+       _parentIdValue = parentId.value,
+       _parentIdPresent = parentId.isPresent,
+       bitrate = bitrate,
+       _bitrateValue = bitrate.value,
+       _bitratePresent = bitrate.isPresent,
+       userLimit = userLimit,
+       _userLimitValue = userLimit.value,
+       _userLimitPresent = userLimit.isPresent,
+       voiceConnectionLimit = voiceConnectionLimit,
+       _voiceConnectionLimitValue = voiceConnectionLimit.value,
+       _voiceConnectionLimitPresent = voiceConnectionLimit.isPresent,
+       rateLimitPerUser = rateLimitPerUser,
+       _rateLimitPerUserValue = rateLimitPerUser.value,
+       _rateLimitPerUserPresent = rateLimitPerUser.isPresent,
+       nsfwOverride = nsfwOverride,
+       _nsfwOverrideValue = nsfwOverride.value,
+       _nsfwOverridePresent = nsfwOverride.isPresent,
+       contentWarningText = contentWarningText,
+       _contentWarningTextValue = contentWarningText.value,
+       _contentWarningTextPresent = contentWarningText.isPresent;
+
+  const GuildAnnouncementChannelCreateRequest._({
+    required this.type,
+    required this.name,
+    this.nsfw = false,
+    this.permissionOverwrites,
+    this.contentWarningLevel,
+  }) : _topicValue = null,
+       _urlValue = null,
+       _parentIdValue = null,
+       _bitrateValue = null,
+       _userLimitValue = null,
+       _voiceConnectionLimitValue = null,
+       _rateLimitPerUserValue = null,
+       _nsfwOverrideValue = null,
+       _contentWarningTextValue = null,
+       topic = const JsonNullable<String>.undefined(),
+       _topicPresent = false,
+       url = const JsonNullable<String>.undefined(),
+       _urlPresent = false,
+       parentId = const JsonNullable<SnowflakeType>.undefined(),
+       _parentIdPresent = false,
+       bitrate = const JsonNullable<int>.undefined(),
+       _bitratePresent = false,
+       userLimit = const JsonNullable<int>.undefined(),
+       _userLimitPresent = false,
+       voiceConnectionLimit = const JsonNullable<int>.undefined(),
+       _voiceConnectionLimitPresent = false,
+       rateLimitPerUser = const JsonNullable<int>.undefined(),
+       _rateLimitPerUserPresent = false,
+       nsfwOverride = const JsonNullable<bool>.undefined(),
+       _nsfwOverridePresent = false,
+       contentWarningText = const JsonNullable<String>.undefined(),
+       _contentWarningTextPresent = false;
+  factory GuildAnnouncementChannelCreateRequest.patch(
+    Map<String, Object?> json,
+  ) => GuildAnnouncementChannelCreateRequest.fromJson(json);
+
+  factory GuildAnnouncementChannelCreateRequest.fromJson(
+    Map<String, Object?> json,
+  ) {
+    final value = _$GuildAnnouncementChannelCreateRequestFromJson(json);
+    return GuildAnnouncementChannelCreateRequest(
+      type: value.type,
+      name: value.name,
+      nsfw: value.nsfw,
+      topic: json.containsKey('topic')
+          ? JsonNullable<String>.of(value._topicValue)
+          : const JsonNullable<String>.undefined(),
+      url: json.containsKey('url')
+          ? JsonNullable<String>.of(value._urlValue)
+          : const JsonNullable<String>.undefined(),
+      parentId: json.containsKey('parent_id')
+          ? JsonNullable<SnowflakeType>.of(value._parentIdValue)
+          : const JsonNullable<SnowflakeType>.undefined(),
+      bitrate: json.containsKey('bitrate')
+          ? JsonNullable<int>.of(value._bitrateValue)
+          : const JsonNullable<int>.undefined(),
+      userLimit: json.containsKey('user_limit')
+          ? JsonNullable<int>.of(value._userLimitValue)
+          : const JsonNullable<int>.undefined(),
+      voiceConnectionLimit: json.containsKey('voice_connection_limit')
+          ? JsonNullable<int>.of(value._voiceConnectionLimitValue)
+          : const JsonNullable<int>.undefined(),
+      permissionOverwrites: value.permissionOverwrites,
+      rateLimitPerUser: json.containsKey('rate_limit_per_user')
+          ? JsonNullable<int>.of(value._rateLimitPerUserValue)
+          : const JsonNullable<int>.undefined(),
+      nsfwOverride: json.containsKey('nsfw_override')
+          ? JsonNullable<bool>.of(value._nsfwOverrideValue)
+          : const JsonNullable<bool>.undefined(),
+      contentWarningLevel: value.contentWarningLevel,
+      contentWarningText: json.containsKey('content_warning_text')
+          ? JsonNullable<String>.of(value._contentWarningTextValue)
+          : const JsonNullable<String>.undefined(),
+    );
+  }
+
+  /// Permission overwrites for roles and members
+  @JsonKey(includeIfNull: false, name: 'permission_overwrites')
+  final List<GuildAnnouncementChannelCreateRequestPermissionOverwrites>?
+  permissionOverwrites;
+
+  /// Whether the channel is marked as NSFW
+  final bool nsfw;
+
+  /// Channel-level content warning override (0=inherit, 1=force-warn)
+  @JsonKey(includeIfNull: false, name: 'content_warning_level')
+  final ContentWarningLevelInput? contentWarningLevel;
+  final GuildAnnouncementChannelCreateRequestTypeType type;
+
+  /// The name of the channel
+  final String name;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> topic;
+  @JsonKey(includeIfNull: false, name: 'topic')
+  final String? _topicValue;
+  final bool _topicPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> url;
+  @JsonKey(includeIfNull: false, name: 'url')
+  final String? _urlValue;
+  final bool _urlPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<SnowflakeType> parentId;
+  @JsonKey(includeIfNull: false, name: 'parent_id')
+  final SnowflakeType? _parentIdValue;
+  final bool _parentIdPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<int> bitrate;
+  @JsonKey(includeIfNull: false, name: 'bitrate')
+  final int? _bitrateValue;
+  final bool _bitratePresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<int> userLimit;
+  @JsonKey(includeIfNull: false, name: 'user_limit')
+  final int? _userLimitValue;
+  final bool _userLimitPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<int> voiceConnectionLimit;
+  @JsonKey(includeIfNull: false, name: 'voice_connection_limit')
+  final int? _voiceConnectionLimitValue;
+  final bool _voiceConnectionLimitPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<int> rateLimitPerUser;
+  @JsonKey(includeIfNull: false, name: 'rate_limit_per_user')
+  final int? _rateLimitPerUserValue;
+  final bool _rateLimitPerUserPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<bool> nsfwOverride;
+  @JsonKey(includeIfNull: false, name: 'nsfw_override')
+  final bool? _nsfwOverrideValue;
+  final bool _nsfwOverridePresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> contentWarningText;
+  @JsonKey(includeIfNull: false, name: 'content_warning_text')
+  final String? _contentWarningTextValue;
+  final bool _contentWarningTextPresent;
+
+  Map<String, Object?> toJson() {
+    final json = _$GuildAnnouncementChannelCreateRequestToJson(this);
+    if (_topicPresent) {
+      json.putIfAbsent('topic', () => _topicValue);
+    }
+    if (_urlPresent) {
+      json.putIfAbsent('url', () => _urlValue);
+    }
+    if (_parentIdPresent) {
+      json.putIfAbsent('parent_id', () => _parentIdValue);
+    }
+    if (_bitratePresent) {
+      json.putIfAbsent('bitrate', () => _bitrateValue);
+    }
+    if (_userLimitPresent) {
+      json.putIfAbsent('user_limit', () => _userLimitValue);
+    }
+    if (_voiceConnectionLimitPresent) {
+      json.putIfAbsent(
+        'voice_connection_limit',
+        () => _voiceConnectionLimitValue,
+      );
+    }
+    if (_rateLimitPerUserPresent) {
+      json.putIfAbsent('rate_limit_per_user', () => _rateLimitPerUserValue);
+    }
+    if (_nsfwOverridePresent) {
+      json.putIfAbsent('nsfw_override', () => _nsfwOverrideValue);
+    }
+    if (_contentWarningTextPresent) {
+      json.putIfAbsent('content_warning_text', () => _contentWarningTextValue);
+    }
+    return json;
+  }
+}

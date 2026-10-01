@@ -22,6 +22,7 @@ import '../models/slack_webhook_request.dart';
 import '../models/slack_webhook_response.dart';
 import '../models/snowflake_type.dart';
 import '../models/webhook_create_request.dart';
+import '../models/webhook_create_response.dart';
 import '../models/webhook_list_response.dart';
 import '../models/webhook_message_edit_request.dart';
 import '../models/webhook_response.dart';
@@ -53,7 +54,7 @@ abstract class WebhooksApi {
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/channels/{channel_id}/webhooks')
-  Future<WebhookResponse> createWebhook({
+  Future<WebhookCreateResponse> createWebhook({
     @Path('channel_id') required SnowflakeType channelId,
     @Body() required WebhookCreateRequest body,
   });
