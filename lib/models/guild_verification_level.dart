@@ -15,8 +15,6 @@ enum GuildVerificationLevel {
   medium(2),
   @JsonValue(3)
   high(3),
-  @JsonValue(4)
-  veryHigh(4),
 
   /// Default value for all unparsed values, allows backward compatibility when adding new values on the backend.
   $unknown(null);

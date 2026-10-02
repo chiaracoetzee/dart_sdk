@@ -51,7 +51,7 @@ class InstanceFeaturesSchema {
   @JsonKey(name: 'emails_enabled')
   final bool emailsEnabled;
 
-  /// Whether users can verify a phone number, so the very high guild verification level applies
+  /// Deprecated. Always false.
   @JsonKey(name: 'phone_verification_enabled')
   final bool phoneVerificationEnabled;
 

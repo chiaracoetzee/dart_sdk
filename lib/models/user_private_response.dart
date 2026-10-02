@@ -18,34 +18,28 @@ part 'user_private_response.g.dart';
 @JsonSerializable()
 class UserPrivateResponse {
   const UserPrivateResponse({
-    required this.premiumType,
+    required this.requiredActions,
     required this.username,
     required this.discriminator,
     required this.globalName,
     required this.avatar,
     required this.avatarColor,
-    required this.termsAgreedAt,
-    required this.pendingBulkMessageDeletion,
     required this.flags,
     required this.pronouns,
     required this.isStaff,
     required this.acls,
     required this.traits,
     required this.email,
-    required this.unreadGiftInventoryCount,
-    required this.hasUnreadGiftInventory,
     required this.hasVerifiedPhone,
     required this.bio,
     required this.id,
     required this.accentColor,
-    required this.hasEverPurchased,
-    required this.hasDismissedPremiumOnboarding,
     required this.banner,
     required this.bannerColor,
     required this.mfaEnabled,
-    required this.nsfwAllowed,
     required this.verified,
-    required this.premiumBadgeMasked,
+    required this.premiumBadgeHidden,
+    required this.premiumType,
     required this.premiumSince,
     required this.premiumUntil,
     required this.premiumWillCancel,
@@ -53,26 +47,31 @@ class UserPrivateResponse {
     required this.premiumLifetimeSequence,
     required this.premiumGraceEndsAt,
     required this.premiumDiscriminator,
-    required this.premiumBadgeHidden,
     required this.privacyAgreedAt,
+    required this.premiumBadgeMasked,
     required this.premiumBadgeTimestampHidden,
     required this.premiumBadgeSequenceHidden,
     required this.premiumPurchaseDisabled,
     required this.premiumEnabledOverride,
     required this.premiumPerksDisabled,
-    required this.lastVoiceActivitySharingChangeAt,
     required this.passwordLastChangedAt,
-    required this.requiredActions,
+    required this.lastVoiceActivitySharingChangeAt,
+    required this.hasEverPurchased,
+    required this.pendingBulkMessageDeletion,
+    required this.unreadGiftInventoryCount,
+    required this.termsAgreedAt,
+    required this.hasDismissedPremiumOnboarding,
+    required this.hasUnreadGiftInventory,
+    required this.nsfwAllowed,
     this.mentionFlags,
     this.authenticatorTypes,
     this.timezonePrivacyFlags,
     this.timezone,
-    this.phone,
     this.emailBounced,
     this.system,
     this.ageVerifiedAdult,
     this.bot,
-    this.forceInboundPhoneVerification,
+    this.accountLimited,
   });
 
   factory UserPrivateResponse.fromJson(Map<String, Object?> json) =>
@@ -130,11 +129,7 @@ class UserPrivateResponse {
   @JsonKey(includeIfNull: false, name: 'email_bounced')
   final bool? emailBounced;
 
-  /// Always null. Retained for old-client backward compatibility — phone numbers are no longer stored on the user record.
-  @JsonKey(includeIfNull: false)
-  final String? phone;
-
-  /// Whether this account has completed phone verification
+  /// Deprecated. Always false.
   @JsonKey(name: 'has_verified_phone')
   final bool hasVerifiedPhone;
 
@@ -174,6 +169,10 @@ class UserPrivateResponse {
 
   /// Whether the email address has been verified
   final bool verified;
+
+  /// Whether the account is limited
+  @JsonKey(includeIfNull: false, name: 'account_limited')
+  final bool? accountLimited;
 
   /// The type of premium subscription
   @JsonKey(includeIfNull: true, name: 'premium_type')
@@ -235,10 +234,6 @@ class UserPrivateResponse {
   @JsonKey(name: 'premium_perks_disabled')
   final bool premiumPerksDisabled;
 
-  /// Whether this account is forced through the inbound phone verification flow, for debugging
-  @JsonKey(includeIfNull: false, name: 'force_inbound_phone_verification')
-  final bool? forceInboundPhoneVerification;
-
   /// ISO8601 timestamp of the last password change
   @JsonKey(includeIfNull: true, name: 'password_last_changed_at')
   final String? passwordLastChangedAt;
@@ -247,7 +242,7 @@ class UserPrivateResponse {
   @JsonKey(includeIfNull: true, name: 'last_voice_activity_sharing_change_at')
   final String? lastVoiceActivitySharingChangeAt;
 
-  /// Actions the user must complete before full access
+  /// Deprecated. Always empty.
   @JsonKey(name: 'required_actions')
   final List<String> requiredActions;
 

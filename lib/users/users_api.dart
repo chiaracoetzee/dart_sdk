@@ -41,7 +41,6 @@ import '../models/harvest_download_url_response.dart';
 import '../models/harvest_self_data_request.dart';
 import '../models/harvest_status_response_schema.dart';
 import '../models/harvest_status_response_schema_nullable.dart';
-import '../models/inbound_sms_challenge_start_response.dart';
 import '../models/mark_mentions_read_request.dart';
 import '../models/message_list_response.dart';
 import '../models/mfa_backup_codes_challenge_regenerate_request.dart';
@@ -64,11 +63,6 @@ import '../models/password_change_start_response.dart';
 import '../models/password_change_ticket_request.dart';
 import '../models/password_change_verify_request.dart';
 import '../models/password_change_verify_response.dart';
-import '../models/phone_gate_escape_preview_response.dart';
-import '../models/phone_send_verification_request.dart';
-import '../models/phone_send_verification_response.dart';
-import '../models/phone_verify_request.dart';
-import '../models/phone_verify_response.dart';
 import '../models/preload_messages_request.dart';
 import '../models/preload_messages_response.dart';
 import '../models/push_rotate_request.dart';
@@ -127,7 +121,7 @@ abstract class UsersApi {
 
   /// Get current user profile.
   ///
-  /// Retrieves the current authenticated user's profile information, including account details and settings. OAuth2 bearer tokens require identify scope, and email is returned only when the email scope is also present. Bearer tokens receive a reduced response: sensitive fields such as phone, MFA status, authenticator types, ACLs, traits, premium billing details, and password metadata are omitted. Session and bot tokens return the full user object with all private fields.
+  /// Retrieves the current authenticated user's profile information, including account details and settings. OAuth2 bearer tokens require identify scope, and email is returned only when the email scope is also present. Bearer tokens receive a reduced response: sensitive fields such as MFA status, authenticator types, ACLs, traits, premium billing details, and password metadata are omitted. Session and bot tokens return the full user object with all private fields.
   @GET('/users/@me')
   Future<UserPrivateResponse> getCurrentUser();
 
@@ -245,7 +239,7 @@ abstract class UsersApi {
 
   /// Verify replacement email for bounced address.
   ///
-  /// Completes bounced-email recovery by verifying the replacement email code, updating the account email, and clearing email-related suspicious-activity requirements.
+  /// Completes bounced-email recovery by verifying the replacement email code, and updating the account email.
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/users/@me/email-change/bounced/verify-new')
@@ -777,32 +771,6 @@ abstract class UsersApi {
     @Body() required PasswordChangeVerifyRequest body,
   });
 
-  /// Start an inbound SMS challenge.
-  ///
-  /// When an account must verify its phone number inbound, the user texts a one-time code to the platform's number instead of receiving one. This endpoint generates the code and the destination number to display.
-  @POST('/users/@me/phone/inbound-challenge')
-  Future<InboundSmsChallengeStartResponse> startInboundPhoneChallenge();
-
-  /// Send phone verification code.
-  ///
-  /// Send a one-time code on the requested channel. Defaults to the first available channel from server policy. Pass channel="sms" to request SMS (only honoured for SMS-allowlisted destinations) or channel="inbound_challenge" to receive challenge details to text in. Expensive outbound destinations always downgrade to an inbound challenge. Requires a solved captcha challenge (X-Captcha-Token) when the phone verification service asks for one.
-  ///
-  /// [body] - Name not received - field will be skipped.
-  @POST('/users/@me/phone/send-verification')
-  Future<PhoneSendVerificationResponse> sendPhoneVerificationCode({
-    @Body() required PhoneSendVerificationRequest body,
-  });
-
-  /// Verify phone code.
-  ///
-  /// Verify a phone number by confirming the SMS verification code. Returns phone verification status.
-  ///
-  /// [body] - Name not received - field will be skipped.
-  @POST('/users/@me/phone/verify')
-  Future<PhoneVerifyResponse> verifyPhoneCode({
-    @Body() required PhoneVerifyRequest body,
-  });
-
   /// Preload messages for channels.
   ///
   /// Preloads and caches messages for multiple channels to improve performance when opening those channels. Returns preloaded message data for the specified channels.
@@ -928,22 +896,6 @@ abstract class UsersApi {
   Future<RelationshipResponse> updateRelationshipNickname({
     @Path('user_id') required SnowflakeType userId,
     @Body() required RelationshipNicknameUpdateRequest body,
-  });
-
-  /// Preview setting the deferred phone check aside.
-  ///
-  /// Reports whether this account can set a due phone verification requirement aside. The community lists are always empty.
-  @GET('/users/@me/required-actions/phone-gate-escape')
-  Future<PhoneGateEscapePreviewResponse> getPhoneGateEscape();
-
-  /// Set the deferred phone check aside.
-  ///
-  /// Defers a due phone verification requirement again, so the account works normally without leaving any community. Returns the updated private user object.
-  ///
-  /// [body] - Name not received - field will be skipped.
-  @POST('/users/@me/required-actions/phone-gate-escape')
-  Future<UserPrivateResponse> executePhoneGateEscape({
-    @Body() EmptyBodyRequest? body,
   });
 
   /// List saved messages.
