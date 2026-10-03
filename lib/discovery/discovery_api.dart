@@ -10,6 +10,7 @@ import '../models/discovery_application_patch_request.dart';
 import '../models/discovery_application_request.dart';
 import '../models/discovery_application_response.dart';
 import '../models/discovery_category_list_response.dart';
+import '../models/discovery_channel_preview_response.dart';
 import '../models/discovery_guild_list_response.dart';
 import '../models/discovery_status_response.dart';
 import '../models/snowflake_type.dart';
@@ -53,6 +54,19 @@ abstract class DiscoveryApi {
     @Query('language') String? language,
     @Query('tag') String? tag,
     @Query('sort_by') SortBy? sortBy,
+  });
+
+  /// Preview a channel in a discoverable guild.
+  ///
+  /// Returns the guild and channel behind a channel or message link when the guild is listed in discovery and new members can read the channel.
+  ///
+  /// [guildId] - The ID of the guild.
+  ///
+  /// [channelId] - The ID of the channel.
+  @GET('/discovery/guilds/{guild_id}/channels/{channel_id}')
+  Future<DiscoveryChannelPreviewResponse> getDiscoveryChannelPreview({
+    @Path('guild_id') required SnowflakeType guildId,
+    @Path('channel_id') required SnowflakeType channelId,
   });
 
   /// Join a discoverable guild.
