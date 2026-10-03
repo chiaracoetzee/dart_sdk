@@ -12,7 +12,7 @@ TemplateRole _$TemplateRoleFromJson(Map<String, dynamic> json) =>
         id: $checkedConvert('id', (v) => v as String),
         permissions: $checkedConvert('permissions', (v) => v as String?),
         permissionsNew: $checkedConvert('permissions_new', (v) => v as String?),
-        color: $checkedConvert('color', (v) => v as num?),
+        color: $checkedConvert('color', (v) => (v as num?)?.toInt()),
         hoist: $checkedConvert('hoist', (v) => v as bool?),
         mentionable: $checkedConvert('mentionable', (v) => v as bool?),
       );

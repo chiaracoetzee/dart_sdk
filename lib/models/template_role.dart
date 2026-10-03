@@ -6,6 +6,8 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'json_nullable.dart';
 
+import 'color_type.dart';
+
 part 'template_role.g.dart';
 
 @JsonSerializable(constructor: '_')
@@ -73,7 +75,7 @@ class TemplateRole {
 
   /// The colour of the role as an integer
   @JsonKey(includeIfNull: false)
-  final num? color;
+  final ColorType? color;
 
   /// Whether the role is hoisted
   @JsonKey(includeIfNull: false)

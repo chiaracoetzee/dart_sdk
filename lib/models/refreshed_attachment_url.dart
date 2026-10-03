@@ -19,7 +19,7 @@ class RefreshedAttachmentUrl {
   /// The requested URL, echoed back unchanged
   final String original;
 
-  /// The same URL carrying a fresh signature, or the original when it is not an attachment URL of ours
+  /// The same URL with a fresh signature, or the original when it is not an attachment URL of ours
   final String refreshed;
 
   Map<String, Object?> toJson() => _$RefreshedAttachmentUrlToJson(this);

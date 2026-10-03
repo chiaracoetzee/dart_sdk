@@ -14,11 +14,11 @@ TemplateChannel _$TemplateChannelFromJson(Map<String, dynamic> json) =>
         final val = TemplateChannel._(
           id: $checkedConvert('id', (v) => v as String),
           type: $checkedConvert('type', (v) => v as num),
-          position: $checkedConvert('position', (v) => v as num),
+          position: $checkedConvert('position', (v) => (v as num).toInt()),
           nsfw: $checkedConvert('nsfw', (v) => v as bool?),
           rateLimitPerUser: $checkedConvert(
             'rate_limit_per_user',
-            (v) => v as num?,
+            (v) => (v as num?)?.toInt(),
           ),
           permissionOverwrites: $checkedConvert(
             'permission_overwrites',

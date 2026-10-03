@@ -6,6 +6,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'json_nullable.dart';
 
+import 'int32_type.dart';
 import 'template_channel_permission_overwrites.dart';
 
 part 'template_channel.g.dart';
@@ -22,10 +23,10 @@ class TemplateChannel {
     JsonNullable<String> name = const JsonNullable<String>.undefined(),
     JsonNullable<String> topic = const JsonNullable<String>.undefined(),
     JsonNullable<String> parentId = const JsonNullable<String>.undefined(),
-    JsonNullable<num> bitrate = const JsonNullable<num>.undefined(),
-    JsonNullable<num> userLimit = const JsonNullable<num>.undefined(),
-    JsonNullable<num> voiceConnectionLimit =
-        const JsonNullable<num>.undefined(),
+    JsonNullable<int> bitrate = const JsonNullable<int>.undefined(),
+    JsonNullable<int> userLimit = const JsonNullable<int>.undefined(),
+    JsonNullable<int> voiceConnectionLimit =
+        const JsonNullable<int>.undefined(),
   }) : name = name,
        _nameValue = name.value,
        _namePresent = name.isPresent,
@@ -64,11 +65,11 @@ class TemplateChannel {
        _topicPresent = false,
        parentId = const JsonNullable<String>.undefined(),
        _parentIdPresent = false,
-       bitrate = const JsonNullable<num>.undefined(),
+       bitrate = const JsonNullable<int>.undefined(),
        _bitratePresent = false,
-       userLimit = const JsonNullable<num>.undefined(),
+       userLimit = const JsonNullable<int>.undefined(),
        _userLimitPresent = false,
-       voiceConnectionLimit = const JsonNullable<num>.undefined(),
+       voiceConnectionLimit = const JsonNullable<int>.undefined(),
        _voiceConnectionLimitPresent = false;
   factory TemplateChannel.patch(Map<String, Object?> json) =>
       TemplateChannel.fromJson(json);
@@ -89,14 +90,14 @@ class TemplateChannel {
           ? JsonNullable<String>.of(value._parentIdValue)
           : const JsonNullable<String>.undefined(),
       bitrate: json.containsKey('bitrate')
-          ? JsonNullable<num>.of(value._bitrateValue)
-          : const JsonNullable<num>.undefined(),
+          ? JsonNullable<int>.of(value._bitrateValue)
+          : const JsonNullable<int>.undefined(),
       userLimit: json.containsKey('user_limit')
-          ? JsonNullable<num>.of(value._userLimitValue)
-          : const JsonNullable<num>.undefined(),
+          ? JsonNullable<int>.of(value._userLimitValue)
+          : const JsonNullable<int>.undefined(),
       voiceConnectionLimit: json.containsKey('voice_connection_limit')
-          ? JsonNullable<num>.of(value._voiceConnectionLimitValue)
-          : const JsonNullable<num>.undefined(),
+          ? JsonNullable<int>.of(value._voiceConnectionLimitValue)
+          : const JsonNullable<int>.undefined(),
       nsfw: value.nsfw,
       rateLimitPerUser: value.rateLimitPerUser,
       permissionOverwrites: value.permissionOverwrites,
@@ -110,7 +111,7 @@ class TemplateChannel {
   final num type;
 
   /// The position of the channel
-  final num position;
+  final Int32Type position;
 
   /// Whether the channel is NSFW
   @JsonKey(includeIfNull: false)
@@ -118,7 +119,7 @@ class TemplateChannel {
 
   /// Slowmode rate limit in seconds
   @JsonKey(includeIfNull: false, name: 'rate_limit_per_user')
-  final num? rateLimitPerUser;
+  final int? rateLimitPerUser;
 
   /// Permission overwrites for this channel
   @JsonKey(includeIfNull: false, name: 'permission_overwrites')
@@ -139,19 +140,19 @@ class TemplateChannel {
   final String? _parentIdValue;
   final bool _parentIdPresent;
   @JsonKey(includeFromJson: false, includeToJson: false)
-  final JsonNullable<num> bitrate;
+  final JsonNullable<int> bitrate;
   @JsonKey(includeIfNull: false, name: 'bitrate')
-  final num? _bitrateValue;
+  final int? _bitrateValue;
   final bool _bitratePresent;
   @JsonKey(includeFromJson: false, includeToJson: false)
-  final JsonNullable<num> userLimit;
+  final JsonNullable<int> userLimit;
   @JsonKey(includeIfNull: false, name: 'user_limit')
-  final num? _userLimitValue;
+  final int? _userLimitValue;
   final bool _userLimitPresent;
   @JsonKey(includeFromJson: false, includeToJson: false)
-  final JsonNullable<num> voiceConnectionLimit;
+  final JsonNullable<int> voiceConnectionLimit;
   @JsonKey(includeIfNull: false, name: 'voice_connection_limit')
-  final num? _voiceConnectionLimitValue;
+  final int? _voiceConnectionLimitValue;
   final bool _voiceConnectionLimitPresent;
 
   Map<String, Object?> toJson() {

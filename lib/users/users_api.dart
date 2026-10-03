@@ -93,6 +93,7 @@ import '../models/user_profile_full_response.dart';
 import '../models/user_settings_response.dart';
 import '../models/user_settings_update_request.dart';
 import '../models/user_tag_check_response.dart';
+import '../models/user_update_response.dart';
 import '../models/user_update_with_verification_request.dart';
 import '../models/username_type.dart';
 import '../models/voice_activity_sharing_update_request.dart';
@@ -127,11 +128,11 @@ abstract class UsersApi {
 
   /// Update current user profile.
   ///
-  /// Updates the authenticated user's profile information such as username, avatar, and bio. Requires sudo mode verification for security-sensitive changes. Only default users can modify their own profile.
+  /// Updates the authenticated user's profile information such as username, avatar, and bio. Requires sudo mode verification for security-sensitive changes. Only default users can modify their own profile. A password change invalidates all existing sessions and returns the replacement session token.
   ///
   /// [body] - Name not received - field will be skipped.
   @PATCH('/users/@me')
-  Future<UserPrivateResponse> updateCurrentUser({
+  Future<UserUpdateResponse> updateCurrentUser({
     @Body() UserUpdateWithVerificationRequest? body,
   });
 

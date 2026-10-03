@@ -75,7 +75,7 @@ class _UsersApi implements UsersApi {
   }
 
   @override
-  Future<UserPrivateResponse> updateCurrentUser({
+  Future<UserUpdateResponse> updateCurrentUser({
     UserUpdateWithVerificationRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -84,7 +84,7 @@ class _UsersApi implements UsersApi {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body?.toJson() ?? <String, dynamic>{});
-    final _options = _setStreamType<UserPrivateResponse>(
+    final _options = _setStreamType<UserUpdateResponse>(
       Options(method: 'PATCH', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -95,9 +95,9 @@ class _UsersApi implements UsersApi {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, Object?>>(_options);
-    late UserPrivateResponse _value;
+    late UserUpdateResponse _value;
     try {
-      _value = UserPrivateResponse.fromJson(_result.data!);
+      _value = UserUpdateResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
