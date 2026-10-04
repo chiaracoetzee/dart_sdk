@@ -7,8 +7,6 @@ import 'package:retrofit/retrofit.dart';
 import 'package:retrofit/error_logger.dart';
 
 import '../models/create_checkout_session_request.dart';
-import '../models/localized_card_preapproval_continue_request.dart';
-import '../models/localized_card_preapproval_continue_response.dart';
 import '../models/self_serve_refund_eligibility_response.dart';
 import '../models/self_serve_refund_response.dart';
 import '../models/url_response.dart';
@@ -50,27 +48,6 @@ abstract class BillingApi {
   @POST('/stripe/checkout/subscription')
   Future<UrlResponse> createCheckoutSession({
     @Body() required CreateCheckoutSessionRequest body,
-  });
-
-  /// Create localized card preapproval session.
-  ///
-  /// Initiates a Stripe Checkout setup-mode session to preapprove a local card before continuing to paid localized checkout.
-  ///
-  /// [body] - Name not received - field will be skipped.
-  @POST('/stripe/checkout/subscription/preapproval')
-  Future<UrlResponse> createLocalizedCardPreapprovalSession({
-    @Body() required CreateCheckoutSessionRequest body,
-  });
-
-  /// Continue localized card preapproval session.
-  ///
-  /// Checks the status of a localized card preapproval flow and returns the paid Stripe Checkout URL when it is ready.
-  ///
-  /// [body] - Name not received - field will be skipped.
-  @POST('/stripe/checkout/subscription/preapproval/continue')
-  Future<LocalizedCardPreapprovalContinueResponse>
-  continueLocalizedCardPreapprovalSession({
-    @Body() required LocalizedCardPreapprovalContinueRequest body,
   });
 
   /// Process Stripe webhook.

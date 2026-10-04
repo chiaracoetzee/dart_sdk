@@ -136,67 +136,6 @@ class _BillingApi implements BillingApi {
   }
 
   @override
-  Future<UrlResponse> createLocalizedCardPreapprovalSession({
-    required CreateCheckoutSessionRequest body,
-  }) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
-    final _options = _setStreamType<UrlResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            '/stripe/checkout/subscription/preapproval',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<Map<String, Object?>>(_options);
-    late UrlResponse _value;
-    try {
-      _value = UrlResponse.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, response: _result);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<LocalizedCardPreapprovalContinueResponse>
-  continueLocalizedCardPreapprovalSession({
-    required LocalizedCardPreapprovalContinueRequest body,
-  }) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
-    final _options = _setStreamType<LocalizedCardPreapprovalContinueResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            '/stripe/checkout/subscription/preapproval/continue',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late LocalizedCardPreapprovalContinueResponse _value;
-    try {
-      _value = LocalizedCardPreapprovalContinueResponse.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, response: _result);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
   Future<WebhookReceivedResponse> processStripeWebhook() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
