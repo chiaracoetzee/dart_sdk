@@ -61,36 +61,21 @@ void main() {
     });
   });
 
-  group('MessageResponseSchemaTypeType (int enum)', () {
+  group('MessageType (int enum)', () {
     test('deserializes common message types', () {
-      expect(
-        MessageResponseSchemaTypeType.fromJson(0),
-        MessageResponseSchemaTypeType.valueDefault,
-      );
-      expect(
-        MessageResponseSchemaTypeType.fromJson(6),
-        MessageResponseSchemaTypeType.channelPinnedMessage,
-      );
-      expect(
-        MessageResponseSchemaTypeType.fromJson(7),
-        MessageResponseSchemaTypeType.userJoin,
-      );
-      expect(
-        MessageResponseSchemaTypeType.fromJson(19),
-        MessageResponseSchemaTypeType.reply,
-      );
+      expect(MessageType.fromJson(0), MessageType.valueDefault);
+      expect(MessageType.fromJson(6), MessageType.channelPinnedMessage);
+      expect(MessageType.fromJson(7), MessageType.userJoin);
+      expect(MessageType.fromJson(19), MessageType.reply);
     });
 
     test('unknown values fall back to \$unknown', () {
-      expect(
-        MessageResponseSchemaTypeType.fromJson(999),
-        MessageResponseSchemaTypeType.$unknown,
-      );
+      expect(MessageType.fromJson(999), MessageType.$unknown);
     });
 
     test('serializes back to int', () {
-      expect(MessageResponseSchemaTypeType.valueDefault.toJson(), 0);
-      expect(MessageResponseSchemaTypeType.reply.toJson(), 19);
+      expect(MessageType.valueDefault.toJson(), 0);
+      expect(MessageType.reply.toJson(), 19);
     });
   });
 
