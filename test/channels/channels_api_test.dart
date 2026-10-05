@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:fluxer_dart/channels/channels_api.dart';
+import 'package:fluxer_dart/models/indicate_typing_request_schema.dart';
+import 'package:fluxer_dart/models/json_nullable.dart';
+import 'package:fluxer_dart/models/message_persona_request_schema.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -21,7 +26,11 @@ void main() {
       final api = ChannelsApi(dio, baseUrl: 'https://api.example.com');
       await api.indicateTyping(
         channelId: '123456',
-        body: <String, dynamic>{'persona_id': 'persona_xyz'},
+        body: IndicateTypingRequestSchema(
+          subprofile: JsonNullable<MessagePersonaRequestSchema>.of(
+            MessagePersonaRequestSchema(id: 'persona_xyz', name: 'Alice'),
+          ),
+        ),
       );
 
       expect(capturedRequest, isNotNull);
@@ -31,8 +40,8 @@ void main() {
         capturedRequest!.uri.toString(),
         'https://api.example.com/channels/123456/typing',
       );
-      expect(capturedRequest!.data, <String, dynamic>{
-        'persona_id': 'persona_xyz',
+      expect(jsonDecode(jsonEncode(capturedRequest!.data)), <String, dynamic>{
+        'subprofile': <String, dynamic>{'id': 'persona_xyz', 'name': 'Alice'},
       });
     });
 

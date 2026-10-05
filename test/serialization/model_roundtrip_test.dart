@@ -270,43 +270,29 @@ void main() {
         'tts': false,
         'mentions': <Object?>[],
         'mention_roles': <String>[],
-        'persona_id': 'persona-abc',
-        'persona_name': 'Persona Alice',
-        'persona_avatar': 'avatar_hash_abc',
-        'persona_tag': 'Wonderland',
         'subprofile': {
           'id': 'persona-abc',
           'name': 'Persona Alice',
           'avatar': 'avatar_hash_abc',
           'avatar_color': 0xFF0000,
           'display_tag_text': 'Wonderland',
-          'system_name': 'Wonderland Sys',
           'pronouns': 'she/her',
           'visibility': 'public',
         },
       };
 
       final model = MessageResponseSchema.fromJson(json);
-      expect(model.personaId, 'persona-abc');
-      expect(model.personaName, 'Persona Alice');
-      expect(model.personaAvatar, 'avatar_hash_abc');
-      expect(model.personaTag, 'Wonderland');
       expect(model.subprofile, isNotNull);
       expect(model.subprofile!.id, 'persona-abc');
       expect(model.subprofile!.name, 'Persona Alice');
       expect(model.subprofile!.displayTagText, 'Wonderland');
-      expect(model.subprofile!.systemName, 'Wonderland Sys');
       expect(model.subprofile!.pronouns, 'she/her');
 
       final serialized =
           jsonDecode(jsonEncode(model.toJson())) as Map<String, Object?>;
       final roundtripped = MessageResponseSchema.fromJson(serialized);
-
-      expect(roundtripped.personaId, 'persona-abc');
-      expect(roundtripped.personaName, 'Persona Alice');
       expect(roundtripped.subprofile?.id, 'persona-abc');
       expect(roundtripped.subprofile?.name, 'Persona Alice');
-      expect(roundtripped.subprofile?.systemName, 'Wonderland Sys');
     });
 
     test('deserializes referenced_message with subprofile', () {
@@ -346,14 +332,11 @@ void main() {
           'tts': false,
           'mentions': <Object?>[],
           'mention_roles': <String>[],
-          'persona_id': 'persona-abc',
-          'persona_name': 'Persona Alice',
           'subprofile': {
             'id': 'persona-abc',
             'name': 'Persona Alice',
             'avatar': 'avatar_hash_abc',
             'display_tag_text': 'Wonderland',
-            'system_name': 'Wonderland Sys',
           },
         },
       };
@@ -361,8 +344,6 @@ void main() {
       final model = MessageResponseSchema.fromJson(json);
       expect(model.referencedMessage, isNotNull);
       expect(model.referencedMessage!.id, '503');
-      expect(model.referencedMessage!.personaId, 'persona-abc');
-      expect(model.referencedMessage!.personaName, 'Persona Alice');
       expect(model.referencedMessage!.subprofile, isNotNull);
       expect(model.referencedMessage!.subprofile!.name, 'Persona Alice');
       expect(model.referencedMessage!.subprofile!.displayTagText, 'Wonderland');
@@ -374,7 +355,7 @@ void main() {
     });
   });
 
-  group('MessageSubprofileResponse roundtrip', () {
+  group('MessageSubprofileResponseSchema roundtrip', () {
     test('deserializes and serializes with required and optional fields', () {
       final json = <String, Object?>{
         'id': 'persona-1',
@@ -383,34 +364,31 @@ void main() {
         'avatar_color': 0xFF0000,
         'display_tag_text': 'Wonderland',
         'display_tag_icon': 'icon_hash_1',
-        'system_name': 'Wonderland Sys',
         'pronouns': 'she/her',
         'color': 0xFF0000,
         'bio': 'Alice bio',
         'visibility': 'public',
       };
 
-      final model = MessageSubprofileResponse.fromJson(json);
+      final model = MessageSubprofileResponseSchema.fromJson(json);
       expect(model.id, 'persona-1');
       expect(model.name, 'Alice');
       expect(model.avatar, 'avatar_hash_1');
       expect(model.avatarColor, 0xFF0000);
       expect(model.displayTagText, 'Wonderland');
       expect(model.displayTagIcon, 'icon_hash_1');
-      expect(model.systemName, 'Wonderland Sys');
       expect(model.pronouns, 'she/her');
       expect(model.color, 0xFF0000);
       expect(model.bio, 'Alice bio');
-      expect(model.visibility, 'public');
+      expect(model.visibility, PersonaVisibilitySchema.public);
 
       final serialized =
           jsonDecode(jsonEncode(model.toJson())) as Map<String, Object?>;
-      final roundtripped = MessageSubprofileResponse.fromJson(serialized);
+      final roundtripped = MessageSubprofileResponseSchema.fromJson(serialized);
 
       expect(roundtripped.id, model.id);
       expect(roundtripped.name, model.name);
-      expect(roundtripped.visibility, 'public');
-      expect(roundtripped.systemName, 'Wonderland Sys');
+      expect(roundtripped.visibility, PersonaVisibilitySchema.public);
     });
 
     test('handles null optional fields and different visibility levels', () {
@@ -420,10 +398,10 @@ void main() {
         'visibility': 'unlisted',
       };
 
-      final model = MessageSubprofileResponse.fromJson(json);
+      final model = MessageSubprofileResponseSchema.fromJson(json);
       expect(model.id, 'persona-2');
       expect(model.name, 'Bob');
-      expect(model.visibility, 'unlisted');
+      expect(model.visibility, PersonaVisibilitySchema.unlisted);
       expect(model.avatar, isNull);
       expect(model.avatarColor, isNull);
       expect(model.displayTagText, isNull);
@@ -433,7 +411,7 @@ void main() {
       final serialized = model.toJson();
       expect(serialized['id'], 'persona-2');
       expect(serialized['name'], 'Bob');
-      expect(serialized['visibility'], 'unlisted');
+      expect(serialized['visibility'], PersonaVisibilitySchema.unlisted);
       expect(serialized.containsKey('avatar'), isFalse);
     });
   });
@@ -539,8 +517,11 @@ void main() {
         'direct_messages_disabled': false,
         'guild_create_access': true,
         'server_list_buttons': <String, dynamic>{
-          'website': 'https://example.com',
-          'docs': 'https://docs.example.com',
+          'favorites': false,
+          'explore': true,
+          'create_join': false,
+          'download': true,
+          'help': true,
         },
       };
 
@@ -550,8 +531,9 @@ void main() {
       expect(model.directMessagesDisabled, isFalse);
       expect(model.guildCreateAccess, isTrue);
       expect(model.serverListButtons, isNotNull);
-      expect(model.serverListButtons!['website'], 'https://example.com');
-      expect(model.serverListButtons!['docs'], 'https://docs.example.com');
+      expect(model.serverListButtons!.favorites, isFalse);
+      expect(model.serverListButtons!.createJoin, isFalse);
+      expect(model.serverListButtons!.help, isTrue);
 
       final serialized =
           jsonDecode(jsonEncode(model.toJson())) as Map<String, Object?>;
@@ -562,11 +544,8 @@ void main() {
       expect(roundtripped.directMessagesDisabled, isFalse);
       expect(roundtripped.guildCreateAccess, isTrue);
       expect(roundtripped.serverListButtons, isNotNull);
-      expect(roundtripped.serverListButtons!['website'], 'https://example.com');
-      expect(
-        roundtripped.serverListButtons!['docs'],
-        'https://docs.example.com',
-      );
+      expect(roundtripped.serverListButtons!.favorites, isFalse);
+      expect(roundtripped.serverListButtons!.createJoin, isFalse);
     });
 
     test('roundtrips without server_list_buttons and with nulls', () {

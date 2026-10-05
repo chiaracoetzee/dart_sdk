@@ -63,29 +63,14 @@ void main() {
 
   group('MessageType (int enum)', () {
     test('deserializes common message types', () {
-      expect(
-        MessageType.fromJson(0),
-        MessageType.valueDefault,
-      );
-      expect(
-        MessageType.fromJson(6),
-        MessageType.channelPinnedMessage,
-      );
-      expect(
-        MessageType.fromJson(7),
-        MessageType.userJoin,
-      );
-      expect(
-        MessageType.fromJson(19),
-        MessageType.reply,
-      );
+      expect(MessageType.fromJson(0), MessageType.valueDefault);
+      expect(MessageType.fromJson(6), MessageType.channelPinnedMessage);
+      expect(MessageType.fromJson(7), MessageType.userJoin);
+      expect(MessageType.fromJson(19), MessageType.reply);
     });
 
     test('unknown values fall back to \$unknown', () {
-      expect(
-        MessageType.fromJson(999),
-        MessageType.$unknown,
-      );
+      expect(MessageType.fromJson(999), MessageType.$unknown);
     });
 
     test('serializes back to int', () {

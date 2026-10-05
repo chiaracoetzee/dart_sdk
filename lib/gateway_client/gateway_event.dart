@@ -11,7 +11,7 @@ import 'package:fluxer_dart/models/user_partial_response.dart';
 import 'package:fluxer_dart/models/user_private_response.dart';
 import 'package:fluxer_dart/models/user_guild_settings_response.dart';
 import 'package:fluxer_dart/models/user_settings_response.dart';
-import 'package:fluxer_dart/models/message_subprofile_response.dart';
+import 'package:fluxer_dart/models/message_subprofile_response_schema.dart';
 import 'package:fluxer_dart/models/web_authn_credential_response.dart';
 
 /// Base class for all gateway events.
@@ -565,7 +565,7 @@ class TypingStartEvent extends GatewayEvent {
   final DateTime timestamp;
   final GuildMemberResponse? member;
   final String? guildId;
-  final MessageSubprofileResponse? subprofile;
+  final MessageSubprofileResponseSchema? subprofile;
 }
 
 // ---------------------------------------------------------------------------
