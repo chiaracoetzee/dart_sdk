@@ -14,10 +14,10 @@ import 'message_response_schema_message_reference.dart';
 import 'message_response_schema_referenced_message.dart';
 import 'message_snapshot_response.dart';
 import 'message_sticker_response.dart';
+import 'message_subprofile_response_schema.dart';
 import 'message_type.dart';
 import 'snowflake_string_type.dart';
 import 'user_partial_response.dart';
-import 'message_subprofile_response.dart';
 
 part 'message_response_schema.g.dart';
 
@@ -48,12 +48,8 @@ class MessageResponseSchema {
     this.messageSnapshots,
     this.nonce,
     this.call,
-    this.referencedMessage,
     this.subprofile,
-    this.personaId,
-    this.personaName,
-    this.personaAvatar,
-    this.personaTag,
+    this.referencedMessage,
   });
 
   factory MessageResponseSchema.fromJson(Map<String, Object?> json) =>
@@ -144,29 +140,13 @@ class MessageResponseSchema {
   @JsonKey(includeIfNull: false)
   final MessageResponseSchemaCall? call;
 
+  /// Optional subprofile persona information
+  @JsonKey(includeIfNull: false)
+  final MessageSubprofileResponseSchema? subprofile;
+
   /// The reply target. Present and populated when the target resolved, present and null when the target is gone, absent when this message has no default reference. Clients must tell null apart from absent by key presence.
   @JsonKey(includeIfNull: false, name: 'referenced_message')
   final MessageResponseSchemaReferencedMessage? referencedMessage;
-
-  /// Optional subprofile persona information
-  @JsonKey(includeIfNull: false)
-  final MessageSubprofileResponse? subprofile;
-
-  /// The ID of the persona that sent this message
-  @JsonKey(includeIfNull: false, name: 'persona_id')
-  final SnowflakeStringType? personaId;
-
-  /// The display name of the persona that sent this message
-  @JsonKey(includeIfNull: false, name: 'persona_name')
-  final String? personaName;
-
-  /// The avatar URL of the persona that sent this message
-  @JsonKey(includeIfNull: false, name: 'persona_avatar')
-  final String? personaAvatar;
-
-  /// The tag/pronouns/badge text of the persona that sent this message
-  @JsonKey(includeIfNull: false, name: 'persona_tag')
-  final String? personaTag;
 
   Map<String, Object?> toJson() => _$MessageResponseSchemaToJson(this);
 }

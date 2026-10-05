@@ -1,30 +1,32 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'message_subprofile_response.dart';
+part of 'message_subprofile_response_schema.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-MessageSubprofileResponse _$MessageSubprofileResponseFromJson(
+MessageSubprofileResponseSchema _$MessageSubprofileResponseSchemaFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate(
-  'MessageSubprofileResponse',
+  'MessageSubprofileResponseSchema',
   json,
   ($checkedConvert) {
-    final val = MessageSubprofileResponse(
+    final val = MessageSubprofileResponseSchema(
       id: $checkedConvert('id', (v) => v as String),
       name: $checkedConvert('name', (v) => v as String),
       avatar: $checkedConvert('avatar', (v) => v as String?),
-      banner: $checkedConvert('banner', (v) => v as String?),
       avatarColor: $checkedConvert('avatar_color', (v) => (v as num?)?.toInt()),
+      banner: $checkedConvert('banner', (v) => v as String?),
       displayTagText: $checkedConvert('display_tag_text', (v) => v as String?),
       displayTagIcon: $checkedConvert('display_tag_icon', (v) => v as String?),
-      systemName: $checkedConvert('system_name', (v) => v as String?),
       pronouns: $checkedConvert('pronouns', (v) => v as String?),
       color: $checkedConvert('color', (v) => (v as num?)?.toInt()),
       bio: $checkedConvert('bio', (v) => v as String?),
-      visibility: $checkedConvert('visibility', (v) => v as String?),
+      visibility: $checkedConvert(
+        'visibility',
+        (v) => v == null ? null : PersonaVisibilitySchema.fromJson(v as String),
+      ),
     );
     return val;
   },
@@ -32,21 +34,19 @@ MessageSubprofileResponse _$MessageSubprofileResponseFromJson(
     'avatarColor': 'avatar_color',
     'displayTagText': 'display_tag_text',
     'displayTagIcon': 'display_tag_icon',
-    'systemName': 'system_name',
   },
 );
 
-Map<String, dynamic> _$MessageSubprofileResponseToJson(
-  MessageSubprofileResponse instance,
+Map<String, dynamic> _$MessageSubprofileResponseSchemaToJson(
+  MessageSubprofileResponseSchema instance,
 ) => <String, dynamic>{
   'id': instance.id,
   'name': instance.name,
   'avatar': ?instance.avatar,
-  'banner': ?instance.banner,
   'avatar_color': ?instance.avatarColor,
+  'banner': ?instance.banner,
   'display_tag_text': ?instance.displayTagText,
   'display_tag_icon': ?instance.displayTagIcon,
-  'system_name': ?instance.systemName,
   'pronouns': ?instance.pronouns,
   'color': ?instance.color,
   'bio': ?instance.bio,

@@ -33,12 +33,12 @@ class MessageReactionResponse {
   @JsonKey(includeIfNull: false)
   final bool? me;
 
-  /// Whether the root account reacted with this emoji
-  @JsonKey(name: 'me_root', includeIfNull: false)
+  /// Whether the current user reacted as root account
+  @JsonKey(includeIfNull: false, name: 'me_root')
   final bool? meRoot;
 
   /// Breakdown of persona reactions
-  @JsonKey(name: 'persona_reactions', includeIfNull: false)
+  @JsonKey(includeIfNull: false, name: 'persona_reactions')
   final List<MessageReactionPersonaEntry>? personaReactions;
 
   Map<String, Object?> toJson() => _$MessageReactionResponseToJson(this);

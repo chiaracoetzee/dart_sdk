@@ -13,7 +13,9 @@ ReactionUsersPageResponse _$ReactionUsersPageResponseFromJson(
     items: $checkedConvert(
       'items',
       (v) => (v as List<dynamic>)
-          .map((e) => UserPartialResponse.fromJson(e as Map<String, dynamic>))
+          .map(
+            (e) => ReactionUserItemResponse.fromJson(e as Map<String, dynamic>),
+          )
           .toList(),
     ),
     hasMore: $checkedConvert('has_more', (v) => v as bool),

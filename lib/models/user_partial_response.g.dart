@@ -30,15 +30,6 @@ UserPartialResponse _$UserPartialResponseFromJson(Map<String, dynamic> json) =>
                 ? null
                 : MentionReplyPreferences.fromJson((v as num).toInt()),
           ),
-          subprofile: $checkedConvert(
-            'subprofile',
-            (v) => v == null
-                ? null
-                : MessageSubprofileResponse.fromJson(
-                    Map<String, Object?>.from(v as Map),
-                  ),
-          ),
-          personaId: $checkedConvert('persona_id', (v) => v as String?),
         );
         return val;
       },
@@ -46,7 +37,6 @@ UserPartialResponse _$UserPartialResponseFromJson(Map<String, dynamic> json) =>
         'globalName': 'global_name',
         'avatarColor': 'avatar_color',
         'mentionFlags': 'mention_flags',
-        'personaId': 'persona_id',
       },
     );
 
@@ -63,6 +53,4 @@ Map<String, dynamic> _$UserPartialResponseToJson(
   'system': ?instance.system,
   'flags': instance.flags,
   'mention_flags': ?instance.mentionFlags,
-  'subprofile': ?instance.subprofile?.toJson(),
-  'persona_id': ?instance.personaId,
 };

@@ -10,15 +10,12 @@ MessageReactionPersonaEntry _$MessageReactionPersonaEntryFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('MessageReactionPersonaEntry', json, ($checkedConvert) {
   final val = MessageReactionPersonaEntry(
-    personaId: $checkedConvert(
-      'persona_id',
-      (v) => (v ?? json['personaId']) as String,
-    ),
+    personaId: $checkedConvert('persona_id', (v) => v as String),
     count: $checkedConvert('count', (v) => (v as num).toInt()),
     me: $checkedConvert('me', (v) => v as bool?),
   );
   return val;
-});
+}, fieldKeyMap: const {'personaId': 'persona_id'});
 
 Map<String, dynamic> _$MessageReactionPersonaEntryToJson(
   MessageReactionPersonaEntry instance,

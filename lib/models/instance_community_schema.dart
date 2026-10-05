@@ -4,6 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'server_list_buttons_schema.dart';
+
 part 'instance_community_schema.g.dart';
 
 /// Community topology and direct-message policy for this instance
@@ -14,6 +16,8 @@ class InstanceCommunitySchema {
     required this.singleCommunityGuildId,
     required this.directMessagesDisabled,
     required this.guildCreateAccess,
+    this.communityCreationStaffOnly = false,
+    this.signalBarGuildId,
     this.serverListButtons,
   });
 
@@ -28,6 +32,10 @@ class InstanceCommunitySchema {
   @JsonKey(includeIfNull: true, name: 'single_community_guild_id')
   final String? singleCommunityGuildId;
 
+  /// The home community whose managers configure the instance-wide signal bar
+  @JsonKey(includeIfNull: false, name: 'signal_bar_guild_id')
+  final String? signalBarGuildId;
+
   /// Whether direct messages and friend requests are disabled instance-wide
   @JsonKey(name: 'direct_messages_disabled')
   final bool directMessagesDisabled;
@@ -36,8 +44,11 @@ class InstanceCommunitySchema {
   @JsonKey(name: 'guild_create_access')
   final bool guildCreateAccess;
 
-  @JsonKey(name: 'server_list_buttons')
-  final Map<String, dynamic>? serverListButtons;
+  /// Whether community creation is restricted to staff members
+  @JsonKey(name: 'community_creation_staff_only')
+  final bool communityCreationStaffOnly;
+  @JsonKey(includeIfNull: false, name: 'server_list_buttons')
+  final ServerListButtonsSchema? serverListButtons;
 
   Map<String, Object?> toJson() => _$InstanceCommunitySchemaToJson(this);
 }

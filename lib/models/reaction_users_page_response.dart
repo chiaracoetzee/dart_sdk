@@ -4,8 +4,8 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'reaction_user_item_response.dart';
 import 'snowflake_string_type.dart';
-import 'user_partial_response.dart';
 
 part 'reaction_users_page_response.g.dart';
 
@@ -21,7 +21,7 @@ class ReactionUsersPageResponse {
       _$ReactionUsersPageResponseFromJson(json);
 
   /// Users who reacted with the requested emoji
-  final List<UserPartialResponse> items;
+  final List<ReactionUserItemResponse> items;
 
   /// Whether more reaction users can be fetched
   @JsonKey(name: 'has_more')

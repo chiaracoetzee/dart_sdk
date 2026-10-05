@@ -16,7 +16,7 @@ import 'message_reaction_response.dart';
 import 'message_response_schema_referenced_message_message_reference.dart';
 import 'message_snapshot_response.dart';
 import 'message_response_schema_referenced_message_call.dart';
-import 'message_subprofile_response.dart';
+import 'message_subprofile_response_schema.dart';
 
 part 'message_response_schema_referenced_message.g.dart';
 
@@ -48,10 +48,6 @@ class MessageResponseSchemaReferencedMessage {
     this.nonce,
     this.call,
     this.subprofile,
-    this.personaId,
-    this.personaName,
-    this.personaAvatar,
-    this.personaTag,
   });
 
   factory MessageResponseSchemaReferencedMessage.fromJson(
@@ -146,23 +142,7 @@ class MessageResponseSchemaReferencedMessage {
 
   /// Optional subprofile persona information
   @JsonKey(includeIfNull: false)
-  final MessageSubprofileResponse? subprofile;
-
-  /// The ID of the persona that sent this message
-  @JsonKey(includeIfNull: false, name: 'persona_id')
-  final SnowflakeStringType? personaId;
-
-  /// The display name of the persona that sent this message
-  @JsonKey(includeIfNull: false, name: 'persona_name')
-  final String? personaName;
-
-  /// The avatar URL of the persona that sent this message
-  @JsonKey(includeIfNull: false, name: 'persona_avatar')
-  final String? personaAvatar;
-
-  /// The tag/pronouns/badge text of the persona that sent this message
-  @JsonKey(includeIfNull: false, name: 'persona_tag')
-  final String? personaTag;
+  final MessageSubprofileResponseSchema? subprofile;
 
   Map<String, Object?> toJson() =>
       _$MessageResponseSchemaReferencedMessageToJson(this);
