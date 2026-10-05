@@ -15,6 +15,7 @@ import 'message_sticker_response.dart';
 import 'channel_pin_response_message_message_reference.dart';
 import 'message_snapshot_response.dart';
 import 'channel_pin_response_message_call.dart';
+import 'message_subprofile_response_schema.dart';
 
 part 'channel_pin_response_message.g.dart';
 
@@ -44,6 +45,7 @@ class ChannelPinResponseMessage {
     this.messageSnapshots,
     this.nonce,
     this.call,
+    this.subprofile,
   });
 
   factory ChannelPinResponseMessage.fromJson(Map<String, Object?> json) =>
@@ -129,6 +131,10 @@ class ChannelPinResponseMessage {
   /// Call information if this message represents a call
   @JsonKey(includeIfNull: false)
   final ChannelPinResponseMessageCall? call;
+
+  /// Optional subprofile persona information
+  @JsonKey(includeIfNull: false)
+  final MessageSubprofileResponseSchema? subprofile;
 
   Map<String, Object?> toJson() => _$ChannelPinResponseMessageToJson(this);
 }

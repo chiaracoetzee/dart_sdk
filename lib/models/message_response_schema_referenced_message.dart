@@ -16,6 +16,7 @@ import 'message_reaction_response.dart';
 import 'message_response_schema_referenced_message_message_reference.dart';
 import 'message_snapshot_response.dart';
 import 'message_response_schema_referenced_message_call.dart';
+import 'message_subprofile_response_schema.dart';
 
 part 'message_response_schema_referenced_message.g.dart';
 
@@ -46,6 +47,7 @@ class MessageResponseSchemaReferencedMessage {
     this.messageSnapshots,
     this.nonce,
     this.call,
+    this.subprofile,
   });
 
   factory MessageResponseSchemaReferencedMessage.fromJson(
@@ -137,6 +139,10 @@ class MessageResponseSchemaReferencedMessage {
   /// Call information if this message represents a call
   @JsonKey(includeIfNull: false)
   final MessageResponseSchemaReferencedMessageCall? call;
+
+  /// Optional subprofile persona information
+  @JsonKey(includeIfNull: false)
+  final MessageSubprofileResponseSchema? subprofile;
 
   Map<String, Object?> toJson() =>
       _$MessageResponseSchemaReferencedMessageToJson(this);

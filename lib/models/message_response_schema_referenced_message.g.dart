@@ -126,6 +126,14 @@ _$MessageResponseSchemaReferencedMessageFromJson(
                 v as Map<String, dynamic>,
               ),
       ),
+      subprofile: $checkedConvert(
+        'subprofile',
+        (v) => v == null
+            ? null
+            : MessageSubprofileResponseSchema.fromJson(
+                v as Map<String, dynamic>,
+              ),
+      ),
     );
     return val;
   },
@@ -168,4 +176,5 @@ Map<String, dynamic> _$MessageResponseSchemaReferencedMessageToJson(
   'message_snapshots': ?instance.messageSnapshots,
   'nonce': ?instance.nonce,
   'call': ?instance.call,
+  'subprofile': ?instance.subprofile,
 };

@@ -63,6 +63,13 @@ import '../models/password_change_start_response.dart';
 import '../models/password_change_ticket_request.dart';
 import '../models/password_change_verify_request.dart';
 import '../models/password_change_verify_response.dart';
+import '../models/persona_avatar_import_request.dart';
+import '../models/persona_avatar_import_response.dart';
+import '../models/persona_avatar_upload_request.dart';
+import '../models/persona_avatar_upload_response.dart';
+import '../models/persona_banner_upload_request.dart';
+import '../models/persona_banner_upload_response.dart';
+import '../models/persona_batch_avatar_import_request.dart';
 import '../models/preload_messages_request.dart';
 import '../models/preload_messages_response.dart';
 import '../models/push_rotate_request.dart';
@@ -1048,5 +1055,85 @@ abstract class UsersApi {
   @GET('/users/{user_id}')
   Future<UserPartialResponse> getUserById({
     @Path('user_id') required SnowflakeType userId,
+  });
+
+  /// Upload persona avatar.
+  ///
+  /// Uploads and processes an avatar image for a persona, hosting it on the instance CDN/storage.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/users/@me/personas/avatar')
+  Future<PersonaAvatarUploadResponse> uploadPersonaAvatar({
+    @Body() required PersonaAvatarUploadRequest body,
+  });
+
+  /// Upload persona banner.
+  ///
+  /// Uploads and processes a banner image for a persona, hosting it on the instance CDN/storage.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/users/@me/personas/banner')
+  Future<PersonaBannerUploadResponse> uploadPersonaBanner({
+    @Body() required PersonaBannerUploadRequest body,
+  });
+
+  /// Import persona avatar from remote URL.
+  ///
+  /// Downloads an avatar image from an external URL and stores it on the instance CDN/storage.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/users/@me/personas/import-avatar')
+  Future<PersonaAvatarImportResponse> importPersonaAvatar({
+    @Body() required PersonaAvatarImportRequest body,
+  });
+
+  /// Batch import persona avatars from remote URLs with streaming progress.
+  ///
+  /// Downloads up to 500 avatar images from external URLs and stores them on the instance CDN/storage, streaming NDJSON progress events.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/users/@me/personas/import-batch-avatars')
+  Future<SuccessResponse> importPersonaBatchAvatars({
+    @Body() required PersonaBatchAvatarImportRequest body,
+  });
+
+  /// Upload subprofile avatar (legacy alias).
+  ///
+  /// Uploads and processes an avatar image for a subprofile/persona, hosting it on the instance CDN/storage.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/users/@me/subprofiles/avatar')
+  Future<PersonaAvatarUploadResponse> uploadSubprofileAvatar({
+    @Body() required PersonaAvatarUploadRequest body,
+  });
+
+  /// Upload subprofile banner (legacy alias).
+  ///
+  /// Uploads and processes a banner image for a subprofile/persona, hosting it on the instance CDN/storage.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/users/@me/subprofiles/banner')
+  Future<PersonaBannerUploadResponse> uploadSubprofileBanner({
+    @Body() required PersonaBannerUploadRequest body,
+  });
+
+  /// Import subprofile avatar from remote URL (legacy alias).
+  ///
+  /// Downloads an avatar image from an external URL and stores it on the instance CDN/storage.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/users/@me/subprofiles/import-avatar')
+  Future<PersonaAvatarImportResponse> importSubprofileAvatar({
+    @Body() required PersonaAvatarImportRequest body,
+  });
+
+  /// Batch import subprofile avatars from remote URLs (legacy alias).
+  ///
+  /// Downloads up to 500 avatar images from external URLs and stores them on the instance CDN/storage, streaming NDJSON progress events.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/users/@me/subprofiles/import-batch-avatars')
+  Future<SuccessResponse> importSubprofileBatchAvatars({
+    @Body() required PersonaBatchAvatarImportRequest body,
   });
 }
