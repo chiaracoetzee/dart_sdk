@@ -1,6 +1,7 @@
 import 'package:fluxer_dart/gateway_client/event_parser.dart';
 import 'package:fluxer_dart/gateway_client/gateway_event.dart';
 import 'package:fluxer_dart/gateway_client/gateway_types.dart';
+import 'package:fluxer_dart/models/channel_type.dart';
 import 'package:fluxer_dart/models/relationship_types.dart';
 import 'package:fluxer_dart/models/user_guild_settings_response.dart';
 import 'package:fluxer_dart/models/user_notification_settings.dart';
@@ -405,7 +406,7 @@ void main() {
       expect(event, isA<ChannelCreateEvent>());
       final e = event as ChannelCreateEvent;
       expect(e.channel.id, '500');
-      expect(e.channel.type, 0);
+      expect(e.channel.type, ChannelType.guildText);
     });
 
     test('CHANNEL_UPDATE → ChannelUpdateEvent', () {
@@ -638,6 +639,32 @@ void main() {
       final e = event as TypingStartEvent;
       expect(e.guildId, isNull);
       expect(e.member, isNull);
+      expect(e.subprofile, isNull);
+    });
+
+    test('TYPING_START with subprofile data', () {
+      final data = <String, Object?>{
+        'channel_id': '200',
+        'user_id': '100',
+        'timestamp': 1700000000,
+        'subprofile': {
+          'id': 'persona_1',
+          'name': 'Ruby',
+          'avatar': 'personas/ruby.png',
+          'avatar_color': 0xff0000,
+          'display_tag_text': 'SYSTEM',
+        },
+      };
+      final event = parser.parse('TYPING_START', data);
+
+      expect(event, isA<TypingStartEvent>());
+      final e = event as TypingStartEvent;
+      expect(e.subprofile, isNotNull);
+      expect(e.subprofile!.id, 'persona_1');
+      expect(e.subprofile!.name, 'Ruby');
+      expect(e.subprofile!.avatar, 'personas/ruby.png');
+      expect(e.subprofile!.avatarColor, 0xff0000);
+      expect(e.subprofile!.displayTagText, 'SYSTEM');
     });
   });
 

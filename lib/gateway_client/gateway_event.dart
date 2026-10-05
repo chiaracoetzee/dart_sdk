@@ -11,6 +11,7 @@ import 'package:fluxer_dart/models/user_partial_response.dart';
 import 'package:fluxer_dart/models/user_private_response.dart';
 import 'package:fluxer_dart/models/user_guild_settings_response.dart';
 import 'package:fluxer_dart/models/user_settings_response.dart';
+import 'package:fluxer_dart/models/message_subprofile_response_schema.dart';
 import 'package:fluxer_dart/models/web_authn_credential_response.dart';
 
 /// Base class for all gateway events.
@@ -211,6 +212,7 @@ class MessageReactionAddEvent extends GatewayEvent {
     required this.userId,
     required this.emoji,
     this.guildId,
+    this.personaId,
   });
 
   final String channelId;
@@ -218,6 +220,7 @@ class MessageReactionAddEvent extends GatewayEvent {
   final String userId;
   final ReactionEmoji emoji;
   final String? guildId;
+  final String? personaId;
 }
 
 class MessageReactionRemoveEvent extends GatewayEvent {
@@ -227,6 +230,7 @@ class MessageReactionRemoveEvent extends GatewayEvent {
     required this.userId,
     required this.emoji,
     this.guildId,
+    this.personaId,
   });
 
   final String channelId;
@@ -234,6 +238,7 @@ class MessageReactionRemoveEvent extends GatewayEvent {
   final String userId;
   final ReactionEmoji emoji;
   final String? guildId;
+  final String? personaId;
 }
 
 class MessageReactionRemoveAllEvent extends GatewayEvent {
@@ -552,6 +557,7 @@ class TypingStartEvent extends GatewayEvent {
     required this.timestamp,
     this.member,
     this.guildId,
+    this.subprofile,
   });
 
   final String channelId;
@@ -559,6 +565,7 @@ class TypingStartEvent extends GatewayEvent {
   final DateTime timestamp;
   final GuildMemberResponse? member;
   final String? guildId;
+  final MessageSubprofileResponseSchema? subprofile;
 }
 
 // ---------------------------------------------------------------------------
