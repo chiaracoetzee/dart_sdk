@@ -33,6 +33,8 @@ import 'debug/debug_api.dart';
 import 'connections/connections_api.dart';
 import 'themes/themes_api.dart';
 import 'voice/voice_api.dart';
+import 'signal_bar/signal_bar_api.dart';
+import 'personas/personas_api.dart';
 
 /// Fluxer API `v1.0.0`.
 ///
@@ -74,6 +76,8 @@ class FluxerClient {
   ConnectionsApi? _connections;
   ThemesApi? _themes;
   VoiceApi? _voice;
+  SignalBarApi? _signalBar;
+  PersonasApi? _personas;
 
   InstanceApi get instance =>
       _instance ??= InstanceApi(_dio, baseUrl: _baseUrl);
@@ -145,4 +149,10 @@ class FluxerClient {
   ThemesApi get themes => _themes ??= ThemesApi(_dio, baseUrl: _baseUrl);
 
   VoiceApi get voice => _voice ??= VoiceApi(_dio, baseUrl: _baseUrl);
+
+  SignalBarApi get signalBar =>
+      _signalBar ??= SignalBarApi(_dio, baseUrl: _baseUrl);
+
+  PersonasApi get personas =>
+      _personas ??= PersonasApi(_dio, baseUrl: _baseUrl);
 }
