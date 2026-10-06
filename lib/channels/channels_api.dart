@@ -671,6 +671,18 @@ abstract class ChannelsApi {
     @Path('overwrite_id') required SnowflakeType overwriteId,
   });
 
+  /// Get persona mention candidates for a channel.
+  ///
+  /// Retrieves mentionable personas belonging to members of the specified channel. Only public personas of other members are returned, along with own personas.
+  ///
+  /// [channelId] - The ID of the channel.
+  @GET('/channels/{channel_id}/persona-mentions')
+  Future<ChannelPersonaMentionsResponseSchema> getChannelPersonaMentions({
+    @Path('channel_id') required SnowflakeType channelId,
+    @Query('q') String? q = '',
+    @Query('limit') int? limit = 100,
+  });
+
   /// Acknowledge new pin notifications.
   ///
   /// Marks all new pin notifications in a channel as acknowledged. Clears the notification badge for pinned messages. Returns 204 No Content on success.
