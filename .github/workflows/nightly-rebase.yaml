@@ -96,7 +96,7 @@ jobs:
           if [ "${{ inputs.force_tests }}" = "true" ] || [ "${{ inputs.force_test_agent }}" = "true" ]; then
             FLAGS="$FLAGS --force-tests"
           fi
-          python /tmp/rebase_tools/rebase/rebase_orchestrator.py --profile dart_sdk $FLAGS
+          python /tmp/rebase_tools/rebase/rebase_orchestrator.py --profile dart_sdk --time-budget-minutes 50 $FLAGS
 
       - name: Upload AI Agent Logs & Artifacts
         if: always()
