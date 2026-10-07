@@ -32,6 +32,7 @@ ChannelOverrides _$ChannelOverridesFromJson(Map<String, dynamic> json) =>
                 ? null
                 : UserNotificationSettingsInput.fromJson((v as num).toInt()),
           ),
+          flags: $checkedConvert('flags', (v) => (v as num?)?.toInt()),
         );
         return val;
       },
@@ -49,4 +50,5 @@ Map<String, dynamic> _$ChannelOverridesToJson(ChannelOverrides instance) =>
       'muted': instance.muted,
       'mute_config': ?instance.muteConfig,
       'unread_badges': ?instance.unreadBadges,
+      'flags': ?instance.flags,
     };

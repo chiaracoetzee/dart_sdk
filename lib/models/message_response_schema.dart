@@ -16,6 +16,7 @@ import 'message_snapshot_response.dart';
 import 'message_sticker_response.dart';
 import 'message_type.dart';
 import 'snowflake_string_type.dart';
+import 'thread_channel_response.dart';
 import 'user_partial_response.dart';
 
 part 'message_response_schema.g.dart';
@@ -47,6 +48,7 @@ class MessageResponseSchema {
     this.messageSnapshots,
     this.nonce,
     this.call,
+    this.thread,
     this.referencedMessage,
   });
 
@@ -137,6 +139,10 @@ class MessageResponseSchema {
   /// Call information if this message represents a call
   @JsonKey(includeIfNull: false)
   final MessageResponseSchemaCall? call;
+
+  /// The thread started from this message, when the viewer can see threads
+  @JsonKey(includeIfNull: false)
+  final ThreadChannelResponse? thread;
 
   /// The reply target. Present and populated when the target resolved, present and null when the target is gone, absent when this message has no default reference. Clients must tell null apart from absent by key presence.
   @JsonKey(includeIfNull: false, name: 'referenced_message')

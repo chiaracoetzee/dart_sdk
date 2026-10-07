@@ -77,6 +77,12 @@ enum AuditLogActionType {
   messagePin(74),
   @JsonValue(75)
   messageUnpin(75),
+  @JsonValue(110)
+  threadCreate(110),
+  @JsonValue(111)
+  threadUpdate(111),
+  @JsonValue(112)
+  threadDelete(112),
 
   /// Default value for all unparsed values, allows backward compatibility when adding new values on the backend.
   $unknown(null);

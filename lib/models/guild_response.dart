@@ -27,33 +27,33 @@ part 'guild_response.g.dart';
 @JsonSerializable()
 class GuildResponse {
   const GuildResponse({
-    required this.contentWarningLevel,
+    required this.features,
     required this.name,
-    required this.afkTimeout,
+    required this.ownerId,
     required this.splashCardAlignment,
     required this.id,
-    required this.ownerId,
+    required this.contentWarningLevel,
     required this.disabledOperations,
+    required this.nsfw,
     required this.nsfwLevel,
-    required this.mfaLevel,
     required this.defaultMessageNotifications,
+    required this.mfaLevel,
     required this.verificationLevel,
-    required this.features,
+    required this.afkTimeout,
     required this.systemChannelFlags,
     required this.explicitContentFilter,
-    required this.nsfw,
     this.systemChannelId,
-    this.embedSplashHeight,
+    this.vanityUrlCode,
     this.rulesChannelId,
     this.afkChannelId,
-    this.vanityUrlCode,
+    this.embedSplashHeight,
+    this.splash,
     this.embedSplashWidth,
     this.embedSplash,
     this.splashHeight,
     this.splashWidth,
     this.bannerHeight,
-    this.approximatePresenceCount,
-    this.contentWarningText,
+    this.threadsActive,
     this.bannerWidth,
     this.banner,
     this.icon,
@@ -66,7 +66,8 @@ class GuildResponse {
     this.memberCount,
     this.onlineCount,
     this.approximateMemberCount,
-    this.splash,
+    this.approximatePresenceCount,
+    this.contentWarningText,
   });
 
   factory GuildResponse.fromJson(Map<String, Object?> json) =>
@@ -217,6 +218,10 @@ class GuildResponse {
   /// Approximate online member count (only when with_counts is true)
   @JsonKey(includeIfNull: false, name: 'approximate_presence_count')
   final Int32Type? approximatePresenceCount;
+
+  /// Present and true when threads, forum and media channels are active in this guild for the requesting client. Only set on the current user guild list
+  @JsonKey(includeIfNull: false, name: 'threads_active')
+  final bool? threadsActive;
 
   Map<String, Object?> toJson() => _$GuildResponseToJson(this);
 }

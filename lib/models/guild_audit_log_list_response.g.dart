@@ -33,6 +33,14 @@ GuildAuditLogListResponse _$GuildAuditLogListResponseFromJson(
           )
           .toList(),
     ),
+    threads: $checkedConvert(
+      'threads',
+      (v) => (v as List<dynamic>?)
+          ?.map(
+            (e) => ThreadChannelResponse.fromJson(e as Map<String, dynamic>),
+          )
+          .toList(),
+    ),
   );
   return val;
 }, fieldKeyMap: const {'auditLogEntries': 'audit_log_entries'});
@@ -43,4 +51,5 @@ Map<String, dynamic> _$GuildAuditLogListResponseToJson(
   'audit_log_entries': instance.auditLogEntries,
   'users': instance.users,
   'webhooks': instance.webhooks,
+  'threads': ?instance.threads,
 };

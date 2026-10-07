@@ -26,7 +26,7 @@ class ChannelPinResponseMessageMessageReference {
   @JsonKey(name: 'channel_id')
   final SnowflakeStringType channelId;
 
-  /// The ID of the referenced message, absent on a channel follow system message
+  /// The ID of the referenced message, absent on a channel follow system message and on thread created messages that reference only a thread
   @JsonKey(includeIfNull: false, name: 'message_id')
   final SnowflakeStringType? messageId;
 

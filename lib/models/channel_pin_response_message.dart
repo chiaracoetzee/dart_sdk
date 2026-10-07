@@ -15,6 +15,7 @@ import 'message_sticker_response.dart';
 import 'channel_pin_response_message_message_reference.dart';
 import 'message_snapshot_response.dart';
 import 'channel_pin_response_message_call.dart';
+import 'thread_channel_response.dart';
 
 part 'channel_pin_response_message.g.dart';
 
@@ -44,6 +45,7 @@ class ChannelPinResponseMessage {
     this.messageSnapshots,
     this.nonce,
     this.call,
+    this.thread,
   });
 
   factory ChannelPinResponseMessage.fromJson(Map<String, Object?> json) =>
@@ -129,6 +131,10 @@ class ChannelPinResponseMessage {
   /// Call information if this message represents a call
   @JsonKey(includeIfNull: false)
   final ChannelPinResponseMessageCall? call;
+
+  /// The thread started from this message, when the viewer can see threads
+  @JsonKey(includeIfNull: false)
+  final ThreadChannelResponse? thread;
 
   Map<String, Object?> toJson() => _$ChannelPinResponseMessageToJson(this);
 }

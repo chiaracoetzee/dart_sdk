@@ -30,6 +30,8 @@ class WebhookMessageRequest {
     this.username,
     this.avatarUrl,
     this.attachments,
+    this.threadName,
+    this.appliedTags,
   });
 
   factory WebhookMessageRequest.fromJson(Map<String, Object?> json) =>
@@ -78,6 +80,14 @@ class WebhookMessageRequest {
   /// Array of attachments uploaded through the presigned upload endpoint
   @JsonKey(includeIfNull: false)
   final List<ClientUploadedAttachmentRequest>? attachments;
+
+  /// Name of the post to create when the webhook belongs to a forum or media channel (1-100 characters)
+  @JsonKey(includeIfNull: false, name: 'thread_name')
+  final String? threadName;
+
+  /// IDs of the tags to apply to the new post (max 5)
+  @JsonKey(includeIfNull: false, name: 'applied_tags')
+  final List<SnowflakeType>? appliedTags;
 
   Map<String, Object?> toJson() => _$WebhookMessageRequestToJson(this);
 }

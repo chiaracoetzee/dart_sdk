@@ -284,6 +284,7 @@ class _WebhooksApi implements WebhooksApi {
   Future<MessageResponseSchema> executeWebhook({
     required String webhookId,
     required String token,
+    String? threadId,
     String? content,
     List<RichEmbedRequest>? embeds,
     MessageReferenceRequest? messageReference,
@@ -295,11 +296,16 @@ class _WebhooksApi implements WebhooksApi {
     String? username,
     String? avatarUrl,
     List<Object3>? attachments,
+    String? threadName,
+    List<String>? appliedTags,
     String? wait = 'false',
     int? flags = 0,
   }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'wait': wait};
+    final queryParameters = <String, dynamic>{
+      r'thread_id': threadId,
+      r'wait': wait,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = FormData();
@@ -338,6 +344,12 @@ class _WebhooksApi implements WebhooksApi {
       _data.fields.add(MapEntry('avatar_url', avatarUrl));
     }
     _data.fields.add(MapEntry('attachments', jsonEncode(attachments)));
+    if (threadName != null) {
+      _data.fields.add(MapEntry('thread_name', threadName));
+    }
+    appliedTags?.forEach((i) {
+      _data.fields.add(MapEntry('applied_tags', i));
+    });
     if (flags != null) {
       _data.fields.add(MapEntry('flags', flags.toString()));
     }
@@ -372,9 +384,11 @@ class _WebhooksApi implements WebhooksApi {
     required String webhookId,
     required String token,
     required GitHubWebhook body,
+    String? threadId,
   }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'thread_id': threadId};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
@@ -421,9 +435,11 @@ class _WebhooksApi implements WebhooksApi {
     required String webhookId,
     required String token,
     required String messageId,
+    String? threadId,
   }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'thread_id': threadId};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<MessageResponseSchema>(
@@ -452,10 +468,11 @@ class _WebhooksApi implements WebhooksApi {
     required String webhookId,
     required String token,
     required String messageId,
+    String? threadId,
     WebhookMessageEditRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'thread_id': threadId};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -486,9 +503,11 @@ class _WebhooksApi implements WebhooksApi {
     required String webhookId,
     required String token,
     required String messageId,
+    String? threadId,
   }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'thread_id': threadId};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<void>(
@@ -508,10 +527,11 @@ class _WebhooksApi implements WebhooksApi {
   Future<String> executeSlackWebhook({
     required String webhookId,
     required String token,
+    String? threadId,
     SlackWebhookRequest? body,
   }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'thread_id': threadId};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};

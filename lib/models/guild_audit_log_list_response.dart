@@ -6,6 +6,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'audit_log_webhook_response.dart';
 import 'guild_audit_log_entry_response.dart';
+import 'thread_channel_response.dart';
 import 'user_partial_response.dart';
 
 part 'guild_audit_log_list_response.g.dart';
@@ -16,6 +17,7 @@ class GuildAuditLogListResponse {
     required this.auditLogEntries,
     required this.users,
     required this.webhooks,
+    this.threads,
   });
 
   factory GuildAuditLogListResponse.fromJson(Map<String, Object?> json) =>
@@ -30,6 +32,10 @@ class GuildAuditLogListResponse {
 
   /// Webhooks referenced in the audit log entries
   final List<AuditLogWebhookResponse> webhooks;
+
+  /// Threads referenced in the audit log entries, when the viewer can see threads
+  @JsonKey(includeIfNull: false)
+  final List<ThreadChannelResponse>? threads;
 
   Map<String, Object?> toJson() => _$GuildAuditLogListResponseToJson(this);
 }

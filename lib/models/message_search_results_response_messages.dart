@@ -16,6 +16,7 @@ import 'message_reaction_response.dart';
 import 'message_search_results_response_messages_message_reference.dart';
 import 'message_snapshot_response.dart';
 import 'message_search_results_response_messages_call.dart';
+import 'thread_channel_response.dart';
 
 part 'message_search_results_response_messages.g.dart';
 
@@ -46,6 +47,7 @@ class MessageSearchResultsResponseMessages {
     this.messageSnapshots,
     this.nonce,
     this.call,
+    this.thread,
   });
 
   factory MessageSearchResultsResponseMessages.fromJson(
@@ -136,6 +138,10 @@ class MessageSearchResultsResponseMessages {
   /// Call information if this message represents a call
   @JsonKey(includeIfNull: false)
   final MessageSearchResultsResponseMessagesCall? call;
+
+  /// The thread started from this message, when the viewer can see threads
+  @JsonKey(includeIfNull: false)
+  final ThreadChannelResponse? thread;
 
   Map<String, Object?> toJson() =>
       _$MessageSearchResultsResponseMessagesToJson(this);

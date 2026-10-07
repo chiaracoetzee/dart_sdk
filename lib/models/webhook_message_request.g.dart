@@ -52,6 +52,11 @@ WebhookMessageRequest _$WebhookMessageRequestFromJson(
             )
             .toList(),
       ),
+      threadName: $checkedConvert('thread_name', (v) => v as String?),
+      appliedTags: $checkedConvert(
+        'applied_tags',
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
+      ),
     );
     return val;
   },
@@ -61,6 +66,8 @@ WebhookMessageRequest _$WebhookMessageRequestFromJson(
     'favoriteMemeId': 'favorite_meme_id',
     'stickerIds': 'sticker_ids',
     'avatarUrl': 'avatar_url',
+    'threadName': 'thread_name',
+    'appliedTags': 'applied_tags',
   },
 );
 
@@ -79,4 +86,6 @@ Map<String, dynamic> _$WebhookMessageRequestToJson(
   'username': ?instance.username,
   'avatar_url': ?instance.avatarUrl,
   'attachments': ?instance.attachments,
+  'thread_name': ?instance.threadName,
+  'applied_tags': ?instance.appliedTags,
 };

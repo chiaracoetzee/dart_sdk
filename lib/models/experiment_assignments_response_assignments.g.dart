@@ -21,6 +21,14 @@ _$ExperimentAssignmentsResponseAssignmentsFromJson(Map<String, dynamic> json) =>
                     v as Map<String, dynamic>,
                   ),
           ),
+          channelThreads: $checkedConvert(
+            'channel_threads',
+            (v) => v == null
+                ? null
+                : ChannelThreadsAssignmentResponse.fromJson(
+                    v as Map<String, dynamic>,
+                  ),
+          ),
           plutoniumPage: $checkedConvert(
             'plutonium_page',
             (v) => v == null
@@ -34,6 +42,7 @@ _$ExperimentAssignmentsResponseAssignmentsFromJson(Map<String, dynamic> json) =>
       },
       fieldKeyMap: const {
         'domainMigration': 'domain_migration',
+        'channelThreads': 'channel_threads',
         'plutoniumPage': 'plutonium_page',
       },
     );
@@ -42,5 +51,6 @@ Map<String, dynamic> _$ExperimentAssignmentsResponseAssignmentsToJson(
   ExperimentAssignmentsResponseAssignments instance,
 ) => <String, dynamic>{
   'domain_migration': ?instance.domainMigration,
+  'channel_threads': ?instance.channelThreads,
   'plutonium_page': ?instance.plutoniumPage,
 };

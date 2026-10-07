@@ -7,6 +7,8 @@ import 'package:json_annotation/json_annotation.dart';
 import 'channel_response.dart';
 import 'int32_type.dart';
 import 'message_search_results_response_messages.dart';
+import 'thread_channel_response.dart';
+import 'thread_member_response.dart';
 
 part 'message_search_results_response.g.dart';
 
@@ -19,6 +21,8 @@ class MessageSearchResultsResponse {
     required this.hitsPerPage,
     required this.page,
     this.cursor,
+    this.threads,
+    this.members,
   });
 
   factory MessageSearchResultsResponse.fromJson(Map<String, Object?> json) =>
@@ -43,6 +47,14 @@ class MessageSearchResultsResponse {
   /// Opaque cursor for fetching the next page of results
   @JsonKey(includeIfNull: false)
   final List<String>? cursor;
+
+  /// The threads that contain the returned messages, when the viewer can see threads
+  @JsonKey(includeIfNull: false)
+  final List<ThreadChannelResponse>? threads;
+
+  /// A thread member object for each returned thread the current user has joined
+  @JsonKey(includeIfNull: false)
+  final List<ThreadMemberResponse>? members;
 
   Map<String, Object?> toJson() => _$MessageSearchResultsResponseToJson(this);
 }

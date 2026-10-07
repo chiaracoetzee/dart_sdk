@@ -33,6 +33,20 @@ MessageSearchResultsResponse _$MessageSearchResultsResponseFromJson(
       'cursor',
       (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
     ),
+    threads: $checkedConvert(
+      'threads',
+      (v) => (v as List<dynamic>?)
+          ?.map(
+            (e) => ThreadChannelResponse.fromJson(e as Map<String, dynamic>),
+          )
+          .toList(),
+    ),
+    members: $checkedConvert(
+      'members',
+      (v) => (v as List<dynamic>?)
+          ?.map((e) => ThreadMemberResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    ),
   );
   return val;
 }, fieldKeyMap: const {'hitsPerPage': 'hits_per_page'});
@@ -46,4 +60,6 @@ Map<String, dynamic> _$MessageSearchResultsResponseToJson(
   'hits_per_page': instance.hitsPerPage,
   'page': instance.page,
   'cursor': ?instance.cursor,
+  'threads': ?instance.threads,
+  'members': ?instance.members,
 };

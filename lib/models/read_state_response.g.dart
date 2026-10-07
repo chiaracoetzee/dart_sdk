@@ -21,6 +21,7 @@ ReadStateResponse _$ReadStateResponseFromJson(
         (v) => v as String?,
       ),
       version: $checkedConvert('version', (v) => v as String?),
+      flags: $checkedConvert('flags', (v) => (v as num?)?.toInt()),
     );
     return val;
   },
@@ -38,4 +39,5 @@ Map<String, dynamic> _$ReadStateResponseToJson(ReadStateResponse instance) =>
       'last_message_id': instance.lastMessageId,
       'last_pin_timestamp': instance.lastPinTimestamp,
       'version': ?instance.version,
+      'flags': ?instance.flags,
     };

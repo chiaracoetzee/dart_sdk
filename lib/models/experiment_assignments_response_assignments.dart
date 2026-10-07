@@ -5,6 +5,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'domain_migration_assignment_response.dart';
+import 'channel_threads_assignment_response.dart';
 import 'plutonium_page_assignment_response.dart';
 
 part 'experiment_assignments_response_assignments.g.dart';
@@ -13,6 +14,7 @@ part 'experiment_assignments_response_assignments.g.dart';
 class ExperimentAssignmentsResponseAssignments {
   const ExperimentAssignmentsResponseAssignments({
     this.domainMigration,
+    this.channelThreads,
     this.plutoniumPage,
   });
 
@@ -22,6 +24,8 @@ class ExperimentAssignmentsResponseAssignments {
 
   @JsonKey(includeIfNull: false, name: 'domain_migration')
   final DomainMigrationAssignmentResponse? domainMigration;
+  @JsonKey(includeIfNull: false, name: 'channel_threads')
+  final ChannelThreadsAssignmentResponse? channelThreads;
   @JsonKey(includeIfNull: false, name: 'plutonium_page')
   final PlutoniumPageAssignmentResponse? plutoniumPage;
 

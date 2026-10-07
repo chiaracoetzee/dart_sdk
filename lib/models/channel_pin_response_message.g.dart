@@ -114,6 +114,12 @@ ChannelPinResponseMessage _$ChannelPinResponseMessageFromJson(
             ? null
             : ChannelPinResponseMessageCall.fromJson(v as Map<String, dynamic>),
       ),
+      thread: $checkedConvert(
+        'thread',
+        (v) => v == null
+            ? null
+            : ThreadChannelResponse.fromJson(v as Map<String, dynamic>),
+      ),
     );
     return val;
   },
@@ -155,4 +161,5 @@ Map<String, dynamic> _$ChannelPinResponseMessageToJson(
   'message_snapshots': ?instance.messageSnapshots,
   'nonce': ?instance.nonce,
   'call': ?instance.call,
+  'thread': ?instance.thread,
 };

@@ -7,6 +7,8 @@ import 'package:json_annotation/json_annotation.dart';
 import 'message_search_results_response_messages.dart';
 import 'channel_response.dart';
 import 'int32_type.dart';
+import 'thread_channel_response.dart';
+import 'thread_member_response.dart';
 
 part 'message_search_response.g.dart';
 
@@ -37,6 +39,10 @@ class MessageSearchResponseMessageSearchResultsResponse {
   final Int32Type page;
   @JsonKey(includeIfNull: false)
   final List<String>? cursor;
+  @JsonKey(includeIfNull: false)
+  final List<ThreadChannelResponse>? threads;
+  @JsonKey(includeIfNull: false)
+  final List<ThreadMemberResponse>? members;
 
   const MessageSearchResponseMessageSearchResultsResponse({
     required this.messages,
@@ -45,6 +51,8 @@ class MessageSearchResponseMessageSearchResultsResponse {
     required this.hitsPerPage,
     required this.page,
     this.cursor,
+    this.threads,
+    this.members,
   });
 
   factory MessageSearchResponseMessageSearchResultsResponse.fromJson(

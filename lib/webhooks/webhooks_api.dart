@@ -188,11 +188,18 @@ abstract class WebhooksApi {
   ///
   /// [attachments] - Array of multipart attachment metadata objects.
   /// Name not received - field will be skipped.
+  ///
+  /// [threadName] - Name of the post to create when the webhook belongs to a forum or media channel (1-100 characters).
+  /// Name not received - field will be skipped.
+  ///
+  /// [appliedTags] - IDs of the tags to apply to the new post (max 5).
+  /// Name not received - field will be skipped.
   @MultiPart()
   @POST('/webhooks/{webhook_id}/{token}')
   Future<MessageResponseSchema> executeWebhook({
     @Path('webhook_id') required SnowflakeType webhookId,
     @Path('token') required String token,
+    @Query('thread_id') String? threadId,
     @Part(name: 'content') MessageContentRequest? content,
     @Part(name: 'embeds') List<RichEmbedRequest>? embeds,
     @Part(name: 'message_reference') MessageReferenceRequest? messageReference,
@@ -204,6 +211,8 @@ abstract class WebhooksApi {
     @Part(name: 'username') String? username,
     @Part(name: 'avatar_url') String? avatarUrl,
     @Part(name: 'attachments') List<Object3>? attachments,
+    @Part(name: 'thread_name') String? threadName,
+    @Part(name: 'applied_tags') List<SnowflakeType>? appliedTags,
     @Query('wait') String? wait = 'false',
     @Part(name: 'flags') MessageFlags? flags = 0,
   });
@@ -222,6 +231,7 @@ abstract class WebhooksApi {
     @Path('webhook_id') required SnowflakeType webhookId,
     @Path('token') required String token,
     @Body() required GitHubWebhook body,
+    @Query('thread_id') String? threadId,
   });
 
   /// Execute Instatus webhook.
@@ -254,6 +264,7 @@ abstract class WebhooksApi {
     @Path('webhook_id') required SnowflakeType webhookId,
     @Path('token') required String token,
     @Path('message_id') required SnowflakeType messageId,
+    @Query('thread_id') String? threadId,
   });
 
   /// Edit webhook message.
@@ -272,6 +283,7 @@ abstract class WebhooksApi {
     @Path('webhook_id') required SnowflakeType webhookId,
     @Path('token') required String token,
     @Path('message_id') required SnowflakeType messageId,
+    @Query('thread_id') String? threadId,
     @Body() WebhookMessageEditRequest? body,
   });
 
@@ -289,6 +301,7 @@ abstract class WebhooksApi {
     @Path('webhook_id') required SnowflakeType webhookId,
     @Path('token') required String token,
     @Path('message_id') required SnowflakeType messageId,
+    @Query('thread_id') String? threadId,
   });
 
   /// Execute Slack webhook.
@@ -304,6 +317,7 @@ abstract class WebhooksApi {
   Future<SlackWebhookResponse> executeSlackWebhook({
     @Path('webhook_id') required SnowflakeType webhookId,
     @Path('token') required String token,
+    @Query('thread_id') String? threadId,
     @Body() SlackWebhookRequest? body,
   });
 }

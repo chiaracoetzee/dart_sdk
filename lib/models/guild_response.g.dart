@@ -13,12 +13,12 @@ GuildResponse _$GuildResponseFromJson(
   json,
   ($checkedConvert) {
     final val = GuildResponse(
-      contentWarningLevel: $checkedConvert(
-        'content_warning_level',
-        (v) => ContentWarningLevel.fromJson((v as num).toInt()),
+      features: $checkedConvert(
+        'features',
+        (v) => (v as List<dynamic>).map((e) => e as String).toList(),
       ),
       name: $checkedConvert('name', (v) => v as String),
-      afkTimeout: $checkedConvert('afk_timeout', (v) => (v as num).toInt()),
+      ownerId: $checkedConvert('owner_id', (v) => v as String),
       splashCardAlignment: $checkedConvert(
         'splash_card_alignment',
         (v) => GuildResponseSplashCardAlignmentSplashCardAlignment.fromJson(
@@ -26,31 +26,32 @@ GuildResponse _$GuildResponseFromJson(
         ),
       ),
       id: $checkedConvert('id', (v) => v as String),
-      ownerId: $checkedConvert('owner_id', (v) => v as String),
+      contentWarningLevel: $checkedConvert(
+        'content_warning_level',
+        (v) => ContentWarningLevel.fromJson((v as num).toInt()),
+      ),
       disabledOperations: $checkedConvert(
         'disabled_operations',
         (v) => (v as num).toInt(),
       ),
+      nsfw: $checkedConvert('nsfw', (v) => v as bool),
       nsfwLevel: $checkedConvert(
         'nsfw_level',
         (v) => NsfwLevel.fromJson((v as num).toInt()),
-      ),
-      mfaLevel: $checkedConvert(
-        'mfa_level',
-        (v) => GuildMfaLevel.fromJson((v as num).toInt()),
       ),
       defaultMessageNotifications: $checkedConvert(
         'default_message_notifications',
         (v) => DefaultMessageNotifications.fromJson((v as num).toInt()),
       ),
+      mfaLevel: $checkedConvert(
+        'mfa_level',
+        (v) => GuildMfaLevel.fromJson((v as num).toInt()),
+      ),
       verificationLevel: $checkedConvert(
         'verification_level',
         (v) => GuildVerificationLevel.fromJson((v as num).toInt()),
       ),
-      features: $checkedConvert(
-        'features',
-        (v) => (v as List<dynamic>).map((e) => e as String).toList(),
-      ),
+      afkTimeout: $checkedConvert('afk_timeout', (v) => (v as num).toInt()),
       systemChannelFlags: $checkedConvert(
         'system_channel_flags',
         (v) => (v as num).toInt(),
@@ -59,18 +60,18 @@ GuildResponse _$GuildResponseFromJson(
         'explicit_content_filter',
         (v) => GuildExplicitContentFilter.fromJson((v as num).toInt()),
       ),
-      nsfw: $checkedConvert('nsfw', (v) => v as bool),
       systemChannelId: $checkedConvert(
         'system_channel_id',
         (v) => v as String?,
       ),
+      vanityUrlCode: $checkedConvert('vanity_url_code', (v) => v as String?),
+      rulesChannelId: $checkedConvert('rules_channel_id', (v) => v as String?),
+      afkChannelId: $checkedConvert('afk_channel_id', (v) => v as String?),
       embedSplashHeight: $checkedConvert(
         'embed_splash_height',
         (v) => (v as num?)?.toInt(),
       ),
-      rulesChannelId: $checkedConvert('rules_channel_id', (v) => v as String?),
-      afkChannelId: $checkedConvert('afk_channel_id', (v) => v as String?),
-      vanityUrlCode: $checkedConvert('vanity_url_code', (v) => v as String?),
+      splash: $checkedConvert('splash', (v) => v as String?),
       embedSplashWidth: $checkedConvert(
         'embed_splash_width',
         (v) => (v as num?)?.toInt(),
@@ -85,14 +86,7 @@ GuildResponse _$GuildResponseFromJson(
         'banner_height',
         (v) => (v as num?)?.toInt(),
       ),
-      approximatePresenceCount: $checkedConvert(
-        'approximate_presence_count',
-        (v) => (v as num?)?.toInt(),
-      ),
-      contentWarningText: $checkedConvert(
-        'content_warning_text',
-        (v) => v as String?,
-      ),
+      threadsActive: $checkedConvert('threads_active', (v) => v as bool?),
       bannerWidth: $checkedConvert('banner_width', (v) => (v as num?)?.toInt()),
       banner: $checkedConvert('banner', (v) => v as String?),
       icon: $checkedConvert('icon', (v) => v as String?),
@@ -133,39 +127,47 @@ GuildResponse _$GuildResponseFromJson(
         'approximate_member_count',
         (v) => (v as num?)?.toInt(),
       ),
-      splash: $checkedConvert('splash', (v) => v as String?),
+      approximatePresenceCount: $checkedConvert(
+        'approximate_presence_count',
+        (v) => (v as num?)?.toInt(),
+      ),
+      contentWarningText: $checkedConvert(
+        'content_warning_text',
+        (v) => v as String?,
+      ),
     );
     return val;
   },
   fieldKeyMap: const {
-    'contentWarningLevel': 'content_warning_level',
-    'afkTimeout': 'afk_timeout',
-    'splashCardAlignment': 'splash_card_alignment',
     'ownerId': 'owner_id',
+    'splashCardAlignment': 'splash_card_alignment',
+    'contentWarningLevel': 'content_warning_level',
     'disabledOperations': 'disabled_operations',
     'nsfwLevel': 'nsfw_level',
-    'mfaLevel': 'mfa_level',
     'defaultMessageNotifications': 'default_message_notifications',
+    'mfaLevel': 'mfa_level',
     'verificationLevel': 'verification_level',
+    'afkTimeout': 'afk_timeout',
     'systemChannelFlags': 'system_channel_flags',
     'explicitContentFilter': 'explicit_content_filter',
     'systemChannelId': 'system_channel_id',
-    'embedSplashHeight': 'embed_splash_height',
+    'vanityUrlCode': 'vanity_url_code',
     'rulesChannelId': 'rules_channel_id',
     'afkChannelId': 'afk_channel_id',
-    'vanityUrlCode': 'vanity_url_code',
+    'embedSplashHeight': 'embed_splash_height',
     'embedSplashWidth': 'embed_splash_width',
     'embedSplash': 'embed_splash',
     'splashHeight': 'splash_height',
     'splashWidth': 'splash_width',
     'bannerHeight': 'banner_height',
-    'approximatePresenceCount': 'approximate_presence_count',
-    'contentWarningText': 'content_warning_text',
+    'threadsActive': 'threads_active',
     'bannerWidth': 'banner_width',
     'messageHistoryCutoff': 'message_history_cutoff',
     'memberCount': 'member_count',
     'onlineCount': 'online_count',
     'approximateMemberCount': 'approximate_member_count',
+    'approximatePresenceCount': 'approximate_presence_count',
+    'contentWarningText': 'content_warning_text',
   },
 );
 
@@ -212,4 +214,5 @@ Map<String, dynamic> _$GuildResponseToJson(
   'online_count': ?instance.onlineCount,
   'approximate_member_count': ?instance.approximateMemberCount,
   'approximate_presence_count': ?instance.approximatePresenceCount,
+  'threads_active': ?instance.threadsActive,
 };

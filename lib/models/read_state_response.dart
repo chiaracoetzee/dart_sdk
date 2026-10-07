@@ -18,6 +18,7 @@ class ReadStateResponse {
     required this.lastMessageId,
     required this.lastPinTimestamp,
     this.version,
+    this.flags,
   });
 
   factory ReadStateResponse.fromJson(Map<String, Object?> json) =>
@@ -41,6 +42,10 @@ class ReadStateResponse {
   /// Read-state version for ordering updates as a decimal uint64
   @JsonKey(includeIfNull: false)
   final UnsignedInt64StringType? version;
+
+  /// Server-stamped read state flags, present only on thread and forum read states
+  @JsonKey(includeIfNull: false)
+  final Int32Type? flags;
 
   Map<String, Object?> toJson() => _$ReadStateResponseToJson(this);
 }

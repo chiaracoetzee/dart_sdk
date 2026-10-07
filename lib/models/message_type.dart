@@ -26,8 +26,12 @@ enum MessageType {
   userJoin(7),
   @JsonValue(12)
   channelFollowAdd(12),
+  @JsonValue(18)
+  threadCreated(18),
   @JsonValue(19)
   reply(19),
+  @JsonValue(21)
+  threadStarterMessage(21),
 
   /// Default value for all unparsed values, allows backward compatibility when adding new values on the backend.
   $unknown(null);

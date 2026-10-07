@@ -123,6 +123,12 @@ MessageResponseSchema _$MessageResponseSchemaFromJson(
             ? null
             : MessageResponseSchemaCall.fromJson(v as Map<String, dynamic>),
       ),
+      thread: $checkedConvert(
+        'thread',
+        (v) => v == null
+            ? null
+            : ThreadChannelResponse.fromJson(v as Map<String, dynamic>),
+      ),
       referencedMessage: $checkedConvert(
         'referenced_message',
         (v) => v == null
@@ -174,5 +180,6 @@ Map<String, dynamic> _$MessageResponseSchemaToJson(
   'message_snapshots': ?instance.messageSnapshots,
   'nonce': ?instance.nonce,
   'call': ?instance.call,
+  'thread': ?instance.thread,
   'referenced_message': ?instance.referencedMessage,
 };

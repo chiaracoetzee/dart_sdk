@@ -8,7 +8,9 @@ import 'package:dio/dio.dart' hide Headers;
 import 'package:retrofit/retrofit.dart';
 import 'package:retrofit/error_logger.dart';
 
+import '../models/active_threads_response.dart';
 import '../models/allowed_mentions_request.dart';
+import '../models/archived_threads_response.dart';
 import '../models/bulk_delete_messages_request.dart';
 import '../models/bulk_message_fetch_request.dart';
 import '../models/bulk_message_fetch_response.dart';
@@ -25,6 +27,8 @@ import '../models/complete_multipart_attachment_upload_request.dart';
 import '../models/complete_multipart_attachment_upload_response.dart';
 import '../models/crosspost_source_response.dart';
 import '../models/followed_channel_response.dart';
+import '../models/forum_tag_request.dart';
+import '../models/forum_tag_setting_schema.dart';
 import '../models/message_ack_request.dart';
 import '../models/message_content_request.dart';
 import '../models/message_flags.dart';
@@ -44,12 +48,23 @@ import '../models/reaction_users_page_response.dart';
 import '../models/rich_embed_request.dart';
 import '../models/rtc_region_list_response.dart';
 import '../models/snowflake_type.dart';
+import '../models/start_forum_thread_response.dart';
+import '../models/start_thread_from_message_request.dart';
 import '../models/stream_preview_response.dart';
 import '../models/stream_preview_upload_body_schema.dart';
 import '../models/stream_preview_upload_url_body_schema.dart';
 import '../models/stream_preview_upload_url_response_schema.dart';
 import '../models/stream_update_body_schema.dart';
 import '../models/sudo_verification_schema.dart';
+import '../models/thread_channel_response.dart';
+import '../models/thread_member_list_response.dart';
+import '../models/thread_member_response.dart';
+import '../models/thread_member_settings_request.dart';
+import '../models/thread_post_data_request.dart';
+import '../models/thread_post_data_response.dart';
+import '../models/thread_search_result.dart';
+import '../models/thread_search_sort_by_schema.dart';
+import '../models/thread_search_sort_order_schema.dart';
 
 part 'channels_api.g.dart';
 
@@ -611,6 +626,22 @@ abstract class ChannelsApi {
     @Query('session_id') String? sessionId,
   });
 
+  /// Start a thread from a message.
+  ///
+  /// Creates a public thread from an existing message in a text channel. The thread shares the ID of the message, so a message can start one thread.
+  ///
+  /// [channelId] - The ID of the channel.
+  ///
+  /// [messageId] - The ID of the message.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/channels/{channel_id}/messages/{message_id}/threads')
+  Future<ThreadChannelResponse> startThreadFromMessage({
+    @Path('channel_id') required SnowflakeType channelId,
+    @Path('message_id') required SnowflakeType messageId,
+    @Body() required StartThreadFromMessageRequest body,
+  });
+
   /// Set permission overwrite for channel.
   ///
   /// Creates or updates permission overrides for a role or user in the channel. Allows fine-grained control over who can view, send messages, or manage the channel.
@@ -676,6 +707,19 @@ abstract class ChannelsApi {
     @Path('message_id') required SnowflakeType messageId,
   });
 
+  /// Get forum post data.
+  ///
+  /// Returns the owner and first message of each requested post in a forum or media channel. Requires the read message history permission.
+  ///
+  /// [channelId] - The ID of the channel.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/channels/{channel_id}/post-data')
+  Future<ThreadPostDataResponse> getChannelPostData({
+    @Path('channel_id') required SnowflakeType channelId,
+    @Body() required ThreadPostDataRequest body,
+  });
+
   /// Add recipient to group DM.
   ///
   /// Adds a user to a group direct message channel. The requesting user must be a member of the group DM. Requires a solved captcha challenge (X-Captcha-Token).
@@ -731,14 +775,284 @@ abstract class ChannelsApi {
     @Path('channel_id') required SnowflakeType channelId,
   });
 
+  /// Create a forum tag.
+  ///
+  /// Adds a tag to a forum or media channel. Requires the manage channels permission. Returns the updated channel.
+  ///
+  /// [channelId] - The ID of the channel.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/channels/{channel_id}/tags')
+  Future<ChannelResponse> createForumTag({
+    @Path('channel_id') required SnowflakeType channelId,
+    @Body() required ForumTagRequest body,
+  });
+
+  /// Update a forum tag.
+  ///
+  /// Replaces a tag of a forum or media channel. Requires the manage channels permission. Returns the updated channel.
+  ///
+  /// [channelId] - The ID of the channel.
+  ///
+  /// [tagId] - The ID of the forum tag.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @PUT('/channels/{channel_id}/tags/{tag_id}')
+  Future<ChannelResponse> updateForumTag({
+    @Path('channel_id') required SnowflakeType channelId,
+    @Path('tag_id') required SnowflakeType tagId,
+    @Body() required ForumTagRequest body,
+  });
+
+  /// Delete a forum tag.
+  ///
+  /// Removes a tag from a forum or media channel. Requires the manage channels permission. Returns the updated channel.
+  ///
+  /// [channelId] - The ID of the channel.
+  ///
+  /// [tagId] - The ID of the forum tag.
+  @DELETE('/channels/{channel_id}/tags/{tag_id}')
+  Future<ChannelResponse> deleteForumTag({
+    @Path('channel_id') required SnowflakeType channelId,
+    @Path('tag_id') required SnowflakeType tagId,
+  });
+
+  /// List thread members.
+  ///
+  /// Returns thread members ordered by user ID. Paginate with after and limit. Set with_member to include the guild member object of each thread member.
+  ///
+  /// [channelId] - The ID of the channel.
+  ///
+  /// [withMember] - Whether to include a guild member object for each thread member.
+  ///
+  /// [after] - Get thread members after this user ID.
+  ///
+  /// [limit] - Max number of thread members to return (1-100, default 100).
+  @GET('/channels/{channel_id}/thread-members')
+  Future<ThreadMemberListResponse> listThreadMembers({
+    @Path('channel_id') required SnowflakeType channelId,
+    @Query('after') SnowflakeType? after,
+    @Query('with_member') String? withMember = 'false',
+    @Query('limit') String? limit = '100',
+  });
+
+  /// Join a thread.
+  ///
+  /// Adds the current user to the thread. The thread must not be archived.
+  ///
+  /// [channelId] - The ID of the channel.
+  ///
+  /// [location] - Accepted and ignored.
+  @PUT('/channels/{channel_id}/thread-members/@me')
+  Future<void> joinThread({
+    @Path('channel_id') required SnowflakeType channelId,
+    @Query('location') String? location,
+  });
+
+  /// Leave a thread.
+  ///
+  /// Removes the current user from the thread. The thread must not be archived.
+  ///
+  /// [channelId] - The ID of the channel.
+  ///
+  /// [location] - Accepted and ignored.
+  @DELETE('/channels/{channel_id}/thread-members/@me')
+  Future<void> leaveThread({
+    @Path('channel_id') required SnowflakeType channelId,
+    @Query('location') String? location,
+  });
+
+  /// Update thread settings.
+  ///
+  /// Updates the current user's notification settings for a thread they are a member of. Returns the thread member, or 204 when nothing changed.
+  ///
+  /// [channelId] - The ID of the channel.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @PATCH('/channels/{channel_id}/thread-members/@me/settings')
+  Future<ThreadMemberResponse?> updateThreadMemberSettings({
+    @Path('channel_id') required SnowflakeType channelId,
+    @Body() ThreadMemberSettingsRequest? body,
+  });
+
+  /// Get a thread member.
+  ///
+  /// Returns the thread member object of the user when the user is a member of the thread.
+  ///
+  /// [channelId] - The ID of the channel.
+  ///
+  /// [userId] - The ID of the user.
+  ///
+  /// [withMember] - Whether to include a guild member object for the thread member.
+  @GET('/channels/{channel_id}/thread-members/{user_id}')
+  Future<ThreadMemberResponse> getThreadMember({
+    @Path('channel_id') required SnowflakeType channelId,
+    @Path('user_id') required SnowflakeType userId,
+    @Query('with_member') String? withMember = 'false',
+  });
+
+  /// Add a thread member.
+  ///
+  /// Adds another guild member to the thread. Requires permission to send messages in threads, and the thread must not be archived.
+  ///
+  /// [channelId] - The ID of the channel.
+  ///
+  /// [userId] - The ID of the user.
+  ///
+  /// [location] - Accepted and ignored.
+  @PUT('/channels/{channel_id}/thread-members/{user_id}')
+  Future<void> addThreadMember({
+    @Path('channel_id') required SnowflakeType channelId,
+    @Path('user_id') required SnowflakeType userId,
+    @Query('location') String? location,
+  });
+
+  /// Remove a thread member.
+  ///
+  /// Removes a member from the thread. Requires the manage threads permission, or being the creator of a private thread. The thread must not be archived.
+  ///
+  /// [channelId] - The ID of the channel.
+  ///
+  /// [userId] - The ID of the user.
+  ///
+  /// [location] - Accepted and ignored.
+  @DELETE('/channels/{channel_id}/thread-members/{user_id}')
+  Future<void> removeThreadMember({
+    @Path('channel_id') required SnowflakeType channelId,
+    @Path('user_id') required SnowflakeType userId,
+    @Query('location') String? location,
+  });
+
+  /// Start a thread.
+  ///
+  /// Creates a thread that is not attached to an existing message. In a text channel the thread type is required. In a forum or media channel this creates a post, and the body carries the first message. The body can also be sent as multipart form data with the JSON in a payload_json field, and a post can attach files as files[n] parts.
+  ///
+  /// [channelId] - The ID of the channel.
+  ///
+  /// [payloadJson] - The JSON-encoded request body.
+  /// Name not received - field will be skipped.
+  ///
+  /// [files0] - A file for the first message of a post, referenced by attachment id 0. Further files go in files[1], files[2] and so on.
+  /// Name not received - field will be skipped.
+  @MultiPart()
+  @POST('/channels/{channel_id}/threads')
+  Future<StartForumThreadResponse> startThread({
+    @Path('channel_id') required SnowflakeType channelId,
+    @Part(name: 'payload_json') required String payloadJson,
+    @Part(name: 'files[0]') MultipartFile? files0,
+  });
+
+  /// List private archived threads.
+  ///
+  /// Returns archived private threads of the text channel, most recently archived first. Requires the read message history and manage threads permissions.
+  ///
+  /// [channelId] - The ID of the channel.
+  ///
+  /// [before] - Get threads archived before this timestamp.
+  ///
+  /// [limit] - Max number of threads to return (2-100, default 50).
+  @GET('/channels/{channel_id}/threads/archived/private')
+  Future<ArchivedThreadsResponse> listPrivateArchivedThreads({
+    @Path('channel_id') required SnowflakeType channelId,
+    @Query('limit') String? limit = '50',
+    @Query('before') String? before,
+  });
+
+  /// List public archived threads.
+  ///
+  /// Returns archived public threads of the channel, most recently archived first. Requires the read message history permission.
+  ///
+  /// [channelId] - The ID of the channel.
+  ///
+  /// [before] - Get threads archived before this timestamp.
+  ///
+  /// [limit] - Max number of threads to return (2-100, default 50).
+  @GET('/channels/{channel_id}/threads/archived/public')
+  Future<ArchivedThreadsResponse> listPublicArchivedThreads({
+    @Path('channel_id') required SnowflakeType channelId,
+    @Query('limit') String? limit = '50',
+    @Query('before') String? before,
+  });
+
+  /// Search threads.
+  ///
+  /// Returns threads of the channel that match the search. Requires the read message history permission. While the search index of the guild is being built, responds with 202 and a body that says when to retry.
+  ///
+  /// [channelId] - The ID of the channel.
+  ///
+  /// [name] - Text to look for in thread names (max 100 characters).
+  ///
+  /// [slop] - Accepted for compatibility and ignored (max 100, default 2).
+  ///
+  /// [tag] - Tag IDs to filter by (max 20).
+  ///
+  /// [tagSetting] - How posts are filtered when searching by several tags.
+  ///
+  /// [archived] - Whether to return only archived or only active threads (default both).
+  ///
+  /// [sortBy] - The sorting algorithm to use.
+  ///
+  /// [sortOrder] - The direction to sort.
+  ///
+  /// [limit] - Max number of threads to return (1-25, default 25).
+  ///
+  /// [offset] - Number of threads to skip (max 9975).
+  ///
+  /// [maxId] - Get threads before this thread ID.
+  ///
+  /// [minId] - Get threads after this thread ID.
+  @GET('/channels/{channel_id}/threads/search')
+  Future<ThreadSearchResult> searchThreads({
+    @Path('channel_id') required SnowflakeType channelId,
+    @Query('slop') String? slop = '2',
+    @Query('sort_by')
+    ThreadSearchSortBySchema? sortBy = ThreadSearchSortBySchema.lastMessageTime,
+    @Query('sort_order')
+    ThreadSearchSortOrderSchema? sortOrder = ThreadSearchSortOrderSchema.desc,
+    @Query('limit') String? limit = '25',
+    @Query('offset') String? offset = '0',
+    @Query('name') String? name,
+    @Query('tag') List<SnowflakeType>? tag,
+    @Query('tag_setting') ForumTagSettingSchema? tagSetting,
+    @Query('archived') String? archived,
+    @Query('max_id') SnowflakeType? maxId,
+    @Query('min_id') SnowflakeType? minId,
+  });
+
   /// Indicate typing activity.
   ///
-  /// Notifies other users in the channel that you are actively typing. Typing indicators typically expire after a short period (usually 10 seconds). Returns 204 No Content. Commonly called repeatedly while the user is composing a message.
+  /// Notifies other users in the channel that you are actively typing. Typing indicators typically expire after a short period (usually 10 seconds). Returns 204 No Content, or 200 with a JSON body holding the remaining slowmode cooldowns in message_send_cooldown_ms and thread_create_cooldown_ms when the user is rate limited. Commonly called repeatedly while the user is composing a message.
   ///
   /// [channelId] - The ID of the channel.
   @POST('/channels/{channel_id}/typing')
   Future<void> indicateTyping({
     @Path('channel_id') required SnowflakeType channelId,
+  });
+
+  /// List joined private archived threads.
+  ///
+  /// Returns archived private threads of the text channel that the current user joined, newest first. Requires the read message history permission.
+  ///
+  /// [channelId] - The ID of the channel.
+  ///
+  /// [before] - Get threads before this thread ID.
+  ///
+  /// [limit] - Max number of threads to return (2-100, default 50).
+  @GET('/channels/{channel_id}/users/@me/threads/archived/private')
+  Future<ArchivedThreadsResponse> listJoinedPrivateArchivedThreads({
+    @Path('channel_id') required SnowflakeType channelId,
+    @Query('limit') String? limit = '50',
+    @Query('before') SnowflakeType? before,
+  });
+
+  /// List active guild threads.
+  ///
+  /// Returns every active thread in the guild that the bot can view, newest first, with a thread member object for each thread the bot joined.
+  ///
+  /// [guildId] - The ID of the guild.
+  @GET('/guilds/{guild_id}/threads/active')
+  Future<ActiveThreadsResponse> listGuildActiveThreads({
+    @Path('guild_id') required SnowflakeType guildId,
   });
 
   /// Get stream preview image.

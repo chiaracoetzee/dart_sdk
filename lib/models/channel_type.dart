@@ -19,6 +19,16 @@ enum ChannelType {
   guildCategory(4),
   @JsonValue(5)
   guildAnnouncement(5),
+  @JsonValue(10)
+  announcementThread(10),
+  @JsonValue(11)
+  publicThread(11),
+  @JsonValue(12)
+  privateThread(12),
+  @JsonValue(15)
+  guildForum(15),
+  @JsonValue(16)
+  guildMedia(16),
   @JsonValue(998)
   guildLink(998),
   @JsonValue(999)

@@ -10,7 +10,9 @@ import 'channel_create_request.dart';
 import 'content_warning_level_input.dart';
 import 'guild_announcement_channel_create_request_permission_overwrites.dart';
 import 'guild_announcement_channel_create_request_type_type.dart';
+import 'int32_type.dart';
 import 'snowflake_type.dart';
+import 'thread_auto_archive_duration_schema.dart';
 
 part 'guild_announcement_channel_create_request.g.dart';
 
@@ -34,6 +36,10 @@ class GuildAnnouncementChannelCreateRequest {
     JsonNullable<bool> nsfwOverride = const JsonNullable<bool>.undefined(),
     JsonNullable<String> contentWarningText =
         const JsonNullable<String>.undefined(),
+    JsonNullable<ThreadAutoArchiveDurationSchema> defaultAutoArchiveDuration =
+        const JsonNullable<ThreadAutoArchiveDurationSchema>.undefined(),
+    JsonNullable<Int32Type> defaultThreadRateLimitPerUser =
+        const JsonNullable<Int32Type>.undefined(),
   }) : topic = topic,
        _topicValue = topic.value,
        _topicPresent = topic.isPresent,
@@ -60,7 +66,16 @@ class GuildAnnouncementChannelCreateRequest {
        _nsfwOverridePresent = nsfwOverride.isPresent,
        contentWarningText = contentWarningText,
        _contentWarningTextValue = contentWarningText.value,
-       _contentWarningTextPresent = contentWarningText.isPresent;
+       _contentWarningTextPresent = contentWarningText.isPresent,
+       defaultAutoArchiveDuration = defaultAutoArchiveDuration,
+       _defaultAutoArchiveDurationValue = defaultAutoArchiveDuration.value,
+       _defaultAutoArchiveDurationPresent =
+           defaultAutoArchiveDuration.isPresent,
+       defaultThreadRateLimitPerUser = defaultThreadRateLimitPerUser,
+       _defaultThreadRateLimitPerUserValue =
+           defaultThreadRateLimitPerUser.value,
+       _defaultThreadRateLimitPerUserPresent =
+           defaultThreadRateLimitPerUser.isPresent;
 
   const GuildAnnouncementChannelCreateRequest._({
     required this.type,
@@ -77,6 +92,8 @@ class GuildAnnouncementChannelCreateRequest {
        _rateLimitPerUserValue = null,
        _nsfwOverrideValue = null,
        _contentWarningTextValue = null,
+       _defaultAutoArchiveDurationValue = null,
+       _defaultThreadRateLimitPerUserValue = null,
        topic = const JsonNullable<String>.undefined(),
        _topicPresent = false,
        url = const JsonNullable<String>.undefined(),
@@ -94,7 +111,13 @@ class GuildAnnouncementChannelCreateRequest {
        nsfwOverride = const JsonNullable<bool>.undefined(),
        _nsfwOverridePresent = false,
        contentWarningText = const JsonNullable<String>.undefined(),
-       _contentWarningTextPresent = false;
+       _contentWarningTextPresent = false,
+       defaultAutoArchiveDuration =
+           const JsonNullable<ThreadAutoArchiveDurationSchema>.undefined(),
+       _defaultAutoArchiveDurationPresent = false,
+       defaultThreadRateLimitPerUser =
+           const JsonNullable<Int32Type>.undefined(),
+       _defaultThreadRateLimitPerUserPresent = false;
   factory GuildAnnouncementChannelCreateRequest.patch(
     Map<String, Object?> json,
   ) => GuildAnnouncementChannelCreateRequest.fromJson(json);
@@ -136,6 +159,18 @@ class GuildAnnouncementChannelCreateRequest {
       contentWarningText: json.containsKey('content_warning_text')
           ? JsonNullable<String>.of(value._contentWarningTextValue)
           : const JsonNullable<String>.undefined(),
+      defaultAutoArchiveDuration:
+          json.containsKey('default_auto_archive_duration')
+          ? JsonNullable<ThreadAutoArchiveDurationSchema>.of(
+              value._defaultAutoArchiveDurationValue,
+            )
+          : const JsonNullable<ThreadAutoArchiveDurationSchema>.undefined(),
+      defaultThreadRateLimitPerUser:
+          json.containsKey('default_thread_rate_limit_per_user')
+          ? JsonNullable<Int32Type>.of(
+              value._defaultThreadRateLimitPerUserValue,
+            )
+          : const JsonNullable<Int32Type>.undefined(),
     );
   }
 
@@ -199,6 +234,17 @@ class GuildAnnouncementChannelCreateRequest {
   @JsonKey(includeIfNull: false, name: 'content_warning_text')
   final String? _contentWarningTextValue;
   final bool _contentWarningTextPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<ThreadAutoArchiveDurationSchema>
+  defaultAutoArchiveDuration;
+  @JsonKey(includeIfNull: false, name: 'default_auto_archive_duration')
+  final ThreadAutoArchiveDurationSchema? _defaultAutoArchiveDurationValue;
+  final bool _defaultAutoArchiveDurationPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<Int32Type> defaultThreadRateLimitPerUser;
+  @JsonKey(includeIfNull: false, name: 'default_thread_rate_limit_per_user')
+  final Int32Type? _defaultThreadRateLimitPerUserValue;
+  final bool _defaultThreadRateLimitPerUserPresent;
 
   Map<String, Object?> toJson() {
     final json = _$GuildAnnouncementChannelCreateRequestToJson(this);
@@ -231,6 +277,18 @@ class GuildAnnouncementChannelCreateRequest {
     }
     if (_contentWarningTextPresent) {
       json.putIfAbsent('content_warning_text', () => _contentWarningTextValue);
+    }
+    if (_defaultAutoArchiveDurationPresent) {
+      json.putIfAbsent(
+        'default_auto_archive_duration',
+        () => _defaultAutoArchiveDurationValue,
+      );
+    }
+    if (_defaultThreadRateLimitPerUserPresent) {
+      json.putIfAbsent(
+        'default_thread_rate_limit_per_user',
+        () => _defaultThreadRateLimitPerUserValue,
+      );
     }
     return json;
   }

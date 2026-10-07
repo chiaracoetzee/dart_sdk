@@ -6,6 +6,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'user_notification_settings_input.dart';
 import 'channel_overrides_mute_config.dart';
+import 'int32_type.dart';
 
 part 'channel_overrides.g.dart';
 
@@ -17,6 +18,7 @@ class ChannelOverrides {
     required this.muted,
     this.muteConfig,
     this.unreadBadges,
+    this.flags,
   });
 
   factory ChannelOverrides.fromJson(Map<String, Object?> json) =>
@@ -39,6 +41,10 @@ class ChannelOverrides {
   /// Unread badges level override for this channel
   @JsonKey(includeIfNull: false, name: 'unread_badges')
   final UserNotificationSettingsInput? unreadBadges;
+
+  /// Channel override flags (NEW_FORUM_THREADS_OFF 1<<13, NEW_FORUM_THREADS_ON 1<<14)
+  @JsonKey(includeIfNull: false)
+  final Int32Type? flags;
 
   Map<String, Object?> toJson() => _$ChannelOverridesToJson(this);
 }
