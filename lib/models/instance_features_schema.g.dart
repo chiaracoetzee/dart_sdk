@@ -30,6 +30,18 @@ InstanceFeaturesSchema _$InstanceFeaturesSchemaFromJson(
         'phone_verification_enabled',
         (v) => v as bool,
       ),
+      desktopModulesEnabled: $checkedConvert(
+        'desktop_modules_enabled',
+        (v) => v as bool?,
+      ),
+      accountDeletionGracePeriodHours: $checkedConvert(
+        'account_deletion_grace_period_hours',
+        (v) => (v as num?)?.toInt(),
+      ),
+      maxBackgroundGatewayConnections: $checkedConvert(
+        'max_background_gateway_connections',
+        (v) => (v as num?)?.toInt(),
+      ),
       accountIdentity: $checkedConvert(
         'account_identity',
         (v) =>
@@ -51,6 +63,9 @@ InstanceFeaturesSchema _$InstanceFeaturesSchemaFromJson(
     'presignedAttachmentUploads': 'presigned_attachment_uploads',
     'emailsEnabled': 'emails_enabled',
     'phoneVerificationEnabled': 'phone_verification_enabled',
+    'desktopModulesEnabled': 'desktop_modules_enabled',
+    'accountDeletionGracePeriodHours': 'account_deletion_grace_period_hours',
+    'maxBackgroundGatewayConnections': 'max_background_gateway_connections',
     'accountIdentity': 'account_identity',
     'tagStyle': 'tag_style',
   },
@@ -67,6 +82,11 @@ Map<String, dynamic> _$InstanceFeaturesSchemaToJson(
   'presigned_attachment_uploads': instance.presignedAttachmentUploads,
   'emails_enabled': instance.emailsEnabled,
   'phone_verification_enabled': instance.phoneVerificationEnabled,
+  'desktop_modules_enabled': ?instance.desktopModulesEnabled,
+  'account_deletion_grace_period_hours':
+      ?instance.accountDeletionGracePeriodHours,
+  'max_background_gateway_connections':
+      ?instance.maxBackgroundGatewayConnections,
   'account_identity': ?instance.accountIdentity,
   'tag_style': ?instance.tagStyle,
 };

@@ -14,6 +14,7 @@ class InstanceSsoSchema {
     required this.enforced,
     required this.displayName,
     required this.redirectUri,
+    this.available,
   });
 
   factory InstanceSsoSchema.fromJson(Map<String, Object?> json) =>
@@ -32,6 +33,10 @@ class InstanceSsoSchema {
   /// OAuth redirect URI for SSO
   @JsonKey(name: 'redirect_uri')
   final String redirectUri;
+
+  /// Whether an SSO provider is configured for this instance
+  @JsonKey(includeIfNull: false)
+  final bool? available;
 
   Map<String, Object?> toJson() => _$InstanceSsoSchemaToJson(this);
 }

@@ -21,6 +21,9 @@ class InstanceFeaturesSchema {
     required this.presignedAttachmentUploads,
     required this.emailsEnabled,
     required this.phoneVerificationEnabled,
+    this.desktopModulesEnabled,
+    this.accountDeletionGracePeriodHours,
+    this.maxBackgroundGatewayConnections,
     this.accountIdentity,
     this.tagStyle,
   });
@@ -59,6 +62,18 @@ class InstanceFeaturesSchema {
   /// Deprecated. Always false.
   @JsonKey(name: 'phone_verification_enabled')
   final bool phoneVerificationEnabled;
+
+  /// Whether desktop clients may load downloadable modules
+  @JsonKey(includeIfNull: false, name: 'desktop_modules_enabled')
+  final bool? desktopModulesEnabled;
+
+  /// Hours between a deletion request and the permanent deletion of the account
+  @JsonKey(includeIfNull: false, name: 'account_deletion_grace_period_hours')
+  final int? accountDeletionGracePeriodHours;
+
+  /// Maximum gateway connections a client may keep open for background accounts
+  @JsonKey(includeIfNull: false, name: 'max_background_gateway_connections')
+  final int? maxBackgroundGatewayConnections;
 
   /// How people sign in on this instance. Clients treat a missing value as email
   @JsonKey(includeIfNull: false, name: 'account_identity')

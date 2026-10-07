@@ -5,6 +5,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'domain_migration_discovery_response.dart';
+import 'instance_age_policy_schema.dart';
 import 'instance_app_public_schema.dart';
 import 'instance_captcha_schema.dart';
 import 'instance_community_schema.dart';
@@ -34,11 +35,17 @@ class WellKnownFluxerResponse {
     required this.limits,
     required this.push,
     required this.appPublic,
+    this.codename,
+    this.agePolicy,
     this.domainMigration,
   });
 
   factory WellKnownFluxerResponse.fromJson(Map<String, Object?> json) =>
       _$WellKnownFluxerResponseFromJson(json);
+
+  /// Protocol generation spoken by this instance
+  @JsonKey(includeIfNull: false)
+  final String? codename;
 
   /// Version of the API server code
   @JsonKey(name: 'api_code_version')
@@ -59,6 +66,8 @@ class WellKnownFluxerResponse {
   /// Public application configuration for client-side features
   @JsonKey(name: 'app_public')
   final InstanceAppPublicSchema appPublic;
+  @JsonKey(includeIfNull: false, name: 'age_policy')
+  final InstanceAgePolicySchema? agePolicy;
 
   /// Web domain migration switch and anonymous rollout, only acted on by official instance clients
   @JsonKey(includeIfNull: false, name: 'domain_migration')

@@ -16,6 +16,7 @@ InstanceSsoSchema _$InstanceSsoSchemaFromJson(Map<String, dynamic> json) =>
           enforced: $checkedConvert('enforced', (v) => v as bool),
           displayName: $checkedConvert('display_name', (v) => v as String?),
           redirectUri: $checkedConvert('redirect_uri', (v) => v as String),
+          available: $checkedConvert('available', (v) => v as bool?),
         );
         return val;
       },
@@ -31,4 +32,5 @@ Map<String, dynamic> _$InstanceSsoSchemaToJson(InstanceSsoSchema instance) =>
       'enforced': instance.enforced,
       'display_name': instance.displayName,
       'redirect_uri': instance.redirectUri,
+      'available': ?instance.available,
     };

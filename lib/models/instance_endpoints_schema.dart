@@ -21,6 +21,8 @@ class InstanceEndpointsSchema {
     required this.invite,
     required this.gift,
     required this.webapp,
+    this.uploadRelay,
+    this.docs,
   });
 
   factory InstanceEndpointsSchema.fromJson(Map<String, Object?> json) =>
@@ -43,12 +45,20 @@ class InstanceEndpointsSchema {
   /// Base URL for the media proxy
   final String media;
 
+  /// Base URL for proxied attachment and preview uploads
+  @JsonKey(includeIfNull: false, name: 'upload_relay')
+  final String? uploadRelay;
+
   /// Base URL for static assets (avatars, emojis, etc.)
   @JsonKey(name: 'static_cdn')
   final String staticCdn;
 
   /// Base URL for the marketing website
   final String marketing;
+
+  /// Base URL for the documentation website
+  @JsonKey(includeIfNull: false)
+  final String? docs;
 
   /// Base URL for the admin panel
   final String admin;

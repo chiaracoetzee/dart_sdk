@@ -62,6 +62,13 @@ WellKnownFluxerResponse _$WellKnownFluxerResponseFromJson(
         'app_public',
         (v) => InstanceAppPublicSchema.fromJson(v as Map<String, dynamic>),
       ),
+      codename: $checkedConvert('codename', (v) => v as String?),
+      agePolicy: $checkedConvert(
+        'age_policy',
+        (v) => v == null
+            ? null
+            : InstanceAgePolicySchema.fromJson(v as Map<String, dynamic>),
+      ),
       domainMigration: $checkedConvert(
         'domain_migration',
         (v) => v == null
@@ -76,6 +83,7 @@ WellKnownFluxerResponse _$WellKnownFluxerResponseFromJson(
   fieldKeyMap: const {
     'apiCodeVersion': 'api_code_version',
     'appPublic': 'app_public',
+    'agePolicy': 'age_policy',
     'domainMigration': 'domain_migration',
   },
 );
@@ -83,6 +91,7 @@ WellKnownFluxerResponse _$WellKnownFluxerResponseFromJson(
 Map<String, dynamic> _$WellKnownFluxerResponseToJson(
   WellKnownFluxerResponse instance,
 ) => <String, dynamic>{
+  'codename': ?instance.codename,
   'api_code_version': instance.apiCodeVersion,
   'endpoints': instance.endpoints,
   'captcha': instance.captcha,
@@ -95,5 +104,6 @@ Map<String, dynamic> _$WellKnownFluxerResponseToJson(
   'limits': instance.limits,
   'push': instance.push,
   'app_public': instance.appPublic,
+  'age_policy': ?instance.agePolicy,
   'domain_migration': ?instance.domainMigration,
 };
