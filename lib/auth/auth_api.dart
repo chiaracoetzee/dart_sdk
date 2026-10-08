@@ -76,7 +76,7 @@ abstract class AuthApi {
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/auth/email-revert')
-  Future<AuthLoginResponse> revertEmailChange({
+  Future<AuthTokenWithUserIdResponse> revertEmailChange({
     @Body() required EmailRevertRequest body,
   });
 

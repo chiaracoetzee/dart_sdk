@@ -53,7 +53,7 @@ MessageEmbedChildResponse _$MessageEmbedChildResponseFromJson(
       'provider',
       (v) => v == null
           ? null
-          : EmbedAuthorResponse.fromJson(v as Map<String, dynamic>),
+          : EmbedProviderResponse.fromJson(v as Map<String, dynamic>),
     ),
     video: $checkedConvert(
       'video',

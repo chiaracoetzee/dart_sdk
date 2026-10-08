@@ -26,7 +26,7 @@ class InstanceAppPublicSchema {
   final InstanceBrandingSchema branding;
   final InstanceSetupSchema setup;
 
-  /// Optional legal document URLs shown during public registration
+  /// Optional legal and policy document URLs shown to users
   final InstanceAppPublicSchemaLegal legal;
 
   /// Public registration field collection policy

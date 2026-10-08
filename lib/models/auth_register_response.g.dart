@@ -31,42 +31,6 @@ Map<String, dynamic> _$AuthRegisterResponseAuthTokenWithUserIdResponseToJson(
   'user': instance.user,
 };
 
-AuthRegisterResponseVariant2 _$AuthRegisterResponseVariant2FromJson(
-  Map<String, dynamic> json,
-) => $checkedCreate(
-  'AuthRegisterResponseVariant2',
-  json,
-  ($checkedConvert) {
-    final val = AuthRegisterResponseVariant2(
-      mfa: $checkedConvert('mfa', (v) => v as bool),
-      ticket: $checkedConvert('ticket', (v) => v as String),
-      allowedMethods: $checkedConvert(
-        'allowed_methods',
-        (v) => (v as List<dynamic>).map((e) => e as String).toList(),
-      ),
-      totp: $checkedConvert('totp', (v) => v as bool),
-      webauthn: $checkedConvert('webauthn', (v) => v as bool),
-      backupCodes: $checkedConvert('backup_codes', (v) => v as bool),
-    );
-    return val;
-  },
-  fieldKeyMap: const {
-    'allowedMethods': 'allowed_methods',
-    'backupCodes': 'backup_codes',
-  },
-);
-
-Map<String, dynamic> _$AuthRegisterResponseVariant2ToJson(
-  AuthRegisterResponseVariant2 instance,
-) => <String, dynamic>{
-  'mfa': instance.mfa,
-  'ticket': instance.ticket,
-  'allowed_methods': instance.allowedMethods,
-  'totp': instance.totp,
-  'webauthn': instance.webauthn,
-  'backup_codes': instance.backupCodes,
-};
-
 AuthRegisterResponseAuthRegistrationPendingApprovalResponse
 _$AuthRegisterResponseAuthRegistrationPendingApprovalResponseFromJson(
   Map<String, dynamic> json,

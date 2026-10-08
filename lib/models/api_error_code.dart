@@ -347,10 +347,6 @@ enum ApiErrorCode {
   maxWebhooksPerChannel('MAX_WEBHOOKS_PER_CHANNEL'),
   @JsonValue('MAX_WEBHOOKS_PER_GUILD')
   maxWebhooksPerGuild('MAX_WEBHOOKS_PER_GUILD'),
-  @JsonValue('NCMEC_ALREADY_SUBMITTED')
-  ncmecAlreadySubmitted('NCMEC_ALREADY_SUBMITTED'),
-  @JsonValue('NCMEC_SUBMISSION_FAILED')
-  ncmecSubmissionFailed('NCMEC_SUBMISSION_FAILED'),
   @JsonValue('MEDIA_METADATA_ERROR')
   mediaMetadataError('MEDIA_METADATA_ERROR'),
   @JsonValue('METHOD_NOT_ALLOWED')

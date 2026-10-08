@@ -119,9 +119,12 @@ abstract class UsersApi {
   /// Streams a completed data harvest archive. Authorised by a signed, expiring token rather than a session, so the link works from the harvest completion email. Only active when presigned harvest downloads are disabled.
   ///
   /// [harvestId] - The ID of the harvest request.
+  ///
+  /// [token] - The signed download token from the harvest download URL.
   @GET('/harvest-downloads/{harvestId}')
   Future<HarvestArchiveResponse> downloadDataHarvestArchive({
     @Path('harvestId') required SnowflakeType harvestId,
+    @Query('token') required String token,
   });
 
   /// Get current user profile.

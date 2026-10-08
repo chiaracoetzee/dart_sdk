@@ -8,6 +8,7 @@ import 'embed_author_response.dart';
 import 'embed_field_response.dart';
 import 'embed_footer_response.dart';
 import 'embed_media_response.dart';
+import 'embed_provider_response.dart';
 import 'int32_type.dart';
 
 part 'message_embed_child_response.g.dart';
@@ -83,7 +84,7 @@ class MessageEmbedChildResponse {
 
   /// The provider of the embed (e.g., YouTube, Twitter)
   @JsonKey(includeIfNull: false)
-  final EmbedAuthorResponse? provider;
+  final EmbedProviderResponse? provider;
 
   /// The video of the embed
   @JsonKey(includeIfNull: false)

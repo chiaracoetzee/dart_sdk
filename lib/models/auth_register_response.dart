@@ -22,8 +22,6 @@ class AuthRegisterResponse {
   AuthRegisterResponseAuthTokenWithUserIdResponse
   toAuthTokenWithUserIdResponse() =>
       AuthRegisterResponseAuthTokenWithUserIdResponse.fromJson(_json);
-  AuthRegisterResponseVariant2 toVariant2() =>
-      AuthRegisterResponseVariant2.fromJson(_json);
   AuthRegisterResponseAuthRegistrationPendingApprovalResponse
   toAuthRegistrationPendingApprovalResponse() =>
       AuthRegisterResponseAuthRegistrationPendingApprovalResponse.fromJson(
@@ -50,32 +48,6 @@ class AuthRegisterResponseAuthTokenWithUserIdResponse {
 
   Map<String, dynamic> toJson() =>
       _$AuthRegisterResponseAuthTokenWithUserIdResponseToJson(this);
-}
-
-@JsonSerializable()
-class AuthRegisterResponseVariant2 {
-  final bool mfa;
-  final String ticket;
-  @JsonKey(name: 'allowed_methods')
-  final List<String> allowedMethods;
-  final bool totp;
-  final bool webauthn;
-  @JsonKey(name: 'backup_codes')
-  final bool backupCodes;
-
-  const AuthRegisterResponseVariant2({
-    required this.mfa,
-    required this.ticket,
-    required this.allowedMethods,
-    required this.totp,
-    required this.webauthn,
-    required this.backupCodes,
-  });
-
-  factory AuthRegisterResponseVariant2.fromJson(Map<String, dynamic> json) =>
-      _$AuthRegisterResponseVariant2FromJson(json);
-
-  Map<String, dynamic> toJson() => _$AuthRegisterResponseVariant2ToJson(this);
 }
 
 @JsonSerializable()

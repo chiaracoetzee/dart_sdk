@@ -41,7 +41,7 @@ class _AuthApi implements AuthApi {
   }
 
   @override
-  Future<AuthLoginResponse> revertEmailChange({
+  Future<AuthTokenWithUserIdResponse> revertEmailChange({
     required EmailRevertRequest body,
   }) async {
     final _extra = <String, dynamic>{};
@@ -49,7 +49,7 @@ class _AuthApi implements AuthApi {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _options = _setStreamType<AuthLoginResponse>(
+    final _options = _setStreamType<AuthTokenWithUserIdResponse>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -59,10 +59,10 @@ class _AuthApi implements AuthApi {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late AuthLoginResponse _value;
+    final _result = await _dio.fetch<Map<String, Object?>>(_options);
+    late AuthTokenWithUserIdResponse _value;
     try {
-      _value = AuthLoginResponse.fromJson(_result.data!);
+      _value = AuthTokenWithUserIdResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
