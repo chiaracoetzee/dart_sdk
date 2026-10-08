@@ -4,30 +4,24 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-/// Category of the user report
+/// What choosing an option does
 @JsonEnum()
-enum UserReportCategory {
-  @JsonValue('harassment')
-  harassment('harassment'),
-  @JsonValue('hate_speech')
-  hateSpeech('hate_speech'),
-  @JsonValue('spam_account')
-  spamAccount('spam_account'),
-  @JsonValue('impersonation')
-  impersonation('impersonation'),
-  @JsonValue('underage_user')
-  underageUser('underage_user'),
-  @JsonValue('inappropriate_profile')
-  inappropriateProfile('inappropriate_profile'),
-  @JsonValue('other')
-  other('other'),
+enum ReportFlowOutcomeType {
+  @JsonValue('screen')
+  screen('screen'),
+  @JsonValue('submit')
+  submit('submit'),
+  @JsonValue('end')
+  end('end'),
+  @JsonValue('link')
+  link('link'),
 
   /// Default value for all unparsed values, allows backward compatibility when adding new values on the backend.
   $unknown(null);
 
-  const UserReportCategory(this.json);
+  const ReportFlowOutcomeType(this.json);
 
-  factory UserReportCategory.fromJson(String json) =>
+  factory ReportFlowOutcomeType.fromJson(String json) =>
       values.firstWhere((e) => e.json == json, orElse: () => $unknown);
 
   final String? json;
@@ -38,6 +32,6 @@ enum UserReportCategory {
   String toString() => json ?? super.toString();
 
   /// Returns all defined enum values excluding the $unknown value.
-  static List<UserReportCategory> get $valuesDefined =>
+  static List<ReportFlowOutcomeType> get $valuesDefined =>
       values.where((value) => value != $unknown).toList();
 }

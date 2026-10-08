@@ -21,7 +21,7 @@ class ThrottledError {
   factory ThrottledError.fromJson(Map<String, Object?> json) =>
       _$ThrottledErrorFromJson(json);
 
-  /// Machine-readable error code
+  /// Machine-readable error code. Known values are listed in the APIErrorCode schema
   final String code;
 
   /// Human-readable error message

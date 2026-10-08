@@ -4,9 +4,9 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-/// EU country code of the reporter residence
+/// EU country code of residence
 @JsonEnum()
-enum MessageDsaReportRequestReporterCountryOfResidenceReporterCountryOfResidence {
+enum EuCountryCode {
   @JsonValue('AT')
   at('AT'),
   @JsonValue('BE')
@@ -65,13 +65,10 @@ enum MessageDsaReportRequestReporterCountryOfResidenceReporterCountryOfResidence
   /// Default value for all unparsed values, allows backward compatibility when adding new values on the backend.
   $unknown(null);
 
-  const MessageDsaReportRequestReporterCountryOfResidenceReporterCountryOfResidence(
-    this.json,
-  );
+  const EuCountryCode(this.json);
 
-  factory MessageDsaReportRequestReporterCountryOfResidenceReporterCountryOfResidence.fromJson(
-    String json,
-  ) => values.firstWhere((e) => e.json == json, orElse: () => $unknown);
+  factory EuCountryCode.fromJson(String json) =>
+      values.firstWhere((e) => e.json == json, orElse: () => $unknown);
 
   final String? json;
 
@@ -81,8 +78,6 @@ enum MessageDsaReportRequestReporterCountryOfResidenceReporterCountryOfResidence
   String toString() => json ?? super.toString();
 
   /// Returns all defined enum values excluding the $unknown value.
-  static List<
-    MessageDsaReportRequestReporterCountryOfResidenceReporterCountryOfResidence
-  >
-  get $valuesDefined => values.where((value) => value != $unknown).toList();
+  static List<EuCountryCode> get $valuesDefined =>
+      values.where((value) => value != $unknown).toList();
 }

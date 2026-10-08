@@ -23,7 +23,7 @@ class ReportResponse {
   @JsonKey(name: 'report_id')
   final SnowflakeStringType reportId;
 
-  /// Current status of the report (pending, reviewed, resolved)
+  /// Current status of the report (pending, resolved)
   final String status;
 
   /// ISO 8601 timestamp when the report was submitted

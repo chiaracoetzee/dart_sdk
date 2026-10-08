@@ -8,12 +8,14 @@ import 'package:retrofit/error_logger.dart';
 
 import '../models/dsa_report_email_send_request.dart';
 import '../models/dsa_report_email_verify_request.dart';
-import '../models/dsa_report_request.dart';
+import '../models/dsa_report_flow_request.dart';
 import '../models/ok_response.dart';
-import '../models/report_guild_request.dart';
-import '../models/report_message_request.dart';
+import '../models/report_flow_message_submission_request.dart';
+import '../models/report_flow_response.dart';
+import '../models/report_flow_surface.dart';
+import '../models/report_flow_target_type.dart';
+import '../models/report_flow_user_submission_request.dart';
 import '../models/report_response.dart';
-import '../models/report_user_request.dart';
 import '../models/ticket_response.dart';
 
 part 'reports_api.g.dart';
@@ -24,17 +26,17 @@ abstract class ReportsApi {
 
   /// Create DSA report.
   ///
-  /// Creates a DSA complaint report with verified email for Digital Services Act compliance.
+  /// Creates a DSA complaint report with verified email for Digital Services Act compliance. The reason comes from the answers given in the DSA report flow.
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/reports/dsa')
   Future<ReportResponse> createDsaReport({
-    @Body() required DsaReportRequest body,
+    @Body() required DsaReportFlowRequest body,
   });
 
   /// Send DSA report email.
   ///
-  /// Initiates DSA (Digital Services Act) report submission by sending verification email to reporter.
+  /// Initiates DSA (Digital Services Act) report submission by sending verification email to reporter. Responds with 503 when the email could not be sent.
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/reports/dsa/email/send')
@@ -52,31 +54,39 @@ abstract class ReportsApi {
     @Body() required DsaReportEmailVerifyRequest body,
   });
 
-  /// Report guild.
+  /// Submit message report flow.
   ///
-  /// Submits a report about a guild to moderators for policy violation review.
+  /// Files a report about a message from the answers given in the in-app message report flow. The reporter must be able to access the channel and target message.
   ///
   /// [body] - Name not received - field will be skipped.
-  @POST('/reports/guild')
-  Future<ReportResponse> reportGuild({
-    @Body() required ReportGuildRequest body,
+  @POST('/reports/flows/message/submissions')
+  Future<ReportResponse> submitMessageReportFlow({
+    @Body() required ReportFlowMessageSubmissionRequest body,
   });
 
-  /// Report message.
+  /// Submit user report flow.
   ///
-  /// Submits a report about a message to moderators for content violation review. The reporter must be able to access the channel and target message.
+  /// Files a report about a user profile from the answers given in the in-app user profile report flow.
   ///
   /// [body] - Name not received - field will be skipped.
-  @POST('/reports/message')
-  Future<ReportResponse> reportMessage({
-    @Body() required ReportMessageRequest body,
+  @POST('/reports/flows/user/submissions')
+  Future<ReportResponse> submitUserReportFlow({
+    @Body() required ReportFlowUserSubmissionRequest body,
   });
 
-  /// Report user.
+  /// Get report flow.
   ///
-  /// Submits a report about a user to moderators for content violation or behaviour review.
+  /// Returns every screen of the report flow for a target type, rendered in the requested locale. Message and user flows are available in app and on the DSA form, the guild flow only on the DSA form.
   ///
-  /// [body] - Name not received - field will be skipped.
-  @POST('/reports/user')
-  Future<ReportResponse> reportUser({@Body() required ReportUserRequest body});
+  /// [targetType] - Kind of entity a report flow is about.
+  ///
+  /// [surface] - Where the flow is shown.
+  ///
+  /// [locale] - Language tag of the client UI. The server picks the closest supported locale and reports it in the locale field.
+  @GET('/reports/flows/{target_type}')
+  Future<ReportFlowResponse> getReportFlow({
+    @Path('target_type') required ReportFlowTargetType targetType,
+    @Query('locale') String? locale,
+    @Query('surface') ReportFlowSurface? surface = ReportFlowSurface.inApp,
+  });
 }

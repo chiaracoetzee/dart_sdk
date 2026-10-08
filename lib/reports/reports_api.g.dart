@@ -22,7 +22,7 @@ class _ReportsApi implements ReportsApi {
 
   @override
   Future<ReportResponse> createDsaReport({
-    required DsaReportRequest body,
+    required DsaReportFlowRequest body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -111,36 +111,8 @@ class _ReportsApi implements ReportsApi {
   }
 
   @override
-  Future<ReportResponse> reportGuild({required ReportGuildRequest body}) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(body.toJson());
-    final _options = _setStreamType<ReportResponse>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            '/reports/guild',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
-    );
-    final _result = await _dio.fetch<Map<String, Object?>>(_options);
-    late ReportResponse _value;
-    try {
-      _value = ReportResponse.fromJson(_result.data!);
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options, response: _result);
-      rethrow;
-    }
-    return _value;
-  }
-
-  @override
-  Future<ReportResponse> reportMessage({
-    required ReportMessageRequest body,
+  Future<ReportResponse> submitMessageReportFlow({
+    required ReportFlowMessageSubmissionRequest body,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -151,7 +123,7 @@ class _ReportsApi implements ReportsApi {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/reports/message',
+            '/reports/flows/message/submissions',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -169,7 +141,9 @@ class _ReportsApi implements ReportsApi {
   }
 
   @override
-  Future<ReportResponse> reportUser({required ReportUserRequest body}) async {
+  Future<ReportResponse> submitUserReportFlow({
+    required ReportFlowUserSubmissionRequest body,
+  }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -179,7 +153,7 @@ class _ReportsApi implements ReportsApi {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/reports/user',
+            '/reports/flows/user/submissions',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -189,6 +163,41 @@ class _ReportsApi implements ReportsApi {
     late ReportResponse _value;
     try {
       _value = ReportResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, response: _result);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<ReportFlowResponse> getReportFlow({
+    required ReportFlowTargetType targetType,
+    String? locale,
+    ReportFlowSurface? surface = ReportFlowSurface.inApp,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'locale': locale,
+      r'surface': surface?.toJson(),
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<ReportFlowResponse>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/reports/flows/${targetType.toJson()}',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, Object?>>(_options);
+    late ReportFlowResponse _value;
+    try {
+      _value = ReportFlowResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
