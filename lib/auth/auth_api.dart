@@ -15,7 +15,9 @@ import '../models/email_revert_request.dart';
 import '../models/forgot_password_request.dart';
 import '../models/handoff_cancel_request.dart';
 import '../models/handoff_complete_request.dart';
+import '../models/handoff_complete_response.dart';
 import '../models/handoff_info_response.dart';
+import '../models/handoff_initiate_request.dart';
 import '../models/handoff_initiate_response.dart';
 import '../models/handoff_status_request.dart';
 import '../models/handoff_status_response.dart';
@@ -88,17 +90,23 @@ abstract class AuthApi {
 
   /// Complete handoff.
   ///
-  /// Complete the handoff process and authenticate on the target device using the handoff code.
+  /// Complete the handoff process and authenticate on the target device using the handoff code. With the deep_link return method, responds with the deep link that hands the one-time grant back to the initiating app. Otherwise responds with no content.
   ///
   /// [body] - Name not received - field will be skipped.
   @POST('/auth/handoff/complete')
-  Future<void> completeHandoff({@Body() required HandoffCompleteRequest body});
+  Future<HandoffCompleteResponse?> completeHandoff({
+    @Body() required HandoffCompleteRequest body,
+  });
 
   /// Initiate handoff.
   ///
-  /// Start a handoff session to transfer authentication between devices. Returns a handoff code for device linking.
+  /// Start a handoff session to transfer authentication between devices. Returns a handoff code for device linking. A desktop app that registers a return deep link can be signed in without the user typing the code.
+  ///
+  /// [body] - Name not received - field will be skipped.
   @POST('/auth/handoff/initiate')
-  Future<HandoffInitiateResponse> initiateHandoff();
+  Future<HandoffInitiateResponse> initiateHandoff({
+    @Body() HandoffInitiateRequest? body,
+  });
 
   /// Cancel handoff.
   ///
@@ -112,6 +120,14 @@ abstract class AuthApi {
     @Path('code') required String code,
     @Body() required HandoffCancelRequest body,
   });
+
+  /// Deny handoff.
+  ///
+  /// Decline a handoff request after looking it up. The initiating device sees the denied status and the code can no longer be approved.
+  ///
+  /// [code] - The handoff code.
+  @POST('/auth/handoff/{code}/deny')
+  Future<void> denyHandoff({@Path('code') required String code});
 
   /// Get handoff info.
   ///

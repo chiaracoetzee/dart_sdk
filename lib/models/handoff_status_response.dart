@@ -21,7 +21,7 @@ class HandoffStatusResponse {
   factory HandoffStatusResponse.fromJson(Map<String, Object?> json) =>
       _$HandoffStatusResponseFromJson(json);
 
-  /// Current status of the handoff (pending, completed, expired)
+  /// Current status of the handoff (pending, completed, denied, expired)
   final String status;
 
   /// Authentication token if handoff is complete

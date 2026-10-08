@@ -8,7 +8,7 @@ part 'handoff_status_request.g.dart';
 
 @JsonSerializable()
 class HandoffStatusRequest {
-  const HandoffStatusRequest({required this.pollSecret});
+  const HandoffStatusRequest({required this.pollSecret, this.grant});
 
   factory HandoffStatusRequest.fromJson(Map<String, Object?> json) =>
       _$HandoffStatusRequestFromJson(json);
@@ -16,6 +16,10 @@ class HandoffStatusRequest {
   /// The poll secret issued when the handoff was initiated
   @JsonKey(name: 'poll_secret')
   final String pollSecret;
+
+  /// The one-time grant delivered to the app through the deep link
+  @JsonKey(includeIfNull: false)
+  final String? grant;
 
   Map<String, Object?> toJson() => _$HandoffStatusRequestToJson(this);
 }

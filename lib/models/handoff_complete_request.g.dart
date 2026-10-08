@@ -13,9 +13,14 @@ HandoffCompleteRequest _$HandoffCompleteRequestFromJson(
     code: $checkedConvert('code', (v) => v as String),
     userId: $checkedConvert('user_id', (v) => v as String),
     token: $checkedConvert('token', (v) => v as String?),
+    returnMethod: $checkedConvert(
+      'return_method',
+      (v) =>
+          v == null ? null : DesktopHandoffReturnMethod.fromJson(v as String),
+    ),
   );
   return val;
-}, fieldKeyMap: const {'userId': 'user_id'});
+}, fieldKeyMap: const {'userId': 'user_id', 'returnMethod': 'return_method'});
 
 Map<String, dynamic> _$HandoffCompleteRequestToJson(
   HandoffCompleteRequest instance,
@@ -23,4 +28,5 @@ Map<String, dynamic> _$HandoffCompleteRequestToJson(
   'code': instance.code,
   'token': ?instance.token,
   'user_id': instance.userId,
+  'return_method': ?instance.returnMethod,
 };

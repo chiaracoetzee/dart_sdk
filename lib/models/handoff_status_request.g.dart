@@ -11,10 +11,14 @@ HandoffStatusRequest _$HandoffStatusRequestFromJson(
 ) => $checkedCreate('HandoffStatusRequest', json, ($checkedConvert) {
   final val = HandoffStatusRequest(
     pollSecret: $checkedConvert('poll_secret', (v) => v as String),
+    grant: $checkedConvert('grant', (v) => v as String?),
   );
   return val;
 }, fieldKeyMap: const {'pollSecret': 'poll_secret'});
 
 Map<String, dynamic> _$HandoffStatusRequestToJson(
   HandoffStatusRequest instance,
-) => <String, dynamic>{'poll_secret': instance.pollSecret};
+) => <String, dynamic>{
+  'poll_secret': instance.pollSecret,
+  'grant': ?instance.grant,
+};
