@@ -17,6 +17,7 @@ import 'message_search_results_response_messages_message_reference.dart';
 import 'message_snapshot_response.dart';
 import 'message_search_results_response_messages_call.dart';
 import 'thread_channel_response.dart';
+import 'message_subprofile_response_schema.dart';
 
 part 'message_search_results_response_messages.g.dart';
 
@@ -48,6 +49,7 @@ class MessageSearchResultsResponseMessages {
     this.nonce,
     this.call,
     this.thread,
+    this.subprofile,
   });
 
   factory MessageSearchResultsResponseMessages.fromJson(
@@ -142,6 +144,10 @@ class MessageSearchResultsResponseMessages {
   /// The thread started from this message, when the viewer can see threads
   @JsonKey(includeIfNull: false)
   final ThreadChannelResponse? thread;
+
+  /// Optional subprofile persona information
+  @JsonKey(includeIfNull: false)
+  final MessageSubprofileResponseSchema? subprofile;
 
   Map<String, Object?> toJson() =>
       _$MessageSearchResultsResponseMessagesToJson(this);

@@ -137,6 +137,14 @@ MessageResponseSchema _$MessageResponseSchemaFromJson(
                 v as Map<String, dynamic>,
               ),
       ),
+      subprofile: $checkedConvert(
+        'subprofile',
+        (v) => v == null
+            ? null
+            : MessageSubprofileResponseSchema.fromJson(
+                v as Map<String, dynamic>,
+              ),
+      ),
     );
     return val;
   },
@@ -182,4 +190,5 @@ Map<String, dynamic> _$MessageResponseSchemaToJson(
   'call': ?instance.call,
   'thread': ?instance.thread,
   'referenced_message': ?instance.referencedMessage,
+  'subprofile': ?instance.subprofile,
 };

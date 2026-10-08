@@ -17,6 +17,7 @@ import 'message_response_schema_referenced_message_message_reference.dart';
 import 'message_snapshot_response.dart';
 import 'message_response_schema_referenced_message_call.dart';
 import 'thread_channel_response.dart';
+import 'message_subprofile_response_schema.dart';
 
 part 'message_response_schema_referenced_message.g.dart';
 
@@ -48,6 +49,7 @@ class MessageResponseSchemaReferencedMessage {
     this.nonce,
     this.call,
     this.thread,
+    this.subprofile,
   });
 
   factory MessageResponseSchemaReferencedMessage.fromJson(
@@ -143,6 +145,10 @@ class MessageResponseSchemaReferencedMessage {
   /// The thread started from this message, when the viewer can see threads
   @JsonKey(includeIfNull: false)
   final ThreadChannelResponse? thread;
+
+  /// Optional subprofile persona information
+  @JsonKey(includeIfNull: false)
+  final MessageSubprofileResponseSchema? subprofile;
 
   Map<String, Object?> toJson() =>
       _$MessageResponseSchemaReferencedMessageToJson(this);

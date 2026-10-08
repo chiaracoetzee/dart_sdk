@@ -10,6 +10,7 @@ export 'auth/auth_api.dart';
 export 'channels/channels_api.dart';
 export 'invites/invites_api.dart';
 export 'saved_media/saved_media_api.dart';
+export 'signal_bar/signal_bar_api.dart';
 export 'webhooks/webhooks_api.dart';
 export 'discovery/discovery_api.dart';
 export 'donations/donations_api.dart';
@@ -30,6 +31,7 @@ export 'search/search_api.dart';
 export 'stickers/stickers_api.dart';
 export 'debug/debug_api.dart';
 export 'connections/connections_api.dart';
+export 'personas/personas_api.dart';
 export 'themes/themes_api.dart';
 export 'voice/voice_api.dart';
 // Data classes

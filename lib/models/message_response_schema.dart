@@ -14,6 +14,7 @@ import 'message_response_schema_message_reference.dart';
 import 'message_response_schema_referenced_message.dart';
 import 'message_snapshot_response.dart';
 import 'message_sticker_response.dart';
+import 'message_subprofile_response_schema.dart';
 import 'message_type.dart';
 import 'snowflake_string_type.dart';
 import 'thread_channel_response.dart';
@@ -50,6 +51,7 @@ class MessageResponseSchema {
     this.call,
     this.thread,
     this.referencedMessage,
+    this.subprofile,
   });
 
   factory MessageResponseSchema.fromJson(Map<String, Object?> json) =>
@@ -147,6 +149,10 @@ class MessageResponseSchema {
   /// The reply target. Present and populated when the target resolved, present and null when the target is gone, absent when this message has no default reference. Clients must tell null apart from absent by key presence.
   @JsonKey(includeIfNull: false, name: 'referenced_message')
   final MessageResponseSchemaReferencedMessage? referencedMessage;
+
+  /// Optional subprofile persona information
+  @JsonKey(includeIfNull: false)
+  final MessageSubprofileResponseSchema? subprofile;
 
   Map<String, Object?> toJson() => _$MessageResponseSchemaToJson(this);
 }

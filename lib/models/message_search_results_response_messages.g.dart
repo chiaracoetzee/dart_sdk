@@ -132,6 +132,14 @@ _$MessageSearchResultsResponseMessagesFromJson(
             ? null
             : ThreadChannelResponse.fromJson(v as Map<String, dynamic>),
       ),
+      subprofile: $checkedConvert(
+        'subprofile',
+        (v) => v == null
+            ? null
+            : MessageSubprofileResponseSchema.fromJson(
+                v as Map<String, dynamic>,
+              ),
+      ),
     );
     return val;
   },
@@ -175,4 +183,5 @@ Map<String, dynamic> _$MessageSearchResultsResponseMessagesToJson(
   'nonce': ?instance.nonce,
   'call': ?instance.call,
   'thread': ?instance.thread,
+  'subprofile': ?instance.subprofile,
 };
