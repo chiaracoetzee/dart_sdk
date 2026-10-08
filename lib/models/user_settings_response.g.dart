@@ -13,14 +13,14 @@ UserSettingsResponse _$UserSettingsResponseFromJson(
   json,
   ($checkedConvert) {
     final val = UserSettingsResponse(
-      renderEmbeds: $checkedConvert('render_embeds', (v) => v as bool),
-      profilePrivacy: $checkedConvert(
-        'profile_privacy',
-        (v) => ProfilePrivacyLevel.fromJson((v as num).toInt()),
+      renderReactions: $checkedConvert('render_reactions', (v) => v as bool),
+      privacySetupVersion: $checkedConvert(
+        'privacy_setup_version',
+        (v) => (v as num).toInt(),
       ),
-      syncedPreferences: $checkedConvert(
-        'synced_preferences',
-        (v) => v as String,
+      defaultShareVoiceActivity: $checkedConvert(
+        'default_share_voice_activity',
+        (v) => v as bool,
       ),
       theme: $checkedConvert('theme', (v) => v as String),
       locale: $checkedConvert('locale', (v) => Locale.fromJson(v as String)),
@@ -46,8 +46,8 @@ UserSettingsResponse _$UserSettingsResponseFromJson(
       ),
       inlineEmbedMedia: $checkedConvert('inline_embed_media', (v) => v as bool),
       gifAutoPlay: $checkedConvert('gif_auto_play', (v) => v as bool),
+      renderEmbeds: $checkedConvert('render_embeds', (v) => v as bool),
       status: $checkedConvert('status', (v) => v as String),
-      renderReactions: $checkedConvert('render_reactions', (v) => v as bool),
       animateEmoji: $checkedConvert('animate_emoji', (v) => v as bool),
       animateStickers: $checkedConvert(
         'animate_stickers',
@@ -90,11 +90,14 @@ UserSettingsResponse _$UserSettingsResponseFromJson(
             : CustomStatusResponse.fromJson(v as Map<String, dynamic>),
       ),
       afkTimeout: $checkedConvert('afk_timeout', (v) => (v as num).toInt()),
-      defaultShareVoiceActivity: $checkedConvert(
-        'default_share_voice_activity',
-        (v) => v as bool,
+      timeFormat: $checkedConvert(
+        'time_format',
+        (v) => TimeFormatTypes.fromJson((v as num).toInt()),
       ),
-      developerMode: $checkedConvert('developer_mode', (v) => v as bool),
+      privacySetupCompletedAt: $checkedConvert(
+        'privacy_setup_completed_at',
+        (v) => v == null ? null : DateTime.parse(v as String),
+      ),
       trustedDomains: $checkedConvert(
         'trusted_domains',
         (v) => (v as List<dynamic>).map((e) => e as String).toList(),
@@ -127,10 +130,15 @@ UserSettingsResponse _$UserSettingsResponseFromJson(
         'staff_dm_access_user_ids',
         (v) => (v as List<dynamic>).map((e) => e as String).toList(),
       ),
-      timeFormat: $checkedConvert(
-        'time_format',
-        (v) => TimeFormatTypes.fromJson((v as num).toInt()),
+      syncedPreferences: $checkedConvert(
+        'synced_preferences',
+        (v) => v as String,
       ),
+      profilePrivacy: $checkedConvert(
+        'profile_privacy',
+        (v) => ProfilePrivacyLevel.fromJson((v as num).toInt()),
+      ),
+      developerMode: $checkedConvert('developer_mode', (v) => v as bool),
       statusResetsAt: $checkedConvert(
         'status_resets_at',
         (v) => v == null ? null : DateTime.parse(v as String),
@@ -140,9 +148,9 @@ UserSettingsResponse _$UserSettingsResponseFromJson(
     return val;
   },
   fieldKeyMap: const {
-    'renderEmbeds': 'render_embeds',
-    'profilePrivacy': 'profile_privacy',
-    'syncedPreferences': 'synced_preferences',
+    'renderReactions': 'render_reactions',
+    'privacySetupVersion': 'privacy_setup_version',
+    'defaultShareVoiceActivity': 'default_share_voice_activity',
     'restrictedGuilds': 'restricted_guilds',
     'botRestrictedGuilds': 'bot_restricted_guilds',
     'defaultGuildsRestricted': 'default_guilds_restricted',
@@ -150,7 +158,7 @@ UserSettingsResponse _$UserSettingsResponseFromJson(
     'inlineAttachmentMedia': 'inline_attachment_media',
     'inlineEmbedMedia': 'inline_embed_media',
     'gifAutoPlay': 'gif_auto_play',
-    'renderReactions': 'render_reactions',
+    'renderEmbeds': 'render_embeds',
     'animateEmoji': 'animate_emoji',
     'animateStickers': 'animate_stickers',
     'renderSpoilers': 'render_spoilers',
@@ -161,8 +169,8 @@ UserSettingsResponse _$UserSettingsResponseFromJson(
     'guildFolders': 'guild_folders',
     'customStatus': 'custom_status',
     'afkTimeout': 'afk_timeout',
-    'defaultShareVoiceActivity': 'default_share_voice_activity',
-    'developerMode': 'developer_mode',
+    'timeFormat': 'time_format',
+    'privacySetupCompletedAt': 'privacy_setup_completed_at',
     'trustedDomains': 'trusted_domains',
     'defaultHideMutedChannels': 'default_hide_muted_channels',
     'sensitiveContentFriendDmFilter': 'sensitive_content_friend_dm_filter',
@@ -173,7 +181,9 @@ UserSettingsResponse _$UserSettingsResponseFromJson(
     'suppressUnprivilegedSelfMentionsBypassUserIds':
         'suppress_unprivileged_self_mentions_bypass_user_ids',
     'staffDmAccessUserIds': 'staff_dm_access_user_ids',
-    'timeFormat': 'time_format',
+    'syncedPreferences': 'synced_preferences',
+    'profilePrivacy': 'profile_privacy',
+    'developerMode': 'developer_mode',
     'statusResetsAt': 'status_resets_at',
     'statusResetsTo': 'status_resets_to',
   },
@@ -222,4 +232,7 @@ Map<String, dynamic> _$UserSettingsResponseToJson(
   'synced_preferences': instance.syncedPreferences,
   'profile_privacy': instance.profilePrivacy,
   'default_share_voice_activity': instance.defaultShareVoiceActivity,
+  'privacy_setup_version': instance.privacySetupVersion,
+  'privacy_setup_completed_at': instance.privacySetupCompletedAt
+      ?.toIso8601String(),
 };

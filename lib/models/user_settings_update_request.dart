@@ -27,7 +27,7 @@ part 'user_settings_update_request.g.dart';
 @JsonSerializable(constructor: '_')
 class UserSettingsUpdateRequest {
   UserSettingsUpdateRequest({
-    this.flags,
+    this.gifAutoPlay,
     this.status,
     this.theme,
     this.guildPositions,
@@ -38,7 +38,7 @@ class UserSettingsUpdateRequest {
     this.botDefaultGuildsRestricted,
     this.inlineAttachmentMedia,
     this.inlineEmbedMedia,
-    this.gifAutoPlay,
+    this.flags,
     this.renderEmbeds,
     this.renderReactions,
     this.animateEmoji,
@@ -48,7 +48,7 @@ class UserSettingsUpdateRequest {
     this.friendSourceFlags,
     this.incomingCallFlags,
     this.groupDmAddPermissionFlags,
-    this.guildFolders,
+    this.privacySetupVersion,
     this.afkTimeout,
     this.timeFormat,
     this.developerMode,
@@ -60,6 +60,7 @@ class UserSettingsUpdateRequest {
     this.suppressUnprivilegedSelfMentions,
     this.profilePrivacy,
     this.defaultShareVoiceActivity,
+    this.guildFolders,
     JsonNullable<String> statusResetsAt =
         const JsonNullable<String>.undefined(),
     JsonNullable<UserStatusType> statusResetsTo =
@@ -128,6 +129,7 @@ class UserSettingsUpdateRequest {
     this.suppressUnprivilegedSelfMentions,
     this.profilePrivacy,
     this.defaultShareVoiceActivity,
+    this.privacySetupVersion,
     this.afkTimeout,
   }) : _statusResetsAtValue = null,
        _statusResetsToValue = null,
@@ -213,6 +215,7 @@ class UserSettingsUpdateRequest {
           : const JsonNullable<List<SnowflakeType>>.undefined(),
       profilePrivacy: value.profilePrivacy,
       defaultShareVoiceActivity: value.defaultShareVoiceActivity,
+      privacySetupVersion: value.privacySetupVersion,
       afkTimeout: value.afkTimeout,
     );
   }
@@ -334,6 +337,10 @@ class UserSettingsUpdateRequest {
   /// Default share_voice_activity applied to new friend relationships
   @JsonKey(includeIfNull: false, name: 'default_share_voice_activity')
   final bool? defaultShareVoiceActivity;
+
+  /// Version of the privacy setup the user just reviewed. The server also records privacy_setup_completed_at as the current time.
+  @JsonKey(includeIfNull: false, name: 'privacy_setup_version')
+  final int? privacySetupVersion;
   @JsonKey(includeFromJson: false, includeToJson: false)
   final JsonNullable<String> statusResetsAt;
   @JsonKey(includeIfNull: false, name: 'status_resets_at')

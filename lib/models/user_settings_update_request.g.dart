@@ -142,6 +142,10 @@ UserSettingsUpdateRequest _$UserSettingsUpdateRequestFromJson(
         'default_share_voice_activity',
         (v) => v as bool?,
       ),
+      privacySetupVersion: $checkedConvert(
+        'privacy_setup_version',
+        (v) => (v as num?)?.toInt(),
+      ),
       afkTimeout: $checkedConvert('afk_timeout', (v) => (v as num?)?.toInt()),
     );
     return val;
@@ -176,6 +180,7 @@ UserSettingsUpdateRequest _$UserSettingsUpdateRequestFromJson(
     'suppressUnprivilegedSelfMentions': 'suppress_unprivileged_self_mentions',
     'profilePrivacy': 'profile_privacy',
     'defaultShareVoiceActivity': 'default_share_voice_activity',
+    'privacySetupVersion': 'privacy_setup_version',
     'afkTimeout': 'afk_timeout',
   },
 );
@@ -219,4 +224,5 @@ Map<String, dynamic> _$UserSettingsUpdateRequestToJson(
       ?instance.suppressUnprivilegedSelfMentions,
   'profile_privacy': ?instance.profilePrivacy,
   'default_share_voice_activity': ?instance.defaultShareVoiceActivity,
+  'privacy_setup_version': ?instance.privacySetupVersion,
 };

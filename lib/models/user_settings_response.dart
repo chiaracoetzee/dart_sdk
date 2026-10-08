@@ -24,9 +24,9 @@ part 'user_settings_response.g.dart';
 @JsonSerializable()
 class UserSettingsResponse {
   const UserSettingsResponse({
-    required this.renderEmbeds,
-    required this.profilePrivacy,
-    required this.syncedPreferences,
+    required this.renderReactions,
+    required this.privacySetupVersion,
+    required this.defaultShareVoiceActivity,
     required this.theme,
     required this.locale,
     required this.restrictedGuilds,
@@ -36,8 +36,8 @@ class UserSettingsResponse {
     required this.inlineAttachmentMedia,
     required this.inlineEmbedMedia,
     required this.gifAutoPlay,
+    required this.renderEmbeds,
     required this.status,
-    required this.renderReactions,
     required this.animateEmoji,
     required this.animateStickers,
     required this.renderSpoilers,
@@ -48,8 +48,8 @@ class UserSettingsResponse {
     required this.guildFolders,
     required this.customStatus,
     required this.afkTimeout,
-    required this.defaultShareVoiceActivity,
-    required this.developerMode,
+    required this.timeFormat,
+    required this.privacySetupCompletedAt,
     required this.trustedDomains,
     required this.defaultHideMutedChannels,
     required this.sensitiveContentFriendDmFilter,
@@ -58,7 +58,9 @@ class UserSettingsResponse {
     required this.suppressUnprivilegedSelfMentions,
     required this.suppressUnprivilegedSelfMentionsBypassUserIds,
     required this.staffDmAccessUserIds,
-    required this.timeFormat,
+    required this.syncedPreferences,
+    required this.profilePrivacy,
+    required this.developerMode,
     this.statusResetsAt,
     this.statusResetsTo,
   });
@@ -200,6 +202,14 @@ class UserSettingsResponse {
   /// Default value of share_voice_activity applied to newly accepted friend relationships. Read-only here; mutated via PUT /users/@me/settings/voice-activity-sharing.
   @JsonKey(name: 'default_share_voice_activity')
   final bool defaultShareVoiceActivity;
+
+  /// Latest privacy setup version the user has reviewed, 0 if never reviewed
+  @JsonKey(name: 'privacy_setup_version')
+  final int privacySetupVersion;
+
+  /// When the user last completed the privacy setup, or null if never
+  @JsonKey(includeIfNull: true, name: 'privacy_setup_completed_at')
+  final DateTime? privacySetupCompletedAt;
 
   Map<String, Object?> toJson() => _$UserSettingsResponseToJson(this);
 }
