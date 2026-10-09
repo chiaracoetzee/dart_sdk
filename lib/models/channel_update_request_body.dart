@@ -416,12 +416,15 @@ class ChannelUpdateRequestBodyVariant6 {
   final SnowflakeType? ownerId;
   @JsonKey(includeIfNull: false)
   final ChannelNicknameOverrides? nicks;
+  @JsonKey(includeIfNull: false)
+  final bool? nsfw;
 
   const ChannelUpdateRequestBodyVariant6({
     this.name,
     this.icon,
     this.ownerId,
     this.nicks,
+    this.nsfw,
   });
 
   factory ChannelUpdateRequestBodyVariant6.fromJson(

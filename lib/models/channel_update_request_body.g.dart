@@ -484,6 +484,7 @@ ChannelUpdateRequestBodyVariant6 _$ChannelUpdateRequestBodyVariant6FromJson(
             (k, e) => MapEntry(k, e as String?),
           ),
         ),
+        nsfw: $checkedConvert('nsfw', (v) => v as bool?),
       );
       return val;
     }, fieldKeyMap: const {'ownerId': 'owner_id'});
@@ -495,6 +496,7 @@ Map<String, dynamic> _$ChannelUpdateRequestBodyVariant6ToJson(
   'icon': ?instance.icon,
   'owner_id': ?instance.ownerId,
   'nicks': ?instance.nicks,
+  'nsfw': ?instance.nsfw,
 };
 
 ChannelUpdateRequestBodyChannelUpdatePublicThreadRequestBody

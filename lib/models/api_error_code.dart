@@ -325,6 +325,8 @@ enum ApiErrorCode {
   maxGroupDms('MAX_GROUP_DMS'),
   @JsonValue('GROUP_DM_RECIPIENTS_NOT_ADDABLE')
   groupDmRecipientsNotAddable('GROUP_DM_RECIPIENTS_NOT_ADDABLE'),
+  @JsonValue('GROUP_DM_MATURE_CONTENT_INELIGIBLE')
+  groupDmMatureContentIneligible('GROUP_DM_MATURE_CONTENT_INELIGIBLE'),
   @JsonValue('MAX_GUILD_CHANNELS')
   maxGuildChannels('MAX_GUILD_CHANNELS'),
   @JsonValue('MAX_GUILD_MEMBERS')
@@ -399,6 +401,8 @@ enum ApiErrorCode {
   reportBanned('REPORT_BANNED'),
   @JsonValue('REPORT_FLOW_OUTDATED')
   reportFlowOutdated('REPORT_FLOW_OUTDATED'),
+  @JsonValue('REPORT_UNDER_LEGAL_HOLD')
+  reportUnderLegalHold('REPORT_UNDER_LEGAL_HOLD'),
   @JsonValue('RESPONSE_VALIDATION_ERROR')
   responseValidationError('RESPONSE_VALIDATION_ERROR'),
   @JsonValue('RESOURCE_LOCKED')
