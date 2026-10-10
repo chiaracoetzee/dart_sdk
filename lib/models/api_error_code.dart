@@ -89,8 +89,6 @@ enum ApiErrorCode {
   cannotSendMessagesToUser('CANNOT_SEND_MESSAGES_TO_USER'),
   @JsonValue('CANNOT_TRANSFER_OWNERSHIP_TO_BOT')
   cannotTransferOwnershipToBot('CANNOT_TRANSFER_OWNERSHIP_TO_BOT'),
-  @JsonValue('CANNOT_SHRINK_RESERVED_SLOTS')
-  cannotShrinkReservedSlots('CANNOT_SHRINK_RESERVED_SLOTS'),
   @JsonValue('CAPTCHA_REQUIRED')
   captchaRequired('CAPTCHA_REQUIRED'),
   @JsonValue('CHANNEL_ALREADY_FOLLOWED')
