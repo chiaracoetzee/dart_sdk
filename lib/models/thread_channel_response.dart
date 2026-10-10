@@ -53,6 +53,7 @@ class ThreadChannelResponse {
     this.memberCount,
     this.memberIdsPreview,
     this.member,
+    this.ownerPersonaId,
     this.defaultAutoArchiveDuration,
     this.defaultThreadRateLimitPerUser,
     this.availableTags,
@@ -188,6 +189,10 @@ class ThreadChannelResponse {
   /// The thread member object for the current user
   @JsonKey(includeIfNull: false)
   final ThreadMemberResponse? member;
+
+  /// The ID of the persona the owner started the thread as, absent when it was started as the account
+  @JsonKey(includeIfNull: false, name: 'owner_persona_id')
+  final SnowflakeStringType? ownerPersonaId;
 
   /// Default auto archive duration for new threads
   @JsonKey(includeIfNull: false, name: 'default_auto_archive_duration')

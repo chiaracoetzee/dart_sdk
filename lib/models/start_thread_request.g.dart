@@ -29,12 +29,14 @@ StartThreadRequest _$StartThreadRequestFromJson(Map<String, dynamic> json) =>
           ),
           invitable: $checkedConvert('invitable', (v) => v as bool?),
           location: $checkedConvert('location', (v) => v as String?),
+          personaId: $checkedConvert('persona_id', (v) => v as String?),
         );
         return val;
       },
       fieldKeyMap: const {
         'autoArchiveDuration': 'auto_archive_duration',
         'rateLimitPerUser': 'rate_limit_per_user',
+        'personaId': 'persona_id',
       },
     );
 
@@ -46,4 +48,5 @@ Map<String, dynamic> _$StartThreadRequestToJson(StartThreadRequest instance) =>
       'rate_limit_per_user': ?instance.rateLimitPerUser,
       'invitable': ?instance.invitable,
       'location': ?instance.location,
+      'persona_id': ?instance.personaId,
     };

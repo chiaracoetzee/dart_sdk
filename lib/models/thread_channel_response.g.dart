@@ -108,6 +108,7 @@ ThreadChannelResponse _$ThreadChannelResponseFromJson(
             ? null
             : ThreadMemberResponse.fromJson(v as Map<String, dynamic>),
       ),
+      ownerPersonaId: $checkedConvert('owner_persona_id', (v) => v as String?),
       defaultAutoArchiveDuration: $checkedConvert(
         'default_auto_archive_duration',
         (v) => (v as num?)?.toInt(),
@@ -165,6 +166,7 @@ ThreadChannelResponse _$ThreadChannelResponseFromJson(
     'totalMessageSent': 'total_message_sent',
     'memberCount': 'member_count',
     'memberIdsPreview': 'member_ids_preview',
+    'ownerPersonaId': 'owner_persona_id',
     'defaultAutoArchiveDuration': 'default_auto_archive_duration',
     'defaultThreadRateLimitPerUser': 'default_thread_rate_limit_per_user',
     'availableTags': 'available_tags',
@@ -210,6 +212,7 @@ Map<String, dynamic> _$ThreadChannelResponseToJson(
   'member_count': ?instance.memberCount,
   'member_ids_preview': ?instance.memberIdsPreview,
   'member': ?instance.member,
+  'owner_persona_id': ?instance.ownerPersonaId,
   'default_auto_archive_duration': ?instance.defaultAutoArchiveDuration,
   'default_thread_rate_limit_per_user': ?instance.defaultThreadRateLimitPerUser,
   'available_tags': ?instance.availableTags,

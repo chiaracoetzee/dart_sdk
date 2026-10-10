@@ -18,7 +18,7 @@ StartForumThreadResponse _$StartForumThreadResponseFromJson(
         'type',
         (v) => ChannelType.fromJson((v as num).toInt()),
       ),
-      rtcRegion: $checkedConvert('rtc_region', (v) => v as String?),
+      lastMessageId: $checkedConvert('last_message_id', (v) => v as String?),
       topic: $checkedConvert('topic', (v) => v as String?),
       url: $checkedConvert('url', (v) => v as String?),
       icon: $checkedConvert('icon', (v) => v as String?),
@@ -32,8 +32,8 @@ StartForumThreadResponse _$StartForumThreadResponseFromJson(
         'voice_connection_limit',
         (v) => (v as num?)?.toInt(),
       ),
+      rtcRegion: $checkedConvert('rtc_region', (v) => v as String?),
       name: $checkedConvert('name', (v) => v as String?),
-      lastMessageId: $checkedConvert('last_message_id', (v) => v as String?),
       lastPinTimestamp: $checkedConvert(
         'last_pin_timestamp',
         (v) => v == null ? null : DateTime.parse(v as String),
@@ -77,15 +77,17 @@ StartForumThreadResponse _$StartForumThreadResponseFromJson(
         ),
       ),
       flags: $checkedConvert('flags', (v) => (v as num?)?.toInt()),
+      threadMetadata: $checkedConvert(
+        'thread_metadata',
+        (v) => v == null
+            ? null
+            : ThreadMetadataResponse.fromJson(v as Map<String, dynamic>),
+      ),
       message: $checkedConvert(
         'message',
         (v) => v == null
             ? null
             : MessageResponseSchema.fromJson(v as Map<String, dynamic>),
-      ),
-      appliedTags: $checkedConvert(
-        'applied_tags',
-        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
       ),
       messageCount: $checkedConvert(
         'message_count',
@@ -106,6 +108,7 @@ StartForumThreadResponse _$StartForumThreadResponseFromJson(
             ? null
             : ThreadMemberResponse.fromJson(v as Map<String, dynamic>),
       ),
+      ownerPersonaId: $checkedConvert('owner_persona_id', (v) => v as String?),
       defaultAutoArchiveDuration: $checkedConvert(
         'default_auto_archive_duration',
         (v) => (v as num?)?.toInt(),
@@ -142,34 +145,33 @@ StartForumThreadResponse _$StartForumThreadResponseFromJson(
                 v as String,
               ),
       ),
-      threadMetadata: $checkedConvert(
-        'thread_metadata',
-        (v) => v == null
-            ? null
-            : ThreadMetadataResponse.fromJson(v as Map<String, dynamic>),
+      appliedTags: $checkedConvert(
+        'applied_tags',
+        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
       ),
     );
     return val;
   },
   fieldKeyMap: const {
-    'rtcRegion': 'rtc_region',
+    'lastMessageId': 'last_message_id',
     'ownerId': 'owner_id',
     'guildId': 'guild_id',
     'parentId': 'parent_id',
     'userLimit': 'user_limit',
     'voiceConnectionLimit': 'voice_connection_limit',
-    'lastMessageId': 'last_message_id',
+    'rtcRegion': 'rtc_region',
     'lastPinTimestamp': 'last_pin_timestamp',
     'permissionOverwrites': 'permission_overwrites',
     'nsfwOverride': 'nsfw_override',
     'contentWarningLevel': 'content_warning_level',
     'contentWarningText': 'content_warning_text',
     'rateLimitPerUser': 'rate_limit_per_user',
-    'appliedTags': 'applied_tags',
+    'threadMetadata': 'thread_metadata',
     'messageCount': 'message_count',
     'totalMessageSent': 'total_message_sent',
     'memberCount': 'member_count',
     'memberIdsPreview': 'member_ids_preview',
+    'ownerPersonaId': 'owner_persona_id',
     'defaultAutoArchiveDuration': 'default_auto_archive_duration',
     'defaultThreadRateLimitPerUser': 'default_thread_rate_limit_per_user',
     'availableTags': 'available_tags',
@@ -177,7 +179,7 @@ StartForumThreadResponse _$StartForumThreadResponseFromJson(
     'defaultSortOrder': 'default_sort_order',
     'defaultForumLayout': 'default_forum_layout',
     'defaultTagSetting': 'default_tag_setting',
-    'threadMetadata': 'thread_metadata',
+    'appliedTags': 'applied_tags',
   },
 );
 
@@ -216,6 +218,7 @@ Map<String, dynamic> _$StartForumThreadResponseToJson(
   'member_count': ?instance.memberCount,
   'member_ids_preview': ?instance.memberIdsPreview,
   'member': ?instance.member,
+  'owner_persona_id': ?instance.ownerPersonaId,
   'default_auto_archive_duration': ?instance.defaultAutoArchiveDuration,
   'default_thread_rate_limit_per_user': ?instance.defaultThreadRateLimitPerUser,
   'available_tags': ?instance.availableTags,

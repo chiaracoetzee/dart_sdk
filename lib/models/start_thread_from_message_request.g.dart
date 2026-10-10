@@ -12,7 +12,7 @@ StartThreadFromMessageRequest _$StartThreadFromMessageRequestFromJson(
   'StartThreadFromMessageRequest',
   json,
   ($checkedConvert) {
-    final val = StartThreadFromMessageRequest(
+    final val = StartThreadFromMessageRequest._(
       name: $checkedConvert('name', (v) => v as String),
       autoArchiveDuration: $checkedConvert(
         'auto_archive_duration',
