@@ -1471,10 +1471,9 @@ class _ChannelsApi implements ChannelsApi {
   }
 
   @override
-  Future<void> joinThread({required String channelId, String? location}) async {
+  Future<void> joinThread({required String channelId}) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'location': location};
-    queryParameters.removeWhere((k, v) => v == null);
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<void>(
@@ -1491,13 +1490,9 @@ class _ChannelsApi implements ChannelsApi {
   }
 
   @override
-  Future<void> leaveThread({
-    required String channelId,
-    String? location,
-  }) async {
+  Future<void> leaveThread({required String channelId}) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'location': location};
-    queryParameters.removeWhere((k, v) => v == null);
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<void>(
@@ -1583,11 +1578,9 @@ class _ChannelsApi implements ChannelsApi {
   Future<void> addThreadMember({
     required String channelId,
     required String userId,
-    String? location,
   }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'location': location};
-    queryParameters.removeWhere((k, v) => v == null);
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<void>(
@@ -1607,11 +1600,9 @@ class _ChannelsApi implements ChannelsApi {
   Future<void> removeThreadMember({
     required String channelId,
     required String userId,
-    String? location,
   }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'location': location};
-    queryParameters.removeWhere((k, v) => v == null);
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<void>(

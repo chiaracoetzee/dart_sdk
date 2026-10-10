@@ -18,7 +18,6 @@ class StartThreadRequest {
     this.autoArchiveDuration,
     this.rateLimitPerUser,
     this.invitable,
-    this.location,
   });
 
   factory StartThreadRequest.fromJson(Map<String, Object?> json) =>
@@ -37,10 +36,6 @@ class StartThreadRequest {
   /// Whether non-moderators can add other non-moderators (private threads)
   @JsonKey(includeIfNull: false)
   final bool? invitable;
-
-  /// Accepted and ignored
-  @JsonKey(includeIfNull: false)
-  final String? location;
 
   Map<String, Object?> toJson() => _$StartThreadRequestToJson(this);
 }

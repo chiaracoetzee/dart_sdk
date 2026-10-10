@@ -24,7 +24,6 @@ StartThreadFromMessageRequest _$StartThreadFromMessageRequestFromJson(
         'rate_limit_per_user',
         (v) => (v as num?)?.toInt(),
       ),
-      location: $checkedConvert('location', (v) => v as String?),
     );
     return val;
   },
@@ -40,5 +39,4 @@ Map<String, dynamic> _$StartThreadFromMessageRequestToJson(
   'name': instance.name,
   'auto_archive_duration': ?instance.autoArchiveDuration,
   'rate_limit_per_user': ?instance.rateLimitPerUser,
-  'location': ?instance.location,
 };

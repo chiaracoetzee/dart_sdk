@@ -841,12 +841,9 @@ abstract class ChannelsApi {
   /// Adds the current user to the thread. The thread must not be archived.
   ///
   /// [channelId] - The ID of the channel.
-  ///
-  /// [location] - Accepted and ignored.
   @PUT('/channels/{channel_id}/thread-members/@me')
   Future<void> joinThread({
     @Path('channel_id') required SnowflakeType channelId,
-    @Query('location') String? location,
   });
 
   /// Leave a thread.
@@ -854,12 +851,9 @@ abstract class ChannelsApi {
   /// Removes the current user from the thread. The thread must not be archived.
   ///
   /// [channelId] - The ID of the channel.
-  ///
-  /// [location] - Accepted and ignored.
   @DELETE('/channels/{channel_id}/thread-members/@me')
   Future<void> leaveThread({
     @Path('channel_id') required SnowflakeType channelId,
-    @Query('location') String? location,
   });
 
   /// Update thread settings.
@@ -898,13 +892,10 @@ abstract class ChannelsApi {
   /// [channelId] - The ID of the channel.
   ///
   /// [userId] - The ID of the user.
-  ///
-  /// [location] - Accepted and ignored.
   @PUT('/channels/{channel_id}/thread-members/{user_id}')
   Future<void> addThreadMember({
     @Path('channel_id') required SnowflakeType channelId,
     @Path('user_id') required SnowflakeType userId,
-    @Query('location') String? location,
   });
 
   /// Remove a thread member.
@@ -914,13 +905,10 @@ abstract class ChannelsApi {
   /// [channelId] - The ID of the channel.
   ///
   /// [userId] - The ID of the user.
-  ///
-  /// [location] - Accepted and ignored.
   @DELETE('/channels/{channel_id}/thread-members/{user_id}')
   Future<void> removeThreadMember({
     @Path('channel_id') required SnowflakeType channelId,
     @Path('user_id') required SnowflakeType userId,
-    @Query('location') String? location,
   });
 
   /// Start a thread.

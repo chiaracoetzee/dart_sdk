@@ -20,7 +20,6 @@ class StartForumThreadRequest {
     this.autoArchiveDuration,
     this.rateLimitPerUser,
     this.appliedTags,
-    this.location,
   });
 
   factory StartForumThreadRequest.fromJson(Map<String, Object?> json) =>
@@ -45,10 +44,6 @@ class StartForumThreadRequest {
 
   /// The first message of the post
   final ForumThreadMessageRequest message;
-
-  /// Accepted and ignored
-  @JsonKey(includeIfNull: false)
-  final String? location;
 
   Map<String, Object?> toJson() => _$StartForumThreadRequestToJson(this);
 }

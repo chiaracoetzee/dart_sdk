@@ -28,7 +28,6 @@ StartThreadRequest _$StartThreadRequestFromJson(Map<String, dynamic> json) =>
             (v) => (v as num?)?.toInt(),
           ),
           invitable: $checkedConvert('invitable', (v) => v as bool?),
-          location: $checkedConvert('location', (v) => v as String?),
         );
         return val;
       },
@@ -45,5 +44,4 @@ Map<String, dynamic> _$StartThreadRequestToJson(StartThreadRequest instance) =>
       'auto_archive_duration': ?instance.autoArchiveDuration,
       'rate_limit_per_user': ?instance.rateLimitPerUser,
       'invitable': ?instance.invitable,
-      'location': ?instance.location,
     };

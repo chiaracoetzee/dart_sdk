@@ -38,8 +38,6 @@ class StartThreadRequestBodyStartThreadRequest {
   final Int32Type? rateLimitPerUser;
   @JsonKey(includeIfNull: false)
   final bool? invitable;
-  @JsonKey(includeIfNull: false)
-  final String? location;
 
   const StartThreadRequestBodyStartThreadRequest({
     required this.name,
@@ -47,7 +45,6 @@ class StartThreadRequestBodyStartThreadRequest {
     this.autoArchiveDuration,
     this.rateLimitPerUser,
     this.invitable,
-    this.location,
   });
 
   factory StartThreadRequestBodyStartThreadRequest.fromJson(
@@ -70,8 +67,6 @@ class StartThreadRequestBodyStartForumThreadRequest {
   @JsonKey(includeIfNull: false, name: 'applied_tags')
   final List<SnowflakeType>? appliedTags;
   final ForumThreadMessageRequest message;
-  @JsonKey(includeIfNull: false)
-  final String? location;
 
   const StartThreadRequestBodyStartForumThreadRequest({
     required this.name,
@@ -80,7 +75,6 @@ class StartThreadRequestBodyStartForumThreadRequest {
     this.rateLimitPerUser,
     this.appliedTags,
     required this.message,
-    this.location,
   });
 
   factory StartThreadRequestBodyStartForumThreadRequest.fromJson(

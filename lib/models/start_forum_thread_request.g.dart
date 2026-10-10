@@ -33,7 +33,6 @@ StartForumThreadRequest _$StartForumThreadRequestFromJson(
         'applied_tags',
         (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
       ),
-      location: $checkedConvert('location', (v) => v as String?),
     );
     return val;
   },
@@ -53,5 +52,4 @@ Map<String, dynamic> _$StartForumThreadRequestToJson(
   'rate_limit_per_user': ?instance.rateLimitPerUser,
   'applied_tags': ?instance.appliedTags,
   'message': instance.message,
-  'location': ?instance.location,
 };

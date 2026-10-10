@@ -15,7 +15,6 @@ class StartThreadFromMessageRequest {
     required this.name,
     this.autoArchiveDuration,
     this.rateLimitPerUser,
-    this.location,
   });
 
   factory StartThreadFromMessageRequest.fromJson(Map<String, Object?> json) =>
@@ -29,10 +28,6 @@ class StartThreadFromMessageRequest {
   /// Seconds a user has to wait before sending another message (0-21600)
   @JsonKey(includeIfNull: false, name: 'rate_limit_per_user')
   final Int32Type? rateLimitPerUser;
-
-  /// Accepted and ignored
-  @JsonKey(includeIfNull: false)
-  final String? location;
 
   Map<String, Object?> toJson() => _$StartThreadFromMessageRequestToJson(this);
 }

@@ -29,7 +29,6 @@ _$StartThreadRequestBodyStartThreadRequestFromJson(Map<String, dynamic> json) =>
             (v) => (v as num?)?.toInt(),
           ),
           invitable: $checkedConvert('invitable', (v) => v as bool?),
-          location: $checkedConvert('location', (v) => v as String?),
         );
         return val;
       },
@@ -47,7 +46,6 @@ Map<String, dynamic> _$StartThreadRequestBodyStartThreadRequestToJson(
   'auto_archive_duration': ?instance.autoArchiveDuration,
   'rate_limit_per_user': ?instance.rateLimitPerUser,
   'invitable': ?instance.invitable,
-  'location': ?instance.location,
 };
 
 StartThreadRequestBodyStartForumThreadRequest
@@ -78,7 +76,6 @@ _$StartThreadRequestBodyStartForumThreadRequestFromJson(
         'message',
         (v) => ForumThreadMessageRequest.fromJson(v as Map<String, dynamic>),
       ),
-      location: $checkedConvert('location', (v) => v as String?),
     );
     return val;
   },
@@ -98,5 +95,4 @@ Map<String, dynamic> _$StartThreadRequestBodyStartForumThreadRequestToJson(
   'rate_limit_per_user': ?instance.rateLimitPerUser,
   'applied_tags': ?instance.appliedTags,
   'message': instance.message,
-  'location': ?instance.location,
 };
