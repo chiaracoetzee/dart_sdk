@@ -129,6 +129,14 @@ MessageResponseSchema _$MessageResponseSchemaFromJson(
             ? null
             : ThreadChannelResponse.fromJson(v as Map<String, dynamic>),
       ),
+      subprofile: $checkedConvert(
+        'subprofile',
+        (v) => v == null
+            ? null
+            : MessageSubprofileResponseSchema.fromJson(
+                v as Map<String, dynamic>,
+              ),
+      ),
       referencedMessage: $checkedConvert(
         'referenced_message',
         (v) => v == null
@@ -181,5 +189,6 @@ Map<String, dynamic> _$MessageResponseSchemaToJson(
   'nonce': ?instance.nonce,
   'call': ?instance.call,
   'thread': ?instance.thread,
+  'subprofile': ?instance.subprofile,
   'referenced_message': ?instance.referencedMessage,
 };
