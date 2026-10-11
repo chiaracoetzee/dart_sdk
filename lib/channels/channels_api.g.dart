@@ -441,7 +441,8 @@ class _ChannelsApi implements ChannelsApi {
     String? favoriteMemeId,
     List<String>? stickerIds,
     bool? tts,
-    MessagePersonaRequestSchema? subprofile,
+    String? personaId,
+    LegacyMessageSubprofileRequestSchema? subprofile,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -479,6 +480,9 @@ class _ChannelsApi implements ChannelsApi {
     });
     if (tts != null) {
       _data.fields.add(MapEntry('tts', tts.toString()));
+    }
+    if (personaId != null) {
+      _data.fields.add(MapEntry('persona_id', personaId));
     }
     _data.fields.add(
       MapEntry('subprofile', jsonEncode(subprofile ?? <String, dynamic>{})),
@@ -676,7 +680,8 @@ class _ChannelsApi implements ChannelsApi {
     String? content,
     List<RichEmbedRequest>? embeds,
     AllowedMentionsRequest? allowedMentions,
-    MessagePersonaRequestSchema? subprofile,
+    String? personaId,
+    LegacyMessageSubprofileRequestSchema? subprofile,
     int? flags,
     List<Object1>? attachments,
     List<Object2>? messageSnapshots,
@@ -696,6 +701,9 @@ class _ChannelsApi implements ChannelsApi {
         jsonEncode(allowedMentions ?? <String, dynamic>{}),
       ),
     );
+    if (personaId != null) {
+      _data.fields.add(MapEntry('persona_id', personaId));
+    }
     _data.fields.add(
       MapEntry('subprofile', jsonEncode(subprofile ?? <String, dynamic>{})),
     );

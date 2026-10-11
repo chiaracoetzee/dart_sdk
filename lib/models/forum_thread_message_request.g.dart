@@ -41,11 +41,14 @@ ForumThreadMessageRequest _$ForumThreadMessageRequestFromJson(
         'sticker_ids',
         (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
       ),
+      personaId: $checkedConvert('persona_id', (v) => v as String?),
       subprofile: $checkedConvert(
         'subprofile',
         (v) => v == null
             ? null
-            : MessagePersonaRequestSchema.fromJson(v as Map<String, dynamic>),
+            : LegacyMessageSubprofileRequestSchema.fromJson(
+                v as Map<String, dynamic>,
+              ),
       ),
     );
     return val;
@@ -53,6 +56,7 @@ ForumThreadMessageRequest _$ForumThreadMessageRequestFromJson(
   fieldKeyMap: const {
     'allowedMentions': 'allowed_mentions',
     'stickerIds': 'sticker_ids',
+    'personaId': 'persona_id',
   },
 );
 
@@ -65,5 +69,6 @@ Map<String, dynamic> _$ForumThreadMessageRequestToJson(
   'allowed_mentions': ?instance.allowedMentions,
   'flags': instance.flags,
   'sticker_ids': ?instance.stickerIds,
+  'persona_id': ?instance.personaId,
   'subprofile': ?instance.subprofile,
 };

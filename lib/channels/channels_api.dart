@@ -32,12 +32,12 @@ import '../models/followed_channel_response.dart';
 import '../models/forum_tag_request.dart';
 import '../models/forum_tag_setting_schema.dart';
 import '../models/indicate_typing_request_schema.dart';
+import '../models/legacy_message_subprofile_request_schema.dart';
 import '../models/message_ack_request.dart';
 import '../models/message_content_request.dart';
 import '../models/message_flags.dart';
 import '../models/message_list_response.dart';
 import '../models/message_nonce_request.dart';
-import '../models/message_persona_request_schema.dart';
 import '../models/message_purge_response.dart';
 import '../models/message_reference_request.dart';
 import '../models/message_response_schema.dart';
@@ -294,6 +294,9 @@ abstract class ChannelsApi {
   /// [tts] - Whether this is a text-to-speech message.
   /// Name not received - field will be skipped.
   ///
+  /// [personaId] - Name not received - field will be skipped.
+  /// Name not received - field will be skipped.
+  ///
   /// [subprofile] - Name not received - field will be skipped.
   /// Name not received - field will be skipped.
   @MultiPart()
@@ -310,7 +313,8 @@ abstract class ChannelsApi {
     @Part(name: 'favorite_meme_id') SnowflakeType? favoriteMemeId,
     @Part(name: 'sticker_ids') List<SnowflakeType>? stickerIds,
     @Part(name: 'tts') bool? tts,
-    @Part(name: 'subprofile') MessagePersonaRequestSchema? subprofile,
+    @Part(name: 'persona_id') SnowflakeType? personaId,
+    @Part(name: 'subprofile') LegacyMessageSubprofileRequestSchema? subprofile,
   });
 
   /// Clear channel read state.
@@ -406,6 +410,9 @@ abstract class ChannelsApi {
   /// [allowedMentions] - Name not received - field will be skipped.
   /// Name not received - field will be skipped.
   ///
+  /// [personaId] - Name not received - field will be skipped.
+  /// Name not received - field will be skipped.
+  ///
   /// [subprofile] - Name not received - field will be skipped.
   /// Name not received - field will be skipped.
   ///
@@ -425,7 +432,8 @@ abstract class ChannelsApi {
     @Part(name: 'content') MessageContentRequest? content,
     @Part(name: 'embeds') List<RichEmbedRequest>? embeds,
     @Part(name: 'allowed_mentions') AllowedMentionsRequest? allowedMentions,
-    @Part(name: 'subprofile') MessagePersonaRequestSchema? subprofile,
+    @Part(name: 'persona_id') SnowflakeType? personaId,
+    @Part(name: 'subprofile') LegacyMessageSubprofileRequestSchema? subprofile,
     @Part(name: 'flags') MessageFlags? flags,
     @Part(name: 'attachments') List<Object1>? attachments,
     @Part(name: 'message_snapshots') List<Object2>? messageSnapshots,

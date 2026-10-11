@@ -6,22 +6,32 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'json_nullable.dart';
 
-import 'message_persona_request_schema.dart';
+import 'legacy_message_subprofile_request_schema.dart';
+import 'snowflake_type.dart';
 
 part 'indicate_typing_request_schema.g.dart';
 
 @JsonSerializable(constructor: '_')
 class IndicateTypingRequestSchema {
   IndicateTypingRequestSchema({
-    JsonNullable<MessagePersonaRequestSchema> subprofile =
-        const JsonNullable<MessagePersonaRequestSchema>.undefined(),
-  }) : subprofile = subprofile,
+    JsonNullable<SnowflakeType> personaId =
+        const JsonNullable<SnowflakeType>.undefined(),
+    JsonNullable<LegacyMessageSubprofileRequestSchema> subprofile =
+        const JsonNullable<LegacyMessageSubprofileRequestSchema>.undefined(),
+  }) : personaId = personaId,
+       _personaIdValue = personaId.value,
+       _personaIdPresent = personaId.isPresent,
+       subprofile = subprofile,
        _subprofileValue = subprofile.value,
        _subprofilePresent = subprofile.isPresent;
 
   const IndicateTypingRequestSchema._()
     : _subprofileValue = null,
-      subprofile = const JsonNullable<MessagePersonaRequestSchema>.undefined(),
+      _personaIdValue = null,
+      personaId = const JsonNullable<SnowflakeType>.undefined(),
+      _personaIdPresent = false,
+      subprofile =
+          const JsonNullable<LegacyMessageSubprofileRequestSchema>.undefined(),
       _subprofilePresent = false;
   factory IndicateTypingRequestSchema.patch(Map<String, Object?> json) =>
       IndicateTypingRequestSchema.fromJson(json);
@@ -29,20 +39,35 @@ class IndicateTypingRequestSchema {
   factory IndicateTypingRequestSchema.fromJson(Map<String, Object?> json) {
     final value = _$IndicateTypingRequestSchemaFromJson(json);
     return IndicateTypingRequestSchema(
+      personaId: json.containsKey('persona_id')
+          ? JsonNullable<SnowflakeType>.of(value._personaIdValue)
+          : const JsonNullable<SnowflakeType>.undefined(),
       subprofile: json.containsKey('subprofile')
-          ? JsonNullable<MessagePersonaRequestSchema>.of(value._subprofileValue)
-          : const JsonNullable<MessagePersonaRequestSchema>.undefined(),
+          ? JsonNullable<LegacyMessageSubprofileRequestSchema>.of(
+              value._subprofileValue,
+            )
+          : const JsonNullable<
+              LegacyMessageSubprofileRequestSchema
+            >.undefined(),
     );
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
-  final JsonNullable<MessagePersonaRequestSchema> subprofile;
+  final JsonNullable<SnowflakeType> personaId;
+  @JsonKey(includeIfNull: false, name: 'persona_id')
+  final SnowflakeType? _personaIdValue;
+  final bool _personaIdPresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<LegacyMessageSubprofileRequestSchema> subprofile;
   @JsonKey(includeIfNull: false, name: 'subprofile')
-  final MessagePersonaRequestSchema? _subprofileValue;
+  final LegacyMessageSubprofileRequestSchema? _subprofileValue;
   final bool _subprofilePresent;
 
   Map<String, Object?> toJson() {
     final json = _$IndicateTypingRequestSchemaToJson(this);
+    if (_personaIdPresent) {
+      json.putIfAbsent('persona_id', () => _personaIdValue);
+    }
     if (_subprofilePresent) {
       json.putIfAbsent('subprofile', () => _subprofileValue);
     }
