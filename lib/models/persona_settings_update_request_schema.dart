@@ -7,6 +7,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'json_nullable.dart';
 
 import 'active_persona_mode_schema.dart';
+import 'active_persona_scope_schema.dart';
 import 'snowflake_string_type.dart';
 
 part 'persona_settings_update_request_schema.g.dart';
@@ -15,6 +16,7 @@ part 'persona_settings_update_request_schema.g.dart';
 class PersonaSettingsUpdateRequestSchema {
   PersonaSettingsUpdateRequestSchema({
     this.activePersonaMode,
+    this.activePersonaScope,
     this.isLatched,
     JsonNullable<SnowflakeStringType> activePersonaId =
         const JsonNullable<SnowflakeStringType>.undefined(),
@@ -34,6 +36,7 @@ class PersonaSettingsUpdateRequestSchema {
 
   const PersonaSettingsUpdateRequestSchema._({
     this.activePersonaMode,
+    this.activePersonaScope,
     this.isLatched,
   }) : _activePersonaIdValue = null,
        _displayTagTextValue = null,
@@ -53,6 +56,7 @@ class PersonaSettingsUpdateRequestSchema {
     final value = _$PersonaSettingsUpdateRequestSchemaFromJson(json);
     return PersonaSettingsUpdateRequestSchema(
       activePersonaMode: value.activePersonaMode,
+      activePersonaScope: value.activePersonaScope,
       activePersonaId: json.containsKey('active_persona_id')
           ? JsonNullable<SnowflakeStringType>.of(value._activePersonaIdValue)
           : const JsonNullable<SnowflakeStringType>.undefined(),
@@ -68,6 +72,8 @@ class PersonaSettingsUpdateRequestSchema {
 
   @JsonKey(includeIfNull: false, name: 'active_persona_mode')
   final ActivePersonaModeSchema? activePersonaMode;
+  @JsonKey(includeIfNull: false, name: 'active_persona_scope')
+  final ActivePersonaScopeSchema? activePersonaScope;
   @JsonKey(includeIfNull: false, name: 'is_latched')
   final bool? isLatched;
   @JsonKey(includeFromJson: false, includeToJson: false)

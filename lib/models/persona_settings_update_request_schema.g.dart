@@ -17,12 +17,18 @@ PersonaSettingsUpdateRequestSchema _$PersonaSettingsUpdateRequestSchemaFromJson(
         'active_persona_mode',
         (v) => v == null ? null : ActivePersonaModeSchema.fromJson(v as String),
       ),
+      activePersonaScope: $checkedConvert(
+        'active_persona_scope',
+        (v) =>
+            v == null ? null : ActivePersonaScopeSchema.fromJson(v as String),
+      ),
       isLatched: $checkedConvert('is_latched', (v) => v as bool?),
     );
     return val;
   },
   fieldKeyMap: const {
     'activePersonaMode': 'active_persona_mode',
+    'activePersonaScope': 'active_persona_scope',
     'isLatched': 'is_latched',
   },
 );
@@ -31,5 +37,6 @@ Map<String, dynamic> _$PersonaSettingsUpdateRequestSchemaToJson(
   PersonaSettingsUpdateRequestSchema instance,
 ) => <String, dynamic>{
   'active_persona_mode': ?instance.activePersonaMode,
+  'active_persona_scope': ?instance.activePersonaScope,
   'is_latched': ?instance.isLatched,
 };

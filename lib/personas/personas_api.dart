@@ -7,6 +7,9 @@ import 'package:retrofit/retrofit.dart';
 import 'package:retrofit/error_logger.dart';
 
 import '../models/persona_bulk_import_request_schema.dart';
+import '../models/persona_channel_state_schema.dart';
+import '../models/persona_channel_state_update_request_schema.dart';
+import '../models/persona_channel_states_response_schema.dart';
 import '../models/persona_create_request_schema.dart';
 import '../models/persona_list_response_schema.dart';
 import '../models/persona_response_schema.dart';
@@ -38,6 +41,25 @@ abstract class PersonasApi {
   @POST('/users/@me/personas')
   Future<PersonaResponseSchema> createPersona({
     @Body() required PersonaCreateRequestSchema body,
+  });
+
+  /// List the personas selected per channel.
+  ///
+  /// Lists every channel the authenticated user has a persona selected in. Used when their persona is remembered per channel; a channel that is not listed is used as the account itself.
+  @GET('/users/@me/personas/channel-states')
+  Future<PersonaChannelStatesResponseSchema> listMyPersonaChannelStates();
+
+  /// Select a persona in a channel.
+  ///
+  /// Selects one of the authenticated user's personas in a channel they can see, or the account itself with a null persona. Only their own sessions are told.
+  ///
+  /// [channelId] - The ID of the channel.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @PUT('/users/@me/personas/channel-states/{channel_id}')
+  Future<PersonaChannelStateSchema> setMyPersonaChannelState({
+    @Path('channel_id') required SnowflakeType channelId,
+    @Body() required PersonaChannelStateUpdateRequestSchema body,
   });
 
   /// Bulk import personas.

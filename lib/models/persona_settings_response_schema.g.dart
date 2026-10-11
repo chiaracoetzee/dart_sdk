@@ -27,6 +27,12 @@ PersonaSettingsResponseSchema _$PersonaSettingsResponseSchemaFromJson(
             ? ActivePersonaModeSchema.manual
             : ActivePersonaModeSchema.fromJson(v as String),
       ),
+      activePersonaScope: $checkedConvert(
+        'active_persona_scope',
+        (v) => v == null
+            ? ActivePersonaScopeSchema.global
+            : ActivePersonaScopeSchema.fromJson(v as String),
+      ),
       isLatched: $checkedConvert('is_latched', (v) => v as bool? ?? false),
     );
     return val;
@@ -38,6 +44,7 @@ PersonaSettingsResponseSchema _$PersonaSettingsResponseSchemaFromJson(
     'displayTagIcon': 'display_tag_icon',
     'updatedAt': 'updated_at',
     'activePersonaMode': 'active_persona_mode',
+    'activePersonaScope': 'active_persona_scope',
     'isLatched': 'is_latched',
   },
 );
@@ -47,6 +54,7 @@ Map<String, dynamic> _$PersonaSettingsResponseSchemaToJson(
 ) => <String, dynamic>{
   'user_id': instance.userId,
   'active_persona_mode': instance.activePersonaMode,
+  'active_persona_scope': instance.activePersonaScope,
   'active_persona_id': ?instance.activePersonaId,
   'is_latched': instance.isLatched,
   'display_tag_text': ?instance.displayTagText,

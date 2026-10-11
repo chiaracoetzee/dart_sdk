@@ -5,6 +5,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'active_persona_mode_schema.dart';
+import 'active_persona_scope_schema.dart';
 import 'snowflake_string_type.dart';
 
 part 'persona_settings_response_schema.g.dart';
@@ -18,6 +19,7 @@ class PersonaSettingsResponseSchema {
     this.displayTagIcon,
     this.updatedAt,
     this.activePersonaMode = ActivePersonaModeSchema.manual,
+    this.activePersonaScope = ActivePersonaScopeSchema.global,
     this.isLatched = false,
   });
 
@@ -29,6 +31,10 @@ class PersonaSettingsResponseSchema {
   final SnowflakeStringType userId;
   @JsonKey(name: 'active_persona_mode')
   final ActivePersonaModeSchema activePersonaMode;
+
+  /// Whether the selected persona is one for every channel or remembered per channel
+  @JsonKey(name: 'active_persona_scope')
+  final ActivePersonaScopeSchema activePersonaScope;
   @JsonKey(includeIfNull: false, name: 'active_persona_id')
   final SnowflakeStringType? activePersonaId;
   @JsonKey(name: 'is_latched')
