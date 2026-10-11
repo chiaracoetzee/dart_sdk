@@ -8,6 +8,7 @@ import 'allowed_mentions_request.dart';
 import 'forum_thread_message_request_attachments_attachments.dart';
 import 'message_content_request.dart';
 import 'message_flags.dart';
+import 'message_persona_request_schema.dart';
 import 'rich_embed_request.dart';
 import 'snowflake_type.dart';
 
@@ -22,6 +23,7 @@ class ForumThreadMessageRequest {
     this.attachments,
     this.allowedMentions,
     this.stickerIds,
+    this.subprofile,
   });
 
   factory ForumThreadMessageRequest.fromJson(Map<String, Object?> json) =>
@@ -48,6 +50,10 @@ class ForumThreadMessageRequest {
   /// Array of sticker IDs to include (max 3)
   @JsonKey(includeIfNull: false, name: 'sticker_ids')
   final List<SnowflakeType>? stickerIds;
+
+  /// Optional subprofile persona information
+  @JsonKey(includeIfNull: false)
+  final MessagePersonaRequestSchema? subprofile;
 
   Map<String, Object?> toJson() => _$ForumThreadMessageRequestToJson(this);
 }

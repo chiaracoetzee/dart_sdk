@@ -89,8 +89,6 @@ enum ApiErrorCode {
   cannotSendMessagesToUser('CANNOT_SEND_MESSAGES_TO_USER'),
   @JsonValue('CANNOT_TRANSFER_OWNERSHIP_TO_BOT')
   cannotTransferOwnershipToBot('CANNOT_TRANSFER_OWNERSHIP_TO_BOT'),
-  @JsonValue('CANNOT_SHRINK_RESERVED_SLOTS')
-  cannotShrinkReservedSlots('CANNOT_SHRINK_RESERVED_SLOTS'),
   @JsonValue('CAPTCHA_REQUIRED')
   captchaRequired('CAPTCHA_REQUIRED'),
   @JsonValue('CHANNEL_ALREADY_FOLLOWED')
@@ -569,6 +567,20 @@ enum ApiErrorCode {
   unknownPasskeyBridge('UNKNOWN_PASSKEY_BRIDGE'),
   @JsonValue('UNKNOWN_PASSKEY_MIGRATION')
   unknownPasskeyMigration('UNKNOWN_PASSKEY_MIGRATION'),
+  @JsonValue('UNKNOWN_PERSONA')
+  unknownPersona('UNKNOWN_PERSONA'),
+  @JsonValue('PERSONA_NOT_FOUND')
+  personaNotFound('PERSONA_NOT_FOUND'),
+  @JsonValue('PERSONA_LIMIT_REACHED')
+  personaLimitReached('PERSONA_LIMIT_REACHED'),
+  @JsonValue('DUPLICATE_PERSONA_TAG')
+  duplicatePersonaTag('DUPLICATE_PERSONA_TAG'),
+  @JsonValue('PERSONA_TAG_LIMIT_REACHED')
+  personaTagLimitReached('PERSONA_TAG_LIMIT_REACHED'),
+  @JsonValue('DUPLICATE_SIGNATURE_EMOJI')
+  duplicateSignatureEmoji('DUPLICATE_SIGNATURE_EMOJI'),
+  @JsonValue('SIGNATURE_EMOJI_LIMIT_REACHED')
+  signatureEmojiLimitReached('SIGNATURE_EMOJI_LIMIT_REACHED'),
   @JsonValue('UNKNOWN_REPORT')
   unknownReport('UNKNOWN_REPORT'),
   @JsonValue('UNKNOWN_ROLE')

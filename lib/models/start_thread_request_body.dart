@@ -38,6 +38,8 @@ class StartThreadRequestBodyStartThreadRequest {
   final Int32Type? rateLimitPerUser;
   @JsonKey(includeIfNull: false)
   final bool? invitable;
+  @JsonKey(includeIfNull: false, name: 'persona_id')
+  final SnowflakeType? personaId;
 
   const StartThreadRequestBodyStartThreadRequest({
     required this.name,
@@ -45,6 +47,7 @@ class StartThreadRequestBodyStartThreadRequest {
     this.autoArchiveDuration,
     this.rateLimitPerUser,
     this.invitable,
+    this.personaId,
   });
 
   factory StartThreadRequestBodyStartThreadRequest.fromJson(
