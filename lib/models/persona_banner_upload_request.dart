@@ -14,6 +14,7 @@ class PersonaBannerUploadRequest {
       _$PersonaBannerUploadRequestFromJson(json);
 
   /// Base64 data URI of the banner image
+  @JsonKey(defaultValue: '')
   final String banner;
 
   Map<String, Object?> toJson() => _$PersonaBannerUploadRequestToJson(this);

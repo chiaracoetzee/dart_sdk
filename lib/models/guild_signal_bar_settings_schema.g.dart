@@ -10,14 +10,18 @@ GuildSignalBarSettingsSchema _$GuildSignalBarSettingsSchemaFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('GuildSignalBarSettingsSchema', json, ($checkedConvert) {
   final val = GuildSignalBarSettingsSchema(
-    defaultField: $checkedConvert('default', (v) => v as bool),
+    defaultField: $checkedConvert('default', (v) => v as bool? ?? false),
     categories: $checkedConvert(
       'categories',
-      (v) => Map<String, bool>.from(v as Map),
+      (v) =>
+          (v as Map<String, dynamic>?)?.map((k, e) => MapEntry(k, e as bool)) ??
+          {},
     ),
     channels: $checkedConvert(
       'channels',
-      (v) => Map<String, bool>.from(v as Map),
+      (v) =>
+          (v as Map<String, dynamic>?)?.map((k, e) => MapEntry(k, e as bool)) ??
+          {},
     ),
   );
   return val;

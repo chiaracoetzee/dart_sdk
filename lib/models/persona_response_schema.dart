@@ -38,9 +38,11 @@ class PersonaResponseSchema {
       _$PersonaResponseSchemaFromJson(json);
 
   /// The unique Snowflake identifier for this persona
+  @JsonKey(defaultValue: '')
   final SnowflakeStringType id;
 
   /// The persona display name
+  @JsonKey(defaultValue: '')
   final String name;
 
   /// Avatar asset hash
@@ -88,6 +90,7 @@ class PersonaResponseSchema {
   final String? lastUsedAtMs;
 
   /// Visibility setting: unlisted (default), public, or private
+  @JsonKey(defaultValue: PersonaVisibilitySchema.$unknown)
   final PersonaVisibilitySchema visibility;
 
   /// External UUID for idempotent PluralKit imports
@@ -95,11 +98,11 @@ class PersonaResponseSchema {
   final String? externalUuid;
 
   /// ISO timestamp of persona creation
-  @JsonKey(name: 'created_at')
+  @JsonKey(name: 'created_at', defaultValue: '')
   final String createdAt;
 
   /// ISO timestamp of last update
-  @JsonKey(name: 'updated_at')
+  @JsonKey(name: 'updated_at', defaultValue: '')
   final String updatedAt;
 
   /// ISO timestamp if the persona has been soft-deleted

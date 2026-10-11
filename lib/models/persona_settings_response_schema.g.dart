@@ -13,7 +13,7 @@ PersonaSettingsResponseSchema _$PersonaSettingsResponseSchemaFromJson(
   json,
   ($checkedConvert) {
     final val = PersonaSettingsResponseSchema(
-      userId: $checkedConvert('user_id', (v) => v as String),
+      userId: $checkedConvert('user_id', (v) => v as String? ?? ''),
       activePersonaId: $checkedConvert(
         'active_persona_id',
         (v) => v as String?,

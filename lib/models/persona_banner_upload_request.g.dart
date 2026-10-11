@@ -10,7 +10,7 @@ PersonaBannerUploadRequest _$PersonaBannerUploadRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('PersonaBannerUploadRequest', json, ($checkedConvert) {
   final val = PersonaBannerUploadRequest(
-    banner: $checkedConvert('banner', (v) => v as String),
+    banner: $checkedConvert('banner', (v) => v as String? ?? ''),
   );
   return val;
 });

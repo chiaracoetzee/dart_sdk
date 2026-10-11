@@ -30,7 +30,7 @@ class SignalBarUpdateRequestSchemaSignals {
   final SnowflakeStringType? emojiId;
 
   /// Emoji name or Unicode character
-  @JsonKey(name: 'emoji_name')
+  @JsonKey(name: 'emoji_name', defaultValue: '')
   final String emojiName;
   @JsonKey(includeIfNull: false)
   final String? label;

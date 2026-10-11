@@ -25,7 +25,7 @@ class PersonaSettingsResponseSchema {
       _$PersonaSettingsResponseSchemaFromJson(json);
 
   /// User Snowflake ID
-  @JsonKey(name: 'user_id')
+  @JsonKey(name: 'user_id', defaultValue: '')
   final SnowflakeStringType userId;
   @JsonKey(name: 'active_persona_mode')
   final ActivePersonaModeSchema activePersonaMode;

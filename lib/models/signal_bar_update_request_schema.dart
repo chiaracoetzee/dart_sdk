@@ -15,6 +15,7 @@ class SignalBarUpdateRequestSchema {
   factory SignalBarUpdateRequestSchema.fromJson(Map<String, Object?> json) =>
       _$SignalBarUpdateRequestSchemaFromJson(json);
 
+  @JsonKey(defaultValue: <SignalBarUpdateRequestSchemaSignals>[])
   final List<SignalBarUpdateRequestSchemaSignals> signals;
 
   Map<String, Object?> toJson() => _$SignalBarUpdateRequestSchemaToJson(this);

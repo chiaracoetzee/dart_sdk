@@ -47,6 +47,7 @@ class StartThreadFromMessageRequest {
   }
 
   /// The name of the thread (1-100 characters)
+  @JsonKey(defaultValue: '')
   final String name;
   @JsonKey(includeIfNull: false, name: 'auto_archive_duration')
   final ThreadAutoArchiveDurationSchema? autoArchiveDuration;

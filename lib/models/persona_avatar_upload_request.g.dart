@@ -10,7 +10,7 @@ PersonaAvatarUploadRequest _$PersonaAvatarUploadRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('PersonaAvatarUploadRequest', json, ($checkedConvert) {
   final val = PersonaAvatarUploadRequest(
-    avatar: $checkedConvert('avatar', (v) => v as String),
+    avatar: $checkedConvert('avatar', (v) => v as String? ?? ''),
   );
   return val;
 });

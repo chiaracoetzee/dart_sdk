@@ -13,11 +13,13 @@ PublicPersonaResponseSchema _$PublicPersonaResponseSchemaFromJson(
   json,
   ($checkedConvert) {
     final val = PublicPersonaResponseSchema(
-      id: $checkedConvert('id', (v) => v as String),
-      name: $checkedConvert('name', (v) => v as String),
+      id: $checkedConvert('id', (v) => v as String? ?? ''),
+      name: $checkedConvert('name', (v) => v as String? ?? ''),
       visibility: $checkedConvert(
         'visibility',
-        (v) => PersonaVisibilitySchema.fromJson(v as String),
+        (v) => v == null
+            ? PersonaVisibilitySchema.$unknown
+            : PersonaVisibilitySchema.fromJson(v as String),
       ),
       avatarHash: $checkedConvert('avatar_hash', (v) => v as String?),
       bannerHash: $checkedConvert('banner_hash', (v) => v as String?),

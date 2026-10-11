@@ -27,9 +27,11 @@ class PublicPersonaResponseSchema {
       _$PublicPersonaResponseSchemaFromJson(json);
 
   /// The unique Snowflake identifier for this persona
+  @JsonKey(defaultValue: '')
   final SnowflakeStringType id;
 
   /// The persona display name
+  @JsonKey(defaultValue: '')
   final String name;
 
   /// Avatar asset hash
@@ -57,6 +59,7 @@ class PublicPersonaResponseSchema {
   final String? bio;
 
   /// Visibility setting
+  @JsonKey(defaultValue: PersonaVisibilitySchema.$unknown)
   final PersonaVisibilitySchema visibility;
 
   Map<String, Object?> toJson() => _$PublicPersonaResponseSchemaToJson(this);

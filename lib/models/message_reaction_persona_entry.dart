@@ -21,10 +21,11 @@ class MessageReactionPersonaEntry {
       _$MessageReactionPersonaEntryFromJson(json);
 
   /// The persona ID that reacted
-  @JsonKey(name: 'persona_id')
+  @JsonKey(name: 'persona_id', defaultValue: '')
   final SnowflakeStringType personaId;
 
   /// Count of reactions by this persona
+  @JsonKey(defaultValue: 0)
   final Int32Type count;
 
   /// Whether the current user reacted as this persona

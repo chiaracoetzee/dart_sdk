@@ -35,9 +35,11 @@ class ChannelPersonaMentionItemSchema {
       _$ChannelPersonaMentionItemSchemaFromJson(json);
 
   /// The unique Snowflake identifier for this persona
+  @JsonKey(defaultValue: '')
   final SnowflakeStringType id;
 
   /// The persona display name
+  @JsonKey(defaultValue: '')
   final String name;
 
   /// Avatar asset hash
@@ -69,6 +71,7 @@ class ChannelPersonaMentionItemSchema {
   final String? bio;
 
   /// Visibility setting
+  @JsonKey(defaultValue: PersonaVisibilitySchema.$unknown)
   final PersonaVisibilitySchema visibility;
 
   /// Usage counter for frecency ranking
@@ -80,11 +83,11 @@ class ChannelPersonaMentionItemSchema {
   final String? lastUsedAtMs;
 
   /// User ID of the persona owner
-  @JsonKey(name: 'owner_user_id')
+  @JsonKey(name: 'owner_user_id', defaultValue: '')
   final SnowflakeStringType ownerUserId;
 
   /// Username of the persona owner
-  @JsonKey(name: 'owner_username')
+  @JsonKey(name: 'owner_username', defaultValue: '')
   final String ownerUsername;
 
   /// Discriminator of the persona owner

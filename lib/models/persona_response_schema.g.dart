@@ -13,14 +13,16 @@ PersonaResponseSchema _$PersonaResponseSchemaFromJson(
   json,
   ($checkedConvert) {
     final val = PersonaResponseSchema(
-      id: $checkedConvert('id', (v) => v as String),
-      name: $checkedConvert('name', (v) => v as String),
+      id: $checkedConvert('id', (v) => v as String? ?? ''),
+      name: $checkedConvert('name', (v) => v as String? ?? ''),
       visibility: $checkedConvert(
         'visibility',
-        (v) => PersonaVisibilitySchema.fromJson(v as String),
+        (v) => v == null
+            ? PersonaVisibilitySchema.$unknown
+            : PersonaVisibilitySchema.fromJson(v as String),
       ),
-      createdAt: $checkedConvert('created_at', (v) => v as String),
-      updatedAt: $checkedConvert('updated_at', (v) => v as String),
+      createdAt: $checkedConvert('created_at', (v) => v as String? ?? ''),
+      updatedAt: $checkedConvert('updated_at', (v) => v as String? ?? ''),
       autoTagDisabled: $checkedConvert(
         'auto_tag_disabled',
         (v) => v as bool? ?? false,

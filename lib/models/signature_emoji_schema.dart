@@ -20,6 +20,7 @@ class SignatureEmojiSchema {
   final SnowflakeStringType? id;
 
   /// Emoji name or Unicode character
+  @JsonKey(defaultValue: '')
   final String name;
 
   /// Whether the emoji is animated

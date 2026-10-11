@@ -28,9 +28,11 @@ class MessageSubprofileResponseSchema {
       _$MessageSubprofileResponseSchemaFromJson(json);
 
   /// Persona ID
+  @JsonKey(defaultValue: '')
   final String id;
 
   /// Persona display name
+  @JsonKey(defaultValue: '')
   final String name;
 
   /// Avatar asset URL or hash

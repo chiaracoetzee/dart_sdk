@@ -14,6 +14,7 @@ class PersonaAvatarUploadRequest {
       _$PersonaAvatarUploadRequestFromJson(json);
 
   /// Base64 data URI of the avatar image
+  @JsonKey(defaultValue: '')
   final String avatar;
 
   Map<String, Object?> toJson() => _$PersonaAvatarUploadRequestToJson(this);

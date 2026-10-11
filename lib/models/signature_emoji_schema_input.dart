@@ -48,6 +48,7 @@ class SignatureEmojiSchemaInput {
   }
 
   /// Emoji name or Unicode character
+  @JsonKey(defaultValue: '')
   final String name;
   @JsonKey(includeFromJson: false, includeToJson: false)
   final JsonNullable<SnowflakeStringType> id;

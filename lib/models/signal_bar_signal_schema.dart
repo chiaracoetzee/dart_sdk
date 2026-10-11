@@ -22,6 +22,7 @@ class SignalBarSignalSchema {
       _$SignalBarSignalSchemaFromJson(json);
 
   /// The unique identifier of the signal within the bar
+  @JsonKey(defaultValue: '')
   final String id;
 
   /// Custom emoji ID (null for Unicode)
@@ -29,10 +30,11 @@ class SignalBarSignalSchema {
   final SnowflakeStringType? emojiId;
 
   /// Emoji name or Unicode character
-  @JsonKey(name: 'emoji_name')
+  @JsonKey(name: 'emoji_name', defaultValue: '')
   final String emojiName;
 
   /// Whether the emoji is animated
+  @JsonKey(defaultValue: false)
   final bool animated;
 
   /// Optional label shown instead of the emoji name

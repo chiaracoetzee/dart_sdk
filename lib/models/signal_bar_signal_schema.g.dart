@@ -10,10 +10,10 @@ SignalBarSignalSchema _$SignalBarSignalSchemaFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('SignalBarSignalSchema', json, ($checkedConvert) {
   final val = SignalBarSignalSchema(
-    id: $checkedConvert('id', (v) => v as String),
+    id: $checkedConvert('id', (v) => v as String? ?? ''),
     emojiId: $checkedConvert('emoji_id', (v) => v as String?),
-    emojiName: $checkedConvert('emoji_name', (v) => v as String),
-    animated: $checkedConvert('animated', (v) => v as bool),
+    emojiName: $checkedConvert('emoji_name', (v) => v as String? ?? ''),
+    animated: $checkedConvert('animated', (v) => v as bool? ?? false),
     label: $checkedConvert('label', (v) => v as String?),
   );
   return val;

@@ -12,7 +12,7 @@ PersonaBatchAvatarImportRequest _$PersonaBatchAvatarImportRequestFromJson(
   final val = PersonaBatchAvatarImportRequest(
     urls: $checkedConvert(
       'urls',
-      (v) => (v as List<dynamic>).map((e) => e as String).toList(),
+      (v) => (v as List<dynamic>?)?.map((e) => e as String).toList() ?? [],
     ),
   );
   return val;

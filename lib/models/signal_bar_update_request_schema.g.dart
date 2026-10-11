@@ -12,13 +12,15 @@ SignalBarUpdateRequestSchema _$SignalBarUpdateRequestSchemaFromJson(
   final val = SignalBarUpdateRequestSchema(
     signals: $checkedConvert(
       'signals',
-      (v) => (v as List<dynamic>)
-          .map(
-            (e) => SignalBarUpdateRequestSchemaSignals.fromJson(
-              e as Map<String, dynamic>,
-            ),
-          )
-          .toList(),
+      (v) =>
+          (v as List<dynamic>?)
+              ?.map(
+                (e) => SignalBarUpdateRequestSchemaSignals.fromJson(
+                  e as Map<String, dynamic>,
+                ),
+              )
+              .toList() ??
+          [],
     ),
   );
   return val;

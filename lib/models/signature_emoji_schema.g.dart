@@ -10,7 +10,7 @@ SignatureEmojiSchema _$SignatureEmojiSchemaFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('SignatureEmojiSchema', json, ($checkedConvert) {
   final val = SignatureEmojiSchema(
-    name: $checkedConvert('name', (v) => v as String),
+    name: $checkedConvert('name', (v) => v as String? ?? ''),
     id: $checkedConvert('id', (v) => v as String?),
     animated: $checkedConvert('animated', (v) => v as bool?),
   );

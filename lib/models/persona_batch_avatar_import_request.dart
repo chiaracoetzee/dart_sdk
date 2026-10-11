@@ -14,6 +14,7 @@ class PersonaBatchAvatarImportRequest {
       _$PersonaBatchAvatarImportRequestFromJson(json);
 
   /// List of remote avatar URLs to import
+  @JsonKey(defaultValue: <String>[])
   final List<String> urls;
 
   Map<String, Object?> toJson() =>

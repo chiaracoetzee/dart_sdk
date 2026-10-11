@@ -12,14 +12,18 @@ GuildSignalBarSettingsSchemaInput _$GuildSignalBarSettingsSchemaInputFromJson(
   $checkedConvert,
 ) {
   final val = GuildSignalBarSettingsSchemaInput(
-    defaultField: $checkedConvert('default', (v) => v as bool),
+    defaultField: $checkedConvert('default', (v) => v as bool? ?? false),
     categories: $checkedConvert(
       'categories',
-      (v) => Map<String, bool>.from(v as Map),
+      (v) =>
+          (v as Map<String, dynamic>?)?.map((k, e) => MapEntry(k, e as bool)) ??
+          {},
     ),
     channels: $checkedConvert(
       'channels',
-      (v) => Map<String, bool>.from(v as Map),
+      (v) =>
+          (v as Map<String, dynamic>?)?.map((k, e) => MapEntry(k, e as bool)) ??
+          {},
     ),
   );
   return val;

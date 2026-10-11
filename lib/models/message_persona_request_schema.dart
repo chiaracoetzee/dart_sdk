@@ -121,9 +121,11 @@ class MessagePersonaRequestSchema {
     );
   }
 
+  @JsonKey(defaultValue: '')
   final String id;
 
   /// Persona display name
+  @JsonKey(defaultValue: '')
   final String name;
   @JsonKey(includeFromJson: false, includeToJson: false)
   final JsonNullable<String> avatar;

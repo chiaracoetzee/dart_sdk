@@ -22,7 +22,9 @@ class SignalBarResponseSchema {
       _$SignalBarResponseSchemaFromJson(json);
 
   /// Incremented on every change to the bar
+  @JsonKey(defaultValue: 0)
   final int version;
+  @JsonKey(defaultValue: <SignalBarSignalSchema>[])
   final List<SignalBarSignalSchema> signals;
 
   /// The home community that owns the bar
@@ -30,7 +32,7 @@ class SignalBarResponseSchema {
   final SnowflakeStringType? guildId;
 
   /// Whether the requesting user may edit the bar
-  @JsonKey(name: 'can_manage')
+  @JsonKey(name: 'can_manage', defaultValue: false)
   final bool canManage;
 
   Map<String, Object?> toJson() => _$SignalBarResponseSchemaToJson(this);

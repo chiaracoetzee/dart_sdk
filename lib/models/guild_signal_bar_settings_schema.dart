@@ -17,9 +17,11 @@ class GuildSignalBarSettingsSchema {
   factory GuildSignalBarSettingsSchema.fromJson(Map<String, Object?> json) =>
       _$GuildSignalBarSettingsSchemaFromJson(json);
 
-  @JsonKey(name: 'default')
+  @JsonKey(name: 'default', defaultValue: false)
   final bool defaultField;
+  @JsonKey(defaultValue: <String, bool>{})
   final Map<String, bool> categories;
+  @JsonKey(defaultValue: <String, bool>{})
   final Map<String, bool> channels;
 
   Map<String, Object?> toJson() => _$GuildSignalBarSettingsSchemaToJson(this);

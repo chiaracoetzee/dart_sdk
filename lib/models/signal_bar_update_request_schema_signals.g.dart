@@ -12,7 +12,7 @@ _$SignalBarUpdateRequestSchemaSignalsFromJson(Map<String, dynamic> json) =>
       $checkedConvert,
     ) {
       final val = SignalBarUpdateRequestSchemaSignals(
-        emojiName: $checkedConvert('emoji_name', (v) => v as String),
+        emojiName: $checkedConvert('emoji_name', (v) => v as String? ?? ''),
         id: $checkedConvert('id', (v) => v as String?),
         emojiId: $checkedConvert('emoji_id', (v) => v as String?),
         label: $checkedConvert('label', (v) => v as String?),

@@ -17,7 +17,7 @@ class PersonaAvatarUploadResponse {
       _$PersonaAvatarUploadResponseFromJson(json);
 
   /// Hash of the uploaded avatar
-  @JsonKey(name: 'avatar_hash')
+  @JsonKey(name: 'avatar_hash', defaultValue: '')
   final String avatarHash;
 
   /// Dominant avatar color

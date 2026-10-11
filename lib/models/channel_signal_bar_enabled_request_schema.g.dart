@@ -12,7 +12,7 @@ _$ChannelSignalBarEnabledRequestSchemaFromJson(Map<String, dynamic> json) =>
       $checkedConvert,
     ) {
       final val = ChannelSignalBarEnabledRequestSchema(
-        enabled: $checkedConvert('enabled', (v) => v as bool),
+        enabled: $checkedConvert('enabled', (v) => v as bool? ?? false),
       );
       return val;
     });

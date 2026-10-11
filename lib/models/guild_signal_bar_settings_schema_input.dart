@@ -18,9 +18,11 @@ class GuildSignalBarSettingsSchemaInput {
     Map<String, Object?> json,
   ) => _$GuildSignalBarSettingsSchemaInputFromJson(json);
 
-  @JsonKey(name: 'default')
+  @JsonKey(name: 'default', defaultValue: false)
   final bool defaultField;
+  @JsonKey(defaultValue: <String, bool>{})
   final Map<String, bool> categories;
+  @JsonKey(defaultValue: <String, bool>{})
   final Map<String, bool> channels;
 
   Map<String, Object?> toJson() =>

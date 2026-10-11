@@ -112,6 +112,7 @@ class PersonaCreateRequestSchema {
   }
 
   /// Persona display name
+  @JsonKey(defaultValue: '')
   final String name;
 
   /// Whether auto-tagging is disabled

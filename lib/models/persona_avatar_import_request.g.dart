@@ -10,7 +10,7 @@ PersonaAvatarImportRequest _$PersonaAvatarImportRequestFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('PersonaAvatarImportRequest', json, ($checkedConvert) {
   final val = PersonaAvatarImportRequest(
-    url: $checkedConvert('url', (v) => v as String),
+    url: $checkedConvert('url', (v) => v as String? ?? ''),
   );
   return val;
 });

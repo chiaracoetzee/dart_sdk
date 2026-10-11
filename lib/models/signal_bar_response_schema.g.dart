@@ -10,15 +10,20 @@ SignalBarResponseSchema _$SignalBarResponseSchemaFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('SignalBarResponseSchema', json, ($checkedConvert) {
   final val = SignalBarResponseSchema(
-    version: $checkedConvert('version', (v) => (v as num).toInt()),
+    version: $checkedConvert('version', (v) => (v as num?)?.toInt() ?? 0),
     signals: $checkedConvert(
       'signals',
-      (v) => (v as List<dynamic>)
-          .map((e) => SignalBarSignalSchema.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      (v) =>
+          (v as List<dynamic>?)
+              ?.map(
+                (e) =>
+                    SignalBarSignalSchema.fromJson(e as Map<String, dynamic>),
+              )
+              .toList() ??
+          [],
     ),
     guildId: $checkedConvert('guild_id', (v) => v as String?),
-    canManage: $checkedConvert('can_manage', (v) => v as bool),
+    canManage: $checkedConvert('can_manage', (v) => v as bool? ?? false),
   );
   return val;
 }, fieldKeyMap: const {'guildId': 'guild_id', 'canManage': 'can_manage'});

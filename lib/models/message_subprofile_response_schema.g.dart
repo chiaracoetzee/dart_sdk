@@ -13,8 +13,8 @@ MessageSubprofileResponseSchema _$MessageSubprofileResponseSchemaFromJson(
   json,
   ($checkedConvert) {
     final val = MessageSubprofileResponseSchema(
-      id: $checkedConvert('id', (v) => v as String),
-      name: $checkedConvert('name', (v) => v as String),
+      id: $checkedConvert('id', (v) => v as String? ?? ''),
+      name: $checkedConvert('name', (v) => v as String? ?? ''),
       avatar: $checkedConvert('avatar', (v) => v as String?),
       avatarColor: $checkedConvert('avatar_color', (v) => (v as num?)?.toInt()),
       banner: $checkedConvert('banner', (v) => v as String?),

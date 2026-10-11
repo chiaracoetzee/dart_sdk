@@ -13,7 +13,7 @@ PersonaAvatarUploadResponse _$PersonaAvatarUploadResponseFromJson(
   json,
   ($checkedConvert) {
     final val = PersonaAvatarUploadResponse(
-      avatarHash: $checkedConvert('avatar_hash', (v) => v as String),
+      avatarHash: $checkedConvert('avatar_hash', (v) => v as String? ?? ''),
       avatarColor: $checkedConvert('avatar_color', (v) => (v as num?)?.toInt()),
     );
     return val;

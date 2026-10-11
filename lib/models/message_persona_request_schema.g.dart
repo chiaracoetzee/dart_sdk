@@ -10,8 +10,8 @@ MessagePersonaRequestSchema _$MessagePersonaRequestSchemaFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('MessagePersonaRequestSchema', json, ($checkedConvert) {
   final val = MessagePersonaRequestSchema._(
-    id: $checkedConvert('id', (v) => v as String),
-    name: $checkedConvert('name', (v) => v as String),
+    id: $checkedConvert('id', (v) => v as String? ?? ''),
+    name: $checkedConvert('name', (v) => v as String? ?? ''),
   );
   return val;
 });

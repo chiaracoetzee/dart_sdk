@@ -20,9 +20,11 @@ class ChannelSignalsResponseSchema {
       _$ChannelSignalsResponseSchemaFromJson(json);
 
   /// Whether the signal bar is switched on in this channel
+  @JsonKey(defaultValue: false)
   final bool enabled;
-  @JsonKey(name: 'bar_version')
+  @JsonKey(name: 'bar_version', defaultValue: 0)
   final int barVersion;
+  @JsonKey(defaultValue: <ChannelSignalEntrySchema>[])
   final List<ChannelSignalEntrySchema> entries;
 
   Map<String, Object?> toJson() => _$ChannelSignalsResponseSchemaToJson(this);

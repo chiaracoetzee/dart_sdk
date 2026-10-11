@@ -14,6 +14,7 @@ class ChannelSignalBarEnabledRequestSchema {
     Map<String, Object?> json,
   ) => _$ChannelSignalBarEnabledRequestSchemaFromJson(json);
 
+  @JsonKey(defaultValue: false)
   final bool enabled;
 
   Map<String, Object?> toJson() =>

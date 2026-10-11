@@ -14,7 +14,7 @@ class PersonaBannerUploadResponse {
       _$PersonaBannerUploadResponseFromJson(json);
 
   /// Hash of the uploaded banner
-  @JsonKey(name: 'banner_hash')
+  @JsonKey(name: 'banner_hash', defaultValue: '')
   final String bannerHash;
 
   Map<String, Object?> toJson() => _$PersonaBannerUploadResponseToJson(this);

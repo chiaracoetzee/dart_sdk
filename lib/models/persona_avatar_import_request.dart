@@ -14,6 +14,7 @@ class PersonaAvatarImportRequest {
       _$PersonaAvatarImportRequestFromJson(json);
 
   /// Remote URL of the avatar image to import
+  @JsonKey(defaultValue: '')
   final String url;
 
   Map<String, Object?> toJson() => _$PersonaAvatarImportRequestToJson(this);

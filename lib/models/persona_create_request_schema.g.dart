@@ -13,7 +13,7 @@ PersonaCreateRequestSchema _$PersonaCreateRequestSchemaFromJson(
   json,
   ($checkedConvert) {
     final val = PersonaCreateRequestSchema._(
-      name: $checkedConvert('name', (v) => v as String),
+      name: $checkedConvert('name', (v) => v as String? ?? ''),
       autoTagDisabled: $checkedConvert('auto_tag_disabled', (v) => v as bool?),
       personaTags: $checkedConvert(
         'persona_tags',

@@ -10,15 +10,22 @@ ChannelSignalsResponseSchema _$ChannelSignalsResponseSchemaFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('ChannelSignalsResponseSchema', json, ($checkedConvert) {
   final val = ChannelSignalsResponseSchema(
-    enabled: $checkedConvert('enabled', (v) => v as bool),
-    barVersion: $checkedConvert('bar_version', (v) => (v as num).toInt()),
+    enabled: $checkedConvert('enabled', (v) => v as bool? ?? false),
+    barVersion: $checkedConvert(
+      'bar_version',
+      (v) => (v as num?)?.toInt() ?? 0,
+    ),
     entries: $checkedConvert(
       'entries',
-      (v) => (v as List<dynamic>)
-          .map(
-            (e) => ChannelSignalEntrySchema.fromJson(e as Map<String, dynamic>),
-          )
-          .toList(),
+      (v) =>
+          (v as List<dynamic>?)
+              ?.map(
+                (e) => ChannelSignalEntrySchema.fromJson(
+                  e as Map<String, dynamic>,
+                ),
+              )
+              .toList() ??
+          [],
     ),
   );
   return val;

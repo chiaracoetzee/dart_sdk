@@ -13,10 +13,12 @@ ChannelSignalEntrySchema _$ChannelSignalEntrySchemaFromJson(
   json,
   ($checkedConvert) {
     final val = ChannelSignalEntrySchema(
-      signalId: $checkedConvert('signal_id', (v) => v as String),
+      signalId: $checkedConvert('signal_id', (v) => v as String? ?? ''),
       user: $checkedConvert(
         'user',
-        (v) => UserPartialResponse.fromJson(v as Map<String, dynamic>),
+        (v) => v == null
+            ? _$missingUserPartialResponse()
+            : UserPartialResponse.fromJson(v as Map<String, dynamic>),
       ),
       personaId: $checkedConvert('persona_id', (v) => v as String?),
       subprofile: $checkedConvert(
@@ -27,7 +29,10 @@ ChannelSignalEntrySchema _$ChannelSignalEntrySchemaFromJson(
                 v as Map<String, dynamic>,
               ),
       ),
-      activatedAt: $checkedConvert('activated_at', (v) => (v as num).toInt()),
+      activatedAt: $checkedConvert(
+        'activated_at',
+        (v) => (v as num?)?.toInt() ?? 0,
+      ),
     );
     return val;
   },

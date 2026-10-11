@@ -10,7 +10,7 @@ PersonaBannerUploadResponse _$PersonaBannerUploadResponseFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('PersonaBannerUploadResponse', json, ($checkedConvert) {
   final val = PersonaBannerUploadResponse(
-    bannerHash: $checkedConvert('banner_hash', (v) => v as String),
+    bannerHash: $checkedConvert('banner_hash', (v) => v as String? ?? ''),
   );
   return val;
 }, fieldKeyMap: const {'bannerHash': 'banner_hash'});

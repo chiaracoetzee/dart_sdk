@@ -24,8 +24,9 @@ class ChannelSignalEntrySchema {
       _$ChannelSignalEntrySchemaFromJson(json);
 
   /// The unique identifier of the signal within the bar
-  @JsonKey(name: 'signal_id')
+  @JsonKey(name: 'signal_id', defaultValue: '')
   final String signalId;
+  @JsonKey(defaultValue: _$missingUserPartialResponse)
   final UserPartialResponse user;
 
   /// The persona the account is currently signalling as, if any
@@ -35,8 +36,11 @@ class ChannelSignalEntrySchema {
   final MessageSubprofileResponseSchema? subprofile;
 
   /// Unix timestamp in milliseconds
-  @JsonKey(name: 'activated_at')
+  @JsonKey(name: 'activated_at', defaultValue: 0)
   final int activatedAt;
 
   Map<String, Object?> toJson() => _$ChannelSignalEntrySchemaToJson(this);
 }
+
+UserPartialResponse _$missingUserPartialResponse() =>
+    UserPartialResponse.fromJson(const <String, dynamic>{});
