@@ -15,12 +15,10 @@ class MessageSubprofileResponseSchema {
     required this.name,
     this.avatar,
     this.avatarColor,
-    this.banner,
     this.displayTagText,
     this.displayTagIcon,
     this.pronouns,
     this.color,
-    this.bio,
     this.visibility,
   });
 
@@ -41,10 +39,6 @@ class MessageSubprofileResponseSchema {
   @JsonKey(includeIfNull: false, name: 'avatar_color')
   final int? avatarColor;
 
-  /// Banner asset URL or hash
-  @JsonKey(includeIfNull: false)
-  final String? banner;
-
   /// Display tag text
   @JsonKey(includeIfNull: false, name: 'display_tag_text')
   final String? displayTagText;
@@ -60,10 +54,6 @@ class MessageSubprofileResponseSchema {
   /// Custom color integer
   @JsonKey(includeIfNull: false)
   final int? color;
-
-  /// Persona bio (deprecated on message)
-  @JsonKey(includeIfNull: false)
-  final String? bio;
 
   /// Persona visibility setting
   @JsonKey(includeIfNull: false)

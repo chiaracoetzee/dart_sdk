@@ -571,6 +571,8 @@ enum ApiErrorCode {
   unknownPersona('UNKNOWN_PERSONA'),
   @JsonValue('PERSONA_NOT_FOUND')
   personaNotFound('PERSONA_NOT_FOUND'),
+  @JsonValue('PRIVATE_PERSONA')
+  privatePersona('PRIVATE_PERSONA'),
   @JsonValue('PERSONA_LIMIT_REACHED')
   personaLimitReached('PERSONA_LIMIT_REACHED'),
   @JsonValue('DUPLICATE_PERSONA_TAG')
