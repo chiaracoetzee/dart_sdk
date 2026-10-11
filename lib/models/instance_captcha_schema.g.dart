@@ -12,9 +12,7 @@ InstanceCaptchaSchema _$InstanceCaptchaSchemaFromJson(
   final val = InstanceCaptchaSchema(
     provider: $checkedConvert(
       'provider',
-      (v) => v == null
-          ? InstanceCaptchaProviderSchema.$unknown
-          : InstanceCaptchaProviderSchema.fromJson(v as String),
+      (v) => InstanceCaptchaProviderSchema.fromJson(v as String),
     ),
   );
   return val;

@@ -62,7 +62,6 @@ class CreateFavoriteMemeBodySchema {
   }
 
   /// Display name for the meme
-  @JsonKey(defaultValue: '')
   final String name;
 
   /// Tags for categorizing and searching the meme

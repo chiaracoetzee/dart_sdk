@@ -22,15 +22,14 @@ class EmailChangeRequestNewRequest {
       _$EmailChangeRequestNewRequestFromJson(json);
 
   /// Email change ticket identifier
-  @JsonKey(defaultValue: '')
   final String ticket;
 
   /// New email address to switch to
-  @JsonKey(name: 'new_email', defaultValue: '')
+  @JsonKey(name: 'new_email')
   final EmailType newEmail;
 
   /// Proof token obtained from verifying the original email
-  @JsonKey(name: 'original_proof', defaultValue: '')
+  @JsonKey(name: 'original_proof')
   final String originalProof;
 
   /// Password the caller intends to set, rejected here instead of after the code is sent

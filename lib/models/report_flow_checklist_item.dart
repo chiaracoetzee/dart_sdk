@@ -17,9 +17,7 @@ class ReportFlowChecklistItem {
   factory ReportFlowChecklistItem.fromJson(Map<String, Object?> json) =>
       _$ReportFlowChecklistItemFromJson(json);
 
-  @JsonKey(defaultValue: '')
   final String id;
-  @JsonKey(defaultValue: '')
   final String label;
   @JsonKey(includeIfNull: true)
   final String? description;

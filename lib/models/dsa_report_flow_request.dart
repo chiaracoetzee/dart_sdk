@@ -31,28 +31,23 @@ class DsaReportFlowRequest {
 
 @JsonSerializable()
 class DsaReportFlowRequestMessageDsaReportFlowRequest {
-  @JsonKey(defaultValue: '')
   final String ticket;
-  @JsonKey(
-    name: 'reporter_country_of_residence',
-    defaultValue: EuCountryCode.$unknown,
-  )
+  @JsonKey(name: 'reporter_country_of_residence')
   final EuCountryCode reporterCountryOfResidence;
-  @JsonKey(name: 'revision_hash', defaultValue: '')
+  @JsonKey(name: 'revision_hash')
   final String revisionHash;
-  @JsonKey(defaultValue: <ReportFlowStep>[])
   final List<ReportFlowStep> steps;
-  @JsonKey(name: 'good_faith_confirmed', defaultValue: false)
+  @JsonKey(name: 'good_faith_confirmed')
   final bool goodFaithConfirmed;
   @JsonKey(includeIfNull: false)
   final String? locale;
-  @JsonKey(name: 'additional_info', defaultValue: '')
+  @JsonKey(name: 'additional_info')
   final String additionalInfo;
   @JsonKey(includeIfNull: false, name: 'reporter_full_legal_name')
   final String? reporterFullLegalName;
-  @JsonKey(name: 'report_type', defaultValue: '')
+  @JsonKey(name: 'report_type')
   final String reportType;
-  @JsonKey(name: 'message_link', defaultValue: '')
+  @JsonKey(name: 'message_link')
   final String messageLink;
   @JsonKey(includeIfNull: false, name: 'reported_user_tag')
   final String? reportedUserTag;
@@ -81,26 +76,21 @@ class DsaReportFlowRequestMessageDsaReportFlowRequest {
 
 @JsonSerializable()
 class DsaReportFlowRequestUserDsaReportFlowRequest {
-  @JsonKey(defaultValue: '')
   final String ticket;
-  @JsonKey(
-    name: 'reporter_country_of_residence',
-    defaultValue: EuCountryCode.$unknown,
-  )
+  @JsonKey(name: 'reporter_country_of_residence')
   final EuCountryCode reporterCountryOfResidence;
-  @JsonKey(name: 'revision_hash', defaultValue: '')
+  @JsonKey(name: 'revision_hash')
   final String revisionHash;
-  @JsonKey(defaultValue: <ReportFlowStep>[])
   final List<ReportFlowStep> steps;
-  @JsonKey(name: 'good_faith_confirmed', defaultValue: false)
+  @JsonKey(name: 'good_faith_confirmed')
   final bool goodFaithConfirmed;
   @JsonKey(includeIfNull: false)
   final String? locale;
-  @JsonKey(name: 'additional_info', defaultValue: '')
+  @JsonKey(name: 'additional_info')
   final String additionalInfo;
   @JsonKey(includeIfNull: false, name: 'reporter_full_legal_name')
   final String? reporterFullLegalName;
-  @JsonKey(name: 'report_type', defaultValue: '')
+  @JsonKey(name: 'report_type')
   final String reportType;
   @JsonKey(includeIfNull: false, name: 'user_id')
   final SnowflakeType? userId;
@@ -131,28 +121,23 @@ class DsaReportFlowRequestUserDsaReportFlowRequest {
 
 @JsonSerializable()
 class DsaReportFlowRequestGuildDsaReportFlowRequest {
-  @JsonKey(defaultValue: '')
   final String ticket;
-  @JsonKey(
-    name: 'reporter_country_of_residence',
-    defaultValue: EuCountryCode.$unknown,
-  )
+  @JsonKey(name: 'reporter_country_of_residence')
   final EuCountryCode reporterCountryOfResidence;
-  @JsonKey(name: 'revision_hash', defaultValue: '')
+  @JsonKey(name: 'revision_hash')
   final String revisionHash;
-  @JsonKey(defaultValue: <ReportFlowStep>[])
   final List<ReportFlowStep> steps;
-  @JsonKey(name: 'good_faith_confirmed', defaultValue: false)
+  @JsonKey(name: 'good_faith_confirmed')
   final bool goodFaithConfirmed;
   @JsonKey(includeIfNull: false)
   final String? locale;
-  @JsonKey(name: 'additional_info', defaultValue: '')
+  @JsonKey(name: 'additional_info')
   final String additionalInfo;
   @JsonKey(includeIfNull: false, name: 'reporter_full_legal_name')
   final String? reporterFullLegalName;
-  @JsonKey(name: 'report_type', defaultValue: '')
+  @JsonKey(name: 'report_type')
   final String reportType;
-  @JsonKey(name: 'guild_id', defaultValue: '')
+  @JsonKey(name: 'guild_id')
   final SnowflakeType guildId;
   @JsonKey(includeIfNull: false, name: 'invite_code')
   final String? inviteCode;

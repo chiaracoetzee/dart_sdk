@@ -19,11 +19,9 @@ class WebAuthnAuthenticationResponseResponse {
     Map<String, Object?> json,
   ) => _$WebAuthnAuthenticationResponseResponseFromJson(json);
 
-  @JsonKey(name: 'clientDataJSON', defaultValue: '')
+  @JsonKey(name: 'clientDataJSON')
   final String clientDataJson;
-  @JsonKey(defaultValue: '')
   final String authenticatorData;
-  @JsonKey(defaultValue: '')
   final String signature;
   @JsonKey(includeIfNull: false)
   final String? userHandle;

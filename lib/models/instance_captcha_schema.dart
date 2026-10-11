@@ -17,7 +17,6 @@ class InstanceCaptchaSchema {
       _$InstanceCaptchaSchemaFromJson(json);
 
   /// Captcha provider (altcha or none)
-  @JsonKey(defaultValue: InstanceCaptchaProviderSchema.$unknown)
   final InstanceCaptchaProviderSchema provider;
 
   Map<String, Object?> toJson() => _$InstanceCaptchaSchemaToJson(this);

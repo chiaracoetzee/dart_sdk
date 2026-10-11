@@ -14,7 +14,6 @@ class BlueskyAuthorizeRequest {
       _$BlueskyAuthorizeRequestFromJson(json);
 
   /// The Bluesky handle to connect (e.g. alice.bsky.social)
-  @JsonKey(defaultValue: '')
   final String handle;
 
   Map<String, Object?> toJson() => _$BlueskyAuthorizeRequestToJson(this);

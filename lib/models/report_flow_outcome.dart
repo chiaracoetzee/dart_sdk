@@ -21,7 +21,6 @@ class ReportFlowOutcome {
   factory ReportFlowOutcome.fromJson(Map<String, Object?> json) =>
       _$ReportFlowOutcomeFromJson(json);
 
-  @JsonKey(defaultValue: ReportFlowOutcomeType.$unknown)
   final ReportFlowOutcomeType type;
 
   /// Next screen when type is screen

@@ -21,15 +21,13 @@ class StoreBillingContextResponseAppStore {
   ) => _$StoreBillingContextResponseAppStoreFromJson(json);
 
   /// Whether App Store purchases are accepted
-  @JsonKey(defaultValue: false)
   final bool enabled;
 
   /// App bundle identifiers whose purchases are accepted
-  @JsonKey(name: 'bundle_ids', defaultValue: <String>[])
+  @JsonKey(name: 'bundle_ids')
   final List<String> bundleIds;
 
   /// App Store products on sale
-  @JsonKey(defaultValue: <StoreBillingAppStoreProductResponse>[])
   final List<StoreBillingAppStoreProductResponse> products;
 
   Map<String, Object?> toJson() =>

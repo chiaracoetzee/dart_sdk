@@ -29,23 +29,19 @@ class MessageSearchResultsResponse {
       _$MessageSearchResultsResponseFromJson(json);
 
   /// The messages matching the search query
-  @JsonKey(defaultValue: <MessageSearchResultsResponseMessages>[])
   final List<MessageSearchResultsResponseMessages> messages;
 
   /// Serialized channels referenced by the returned messages
-  @JsonKey(defaultValue: <ChannelResponse>[])
   final List<ChannelResponse> channels;
 
   /// The total number of messages matching the search
-  @JsonKey(defaultValue: 0)
   final Int32Type total;
 
   /// The maximum number of messages returned per page
-  @JsonKey(name: 'hits_per_page', defaultValue: 0)
+  @JsonKey(name: 'hits_per_page')
   final Int32Type hitsPerPage;
 
   /// The current page number
-  @JsonKey(defaultValue: 0)
   final Int32Type page;
 
   /// Opaque cursor for fetching the next page of results

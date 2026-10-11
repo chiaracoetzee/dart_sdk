@@ -15,15 +15,13 @@ MessageSnapshotResponse _$MessageSnapshotResponseFromJson(
     final val = MessageSnapshotResponse(
       timestamp: $checkedConvert(
         'timestamp',
-        (v) => v == null ? _$missingDateTime() : DateTime.parse(v as String),
+        (v) => DateTime.parse(v as String),
       ),
       type: $checkedConvert(
         'type',
-        (v) => v == null
-            ? MessageType.$unknown
-            : MessageType.fromJson((v as num).toInt()),
+        (v) => MessageType.fromJson((v as num).toInt()),
       ),
-      flags: $checkedConvert('flags', (v) => (v as num?)?.toInt() ?? 0),
+      flags: $checkedConvert('flags', (v) => (v as num).toInt()),
       content: $checkedConvert('content', (v) => v as String?),
       editedTimestamp: $checkedConvert(
         'edited_timestamp',

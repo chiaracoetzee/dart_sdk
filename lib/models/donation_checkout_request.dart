@@ -23,15 +23,13 @@ class DonationCheckoutRequest {
       _$DonationCheckoutRequestFromJson(json);
 
   /// Donor email address
-  @JsonKey(defaultValue: '')
   final String email;
 
   /// Donation amount in minor units for the selected currency
-  @JsonKey(name: 'amount_cents', defaultValue: 0)
+  @JsonKey(name: 'amount_cents')
   final int amountCents;
 
   /// Currency for the donation
-  @JsonKey(defaultValue: DonationCurrency.$unknown)
   final DonationCurrency currency;
 
   /// Billing interval (null for one-time donation)

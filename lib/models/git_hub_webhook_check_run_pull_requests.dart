@@ -16,7 +16,6 @@ class GitHubWebhookCheckRunPullRequests {
     Map<String, Object?> json,
   ) => _$GitHubWebhookCheckRunPullRequestsFromJson(json);
 
-  @JsonKey(defaultValue: 0)
   final Int32Type number;
 
   Map<String, Object?> toJson() =>

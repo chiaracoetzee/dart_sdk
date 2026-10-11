@@ -52,7 +52,6 @@ class ForumTagUpdateRequest {
   }
 
   /// The name of the tag (1-50 characters)
-  @JsonKey(defaultValue: '')
   final String name;
 
   /// Whether only moderators can add or remove this tag

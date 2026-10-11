@@ -16,7 +16,7 @@ ThreadMemberResponseMuteConfig _$ThreadMemberResponseMuteConfigFromJson(
       endTime: $checkedConvert('end_time', (v) => v as String?),
       selectedTimeWindow: $checkedConvert(
         'selected_time_window',
-        (v) => (v as num?)?.toInt() ?? 0,
+        (v) => (v as num).toInt(),
       ),
     );
     return val;

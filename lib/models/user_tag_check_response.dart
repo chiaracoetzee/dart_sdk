@@ -14,7 +14,6 @@ class UserTagCheckResponse {
       _$UserTagCheckResponseFromJson(json);
 
   /// Whether the username/discriminator combination is already taken
-  @JsonKey(defaultValue: false)
   final bool taken;
 
   Map<String, Object?> toJson() => _$UserTagCheckResponseToJson(this);

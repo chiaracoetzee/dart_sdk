@@ -13,30 +13,25 @@ GuildMemberSearchResult _$GuildMemberSearchResultFromJson(
   json,
   ($checkedConvert) {
     final val = GuildMemberSearchResult(
-      id: $checkedConvert('id', (v) => v as String? ?? ''),
-      guildId: $checkedConvert('guild_id', (v) => v as String? ?? ''),
-      userId: $checkedConvert('user_id', (v) => v as String? ?? ''),
-      username: $checkedConvert('username', (v) => v as String? ?? ''),
-      discriminator: $checkedConvert(
-        'discriminator',
-        (v) => v as String? ?? '',
-      ),
+      id: $checkedConvert('id', (v) => v as String),
+      guildId: $checkedConvert('guild_id', (v) => v as String),
+      userId: $checkedConvert('user_id', (v) => v as String),
+      username: $checkedConvert('username', (v) => v as String),
+      discriminator: $checkedConvert('discriminator', (v) => v as String),
       globalName: $checkedConvert('global_name', (v) => v as String?),
       nickname: $checkedConvert('nickname', (v) => v as String?),
       roleIds: $checkedConvert(
         'role_ids',
-        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList() ?? [],
+        (v) => (v as List<dynamic>).map((e) => e as String).toList(),
       ),
-      joinedAt: $checkedConvert('joined_at', (v) => v as num? ?? 0),
+      joinedAt: $checkedConvert('joined_at', (v) => v as num),
       supplemental: $checkedConvert(
         'supplemental',
-        (v) => v == null
-            ? _$missingGuildMemberSearchResultSupplemental()
-            : GuildMemberSearchResultSupplemental.fromJson(
-                v as Map<String, dynamic>,
-              ),
+        (v) => GuildMemberSearchResultSupplemental.fromJson(
+          v as Map<String, dynamic>,
+        ),
       ),
-      isBot: $checkedConvert('is_bot', (v) => v as bool? ?? false),
+      isBot: $checkedConvert('is_bot', (v) => v as bool),
     );
     return val;
   },

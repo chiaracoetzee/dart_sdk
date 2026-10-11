@@ -20,11 +20,10 @@ class GitHubWebhookRelease {
   factory GitHubWebhookRelease.fromJson(Map<String, Object?> json) =>
       _$GitHubWebhookReleaseFromJson(json);
 
-  @JsonKey(defaultValue: 0)
   final Int32Type id;
-  @JsonKey(name: 'tag_name', defaultValue: '')
+  @JsonKey(name: 'tag_name')
   final String tagName;
-  @JsonKey(name: 'html_url', defaultValue: '')
+  @JsonKey(name: 'html_url')
   final String htmlUrl;
   @JsonKey(includeIfNull: false)
   final String? body;

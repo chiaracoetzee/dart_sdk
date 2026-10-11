@@ -12,8 +12,8 @@ _$DiscoveryGuildListResponseCategoryCountsFromJson(Map<String, dynamic> json) =>
       $checkedConvert,
     ) {
       final val = DiscoveryGuildListResponseCategoryCounts(
-        categoryType: $checkedConvert('category_type', (v) => v as num? ?? 0),
-        count: $checkedConvert('count', (v) => v as num? ?? 0),
+        categoryType: $checkedConvert('category_type', (v) => v as num),
+        count: $checkedConvert('count', (v) => v as num),
       );
       return val;
     }, fieldKeyMap: const {'categoryType': 'category_type'});

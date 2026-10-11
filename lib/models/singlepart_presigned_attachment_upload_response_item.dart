@@ -26,29 +26,27 @@ class SinglepartPresignedAttachmentUploadResponseItem {
   ) => _$SinglepartPresignedAttachmentUploadResponseItemFromJson(json);
 
   /// The client-side identifier for this attachment
-  @JsonKey(defaultValue: 0)
   final Int32Type id;
 
   /// The original filename for this upload
-  @JsonKey(defaultValue: '')
   final String filename;
 
   /// Expected file size in bytes
-  @JsonKey(name: 'file_size', defaultValue: 0)
+  @JsonKey(name: 'file_size')
   final NonNegativeSafeIntegerType fileSize;
 
   /// Expected MIME type for this upload
-  @JsonKey(name: 'content_type', defaultValue: '')
+  @JsonKey(name: 'content_type')
   final String contentType;
 
   /// Temporary upload key to reference in message send payloads
-  @JsonKey(name: 'upload_filename', defaultValue: '')
+  @JsonKey(name: 'upload_filename')
   final String uploadFilename;
-  @JsonKey(name: 'upload_mode', defaultValue: '')
+  @JsonKey(name: 'upload_mode')
   final String uploadMode;
 
   /// Presigned URL used to upload this attachment with a single PUT
-  @JsonKey(name: 'upload_url', defaultValue: '')
+  @JsonKey(name: 'upload_url')
   final String uploadUrl;
 
   Map<String, Object?> toJson() =>

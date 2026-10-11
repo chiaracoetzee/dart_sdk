@@ -20,11 +20,10 @@ class GuildRoleHoistPositionsRequestItem {
   ) => _$GuildRoleHoistPositionsRequestItemFromJson(json);
 
   /// The ID of the role
-  @JsonKey(defaultValue: '')
   final SnowflakeType id;
 
   /// The new hoist position for the role
-  @JsonKey(name: 'hoist_position', defaultValue: 0)
+  @JsonKey(name: 'hoist_position')
   final int hoistPosition;
 
   Map<String, Object?> toJson() =>

@@ -14,6 +14,7 @@ import 'message_response_schema_message_reference.dart';
 import 'message_response_schema_referenced_message.dart';
 import 'message_snapshot_response.dart';
 import 'message_sticker_response.dart';
+import 'message_subprofile_response_schema.dart';
 import 'message_type.dart';
 import 'snowflake_string_type.dart';
 import 'thread_channel_response.dart';
@@ -49,6 +50,7 @@ class MessageResponseSchema {
     this.nonce,
     this.call,
     this.thread,
+    this.subprofile,
     this.referencedMessage,
   });
 
@@ -56,33 +58,27 @@ class MessageResponseSchema {
       _$MessageResponseSchemaFromJson(json);
 
   /// The unique identifier (snowflake) for this message
-  @JsonKey(defaultValue: '')
   final SnowflakeStringType id;
 
   /// The ID of the channel this message was sent in
-  @JsonKey(name: 'channel_id', defaultValue: '')
+  @JsonKey(name: 'channel_id')
   final SnowflakeStringType channelId;
 
   /// The author of the message
-  @JsonKey(defaultValue: _$missingUserPartialResponse)
   final UserPartialResponse author;
 
   /// The ID of the webhook that sent this message
   @JsonKey(includeIfNull: false, name: 'webhook_id')
   final SnowflakeStringType? webhookId;
-  @JsonKey(defaultValue: MessageType.$unknown)
   final MessageType type;
 
   /// The bitwise flags for this message
-  @JsonKey(defaultValue: 0)
   final MessageFlags flags;
 
   /// The text content of the message
-  @JsonKey(defaultValue: '')
   final String content;
 
   /// The ISO 8601 timestamp of when the message was created
-  @JsonKey(defaultValue: _$missingDateTime)
   final DateTime timestamp;
 
   /// The ISO 8601 timestamp of when the message was last edited
@@ -90,23 +86,20 @@ class MessageResponseSchema {
   final DateTime? editedTimestamp;
 
   /// Whether the message is pinned
-  @JsonKey(defaultValue: false)
   final bool pinned;
 
   /// Whether the message mentions @everyone
-  @JsonKey(name: 'mention_everyone', defaultValue: false)
+  @JsonKey(name: 'mention_everyone')
   final bool mentionEveryone;
 
   /// Whether the message was sent as text-to-speech
-  @JsonKey(defaultValue: false)
   final bool tts;
 
   /// The users mentioned in the message
-  @JsonKey(defaultValue: <UserPartialResponse>[])
   final List<UserPartialResponse> mentions;
 
   /// The role IDs mentioned in the message
-  @JsonKey(name: 'mention_roles', defaultValue: <String>[])
+  @JsonKey(name: 'mention_roles')
   final List<String> mentionRoles;
 
   /// Channels mentioned in the message that are visible to @everyone
@@ -153,15 +146,13 @@ class MessageResponseSchema {
   @JsonKey(includeIfNull: false)
   final ThreadChannelResponse? thread;
 
+  /// Optional subprofile persona information
+  @JsonKey(includeIfNull: false)
+  final MessageSubprofileResponseSchema? subprofile;
+
   /// The reply target. Present and populated when the target resolved, present and null when the target is gone, absent when this message has no default reference. Clients must tell null apart from absent by key presence.
   @JsonKey(includeIfNull: false, name: 'referenced_message')
   final MessageResponseSchemaReferencedMessage? referencedMessage;
 
   Map<String, Object?> toJson() => _$MessageResponseSchemaToJson(this);
 }
-
-DateTime _$missingDateTime() =>
-    DateTime.fromMillisecondsSinceEpoch(0, isUtc: true);
-
-UserPartialResponse _$missingUserPartialResponse() =>
-    UserPartialResponse.fromJson(const <String, dynamic>{});

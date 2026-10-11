@@ -24,9 +24,7 @@ class AuditLogWebhookResponse {
       _$AuditLogWebhookResponseFromJson(json);
 
   /// The unique identifier for this webhook
-  @JsonKey(defaultValue: '')
   final SnowflakeStringType id;
-  @JsonKey(defaultValue: WebhookType.$unknown)
   final WebhookType type;
 
   /// The guild ID this webhook belongs to
@@ -38,7 +36,6 @@ class AuditLogWebhookResponse {
   final SnowflakeStringType? channelId;
 
   /// The name of the webhook
-  @JsonKey(defaultValue: '')
   final String name;
 
   /// The hash of the webhook avatar

@@ -13,7 +13,7 @@ InstanceBrandingSchema _$InstanceBrandingSchemaFromJson(
   json,
   ($checkedConvert) {
     final val = InstanceBrandingSchema(
-      productName: $checkedConvert('product_name', (v) => v as String? ?? ''),
+      productName: $checkedConvert('product_name', (v) => v as String),
       iconUrl: $checkedConvert('icon_url', (v) => v as String?),
       symbolUrl: $checkedConvert('symbol_url', (v) => v as String?),
       logoUrl: $checkedConvert('logo_url', (v) => v as String?),
@@ -27,9 +27,13 @@ InstanceBrandingSchema _$InstanceBrandingSchemaFromJson(
       ),
       premiumProductName: $checkedConvert(
         'premium_product_name',
-        (v) => v as String? ?? '',
+        (v) => v as String,
       ),
       premiumInfoUrl: $checkedConvert('premium_info_url', (v) => v as String?),
+      desktopAppPromptEnabled: $checkedConvert(
+        'desktop_app_prompt_enabled',
+        (v) => v as bool? ?? true,
+      ),
     );
     return val;
   },
@@ -45,6 +49,7 @@ InstanceBrandingSchema _$InstanceBrandingSchemaFromJson(
     'statusPageIncidentHistoryUrl': 'status_page_incident_history_url',
     'premiumProductName': 'premium_product_name',
     'premiumInfoUrl': 'premium_info_url',
+    'desktopAppPromptEnabled': 'desktop_app_prompt_enabled',
   },
 );
 
@@ -62,4 +67,5 @@ Map<String, dynamic> _$InstanceBrandingSchemaToJson(
   'status_page_incident_history_url': instance.statusPageIncidentHistoryUrl,
   'premium_product_name': instance.premiumProductName,
   'premium_info_url': instance.premiumInfoUrl,
+  'desktop_app_prompt_enabled': instance.desktopAppPromptEnabled,
 };

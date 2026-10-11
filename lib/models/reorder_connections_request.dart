@@ -14,7 +14,7 @@ class ReorderConnectionsRequest {
       _$ReorderConnectionsRequestFromJson(json);
 
   /// Ordered list of connection IDs defining the new display order
-  @JsonKey(name: 'connection_ids', defaultValue: <String>[])
+  @JsonKey(name: 'connection_ids')
   final List<String> connectionIds;
 
   Map<String, Object?> toJson() => _$ReorderConnectionsRequestToJson(this);

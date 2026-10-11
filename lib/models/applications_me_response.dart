@@ -29,11 +29,9 @@ class ApplicationsMeResponse {
       _$ApplicationsMeResponseFromJson(json);
 
   /// The unique identifier of the application
-  @JsonKey(defaultValue: '')
   final SnowflakeStringType id;
 
   /// The name of the application
-  @JsonKey(defaultValue: '')
   final String name;
 
   /// The persisted bot avatar hash used as the application icon, if available
@@ -45,19 +43,18 @@ class ApplicationsMeResponse {
   final String? description;
 
   /// Whether the bot can be invited by anyone
-  @JsonKey(name: 'bot_public', defaultValue: false)
+  @JsonKey(name: 'bot_public')
   final bool botPublic;
 
   /// Whether the bot requires OAuth2 code grant
-  @JsonKey(name: 'bot_require_code_grant', defaultValue: false)
+  @JsonKey(name: 'bot_require_code_grant')
   final bool botRequireCodeGrant;
 
   /// Compatibility placeholder for AppInfo clients until keys are persisted
-  @JsonKey(name: 'verify_key', defaultValue: '')
+  @JsonKey(name: 'verify_key')
   final String verifyKey;
 
   /// The owner of the application
-  @JsonKey(defaultValue: _$missingUserPartialResponse)
   final UserPartialResponse owner;
 
   /// The bot user associated with the application
@@ -70,6 +67,3 @@ class ApplicationsMeResponse {
 
   Map<String, Object?> toJson() => _$ApplicationsMeResponseToJson(this);
 }
-
-UserPartialResponse _$missingUserPartialResponse() =>
-    UserPartialResponse.fromJson(const <String, dynamic>{});

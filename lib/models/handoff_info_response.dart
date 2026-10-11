@@ -21,7 +21,6 @@ class HandoffInfoResponse {
       _$HandoffInfoResponseFromJson(json);
 
   /// Current status of the handoff (pending, expired)
-  @JsonKey(defaultValue: '')
   final String status;
 
   /// Client information of the initiating device

@@ -25,7 +25,6 @@ class WebAuthnCredentialUpdateRequest {
       _$WebAuthnCredentialUpdateRequestFromJson(json);
 
   /// New name for the credential
-  @JsonKey(defaultValue: '')
   final String name;
 
   /// Account password for sudo verification

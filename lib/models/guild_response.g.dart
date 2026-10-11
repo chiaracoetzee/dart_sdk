@@ -15,67 +15,50 @@ GuildResponse _$GuildResponseFromJson(
     final val = GuildResponse(
       features: $checkedConvert(
         'features',
-        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList() ?? [],
+        (v) => (v as List<dynamic>).map((e) => e as String).toList(),
       ),
-      name: $checkedConvert('name', (v) => v as String? ?? ''),
-      ownerId: $checkedConvert('owner_id', (v) => v as String? ?? ''),
+      name: $checkedConvert('name', (v) => v as String),
+      ownerId: $checkedConvert('owner_id', (v) => v as String),
       splashCardAlignment: $checkedConvert(
         'splash_card_alignment',
-        (v) => v == null
-            ? GuildResponseSplashCardAlignmentSplashCardAlignment.$unknown
-            : GuildResponseSplashCardAlignmentSplashCardAlignment.fromJson(
-                (v as num).toInt(),
-              ),
+        (v) => GuildResponseSplashCardAlignmentSplashCardAlignment.fromJson(
+          (v as num).toInt(),
+        ),
       ),
-      id: $checkedConvert('id', (v) => v as String? ?? ''),
+      id: $checkedConvert('id', (v) => v as String),
       contentWarningLevel: $checkedConvert(
         'content_warning_level',
-        (v) => v == null
-            ? ContentWarningLevel.$unknown
-            : ContentWarningLevel.fromJson((v as num).toInt()),
+        (v) => ContentWarningLevel.fromJson((v as num).toInt()),
       ),
       disabledOperations: $checkedConvert(
         'disabled_operations',
-        (v) => (v as num?)?.toInt() ?? 0,
+        (v) => (v as num).toInt(),
       ),
-      nsfw: $checkedConvert('nsfw', (v) => v as bool? ?? false),
+      nsfw: $checkedConvert('nsfw', (v) => v as bool),
       nsfwLevel: $checkedConvert(
         'nsfw_level',
-        (v) => v == null
-            ? NsfwLevel.$unknown
-            : NsfwLevel.fromJson((v as num).toInt()),
+        (v) => NsfwLevel.fromJson((v as num).toInt()),
       ),
       defaultMessageNotifications: $checkedConvert(
         'default_message_notifications',
-        (v) => v == null
-            ? DefaultMessageNotifications.$unknown
-            : DefaultMessageNotifications.fromJson((v as num).toInt()),
+        (v) => DefaultMessageNotifications.fromJson((v as num).toInt()),
       ),
       mfaLevel: $checkedConvert(
         'mfa_level',
-        (v) => v == null
-            ? GuildMfaLevel.$unknown
-            : GuildMfaLevel.fromJson((v as num).toInt()),
+        (v) => GuildMfaLevel.fromJson((v as num).toInt()),
       ),
       verificationLevel: $checkedConvert(
         'verification_level',
-        (v) => v == null
-            ? GuildVerificationLevel.$unknown
-            : GuildVerificationLevel.fromJson((v as num).toInt()),
+        (v) => GuildVerificationLevel.fromJson((v as num).toInt()),
       ),
-      afkTimeout: $checkedConvert(
-        'afk_timeout',
-        (v) => (v as num?)?.toInt() ?? 0,
-      ),
+      afkTimeout: $checkedConvert('afk_timeout', (v) => (v as num).toInt()),
       systemChannelFlags: $checkedConvert(
         'system_channel_flags',
-        (v) => (v as num?)?.toInt() ?? 0,
+        (v) => (v as num).toInt(),
       ),
       explicitContentFilter: $checkedConvert(
         'explicit_content_filter',
-        (v) => v == null
-            ? GuildExplicitContentFilter.$unknown
-            : GuildExplicitContentFilter.fromJson((v as num).toInt()),
+        (v) => GuildExplicitContentFilter.fromJson((v as num).toInt()),
       ),
       systemChannelId: $checkedConvert(
         'system_channel_id',

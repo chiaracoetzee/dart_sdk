@@ -26,21 +26,15 @@ class CurrentSubscriptionPriceResponse {
 
 @JsonSerializable()
 class CurrentSubscriptionPriceResponseVariant1 {
-  @JsonKey(name: 'price_id', defaultValue: '')
+  @JsonKey(name: 'price_id')
   final String priceId;
-  @JsonKey(name: 'amount_minor', defaultValue: 0)
+  @JsonKey(name: 'amount_minor')
   final int amountMinor;
-  @JsonKey(defaultValue: '')
   final PremiumCurrency currency;
-  @JsonKey(
-    name: 'billing_cycle',
-    defaultValue:
-        CurrentSubscriptionPriceResponseVariant1BillingCycleBillingCycle
-            .$unknown,
-  )
+  @JsonKey(name: 'billing_cycle')
   final CurrentSubscriptionPriceResponseVariant1BillingCycleBillingCycle
   billingCycle;
-  @JsonKey(name: 'is_grandfathered', defaultValue: false)
+  @JsonKey(name: 'is_grandfathered')
   final bool isGrandfathered;
   @JsonKey(includeIfNull: true, name: 'list_amount_minor')
   final int? listAmountMinor;

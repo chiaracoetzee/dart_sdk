@@ -17,7 +17,6 @@ class PresignedAttachmentUploadRequest {
   ) => _$PresignedAttachmentUploadRequestFromJson(json);
 
   /// Attachment upload specifications
-  @JsonKey(defaultValue: <PresignedAttachmentUploadRequestItem>[])
   final List<PresignedAttachmentUploadRequestItem> attachments;
 
   Map<String, Object?> toJson() =>

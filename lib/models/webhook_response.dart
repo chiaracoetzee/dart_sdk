@@ -31,25 +31,22 @@ class WebhookResponse {
       _$WebhookResponseFromJson(json);
 
   /// The unique identifier (snowflake) for the webhook
-  @JsonKey(defaultValue: '')
   final SnowflakeStringType id;
 
   /// The ID of the guild this webhook belongs to
-  @JsonKey(name: 'guild_id', defaultValue: '')
+  @JsonKey(name: 'guild_id')
   final SnowflakeStringType guildId;
 
   /// The ID of the channel this webhook posts to
-  @JsonKey(name: 'channel_id', defaultValue: '')
+  @JsonKey(name: 'channel_id')
   final SnowflakeStringType channelId;
 
   /// The display name of the webhook
-  @JsonKey(defaultValue: '')
   final String name;
 
   /// The hash of the webhook avatar image
   @JsonKey(includeIfNull: false)
   final String? avatar;
-  @JsonKey(defaultValue: WebhookType.$unknown)
   final WebhookType type;
 
   /// The secure token used to execute the webhook, omitted for channel follower webhooks
@@ -57,7 +54,6 @@ class WebhookResponse {
   final String? token;
 
   /// The user who created the webhook
-  @JsonKey(defaultValue: _$missingUserPartialResponse)
   final UserPartialResponse user;
 
   /// The guild of the followed announcement channel, present on channel follower webhooks while the creator can view it
@@ -70,6 +66,3 @@ class WebhookResponse {
 
   Map<String, Object?> toJson() => _$WebhookResponseToJson(this);
 }
-
-UserPartialResponse _$missingUserPartialResponse() =>
-    UserPartialResponse.fromJson(const <String, dynamic>{});

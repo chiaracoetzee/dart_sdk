@@ -20,11 +20,10 @@ class InstanceRegistrationSchema {
       _$InstanceRegistrationSchemaFromJson(json);
 
   /// Public registration mode for this instance
-  @JsonKey(defaultValue: InstanceRegistrationModeSchema.$unknown)
   final InstanceRegistrationModeSchema mode;
 
   /// Whether admin-issued registration URLs are accepted
-  @JsonKey(name: 'admin_registration_urls_enabled', defaultValue: false)
+  @JsonKey(name: 'admin_registration_urls_enabled')
   final bool adminRegistrationUrlsEnabled;
 
   Map<String, Object?> toJson() => _$InstanceRegistrationSchemaToJson(this);

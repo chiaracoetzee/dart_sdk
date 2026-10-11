@@ -14,7 +14,6 @@ class DomainMigrationAssignmentResponse {
     Map<String, Object?> json,
   ) => _$DomainMigrationAssignmentResponseFromJson(json);
 
-  @JsonKey(defaultValue: false)
   final bool enabled;
 
   Map<String, Object?> toJson() =>

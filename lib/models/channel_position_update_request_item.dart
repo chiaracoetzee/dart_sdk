@@ -23,7 +23,6 @@ class ChannelPositionUpdateRequestItem {
   ) => _$ChannelPositionUpdateRequestItemFromJson(json);
 
   /// The ID of the channel to reposition
-  @JsonKey(defaultValue: '')
   final SnowflakeType id;
 
   /// New position for the channel

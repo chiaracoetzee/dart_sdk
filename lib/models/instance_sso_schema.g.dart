@@ -12,13 +12,10 @@ InstanceSsoSchema _$InstanceSsoSchemaFromJson(Map<String, dynamic> json) =>
       json,
       ($checkedConvert) {
         final val = InstanceSsoSchema(
-          enabled: $checkedConvert('enabled', (v) => v as bool? ?? false),
-          enforced: $checkedConvert('enforced', (v) => v as bool? ?? false),
+          enabled: $checkedConvert('enabled', (v) => v as bool),
+          enforced: $checkedConvert('enforced', (v) => v as bool),
           displayName: $checkedConvert('display_name', (v) => v as String?),
-          redirectUri: $checkedConvert(
-            'redirect_uri',
-            (v) => v as String? ?? '',
-          ),
+          redirectUri: $checkedConvert('redirect_uri', (v) => v as String),
           available: $checkedConvert('available', (v) => v as bool?),
         );
         return val;

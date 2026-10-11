@@ -25,21 +25,15 @@ class StoreBillingContextResponse {
       _$StoreBillingContextResponseFromJson(json);
 
   /// Lowercase UUID for this account. Pass it as appAccountToken on App Store purchases and as obfuscatedAccountId on Google Play purchases
-  @JsonKey(name: 'app_account_token', defaultValue: '')
+  @JsonKey(name: 'app_account_token')
   final String appAccountToken;
 
   /// App Store purchase settings
-  @JsonKey(
-    name: 'app_store',
-    defaultValue: _$missingStoreBillingContextResponseAppStore,
-  )
+  @JsonKey(name: 'app_store')
   final StoreBillingContextResponseAppStore appStore;
 
   /// Google Play purchase settings
-  @JsonKey(
-    name: 'google_play',
-    defaultValue: _$missingStoreBillingContextResponseGooglePlay,
-  )
+  @JsonKey(name: 'google_play')
   final StoreBillingContextResponseGooglePlay googlePlay;
 
   /// Why this account cannot buy a subscription right now, null when it can
@@ -52,11 +46,3 @@ class StoreBillingContextResponse {
 
   Map<String, Object?> toJson() => _$StoreBillingContextResponseToJson(this);
 }
-
-StoreBillingContextResponseAppStore
-_$missingStoreBillingContextResponseAppStore() =>
-    StoreBillingContextResponseAppStore.fromJson(const <String, dynamic>{});
-
-StoreBillingContextResponseGooglePlay
-_$missingStoreBillingContextResponseGooglePlay() =>
-    StoreBillingContextResponseGooglePlay.fromJson(const <String, dynamic>{});

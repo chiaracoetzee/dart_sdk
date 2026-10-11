@@ -13,13 +13,11 @@ _$AuthRegisterResponseAuthTokenWithUserIdResponseFromJson(
   $checkedConvert,
 ) {
   final val = AuthRegisterResponseAuthTokenWithUserIdResponse(
-    token: $checkedConvert('token', (v) => v as String? ?? ''),
-    userId: $checkedConvert('user_id', (v) => v as String? ?? ''),
+    token: $checkedConvert('token', (v) => v as String),
+    userId: $checkedConvert('user_id', (v) => v as String),
     user: $checkedConvert(
       'user',
-      (v) => v == null
-          ? _$missingUserPartialResponse()
-          : UserPartialResponse.fromJson(v as Map<String, dynamic>),
+      (v) => UserPartialResponse.fromJson(v as Map<String, dynamic>),
     ),
   );
   return val;
@@ -43,9 +41,9 @@ _$AuthRegisterResponseAuthRegistrationPendingApprovalResponseFromJson(
     final val = AuthRegisterResponseAuthRegistrationPendingApprovalResponse(
       registrationPendingApproval: $checkedConvert(
         'registration_pending_approval',
-        (v) => v as bool? ?? false,
+        (v) => v as bool,
       ),
-      userId: $checkedConvert('user_id', (v) => v as String? ?? ''),
+      userId: $checkedConvert('user_id', (v) => v as String),
     );
     return val;
   },

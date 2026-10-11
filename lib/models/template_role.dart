@@ -63,7 +63,6 @@ class TemplateRole {
   }
 
   /// The template-local role ID
-  @JsonKey(defaultValue: '')
   final String id;
 
   /// The permissions bitfield as a string (legacy)

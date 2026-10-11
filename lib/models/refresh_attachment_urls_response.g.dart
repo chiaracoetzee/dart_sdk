@@ -12,14 +12,11 @@ RefreshAttachmentUrlsResponse _$RefreshAttachmentUrlsResponseFromJson(
   final val = RefreshAttachmentUrlsResponse(
     refreshedUrls: $checkedConvert(
       'refreshed_urls',
-      (v) =>
-          (v as List<dynamic>?)
-              ?.map(
-                (e) =>
-                    RefreshedAttachmentUrl.fromJson(e as Map<String, dynamic>),
-              )
-              .toList() ??
-          [],
+      (v) => (v as List<dynamic>)
+          .map(
+            (e) => RefreshedAttachmentUrl.fromJson(e as Map<String, dynamic>),
+          )
+          .toList(),
     ),
   );
   return val;

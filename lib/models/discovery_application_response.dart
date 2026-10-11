@@ -30,7 +30,7 @@ class DiscoveryApplicationResponse {
       _$DiscoveryApplicationResponseFromJson(json);
 
   /// Guild ID
-  @JsonKey(name: 'guild_id', defaultValue: '')
+  @JsonKey(name: 'guild_id')
   final SnowflakeStringType guildId;
 
   /// NSFW level of the guild
@@ -38,15 +38,13 @@ class DiscoveryApplicationResponse {
   final NsfwLevel? guildNsfwLevel;
 
   /// Application status
-  @JsonKey(defaultValue: '')
   final String status;
 
   /// Discovery description
-  @JsonKey(defaultValue: '')
   final String description;
 
   /// Discovery category type
-  @JsonKey(name: 'category_type', defaultValue: 0)
+  @JsonKey(name: 'category_type')
   final num categoryType;
 
   /// Primary community language
@@ -54,11 +52,11 @@ class DiscoveryApplicationResponse {
   final String? primaryLanguage;
 
   /// Custom discovery tags
-  @JsonKey(name: 'custom_tags', defaultValue: <String>[])
+  @JsonKey(name: 'custom_tags')
   final List<String> customTags;
 
   /// Application timestamp
-  @JsonKey(name: 'applied_at', defaultValue: '')
+  @JsonKey(name: 'applied_at')
   final String appliedAt;
 
   /// Review timestamp

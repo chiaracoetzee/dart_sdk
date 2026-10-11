@@ -18,7 +18,6 @@ class ThrottledErrorErrors {
       _$ThrottledErrorErrorsFromJson(json);
 
   /// Field path that failed validation
-  @JsonKey(defaultValue: '')
   final String path;
 
   /// Machine-readable validation error code
@@ -26,7 +25,6 @@ class ThrottledErrorErrors {
   final String? code;
 
   /// Human-readable validation error message
-  @JsonKey(defaultValue: '')
   final String message;
 
   Map<String, Object?> toJson() => _$ThrottledErrorErrorsToJson(this);

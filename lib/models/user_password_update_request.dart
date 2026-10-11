@@ -25,7 +25,7 @@ class UserPasswordUpdateRequest {
       _$UserPasswordUpdateRequestFromJson(json);
 
   /// The new password to set
-  @JsonKey(name: 'new_password', defaultValue: '')
+  @JsonKey(name: 'new_password')
   final PasswordType newPassword;
 
   /// Account password for sudo verification

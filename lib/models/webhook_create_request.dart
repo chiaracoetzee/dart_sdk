@@ -38,7 +38,6 @@ class WebhookCreateRequest {
   }
 
   /// The name of the webhook
-  @JsonKey(defaultValue: '')
   final String name;
   @JsonKey(includeFromJson: false, includeToJson: false)
   final JsonNullable<Base64ImageType> avatar;

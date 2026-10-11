@@ -16,7 +16,6 @@ class MobileDevicesListResponse {
       _$MobileDevicesListResponseFromJson(json);
 
   /// Array of registered mobile push devices
-  @JsonKey(defaultValue: <MobileDevicesListResponseDevices>[])
   final List<MobileDevicesListResponseDevices> devices;
 
   Map<String, Object?> toJson() => _$MobileDevicesListResponseToJson(this);

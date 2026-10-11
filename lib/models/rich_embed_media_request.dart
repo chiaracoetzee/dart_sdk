@@ -22,7 +22,6 @@ class RichEmbedMediaRequest {
 
 @JsonSerializable()
 class RichEmbedMediaRequestVariant1 {
-  @JsonKey(defaultValue: '')
   final String url;
   @JsonKey(includeIfNull: false)
   final String? description;

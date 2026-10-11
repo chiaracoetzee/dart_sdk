@@ -10,7 +10,7 @@ UserTagCheckResponse _$UserTagCheckResponseFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('UserTagCheckResponse', json, ($checkedConvert) {
   final val = UserTagCheckResponse(
-    taken: $checkedConvert('taken', (v) => v as bool? ?? false),
+    taken: $checkedConvert('taken', (v) => v as bool),
   );
   return val;
 });

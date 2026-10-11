@@ -14,7 +14,6 @@ class UsernameAvailabilityResponse {
       _$UsernameAvailabilityResponseFromJson(json);
 
   /// Whether no other account holds this username
-  @JsonKey(defaultValue: false)
   final bool available;
 
   Map<String, Object?> toJson() => _$UsernameAvailabilityResponseToJson(this);

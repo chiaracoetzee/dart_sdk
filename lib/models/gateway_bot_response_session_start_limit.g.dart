@@ -13,18 +13,12 @@ _$GatewayBotResponseSessionStartLimitFromJson(Map<String, dynamic> json) =>
       json,
       ($checkedConvert) {
         final val = GatewayBotResponseSessionStartLimit(
-          total: $checkedConvert('total', (v) => (v as num?)?.toInt() ?? 0),
-          remaining: $checkedConvert(
-            'remaining',
-            (v) => (v as num?)?.toInt() ?? 0,
-          ),
-          resetAfter: $checkedConvert(
-            'reset_after',
-            (v) => (v as num?)?.toInt() ?? 0,
-          ),
+          total: $checkedConvert('total', (v) => (v as num).toInt()),
+          remaining: $checkedConvert('remaining', (v) => (v as num).toInt()),
+          resetAfter: $checkedConvert('reset_after', (v) => (v as num).toInt()),
           maxConcurrency: $checkedConvert(
             'max_concurrency',
-            (v) => (v as num?)?.toInt() ?? 0,
+            (v) => (v as num).toInt(),
           ),
         );
         return val;

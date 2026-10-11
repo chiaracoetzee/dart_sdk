@@ -13,14 +13,8 @@ _$WebAuthnRegistrationResponseResponseFromJson(
   $checkedConvert,
 ) {
   final val = WebAuthnRegistrationResponseResponse(
-    clientDataJson: $checkedConvert(
-      'clientDataJSON',
-      (v) => v as String? ?? '',
-    ),
-    attestationObject: $checkedConvert(
-      'attestationObject',
-      (v) => v as String? ?? '',
-    ),
+    clientDataJson: $checkedConvert('clientDataJSON', (v) => v as String),
+    attestationObject: $checkedConvert('attestationObject', (v) => v as String),
     authenticatorData: $checkedConvert(
       'authenticatorData',
       (v) => v as String?,

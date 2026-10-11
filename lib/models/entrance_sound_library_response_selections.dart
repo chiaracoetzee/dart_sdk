@@ -20,9 +20,9 @@ class EntranceSoundLibraryResponseSelections {
   ) => _$EntranceSoundLibraryResponseSelectionsFromJson(json);
 
   /// Entrance sound scope identifier
-  @JsonKey(name: 'scope_id', defaultValue: '')
+  @JsonKey(name: 'scope_id')
   final String scopeId;
-  @JsonKey(name: 'sound_id', defaultValue: '')
+  @JsonKey(name: 'sound_id')
   final SnowflakeStringType soundId;
 
   Map<String, Object?> toJson() =>

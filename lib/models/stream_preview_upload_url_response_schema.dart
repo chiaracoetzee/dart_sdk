@@ -24,32 +24,28 @@ class StreamPreviewUploadUrlResponseSchema {
   ) => _$StreamPreviewUploadUrlResponseSchemaFromJson(json);
 
   /// URL used to upload the stream preview with a PUT request
-  @JsonKey(name: 'upload_url', defaultValue: '')
+  @JsonKey(name: 'upload_url')
   final String uploadUrl;
 
   /// HTTP method to use for the upload URL
-  @JsonKey(defaultValue: '')
   final String method;
 
   /// MIME type that must be sent with the upload request
-  @JsonKey(name: 'content_type', defaultValue: '')
+  @JsonKey(name: 'content_type')
   final String contentType;
 
   /// ISO timestamp when the upload URL expires
-  @JsonKey(name: 'expires_at', defaultValue: _$missingDateTime)
+  @JsonKey(name: 'expires_at')
   final DateTime expiresAt;
 
   /// Number of seconds the upload URL remains valid
-  @JsonKey(name: 'expires_in', defaultValue: 0)
+  @JsonKey(name: 'expires_in')
   final Int32Type expiresIn;
 
   /// Maximum supported preview image size in bytes
-  @JsonKey(name: 'max_bytes', defaultValue: 0)
+  @JsonKey(name: 'max_bytes')
   final Int32Type maxBytes;
 
   Map<String, Object?> toJson() =>
       _$StreamPreviewUploadUrlResponseSchemaToJson(this);
 }
-
-DateTime _$missingDateTime() =>
-    DateTime.fromMillisecondsSinceEpoch(0, isUtc: true);

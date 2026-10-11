@@ -13,19 +13,19 @@ ThreadMetadataResponse _$ThreadMetadataResponseFromJson(
   json,
   ($checkedConvert) {
     final val = ThreadMetadataResponse(
-      archived: $checkedConvert('archived', (v) => v as bool? ?? false),
+      archived: $checkedConvert('archived', (v) => v as bool),
       autoArchiveDuration: $checkedConvert(
         'auto_archive_duration',
-        (v) => (v as num?)?.toInt() ?? 0,
+        (v) => (v as num).toInt(),
       ),
       archiveTimestamp: $checkedConvert(
         'archive_timestamp',
-        (v) => v == null ? _$missingDateTime() : DateTime.parse(v as String),
+        (v) => DateTime.parse(v as String),
       ),
-      locked: $checkedConvert('locked', (v) => v as bool? ?? false),
+      locked: $checkedConvert('locked', (v) => v as bool),
       createTimestamp: $checkedConvert(
         'create_timestamp',
-        (v) => v == null ? _$missingDateTime() : DateTime.parse(v as String),
+        (v) => DateTime.parse(v as String),
       ),
       invitable: $checkedConvert('invitable', (v) => v as bool?),
     );

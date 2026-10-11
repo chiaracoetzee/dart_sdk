@@ -30,11 +30,9 @@ class DiscoveryGuildListResponseGuilds {
   ) => _$DiscoveryGuildListResponseGuildsFromJson(json);
 
   /// Guild ID
-  @JsonKey(defaultValue: '')
   final SnowflakeStringType id;
 
   /// Guild name
-  @JsonKey(defaultValue: '')
   final String name;
 
   /// Guild icon hash
@@ -50,7 +48,7 @@ class DiscoveryGuildListResponseGuilds {
   final String? description;
 
   /// Discovery category type
-  @JsonKey(name: 'category_type', defaultValue: 0)
+  @JsonKey(name: 'category_type')
   final num categoryType;
 
   /// Primary community language
@@ -58,23 +56,22 @@ class DiscoveryGuildListResponseGuilds {
   final String? primaryLanguage;
 
   /// Custom discovery tags
-  @JsonKey(name: 'custom_tags', defaultValue: <String>[])
+  @JsonKey(name: 'custom_tags')
   final List<String> customTags;
 
   /// Approximate member count
-  @JsonKey(name: 'member_count', defaultValue: 0)
+  @JsonKey(name: 'member_count')
   final num memberCount;
 
   /// Approximate online member count
-  @JsonKey(name: 'online_count', defaultValue: 0)
+  @JsonKey(name: 'online_count')
   final num onlineCount;
 
   /// Guild feature flags
-  @JsonKey(defaultValue: <String>[])
   final List<String> features;
 
   /// Verification level
-  @JsonKey(name: 'verification_level', defaultValue: 0)
+  @JsonKey(name: 'verification_level')
   final num verificationLevel;
 
   Map<String, Object?> toJson() =>

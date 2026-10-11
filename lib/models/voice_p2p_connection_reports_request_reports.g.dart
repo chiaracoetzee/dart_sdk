@@ -14,19 +14,17 @@ _$VoiceP2pConnectionReportsRequestReportsFromJson(
   json,
   ($checkedConvert) {
     final val = VoiceP2pConnectionReportsRequestReports(
-      channelId: $checkedConvert('channel_id', (v) => v as String? ?? ''),
+      channelId: $checkedConvert('channel_id', (v) => v as String),
       guildId: $checkedConvert('guild_id', (v) => v as String?),
       participantCount: $checkedConvert(
         'participant_count',
-        (v) => (v as num?)?.toInt() ?? 0,
+        (v) => (v as num).toInt(),
       ),
       outcome: $checkedConvert(
         'outcome',
-        (v) => v == null
-            ? VoiceP2pConnectionReportsRequestReportsOutcomeOutcome.$unknown
-            : VoiceP2pConnectionReportsRequestReportsOutcomeOutcome.fromJson(
-                v as String,
-              ),
+        (v) => VoiceP2pConnectionReportsRequestReportsOutcomeOutcome.fromJson(
+          v as String,
+        ),
       ),
       localCandidateType: $checkedConvert(
         'local_candidate_type',
@@ -61,10 +59,7 @@ _$VoiceP2pConnectionReportsRequestReportsFromJson(
               ),
       ),
       setupMs: $checkedConvert('setup_ms', (v) => (v as num?)?.toInt()),
-      iceRestarted: $checkedConvert(
-        'ice_restarted',
-        (v) => v as bool? ?? false,
-      ),
+      iceRestarted: $checkedConvert('ice_restarted', (v) => v as bool),
     );
     return val;
   },

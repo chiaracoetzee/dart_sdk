@@ -14,7 +14,6 @@ class UrlResponse {
       _$UrlResponseFromJson(json);
 
   /// The URL to redirect to
-  @JsonKey(defaultValue: '')
   final String url;
 
   Map<String, Object?> toJson() => _$UrlResponseToJson(this);

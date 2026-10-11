@@ -14,7 +14,7 @@ class ClaimAppStoreTransactionRequest {
       _$ClaimAppStoreTransactionRequestFromJson(json);
 
   /// JWS signed transaction from StoreKit 2 (Transaction.jwsRepresentation)
-  @JsonKey(name: 'signed_transaction', defaultValue: '')
+  @JsonKey(name: 'signed_transaction')
   final String signedTransaction;
 
   Map<String, Object?> toJson() =>

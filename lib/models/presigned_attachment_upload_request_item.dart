@@ -23,19 +23,17 @@ class PresignedAttachmentUploadRequestItem {
   ) => _$PresignedAttachmentUploadRequestItemFromJson(json);
 
   /// The client-side identifier for this attachment
-  @JsonKey(defaultValue: 0)
   final Int32Type id;
 
   /// The name of the file that will be uploaded
-  @JsonKey(defaultValue: '')
   final String filename;
 
   /// Expected file size in bytes
-  @JsonKey(name: 'file_size', defaultValue: 0)
+  @JsonKey(name: 'file_size')
   final NonNegativeSafeIntegerType fileSize;
 
   /// MIME type the client will upload
-  @JsonKey(name: 'content_type', defaultValue: '')
+  @JsonKey(name: 'content_type')
   final String contentType;
 
   Map<String, Object?> toJson() =>

@@ -27,14 +27,10 @@ class GitHubWebhookCheckRun {
 
   @JsonKey(includeIfNull: false)
   final String? conclusion;
-  @JsonKey(defaultValue: '')
   final String name;
-  @JsonKey(name: 'html_url', defaultValue: '')
+  @JsonKey(name: 'html_url')
   final String htmlUrl;
-  @JsonKey(
-    name: 'check_suite',
-    defaultValue: _$missingGitHubWebhookCheckRunCheckSuite,
-  )
+  @JsonKey(name: 'check_suite')
   final GitHubWebhookCheckRunCheckSuite checkSuite;
   @JsonKey(includeIfNull: false, name: 'details_url')
   final String? detailsUrl;
@@ -45,6 +41,3 @@ class GitHubWebhookCheckRun {
 
   Map<String, Object?> toJson() => _$GitHubWebhookCheckRunToJson(this);
 }
-
-GitHubWebhookCheckRunCheckSuite _$missingGitHubWebhookCheckRunCheckSuite() =>
-    GitHubWebhookCheckRunCheckSuite.fromJson(const <String, dynamic>{});

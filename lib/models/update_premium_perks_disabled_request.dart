@@ -15,7 +15,6 @@ class UpdatePremiumPerksDisabledRequest {
   ) => _$UpdatePremiumPerksDisabledRequestFromJson(json);
 
   /// Whether premium perks should be temporarily disabled
-  @JsonKey(defaultValue: false)
   final bool disabled;
 
   Map<String, Object?> toJson() =>

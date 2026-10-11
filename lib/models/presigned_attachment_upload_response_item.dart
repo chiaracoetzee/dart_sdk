@@ -35,19 +35,17 @@ class PresignedAttachmentUploadResponseItem {
 
 @JsonSerializable()
 class PresignedAttachmentUploadResponseItemSinglepartPresignedAttachmentUploadResponseItem {
-  @JsonKey(defaultValue: 0)
   final Int32Type id;
-  @JsonKey(defaultValue: '')
   final String filename;
-  @JsonKey(name: 'file_size', defaultValue: 0)
+  @JsonKey(name: 'file_size')
   final NonNegativeSafeIntegerType fileSize;
-  @JsonKey(name: 'content_type', defaultValue: '')
+  @JsonKey(name: 'content_type')
   final String contentType;
-  @JsonKey(name: 'upload_filename', defaultValue: '')
+  @JsonKey(name: 'upload_filename')
   final String uploadFilename;
-  @JsonKey(name: 'upload_mode', defaultValue: '')
+  @JsonKey(name: 'upload_mode')
   final String uploadMode;
-  @JsonKey(name: 'upload_url', defaultValue: '')
+  @JsonKey(name: 'upload_url')
   final String uploadUrl;
 
   const PresignedAttachmentUploadResponseItemSinglepartPresignedAttachmentUploadResponseItem({
@@ -75,25 +73,20 @@ class PresignedAttachmentUploadResponseItemSinglepartPresignedAttachmentUploadRe
 
 @JsonSerializable()
 class PresignedAttachmentUploadResponseItemMultipartPresignedAttachmentUploadResponseItem {
-  @JsonKey(defaultValue: 0)
   final Int32Type id;
-  @JsonKey(defaultValue: '')
   final String filename;
-  @JsonKey(name: 'file_size', defaultValue: 0)
+  @JsonKey(name: 'file_size')
   final NonNegativeSafeIntegerType fileSize;
-  @JsonKey(name: 'content_type', defaultValue: '')
+  @JsonKey(name: 'content_type')
   final String contentType;
-  @JsonKey(name: 'upload_filename', defaultValue: '')
+  @JsonKey(name: 'upload_filename')
   final String uploadFilename;
-  @JsonKey(name: 'upload_mode', defaultValue: '')
+  @JsonKey(name: 'upload_mode')
   final String uploadMode;
-  @JsonKey(name: 'upload_id', defaultValue: '')
+  @JsonKey(name: 'upload_id')
   final String uploadId;
-  @JsonKey(name: 'part_size', defaultValue: 0)
+  @JsonKey(name: 'part_size')
   final NonNegativeSafeIntegerType partSize;
-  @JsonKey(
-    defaultValue: <MultipartPresignedAttachmentUploadResponseItemParts>[],
-  )
   final List<MultipartPresignedAttachmentUploadResponseItemParts> parts;
 
   const PresignedAttachmentUploadResponseItemMultipartPresignedAttachmentUploadResponseItem({

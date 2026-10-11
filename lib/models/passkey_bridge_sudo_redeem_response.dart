@@ -30,7 +30,6 @@ class PasskeyBridgeSudoRedeemResponse {
 
 @JsonSerializable()
 class PasskeyBridgeSudoRedeemResponseCancelledPasskeyBridgeSudoRedeemResponse {
-  @JsonKey(defaultValue: '')
   final String status;
 
   const PasskeyBridgeSudoRedeemResponseCancelledPasskeyBridgeSudoRedeemResponse({
@@ -52,9 +51,8 @@ class PasskeyBridgeSudoRedeemResponseCancelledPasskeyBridgeSudoRedeemResponse {
 
 @JsonSerializable()
 class PasskeyBridgeSudoRedeemResponseCompletedPasskeyBridgeSudoRedeemResponse {
-  @JsonKey(defaultValue: '')
   final String status;
-  @JsonKey(name: 'sudo_token', defaultValue: '')
+  @JsonKey(name: 'sudo_token')
   final String sudoToken;
 
   const PasskeyBridgeSudoRedeemResponseCompletedPasskeyBridgeSudoRedeemResponse({

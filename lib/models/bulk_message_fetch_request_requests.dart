@@ -22,11 +22,10 @@ class BulkMessageFetchRequestRequests {
       _$BulkMessageFetchRequestRequestsFromJson(json);
 
   /// The ID of the channel to fetch messages from
-  @JsonKey(name: 'channel_id', defaultValue: '')
+  @JsonKey(name: 'channel_id')
   final SnowflakeType channelId;
 
   /// Number of messages to return for this channel (1-50)
-  @JsonKey(defaultValue: 0)
   final int limit;
 
   /// Get messages before this message ID

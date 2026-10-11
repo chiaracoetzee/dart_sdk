@@ -28,25 +28,17 @@ class PendingSubscriptionChangeResponse {
 
 @JsonSerializable()
 class PendingSubscriptionChangeResponseVariant1 {
-  @JsonKey(name: 'schedule_id', defaultValue: '')
+  @JsonKey(name: 'schedule_id')
   final String scheduleId;
-  @JsonKey(
-    name: 'change_kind',
-    defaultValue: PendingSubscriptionChangeKind.$unknown,
-  )
+  @JsonKey(name: 'change_kind')
   final PendingSubscriptionChangeKind changeKind;
   @JsonKey(includeIfNull: true, name: 'current_billing_cycle')
   final PendingSubscriptionChangeResponseVariant1CurrentBillingCycleCurrentBillingCycle?
   currentBillingCycle;
-  @JsonKey(
-    name: 'target_billing_cycle',
-    defaultValue:
-        PendingSubscriptionChangeResponseVariant1TargetBillingCycleTargetBillingCycle
-            .$unknown,
-  )
+  @JsonKey(name: 'target_billing_cycle')
   final PendingSubscriptionChangeResponseVariant1TargetBillingCycleTargetBillingCycle
   targetBillingCycle;
-  @JsonKey(name: 'effective_at', defaultValue: '')
+  @JsonKey(name: 'effective_at')
   final String effectiveAt;
   @JsonKey(includeIfNull: true, name: 'current_price_id')
   final String? currentPriceId;

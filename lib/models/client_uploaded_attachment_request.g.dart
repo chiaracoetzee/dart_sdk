@@ -13,14 +13,11 @@ ClientUploadedAttachmentRequest _$ClientUploadedAttachmentRequestFromJson(
   json,
   ($checkedConvert) {
     final val = ClientUploadedAttachmentRequest(
-      id: $checkedConvert('id', (v) => (v as num?)?.toInt() ?? 0),
-      filename: $checkedConvert('filename', (v) => v as String? ?? ''),
-      contentType: $checkedConvert('content_type', (v) => v as String? ?? ''),
-      uploadFilename: $checkedConvert(
-        'upload_filename',
-        (v) => v as String? ?? '',
-      ),
-      fileSize: $checkedConvert('file_size', (v) => (v as num?)?.toInt() ?? 0),
+      id: $checkedConvert('id', (v) => (v as num).toInt()),
+      filename: $checkedConvert('filename', (v) => v as String),
+      contentType: $checkedConvert('content_type', (v) => v as String),
+      uploadFilename: $checkedConvert('upload_filename', (v) => v as String),
+      fileSize: $checkedConvert('file_size', (v) => (v as num).toInt()),
       title: $checkedConvert('title', (v) => v as String?),
       description: $checkedConvert('description', (v) => v as String?),
       flags: $checkedConvert('flags', (v) => (v as num?)?.toInt()),

@@ -15,17 +15,13 @@ UserProfileFullResponse _$UserProfileFullResponseFromJson(
     final val = UserProfileFullResponse(
       user: $checkedConvert(
         'user',
-        (v) => v == null
-            ? _$missingUserPartialResponse()
-            : UserPartialResponse.fromJson(v as Map<String, dynamic>),
+        (v) => UserPartialResponse.fromJson(v as Map<String, dynamic>),
       ),
       userProfile: $checkedConvert(
         'user_profile',
-        (v) => v == null
-            ? _$missingUserProfileFullResponseUserProfile()
-            : UserProfileFullResponseUserProfile.fromJson(
-                v as Map<String, dynamic>,
-              ),
+        (v) => UserProfileFullResponseUserProfile.fromJson(
+          v as Map<String, dynamic>,
+        ),
       ),
       timezoneOffset: $checkedConvert(
         'timezone_offset',

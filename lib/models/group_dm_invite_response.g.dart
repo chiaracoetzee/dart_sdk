@@ -13,19 +13,14 @@ GroupDmInviteResponse _$GroupDmInviteResponseFromJson(
   json,
   ($checkedConvert) {
     final val = GroupDmInviteResponse(
-      code: $checkedConvert('code', (v) => v as String? ?? ''),
-      temporary: $checkedConvert('temporary', (v) => v as bool? ?? false),
-      type: $checkedConvert('type', (v) => v as num? ?? 0),
+      code: $checkedConvert('code', (v) => v as String),
+      temporary: $checkedConvert('temporary', (v) => v as bool),
+      type: $checkedConvert('type', (v) => v as num),
       channel: $checkedConvert(
         'channel',
-        (v) => v == null
-            ? _$missingChannelPartialResponse()
-            : ChannelPartialResponse.fromJson(v as Map<String, dynamic>),
+        (v) => ChannelPartialResponse.fromJson(v as Map<String, dynamic>),
       ),
-      memberCount: $checkedConvert(
-        'member_count',
-        (v) => (v as num?)?.toInt() ?? 0,
-      ),
+      memberCount: $checkedConvert('member_count', (v) => (v as num).toInt()),
       inviter: $checkedConvert(
         'inviter',
         (v) => v == null

@@ -21,11 +21,10 @@ class BulkMessageFetchResponseChannels {
   ) => _$BulkMessageFetchResponseChannelsFromJson(json);
 
   /// The ID of the channel whose messages were fetched
-  @JsonKey(name: 'channel_id', defaultValue: '')
+  @JsonKey(name: 'channel_id')
   final SnowflakeStringType channelId;
 
   /// Messages fetched for this channel
-  @JsonKey(defaultValue: <MessageResponseSchema>[])
   final MessageListResponse messages;
 
   Map<String, Object?> toJson() =>

@@ -23,15 +23,14 @@ class AuthorizationCodeTokenRequest {
       _$AuthorizationCodeTokenRequestFromJson(json);
 
   /// The grant type for exchanging an authorization code
-  @JsonKey(name: 'grant_type', defaultValue: '')
+  @JsonKey(name: 'grant_type')
   final String grantType;
 
   /// The authorization code received from the authorize endpoint
-  @JsonKey(defaultValue: '')
   final String code;
 
   /// The redirect URI used in the authorization request
-  @JsonKey(name: 'redirect_uri', defaultValue: '')
+  @JsonKey(name: 'redirect_uri')
   final String redirectUri;
 
   /// The application client ID

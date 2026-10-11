@@ -11,9 +11,7 @@ ReportFlowOutcome _$ReportFlowOutcomeFromJson(Map<String, dynamic> json) =>
       final val = ReportFlowOutcome(
         type: $checkedConvert(
           'type',
-          (v) => v == null
-              ? ReportFlowOutcomeType.$unknown
-              : ReportFlowOutcomeType.fromJson(v as String),
+          (v) => ReportFlowOutcomeType.fromJson(v as String),
         ),
         screenId: $checkedConvert('screen_id', (v) => v as String?),
         reason: $checkedConvert('reason', (v) => v as String?),

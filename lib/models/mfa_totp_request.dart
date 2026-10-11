@@ -14,11 +14,9 @@ class MfaTotpRequest {
       _$MfaTotpRequestFromJson(json);
 
   /// The TOTP code from the authenticator app
-  @JsonKey(defaultValue: '')
   final String code;
 
   /// The MFA ticket from the login response
-  @JsonKey(defaultValue: '')
   final String ticket;
 
   Map<String, Object?> toJson() => _$MfaTotpRequestToJson(this);

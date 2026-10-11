@@ -8,9 +8,7 @@ part of 'url_response.dart';
 
 UrlResponse _$UrlResponseFromJson(Map<String, dynamic> json) =>
     $checkedCreate('UrlResponse', json, ($checkedConvert) {
-      final val = UrlResponse(
-        url: $checkedConvert('url', (v) => v as String? ?? ''),
-      );
+      final val = UrlResponse(url: $checkedConvert('url', (v) => v as String));
       return val;
     });
 

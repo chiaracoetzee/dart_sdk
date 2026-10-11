@@ -21,11 +21,11 @@ class RefreshTokenTokenRequest {
       _$RefreshTokenTokenRequestFromJson(json);
 
   /// The grant type for refreshing an access token
-  @JsonKey(name: 'grant_type', defaultValue: '')
+  @JsonKey(name: 'grant_type')
   final String grantType;
 
   /// The refresh token to exchange for a new access token
-  @JsonKey(name: 'refresh_token', defaultValue: '')
+  @JsonKey(name: 'refresh_token')
   final String refreshToken;
 
   /// The application client ID

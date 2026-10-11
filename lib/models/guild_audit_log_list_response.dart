@@ -24,18 +24,13 @@ class GuildAuditLogListResponse {
       _$GuildAuditLogListResponseFromJson(json);
 
   /// Array of audit log entries
-  @JsonKey(
-    name: 'audit_log_entries',
-    defaultValue: <GuildAuditLogEntryResponse>[],
-  )
+  @JsonKey(name: 'audit_log_entries')
   final List<GuildAuditLogEntryResponse> auditLogEntries;
 
   /// Users referenced in the audit log entries
-  @JsonKey(defaultValue: <UserPartialResponse>[])
   final List<UserPartialResponse> users;
 
   /// Webhooks referenced in the audit log entries
-  @JsonKey(defaultValue: <AuditLogWebhookResponse>[])
   final List<AuditLogWebhookResponse> webhooks;
 
   /// Threads referenced in the audit log entries, when the viewer can see threads

@@ -10,14 +10,12 @@ HarvestCreationResponseSchema _$HarvestCreationResponseSchemaFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('HarvestCreationResponseSchema', json, ($checkedConvert) {
   final val = HarvestCreationResponseSchema(
-    harvestId: $checkedConvert('harvest_id', (v) => v as String? ?? ''),
+    harvestId: $checkedConvert('harvest_id', (v) => v as String),
     status: $checkedConvert(
       'status',
-      (v) => v == null
-          ? HarvestStatus.$unknown
-          : HarvestStatus.fromJson(v as String),
+      (v) => HarvestStatus.fromJson(v as String),
     ),
-    createdAt: $checkedConvert('created_at', (v) => v as String? ?? ''),
+    createdAt: $checkedConvert('created_at', (v) => v as String),
   );
   return val;
 }, fieldKeyMap: const {'harvestId': 'harvest_id', 'createdAt': 'created_at'});

@@ -10,22 +10,18 @@ WebhookCreateResponse _$WebhookCreateResponseFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('WebhookCreateResponse', json, ($checkedConvert) {
   final val = WebhookCreateResponse(
-    id: $checkedConvert('id', (v) => v as String? ?? ''),
-    guildId: $checkedConvert('guild_id', (v) => v as String? ?? ''),
-    channelId: $checkedConvert('channel_id', (v) => v as String? ?? ''),
-    name: $checkedConvert('name', (v) => v as String? ?? ''),
+    id: $checkedConvert('id', (v) => v as String),
+    guildId: $checkedConvert('guild_id', (v) => v as String),
+    channelId: $checkedConvert('channel_id', (v) => v as String),
+    name: $checkedConvert('name', (v) => v as String),
     type: $checkedConvert(
       'type',
-      (v) => v == null
-          ? WebhookType.$unknown
-          : WebhookType.fromJson((v as num).toInt()),
+      (v) => WebhookType.fromJson((v as num).toInt()),
     ),
-    token: $checkedConvert('token', (v) => v as String? ?? ''),
+    token: $checkedConvert('token', (v) => v as String),
     user: $checkedConvert(
       'user',
-      (v) => v == null
-          ? _$missingUserPartialResponse()
-          : UserPartialResponse.fromJson(v as Map<String, dynamic>),
+      (v) => UserPartialResponse.fromJson(v as Map<String, dynamic>),
     ),
     avatar: $checkedConvert('avatar', (v) => v as String?),
   );

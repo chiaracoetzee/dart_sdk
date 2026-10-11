@@ -14,7 +14,7 @@ class HandoffStatusRequest {
       _$HandoffStatusRequestFromJson(json);
 
   /// The poll secret issued when the handoff was initiated
-  @JsonKey(name: 'poll_secret', defaultValue: '')
+  @JsonKey(name: 'poll_secret')
   final String pollSecret;
 
   /// The one-time grant delivered to the app through the deep link

@@ -14,7 +14,7 @@ class OAuth2ConsentResponse {
       _$OAuth2ConsentResponseFromJson(json);
 
   /// The URL to redirect the user to after consent
-  @JsonKey(name: 'redirect_to', defaultValue: '')
+  @JsonKey(name: 'redirect_to')
   final String redirectTo;
 
   Map<String, Object?> toJson() => _$OAuth2ConsentResponseToJson(this);

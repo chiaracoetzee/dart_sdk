@@ -16,10 +16,7 @@ class MfaBackupCodesResponse {
       _$MfaBackupCodesResponseFromJson(json);
 
   /// List of backup codes
-  @JsonKey(
-    name: 'backup_codes',
-    defaultValue: <MfaBackupCodesResponseBackupCodes>[],
-  )
+  @JsonKey(name: 'backup_codes')
   final List<MfaBackupCodesResponseBackupCodes> backupCodes;
 
   Map<String, Object?> toJson() => _$MfaBackupCodesResponseToJson(this);

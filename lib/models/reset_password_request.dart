@@ -16,11 +16,9 @@ class ResetPasswordRequest {
       _$ResetPasswordRequestFromJson(json);
 
   /// Password reset token from email
-  @JsonKey(defaultValue: '')
   final String token;
 
   /// New password to set
-  @JsonKey(defaultValue: '')
   final PasswordType password;
 
   Map<String, Object?> toJson() => _$ResetPasswordRequestToJson(this);

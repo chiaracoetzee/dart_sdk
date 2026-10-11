@@ -46,7 +46,6 @@ class GuildCreateRequest {
   }
 
   /// The name of the guild (1-100 characters)
-  @JsonKey(defaultValue: '')
   final String name;
 
   /// Whether to create the guild without default features

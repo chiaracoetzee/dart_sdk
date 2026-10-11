@@ -12,18 +12,16 @@ GiftCodeResponse _$GiftCodeResponseFromJson(Map<String, dynamic> json) =>
       json,
       ($checkedConvert) {
         final val = GiftCodeResponse(
-          code: $checkedConvert('code', (v) => v as String? ?? ''),
+          code: $checkedConvert('code', (v) => v as String),
           durationType: $checkedConvert(
             'duration_type',
-            (v) => v == null
-                ? GiftCodeDurationTypeSchema.$unknown
-                : GiftCodeDurationTypeSchema.fromJson(v as String),
+            (v) => GiftCodeDurationTypeSchema.fromJson(v as String),
           ),
           durationQuantity: $checkedConvert(
             'duration_quantity',
-            (v) => (v as num?)?.toInt() ?? 0,
+            (v) => (v as num).toInt(),
           ),
-          redeemed: $checkedConvert('redeemed', (v) => v as bool? ?? false),
+          redeemed: $checkedConvert('redeemed', (v) => v as bool),
           createdBy: $checkedConvert(
             'created_by',
             (v) => v == null

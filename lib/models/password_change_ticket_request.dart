@@ -14,7 +14,6 @@ class PasswordChangeTicketRequest {
       _$PasswordChangeTicketRequestFromJson(json);
 
   /// Password change ticket identifier
-  @JsonKey(defaultValue: '')
   final String ticket;
 
   Map<String, Object?> toJson() => _$PasswordChangeTicketRequestToJson(this);

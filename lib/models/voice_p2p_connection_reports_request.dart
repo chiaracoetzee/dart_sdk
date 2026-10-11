@@ -17,7 +17,6 @@ class VoiceP2pConnectionReportsRequest {
   ) => _$VoiceP2pConnectionReportsRequestFromJson(json);
 
   /// One report for each remote peer that settled
-  @JsonKey(defaultValue: <VoiceP2pConnectionReportsRequestReports>[])
   final List<VoiceP2pConnectionReportsRequestReports> reports;
 
   Map<String, Object?> toJson() =>

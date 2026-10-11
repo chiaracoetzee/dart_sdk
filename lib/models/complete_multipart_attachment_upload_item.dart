@@ -18,11 +18,11 @@ class CompleteMultipartAttachmentUploadItem {
   ) => _$CompleteMultipartAttachmentUploadItemFromJson(json);
 
   /// The upload_filename returned when the upload was planned
-  @JsonKey(name: 'upload_filename', defaultValue: '')
+  @JsonKey(name: 'upload_filename')
   final String uploadFilename;
 
   /// The upload_id returned when the upload was planned
-  @JsonKey(name: 'upload_id', defaultValue: '')
+  @JsonKey(name: 'upload_id')
   final String uploadId;
 
   Map<String, Object?> toJson() =>

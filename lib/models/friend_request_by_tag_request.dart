@@ -20,11 +20,9 @@ class FriendRequestByTagRequest {
       _$FriendRequestByTagRequestFromJson(json);
 
   /// Username of the user to send friend request
-  @JsonKey(defaultValue: '')
   final UsernameType username;
 
   /// Discriminator tag of the user
-  @JsonKey(defaultValue: '')
   final DiscriminatorType discriminator;
 
   Map<String, Object?> toJson() => _$FriendRequestByTagRequestToJson(this);

@@ -12,9 +12,7 @@ AuthSessionResponseClientInfo _$AuthSessionResponseClientInfoFromJson(
   final val = AuthSessionResponseClientInfo(
     device: $checkedConvert(
       'device',
-      (v) => v == null
-          ? AuthSessionResponseClientInfoDeviceDevice.$unknown
-          : AuthSessionResponseClientInfoDeviceDevice.fromJson(v as String),
+      (v) => AuthSessionResponseClientInfoDeviceDevice.fromJson(v as String),
     ),
     platform: $checkedConvert('platform', (v) => v as String?),
     os: $checkedConvert('os', (v) => v as String?),

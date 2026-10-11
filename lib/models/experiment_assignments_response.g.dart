@@ -15,19 +15,17 @@ ExperimentAssignmentsResponse _$ExperimentAssignmentsResponseFromJson(
     final val = ExperimentAssignmentsResponse(
       pollIntervalSeconds: $checkedConvert(
         'poll_interval_seconds',
-        (v) => (v as num?)?.toInt() ?? 0,
+        (v) => (v as num).toInt(),
       ),
       pollJitterPercent: $checkedConvert(
         'poll_jitter_percent',
-        (v) => (v as num?)?.toInt() ?? 0,
+        (v) => (v as num).toInt(),
       ),
       assignments: $checkedConvert(
         'assignments',
-        (v) => v == null
-            ? _$missingExperimentAssignmentsResponseAssignments()
-            : ExperimentAssignmentsResponseAssignments.fromJson(
-                v as Map<String, dynamic>,
-              ),
+        (v) => ExperimentAssignmentsResponseAssignments.fromJson(
+          v as Map<String, dynamic>,
+        ),
       ),
     );
     return val;

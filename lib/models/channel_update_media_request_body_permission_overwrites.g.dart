@@ -13,14 +13,12 @@ _$ChannelUpdateMediaRequestBodyPermissionOverwritesFromJson(
   $checkedConvert,
 ) {
   final val = ChannelUpdateMediaRequestBodyPermissionOverwrites(
-    id: $checkedConvert('id', (v) => v as String? ?? ''),
+    id: $checkedConvert('id', (v) => v as String),
     type: $checkedConvert(
       'type',
-      (v) => v == null
-          ? ChannelUpdateMediaRequestBodyPermissionOverwritesTypeType.$unknown
-          : ChannelUpdateMediaRequestBodyPermissionOverwritesTypeType.fromJson(
-              (v as num).toInt(),
-            ),
+      (v) => ChannelUpdateMediaRequestBodyPermissionOverwritesTypeType.fromJson(
+        (v as num).toInt(),
+      ),
     ),
     allow: $checkedConvert('allow', (v) => v as String?),
     deny: $checkedConvert('deny', (v) => v as String?),

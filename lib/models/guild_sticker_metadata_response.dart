@@ -22,23 +22,20 @@ class GuildStickerMetadataResponse {
       _$GuildStickerMetadataResponseFromJson(json);
 
   /// The unique identifier for this sticker
-  @JsonKey(defaultValue: '')
   final SnowflakeStringType id;
 
   /// The guild this sticker belongs to
-  @JsonKey(name: 'guild_id', defaultValue: '')
+  @JsonKey(name: 'guild_id')
   final SnowflakeStringType guildId;
 
   /// The name of the sticker
-  @JsonKey(defaultValue: '')
   final String name;
 
   /// Whether this sticker is animated
-  @JsonKey(defaultValue: false)
   final bool animated;
 
   /// Whether the source guild allows non-members to use the in-app clone shortcut
-  @JsonKey(name: 'allow_cloning', defaultValue: false)
+  @JsonKey(name: 'allow_cloning')
   final bool allowCloning;
 
   Map<String, Object?> toJson() => _$GuildStickerMetadataResponseToJson(this);

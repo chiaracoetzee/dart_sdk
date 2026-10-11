@@ -28,11 +28,9 @@ class ApplicationPublicResponse {
       _$ApplicationPublicResponseFromJson(json);
 
   /// The unique identifier of the application
-  @JsonKey(defaultValue: '')
   final SnowflakeStringType id;
 
   /// The name of the application
-  @JsonKey(defaultValue: '')
   final String name;
 
   /// The icon hash of the application
@@ -44,15 +42,14 @@ class ApplicationPublicResponse {
   final String? description;
 
   /// The registered redirect URIs for OAuth2
-  @JsonKey(name: 'redirect_uris', defaultValue: <String>[])
+  @JsonKey(name: 'redirect_uris')
   final List<String> redirectUris;
 
   /// The available OAuth2 scopes
-  @JsonKey(defaultValue: <String>[])
   final List<String> scopes;
 
   /// Whether the bot can be invited by anyone
-  @JsonKey(name: 'bot_public', defaultValue: false)
+  @JsonKey(name: 'bot_public')
   final bool botPublic;
 
   /// Detailed bot user metadata

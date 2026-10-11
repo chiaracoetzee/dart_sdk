@@ -17,11 +17,10 @@ class PasswordChangeCompleteResponse {
       _$PasswordChangeCompleteResponseFromJson(json);
 
   /// Authentication token for the newly created session
-  @JsonKey(defaultValue: '')
   final String token;
 
   /// Base64url-encoded hash of the newly created authentication session
-  @JsonKey(name: 'auth_session_id_hash', defaultValue: '')
+  @JsonKey(name: 'auth_session_id_hash')
   final String authSessionIdHash;
 
   Map<String, Object?> toJson() => _$PasswordChangeCompleteResponseToJson(this);

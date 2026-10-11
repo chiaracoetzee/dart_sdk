@@ -27,7 +27,6 @@ class UserSettingsUpdateRequestGuildFolders {
   ) => _$UserSettingsUpdateRequestGuildFoldersFromJson(json);
 
   /// Unique identifier for the folder (-1 for uncategorized)
-  @JsonKey(defaultValue: 0)
   final int id;
 
   /// Display name of the folder
@@ -43,7 +42,7 @@ class UserSettingsUpdateRequestGuildFolders {
   final GuildFolderIconType icon;
 
   /// Guild IDs in this folder
-  @JsonKey(name: 'guild_ids', defaultValue: <String>[])
+  @JsonKey(name: 'guild_ids')
   final List<SnowflakeType> guildIds;
 
   Map<String, Object?> toJson() =>

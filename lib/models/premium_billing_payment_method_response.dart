@@ -22,7 +22,6 @@ class PremiumBillingPaymentMethodResponse {
     Map<String, Object?> json,
   ) => _$PremiumBillingPaymentMethodResponseFromJson(json);
 
-  @JsonKey(defaultValue: '')
   final String id;
   @JsonKey(includeIfNull: true)
   final String? type;
@@ -34,7 +33,7 @@ class PremiumBillingPaymentMethodResponse {
   final int? cardExpMonth;
   @JsonKey(includeIfNull: true, name: 'card_exp_year')
   final int? cardExpYear;
-  @JsonKey(name: 'is_default', defaultValue: false)
+  @JsonKey(name: 'is_default')
   final bool isDefault;
 
   Map<String, Object?> toJson() =>

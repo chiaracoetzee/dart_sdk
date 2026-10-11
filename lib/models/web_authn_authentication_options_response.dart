@@ -23,7 +23,6 @@ class WebAuthnAuthenticationOptionsResponse {
     Map<String, Object?> json,
   ) => _$WebAuthnAuthenticationOptionsResponseFromJson(json);
 
-  @JsonKey(defaultValue: '')
   final String challenge;
   @JsonKey(includeIfNull: false)
   final num? timeout;

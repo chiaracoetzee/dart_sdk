@@ -10,14 +10,12 @@ GitHubWebhookHeadCommit _$GitHubWebhookHeadCommitFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('GitHubWebhookHeadCommit', json, ($checkedConvert) {
   final val = GitHubWebhookHeadCommit(
-    id: $checkedConvert('id', (v) => v as String? ?? ''),
-    url: $checkedConvert('url', (v) => v as String? ?? ''),
-    message: $checkedConvert('message', (v) => v as String? ?? ''),
+    id: $checkedConvert('id', (v) => v as String),
+    url: $checkedConvert('url', (v) => v as String),
+    message: $checkedConvert('message', (v) => v as String),
     author: $checkedConvert(
       'author',
-      (v) => v == null
-          ? _$missingGitHubWebhookHeadCommitAuthor()
-          : GitHubWebhookHeadCommitAuthor.fromJson(v as Map<String, dynamic>),
+      (v) => GitHubWebhookHeadCommitAuthor.fromJson(v as Map<String, dynamic>),
     ),
   );
   return val;

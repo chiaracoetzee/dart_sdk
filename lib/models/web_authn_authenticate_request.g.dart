@@ -12,11 +12,9 @@ WebAuthnAuthenticateRequest _$WebAuthnAuthenticateRequestFromJson(
   final val = WebAuthnAuthenticateRequest(
     response: $checkedConvert(
       'response',
-      (v) => v == null
-          ? _$missingWebAuthnAuthenticationResponse()
-          : WebAuthnAuthenticationResponse.fromJson(v as Map<String, dynamic>),
+      (v) => WebAuthnAuthenticationResponse.fromJson(v as Map<String, dynamic>),
     ),
-    challenge: $checkedConvert('challenge', (v) => v as String? ?? ''),
+    challenge: $checkedConvert('challenge', (v) => v as String),
   );
   return val;
 });

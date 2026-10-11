@@ -12,14 +12,11 @@ GuildEmojiBulkCreateRequest _$GuildEmojiBulkCreateRequestFromJson(
   final val = GuildEmojiBulkCreateRequest(
     emojis: $checkedConvert(
       'emojis',
-      (v) =>
-          (v as List<dynamic>?)
-              ?.map(
-                (e) =>
-                    GuildEmojiCreateRequest.fromJson(e as Map<String, dynamic>),
-              )
-              .toList() ??
-          [],
+      (v) => (v as List<dynamic>)
+          .map(
+            (e) => GuildEmojiCreateRequest.fromJson(e as Map<String, dynamic>),
+          )
+          .toList(),
     ),
   );
   return val;

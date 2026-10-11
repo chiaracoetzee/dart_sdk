@@ -16,7 +16,6 @@ class ThemeCreateResponse {
       _$ThemeCreateResponseFromJson(json);
 
   /// The unique identifier for the created theme
-  @JsonKey(defaultValue: '')
   final HexString16Type id;
 
   Map<String, Object?> toJson() => _$ThemeCreateResponseToJson(this);

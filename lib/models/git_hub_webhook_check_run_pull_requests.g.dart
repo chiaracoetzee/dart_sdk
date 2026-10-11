@@ -12,7 +12,7 @@ GitHubWebhookCheckRunPullRequests _$GitHubWebhookCheckRunPullRequestsFromJson(
   $checkedConvert,
 ) {
   final val = GitHubWebhookCheckRunPullRequests(
-    number: $checkedConvert('number', (v) => (v as num?)?.toInt() ?? 0),
+    number: $checkedConvert('number', (v) => (v as num).toInt()),
   );
   return val;
 });

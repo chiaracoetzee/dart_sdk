@@ -14,7 +14,6 @@ class AuditLogChangeSchema {
       _$AuditLogChangeSchemaFromJson(json);
 
   /// The field that changed
-  @JsonKey(defaultValue: '')
   final String key;
 
   /// Value before the change

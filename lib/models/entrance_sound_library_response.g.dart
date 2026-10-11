@@ -12,26 +12,19 @@ EntranceSoundLibraryResponse _$EntranceSoundLibraryResponseFromJson(
   final val = EntranceSoundLibraryResponse(
     sounds: $checkedConvert(
       'sounds',
-      (v) =>
-          (v as List<dynamic>?)
-              ?.map(
-                (e) =>
-                    EntranceSoundResponse.fromJson(e as Map<String, dynamic>),
-              )
-              .toList() ??
-          [],
+      (v) => (v as List<dynamic>)
+          .map((e) => EntranceSoundResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
     ),
     selections: $checkedConvert(
       'selections',
-      (v) =>
-          (v as List<dynamic>?)
-              ?.map(
-                (e) => EntranceSoundLibraryResponseSelections.fromJson(
-                  e as Map<String, dynamic>,
-                ),
-              )
-              .toList() ??
-          [],
+      (v) => (v as List<dynamic>)
+          .map(
+            (e) => EntranceSoundLibraryResponseSelections.fromJson(
+              e as Map<String, dynamic>,
+            ),
+          )
+          .toList(),
     ),
   );
   return val;

@@ -13,7 +13,6 @@ class PlutoniumPageAssignmentResponse {
   factory PlutoniumPageAssignmentResponse.fromJson(Map<String, Object?> json) =>
       _$PlutoniumPageAssignmentResponseFromJson(json);
 
-  @JsonKey(defaultValue: false)
   final bool enabled;
 
   Map<String, Object?> toJson() =>

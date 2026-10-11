@@ -16,7 +16,6 @@ class PushSubscriptionsListResponse {
       _$PushSubscriptionsListResponseFromJson(json);
 
   /// Array of push notification subscriptions
-  @JsonKey(defaultValue: <PushSubscriptionsListResponseSubscriptions>[])
   final List<PushSubscriptionsListResponseSubscriptions> subscriptions;
 
   Map<String, Object?> toJson() => _$PushSubscriptionsListResponseToJson(this);

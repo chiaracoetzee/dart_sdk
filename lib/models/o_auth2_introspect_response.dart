@@ -26,7 +26,6 @@ class OAuth2IntrospectResponse {
       _$OAuth2IntrospectResponseFromJson(json);
 
   /// Whether the token is currently active
-  @JsonKey(defaultValue: false)
   final bool active;
 
   /// The space-separated list of scopes

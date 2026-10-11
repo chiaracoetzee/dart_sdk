@@ -13,21 +13,18 @@ ScheduledSwitchToListPriceResponse _$ScheduledSwitchToListPriceResponseFromJson(
   json,
   ($checkedConvert) {
     final val = ScheduledSwitchToListPriceResponse(
-      effectiveAt: $checkedConvert('effective_at', (v) => v as String? ?? ''),
-      targetPriceId: $checkedConvert(
-        'target_price_id',
-        (v) => v as String? ?? '',
-      ),
+      effectiveAt: $checkedConvert('effective_at', (v) => v as String),
+      targetPriceId: $checkedConvert('target_price_id', (v) => v as String),
       targetAmountMinor: $checkedConvert(
         'target_amount_minor',
-        (v) => (v as num?)?.toInt() ?? 0,
+        (v) => (v as num).toInt(),
       ),
       currentAmountMinor: $checkedConvert(
         'current_amount_minor',
-        (v) => (v as num?)?.toInt() ?? 0,
+        (v) => (v as num).toInt(),
       ),
-      currency: $checkedConvert('currency', (v) => v as String? ?? ''),
-      status: $checkedConvert('status', (v) => v as String? ?? ''),
+      currency: $checkedConvert('currency', (v) => v as String),
+      status: $checkedConvert('status', (v) => v as String),
     );
     return val;
   },

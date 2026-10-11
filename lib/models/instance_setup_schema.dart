@@ -19,7 +19,6 @@ class InstanceSetupSchema {
       _$InstanceSetupSchemaFromJson(json);
 
   /// Whether the instance administrator has completed initial setup
-  @JsonKey(defaultValue: false)
   final bool configured;
 
   /// Admin panel URL to continue instance setup

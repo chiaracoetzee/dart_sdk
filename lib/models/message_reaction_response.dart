@@ -5,6 +5,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'int32_type.dart';
+import 'message_reaction_persona_entry.dart';
 import 'message_reaction_response_emoji.dart';
 
 part 'message_reaction_response.g.dart';
@@ -15,25 +16,30 @@ class MessageReactionResponse {
     required this.emoji,
     required this.count,
     this.me,
+    this.meRoot,
+    this.personaReactions,
   });
 
   factory MessageReactionResponse.fromJson(Map<String, Object?> json) =>
       _$MessageReactionResponseFromJson(json);
 
   /// The emoji used for the reaction
-  @JsonKey(defaultValue: _$missingMessageReactionResponseEmoji)
   final MessageReactionResponseEmoji emoji;
 
   /// The total number of times this reaction has been used
-  @JsonKey(defaultValue: 0)
   final Int32Type count;
 
   /// Whether the current user has reacted with this emoji
   @JsonKey(includeIfNull: false)
   final bool? me;
 
+  /// Whether the current user reacted as root account
+  @JsonKey(includeIfNull: false, name: 'me_root')
+  final bool? meRoot;
+
+  /// Breakdown of persona reactions
+  @JsonKey(includeIfNull: false, name: 'persona_reactions')
+  final List<MessageReactionPersonaEntry>? personaReactions;
+
   Map<String, Object?> toJson() => _$MessageReactionResponseToJson(this);
 }
-
-MessageReactionResponseEmoji _$missingMessageReactionResponseEmoji() =>
-    MessageReactionResponseEmoji.fromJson(const <String, dynamic>{});

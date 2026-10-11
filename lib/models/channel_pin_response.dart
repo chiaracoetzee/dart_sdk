@@ -16,18 +16,11 @@ class ChannelPinResponse {
       _$ChannelPinResponseFromJson(json);
 
   /// The pinned message
-  @JsonKey(defaultValue: _$missingChannelPinResponseMessage)
   final ChannelPinResponseMessage message;
 
   /// The ISO 8601 timestamp of when the message was pinned
-  @JsonKey(name: 'pinned_at', defaultValue: _$missingDateTime)
+  @JsonKey(name: 'pinned_at')
   final DateTime pinnedAt;
 
   Map<String, Object?> toJson() => _$ChannelPinResponseToJson(this);
 }
-
-ChannelPinResponseMessage _$missingChannelPinResponseMessage() =>
-    ChannelPinResponseMessage.fromJson(const <String, dynamic>{});
-
-DateTime _$missingDateTime() =>
-    DateTime.fromMillisecondsSinceEpoch(0, isUtc: true);

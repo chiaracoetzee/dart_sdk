@@ -35,9 +35,7 @@ PremiumStateResponseBilling _$PremiumStateResponseBillingFromJson(
       ),
       listPriceSwitch: $checkedConvert(
         'list_price_switch',
-        (v) => v == null
-            ? _$missingListPriceSwitchState()
-            : ListPriceSwitchState.fromJson(v as Map<String, dynamic>),
+        (v) => ListPriceSwitchState.fromJson(v as Map<String, dynamic>),
       ),
       subscription: $checkedConvert(
         'subscription',
@@ -49,39 +47,30 @@ PremiumStateResponseBilling _$PremiumStateResponseBillingFromJson(
       ),
       invoices: $checkedConvert(
         'invoices',
-        (v) =>
-            (v as List<dynamic>?)
-                ?.map(
-                  (e) => PremiumBillingInvoiceResponse.fromJson(
-                    e as Map<String, dynamic>,
-                  ),
-                )
-                .toList() ??
-            [],
+        (v) => (v as List<dynamic>)
+            .map(
+              (e) => PremiumBillingInvoiceResponse.fromJson(
+                e as Map<String, dynamic>,
+              ),
+            )
+            .toList(),
       ),
-      invoicesHasMore: $checkedConvert(
-        'invoices_has_more',
-        (v) => v as bool? ?? false,
-      ),
+      invoicesHasMore: $checkedConvert('invoices_has_more', (v) => v as bool),
       paymentMethods: $checkedConvert(
         'payment_methods',
-        (v) =>
-            (v as List<dynamic>?)
-                ?.map(
-                  (e) => PremiumBillingPaymentMethodResponse.fromJson(
-                    e as Map<String, dynamic>,
-                  ),
-                )
-                .toList() ??
-            [],
+        (v) => (v as List<dynamic>)
+            .map(
+              (e) => PremiumBillingPaymentMethodResponse.fromJson(
+                e as Map<String, dynamic>,
+              ),
+            )
+            .toList(),
       ),
       refundEligibility: $checkedConvert(
         'refund_eligibility',
-        (v) => v == null
-            ? _$missingSelfServeRefundEligibilityResponse()
-            : SelfServeRefundEligibilityResponse.fromJson(
-                v as Map<String, dynamic>,
-              ),
+        (v) => SelfServeRefundEligibilityResponse.fromJson(
+          v as Map<String, dynamic>,
+        ),
       ),
     );
     return val;

@@ -18,11 +18,9 @@ class EmailChangeVerifyOriginalRequest {
   ) => _$EmailChangeVerifyOriginalRequestFromJson(json);
 
   /// Email change ticket identifier
-  @JsonKey(defaultValue: '')
   final String ticket;
 
   /// Verification code sent to the original email address
-  @JsonKey(defaultValue: '')
   final String code;
 
   Map<String, Object?> toJson() =>

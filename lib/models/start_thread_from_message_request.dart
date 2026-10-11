@@ -4,24 +4,49 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'json_nullable.dart';
+
 import 'int32_type.dart';
+import 'snowflake_type.dart';
 import 'thread_auto_archive_duration_schema.dart';
 
 part 'start_thread_from_message_request.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(constructor: '_')
 class StartThreadFromMessageRequest {
-  const StartThreadFromMessageRequest({
+  StartThreadFromMessageRequest({
     required this.name,
     this.autoArchiveDuration,
     this.rateLimitPerUser,
-  });
+    JsonNullable<SnowflakeType> personaId =
+        const JsonNullable<SnowflakeType>.undefined(),
+  }) : personaId = personaId,
+       _personaIdValue = personaId.value,
+       _personaIdPresent = personaId.isPresent;
 
-  factory StartThreadFromMessageRequest.fromJson(Map<String, Object?> json) =>
-      _$StartThreadFromMessageRequestFromJson(json);
+  const StartThreadFromMessageRequest._({
+    required this.name,
+    this.autoArchiveDuration,
+    this.rateLimitPerUser,
+  }) : _personaIdValue = null,
+       personaId = const JsonNullable<SnowflakeType>.undefined(),
+       _personaIdPresent = false;
+  factory StartThreadFromMessageRequest.patch(Map<String, Object?> json) =>
+      StartThreadFromMessageRequest.fromJson(json);
+
+  factory StartThreadFromMessageRequest.fromJson(Map<String, Object?> json) {
+    final value = _$StartThreadFromMessageRequestFromJson(json);
+    return StartThreadFromMessageRequest(
+      name: value.name,
+      autoArchiveDuration: value.autoArchiveDuration,
+      rateLimitPerUser: value.rateLimitPerUser,
+      personaId: json.containsKey('persona_id')
+          ? JsonNullable<SnowflakeType>.of(value._personaIdValue)
+          : const JsonNullable<SnowflakeType>.undefined(),
+    );
+  }
 
   /// The name of the thread (1-100 characters)
-  @JsonKey(defaultValue: '')
   final String name;
   @JsonKey(includeIfNull: false, name: 'auto_archive_duration')
   final ThreadAutoArchiveDurationSchema? autoArchiveDuration;
@@ -29,6 +54,17 @@ class StartThreadFromMessageRequest {
   /// Seconds a user has to wait before sending another message (0-21600)
   @JsonKey(includeIfNull: false, name: 'rate_limit_per_user')
   final Int32Type? rateLimitPerUser;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<SnowflakeType> personaId;
+  @JsonKey(includeIfNull: false, name: 'persona_id')
+  final SnowflakeType? _personaIdValue;
+  final bool _personaIdPresent;
 
-  Map<String, Object?> toJson() => _$StartThreadFromMessageRequestToJson(this);
+  Map<String, Object?> toJson() {
+    final json = _$StartThreadFromMessageRequestToJson(this);
+    if (_personaIdPresent) {
+      json.putIfAbsent('persona_id', () => _personaIdValue);
+    }
+    return json;
+  }
 }

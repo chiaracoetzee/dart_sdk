@@ -9,15 +9,13 @@ part of 'gateway_bot_response.dart';
 GatewayBotResponse _$GatewayBotResponseFromJson(Map<String, dynamic> json) =>
     $checkedCreate('GatewayBotResponse', json, ($checkedConvert) {
       final val = GatewayBotResponse(
-        url: $checkedConvert('url', (v) => v as String? ?? ''),
-        shards: $checkedConvert('shards', (v) => (v as num?)?.toInt() ?? 0),
+        url: $checkedConvert('url', (v) => v as String),
+        shards: $checkedConvert('shards', (v) => (v as num).toInt()),
         sessionStartLimit: $checkedConvert(
           'session_start_limit',
-          (v) => v == null
-              ? _$missingGatewayBotResponseSessionStartLimit()
-              : GatewayBotResponseSessionStartLimit.fromJson(
-                  v as Map<String, dynamic>,
-                ),
+          (v) => GatewayBotResponseSessionStartLimit.fromJson(
+            v as Map<String, dynamic>,
+          ),
         ),
       );
       return val;

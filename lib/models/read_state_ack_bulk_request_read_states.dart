@@ -20,11 +20,11 @@ class ReadStateAckBulkRequestReadStates {
   ) => _$ReadStateAckBulkRequestReadStatesFromJson(json);
 
   /// The ID of the channel
-  @JsonKey(name: 'channel_id', defaultValue: '')
+  @JsonKey(name: 'channel_id')
   final SnowflakeType channelId;
 
   /// The ID of the last read message
-  @JsonKey(name: 'message_id', defaultValue: '')
+  @JsonKey(name: 'message_id')
   final SnowflakeType messageId;
 
   Map<String, Object?> toJson() =>

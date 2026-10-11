@@ -12,14 +12,11 @@ ResolveGifUrlsResponse _$ResolveGifUrlsResponseFromJson(
   final val = ResolveGifUrlsResponse(
     entries: $checkedConvert(
       'entries',
-      (v) =>
-          (v as List<dynamic>?)
-              ?.map(
-                (e) =>
-                    ResolvedGifEntrySchema.fromJson(e as Map<String, dynamic>),
-              )
-              .toList() ??
-          [],
+      (v) => (v as List<dynamic>)
+          .map(
+            (e) => ResolvedGifEntrySchema.fromJson(e as Map<String, dynamic>),
+          )
+          .toList(),
     ),
   );
   return val;

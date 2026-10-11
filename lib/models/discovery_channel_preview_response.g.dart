@@ -12,19 +12,15 @@ DiscoveryChannelPreviewResponse _$DiscoveryChannelPreviewResponseFromJson(
   final val = DiscoveryChannelPreviewResponse(
     guild: $checkedConvert(
       'guild',
-      (v) => v == null
-          ? _$missingDiscoveryChannelPreviewResponseGuild()
-          : DiscoveryChannelPreviewResponseGuild.fromJson(
-              v as Map<String, dynamic>,
-            ),
+      (v) => DiscoveryChannelPreviewResponseGuild.fromJson(
+        v as Map<String, dynamic>,
+      ),
     ),
     channel: $checkedConvert(
       'channel',
-      (v) => v == null
-          ? _$missingDiscoveryChannelPreviewResponseChannel()
-          : DiscoveryChannelPreviewResponseChannel.fromJson(
-              v as Map<String, dynamic>,
-            ),
+      (v) => DiscoveryChannelPreviewResponseChannel.fromJson(
+        v as Map<String, dynamic>,
+      ),
     ),
   );
   return val;

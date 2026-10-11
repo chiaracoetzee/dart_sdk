@@ -22,7 +22,6 @@ class RichEmbedAuthorRequest {
 
 @JsonSerializable()
 class RichEmbedAuthorRequestVariant1 {
-  @JsonKey(defaultValue: '')
   final String name;
   @JsonKey(includeIfNull: false)
   final String? url;

@@ -13,96 +13,75 @@ UserSettingsResponse _$UserSettingsResponseFromJson(
   json,
   ($checkedConvert) {
     final val = UserSettingsResponse(
-      renderReactions: $checkedConvert(
-        'render_reactions',
-        (v) => v as bool? ?? false,
-      ),
+      renderReactions: $checkedConvert('render_reactions', (v) => v as bool),
       privacySetupVersion: $checkedConvert(
         'privacy_setup_version',
-        (v) => (v as num?)?.toInt() ?? 0,
+        (v) => (v as num).toInt(),
       ),
       defaultShareVoiceActivity: $checkedConvert(
         'default_share_voice_activity',
-        (v) => v as bool? ?? false,
+        (v) => v as bool,
       ),
-      theme: $checkedConvert('theme', (v) => v as String? ?? ''),
-      locale: $checkedConvert(
-        'locale',
-        (v) => v == null ? Locale.$unknown : Locale.fromJson(v as String),
-      ),
+      theme: $checkedConvert('theme', (v) => v as String),
+      locale: $checkedConvert('locale', (v) => Locale.fromJson(v as String)),
       restrictedGuilds: $checkedConvert(
         'restricted_guilds',
-        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList() ?? [],
+        (v) => (v as List<dynamic>).map((e) => e as String).toList(),
       ),
       botRestrictedGuilds: $checkedConvert(
         'bot_restricted_guilds',
-        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList() ?? [],
+        (v) => (v as List<dynamic>).map((e) => e as String).toList(),
       ),
       defaultGuildsRestricted: $checkedConvert(
         'default_guilds_restricted',
-        (v) => v as bool? ?? false,
+        (v) => v as bool,
       ),
       botDefaultGuildsRestricted: $checkedConvert(
         'bot_default_guilds_restricted',
-        (v) => v as bool? ?? false,
+        (v) => v as bool,
       ),
       inlineAttachmentMedia: $checkedConvert(
         'inline_attachment_media',
-        (v) => v as bool? ?? false,
+        (v) => v as bool,
       ),
-      inlineEmbedMedia: $checkedConvert(
-        'inline_embed_media',
-        (v) => v as bool? ?? false,
-      ),
-      gifAutoPlay: $checkedConvert('gif_auto_play', (v) => v as bool? ?? false),
-      renderEmbeds: $checkedConvert(
-        'render_embeds',
-        (v) => v as bool? ?? false,
-      ),
-      status: $checkedConvert('status', (v) => v as String? ?? ''),
-      animateEmoji: $checkedConvert(
-        'animate_emoji',
-        (v) => v as bool? ?? false,
-      ),
+      inlineEmbedMedia: $checkedConvert('inline_embed_media', (v) => v as bool),
+      gifAutoPlay: $checkedConvert('gif_auto_play', (v) => v as bool),
+      renderEmbeds: $checkedConvert('render_embeds', (v) => v as bool),
+      status: $checkedConvert('status', (v) => v as String),
+      animateEmoji: $checkedConvert('animate_emoji', (v) => v as bool),
       animateStickers: $checkedConvert(
         'animate_stickers',
-        (v) => v == null
-            ? StickerAnimationOptions.$unknown
-            : StickerAnimationOptions.fromJson((v as num).toInt()),
+        (v) => StickerAnimationOptions.fromJson((v as num).toInt()),
       ),
       renderSpoilers: $checkedConvert(
         'render_spoilers',
-        (v) => v == null
-            ? RenderSpoilers.$unknown
-            : RenderSpoilers.fromJson((v as num).toInt()),
+        (v) => RenderSpoilers.fromJson((v as num).toInt()),
       ),
       messageDisplayCompact: $checkedConvert(
         'message_display_compact',
-        (v) => v as bool? ?? false,
+        (v) => v as bool,
       ),
       friendSourceFlags: $checkedConvert(
         'friend_source_flags',
-        (v) => (v as num?)?.toInt() ?? 0,
+        (v) => (v as num).toInt(),
       ),
       incomingCallFlags: $checkedConvert(
         'incoming_call_flags',
-        (v) => (v as num?)?.toInt() ?? 0,
+        (v) => (v as num).toInt(),
       ),
       groupDmAddPermissionFlags: $checkedConvert(
         'group_dm_add_permission_flags',
-        (v) => (v as num?)?.toInt() ?? 0,
+        (v) => (v as num).toInt(),
       ),
       guildFolders: $checkedConvert(
         'guild_folders',
-        (v) =>
-            (v as List<dynamic>?)
-                ?.map(
-                  (e) => UserSettingsResponseGuildFolders.fromJson(
-                    e as Map<String, dynamic>,
-                  ),
-                )
-                .toList() ??
-            [],
+        (v) => (v as List<dynamic>)
+            .map(
+              (e) => UserSettingsResponseGuildFolders.fromJson(
+                e as Map<String, dynamic>,
+              ),
+            )
+            .toList(),
       ),
       customStatus: $checkedConvert(
         'custom_status',
@@ -110,15 +89,10 @@ UserSettingsResponse _$UserSettingsResponseFromJson(
             ? null
             : CustomStatusResponse.fromJson(v as Map<String, dynamic>),
       ),
-      afkTimeout: $checkedConvert(
-        'afk_timeout',
-        (v) => (v as num?)?.toInt() ?? 0,
-      ),
+      afkTimeout: $checkedConvert('afk_timeout', (v) => (v as num).toInt()),
       timeFormat: $checkedConvert(
         'time_format',
-        (v) => v == null
-            ? TimeFormatTypes.$unknown
-            : TimeFormatTypes.fromJson((v as num).toInt()),
+        (v) => TimeFormatTypes.fromJson((v as num).toInt()),
       ),
       privacySetupCompletedAt: $checkedConvert(
         'privacy_setup_completed_at',
@@ -126,56 +100,45 @@ UserSettingsResponse _$UserSettingsResponseFromJson(
       ),
       trustedDomains: $checkedConvert(
         'trusted_domains',
-        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList() ?? [],
+        (v) => (v as List<dynamic>).map((e) => e as String).toList(),
       ),
       defaultHideMutedChannels: $checkedConvert(
         'default_hide_muted_channels',
-        (v) => v as bool? ?? false,
+        (v) => v as bool,
       ),
       sensitiveContentFriendDmFilter: $checkedConvert(
         'sensitive_content_friend_dm_filter',
-        (v) => v == null
-            ? SensitiveMediaFilterLevel.$unknown
-            : SensitiveMediaFilterLevel.fromJson((v as num).toInt()),
+        (v) => SensitiveMediaFilterLevel.fromJson((v as num).toInt()),
       ),
       sensitiveContentNonFriendDmFilter: $checkedConvert(
         'sensitive_content_non_friend_dm_filter',
-        (v) => v == null
-            ? SensitiveMediaFilterLevel.$unknown
-            : SensitiveMediaFilterLevel.fromJson((v as num).toInt()),
+        (v) => SensitiveMediaFilterLevel.fromJson((v as num).toInt()),
       ),
       sensitiveContentGuildFilter: $checkedConvert(
         'sensitive_content_guild_filter',
-        (v) => v == null
-            ? SensitiveMediaGuildFilterLevel.$unknown
-            : SensitiveMediaGuildFilterLevel.fromJson((v as num).toInt()),
+        (v) => SensitiveMediaGuildFilterLevel.fromJson((v as num).toInt()),
       ),
       suppressUnprivilegedSelfMentions: $checkedConvert(
         'suppress_unprivileged_self_mentions',
-        (v) => v as bool? ?? false,
+        (v) => v as bool,
       ),
       suppressUnprivilegedSelfMentionsBypassUserIds: $checkedConvert(
         'suppress_unprivileged_self_mentions_bypass_user_ids',
-        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList() ?? [],
+        (v) => (v as List<dynamic>).map((e) => e as String).toList(),
       ),
       staffDmAccessUserIds: $checkedConvert(
         'staff_dm_access_user_ids',
-        (v) => (v as List<dynamic>?)?.map((e) => e as String).toList() ?? [],
+        (v) => (v as List<dynamic>).map((e) => e as String).toList(),
       ),
       syncedPreferences: $checkedConvert(
         'synced_preferences',
-        (v) => v as String? ?? '',
+        (v) => v as String,
       ),
       profilePrivacy: $checkedConvert(
         'profile_privacy',
-        (v) => v == null
-            ? ProfilePrivacyLevel.$unknown
-            : ProfilePrivacyLevel.fromJson((v as num).toInt()),
+        (v) => ProfilePrivacyLevel.fromJson((v as num).toInt()),
       ),
-      developerMode: $checkedConvert(
-        'developer_mode',
-        (v) => v as bool? ?? false,
-      ),
+      developerMode: $checkedConvert('developer_mode', (v) => v as bool),
       statusResetsAt: $checkedConvert(
         'status_resets_at',
         (v) => v == null ? null : DateTime.parse(v as String),

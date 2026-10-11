@@ -18,15 +18,14 @@ class PasskeyMigrationResponsePending {
       _$PasskeyMigrationResponsePendingFromJson(json);
 
   /// ID of the passkey waiting to be updated
-  @JsonKey(name: 'credential_id', defaultValue: '')
+  @JsonKey(name: 'credential_id')
   final String credentialId;
 
   /// User-assigned name of the passkey
-  @JsonKey(defaultValue: '')
   final String name;
 
   /// Whether the passkey was used from another device
-  @JsonKey(name: 'cross_device', defaultValue: false)
+  @JsonKey(name: 'cross_device')
   final bool crossDevice;
 
   Map<String, Object?> toJson() =>

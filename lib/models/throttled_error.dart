@@ -22,11 +22,9 @@ class ThrottledError {
       _$ThrottledErrorFromJson(json);
 
   /// Machine-readable error code. Known values are listed in the APIErrorCode schema
-  @JsonKey(defaultValue: '')
   final String code;
 
   /// Human-readable error message
-  @JsonKey(defaultValue: '')
   final String message;
 
   /// Field-specific validation errors

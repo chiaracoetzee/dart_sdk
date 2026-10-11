@@ -20,20 +20,14 @@ _$ForumThreadMessageRequestAttachmentsAttachmentsClientUploadedAttachmentRequest
           flags: $checkedConvert('flags', (v) => (v as num?)?.toInt()),
           duration: $checkedConvert('duration', (v) => (v as num?)?.toInt()),
           waveform: $checkedConvert('waveform', (v) => v as String?),
-          id: $checkedConvert('id', (v) => (v as num?)?.toInt() ?? 0),
-          filename: $checkedConvert('filename', (v) => v as String? ?? ''),
-          contentType: $checkedConvert(
-            'content_type',
-            (v) => v as String? ?? '',
-          ),
+          id: $checkedConvert('id', (v) => (v as num).toInt()),
+          filename: $checkedConvert('filename', (v) => v as String),
+          contentType: $checkedConvert('content_type', (v) => v as String),
           uploadFilename: $checkedConvert(
             'upload_filename',
-            (v) => v as String? ?? '',
+            (v) => v as String,
           ),
-          fileSize: $checkedConvert(
-            'file_size',
-            (v) => (v as num?)?.toInt() ?? 0,
-          ),
+          fileSize: $checkedConvert('file_size', (v) => (v as num).toInt()),
         );
     return val;
   },
@@ -75,8 +69,8 @@ _$ForumThreadMessageRequestAttachmentsAttachmentsClientAttachmentRequestFromJson
           flags: $checkedConvert('flags', (v) => (v as num?)?.toInt()),
           duration: $checkedConvert('duration', (v) => (v as num?)?.toInt()),
           waveform: $checkedConvert('waveform', (v) => v as String?),
-          id: $checkedConvert('id', (v) => (v as num?)?.toInt() ?? 0),
-          filename: $checkedConvert('filename', (v) => v as String? ?? ''),
+          id: $checkedConvert('id', (v) => (v as num).toInt()),
+          filename: $checkedConvert('filename', (v) => v as String),
           contentType: $checkedConvert('content_type', (v) => v as String?),
         );
     return val;

@@ -12,14 +12,11 @@ InstanceGifSchema _$InstanceGifSchemaFromJson(Map<String, dynamic> json) =>
       json,
       ($checkedConvert) {
         final val = InstanceGifSchema(
-          provider: $checkedConvert('provider', (v) => v as String? ?? ''),
-          displayName: $checkedConvert(
-            'display_name',
-            (v) => v as String? ?? '',
-          ),
+          provider: $checkedConvert('provider', (v) => v as String),
+          displayName: $checkedConvert('display_name', (v) => v as String),
           attributionRequired: $checkedConvert(
             'attribution_required',
-            (v) => v as bool? ?? false,
+            (v) => v as bool,
           ),
         );
         return val;

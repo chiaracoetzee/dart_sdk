@@ -15,7 +15,6 @@ class CancelledPasskeyBridgeLoginRedeemResponse {
   ) => _$CancelledPasskeyBridgeLoginRedeemResponseFromJson(json);
 
   /// The ceremony was cancelled
-  @JsonKey(defaultValue: '')
   final String status;
 
   Map<String, Object?> toJson() =>

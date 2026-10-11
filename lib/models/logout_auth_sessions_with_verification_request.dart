@@ -26,7 +26,7 @@ class LogoutAuthSessionsWithVerificationRequest {
   ) => _$LogoutAuthSessionsWithVerificationRequestFromJson(json);
 
   /// Array of session ID hashes to log out (max 100)
-  @JsonKey(name: 'session_id_hashes', defaultValue: <String>[])
+  @JsonKey(name: 'session_id_hashes')
   final List<String> sessionIdHashes;
 
   /// Account password for sudo verification

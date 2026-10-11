@@ -28,11 +28,9 @@ class CrosspostSourceGuildResponse {
       _$CrosspostSourceGuildResponseFromJson(json);
 
   /// The ID of the source community
-  @JsonKey(defaultValue: '')
   final SnowflakeStringType id;
 
   /// The name of the source community
-  @JsonKey(defaultValue: '')
   final String name;
 
   /// The hash of the source community icon
@@ -48,7 +46,6 @@ class CrosspostSourceGuildResponse {
   final String? description;
 
   /// The public badge features of the source community: VERIFIED, PARTNERED and DISCOVERABLE only
-  @JsonKey(defaultValue: <String>[])
   final List<GuildFeatureSchema> features;
 
   /// Approximate number of members in the source community, or null when unavailable
@@ -60,7 +57,6 @@ class CrosspostSourceGuildResponse {
   final Int32Type? approximatePresenceCount;
 
   /// Whether the source community can be joined through discovery
-  @JsonKey(defaultValue: false)
   final bool discoverable;
 
   Map<String, Object?> toJson() => _$CrosspostSourceGuildResponseToJson(this);

@@ -89,7 +89,6 @@ class CreateFavoriteMemeFromUrlBodySchema {
   final List<String>? tags;
 
   /// URL of the image or video to save as a favorite meme
-  @JsonKey(defaultValue: '')
   final String url;
   @JsonKey(includeFromJson: false, includeToJson: false)
   final JsonNullable<String> altText;

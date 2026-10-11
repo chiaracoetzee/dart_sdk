@@ -13,14 +13,14 @@ ListPriceSwitchState _$ListPriceSwitchStateFromJson(
   json,
   ($checkedConvert) {
     final val = ListPriceSwitchState(
-      available: $checkedConvert('available', (v) => v as bool? ?? false),
+      available: $checkedConvert('available', (v) => v as bool),
       reason: $checkedConvert(
         'reason',
         (v) => v == null
             ? null
             : ListPriceSwitchIneligibilityReason.fromJson(v as String),
       ),
-      pending: $checkedConvert('pending', (v) => v as bool? ?? false),
+      pending: $checkedConvert('pending', (v) => v as bool),
       currentPriceId: $checkedConvert('current_price_id', (v) => v as String?),
       currentAmountMinor: $checkedConvert(
         'current_amount_minor',

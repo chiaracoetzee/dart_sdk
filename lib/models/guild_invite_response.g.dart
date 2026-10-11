@@ -12,28 +12,24 @@ GuildInviteResponse _$GuildInviteResponseFromJson(Map<String, dynamic> json) =>
       json,
       ($checkedConvert) {
         final val = GuildInviteResponse(
-          code: $checkedConvert('code', (v) => v as String? ?? ''),
-          temporary: $checkedConvert('temporary', (v) => v as bool? ?? false),
-          type: $checkedConvert('type', (v) => v as num? ?? 0),
+          code: $checkedConvert('code', (v) => v as String),
+          temporary: $checkedConvert('temporary', (v) => v as bool),
+          type: $checkedConvert('type', (v) => v as num),
           guild: $checkedConvert(
             'guild',
-            (v) => v == null
-                ? _$missingGuildPartialResponse()
-                : GuildPartialResponse.fromJson(v as Map<String, dynamic>),
+            (v) => GuildPartialResponse.fromJson(v as Map<String, dynamic>),
           ),
           channel: $checkedConvert(
             'channel',
-            (v) => v == null
-                ? _$missingChannelPartialResponse()
-                : ChannelPartialResponse.fromJson(v as Map<String, dynamic>),
+            (v) => ChannelPartialResponse.fromJson(v as Map<String, dynamic>),
           ),
           memberCount: $checkedConvert(
             'member_count',
-            (v) => (v as num?)?.toInt() ?? 0,
+            (v) => (v as num).toInt(),
           ),
           presenceCount: $checkedConvert(
             'presence_count',
-            (v) => (v as num?)?.toInt() ?? 0,
+            (v) => (v as num).toInt(),
           ),
           inviter: $checkedConvert(
             'inviter',

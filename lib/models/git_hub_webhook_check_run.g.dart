@@ -13,15 +13,12 @@ GitHubWebhookCheckRun _$GitHubWebhookCheckRunFromJson(
   json,
   ($checkedConvert) {
     final val = GitHubWebhookCheckRun(
-      name: $checkedConvert('name', (v) => v as String? ?? ''),
-      htmlUrl: $checkedConvert('html_url', (v) => v as String? ?? ''),
+      name: $checkedConvert('name', (v) => v as String),
+      htmlUrl: $checkedConvert('html_url', (v) => v as String),
       checkSuite: $checkedConvert(
         'check_suite',
-        (v) => v == null
-            ? _$missingGitHubWebhookCheckRunCheckSuite()
-            : GitHubWebhookCheckRunCheckSuite.fromJson(
-                v as Map<String, dynamic>,
-              ),
+        (v) =>
+            GitHubWebhookCheckRunCheckSuite.fromJson(v as Map<String, dynamic>),
       ),
       conclusion: $checkedConvert('conclusion', (v) => v as String?),
       detailsUrl: $checkedConvert('details_url', (v) => v as String?),

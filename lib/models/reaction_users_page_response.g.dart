@@ -12,15 +12,13 @@ ReactionUsersPageResponse _$ReactionUsersPageResponseFromJson(
   final val = ReactionUsersPageResponse(
     items: $checkedConvert(
       'items',
-      (v) =>
-          (v as List<dynamic>?)
-              ?.map(
-                (e) => UserPartialResponse.fromJson(e as Map<String, dynamic>),
-              )
-              .toList() ??
-          [],
+      (v) => (v as List<dynamic>)
+          .map(
+            (e) => ReactionUserItemResponse.fromJson(e as Map<String, dynamic>),
+          )
+          .toList(),
     ),
-    hasMore: $checkedConvert('has_more', (v) => v as bool? ?? false),
+    hasMore: $checkedConvert('has_more', (v) => v as bool),
     nextAfter: $checkedConvert('next_after', (v) => v as String?),
   );
   return val;

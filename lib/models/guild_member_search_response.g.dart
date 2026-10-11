@@ -13,28 +13,25 @@ GuildMemberSearchResponse _$GuildMemberSearchResponseFromJson(
   json,
   ($checkedConvert) {
     final val = GuildMemberSearchResponse(
-      guildId: $checkedConvert('guild_id', (v) => v as String? ?? ''),
+      guildId: $checkedConvert('guild_id', (v) => v as String),
       members: $checkedConvert(
         'members',
-        (v) =>
-            (v as List<dynamic>?)
-                ?.map(
-                  (e) => GuildMemberSearchResult.fromJson(
-                    e as Map<String, dynamic>,
-                  ),
-                )
-                .toList() ??
-            [],
+        (v) => (v as List<dynamic>)
+            .map(
+              (e) =>
+                  GuildMemberSearchResult.fromJson(e as Map<String, dynamic>),
+            )
+            .toList(),
       ),
       pageResultCount: $checkedConvert(
         'page_result_count',
-        (v) => (v as num?)?.toInt() ?? 0,
+        (v) => (v as num).toInt(),
       ),
       totalResultCount: $checkedConvert(
         'total_result_count',
-        (v) => (v as num?)?.toInt() ?? 0,
+        (v) => (v as num).toInt(),
       ),
-      indexing: $checkedConvert('indexing', (v) => v as bool? ?? false),
+      indexing: $checkedConvert('indexing', (v) => v as bool),
     );
     return val;
   },

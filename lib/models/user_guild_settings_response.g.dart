@@ -16,11 +16,9 @@ UserGuildSettingsResponse _$UserGuildSettingsResponseFromJson(
       guildId: $checkedConvert('guild_id', (v) => v as String?),
       messageNotifications: $checkedConvert(
         'message_notifications',
-        (v) => v == null
-            ? UserNotificationSettings.$unknown
-            : UserNotificationSettings.fromJson((v as num).toInt()),
+        (v) => UserNotificationSettings.fromJson((v as num).toInt()),
       ),
-      muted: $checkedConvert('muted', (v) => v as bool? ?? false),
+      muted: $checkedConvert('muted', (v) => v as bool),
       muteConfig: $checkedConvert(
         'mute_config',
         (v) => v == null
@@ -29,18 +27,12 @@ UserGuildSettingsResponse _$UserGuildSettingsResponseFromJson(
                 v as Map<String, dynamic>,
               ),
       ),
-      mobilePush: $checkedConvert('mobile_push', (v) => v as bool? ?? false),
-      suppressEveryone: $checkedConvert(
-        'suppress_everyone',
-        (v) => v as bool? ?? false,
-      ),
-      suppressRoles: $checkedConvert(
-        'suppress_roles',
-        (v) => v as bool? ?? false,
-      ),
+      mobilePush: $checkedConvert('mobile_push', (v) => v as bool),
+      suppressEveryone: $checkedConvert('suppress_everyone', (v) => v as bool),
+      suppressRoles: $checkedConvert('suppress_roles', (v) => v as bool),
       hideMutedChannels: $checkedConvert(
         'hide_muted_channels',
-        (v) => v as bool? ?? false,
+        (v) => v as bool,
       ),
       channelOverrides: $checkedConvert(
         'channel_overrides',
@@ -49,7 +41,7 @@ UserGuildSettingsResponse _$UserGuildSettingsResponseFromJson(
               MapEntry(k, ChannelOverrides.fromJson(e as Map<String, dynamic>)),
         ),
       ),
-      version: $checkedConvert('version', (v) => (v as num?)?.toInt() ?? 0),
+      version: $checkedConvert('version', (v) => (v as num).toInt()),
       unreadBadges: $checkedConvert(
         'unread_badges',
         (v) => v == null

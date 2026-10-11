@@ -17,11 +17,10 @@ class OriginHandoffCreateRequest {
       _$OriginHandoffCreateRequestFromJson(json);
 
   /// Lowercase hex SHA-256 digest of the nonce the receiving origin holds
-  @JsonKey(name: 'nonce_hash', defaultValue: '')
+  @JsonKey(name: 'nonce_hash')
   final String nonceHash;
 
   /// Encrypted client state encoded as base64url
-  @JsonKey(defaultValue: '')
   final String payload;
 
   Map<String, Object?> toJson() => _$OriginHandoffCreateRequestToJson(this);

@@ -22,7 +22,6 @@ class IpAuthorizationPollResponse {
       _$IpAuthorizationPollResponseFromJson(json);
 
   /// Whether the IP authorization has been completed
-  @JsonKey(defaultValue: false)
   final bool completed;
 
   /// Authentication token if authorization is complete

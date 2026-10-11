@@ -14,7 +14,7 @@ class PasswordChangeVerifyResponse {
       _$PasswordChangeVerifyResponseFromJson(json);
 
   /// Proof token issued after verifying the email code
-  @JsonKey(name: 'verification_proof', defaultValue: '')
+  @JsonKey(name: 'verification_proof')
   final String verificationProof;
 
   Map<String, Object?> toJson() => _$PasswordChangeVerifyResponseToJson(this);

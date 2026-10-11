@@ -14,7 +14,7 @@ class HandoffCancelRequest {
       _$HandoffCancelRequestFromJson(json);
 
   /// The poll secret issued when the handoff was initiated
-  @JsonKey(name: 'poll_secret', defaultValue: '')
+  @JsonKey(name: 'poll_secret')
   final String pollSecret;
 
   Map<String, Object?> toJson() => _$HandoffCancelRequestToJson(this);

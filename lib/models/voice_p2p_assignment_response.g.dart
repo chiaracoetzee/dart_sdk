@@ -10,10 +10,10 @@ VoiceP2pAssignmentResponse _$VoiceP2pAssignmentResponseFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('VoiceP2pAssignmentResponse', json, ($checkedConvert) {
   final val = VoiceP2pAssignmentResponse(
-    enabled: $checkedConvert('enabled', (v) => v as bool? ?? false),
+    enabled: $checkedConvert('enabled', (v) => v as bool),
     maxParticipants: $checkedConvert(
       'max_participants',
-      (v) => (v as num?)?.toInt() ?? 0,
+      (v) => (v as num).toInt(),
     ),
   );
   return val;

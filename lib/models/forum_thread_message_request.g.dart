@@ -41,6 +41,12 @@ ForumThreadMessageRequest _$ForumThreadMessageRequestFromJson(
         'sticker_ids',
         (v) => (v as List<dynamic>?)?.map((e) => e as String).toList(),
       ),
+      subprofile: $checkedConvert(
+        'subprofile',
+        (v) => v == null
+            ? null
+            : MessagePersonaRequestSchema.fromJson(v as Map<String, dynamic>),
+      ),
     );
     return val;
   },
@@ -59,4 +65,5 @@ Map<String, dynamic> _$ForumThreadMessageRequestToJson(
   'allowed_mentions': ?instance.allowedMentions,
   'flags': instance.flags,
   'sticker_ids': ?instance.stickerIds,
+  'subprofile': ?instance.subprofile,
 };

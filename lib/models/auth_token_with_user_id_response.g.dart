@@ -10,13 +10,11 @@ AuthTokenWithUserIdResponse _$AuthTokenWithUserIdResponseFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('AuthTokenWithUserIdResponse', json, ($checkedConvert) {
   final val = AuthTokenWithUserIdResponse(
-    token: $checkedConvert('token', (v) => v as String? ?? ''),
-    userId: $checkedConvert('user_id', (v) => v as String? ?? ''),
+    token: $checkedConvert('token', (v) => v as String),
+    userId: $checkedConvert('user_id', (v) => v as String),
     user: $checkedConvert(
       'user',
-      (v) => v == null
-          ? _$missingUserPartialResponse()
-          : UserPartialResponse.fromJson(v as Map<String, dynamic>),
+      (v) => UserPartialResponse.fromJson(v as Map<String, dynamic>),
     ),
   );
   return val;

@@ -36,14 +36,10 @@ class UserGuildSettingsResponse {
   final SnowflakeStringType? guildId;
 
   /// The default notification level for the guild
-  @JsonKey(
-    name: 'message_notifications',
-    defaultValue: UserNotificationSettings.$unknown,
-  )
+  @JsonKey(name: 'message_notifications')
   final UserNotificationSettings messageNotifications;
 
   /// Whether the guild is muted
-  @JsonKey(defaultValue: false)
   final bool muted;
 
   /// The mute configuration for the guild
@@ -51,19 +47,19 @@ class UserGuildSettingsResponse {
   final UserGuildSettingsResponseMuteConfig? muteConfig;
 
   /// Whether mobile push notifications are enabled
-  @JsonKey(name: 'mobile_push', defaultValue: false)
+  @JsonKey(name: 'mobile_push')
   final bool mobilePush;
 
   /// Whether @everyone mentions are suppressed
-  @JsonKey(name: 'suppress_everyone', defaultValue: false)
+  @JsonKey(name: 'suppress_everyone')
   final bool suppressEveryone;
 
   /// Whether role mentions are suppressed
-  @JsonKey(name: 'suppress_roles', defaultValue: false)
+  @JsonKey(name: 'suppress_roles')
   final bool suppressRoles;
 
   /// Whether muted channels are hidden in the sidebar
-  @JsonKey(name: 'hide_muted_channels', defaultValue: false)
+  @JsonKey(name: 'hide_muted_channels')
   final bool hideMutedChannels;
 
   /// Per-channel notification overrides
@@ -75,7 +71,6 @@ class UserGuildSettingsResponse {
   final UserNotificationSettings? unreadBadges;
 
   /// The version number of these settings for sync
-  @JsonKey(defaultValue: 0)
   final Int32Type version;
 
   Map<String, Object?> toJson() => _$UserGuildSettingsResponseToJson(this);

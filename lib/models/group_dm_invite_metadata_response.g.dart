@@ -13,25 +13,20 @@ GroupDmInviteMetadataResponse _$GroupDmInviteMetadataResponseFromJson(
   json,
   ($checkedConvert) {
     final val = GroupDmInviteMetadataResponse(
-      code: $checkedConvert('code', (v) => v as String? ?? ''),
-      temporary: $checkedConvert('temporary', (v) => v as bool? ?? false),
-      type: $checkedConvert('type', (v) => v as num? ?? 0),
+      code: $checkedConvert('code', (v) => v as String),
+      temporary: $checkedConvert('temporary', (v) => v as bool),
+      type: $checkedConvert('type', (v) => v as num),
       channel: $checkedConvert(
         'channel',
-        (v) => v == null
-            ? _$missingChannelPartialResponse()
-            : ChannelPartialResponse.fromJson(v as Map<String, dynamic>),
+        (v) => ChannelPartialResponse.fromJson(v as Map<String, dynamic>),
       ),
-      memberCount: $checkedConvert(
-        'member_count',
-        (v) => (v as num?)?.toInt() ?? 0,
-      ),
+      memberCount: $checkedConvert('member_count', (v) => (v as num).toInt()),
       createdAt: $checkedConvert(
         'created_at',
-        (v) => v == null ? _$missingDateTime() : DateTime.parse(v as String),
+        (v) => DateTime.parse(v as String),
       ),
-      uses: $checkedConvert('uses', (v) => (v as num?)?.toInt() ?? 0),
-      maxUses: $checkedConvert('max_uses', (v) => (v as num?)?.toInt() ?? 0),
+      uses: $checkedConvert('uses', (v) => (v as num).toInt()),
+      maxUses: $checkedConvert('max_uses', (v) => (v as num).toInt()),
       inviter: $checkedConvert(
         'inviter',
         (v) => v == null

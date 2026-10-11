@@ -69,7 +69,6 @@ class UserSettingsResponse {
       _$UserSettingsResponseFromJson(json);
 
   /// The current online status of the user
-  @JsonKey(defaultValue: '')
   final String status;
 
   /// ISO8601 timestamp of when the status will reset
@@ -81,77 +80,69 @@ class UserSettingsResponse {
   final String? statusResetsTo;
 
   /// The UI theme preference
-  @JsonKey(defaultValue: '')
   final String theme;
-  @JsonKey(defaultValue: Locale.$unknown)
   final Locale locale;
 
   /// Guild IDs where direct messages are restricted
-  @JsonKey(name: 'restricted_guilds', defaultValue: <String>[])
+  @JsonKey(name: 'restricted_guilds')
   final List<SnowflakeStringType> restrictedGuilds;
 
   /// Guild IDs where bot direct messages are restricted
-  @JsonKey(name: 'bot_restricted_guilds', defaultValue: <String>[])
+  @JsonKey(name: 'bot_restricted_guilds')
   final List<SnowflakeStringType> botRestrictedGuilds;
 
   /// Whether new guilds have DM restrictions by default
-  @JsonKey(name: 'default_guilds_restricted', defaultValue: false)
+  @JsonKey(name: 'default_guilds_restricted')
   final bool defaultGuildsRestricted;
 
   /// Whether new guilds have bot DM restrictions by default
-  @JsonKey(name: 'bot_default_guilds_restricted', defaultValue: false)
+  @JsonKey(name: 'bot_default_guilds_restricted')
   final bool botDefaultGuildsRestricted;
 
   /// Whether to display attachments inline in chat
-  @JsonKey(name: 'inline_attachment_media', defaultValue: false)
+  @JsonKey(name: 'inline_attachment_media')
   final bool inlineAttachmentMedia;
 
   /// Whether to display embed media inline in chat
-  @JsonKey(name: 'inline_embed_media', defaultValue: false)
+  @JsonKey(name: 'inline_embed_media')
   final bool inlineEmbedMedia;
 
   /// Whether GIFs auto-play in chat
-  @JsonKey(name: 'gif_auto_play', defaultValue: false)
+  @JsonKey(name: 'gif_auto_play')
   final bool gifAutoPlay;
 
   /// Whether to render message embeds
-  @JsonKey(name: 'render_embeds', defaultValue: false)
+  @JsonKey(name: 'render_embeds')
   final bool renderEmbeds;
 
   /// Whether to display reactions on messages
-  @JsonKey(name: 'render_reactions', defaultValue: false)
+  @JsonKey(name: 'render_reactions')
   final bool renderReactions;
 
   /// Whether to animate custom emoji
-  @JsonKey(name: 'animate_emoji', defaultValue: false)
+  @JsonKey(name: 'animate_emoji')
   final bool animateEmoji;
 
   /// Sticker animation preference setting
-  @JsonKey(
-    name: 'animate_stickers',
-    defaultValue: StickerAnimationOptions.$unknown,
-  )
+  @JsonKey(name: 'animate_stickers')
   final StickerAnimationOptions animateStickers;
 
   /// Spoiler rendering preference setting
-  @JsonKey(name: 'render_spoilers', defaultValue: RenderSpoilers.$unknown)
+  @JsonKey(name: 'render_spoilers')
   final RenderSpoilers renderSpoilers;
 
   /// Whether to use compact message display mode
-  @JsonKey(name: 'message_display_compact', defaultValue: false)
+  @JsonKey(name: 'message_display_compact')
   final bool messageDisplayCompact;
-  @JsonKey(name: 'friend_source_flags', defaultValue: 0)
+  @JsonKey(name: 'friend_source_flags')
   final FriendSourceFlags friendSourceFlags;
-  @JsonKey(name: 'incoming_call_flags', defaultValue: 0)
+  @JsonKey(name: 'incoming_call_flags')
   final IncomingCallFlags incomingCallFlags;
-  @JsonKey(name: 'group_dm_add_permission_flags', defaultValue: 0)
+  @JsonKey(name: 'group_dm_add_permission_flags')
   final GroupDmAddPermissionFlags groupDmAddPermissionFlags;
 
   /// The folder structure for organizing guilds in the sidebar
-  @JsonKey(
-    name: 'guild_folders',
-    defaultValue: <UserSettingsResponseGuildFolders>[],
-  )
+  @JsonKey(name: 'guild_folders')
   final List<UserSettingsResponseGuildFolders> guildFolders;
 
   /// The custom status set by the user
@@ -159,73 +150,61 @@ class UserSettingsResponse {
   final CustomStatusResponse? customStatus;
 
   /// The idle timeout in seconds before going AFK
-  @JsonKey(name: 'afk_timeout', defaultValue: 0)
+  @JsonKey(name: 'afk_timeout')
   final Int32Type afkTimeout;
 
   /// The preferred time format setting
-  @JsonKey(name: 'time_format', defaultValue: TimeFormatTypes.$unknown)
+  @JsonKey(name: 'time_format')
   final TimeFormatTypes timeFormat;
 
   /// Whether developer mode is enabled
-  @JsonKey(name: 'developer_mode', defaultValue: false)
+  @JsonKey(name: 'developer_mode')
   final bool developerMode;
 
   /// List of trusted external link domains
-  @JsonKey(name: 'trusted_domains', defaultValue: <String>[])
+  @JsonKey(name: 'trusted_domains')
   final List<String> trustedDomains;
 
   /// Whether muted channels are hidden by default in new guilds
-  @JsonKey(name: 'default_hide_muted_channels', defaultValue: false)
+  @JsonKey(name: 'default_hide_muted_channels')
   final bool defaultHideMutedChannels;
 
   /// Sensitive media filter level for DMs from friends
-  @JsonKey(
-    name: 'sensitive_content_friend_dm_filter',
-    defaultValue: SensitiveMediaFilterLevel.$unknown,
-  )
+  @JsonKey(name: 'sensitive_content_friend_dm_filter')
   final SensitiveMediaFilterLevel sensitiveContentFriendDmFilter;
 
   /// Sensitive media filter level for DMs from non-friends
-  @JsonKey(
-    name: 'sensitive_content_non_friend_dm_filter',
-    defaultValue: SensitiveMediaFilterLevel.$unknown,
-  )
+  @JsonKey(name: 'sensitive_content_non_friend_dm_filter')
   final SensitiveMediaFilterLevel sensitiveContentNonFriendDmFilter;
-  @JsonKey(
-    name: 'sensitive_content_guild_filter',
-    defaultValue: SensitiveMediaGuildFilterLevel.$unknown,
-  )
+  @JsonKey(name: 'sensitive_content_guild_filter')
   final SensitiveMediaGuildFilterLevel sensitiveContentGuildFilter;
 
   /// Whether direct mentions and reply mentions from unprivileged users are suppressed
-  @JsonKey(name: 'suppress_unprivileged_self_mentions', defaultValue: false)
+  @JsonKey(name: 'suppress_unprivileged_self_mentions')
   final bool suppressUnprivilegedSelfMentions;
 
   /// User IDs that bypass self-mention suppression
-  @JsonKey(
-    name: 'suppress_unprivileged_self_mentions_bypass_user_ids',
-    defaultValue: <String>[],
-  )
+  @JsonKey(name: 'suppress_unprivileged_self_mentions_bypass_user_ids')
   final List<SnowflakeStringType> suppressUnprivilegedSelfMentionsBypassUserIds;
 
   /// User IDs with Staff DM Access enabled
-  @JsonKey(name: 'staff_dm_access_user_ids', defaultValue: <String>[])
+  @JsonKey(name: 'staff_dm_access_user_ids')
   final List<SnowflakeStringType> staffDmAccessUserIds;
 
   /// Account-wide client preferences as a base64-encoded protobuf snapshot. Empty string when nothing has been synced yet.
-  @JsonKey(name: 'synced_preferences', defaultValue: '')
+  @JsonKey(name: 'synced_preferences')
   final String syncedPreferences;
 
   /// Controls who sees the full profile: all guild members, only small-guild members, or only friends
-  @JsonKey(name: 'profile_privacy', defaultValue: ProfilePrivacyLevel.$unknown)
+  @JsonKey(name: 'profile_privacy')
   final ProfilePrivacyLevel profilePrivacy;
 
   /// Default value of share_voice_activity applied to newly accepted friend relationships. Read-only here; mutated via PUT /users/@me/settings/voice-activity-sharing.
-  @JsonKey(name: 'default_share_voice_activity', defaultValue: false)
+  @JsonKey(name: 'default_share_voice_activity')
   final bool defaultShareVoiceActivity;
 
   /// Latest privacy setup version the user has reviewed, 0 if never reviewed
-  @JsonKey(name: 'privacy_setup_version', defaultValue: 0)
+  @JsonKey(name: 'privacy_setup_version')
   final int privacySetupVersion;
 
   /// When the user last completed the privacy setup, or null if never

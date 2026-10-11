@@ -16,7 +16,6 @@ class PreloadMessagesRequest {
       _$PreloadMessagesRequestFromJson(json);
 
   /// Array of channel IDs to preload messages from (max 100)
-  @JsonKey(defaultValue: <String>[])
   final List<SnowflakeType> channels;
 
   Map<String, Object?> toJson() => _$PreloadMessagesRequestToJson(this);

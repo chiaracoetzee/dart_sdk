@@ -12,36 +12,26 @@ GuildAuditLogListResponse _$GuildAuditLogListResponseFromJson(
   final val = GuildAuditLogListResponse(
     auditLogEntries: $checkedConvert(
       'audit_log_entries',
-      (v) =>
-          (v as List<dynamic>?)
-              ?.map(
-                (e) => GuildAuditLogEntryResponse.fromJson(
-                  e as Map<String, dynamic>,
-                ),
-              )
-              .toList() ??
-          [],
+      (v) => (v as List<dynamic>)
+          .map(
+            (e) =>
+                GuildAuditLogEntryResponse.fromJson(e as Map<String, dynamic>),
+          )
+          .toList(),
     ),
     users: $checkedConvert(
       'users',
-      (v) =>
-          (v as List<dynamic>?)
-              ?.map(
-                (e) => UserPartialResponse.fromJson(e as Map<String, dynamic>),
-              )
-              .toList() ??
-          [],
+      (v) => (v as List<dynamic>)
+          .map((e) => UserPartialResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
     ),
     webhooks: $checkedConvert(
       'webhooks',
-      (v) =>
-          (v as List<dynamic>?)
-              ?.map(
-                (e) =>
-                    AuditLogWebhookResponse.fromJson(e as Map<String, dynamic>),
-              )
-              .toList() ??
-          [],
+      (v) => (v as List<dynamic>)
+          .map(
+            (e) => AuditLogWebhookResponse.fromJson(e as Map<String, dynamic>),
+          )
+          .toList(),
     ),
     threads: $checkedConvert(
       'threads',

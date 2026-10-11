@@ -20,23 +20,14 @@ class GatewayBotResponse {
       _$GatewayBotResponseFromJson(json);
 
   /// WebSocket URL to connect to the gateway
-  @JsonKey(defaultValue: '')
   final String url;
 
   /// Recommended number of shards to use when connecting
-  @JsonKey(defaultValue: 0)
   final int shards;
 
   /// Session start rate limit information
-  @JsonKey(
-    name: 'session_start_limit',
-    defaultValue: _$missingGatewayBotResponseSessionStartLimit,
-  )
+  @JsonKey(name: 'session_start_limit')
   final GatewayBotResponseSessionStartLimit sessionStartLimit;
 
   Map<String, Object?> toJson() => _$GatewayBotResponseToJson(this);
 }
-
-GatewayBotResponseSessionStartLimit
-_$missingGatewayBotResponseSessionStartLimit() =>
-    GatewayBotResponseSessionStartLimit.fromJson(const <String, dynamic>{});

@@ -12,17 +12,16 @@ ApplicationResponse _$ApplicationResponseFromJson(Map<String, dynamic> json) =>
       json,
       ($checkedConvert) {
         final val = ApplicationResponse(
-          id: $checkedConvert('id', (v) => v as String? ?? ''),
-          name: $checkedConvert('name', (v) => v as String? ?? ''),
+          id: $checkedConvert('id', (v) => v as String),
+          name: $checkedConvert('name', (v) => v as String),
           redirectUris: $checkedConvert(
             'redirect_uris',
-            (v) =>
-                (v as List<dynamic>?)?.map((e) => e as String).toList() ?? [],
+            (v) => (v as List<dynamic>).map((e) => e as String).toList(),
           ),
-          botPublic: $checkedConvert('bot_public', (v) => v as bool? ?? false),
+          botPublic: $checkedConvert('bot_public', (v) => v as bool),
           botRequireCodeGrant: $checkedConvert(
             'bot_require_code_grant',
-            (v) => v as bool? ?? false,
+            (v) => v as bool,
           ),
           clientSecret: $checkedConvert('client_secret', (v) => v as String?),
           bot: $checkedConvert(

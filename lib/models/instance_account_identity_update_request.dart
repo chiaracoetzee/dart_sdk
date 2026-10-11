@@ -21,7 +21,6 @@ class InstanceAccountIdentityUpdateRequest {
   ) => _$InstanceAccountIdentityUpdateRequestFromJson(json);
 
   /// Sign-in method for the new instance
-  @JsonKey(defaultValue: AccountIdentityModeSchema.$unknown)
   final AccountIdentityModeSchema mode;
 
   /// How usernames are tagged. Defaults to none. Username sign-in accepts only none

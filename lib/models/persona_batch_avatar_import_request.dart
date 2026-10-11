@@ -1,0 +1,21 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, unused_import, invalid_annotation_target, unnecessary_import
+
+import 'package:json_annotation/json_annotation.dart';
+
+part 'persona_batch_avatar_import_request.g.dart';
+
+@JsonSerializable()
+class PersonaBatchAvatarImportRequest {
+  const PersonaBatchAvatarImportRequest({required this.urls});
+
+  factory PersonaBatchAvatarImportRequest.fromJson(Map<String, Object?> json) =>
+      _$PersonaBatchAvatarImportRequestFromJson(json);
+
+  /// List of remote avatar URLs to import
+  final List<String> urls;
+
+  Map<String, Object?> toJson() =>
+      _$PersonaBatchAvatarImportRequestToJson(this);
+}

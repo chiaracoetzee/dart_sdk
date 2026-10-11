@@ -16,7 +16,6 @@ class ThreadPostDataResponse {
       _$ThreadPostDataResponseFromJson(json);
 
   /// A mapping of post IDs to their post data
-  @JsonKey(defaultValue: <String, ThreadPostDataEntryResponse>{})
   final Map<String, ThreadPostDataEntryResponse> threads;
 
   Map<String, Object?> toJson() => _$ThreadPostDataResponseToJson(this);

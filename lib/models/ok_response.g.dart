@@ -8,9 +8,7 @@ part of 'ok_response.dart';
 
 OkResponse _$OkResponseFromJson(Map<String, dynamic> json) =>
     $checkedCreate('OkResponse', json, ($checkedConvert) {
-      final val = OkResponse(
-        ok: $checkedConvert('ok', (v) => v as bool? ?? false),
-      );
+      final val = OkResponse(ok: $checkedConvert('ok', (v) => v as bool));
       return val;
     });
 

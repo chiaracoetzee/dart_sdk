@@ -14,15 +14,9 @@ _$UserUpdateResponsePendingBulkMessageDeletionFromJson(
   json,
   ($checkedConvert) {
     final val = UserUpdateResponsePendingBulkMessageDeletion(
-      scheduledAt: $checkedConvert('scheduled_at', (v) => v as String? ?? ''),
-      channelCount: $checkedConvert(
-        'channel_count',
-        (v) => (v as num?)?.toInt() ?? 0,
-      ),
-      messageCount: $checkedConvert(
-        'message_count',
-        (v) => (v as num?)?.toInt() ?? 0,
-      ),
+      scheduledAt: $checkedConvert('scheduled_at', (v) => v as String),
+      channelCount: $checkedConvert('channel_count', (v) => (v as num).toInt()),
+      messageCount: $checkedConvert('message_count', (v) => (v as num).toInt()),
     );
     return val;
   },

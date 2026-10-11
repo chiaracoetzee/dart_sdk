@@ -23,17 +23,16 @@ class ReportFlowMessageSubmissionRequest {
     Map<String, Object?> json,
   ) => _$ReportFlowMessageSubmissionRequestFromJson(json);
 
-  @JsonKey(name: 'revision_hash', defaultValue: '')
+  @JsonKey(name: 'revision_hash')
   final String revisionHash;
-  @JsonKey(defaultValue: <ReportFlowStep>[])
   final List<ReportFlowStep> steps;
 
   /// Language tag the reporter saw the flow in
   @JsonKey(includeIfNull: false)
   final String? locale;
-  @JsonKey(name: 'channel_id', defaultValue: '')
+  @JsonKey(name: 'channel_id')
   final SnowflakeType channelId;
-  @JsonKey(name: 'message_id', defaultValue: '')
+  @JsonKey(name: 'message_id')
   final SnowflakeType messageId;
 
   Map<String, Object?> toJson() =>

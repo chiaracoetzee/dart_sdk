@@ -27,25 +27,21 @@ class ReportFlowResponse {
   factory ReportFlowResponse.fromJson(Map<String, Object?> json) =>
       _$ReportFlowResponseFromJson(json);
 
-  @JsonKey(name: 'target_type', defaultValue: ReportFlowTargetType.$unknown)
+  @JsonKey(name: 'target_type')
   final ReportFlowTargetType targetType;
-  @JsonKey(defaultValue: ReportFlowSurface.$unknown)
   final ReportFlowSurface surface;
-  @JsonKey(name: 'revision_hash', defaultValue: '')
+  @JsonKey(name: 'revision_hash')
   final String revisionHash;
 
   /// Locale the copy was rendered in
-  @JsonKey(defaultValue: '')
   final String locale;
-  @JsonKey(name: 'start_screen_id', defaultValue: '')
+  @JsonKey(name: 'start_screen_id')
   final String startScreenId;
 
   /// Community guidelines page, null when the instance has none
   @JsonKey(includeIfNull: true, name: 'guidelines_url')
   final String? guidelinesUrl;
-  @JsonKey(defaultValue: <ReportFlowScreen>[])
   final List<ReportFlowScreen> screens;
-  @JsonKey(defaultValue: <ReportFlowNotice>[])
   final List<ReportFlowNotice> notices;
 
   Map<String, Object?> toJson() => _$ReportFlowResponseToJson(this);

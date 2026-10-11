@@ -20,15 +20,14 @@ class ReportResponse {
       _$ReportResponseFromJson(json);
 
   /// The unique identifier for this report
-  @JsonKey(name: 'report_id', defaultValue: '')
+  @JsonKey(name: 'report_id')
   final SnowflakeStringType reportId;
 
   /// Current status of the report (pending, resolved)
-  @JsonKey(defaultValue: '')
   final String status;
 
   /// ISO 8601 timestamp when the report was submitted
-  @JsonKey(name: 'reported_at', defaultValue: '')
+  @JsonKey(name: 'reported_at')
   final String reportedAt;
 
   Map<String, Object?> toJson() => _$ReportResponseToJson(this);

@@ -15,31 +15,22 @@ ThreadSearchResponse _$ThreadSearchResponseFromJson(
     final val = ThreadSearchResponse(
       threads: $checkedConvert(
         'threads',
-        (v) =>
-            (v as List<dynamic>?)
-                ?.map(
-                  (e) =>
-                      ThreadChannelResponse.fromJson(e as Map<String, dynamic>),
-                )
-                .toList() ??
-            [],
+        (v) => (v as List<dynamic>)
+            .map(
+              (e) => ThreadChannelResponse.fromJson(e as Map<String, dynamic>),
+            )
+            .toList(),
       ),
       members: $checkedConvert(
         'members',
-        (v) =>
-            (v as List<dynamic>?)
-                ?.map(
-                  (e) =>
-                      ThreadMemberResponse.fromJson(e as Map<String, dynamic>),
-                )
-                .toList() ??
-            [],
+        (v) => (v as List<dynamic>)
+            .map(
+              (e) => ThreadMemberResponse.fromJson(e as Map<String, dynamic>),
+            )
+            .toList(),
       ),
-      hasMore: $checkedConvert('has_more', (v) => v as bool? ?? false),
-      totalResults: $checkedConvert(
-        'total_results',
-        (v) => (v as num?)?.toInt() ?? 0,
-      ),
+      hasMore: $checkedConvert('has_more', (v) => v as bool),
+      totalResults: $checkedConvert('total_results', (v) => (v as num).toInt()),
       firstMessages: $checkedConvert(
         'first_messages',
         (v) => (v as List<dynamic>?)

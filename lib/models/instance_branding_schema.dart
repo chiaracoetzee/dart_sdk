@@ -21,13 +21,14 @@ class InstanceBrandingSchema {
     required this.statusPageIncidentHistoryUrl,
     required this.premiumProductName,
     required this.premiumInfoUrl,
+    this.desktopAppPromptEnabled = true,
   });
 
   factory InstanceBrandingSchema.fromJson(Map<String, Object?> json) =>
       _$InstanceBrandingSchemaFromJson(json);
 
   /// Public product name shown by client applications
-  @JsonKey(name: 'product_name', defaultValue: '')
+  @JsonKey(name: 'product_name')
   final String productName;
 
   /// Optional image URL for the full application icon
@@ -63,12 +64,16 @@ class InstanceBrandingSchema {
   final String? statusPageIncidentHistoryUrl;
 
   /// Name of the premium tier shown by client applications
-  @JsonKey(name: 'premium_product_name', defaultValue: '')
+  @JsonKey(name: 'premium_product_name')
   final String premiumProductName;
 
   /// Optional absolute URL of a page describing the premium tier
   @JsonKey(includeIfNull: true, name: 'premium_info_url')
   final String? premiumInfoUrl;
+
+  /// Whether the web app shows prompts to open deep links or download the desktop app
+  @JsonKey(name: 'desktop_app_prompt_enabled')
+  final bool desktopAppPromptEnabled;
 
   Map<String, Object?> toJson() => _$InstanceBrandingSchemaToJson(this);
 }

@@ -12,7 +12,7 @@ UpdatePremiumPerksDisabledRequest _$UpdatePremiumPerksDisabledRequestFromJson(
   $checkedConvert,
 ) {
   final val = UpdatePremiumPerksDisabledRequest(
-    disabled: $checkedConvert('disabled', (v) => v as bool? ?? false),
+    disabled: $checkedConvert('disabled', (v) => v as bool),
   );
   return val;
 });

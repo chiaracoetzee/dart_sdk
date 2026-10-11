@@ -25,7 +25,7 @@ class EmailChangeApplyRequest {
       _$EmailChangeApplyRequestFromJson(json);
 
   /// Email change token returned from verify-new
-  @JsonKey(name: 'email_token', defaultValue: '')
+  @JsonKey(name: 'email_token')
   final String emailToken;
 
   /// Account password for sudo verification

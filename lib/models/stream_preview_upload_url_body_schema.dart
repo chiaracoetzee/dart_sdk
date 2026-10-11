@@ -20,7 +20,7 @@ class StreamPreviewUploadUrlBodySchema {
   ) => _$StreamPreviewUploadUrlBodySchemaFromJson(json);
 
   /// The ID of the channel where the stream is active
-  @JsonKey(name: 'channel_id', defaultValue: '')
+  @JsonKey(name: 'channel_id')
   final SnowflakeType channelId;
 
   /// MIME type of the thumbnail image

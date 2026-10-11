@@ -14,7 +14,6 @@ class UsernameSuggestionsResponse {
       _$UsernameSuggestionsResponseFromJson(json);
 
   /// List of suggested usernames
-  @JsonKey(defaultValue: <String>[])
   final List<String> suggestions;
 
   Map<String, Object?> toJson() => _$UsernameSuggestionsResponseToJson(this);

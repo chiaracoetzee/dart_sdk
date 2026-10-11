@@ -16,11 +16,11 @@ class SaveMessageRequest {
       _$SaveMessageRequestFromJson(json);
 
   /// The ID of the channel containing the message
-  @JsonKey(name: 'channel_id', defaultValue: '')
+  @JsonKey(name: 'channel_id')
   final SnowflakeType channelId;
 
   /// The ID of the message to save
-  @JsonKey(name: 'message_id', defaultValue: '')
+  @JsonKey(name: 'message_id')
   final SnowflakeType messageId;
 
   Map<String, Object?> toJson() => _$SaveMessageRequestToJson(this);

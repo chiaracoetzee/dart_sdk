@@ -21,7 +21,6 @@ class WellKnownFluxerResponseLimitsRules {
   ) => _$WellKnownFluxerResponseLimitsRulesFromJson(json);
 
   /// Unique identifier for this limit rule
-  @JsonKey(defaultValue: '')
   final String id;
 
   /// Filters that determine when this rule applies
@@ -29,7 +28,6 @@ class WellKnownFluxerResponseLimitsRules {
   final WellKnownFluxerResponseLimitsRulesFilters? filters;
 
   /// Map of limit keys to their override values (differences from defaults)
-  @JsonKey(defaultValue: <String, num>{})
   final Map<String, num> overrides;
 
   Map<String, Object?> toJson() =>

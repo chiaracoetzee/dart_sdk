@@ -25,11 +25,10 @@ class ReadStateResponse {
       _$ReadStateResponseFromJson(json);
 
   /// The channel ID for this read state
-  @JsonKey(defaultValue: '')
   final SnowflakeStringType id;
 
   /// Number of unread mentions in the channel
-  @JsonKey(name: 'mention_count', defaultValue: 0)
+  @JsonKey(name: 'mention_count')
   final Int32Type mentionCount;
 
   /// The ID of the last message read

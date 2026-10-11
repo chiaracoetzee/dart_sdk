@@ -18,11 +18,9 @@ class MfaBackupCodesChallengeVerifyRequest {
   ) => _$MfaBackupCodesChallengeVerifyRequestFromJson(json);
 
   /// Backup codes challenge ticket identifier
-  @JsonKey(defaultValue: '')
   final String ticket;
 
   /// Verification code sent to the email address
-  @JsonKey(defaultValue: '')
   final String code;
 
   Map<String, Object?> toJson() =>

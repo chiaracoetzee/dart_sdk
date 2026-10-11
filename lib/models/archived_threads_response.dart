@@ -21,15 +21,13 @@ class ArchivedThreadsResponse {
       _$ArchivedThreadsResponseFromJson(json);
 
   /// The archived threads
-  @JsonKey(defaultValue: <ThreadChannelResponse>[])
   final List<ThreadChannelResponse> threads;
 
   /// A thread member object for each returned thread the user joined
-  @JsonKey(defaultValue: <ThreadMemberResponse>[])
   final List<ThreadMemberResponse> members;
 
   /// Whether there are potentially more threads to fetch
-  @JsonKey(name: 'has_more', defaultValue: false)
+  @JsonKey(name: 'has_more')
   final bool hasMore;
 
   Map<String, Object?> toJson() => _$ArchivedThreadsResponseToJson(this);

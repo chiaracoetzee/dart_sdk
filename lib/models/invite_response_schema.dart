@@ -29,23 +29,18 @@ class InviteResponseSchema {
 
 @JsonSerializable()
 class InviteResponseSchemaGuildInviteResponse {
-  @JsonKey(defaultValue: '')
   final String code;
   @JsonKey(includeIfNull: false)
   final UserPartialResponse? inviter;
   @JsonKey(includeIfNull: false, name: 'expires_at')
   final DateTime? expiresAt;
-  @JsonKey(defaultValue: false)
   final bool temporary;
-  @JsonKey(defaultValue: 0)
   final num type;
-  @JsonKey(defaultValue: _$missingGuildPartialResponse)
   final GuildPartialResponse guild;
-  @JsonKey(defaultValue: _$missingChannelPartialResponse)
   final ChannelPartialResponse channel;
-  @JsonKey(name: 'member_count', defaultValue: 0)
+  @JsonKey(name: 'member_count')
   final Int32Type memberCount;
-  @JsonKey(name: 'presence_count', defaultValue: 0)
+  @JsonKey(name: 'presence_count')
   final Int32Type presenceCount;
 
   const InviteResponseSchemaGuildInviteResponse({
@@ -70,19 +65,15 @@ class InviteResponseSchemaGuildInviteResponse {
 
 @JsonSerializable()
 class InviteResponseSchemaGroupDmInviteResponse {
-  @JsonKey(defaultValue: '')
   final String code;
   @JsonKey(includeIfNull: false)
   final UserPartialResponse? inviter;
   @JsonKey(includeIfNull: false, name: 'expires_at')
   final DateTime? expiresAt;
-  @JsonKey(defaultValue: false)
   final bool temporary;
-  @JsonKey(defaultValue: 0)
   final num type;
-  @JsonKey(defaultValue: _$missingChannelPartialResponse)
   final ChannelPartialResponse channel;
-  @JsonKey(name: 'member_count', defaultValue: 0)
+  @JsonKey(name: 'member_count')
   final Int32Type memberCount;
 
   const InviteResponseSchemaGroupDmInviteResponse({
@@ -102,9 +93,3 @@ class InviteResponseSchemaGroupDmInviteResponse {
   Map<String, dynamic> toJson() =>
       _$InviteResponseSchemaGroupDmInviteResponseToJson(this);
 }
-
-ChannelPartialResponse _$missingChannelPartialResponse() =>
-    ChannelPartialResponse.fromJson(const <String, dynamic>{});
-
-GuildPartialResponse _$missingGuildPartialResponse() =>
-    GuildPartialResponse.fromJson(const <String, dynamic>{});

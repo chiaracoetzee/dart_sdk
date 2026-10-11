@@ -13,34 +13,22 @@ InstanceFeaturesSchema _$InstanceFeaturesSchemaFromJson(
   json,
   ($checkedConvert) {
     final val = InstanceFeaturesSchema(
-      voiceEnabled: $checkedConvert(
-        'voice_enabled',
-        (v) => v as bool? ?? false,
-      ),
-      stripeEnabled: $checkedConvert(
-        'stripe_enabled',
-        (v) => v as bool? ?? false,
-      ),
-      premiumEnabled: $checkedConvert(
-        'premium_enabled',
-        (v) => v as bool? ?? false,
-      ),
+      voiceEnabled: $checkedConvert('voice_enabled', (v) => v as bool),
+      stripeEnabled: $checkedConvert('stripe_enabled', (v) => v as bool),
+      premiumEnabled: $checkedConvert('premium_enabled', (v) => v as bool),
       stripeServiceable: $checkedConvert(
         'stripe_serviceable',
-        (v) => v as bool? ?? false,
+        (v) => v as bool,
       ),
-      selfHosted: $checkedConvert('self_hosted', (v) => v as bool? ?? false),
+      selfHosted: $checkedConvert('self_hosted', (v) => v as bool),
       presignedAttachmentUploads: $checkedConvert(
         'presigned_attachment_uploads',
-        (v) => v as bool? ?? false,
+        (v) => v as bool,
       ),
-      emailsEnabled: $checkedConvert(
-        'emails_enabled',
-        (v) => v as bool? ?? false,
-      ),
+      emailsEnabled: $checkedConvert('emails_enabled', (v) => v as bool),
       phoneVerificationEnabled: $checkedConvert(
         'phone_verification_enabled',
-        (v) => v as bool? ?? false,
+        (v) => v as bool,
       ),
       desktopModulesEnabled: $checkedConvert(
         'desktop_modules_enabled',

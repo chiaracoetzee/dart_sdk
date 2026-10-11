@@ -14,7 +14,6 @@ class TicketResponse {
       _$TicketResponseFromJson(json);
 
   /// A temporary ticket token for subsequent operations
-  @JsonKey(defaultValue: '')
   final String ticket;
 
   Map<String, Object?> toJson() => _$TicketResponseToJson(this);

@@ -12,7 +12,7 @@ DomainMigrationAssignmentResponse _$DomainMigrationAssignmentResponseFromJson(
   $checkedConvert,
 ) {
   final val = DomainMigrationAssignmentResponse(
-    enabled: $checkedConvert('enabled', (v) => v as bool? ?? false),
+    enabled: $checkedConvert('enabled', (v) => v as bool),
   );
   return val;
 });

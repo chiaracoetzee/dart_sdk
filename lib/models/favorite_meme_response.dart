@@ -38,15 +38,13 @@ class FavoriteMemeResponse {
       _$FavoriteMemeResponseFromJson(json);
 
   /// Unique identifier for the favorite meme
-  @JsonKey(defaultValue: '')
   final SnowflakeStringType id;
 
   /// ID of the user who owns this favorite meme
-  @JsonKey(name: 'user_id', defaultValue: '')
+  @JsonKey(name: 'user_id')
   final SnowflakeStringType userId;
 
   /// Display name of the meme
-  @JsonKey(defaultValue: '')
   final String name;
 
   /// Alternative text description for accessibility
@@ -54,19 +52,17 @@ class FavoriteMemeResponse {
   final String? altText;
 
   /// Tags for categorizing and searching the meme
-  @JsonKey(defaultValue: <String>[])
   final List<String> tags;
 
   /// ID of the attachment storing the meme
-  @JsonKey(name: 'attachment_id', defaultValue: '')
+  @JsonKey(name: 'attachment_id')
   final SnowflakeStringType attachmentId;
 
   /// Original filename of the meme
-  @JsonKey(defaultValue: '')
   final String filename;
 
   /// MIME type of the meme file
-  @JsonKey(name: 'content_type', defaultValue: '')
+  @JsonKey(name: 'content_type')
   final String contentType;
 
   /// Hash of the file content for deduplication
@@ -74,7 +70,6 @@ class FavoriteMemeResponse {
   final String? contentHash;
 
   /// File size in bytes
-  @JsonKey(defaultValue: 0)
   final NonNegativeSafeIntegerType size;
 
   /// Width of the image or video in pixels
@@ -90,7 +85,6 @@ class FavoriteMemeResponse {
   final num? duration;
 
   /// CDN URL to access the meme
-  @JsonKey(defaultValue: '')
   final String url;
 
   /// Whether the meme is a video converted from GIF

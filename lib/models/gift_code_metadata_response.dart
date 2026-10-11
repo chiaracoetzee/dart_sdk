@@ -25,26 +25,22 @@ class GiftCodeMetadataResponse {
       _$GiftCodeMetadataResponseFromJson(json);
 
   /// The unique gift code string
-  @JsonKey(defaultValue: '')
   final String code;
 
   /// Duration unit for the gift entitlement
-  @JsonKey(
-    name: 'duration_type',
-    defaultValue: GiftCodeDurationTypeSchema.$unknown,
-  )
+  @JsonKey(name: 'duration_type')
   final GiftCodeDurationTypeSchema durationType;
 
   /// Duration quantity for the selected duration unit
-  @JsonKey(name: 'duration_quantity', defaultValue: 0)
+  @JsonKey(name: 'duration_quantity')
   final int durationQuantity;
 
   /// The user who created the gift code
-  @JsonKey(name: 'created_by', defaultValue: _$missingUserPartialResponse)
+  @JsonKey(name: 'created_by')
   final UserPartialResponse createdBy;
 
   /// Timestamp when the gift code was created
-  @JsonKey(name: 'created_at', defaultValue: _$missingDateTime)
+  @JsonKey(name: 'created_at')
   final DateTime createdAt;
 
   /// Timestamp when the gift code was redeemed
@@ -57,9 +53,3 @@ class GiftCodeMetadataResponse {
 
   Map<String, Object?> toJson() => _$GiftCodeMetadataResponseToJson(this);
 }
-
-DateTime _$missingDateTime() =>
-    DateTime.fromMillisecondsSinceEpoch(0, isUtc: true);
-
-UserPartialResponse _$missingUserPartialResponse() =>
-    UserPartialResponse.fromJson(const <String, dynamic>{});

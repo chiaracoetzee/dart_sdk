@@ -20,13 +20,11 @@ class GitHubWebhookCommentUser {
   factory GitHubWebhookCommentUser.fromJson(Map<String, Object?> json) =>
       _$GitHubWebhookCommentUserFromJson(json);
 
-  @JsonKey(defaultValue: 0)
   final Int32Type id;
-  @JsonKey(defaultValue: '')
   final String login;
-  @JsonKey(name: 'html_url', defaultValue: '')
+  @JsonKey(name: 'html_url')
   final String htmlUrl;
-  @JsonKey(name: 'avatar_url', defaultValue: '')
+  @JsonKey(name: 'avatar_url')
   final String avatarUrl;
 
   Map<String, Object?> toJson() => _$GitHubWebhookCommentUserToJson(this);

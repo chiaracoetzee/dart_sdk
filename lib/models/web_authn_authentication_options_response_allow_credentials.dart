@@ -20,9 +20,7 @@ class WebAuthnAuthenticationOptionsResponseAllowCredentials {
     Map<String, Object?> json,
   ) => _$WebAuthnAuthenticationOptionsResponseAllowCredentialsFromJson(json);
 
-  @JsonKey(defaultValue: '')
   final String id;
-  @JsonKey(defaultValue: '')
   final String type;
   @JsonKey(includeIfNull: false)
   final List<

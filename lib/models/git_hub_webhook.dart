@@ -244,7 +244,6 @@ class GitHubWebhook {
     );
   }
 
-  @JsonKey(defaultValue: _$missingGitHubWebhookSender)
   final GitHubWebhookSender sender;
   @JsonKey(includeFromJson: false, includeToJson: false)
   final JsonNullable<String> action;
@@ -404,6 +403,3 @@ class GitHubWebhook {
     return json;
   }
 }
-
-GitHubWebhookSender _$missingGitHubWebhookSender() =>
-    GitHubWebhookSender.fromJson(const <String, dynamic>{});

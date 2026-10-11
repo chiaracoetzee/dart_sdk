@@ -22,7 +22,7 @@ class InstanceAgePolicyGeoSchema {
       _$InstanceAgePolicyGeoSchemaFromJson(json);
 
   /// ISO 3166-1 alpha-2 country code
-  @JsonKey(name: 'country_code', defaultValue: '')
+  @JsonKey(name: 'country_code')
   final String countryCode;
 
   /// ISO 3166-2 subdivision code, or null for the whole country
@@ -30,11 +30,10 @@ class InstanceAgePolicyGeoSchema {
   final String? regionCode;
 
   /// Whether the region restricts or blocks access
-  @JsonKey(defaultValue: InstanceAgePolicyActionSchema.$unknown)
   final InstanceAgePolicyActionSchema action;
 
   /// Whether card age verification is available in the region
-  @JsonKey(name: 'card_verification_available', defaultValue: false)
+  @JsonKey(name: 'card_verification_available')
   final bool cardVerificationAvailable;
 
   Map<String, Object?> toJson() => _$InstanceAgePolicyGeoSchemaToJson(this);

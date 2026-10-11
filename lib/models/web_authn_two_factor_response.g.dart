@@ -12,9 +12,7 @@ WebAuthnTwoFactorResponse _$WebAuthnTwoFactorResponseFromJson(
   final val = WebAuthnTwoFactorResponse(
     user: $checkedConvert(
       'user',
-      (v) => v == null
-          ? _$missingUserPrivateResponse()
-          : UserPrivateResponse.fromJson(v as Map<String, dynamic>),
+      (v) => UserPrivateResponse.fromJson(v as Map<String, dynamic>),
     ),
     backupCodes: $checkedConvert(
       'backup_codes',

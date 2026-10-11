@@ -13,21 +13,19 @@ ApplicationsMeResponse _$ApplicationsMeResponseFromJson(
   json,
   ($checkedConvert) {
     final val = ApplicationsMeResponse(
-      id: $checkedConvert('id', (v) => v as String? ?? ''),
-      name: $checkedConvert('name', (v) => v as String? ?? ''),
+      id: $checkedConvert('id', (v) => v as String),
+      name: $checkedConvert('name', (v) => v as String),
       icon: $checkedConvert('icon', (v) => v as String?),
       description: $checkedConvert('description', (v) => v as String?),
-      botPublic: $checkedConvert('bot_public', (v) => v as bool? ?? false),
+      botPublic: $checkedConvert('bot_public', (v) => v as bool),
       botRequireCodeGrant: $checkedConvert(
         'bot_require_code_grant',
-        (v) => v as bool? ?? false,
+        (v) => v as bool,
       ),
-      verifyKey: $checkedConvert('verify_key', (v) => v as String? ?? ''),
+      verifyKey: $checkedConvert('verify_key', (v) => v as String),
       owner: $checkedConvert(
         'owner',
-        (v) => v == null
-            ? _$missingUserPartialResponse()
-            : UserPartialResponse.fromJson(v as Map<String, dynamic>),
+        (v) => UserPartialResponse.fromJson(v as Map<String, dynamic>),
       ),
       bot: $checkedConvert(
         'bot',

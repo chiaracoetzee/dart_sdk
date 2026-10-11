@@ -12,24 +12,15 @@ ActiveThreadsResponse _$ActiveThreadsResponseFromJson(
   final val = ActiveThreadsResponse(
     threads: $checkedConvert(
       'threads',
-      (v) =>
-          (v as List<dynamic>?)
-              ?.map(
-                (e) =>
-                    ThreadChannelResponse.fromJson(e as Map<String, dynamic>),
-              )
-              .toList() ??
-          [],
+      (v) => (v as List<dynamic>)
+          .map((e) => ThreadChannelResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
     ),
     members: $checkedConvert(
       'members',
-      (v) =>
-          (v as List<dynamic>?)
-              ?.map(
-                (e) => ThreadMemberResponse.fromJson(e as Map<String, dynamic>),
-              )
-              .toList() ??
-          [],
+      (v) => (v as List<dynamic>)
+          .map((e) => ThreadMemberResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
     ),
   );
   return val;

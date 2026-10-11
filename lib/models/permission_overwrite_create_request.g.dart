@@ -13,9 +13,7 @@ PermissionOverwriteCreateRequest _$PermissionOverwriteCreateRequestFromJson(
       final val = PermissionOverwriteCreateRequest._(
         type: $checkedConvert(
           'type',
-          (v) => v == null
-              ? ChannelOverwriteType.$unknown
-              : ChannelOverwriteType.fromJson((v as num).toInt()),
+          (v) => ChannelOverwriteType.fromJson((v as num).toInt()),
         ),
       );
       return val;

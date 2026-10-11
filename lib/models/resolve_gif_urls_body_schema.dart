@@ -14,7 +14,6 @@ class ResolveGifUrlsBodySchema {
       _$ResolveGifUrlsBodySchemaFromJson(json);
 
   /// GIF URLs to resolve into entries with proxy metadata
-  @JsonKey(defaultValue: <String>[])
   final List<String> urls;
 
   Map<String, Object?> toJson() => _$ResolveGifUrlsBodySchemaToJson(this);

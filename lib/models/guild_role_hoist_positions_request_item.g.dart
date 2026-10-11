@@ -12,11 +12,8 @@ GuildRoleHoistPositionsRequestItem _$GuildRoleHoistPositionsRequestItemFromJson(
   $checkedConvert,
 ) {
   final val = GuildRoleHoistPositionsRequestItem(
-    id: $checkedConvert('id', (v) => v as String? ?? ''),
-    hoistPosition: $checkedConvert(
-      'hoist_position',
-      (v) => (v as num?)?.toInt() ?? 0,
-    ),
+    id: $checkedConvert('id', (v) => v as String),
+    hoistPosition: $checkedConvert('hoist_position', (v) => (v as num).toInt()),
   );
   return val;
 }, fieldKeyMap: const {'hoistPosition': 'hoist_position'});

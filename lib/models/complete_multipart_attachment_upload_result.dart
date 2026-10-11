@@ -15,7 +15,7 @@ class CompleteMultipartAttachmentUploadResult {
   ) => _$CompleteMultipartAttachmentUploadResultFromJson(json);
 
   /// Finalized upload key
-  @JsonKey(name: 'upload_filename', defaultValue: '')
+  @JsonKey(name: 'upload_filename')
   final String uploadFilename;
 
   Map<String, Object?> toJson() =>

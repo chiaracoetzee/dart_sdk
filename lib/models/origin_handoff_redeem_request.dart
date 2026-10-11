@@ -17,11 +17,10 @@ class OriginHandoffRedeemRequest {
       _$OriginHandoffRedeemRequestFromJson(json);
 
   /// Identifier returned when the handoff was created
-  @JsonKey(name: 'handoff_id', defaultValue: '')
+  @JsonKey(name: 'handoff_id')
   final String handoffId;
 
   /// Nonce whose SHA-256 digest was sent when the handoff was created
-  @JsonKey(defaultValue: '')
   final String nonce;
 
   Map<String, Object?> toJson() => _$OriginHandoffRedeemRequestToJson(this);

@@ -21,11 +21,10 @@ class HandoffInitiateResponse {
       _$HandoffInitiateResponseFromJson(json);
 
   /// Handoff code to share with the receiving device
-  @JsonKey(defaultValue: '')
   final String code;
 
   /// ISO 8601 timestamp when the handoff code expires
-  @JsonKey(name: 'expires_at', defaultValue: _$missingDateTime)
+  @JsonKey(name: 'expires_at')
   final DateTime expiresAt;
 
   /// Secret the initiating device must present to retrieve the token
@@ -38,6 +37,3 @@ class HandoffInitiateResponse {
 
   Map<String, Object?> toJson() => _$HandoffInitiateResponseToJson(this);
 }
-
-DateTime _$missingDateTime() =>
-    DateTime.fromMillisecondsSinceEpoch(0, isUtc: true);

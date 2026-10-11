@@ -20,9 +20,8 @@ class InstanceAccountIdentityResponse {
       _$InstanceAccountIdentityResponseFromJson(json);
 
   /// Sign-in method now in effect
-  @JsonKey(defaultValue: AccountIdentityModeSchema.$unknown)
   final AccountIdentityModeSchema mode;
-  @JsonKey(name: 'tag_style', defaultValue: TagStyleSchema.$unknown)
+  @JsonKey(name: 'tag_style')
   final TagStyleSchema tagStyle;
 
   Map<String, Object?> toJson() =>

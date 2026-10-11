@@ -13,15 +13,9 @@ InstanceServicesSchema _$InstanceServicesSchemaFromJson(
   json,
   ($checkedConvert) {
     final val = InstanceServicesSchema(
-      gifEnabled: $checkedConvert('gif_enabled', (v) => v as bool? ?? false),
-      youtubeEnabled: $checkedConvert(
-        'youtube_enabled',
-        (v) => v as bool? ?? false,
-      ),
-      blueskyEnabled: $checkedConvert(
-        'bluesky_enabled',
-        (v) => v as bool? ?? false,
-      ),
+      gifEnabled: $checkedConvert('gif_enabled', (v) => v as bool),
+      youtubeEnabled: $checkedConvert('youtube_enabled', (v) => v as bool),
+      blueskyEnabled: $checkedConvert('bluesky_enabled', (v) => v as bool),
     );
     return val;
   },

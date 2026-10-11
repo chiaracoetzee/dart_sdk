@@ -10,24 +10,22 @@ WellKnownFluxerResponseLimits _$WellKnownFluxerResponseLimitsFromJson(
   Map<String, dynamic> json,
 ) => $checkedCreate('WellKnownFluxerResponseLimits', json, ($checkedConvert) {
   final val = WellKnownFluxerResponseLimits(
-    version: $checkedConvert('version', (v) => v as num? ?? 0),
+    version: $checkedConvert('version', (v) => v as num),
     traitDefinitions: $checkedConvert(
       'traitDefinitions',
-      (v) => (v as List<dynamic>?)?.map((e) => e as String).toList() ?? [],
+      (v) => (v as List<dynamic>).map((e) => e as String).toList(),
     ),
     rules: $checkedConvert(
       'rules',
-      (v) =>
-          (v as List<dynamic>?)
-              ?.map(
-                (e) => WellKnownFluxerResponseLimitsRules.fromJson(
-                  e as Map<String, dynamic>,
-                ),
-              )
-              .toList() ??
-          [],
+      (v) => (v as List<dynamic>)
+          .map(
+            (e) => WellKnownFluxerResponseLimitsRules.fromJson(
+              e as Map<String, dynamic>,
+            ),
+          )
+          .toList(),
     ),
-    defaultsHash: $checkedConvert('defaultsHash', (v) => v as String? ?? ''),
+    defaultsHash: $checkedConvert('defaultsHash', (v) => v as String),
   );
   return val;
 });

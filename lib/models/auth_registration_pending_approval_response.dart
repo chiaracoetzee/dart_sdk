@@ -20,11 +20,11 @@ class AuthRegistrationPendingApprovalResponse {
   ) => _$AuthRegistrationPendingApprovalResponseFromJson(json);
 
   /// Registration succeeded and is waiting for admin approval
-  @JsonKey(name: 'registration_pending_approval', defaultValue: false)
+  @JsonKey(name: 'registration_pending_approval')
   final bool registrationPendingApproval;
 
   /// ID of the registered account waiting for approval
-  @JsonKey(name: 'user_id', defaultValue: '')
+  @JsonKey(name: 'user_id')
   final SnowflakeStringType userId;
 
   Map<String, Object?> toJson() =>

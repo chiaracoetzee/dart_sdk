@@ -19,15 +19,14 @@ class EmailChangeRequestNewResponse {
       _$EmailChangeRequestNewResponseFromJson(json);
 
   /// Ticket associated with the email change attempt
-  @JsonKey(defaultValue: '')
   final String ticket;
 
   /// The new email address the user wants to verify
-  @JsonKey(name: 'new_email', defaultValue: '')
+  @JsonKey(name: 'new_email')
   final String newEmail;
 
   /// ISO8601 timestamp when the new email code expires
-  @JsonKey(name: 'new_code_expires_at', defaultValue: '')
+  @JsonKey(name: 'new_code_expires_at')
   final String newCodeExpiresAt;
 
   /// ISO8601 timestamp when the new email code can be resent

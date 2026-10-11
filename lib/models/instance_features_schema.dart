@@ -32,35 +32,35 @@ class InstanceFeaturesSchema {
       _$InstanceFeaturesSchemaFromJson(json);
 
   /// Whether voice/video calling is enabled
-  @JsonKey(name: 'voice_enabled', defaultValue: false)
+  @JsonKey(name: 'voice_enabled')
   final bool voiceEnabled;
 
   /// Whether premium purchases through Stripe are available
-  @JsonKey(name: 'stripe_enabled', defaultValue: false)
+  @JsonKey(name: 'stripe_enabled')
   final bool stripeEnabled;
 
   /// Whether this instance has a premium tier, so premium status, gifts and perks apply
-  @JsonKey(name: 'premium_enabled', defaultValue: false)
+  @JsonKey(name: 'premium_enabled')
   final bool premiumEnabled;
 
   /// Whether existing Stripe subscriptions can be managed, cancelled and billed on this instance
-  @JsonKey(name: 'stripe_serviceable', defaultValue: false)
+  @JsonKey(name: 'stripe_serviceable')
   final bool stripeServiceable;
 
   /// Whether this is a self-hosted instance
-  @JsonKey(name: 'self_hosted', defaultValue: false)
+  @JsonKey(name: 'self_hosted')
   final bool selfHosted;
 
   /// Whether clients can request presigned attachment upload URLs
-  @JsonKey(name: 'presigned_attachment_uploads', defaultValue: false)
+  @JsonKey(name: 'presigned_attachment_uploads')
   final bool presignedAttachmentUploads;
 
   /// Whether the instance sends emails (verification, password reset, etc.)
-  @JsonKey(name: 'emails_enabled', defaultValue: false)
+  @JsonKey(name: 'emails_enabled')
   final bool emailsEnabled;
 
   /// Deprecated. Always false.
-  @JsonKey(name: 'phone_verification_enabled', defaultValue: false)
+  @JsonKey(name: 'phone_verification_enabled')
   final bool phoneVerificationEnabled;
 
   /// Whether desktop clients may load downloadable modules

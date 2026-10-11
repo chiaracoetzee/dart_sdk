@@ -20,7 +20,6 @@ class GuildVanityUrlResponse {
   final String? code;
 
   /// The number of times this vanity URL has been used
-  @JsonKey(defaultValue: 0)
   final Int32Type uses;
 
   Map<String, Object?> toJson() => _$GuildVanityUrlResponseToJson(this);

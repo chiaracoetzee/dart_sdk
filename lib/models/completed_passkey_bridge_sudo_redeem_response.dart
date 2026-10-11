@@ -18,11 +18,10 @@ class CompletedPasskeyBridgeSudoRedeemResponse {
   ) => _$CompletedPasskeyBridgeSudoRedeemResponseFromJson(json);
 
   /// The ceremony finished
-  @JsonKey(defaultValue: '')
   final String status;
 
   /// Sudo mode token
-  @JsonKey(name: 'sudo_token', defaultValue: '')
+  @JsonKey(name: 'sudo_token')
   final String sudoToken;
 
   Map<String, Object?> toJson() =>

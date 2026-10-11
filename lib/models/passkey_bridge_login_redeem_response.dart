@@ -34,7 +34,6 @@ class PasskeyBridgeLoginRedeemResponse {
 
 @JsonSerializable()
 class PasskeyBridgeLoginRedeemResponseCancelledPasskeyBridgeLoginRedeemResponse {
-  @JsonKey(defaultValue: '')
   final String status;
 
   const PasskeyBridgeLoginRedeemResponseCancelledPasskeyBridgeLoginRedeemResponse({
@@ -56,13 +55,10 @@ class PasskeyBridgeLoginRedeemResponseCancelledPasskeyBridgeLoginRedeemResponse 
 
 @JsonSerializable()
 class PasskeyBridgeLoginRedeemResponseCompletedPasskeyBridgeLoginRedeemResponse {
-  @JsonKey(defaultValue: '')
   final String status;
-  @JsonKey(defaultValue: '')
   final String token;
-  @JsonKey(name: 'user_id', defaultValue: '')
+  @JsonKey(name: 'user_id')
   final SnowflakeStringType userId;
-  @JsonKey(defaultValue: _$missingUserPartialResponse)
   final UserPartialResponse user;
 
   const PasskeyBridgeLoginRedeemResponseCompletedPasskeyBridgeLoginRedeemResponse({
@@ -84,6 +80,3 @@ class PasskeyBridgeLoginRedeemResponseCompletedPasskeyBridgeLoginRedeemResponse 
         this,
       );
 }
-
-UserPartialResponse _$missingUserPartialResponse() =>
-    UserPartialResponse.fromJson(const <String, dynamic>{});

@@ -35,7 +35,6 @@ class AuthSessionResponseClientInfo {
   final String? browser;
 
   /// Device class of the session, decided by the server
-  @JsonKey(defaultValue: AuthSessionResponseClientInfoDeviceDevice.$unknown)
   final AuthSessionResponseClientInfoDeviceDevice device;
 
   /// The geolocation data sent by the client

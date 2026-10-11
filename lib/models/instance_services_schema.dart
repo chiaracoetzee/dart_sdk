@@ -19,15 +19,15 @@ class InstanceServicesSchema {
       _$InstanceServicesSchemaFromJson(json);
 
   /// Whether the GIF picker is enabled for this instance
-  @JsonKey(name: 'gif_enabled', defaultValue: false)
+  @JsonKey(name: 'gif_enabled')
   final bool gifEnabled;
 
   /// Whether YouTube link enrichment is enabled for this instance
-  @JsonKey(name: 'youtube_enabled', defaultValue: false)
+  @JsonKey(name: 'youtube_enabled')
   final bool youtubeEnabled;
 
   /// Whether Bluesky profile connections are enabled for this instance
-  @JsonKey(name: 'bluesky_enabled', defaultValue: false)
+  @JsonKey(name: 'bluesky_enabled')
   final bool blueskyEnabled;
 
   Map<String, Object?> toJson() => _$InstanceServicesSchemaToJson(this);

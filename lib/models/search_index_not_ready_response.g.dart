@@ -13,13 +13,13 @@ SearchIndexNotReadyResponse _$SearchIndexNotReadyResponseFromJson(
   json,
   ($checkedConvert) {
     final val = SearchIndexNotReadyResponse(
-      code: $checkedConvert('code', (v) => v as String? ?? ''),
-      message: $checkedConvert('message', (v) => v as String? ?? ''),
+      code: $checkedConvert('code', (v) => v as String),
+      message: $checkedConvert('message', (v) => v as String),
       documentsIndexed: $checkedConvert(
         'documents_indexed',
-        (v) => (v as num?)?.toInt() ?? 0,
+        (v) => (v as num).toInt(),
       ),
-      retryAfter: $checkedConvert('retry_after', (v) => v as num? ?? 0),
+      retryAfter: $checkedConvert('retry_after', (v) => v as num),
     );
     return val;
   },

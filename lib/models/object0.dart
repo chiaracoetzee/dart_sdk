@@ -38,15 +38,13 @@ class Object0ClientUploadedAttachmentRequest {
   final Int32Type? duration;
   @JsonKey(includeIfNull: false)
   final String? waveform;
-  @JsonKey(defaultValue: 0)
   final Int32Type id;
-  @JsonKey(defaultValue: '')
   final String filename;
-  @JsonKey(name: 'content_type', defaultValue: '')
+  @JsonKey(name: 'content_type')
   final String contentType;
-  @JsonKey(name: 'upload_filename', defaultValue: '')
+  @JsonKey(name: 'upload_filename')
   final String uploadFilename;
-  @JsonKey(name: 'file_size', defaultValue: 0)
+  @JsonKey(name: 'file_size')
   final NonNegativeSafeIntegerType fileSize;
 
   const Object0ClientUploadedAttachmentRequest({
@@ -82,9 +80,7 @@ class Object0ClientAttachmentRequest {
   final Int32Type? duration;
   @JsonKey(includeIfNull: false)
   final String? waveform;
-  @JsonKey(defaultValue: 0)
   final Int32Type id;
-  @JsonKey(defaultValue: '')
   final String filename;
   @JsonKey(includeIfNull: false, name: 'content_type')
   final String? contentType;

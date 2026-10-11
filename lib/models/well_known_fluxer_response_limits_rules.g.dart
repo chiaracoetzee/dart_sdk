@@ -12,12 +12,10 @@ WellKnownFluxerResponseLimitsRules _$WellKnownFluxerResponseLimitsRulesFromJson(
   $checkedConvert,
 ) {
   final val = WellKnownFluxerResponseLimitsRules(
-    id: $checkedConvert('id', (v) => v as String? ?? ''),
+    id: $checkedConvert('id', (v) => v as String),
     overrides: $checkedConvert(
       'overrides',
-      (v) =>
-          (v as Map<String, dynamic>?)?.map((k, e) => MapEntry(k, e as num)) ??
-          {},
+      (v) => Map<String, num>.from(v as Map),
     ),
     filters: $checkedConvert(
       'filters',

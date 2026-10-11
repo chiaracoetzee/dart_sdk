@@ -17,7 +17,7 @@ class EmailChangeBouncedRequestNewRequest {
   ) => _$EmailChangeBouncedRequestNewRequestFromJson(json);
 
   /// Replacement email address used when the current email has bounced
-  @JsonKey(name: 'new_email', defaultValue: '')
+  @JsonKey(name: 'new_email')
   final EmailType newEmail;
 
   Map<String, Object?> toJson() =>

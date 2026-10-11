@@ -17,7 +17,7 @@ class OAuth2AuthorizationsBulkRevokeRequest {
   ) => _$OAuth2AuthorizationsBulkRevokeRequestFromJson(json);
 
   /// Application IDs whose OAuth2 authorizations should be revoked
-  @JsonKey(name: 'application_ids', defaultValue: <String>[])
+  @JsonKey(name: 'application_ids')
   final List<SnowflakeType> applicationIds;
 
   Map<String, Object?> toJson() =>

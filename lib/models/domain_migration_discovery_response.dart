@@ -20,19 +20,18 @@ class DomainMigrationDiscoveryResponse {
   ) => _$DomainMigrationDiscoveryResponseFromJson(json);
 
   /// Whether the domain migration is switched on
-  @JsonKey(defaultValue: false)
   final bool enabled;
 
   /// Share of logged-out devices, in basis points, that move to the new domain
-  @JsonKey(name: 'anonymous_rollout_basis_points', defaultValue: 0)
+  @JsonKey(name: 'anonymous_rollout_basis_points')
   final int anonymousRolloutBasisPoints;
 
   /// Salt used to bucket devices and users
-  @JsonKey(name: 'rollout_salt', defaultValue: '')
+  @JsonKey(name: 'rollout_salt')
   final String rolloutSalt;
 
   /// Whether installed desktop web apps forward to the new domain after moving their session
-  @JsonKey(name: 'standalone_forwarding', defaultValue: false)
+  @JsonKey(name: 'standalone_forwarding')
   final bool standaloneForwarding;
 
   Map<String, Object?> toJson() =>

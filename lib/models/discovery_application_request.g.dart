@@ -13,11 +13,8 @@ DiscoveryApplicationRequest _$DiscoveryApplicationRequestFromJson(
   json,
   ($checkedConvert) {
     final val = DiscoveryApplicationRequest(
-      description: $checkedConvert('description', (v) => v as String? ?? ''),
-      categoryType: $checkedConvert(
-        'category_type',
-        (v) => (v as num?)?.toInt() ?? 0,
-      ),
+      description: $checkedConvert('description', (v) => v as String),
+      categoryType: $checkedConvert('category_type', (v) => (v as num).toInt()),
       primaryLanguage: $checkedConvert('primary_language', (v) => v as String?),
       customTags: $checkedConvert(
         'custom_tags',

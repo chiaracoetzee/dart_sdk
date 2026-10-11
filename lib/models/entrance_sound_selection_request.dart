@@ -19,7 +19,7 @@ class EntranceSoundSelectionRequest {
       _$EntranceSoundSelectionRequestFromJson(json);
 
   /// Entrance sound scope identifier
-  @JsonKey(name: 'scope_id', defaultValue: '')
+  @JsonKey(name: 'scope_id')
   final String scopeId;
 
   /// Sound ID to assign, or null to clear

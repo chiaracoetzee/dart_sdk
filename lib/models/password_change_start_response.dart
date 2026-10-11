@@ -18,11 +18,10 @@ class PasswordChangeStartResponse {
       _$PasswordChangeStartResponseFromJson(json);
 
   /// Ticket for password change actions
-  @JsonKey(defaultValue: '')
   final String ticket;
 
   /// ISO8601 timestamp when the verification code expires
-  @JsonKey(name: 'code_expires_at', defaultValue: '')
+  @JsonKey(name: 'code_expires_at')
   final String codeExpiresAt;
 
   /// ISO8601 timestamp when the code can be resent

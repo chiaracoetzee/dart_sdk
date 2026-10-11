@@ -12,12 +12,10 @@ WebAuthnRegisterRequest _$WebAuthnRegisterRequestFromJson(
   final val = WebAuthnRegisterRequest(
     response: $checkedConvert(
       'response',
-      (v) => v == null
-          ? _$missingWebAuthnRegistrationResponse()
-          : WebAuthnRegistrationResponse.fromJson(v as Map<String, dynamic>),
+      (v) => WebAuthnRegistrationResponse.fromJson(v as Map<String, dynamic>),
     ),
-    challenge: $checkedConvert('challenge', (v) => v as String? ?? ''),
-    name: $checkedConvert('name', (v) => v as String? ?? ''),
+    challenge: $checkedConvert('challenge', (v) => v as String),
+    name: $checkedConvert('name', (v) => v as String),
   );
   return val;
 });

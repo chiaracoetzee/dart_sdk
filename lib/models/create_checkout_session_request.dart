@@ -23,7 +23,7 @@ class CreateCheckoutSessionRequest {
       _$CreateCheckoutSessionRequestFromJson(json);
 
   /// The Stripe price ID for the subscription plan
-  @JsonKey(name: 'price_id', defaultValue: '')
+  @JsonKey(name: 'price_id')
   final String priceId;
 
   /// Two-letter country code used for regional pricing. Only used when the server cannot geolocate the request; otherwise the request GeoIP country wins.

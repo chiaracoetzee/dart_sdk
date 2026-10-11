@@ -13,26 +13,22 @@ GiftCodeMetadataResponse _$GiftCodeMetadataResponseFromJson(
   json,
   ($checkedConvert) {
     final val = GiftCodeMetadataResponse(
-      code: $checkedConvert('code', (v) => v as String? ?? ''),
+      code: $checkedConvert('code', (v) => v as String),
       durationType: $checkedConvert(
         'duration_type',
-        (v) => v == null
-            ? GiftCodeDurationTypeSchema.$unknown
-            : GiftCodeDurationTypeSchema.fromJson(v as String),
+        (v) => GiftCodeDurationTypeSchema.fromJson(v as String),
       ),
       durationQuantity: $checkedConvert(
         'duration_quantity',
-        (v) => (v as num?)?.toInt() ?? 0,
+        (v) => (v as num).toInt(),
       ),
       createdBy: $checkedConvert(
         'created_by',
-        (v) => v == null
-            ? _$missingUserPartialResponse()
-            : UserPartialResponse.fromJson(v as Map<String, dynamic>),
+        (v) => UserPartialResponse.fromJson(v as Map<String, dynamic>),
       ),
       createdAt: $checkedConvert(
         'created_at',
-        (v) => v == null ? _$missingDateTime() : DateTime.parse(v as String),
+        (v) => DateTime.parse(v as String),
       ),
       redeemedAt: $checkedConvert(
         'redeemed_at',

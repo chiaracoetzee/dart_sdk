@@ -20,7 +20,6 @@ class UserProfileFullResponseMutualGuilds {
   ) => _$UserProfileFullResponseMutualGuildsFromJson(json);
 
   /// The ID of the mutual guild
-  @JsonKey(defaultValue: '')
   final SnowflakeStringType id;
 
   /// The nickname of the target user in this guild

@@ -12,9 +12,7 @@ HandoffInfoResponseClientInfo _$HandoffInfoResponseClientInfoFromJson(
   final val = HandoffInfoResponseClientInfo(
     device: $checkedConvert(
       'device',
-      (v) => v == null
-          ? HandoffInfoResponseClientInfoDeviceDevice.$unknown
-          : HandoffInfoResponseClientInfoDeviceDevice.fromJson(v as String),
+      (v) => HandoffInfoResponseClientInfoDeviceDevice.fromJson(v as String),
     ),
     platform: $checkedConvert('platform', (v) => v as String?),
     os: $checkedConvert('os', (v) => v as String?),
