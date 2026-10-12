@@ -13,6 +13,7 @@ class InstanceSetupSchema {
     required this.configured,
     required this.adminUrl,
     this.accountIdentityLocked,
+    this.setupTokenRequired,
   });
 
   factory InstanceSetupSchema.fromJson(Map<String, Object?> json) =>
@@ -29,6 +30,10 @@ class InstanceSetupSchema {
   /// Present only while a self-hosted instance is unconfigured. True when the sign-in method can no longer change
   @JsonKey(includeIfNull: false, name: 'account_identity_locked')
   final bool? accountIdentityLocked;
+
+  /// Present only while a self-hosted instance is unconfigured. True when registration needs the setup token
+  @JsonKey(includeIfNull: false, name: 'setup_token_required')
+  final bool? setupTokenRequired;
 
   Map<String, Object?> toJson() => _$InstanceSetupSchemaToJson(this);
 }
