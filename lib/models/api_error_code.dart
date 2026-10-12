@@ -33,8 +33,6 @@ enum ApiErrorCode {
   aclsMustBeNonEmpty('ACLS_MUST_BE_NON_EMPTY'),
   @JsonValue('ADMIN_API_KEY_NOT_FOUND')
   adminApiKeyNotFound('ADMIN_API_KEY_NOT_FOUND'),
-  @JsonValue('APPLICATION_NOT_OWNED')
-  applicationNotOwned('APPLICATION_NOT_OWNED'),
   @JsonValue('ALREADY_FRIENDS')
   alreadyFriends('ALREADY_FRIENDS'),
   @JsonValue('BOTS_CANNOT_CREATE_GUILDS')
