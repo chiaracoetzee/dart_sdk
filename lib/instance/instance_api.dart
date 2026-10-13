@@ -24,7 +24,7 @@ abstract class InstanceApi {
 
   /// Choose the sign-in method for a new instance.
   ///
-  /// Sets how people sign in on a new self-hosted instance, and for email sign-in whether usernames are unique with no tag. Username sign-in always uses unique usernames. It works only before setup is finished and before the first account exists. After that it fails with ACCOUNT_IDENTITY_LOCKED.
+  /// Sets how people sign in on a new self-hosted instance, and for email sign-in whether usernames are unique with no tag. Username sign-in always uses unique usernames. It works only before setup is finished and before the first account exists. After that it fails with ACCOUNT_IDENTITY_LOCKED. While the instance requires a setup token, the request must send it as setup_token.
   ///
   /// [body] - Name not received - field will be skipped.
   @PUT('/instance/setup/account-identity')

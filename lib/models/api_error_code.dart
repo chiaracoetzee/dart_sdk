@@ -33,8 +33,6 @@ enum ApiErrorCode {
   aclsMustBeNonEmpty('ACLS_MUST_BE_NON_EMPTY'),
   @JsonValue('ADMIN_API_KEY_NOT_FOUND')
   adminApiKeyNotFound('ADMIN_API_KEY_NOT_FOUND'),
-  @JsonValue('APPLICATION_NOT_OWNED')
-  applicationNotOwned('APPLICATION_NOT_OWNED'),
   @JsonValue('ALREADY_FRIENDS')
   alreadyFriends('ALREADY_FRIENDS'),
   @JsonValue('BOTS_CANNOT_CREATE_GUILDS')
@@ -567,6 +565,22 @@ enum ApiErrorCode {
   unknownPasskeyBridge('UNKNOWN_PASSKEY_BRIDGE'),
   @JsonValue('UNKNOWN_PASSKEY_MIGRATION')
   unknownPasskeyMigration('UNKNOWN_PASSKEY_MIGRATION'),
+  @JsonValue('UNKNOWN_PERSONA')
+  unknownPersona('UNKNOWN_PERSONA'),
+  @JsonValue('PERSONA_NOT_FOUND')
+  personaNotFound('PERSONA_NOT_FOUND'),
+  @JsonValue('PRIVATE_PERSONA')
+  privatePersona('PRIVATE_PERSONA'),
+  @JsonValue('PERSONA_LIMIT_REACHED')
+  personaLimitReached('PERSONA_LIMIT_REACHED'),
+  @JsonValue('DUPLICATE_PERSONA_TAG')
+  duplicatePersonaTag('DUPLICATE_PERSONA_TAG'),
+  @JsonValue('PERSONA_TAG_LIMIT_REACHED')
+  personaTagLimitReached('PERSONA_TAG_LIMIT_REACHED'),
+  @JsonValue('DUPLICATE_SIGNATURE_EMOJI')
+  duplicateSignatureEmoji('DUPLICATE_SIGNATURE_EMOJI'),
+  @JsonValue('SIGNATURE_EMOJI_LIMIT_REACHED')
+  signatureEmojiLimitReached('SIGNATURE_EMOJI_LIMIT_REACHED'),
   @JsonValue('UNKNOWN_REPORT')
   unknownReport('UNKNOWN_REPORT'),
   @JsonValue('UNKNOWN_ROLE')

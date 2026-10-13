@@ -11,7 +11,7 @@ _$InstanceAccountIdentityUpdateRequestFromJson(Map<String, dynamic> json) =>
     $checkedCreate('InstanceAccountIdentityUpdateRequest', json, (
       $checkedConvert,
     ) {
-      final val = InstanceAccountIdentityUpdateRequest(
+      final val = InstanceAccountIdentityUpdateRequest._(
         mode: $checkedConvert(
           'mode',
           (v) => v == null
