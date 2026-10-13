@@ -7,7 +7,6 @@ import 'package:fluxer_dart/models/guild_role_response.dart';
 import 'package:fluxer_dart/models/guild_sticker_response.dart';
 import 'package:fluxer_dart/models/message_response_schema.dart';
 import 'package:fluxer_dart/models/relationship_response.dart';
-import 'package:fluxer_dart/models/relationship_types.dart';
 import 'package:fluxer_dart/models/thread_member_response.dart';
 import 'package:fluxer_dart/models/user_partial_response.dart';
 import 'package:fluxer_dart/models/user_private_response.dart';
@@ -15,14 +14,9 @@ import 'package:fluxer_dart/models/user_guild_settings_response.dart';
 import 'package:fluxer_dart/models/user_settings_response.dart';
 import 'package:fluxer_dart/models/web_authn_credential_response.dart';
 
-/// Base class for all gateway events.
 sealed class GatewayEvent {
   const GatewayEvent();
 }
-
-// ---------------------------------------------------------------------------
-// Connection lifecycle
-// ---------------------------------------------------------------------------
 
 class ReadyEvent extends GatewayEvent {
   const ReadyEvent({
@@ -49,8 +43,6 @@ class ReadyEvent extends GatewayEvent {
   final UserPrivateResponse user;
   final List<GuildReadyData> guilds;
 
-  /// Raw guild JSON maps from the READY payload, for extracting full guild
-  /// data (channels, roles, members) that [GuildReadyData] omits.
   final List<Map<String, dynamic>> rawGuilds;
   final List<ChannelResponse> privateChannels;
   final List<RelationshipResponse> relationships;
@@ -71,10 +63,6 @@ class ResumedEvent extends GatewayEvent {
   const ResumedEvent();
 }
 
-// ---------------------------------------------------------------------------
-// User
-// ---------------------------------------------------------------------------
-
 class UserUpdateEvent extends GatewayEvent {
   const UserUpdateEvent({required this.user});
 
@@ -94,7 +82,7 @@ class UserGuildSettingsUpdateEvent extends GatewayEvent {
     required this.data,
   });
 
-  final String guildId;
+  final String? guildId;
   final Map<String, dynamic> data;
 }
 
@@ -130,26 +118,26 @@ class AuthSessionChangeEvent extends GatewayEvent {
   final String? newAuthSessionIdHash;
 }
 
-// ---------------------------------------------------------------------------
-// Messages
-// ---------------------------------------------------------------------------
-
 class MessageCreateEvent extends GatewayEvent {
   const MessageCreateEvent({
     required this.message,
     this.guildId,
     this.channelType,
+    this.member,
   });
 
   final MessageResponseSchema message;
   final String? guildId;
   final int? channelType;
+  final GuildMemberResponse? member;
 }
 
 class MessageUpdateEvent extends GatewayEvent {
-  const MessageUpdateEvent({required this.message});
+  const MessageUpdateEvent({required this.message, this.guildId, this.member});
 
   final MessageResponseSchema message;
+  final String? guildId;
+  final GuildMemberResponse? member;
 }
 
 class MessageDeleteEvent extends GatewayEvent {
@@ -194,10 +182,6 @@ class MessageAckEvent extends GatewayEvent {
   final int? flags;
 }
 
-// ---------------------------------------------------------------------------
-// Reactions
-// ---------------------------------------------------------------------------
-
 class ReactionEmoji {
   const ReactionEmoji({required this.name, this.id, this.animated = false});
 
@@ -221,6 +205,7 @@ class MessageReactionAddEvent extends GatewayEvent {
     required this.userId,
     required this.emoji,
     this.guildId,
+    this.member,
   });
 
   final String channelId;
@@ -228,6 +213,7 @@ class MessageReactionAddEvent extends GatewayEvent {
   final String userId;
   final ReactionEmoji emoji;
   final String? guildId;
+  final GuildMemberResponse? member;
 }
 
 class MessageReactionRemoveEvent extends GatewayEvent {
@@ -237,6 +223,7 @@ class MessageReactionRemoveEvent extends GatewayEvent {
     required this.userId,
     required this.emoji,
     this.guildId,
+    this.member,
   });
 
   final String channelId;
@@ -244,6 +231,7 @@ class MessageReactionRemoveEvent extends GatewayEvent {
   final String userId;
   final ReactionEmoji emoji;
   final String? guildId;
+  final GuildMemberResponse? member;
 }
 
 class MessageReactionRemoveAllEvent extends GatewayEvent {
@@ -286,10 +274,6 @@ class MessageReactionAddManyEvent extends GatewayEvent {
   final String? guildId;
 }
 
-// ---------------------------------------------------------------------------
-// Channels
-// ---------------------------------------------------------------------------
-
 class ChannelCreateEvent extends GatewayEvent {
   const ChannelCreateEvent({required this.channel});
 
@@ -303,9 +287,10 @@ class ChannelUpdateEvent extends GatewayEvent {
 }
 
 class ChannelDeleteEvent extends GatewayEvent {
-  const ChannelDeleteEvent({required this.channel});
+  const ChannelDeleteEvent({required this.channelId, this.guildId});
 
-  final ChannelResponse channel;
+  final String channelId;
+  final String? guildId;
 }
 
 class ChannelUpdateBulkEvent extends GatewayEvent {
@@ -327,10 +312,10 @@ class ChannelPinsUpdateEvent extends GatewayEvent {
 }
 
 class ChannelPinsAckEvent extends GatewayEvent {
-  const ChannelPinsAckEvent({required this.channelId, this.lastPinTimestamp});
+  const ChannelPinsAckEvent({required this.channelId, this.timestamp});
 
   final String channelId;
-  final String? lastPinTimestamp;
+  final String? timestamp;
 }
 
 class ChannelRecipientAddEvent extends GatewayEvent {
@@ -355,17 +340,11 @@ class PassiveUpdatesEvent extends GatewayEvent {
     required this.guildId,
     required this.channels,
     this.voiceStates,
-    this.createdChannels,
-    this.updatedChannels,
-    this.deletedChannelIds,
   });
 
   final String guildId;
   final Map<String, String> channels;
   final List<VoiceState>? voiceStates;
-  final List<ChannelResponse>? createdChannels;
-  final List<ChannelResponse>? updatedChannels;
-  final List<String>? deletedChannelIds;
 }
 
 class ThreadCreateEvent extends GatewayEvent {
@@ -456,10 +435,6 @@ class ForumUnreadsEvent extends GatewayEvent {
   final List<ForumUnreadEntry> threads;
 }
 
-// ---------------------------------------------------------------------------
-// Guilds
-// ---------------------------------------------------------------------------
-
 class GuildCreateEvent extends GatewayEvent {
   const GuildCreateEvent({required this.guild});
 
@@ -513,17 +488,17 @@ class GuildRoleUpdateBulkEvent extends GatewayEvent {
 }
 
 class GuildBanAddEvent extends GatewayEvent {
-  const GuildBanAddEvent({required this.guildId, required this.user});
+  const GuildBanAddEvent({required this.guildId, required this.userId});
 
   final String guildId;
-  final UserPartialResponse user;
+  final String userId;
 }
 
 class GuildBanRemoveEvent extends GatewayEvent {
-  const GuildBanRemoveEvent({required this.guildId, required this.user});
+  const GuildBanRemoveEvent({required this.guildId, required this.userId});
 
   final String guildId;
-  final UserPartialResponse user;
+  final String userId;
 }
 
 class GuildEmojisUpdateEvent extends GatewayEvent {
@@ -555,7 +530,6 @@ class GuildMembersChunkEvent extends GatewayEvent {
     required this.members,
     required this.chunkIndex,
     required this.chunkCount,
-    this.notFound,
     this.presences,
     this.nonce,
   });
@@ -564,7 +538,6 @@ class GuildMembersChunkEvent extends GatewayEvent {
   final List<GuildMemberResponse> members;
   final int chunkIndex;
   final int chunkCount;
-  final List<String>? notFound;
   final List<Map<String, dynamic>>? presences;
   final String? nonce;
 }
@@ -589,10 +562,6 @@ class GuildMemberListUpdateEvent extends GatewayEvent {
   final List<MemberListOp> ops;
 }
 
-// ---------------------------------------------------------------------------
-// Guild members
-// ---------------------------------------------------------------------------
-
 class GuildMemberAddEvent extends GatewayEvent {
   const GuildMemberAddEvent({required this.guildId, required this.member});
 
@@ -614,22 +583,20 @@ class GuildMemberRemoveEvent extends GatewayEvent {
   final String userId;
 }
 
-// ---------------------------------------------------------------------------
-// Presence
-// ---------------------------------------------------------------------------
-
 class PresenceUpdateEvent extends GatewayEvent {
   const PresenceUpdateEvent({
     required this.userId,
     required this.status,
     this.customStatus,
     this.mobile = false,
+    this.user,
   });
 
   final String userId;
   final String status;
   final String? customStatus;
   final bool mobile;
+  final UserPartialResponse? user;
 }
 
 class PresenceUpdateBulkEvent extends GatewayEvent {
@@ -638,10 +605,6 @@ class PresenceUpdateBulkEvent extends GatewayEvent {
   final List<Map<String, dynamic>> presences;
   final String? guildId;
 }
-
-// ---------------------------------------------------------------------------
-// Typing
-// ---------------------------------------------------------------------------
 
 class TypingStartEvent extends GatewayEvent {
   const TypingStartEvent({
@@ -659,14 +622,11 @@ class TypingStartEvent extends GatewayEvent {
   final String? guildId;
 }
 
-// ---------------------------------------------------------------------------
-// Voice
-// ---------------------------------------------------------------------------
-
 class VoiceStateUpdateEvent extends GatewayEvent {
-  const VoiceStateUpdateEvent({required this.state});
+  const VoiceStateUpdateEvent({required this.state, this.member});
 
   final VoiceState state;
+  final GuildMemberResponse? member;
 }
 
 class VoiceServerUpdateEvent extends GatewayEvent {
@@ -721,32 +681,6 @@ class VoiceSignalEvent extends GatewayEvent {
   final String userId;
   final Map<String, dynamic> data;
   final String? guildId;
-}
-
-class VoiceStateAckEvent extends GatewayEvent {
-  const VoiceStateAckEvent({
-    this.mutationId,
-    this.runtimeEpoch,
-    this.connectionId,
-    this.guildId,
-    this.channelId,
-    this.status,
-    this.serverVersion,
-    this.canonicalState,
-    this.errorCode,
-    this.errorMessage,
-  });
-
-  final String? mutationId;
-  final String? runtimeEpoch;
-  final String? connectionId;
-  final String? guildId;
-  final String? channelId;
-  final String? status;
-  final int? serverVersion;
-  final VoiceState? canonicalState;
-  final String? errorCode;
-  final String? errorMessage;
 }
 
 class EntranceSoundPlayEvent extends GatewayEvent {
@@ -809,10 +743,6 @@ class ChannelMemberCountsUpdateEvent extends GatewayEvent {
   final List<ChannelMemberCountEntry> counts;
 }
 
-// ---------------------------------------------------------------------------
-// Calls
-// ---------------------------------------------------------------------------
-
 class CallCreateEvent extends GatewayEvent {
   const CallCreateEvent({
     required this.channelId,
@@ -851,10 +781,6 @@ class CallDeleteEvent extends GatewayEvent {
   final String channelId;
 }
 
-// ---------------------------------------------------------------------------
-// Relationships
-// ---------------------------------------------------------------------------
-
 class RelationshipAddEvent extends GatewayEvent {
   const RelationshipAddEvent({required this.relationship});
 
@@ -868,15 +794,10 @@ class RelationshipUpdateEvent extends GatewayEvent {
 }
 
 class RelationshipRemoveEvent extends GatewayEvent {
-  const RelationshipRemoveEvent({required this.userId, required this.type});
+  const RelationshipRemoveEvent({required this.userId});
 
   final String userId;
-  final RelationshipTypes type;
 }
-
-// ---------------------------------------------------------------------------
-// Invites
-// ---------------------------------------------------------------------------
 
 class InviteCreateEvent extends GatewayEvent {
   const InviteCreateEvent({required this.data});
@@ -890,10 +811,6 @@ class InviteDeleteEvent extends GatewayEvent {
   final String code;
   final String guildId;
 }
-
-// ---------------------------------------------------------------------------
-// Saved messages & mentions
-// ---------------------------------------------------------------------------
 
 class SavedMessageCreateEvent extends GatewayEvent {
   const SavedMessageCreateEvent({required this.message});
@@ -912,10 +829,6 @@ class RecentMentionDeleteEvent extends GatewayEvent {
 
   final String messageId;
 }
-
-// ---------------------------------------------------------------------------
-// Misc
-// ---------------------------------------------------------------------------
 
 class WebhooksUpdateEvent extends GatewayEvent {
   const WebhooksUpdateEvent({required this.channelId, required this.guildId});
@@ -946,10 +859,6 @@ class SessionsReplaceEvent extends GatewayEvent {
   const SessionsReplaceEvent();
 }
 
-// ---------------------------------------------------------------------------
-// Gateway error (op 12)
-// ---------------------------------------------------------------------------
-
 class GatewayErrorEvent extends GatewayEvent {
   const GatewayErrorEvent({required this.code, required this.message});
 
@@ -957,13 +866,14 @@ class GatewayErrorEvent extends GatewayEvent {
   final String message;
 }
 
-// ---------------------------------------------------------------------------
-// Unknown / fallback
-// ---------------------------------------------------------------------------
-
 class UnknownGatewayEvent extends GatewayEvent {
-  const UnknownGatewayEvent({required this.eventType, required this.data});
+  const UnknownGatewayEvent({
+    required this.eventType,
+    required this.data,
+    this.parseError,
+  });
 
   final String eventType;
   final Map<String, dynamic> data;
+  final Object? parseError;
 }

@@ -7,7 +7,6 @@ import 'package:fluxer_dart/models/user_guild_settings_response.dart';
 import 'package:fluxer_dart/models/user_notification_settings.dart';
 import 'package:test/test.dart';
 
-/// Minimal JSON for a UserPartialResponse.
 Map<String, Object?> _userPartialJson({String id = '100'}) => {
   'id': id,
   'username': 'testuser',
@@ -18,7 +17,6 @@ Map<String, Object?> _userPartialJson({String id = '100'}) => {
   'flags': 0,
 };
 
-/// Minimal JSON for a UserPrivateResponse.
 Map<String, Object?> _userPrivateJson({String id = '100'}) => {
   'id': id,
   'username': 'testuser',
@@ -68,13 +66,11 @@ Map<String, Object?> _userPrivateJson({String id = '100'}) => {
   'privacy_agreed_at': null,
 };
 
-/// Minimal JSON for a ChannelResponse.
 Map<String, Object?> _channelJson({String id = '200', int type = 0}) => {
   'id': id,
   'type': type,
 };
 
-/// Minimal JSON for a GuildReadyData (partial guild from READY).
 Map<String, Object?> _guildReadyJson({String id = '300'}) => {
   'id': id,
   'name': 'Test Guild',
@@ -85,7 +81,6 @@ Map<String, Object?> _guildReadyJson({String id = '300'}) => {
   'joined_at': '2026-01-01T00:00:00.000Z',
 };
 
-/// Minimal JSON for a GuildResponse (full guild properties).
 Map<String, Object?> _guildJson({String id = '300'}) => {
   'id': id,
   'name': 'Test Guild',
@@ -104,7 +99,6 @@ Map<String, Object?> _guildJson({String id = '300'}) => {
   'nsfw': false,
 };
 
-/// Minimal JSON for a GuildRoleResponse.
 Map<String, Object?> _guildRoleJson({String id = '900'}) => {
   'id': id,
   'name': 'Test Role',
@@ -115,7 +109,6 @@ Map<String, Object?> _guildRoleJson({String id = '900'}) => {
   'mentionable': false,
 };
 
-/// Builds a GUILD_CREATE payload with properties wrapper and collections.
 Map<String, Object?> _guildCreateJson({String id = '300'}) => {
   'id': id,
   'properties': _guildJson(id: id),
@@ -126,9 +119,9 @@ Map<String, Object?> _guildCreateJson({String id = '300'}) => {
   'voice_states': <Object?>[],
   'joined_at': '2026-01-01T00:00:00.000Z',
   'member_count': 5,
+  'online_count': 3,
 };
 
-/// Minimal JSON for a MessageResponseSchema.
 Map<String, Object?> _messageJson({
   String id = '400',
   String channelId = '200',
@@ -147,7 +140,6 @@ Map<String, Object?> _messageJson({
   'mention_roles': <String>[],
 };
 
-/// Minimal JSON for a GuildMemberResponse.
 Map<String, Object?> _guildMemberJson({String userId = '100'}) => {
   'user': _userPartialJson(id: userId),
   'roles': <String>[],
@@ -156,7 +148,6 @@ Map<String, Object?> _guildMemberJson({String userId = '100'}) => {
   'deaf': false,
 };
 
-/// Minimal JSON for a RelationshipResponse.
 Map<String, Object?> _relationshipJson({String id = '100', int type = 1}) => {
   'id': id,
   'type': type,
@@ -166,7 +157,6 @@ Map<String, Object?> _relationshipJson({String id = '100', int type = 1}) => {
   'friend_shares_voice_activity': true,
 };
 
-/// Minimal JSON for a UserSettingsResponse.
 Map<String, Object?> _userSettingsJson() => {
   'status': 'online',
   'theme': 'dark',
@@ -210,10 +200,6 @@ Map<String, Object?> _userSettingsJson() => {
 void main() {
   const parser = EventParser();
 
-  // ---------------------------------------------------------------------------
-  // Connection lifecycle
-  // ---------------------------------------------------------------------------
-
   group('Connection lifecycle', () {
     test('READY → ReadyEvent with GuildReadyData guilds', () {
       final data = {
@@ -255,10 +241,6 @@ void main() {
     });
   });
 
-  // ---------------------------------------------------------------------------
-  // Messages
-  // ---------------------------------------------------------------------------
-
   group('Messages', () {
     test('MESSAGE_CREATE → MessageCreateEvent', () {
       final data = _messageJson(id: '401', channelId: '201');
@@ -283,6 +265,46 @@ void main() {
 
       expect(e.guildId, '9');
       expect(e.channelType, 11);
+    });
+
+    test('guild MESSAGE_CREATE joins the embedded member with the author', () {
+      final Map<String, Object?> member = _guildMemberJson()..remove('user');
+      final data = {
+        ..._messageJson(id: '404', channelId: '204'),
+        'guild_id': '9',
+        'member': {...member, 'nick': 'Nick'},
+      };
+      final e = parser.parse('MESSAGE_CREATE', data) as MessageCreateEvent;
+
+      expect(e.member, isNotNull);
+      expect(e.member!.nick, 'Nick');
+      expect(e.member!.user.id, e.message.author.id);
+    });
+
+    test('guild MESSAGE_UPDATE carries guild_id and the embedded member', () {
+      final Map<String, Object?> member = _guildMemberJson()..remove('user');
+      final data = {
+        ..._messageJson(id: '405', channelId: '205'),
+        'guild_id': '9',
+        'member': member,
+      };
+      final e = parser.parse('MESSAGE_UPDATE', data) as MessageUpdateEvent;
+
+      expect(e.guildId, '9');
+      expect(e.member, isNotNull);
+      expect(e.member!.user.id, e.message.author.id);
+    });
+
+    test('a malformed embedded member does not drop the message', () {
+      final data = {
+        ..._messageJson(id: '406', channelId: '206'),
+        'guild_id': '9',
+        'member': <String, Object?>{'roles': 'not-a-list'},
+      };
+      final event = parser.parse('MESSAGE_CREATE', data);
+
+      expect(event, isA<MessageCreateEvent>());
+      expect((event as MessageCreateEvent).member, isNull);
     });
 
     test('MESSAGE_UPDATE → MessageUpdateEvent', () {
@@ -327,10 +349,6 @@ void main() {
     });
   });
 
-  // ---------------------------------------------------------------------------
-  // Reactions
-  // ---------------------------------------------------------------------------
-
   group('Reactions', () {
     test(
       'MESSAGE_REACTION_ADD → MessageReactionAddEvent with emoji fields',
@@ -355,6 +373,25 @@ void main() {
         expect(e.guildId, '300');
       },
     );
+
+    test('guild reaction events carry the reacting member', () {
+      final data = <String, Object?>{
+        'channel_id': '200',
+        'message_id': '400',
+        'user_id': '100',
+        'emoji': {'name': 'fire'},
+        'guild_id': '300',
+        'member': _guildMemberJson(),
+      };
+      final add =
+          parser.parse('MESSAGE_REACTION_ADD', data) as MessageReactionAddEvent;
+      final remove =
+          parser.parse('MESSAGE_REACTION_REMOVE', data)
+              as MessageReactionRemoveEvent;
+
+      expect(add.member?.user.id, '100');
+      expect(remove.member?.user.id, '100');
+    });
 
     test('MESSAGE_REACTION_REMOVE → MessageReactionRemoveEvent', () {
       final data = <String, Object?>{
@@ -410,10 +447,6 @@ void main() {
     });
   });
 
-  // ---------------------------------------------------------------------------
-  // Channels
-  // ---------------------------------------------------------------------------
-
   group('Channels', () {
     test('CHANNEL_CREATE → ChannelCreateEvent', () {
       final data = _channelJson(id: '500', type: 0);
@@ -440,13 +473,21 @@ void main() {
 
       expect(event, isA<ChannelDeleteEvent>());
       final e = event as ChannelDeleteEvent;
-      expect(e.channel.id, '502');
+      expect(e.channelId, '502');
+    });
+
+    test('CHANNEL_DELETE for a channel the user can no longer view', () {
+      final event = parser.parse('CHANNEL_DELETE', <String, dynamic>{
+        'guild_id': '600',
+        'id': '503',
+      });
+
+      expect(event, isA<ChannelDeleteEvent>());
+      final e = event as ChannelDeleteEvent;
+      expect(e.channelId, '503');
+      expect(e.guildId, '600');
     });
   });
-
-  // ---------------------------------------------------------------------------
-  // Guilds
-  // ---------------------------------------------------------------------------
 
   group('Guilds', () {
     test('GUILD_CREATE → GuildCreateEvent with GuildCreateData', () {
@@ -466,6 +507,7 @@ void main() {
       expect(e.guild.roles[0].id, '900');
       expect(e.guild.joinedAt, '2026-01-01T00:00:00.000Z');
       expect(e.guild.memberCount, 5);
+      expect(e.guild.onlineCount, 3);
     });
 
     test('GUILD_CREATE without properties wrapper (fallback)', () {
@@ -506,10 +548,6 @@ void main() {
       expect(e.guildId, '602');
     });
   });
-
-  // ---------------------------------------------------------------------------
-  // Guild members
-  // ---------------------------------------------------------------------------
 
   group('Guild members', () {
     test('GUILD_MEMBER_ADD → GuildMemberAddEvent with guildId, member', () {
@@ -565,10 +603,6 @@ void main() {
     });
   });
 
-  // ---------------------------------------------------------------------------
-  // Presence
-  // ---------------------------------------------------------------------------
-
   group('Presence', () {
     test('PRESENCE_UPDATE → PresenceUpdateEvent with userId, status', () {
       final data = <String, Object?>{
@@ -600,6 +634,44 @@ void main() {
       expect(e.customStatus, isNull);
     });
 
+    test('PRESENCE_UPDATE keeps the partial user the gateway sends', () {
+      final data = <String, Object?>{
+        'user': {
+          'id': '103',
+          'username': 'renamed',
+          'discriminator': '0042',
+          'global_name': 'Renamed',
+          'avatar': 'abc',
+          'avatar_color': 123,
+          'flags': 0,
+        },
+        'status': 'online',
+        'mobile': false,
+        'afk': false,
+        'custom_status': null,
+      };
+      final event = parser.parse('PRESENCE_UPDATE', data);
+
+      expect(event, isA<PresenceUpdateEvent>());
+      final e = event as PresenceUpdateEvent;
+      expect(e.userId, '103');
+      expect(e.user?.username, 'renamed');
+      expect(e.user?.globalName, 'Renamed');
+      expect(e.user?.avatar, 'abc');
+    });
+
+    test('PRESENCE_UPDATE with only a user id has no user', () {
+      final event = parser.parse('PRESENCE_UPDATE', <String, Object?>{
+        'user': {'id': '104'},
+        'status': 'idle',
+      });
+
+      expect(event, isA<PresenceUpdateEvent>());
+      final e = event as PresenceUpdateEvent;
+      expect(e.userId, '104');
+      expect(e.user, isNull);
+    });
+
     test('PRESENCE_UPDATE with user_id fallback', () {
       final data = <String, Object?>{'user_id': '102', 'status': 'dnd'};
       final event = parser.parse('PRESENCE_UPDATE', data);
@@ -610,10 +682,6 @@ void main() {
       expect(e.status, 'dnd');
     });
   });
-
-  // ---------------------------------------------------------------------------
-  // Typing
-  // ---------------------------------------------------------------------------
 
   group('Typing', () {
     test(
@@ -658,10 +726,6 @@ void main() {
     });
   });
 
-  // ---------------------------------------------------------------------------
-  // Relationships
-  // ---------------------------------------------------------------------------
-
   group('Relationships', () {
     test('RELATIONSHIP_ADD → RelationshipAddEvent', () {
       final data = _relationshipJson(id: '100', type: 1);
@@ -688,20 +752,14 @@ void main() {
       expect(event.relationship.friendSharesVoiceActivity, isTrue);
     });
 
-    test('RELATIONSHIP_REMOVE → RelationshipRemoveEvent with userId, type', () {
-      final data = <String, Object?>{'id': '101', 'type': 2};
+    test('RELATIONSHIP_REMOVE carries only the user id', () {
+      final data = <String, Object?>{'id': '101'};
       final event = parser.parse('RELATIONSHIP_REMOVE', data);
 
       expect(event, isA<RelationshipRemoveEvent>());
-      final e = event as RelationshipRemoveEvent;
-      expect(e.userId, '101');
-      expect(e.type, RelationshipTypes.blocked);
+      expect((event as RelationshipRemoveEvent).userId, '101');
     });
   });
-
-  // ---------------------------------------------------------------------------
-  // User
-  // ---------------------------------------------------------------------------
 
   group('User', () {
     test('USER_UPDATE → UserUpdateEvent with full user data', () {
@@ -733,6 +791,14 @@ void main() {
       final e = event as UserGuildSettingsUpdateEvent;
       expect(e.guildId, 'g1');
       expect(e.data['muted'], true);
+    });
+
+    test('USER_GUILD_SETTINGS_UPDATE for DMs has a null guild_id', () {
+      final data = <String, Object?>{'guild_id': null, 'muted': true};
+      final event = parser.parse('USER_GUILD_SETTINGS_UPDATE', data);
+
+      expect(event, isA<UserGuildSettingsUpdateEvent>());
+      expect((event as UserGuildSettingsUpdateEvent).guildId, isNull);
     });
 
     test('USER_NOTE_UPDATE → UserNoteUpdateEvent', () {
@@ -788,10 +854,6 @@ void main() {
       expect(e.newAuthSessionIdHash, isNull);
     });
   });
-
-  // ---------------------------------------------------------------------------
-  // Messages (new events)
-  // ---------------------------------------------------------------------------
 
   group('Messages (new events)', () {
     test('MESSAGE_DELETE_BULK → MessageDeleteBulkEvent', () {
@@ -881,10 +943,6 @@ void main() {
     });
   });
 
-  // ---------------------------------------------------------------------------
-  // Channels (new events)
-  // ---------------------------------------------------------------------------
-
   group('Channels (new events)', () {
     test('CHANNEL_UPDATE_BULK → ChannelUpdateBulkEvent', () {
       final data = <String, Object?>{
@@ -934,14 +992,14 @@ void main() {
     test('CHANNEL_PINS_ACK → ChannelPinsAckEvent', () {
       final data = <String, Object?>{
         'channel_id': 'ch1',
-        'last_pin_timestamp': '2026-03-21T00:00:00Z',
+        'timestamp': '2026-03-21T00:00:00Z',
       };
       final event = parser.parse('CHANNEL_PINS_ACK', data);
 
       expect(event, isA<ChannelPinsAckEvent>());
       final e = event as ChannelPinsAckEvent;
       expect(e.channelId, 'ch1');
-      expect(e.lastPinTimestamp, '2026-03-21T00:00:00Z');
+      expect(e.timestamp, '2026-03-21T00:00:00Z');
     });
 
     test('CHANNEL_RECIPIENT_ADD → ChannelRecipientAddEvent', () {
@@ -975,7 +1033,6 @@ void main() {
       final data = <String, Object?>{
         'guild_id': 'g1',
         'channels': {'ch1': 'msg123', 'ch2': 'msg456'},
-        'deleted_channel_ids': ['ch3'],
       };
       final event = parser.parse('PASSIVE_UPDATES', data);
 
@@ -984,36 +1041,57 @@ void main() {
       expect(e.guildId, 'g1');
       expect(e.channels['ch1'], 'msg123');
       expect(e.channels['ch2'], 'msg456');
-      expect(e.deletedChannelIds, ['ch3']);
+      expect(e.voiceStates, isNull);
     });
 
-    test('PASSIVE_UPDATES with voice states and channel lists', () {
+    test('PASSIVE_UPDATES voice_states hold changed and removed states', () {
       final data = <String, Object?>{
         'guild_id': 'g1',
         'channels': <String, dynamic>{},
         'voice_states': [
-          {'user_id': 'u1', 'channel_id': 'ch1'},
+          {
+            'guild_id': 'g1',
+            'channel_id': 'ch1',
+            'user_id': 'u1',
+            'connection_id': 'conn-1',
+            'session_id': 's1',
+            'member': null,
+            'mute': false,
+            'deaf': false,
+            'self_mute': true,
+            'self_deaf': false,
+            'self_video': false,
+            'self_stream': false,
+            'is_mobile': false,
+            'suppress': false,
+            'viewer_stream_keys': <String>[],
+            'e2ee_capable': false,
+            'version': 2,
+          },
+          {
+            'guild_id': 'g1',
+            'channel_id': null,
+            'user_id': 'u2',
+            'connection_id': 'conn-2',
+            'session_id': 's2',
+            'member': null,
+            'version': 1,
+          },
         ],
-        'created_channels': [_channelJson(id: '700', type: 0)],
-        'updated_channels': [_channelJson(id: '701', type: 2)],
-        'deleted_channel_ids': <String>[],
       };
       final event = parser.parse('PASSIVE_UPDATES', data);
 
       expect(event, isA<PassiveUpdatesEvent>());
       final e = event as PassiveUpdatesEvent;
-      expect(e.voiceStates, hasLength(1));
+      expect(e.voiceStates, hasLength(2));
       expect(e.voiceStates![0].userId, 'u1');
-      expect(e.createdChannels, hasLength(1));
-      expect(e.createdChannels![0].id, '700');
-      expect(e.updatedChannels, hasLength(1));
-      expect(e.updatedChannels![0].id, '701');
+      expect(e.voiceStates![0].channelId, 'ch1');
+      expect(e.voiceStates![0].selfMute, isTrue);
+      expect(e.voiceStates![1].connectionId, 'conn-2');
+      expect(e.voiceStates![1].channelId, isNull);
+      expect(e.voiceStates![1].guildId, 'g1');
     });
   });
-
-  // ---------------------------------------------------------------------------
-  // Guild roles
-  // ---------------------------------------------------------------------------
 
   group('Guild roles', () {
     test('GUILD_ROLE_CREATE → GuildRoleCreateEvent', () {
@@ -1069,42 +1147,33 @@ void main() {
     });
   });
 
-  // ---------------------------------------------------------------------------
-  // Guild bans
-  // ---------------------------------------------------------------------------
-
   group('Guild bans', () {
     test('GUILD_BAN_ADD → GuildBanAddEvent', () {
       final data = <String, Object?>{
         'guild_id': 'g1',
-        'user': _userPartialJson(id: 'u1'),
+        'user': <String, Object?>{'id': 'u1'},
       };
       final event = parser.parse('GUILD_BAN_ADD', data);
 
       expect(event, isA<GuildBanAddEvent>());
       final e = event as GuildBanAddEvent;
       expect(e.guildId, 'g1');
-      expect(e.user.id, 'u1');
-      expect(e.user.username, 'testuser');
+      expect(e.userId, 'u1');
     });
 
     test('GUILD_BAN_REMOVE → GuildBanRemoveEvent', () {
       final data = <String, Object?>{
         'guild_id': 'g1',
-        'user': _userPartialJson(id: 'u2'),
+        'user': <String, Object?>{'id': 'u2'},
       };
       final event = parser.parse('GUILD_BAN_REMOVE', data);
 
       expect(event, isA<GuildBanRemoveEvent>());
       final e = event as GuildBanRemoveEvent;
       expect(e.guildId, 'g1');
-      expect(e.user.id, 'u2');
+      expect(e.userId, 'u2');
     });
   });
-
-  // ---------------------------------------------------------------------------
-  // Guild emojis & stickers
-  // ---------------------------------------------------------------------------
 
   group('Guild emojis & stickers', () {
     test('GUILD_EMOJIS_UPDATE → GuildEmojisUpdateEvent', () {
@@ -1153,10 +1222,6 @@ void main() {
     });
   });
 
-  // ---------------------------------------------------------------------------
-  // Guild sync & members chunk
-  // ---------------------------------------------------------------------------
-
   group('Guild sync & members chunk', () {
     test('GUILD_SYNC → GuildSyncEvent with GuildCreateData', () {
       final data = _guildCreateJson(id: '600');
@@ -1174,7 +1239,6 @@ void main() {
         'members': [_guildMemberJson(userId: 'u1')],
         'chunk_index': 0,
         'chunk_count': 1,
-        'not_found': ['u99'],
         'nonce': 'nonce123',
       };
       final event = parser.parse('GUILD_MEMBERS_CHUNK', data);
@@ -1186,7 +1250,6 @@ void main() {
       expect(e.members[0].user.id, 'u1');
       expect(e.chunkIndex, 0);
       expect(e.chunkCount, 1);
-      expect(e.notFound, ['u99']);
       expect(e.nonce, 'nonce123');
     });
 
@@ -1278,10 +1341,6 @@ void main() {
     });
   });
 
-  // ---------------------------------------------------------------------------
-  // Presence (new events)
-  // ---------------------------------------------------------------------------
-
   group('Presence (new events)', () {
     test('PRESENCE_UPDATE_BULK → PresenceUpdateBulkEvent', () {
       final data = <String, Object?>{
@@ -1305,10 +1364,6 @@ void main() {
       expect(e.guildId, 'g1');
     });
   });
-
-  // ---------------------------------------------------------------------------
-  // Voice
-  // ---------------------------------------------------------------------------
 
   group('Voice', () {
     test('VOICE_STATE_UPDATE → VoiceStateUpdateEvent', () {
@@ -1340,6 +1395,33 @@ void main() {
       expect(e.state.mute, false);
       expect(e.state.deaf, false);
       expect(e.state.suppress, false);
+    });
+
+    test('VOICE_STATE_UPDATE carries the embedded member', () {
+      final data = <String, Object?>{
+        'user_id': '100',
+        'channel_id': 'ch1',
+        'guild_id': 'g1',
+        'member': _guildMemberJson(),
+      };
+      final e =
+          parser.parse('VOICE_STATE_UPDATE', data) as VoiceStateUpdateEvent;
+
+      expect(e.member?.user.id, '100');
+    });
+
+    test('VOICE_STATE_UPDATE with a null member still parses', () {
+      final data = <String, Object?>{
+        'user_id': '100',
+        'channel_id': null,
+        'guild_id': 'g1',
+        'member': null,
+      };
+      final e =
+          parser.parse('VOICE_STATE_UPDATE', data) as VoiceStateUpdateEvent;
+
+      expect(e.state.userId, '100');
+      expect(e.member, isNull);
     });
 
     test('VOICE_STATE_UPDATE with null optional fields', () {
@@ -1388,31 +1470,6 @@ void main() {
       final e = event as VoiceServerUpdateEvent;
       expect(e.guildId, isNull);
       expect(e.channelId, isNull);
-    });
-
-    test('VOICE_STATE_ACK → VoiceStateAckEvent', () {
-      final data = <String, Object?>{
-        'mutation_id': 'm1',
-        'status': 'ok',
-        'guild_id': 'g1',
-        'channel_id': 'ch1',
-        'connection_id': 'c1',
-        'canonical_state': <String, Object?>{
-          'user_id': 'u1',
-          'channel_id': 'ch1',
-          'guild_id': 'g1',
-          'connection_id': 'c1',
-          'self_mute': true,
-        },
-      };
-      final event = parser.parse('VOICE_STATE_ACK', data);
-
-      expect(event, isA<VoiceStateAckEvent>());
-      final e = event as VoiceStateAckEvent;
-      expect(e.mutationId, 'm1');
-      expect(e.status, 'ok');
-      expect(e.canonicalState?.userId, 'u1');
-      expect(e.canonicalState?.selfMute, true);
     });
 
     test('ENTRANCE_SOUND_PLAY → EntranceSoundPlayEvent', () {
@@ -1473,10 +1530,6 @@ void main() {
     });
   });
 
-  // ---------------------------------------------------------------------------
-  // Calls
-  // ---------------------------------------------------------------------------
-
   group('Calls', () {
     test('CALL_CREATE → CallCreateEvent', () {
       final data = <String, Object?>{
@@ -1535,6 +1588,44 @@ void main() {
       expect(e.ringing, isEmpty);
     });
 
+    test('CALL_UPDATE voice_states keep the per-connection version', () {
+      final data = <String, Object?>{
+        'channel_id': 'ch1',
+        'message_id': 'msg2',
+        'region': 'eu-west',
+        'ringing': <String>[],
+        'voice_states': [
+          {
+            'guild_id': null,
+            'channel_id': 'ch1',
+            'user_id': 'u1',
+            'connection_id': 'conn-1',
+            'session_id': 's1',
+            'member': null,
+            'mute': false,
+            'deaf': false,
+            'self_mute': true,
+            'self_deaf': false,
+            'self_video': false,
+            'self_stream': false,
+            'is_mobile': false,
+            'suppress': false,
+            'viewer_stream_keys': <String>[],
+            'e2ee_capable': false,
+            'region_id': null,
+            'server_id': null,
+            'version': 4,
+          },
+        ],
+      };
+      final event = parser.parse('CALL_UPDATE', data);
+
+      final e = event as CallUpdateEvent;
+      expect(e.voiceStates, hasLength(1));
+      expect(e.voiceStates![0].connectionId, 'conn-1');
+      expect(e.voiceStates![0].version, 4);
+    });
+
     test('CALL_DELETE → CallDeleteEvent', () {
       final data = <String, Object?>{'channel_id': 'ch1'};
       final event = parser.parse('CALL_DELETE', data);
@@ -1544,10 +1635,6 @@ void main() {
       expect(e.channelId, 'ch1');
     });
   });
-
-  // ---------------------------------------------------------------------------
-  // Invites
-  // ---------------------------------------------------------------------------
 
   group('Invites', () {
     test('INVITE_CREATE → InviteCreateEvent', () {
@@ -1573,10 +1660,6 @@ void main() {
       expect(e.guildId, 'g1');
     });
   });
-
-  // ---------------------------------------------------------------------------
-  // Saved messages & mentions
-  // ---------------------------------------------------------------------------
 
   group('Saved messages & mentions', () {
     test('SAVED_MESSAGE_CREATE → SavedMessageCreateEvent', () {
@@ -1606,10 +1689,6 @@ void main() {
       expect(e.messageId, 'msg2');
     });
   });
-
-  // ---------------------------------------------------------------------------
-  // Misc
-  // ---------------------------------------------------------------------------
 
   group('Misc', () {
     test('WEBHOOKS_UPDATE → WebhooksUpdateEvent', () {
@@ -1664,10 +1743,6 @@ void main() {
     });
   });
 
-  // ---------------------------------------------------------------------------
-  // Unknown / fallback
-  // ---------------------------------------------------------------------------
-
   group('Unknown / fallback', () {
     test('Unknown event type → UnknownGatewayEvent', () {
       final data = <String, Object?>{'foo': 'bar'};
@@ -1677,12 +1752,10 @@ void main() {
       final e = event as UnknownGatewayEvent;
       expect(e.eventType, 'TOTALLY_UNKNOWN_EVENT');
       expect(e.data, data);
+      expect(e.parseError, isNull);
     });
 
     test('Malformed payload → UnknownGatewayEvent (fallback via catch)', () {
-      // MESSAGE_CREATE expects a valid MessageResponseSchema JSON.
-      // A field of the wrong type should cause fromJson to throw, triggering
-      // fallback. Missing fields alone do not: they parse to fallbacks.
       final data = <String, Object?>{'id': 1};
       final event = parser.parse('MESSAGE_CREATE', data);
 
@@ -1690,15 +1763,11 @@ void main() {
       final e = event as UnknownGatewayEvent;
       expect(e.eventType, 'MESSAGE_CREATE');
       expect(e.data, data);
+      expect(e.parseError, isNotNull);
     });
   });
 
-  // ---------------------------------------------------------------------------
-  // READY extended fields
-  // ---------------------------------------------------------------------------
-
   group('READY extended fields', () {
-    /// Builds a minimal READY payload with only the required fields.
     Map<String, Object?> minimalReadyPayload([
       Map<String, Object?> overrides = const {},
     ]) => {
@@ -1724,6 +1793,19 @@ void main() {
       expect(ready.user.username, 'old');
       expect(ready.userSettings?.theme, 'dark');
       expect(ready.guilds, isEmpty);
+    });
+
+    test('relationships without an inline user take it from READY users', () {
+      final data = minimalReadyPayload({
+        'relationships': [
+          {'id': '100', 'type': 1, 'nickname': null},
+        ],
+        'users': [_userPartialJson(id: '100')],
+      });
+      final event = parser.parse('READY', data) as ReadyEvent;
+
+      expect(event.relationships, hasLength(1));
+      expect(event.relationships.single.user.id, '100');
     });
 
     test('notes — Map<String, String> parsed correctly', () {
