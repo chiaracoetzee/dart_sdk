@@ -26,12 +26,16 @@ class RegisterRequest {
     JsonNullable<String> inviteCode = const JsonNullable<String>.undefined(),
     JsonNullable<String> registrationUrlCode =
         const JsonNullable<String>.undefined(),
+    JsonNullable<String> setupToken = const JsonNullable<String>.undefined(),
   }) : inviteCode = inviteCode,
        _inviteCodeValue = inviteCode.value,
        _inviteCodePresent = inviteCode.isPresent,
        registrationUrlCode = registrationUrlCode,
        _registrationUrlCodeValue = registrationUrlCode.value,
-       _registrationUrlCodePresent = registrationUrlCode.isPresent;
+       _registrationUrlCodePresent = registrationUrlCode.isPresent,
+       setupToken = setupToken,
+       _setupTokenValue = setupToken.value,
+       _setupTokenPresent = setupToken.isPresent;
 
   const RegisterRequest._({
     this.consent = false,
@@ -43,10 +47,13 @@ class RegisterRequest {
     this.theme,
   }) : _inviteCodeValue = null,
        _registrationUrlCodeValue = null,
+       _setupTokenValue = null,
        inviteCode = const JsonNullable<String>.undefined(),
        _inviteCodePresent = false,
        registrationUrlCode = const JsonNullable<String>.undefined(),
-       _registrationUrlCodePresent = false;
+       _registrationUrlCodePresent = false,
+       setupToken = const JsonNullable<String>.undefined(),
+       _setupTokenPresent = false;
   factory RegisterRequest.patch(Map<String, Object?> json) =>
       RegisterRequest.fromJson(json);
 
@@ -66,6 +73,9 @@ class RegisterRequest {
           ? JsonNullable<String>.of(value._registrationUrlCodeValue)
           : const JsonNullable<String>.undefined(),
       theme: value.theme,
+      setupToken: json.containsKey('setup_token')
+          ? JsonNullable<String>.of(value._setupTokenValue)
+          : const JsonNullable<String>.undefined(),
     );
   }
 
@@ -105,6 +115,11 @@ class RegisterRequest {
   @JsonKey(includeIfNull: false, name: 'registration_url_code')
   final String? _registrationUrlCodeValue;
   final bool _registrationUrlCodePresent;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final JsonNullable<String> setupToken;
+  @JsonKey(includeIfNull: false, name: 'setup_token')
+  final String? _setupTokenValue;
+  final bool _setupTokenPresent;
 
   Map<String, Object?> toJson() {
     final json = _$RegisterRequestToJson(this);
@@ -116,6 +131,9 @@ class RegisterRequest {
         'registration_url_code',
         () => _registrationUrlCodeValue,
       );
+    }
+    if (_setupTokenPresent) {
+      json.putIfAbsent('setup_token', () => _setupTokenValue);
     }
     return json;
   }
