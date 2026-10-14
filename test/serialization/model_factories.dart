@@ -701,6 +701,9 @@ tolerantModelFactories = <String, Object Function(Map<String, Object?>)>{
   'SwitchToListPriceResponseScheduledSwitchToListPriceResponse':
       SwitchToListPriceResponseScheduledSwitchToListPriceResponse.fromJson,
   'TemplateChannel': TemplateChannel.fromJson,
+  'TemplateChannelAvailableTags': TemplateChannelAvailableTags.fromJson,
+  'TemplateChannelDefaultReactionEmoji':
+      TemplateChannelDefaultReactionEmoji.fromJson,
   'TemplateChannelPermissionOverwrites':
       TemplateChannelPermissionOverwrites.fromJson,
   'TemplateRole': TemplateRole.fromJson,

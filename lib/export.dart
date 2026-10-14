@@ -779,6 +779,8 @@ export 'models/channel_pin_response_message_call.dart';
 export 'models/channel_pin_response_message.dart';
 export 'models/forum_thread_message_request_attachments_attachments.dart';
 export 'models/template_channel_permission_overwrites.dart';
+export 'models/template_channel_available_tags.dart';
+export 'models/template_channel_default_reaction_emoji.dart';
 export 'models/guild_audit_log_entry_response_options.dart';
 export 'models/guild_media_channel_create_request_permission_overwrites.dart';
 export 'models/guild_forum_channel_create_request_permission_overwrites.dart';
