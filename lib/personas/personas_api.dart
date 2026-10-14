@@ -11,6 +11,9 @@ import '../models/persona_channel_state_schema.dart';
 import '../models/persona_channel_state_update_request_schema.dart';
 import '../models/persona_channel_states_response_schema.dart';
 import '../models/persona_create_request_schema.dart';
+import '../models/persona_export_response.dart';
+import '../models/persona_import_image_request.dart';
+import '../models/persona_import_image_response.dart';
 import '../models/persona_list_response_schema.dart';
 import '../models/persona_response_schema.dart';
 import '../models/persona_settings_response_schema.dart';
@@ -62,6 +65,12 @@ abstract class PersonasApi {
     @Body() required PersonaChannelStateUpdateRequestSchema body,
   });
 
+  /// Export own personas.
+  ///
+  /// Exports all personas of the authenticated user as a ZIP file: a PluralKit export file (pluralkit.json), each persona's avatar and banner and the tag icon, tyne.json listing which image belongs to which persona, and a README. Importing the ZIP gives the personas back.
+  @GET('/users/@me/personas/export')
+  Future<PersonaExportResponse> exportMyPersonas();
+
   /// Bulk import personas.
   ///
   /// Imports or synchronizes personas in bulk (e.g. from PluralKit or Tupperbox).
@@ -70,6 +79,16 @@ abstract class PersonasApi {
   @POST('/users/@me/personas/import')
   Future<PersonaListResponseSchema> importPersonas({
     @Body() required PersonaBulkImportRequestSchema body,
+  });
+
+  /// Store an image from a persona export being imported.
+  ///
+  /// Stores one avatar or banner image read from a persona export ZIP that the user is importing, and returns its hash for use in the import. Counts against the persona image import quota.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/users/@me/personas/import-image')
+  Future<PersonaImportImageResponse> importPersonaImage({
+    @Body() required PersonaImportImageRequest body,
   });
 
   /// Get own persona settings.

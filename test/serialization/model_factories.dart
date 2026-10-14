@@ -588,6 +588,14 @@ tolerantModelFactories = <String, Object Function(Map<String, Object?>)>{
   'PersonaChannelStatesResponseSchema':
       PersonaChannelStatesResponseSchema.fromJson,
   'PersonaCreateRequestSchema': PersonaCreateRequestSchema.fromJson,
+  'PersonaImportImageRequest': PersonaImportImageRequest.fromJson,
+  'PersonaImportImageResponse': PersonaImportImageResponse.fromJson,
+  'PersonaImportImageSourcesSchema': PersonaImportImageSourcesSchema.fromJson,
+  'PersonaImportImageSourcesSchemaAvatar':
+      PersonaImportImageSourcesSchemaAvatar.fromJson,
+  'PersonaImportImageSourcesSchemaBanner':
+      PersonaImportImageSourcesSchemaBanner.fromJson,
+  'PersonaImportItemSchema': PersonaImportItemSchema.fromJson,
   'PersonaResponseSchema': PersonaResponseSchema.fromJson,
   'PersonaSettingsResponseSchema': PersonaSettingsResponseSchema.fromJson,
   'PersonaSettingsUpdateRequestSchema':

@@ -14,10 +14,15 @@ PersonaBatchAvatarImportRequest _$PersonaBatchAvatarImportRequestFromJson(
       'urls',
       (v) => (v as List<dynamic>?)?.map((e) => e as String).toList() ?? [],
     ),
+    kind: $checkedConvert(
+      'kind',
+      (v) =>
+          v == null ? null : PersonaImportImageKindSchema.fromJson(v as String),
+    ),
   );
   return val;
 });
 
 Map<String, dynamic> _$PersonaBatchAvatarImportRequestToJson(
   PersonaBatchAvatarImportRequest instance,
-) => <String, dynamic>{'urls': instance.urls};
+) => <String, dynamic>{'urls': instance.urls, 'kind': ?instance.kind};

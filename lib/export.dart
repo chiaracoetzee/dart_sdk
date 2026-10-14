@@ -660,8 +660,11 @@ export 'models/persona_update_request_schema.dart';
 export 'models/persona_response_schema.dart';
 export 'models/persona_settings_update_request_schema.dart';
 export 'models/persona_settings_response_schema.dart';
+export 'models/persona_import_image_request.dart';
+export 'models/persona_import_image_response.dart';
 export 'models/persona_bulk_import_request_schema.dart';
 export 'models/persona_list_response_schema.dart';
+export 'models/persona_export_response.dart';
 export 'models/persona_channel_state_update_request_schema.dart';
 export 'models/persona_channel_state_schema.dart';
 export 'models/persona_channel_states_response_schema.dart';
@@ -687,6 +690,9 @@ export 'models/signal_bar_signal_schema.dart';
 export 'models/message_reaction_persona_entry.dart';
 export 'models/signature_emoji_schema_input.dart';
 export 'models/persona_tag_schema_input.dart';
+export 'models/persona_import_item_schema.dart';
+export 'models/persona_import_image_sources_schema.dart';
+export 'models/persona_import_image_kind_schema.dart';
 export 'models/active_persona_scope_schema.dart';
 export 'models/active_persona_mode_schema.dart';
 export 'models/signature_emoji_schema.dart';
@@ -842,6 +848,8 @@ export 'models/web_authn_registration_response_client_extension_results_cred_pro
 export 'models/web_authn_registration_response_client_extension_results.dart';
 export 'models/web_authn_registration_response_response.dart';
 export 'models/signal_bar_update_request_schema_signals.dart';
+export 'models/persona_import_image_sources_schema_avatar.dart';
+export 'models/persona_import_image_sources_schema_banner.dart';
 export 'models/sort_by.dart';
 export 'models/voice_p2p_connection_reports_request_reports_outcome_outcome.dart';
 export 'models/voice_p2p_connection_reports_request_reports_local_candidate_type_local_candidate_type.dart';
@@ -919,6 +927,7 @@ export 'models/pending_subscription_change_response_variant1_target_billing_cycl
 export 'models/web_authn_registration_response_authenticator_attachment_authenticator_attachment.dart';
 export 'models/web_authn_registration_response_response_transports_transports.dart';
 export 'models/persona_update_request_schema_visibility_visibility.dart';
+export 'models/persona_import_image_sources_schema_avatar_field_field.dart';
 export 'models/json_nullable.dart';
 // Root client
 export 'fluxer_client.dart';

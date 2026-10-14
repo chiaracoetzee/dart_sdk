@@ -2,7 +2,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, unused_import, invalid_annotation_target, unnecessary_import
 
-import 'persona_create_request_schema.dart';
-export 'persona_create_request_schema.dart';
+import 'persona_import_item_schema.dart';
+export 'persona_import_item_schema.dart';
 
-typedef PersonaBulkImportRequestSchema = List<PersonaCreateRequestSchema>;
+typedef PersonaBulkImportRequestSchema = List<PersonaImportItemSchema>;
