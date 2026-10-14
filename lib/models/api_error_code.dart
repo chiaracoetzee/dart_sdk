@@ -179,6 +179,8 @@ enum ApiErrorCode {
   reportEmailVerificationRequired('REPORT_EMAIL_VERIFICATION_REQUIRED'),
   @JsonValue('REGISTRATION_CLOSED')
   registrationClosed('REGISTRATION_CLOSED'),
+  @JsonValue('REGISTRATION_CREDENTIALS_REQUIRED')
+  registrationCredentialsRequired('REGISTRATION_CREDENTIALS_REQUIRED'),
   @JsonValue('REGISTRATION_PENDING_APPROVAL')
   registrationPendingApproval('REGISTRATION_PENDING_APPROVAL'),
   @JsonValue('REGISTRATION_REJECTED')
