@@ -37,7 +37,8 @@ permissions:
 jobs:
   nightly-rebase:
     runs-on: ubuntu-24.04
-    timeout-minutes: 60
+    # Chain worst case from the 01:00 Pacific dispatch: monorepo 210 + SDK 30 + Flutter 150 min ends 07:30, before the 07:40 mobile sync.
+    timeout-minutes: 30
 
     steps:
       - name: Checkout tyne
@@ -96,7 +97,7 @@ jobs:
           if [ "${{ inputs.force_tests }}" = "true" ] || [ "${{ inputs.force_test_agent }}" = "true" ]; then
             FLAGS="$FLAGS --force-tests"
           fi
-          echo "REBASE_ARGS=--profile dart_sdk --time-budget-minutes 50 $FLAGS" >> "$GITHUB_ENV"
+          echo "REBASE_ARGS=--profile dart_sdk --time-budget-minutes 25 $FLAGS" >> "$GITHUB_ENV"
 
       - name: "1. Check upstream and tag a backup"
         id: prepare
