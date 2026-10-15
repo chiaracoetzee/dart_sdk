@@ -11,6 +11,7 @@ import 'package:retrofit/error_logger.dart';
 import '../models/allowed_mentions_request.dart';
 import '../models/git_hub_webhook.dart';
 import '../models/instatus_webhook.dart';
+import '../models/libredesk_webhook.dart';
 import '../models/message_content_request.dart';
 import '../models/message_flags.dart';
 import '../models/message_nonce_request.dart';
@@ -248,6 +249,23 @@ abstract class WebhooksApi {
     @Path('webhook_id') required SnowflakeType webhookId,
     @Path('token') required String token,
     @Body() InstatusWebhook? body,
+  });
+
+  /// Execute Libredesk webhook.
+  ///
+  /// Receives and processes Libredesk help desk webhook events, formatting them as messages in the configured channel.
+  ///
+  /// [webhookId] - The ID of the webhook.
+  ///
+  /// [token] - The webhook token.
+  ///
+  /// [body] - Name not received - field will be skipped.
+  @POST('/webhooks/{webhook_id}/{token}/libredesk')
+  Future<void> executeLibredeskWebhook({
+    @Path('webhook_id') required SnowflakeType webhookId,
+    @Path('token') required String token,
+    @Body() required LibredeskWebhook body,
+    @Query('thread_id') String? threadId,
   });
 
   /// Get webhook message.

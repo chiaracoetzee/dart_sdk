@@ -141,6 +141,16 @@ enum ApiErrorCode {
   directMessageEmailVerificationRequired(
     'DIRECT_MESSAGE_EMAIL_VERIFICATION_REQUIRED',
   ),
+  @JsonValue('ENFORCEMENT_ACCOUNT_CLOSED')
+  enforcementAccountClosed('ENFORCEMENT_ACCOUNT_CLOSED'),
+  @JsonValue('ENFORCEMENT_DECISION_ENDED')
+  enforcementDecisionEnded('ENFORCEMENT_DECISION_ENDED'),
+  @JsonValue('ENFORCEMENT_DECISION_OWNS_STATE')
+  enforcementDecisionOwnsState('ENFORCEMENT_DECISION_OWNS_STATE'),
+  @JsonValue('ENFORCEMENT_DECISION_REPLACED')
+  enforcementDecisionReplaced('ENFORCEMENT_DECISION_REPLACED'),
+  @JsonValue('ENFORCEMENT_DELETION_STARTED')
+  enforcementDeletionStarted('ENFORCEMENT_DELETION_STARTED'),
   @JsonValue('FOLLOW_TARGET_CONTENT_WARNING_REQUIRED')
   followTargetContentWarningRequired('FOLLOW_TARGET_CONTENT_WARNING_REQUIRED'),
   @JsonValue('FOLLOW_TARGET_NOT_AGE_RESTRICTED')
@@ -301,6 +311,8 @@ enum ApiErrorCode {
   globalIpTemporarilyBanned('GLOBAL_IP_TEMPORARILY_BANNED'),
   @JsonValue('IP_BAN_DECLINED')
   ipBanDeclined('IP_BAN_DECLINED'),
+  @JsonValue('IP_BAN_LINKED_TO_DECISION')
+  ipBanLinkedToDecision('IP_BAN_LINKED_TO_DECISION'),
   @JsonValue('MAX_APPLICATIONS')
   maxApplications('MAX_APPLICATIONS'),
   @JsonValue('MAX_BOOKMARKS')
@@ -545,6 +557,8 @@ enum ApiErrorCode {
   unknownChannel('UNKNOWN_CHANNEL'),
   @JsonValue('UNKNOWN_EMOJI')
   unknownEmoji('UNKNOWN_EMOJI'),
+  @JsonValue('UNKNOWN_ENFORCEMENT_DECISION')
+  unknownEnforcementDecision('UNKNOWN_ENFORCEMENT_DECISION'),
   @JsonValue('UNKNOWN_FAVORITE_MEME')
   unknownFavoriteMeme('UNKNOWN_FAVORITE_MEME'),
   @JsonValue('UNKNOWN_FORUM_TAG')
@@ -621,6 +635,22 @@ enum ApiErrorCode {
   webauthnCredentialLimitReached('WEBAUTHN_CREDENTIAL_LIMIT_REACHED'),
   @JsonValue('AGE_VERIFICATION_ALREADY_VERIFIED')
   ageVerificationAlreadyVerified('AGE_VERIFICATION_ALREADY_VERIFIED'),
+  @JsonValue('UNKNOWN_PERSONA')
+  unknownPersona('UNKNOWN_PERSONA'),
+  @JsonValue('PERSONA_NOT_FOUND')
+  personaNotFound('PERSONA_NOT_FOUND'),
+  @JsonValue('PRIVATE_PERSONA')
+  privatePersona('PRIVATE_PERSONA'),
+  @JsonValue('PERSONA_LIMIT_REACHED')
+  personaLimitReached('PERSONA_LIMIT_REACHED'),
+  @JsonValue('DUPLICATE_PERSONA_TAG')
+  duplicatePersonaTag('DUPLICATE_PERSONA_TAG'),
+  @JsonValue('PERSONA_TAG_LIMIT_REACHED')
+  personaTagLimitReached('PERSONA_TAG_LIMIT_REACHED'),
+  @JsonValue('DUPLICATE_SIGNATURE_EMOJI')
+  duplicateSignatureEmoji('DUPLICATE_SIGNATURE_EMOJI'),
+  @JsonValue('SIGNATURE_EMOJI_LIMIT_REACHED')
+  signatureEmojiLimitReached('SIGNATURE_EMOJI_LIMIT_REACHED'),
 
   /// Default value for all unparsed values, allows backward compatibility when adding new values on the backend.
   $unknown(null);
