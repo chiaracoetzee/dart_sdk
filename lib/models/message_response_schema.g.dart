@@ -149,6 +149,16 @@ MessageResponseSchema _$MessageResponseSchemaFromJson(
                 v as Map<String, dynamic>,
               ),
       ),
+      mentionPersonas: $checkedConvert(
+        'mention_personas',
+        (v) => (v as List<dynamic>?)
+            ?.map(
+              (e) => MessageSubprofileResponseSchema.fromJson(
+                e as Map<String, dynamic>,
+              ),
+            )
+            .toList(),
+      ),
       referencedMessage: $checkedConvert(
         'referenced_message',
         (v) => v == null
@@ -169,6 +179,7 @@ MessageResponseSchema _$MessageResponseSchemaFromJson(
     'mentionChannels': 'mention_channels',
     'messageReference': 'message_reference',
     'messageSnapshots': 'message_snapshots',
+    'mentionPersonas': 'mention_personas',
     'referencedMessage': 'referenced_message',
   },
 );
@@ -202,5 +213,6 @@ Map<String, dynamic> _$MessageResponseSchemaToJson(
   'call': ?instance.call,
   'thread': ?instance.thread,
   'subprofile': ?instance.subprofile,
+  'mention_personas': ?instance.mentionPersonas,
   'referenced_message': ?instance.referencedMessage,
 };

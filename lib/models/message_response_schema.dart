@@ -51,6 +51,7 @@ class MessageResponseSchema {
     this.call,
     this.thread,
     this.subprofile,
+    this.mentionPersonas,
     this.referencedMessage,
   });
 
@@ -158,6 +159,10 @@ class MessageResponseSchema {
   /// Optional subprofile persona information
   @JsonKey(includeIfNull: false)
   final MessageSubprofileResponseSchema? subprofile;
+
+  /// The personas mentioned in the message, as they are now. Private and deleted personas are left out; absent when there are none
+  @JsonKey(includeIfNull: false, name: 'mention_personas')
+  final List<MessageSubprofileResponseSchema>? mentionPersonas;
 
   /// The reply target. Present and populated when the target resolved, present and null when the target is gone, absent when this message has no default reference. Clients must tell null apart from absent by key presence.
   @JsonKey(includeIfNull: false, name: 'referenced_message')

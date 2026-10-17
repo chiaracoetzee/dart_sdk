@@ -50,6 +50,7 @@ class MessageSearchResultsResponseMessages {
     this.call,
     this.thread,
     this.subprofile,
+    this.mentionPersonas,
   });
 
   factory MessageSearchResultsResponseMessages.fromJson(
@@ -157,6 +158,10 @@ class MessageSearchResultsResponseMessages {
   /// Optional subprofile persona information
   @JsonKey(includeIfNull: false)
   final MessageSubprofileResponseSchema? subprofile;
+
+  /// The personas mentioned in the message, as they are now. Private and deleted personas are left out; absent when there are none
+  @JsonKey(includeIfNull: false, name: 'mention_personas')
+  final List<MessageSubprofileResponseSchema>? mentionPersonas;
 
   Map<String, Object?> toJson() =>
       _$MessageSearchResultsResponseMessagesToJson(this);

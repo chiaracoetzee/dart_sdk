@@ -152,6 +152,16 @@ _$MessageSearchResultsResponseMessagesFromJson(
                 v as Map<String, dynamic>,
               ),
       ),
+      mentionPersonas: $checkedConvert(
+        'mention_personas',
+        (v) => (v as List<dynamic>?)
+            ?.map(
+              (e) => MessageSubprofileResponseSchema.fromJson(
+                e as Map<String, dynamic>,
+              ),
+            )
+            .toList(),
+      ),
     );
     return val;
   },
@@ -164,6 +174,7 @@ _$MessageSearchResultsResponseMessagesFromJson(
     'mentionChannels': 'mention_channels',
     'messageReference': 'message_reference',
     'messageSnapshots': 'message_snapshots',
+    'mentionPersonas': 'mention_personas',
   },
 );
 
@@ -196,4 +207,5 @@ Map<String, dynamic> _$MessageSearchResultsResponseMessagesToJson(
   'call': ?instance.call,
   'thread': ?instance.thread,
   'subprofile': ?instance.subprofile,
+  'mention_personas': ?instance.mentionPersonas,
 };
