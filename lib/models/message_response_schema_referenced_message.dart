@@ -160,7 +160,7 @@ class MessageResponseSchemaReferencedMessage {
   @JsonKey(includeIfNull: false)
   final MessageSubprofileResponseSchema? subprofile;
 
-  /// The personas the message mentions, shown as a message sent as them would show them; absent when there are none
+  /// The personas mentioned in the message, its embeds or what it forwards, shown as a message sent as them would show them; absent when there are none
   @JsonKey(includeIfNull: false, name: 'mention_personas')
   final List<MessageSubprofileResponseSchema>? mentionPersonas;
 
